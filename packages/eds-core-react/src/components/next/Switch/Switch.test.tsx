@@ -171,16 +171,6 @@ describe('Switch (next)', () => {
       expect(wrapper).toHaveAttribute('data-disabled', 'true')
     })
 
-    it('keeps accent color appearance when disabled', () => {
-      // The disabled greys are appearance-independent in CSS, so the
-      // appearance no longer flips to neutral on the disabled prop
-      render(<Switch label="Disabled switch" disabled />)
-      const switchEl = screen.getByLabelText('Disabled switch')
-      // eslint-disable-next-line testing-library/no-node-access
-      const wrapper = switchEl.closest('.eds-switch')
-      expect(wrapper).toHaveAttribute('data-color-appearance', 'accent')
-    })
-
     it('applies data-* attributes to input element', () => {
       render(
         <Switch
@@ -193,6 +183,39 @@ describe('Switch (next)', () => {
       const input = screen.getByRole('switch')
       expect(input).toHaveAttribute('data-testid', 'test-switch')
       expect(input).toHaveAttribute('data-analytics', 'track-switch')
+    })
+  })
+
+  describe('Tone', () => {
+    it('sets the accent tone', () => {
+      render(<Switch label="Option" />)
+      const switchEl = screen.getByRole('switch')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = switchEl.closest('.eds-switch')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('keeps the accent tone when disabled', () => {
+      // The disabled tokens do not depend on the tone, so the tone does not
+      // flip to neutral on the disabled prop
+      render(<Switch label="Disabled switch" disabled />)
+      const switchEl = screen.getByLabelText('Disabled switch')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = switchEl.closest('.eds-switch')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('does not set the legacy foundation attributes', () => {
+      render(<Switch label="Option" defaultChecked />)
+      const switchEl = screen.getByRole('switch')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = switchEl.closest('.eds-switch')
+      expect(wrapper).not.toHaveAttribute('data-color-appearance')
+      expect(wrapper).not.toHaveAttribute('data-selectable-space')
+      expect(wrapper).not.toHaveAttribute('data-space-proportions')
+      expect(wrapper).not.toHaveAttribute('data-font-size')
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(wrapper?.querySelector('[data-color-appearance]')).toBeNull()
     })
   })
 })

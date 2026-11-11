@@ -4,15 +4,11 @@ exports[`Switch (next) matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="eds-field eds-switch"
-    data-color-appearance="accent"
-    data-font-size="md"
     data-position="start"
-    data-selectable-space="md"
-    data-space-proportions="squished"
+    data-tone="accent"
   >
     <span
       class="control"
-      data-color-appearance="neutral"
     >
       <input
         class="input"

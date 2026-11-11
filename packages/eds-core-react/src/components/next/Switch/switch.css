@@ -1,97 +1,106 @@
 /* Switch component - uses Field for layout */
 @layer eds-components {
   .eds-switch {
-    --_switch-hover-color: var(--eds-color-bg-fill-muted-default);
-    --_icon-size: var(--eds-sizing-icon-lg);
+    /* Tone slots, accent by default. Slot names match Button and Chip
+     * (#5711). Switch only has the accent tone. */
+    --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
+    --_icon-on-default: var(--eds-icon-on-default-accent);
+    --_icon-on-muted: var(--eds-icon-on-muted-accent);
+    --_icon-on-emphasis: var(--eds-icon-on-emphasis-accent);
 
-    /* Track: 22x8px, Handle: 12px (spacious density with 24px icon size) */
-    --_handle-size: calc(var(--_icon-size) / 2);
+    /* Track and handle colours, unchecked and checked. Set by the states
+     * below and read by .track */
+    --_track-bg: var(--eds-icon-on-emphasis-neutral);
+    --_track-border: var(--eds-border-interactive-neutral-muted-default);
+    --_handle-bg: var(--eds-icon-on-default-neutral);
+    --_track-bg-checked: var(--_icon-on-default);
+    --_handle-bg-checked: var(--_icon-on-emphasis);
+    --_bg-color: transparent;
+
+    /* Track 22x12px with an 8px handle, inside the 24px icon box at
+     * comfortable */
+    --_icon-size: var(--eds-spacing-xl);
     --_track-width: calc(var(--_icon-size) * 11 / 12);
-    --_track-height: calc(var(--_icon-size) / 3);
+    --_track-height: calc(var(--_icon-size) / 2);
+    --_handle-size: calc(var(--_icon-size) / 3);
 
-    /* TODO: Replace with semantic token when available */
-    --_track-hover-bg: var(--eds-color-neutral-2);
+    /* No width token: the design uses 1px for every stroke (#5692) */
+    --_stroke-width: 1px;
 
-    /* Not --eds-color-text-disabled: that token is switched by
-       data-color-appearance (tinted, not grey, under 'accent') and the wrapper
-       stays 'accent' when :disabled is inherited from e.g. fieldset[disabled].
-       TODO: Replace with semantic token when available */
-    --_switch-disabled-color: var(--eds-color-neutral-7);
+    /* Centres the handle in the track. The handle is placed inside the
+     * track's border, so the border is taken off */
+    --_handle-offset: calc(
+      (var(--_track-height) - var(--_handle-size)) / 2 - var(--_stroke-width)
+    );
 
-    /*
-     * Gap compensation for label alignment with Checkbox and Radio.
-     * Checkbox/Radio icons have ~3px internal SVG padding, but the Switch
-     * track is rendered edge-to-edge. This requires smaller gap adjustment
-     * to achieve consistent label positioning across all selection controls.
-     */
-    --_switch-gap-compensation: 0.1rem;
+    /* TODO: replace 150ms with a motion token once one exists. Same duration
+     * as Button for now. */
+    --_transition-duration: 150ms;
 
     cursor: pointer;
 
     position: relative;
 
-    gap: calc(
-      var(--eds-generic-gap-horizontal) + var(--_switch-gap-compensation)
-    );
-
+    box-sizing: border-box;
     width: auto;
-    padding-block: var(--eds-selectable-space-vertical);
-    padding-inline: var(--eds-selectable-space-horizontal);
-    border-radius: var(--eds-spacing-border-radius-rounded);
 
-    transition: background-color 150ms;
+    /* 6px + 24px icon + 6px gives 36px at comfortable */
+    padding: var(--eds-spacing-2xs);
+    border-radius: var(--eds-corner-radius-rounded);
 
+    background-color: var(--_bg-color);
+
+    transition: background-color var(--_transition-duration);
+
+    /* Focus takes the hover fill and track too, as in Figma */
     &:has(.input:focus-visible) {
-      outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-focus);
-      outline-offset: var(--eds-sizing-stroke-thick);
+      --_bg-color: var(--_bg-muted-hover);
+      --_track-border: var(--eds-border-interactive-neutral-muted-hover);
+      --_track-bg-checked: var(--_icon-on-muted);
+
+      outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
+      outline-offset: var(--_stroke-width);
     }
 
     & label {
       cursor: pointer;
+
+      /* Centres the first line of the label on the 24px icon */
+      padding-block: calc(
+        (var(--_icon-size) - var(--eds-typography-label-md-line-height)) / 2
+      );
     }
 
     /* :has(.input:disabled) instead of a prop-set attribute so the styling
        also covers disabling inherited from an ancestor, e.g. fieldset[disabled].
-       The variable overrides outrank the :hover rules below on specificity,
-       so hover needs no :not() guard */
+       The :has() argument makes this selector more specific than :hover, so
+       a disabled switch gets no hover fill wherever the hover rule sits. */
     &:has(.input:disabled) {
-      --_eds-field-label-color: var(--_switch-disabled-color);
-      --_switch-hover-color: transparent;
+      --_eds-field-label-color: var(--eds-text-interactive-disabled);
+      --_bg-color: transparent;
+      --_track-bg: var(--eds-background-interactive-disabled);
+      --_track-border: var(--eds-background-interactive-disabled);
+      --_handle-bg: var(--eds-icon-on-emphasis-neutral);
+      --_track-bg-checked: var(--eds-background-interactive-disabled);
+      --_handle-bg-checked: var(--eds-icon-on-emphasis-neutral);
 
       cursor: not-allowed;
 
       & label {
         cursor: not-allowed;
       }
-
-      & .track {
-        --_track-bg: var(--eds-color-bg-disabled);
-      }
-
-      & .handle {
-        --_handle-bg: var(--eds-color-bg-disabled);
-      }
-    }
-
-    &:has(.input:checked) .handle {
-      inset-inline-start: calc(100% - var(--_handle-size));
     }
 
     & .control {
+      position: relative;
+
       display: inline-flex;
       flex-shrink: 0;
       align-items: center;
       justify-content: center;
 
-      min-block-size: var(--_icon-size);
-
-      /* Negative margin for alignment with Checkbox/Radio icons */
-      margin-block: -6px;
-      margin-inline: -1.9px;
-
-      [data-density='comfortable'] & {
-        margin-inline: -2.1px;
-      }
+      inline-size: var(--_icon-size);
+      block-size: var(--_icon-size);
     }
 
     & .input {
@@ -115,56 +124,70 @@
     }
 
     & .track {
-      /* Declared on the element, not the root: the appearance-switched token
-         must resolve under .control's data-color-appearance */
-      --_track-bg: var(--eds-color-bg-fill-muted-default);
+      --_fill: var(--_track-bg);
+      --_stroke: var(--_track-border);
+      --_knob: var(--_handle-bg);
+      --_knob-start: var(--_handle-offset);
 
       pointer-events: none;
 
-      position: relative;
+      /* The handle sits in the flex flow, not absolutely positioned, so it
+         snaps to the same pixel rows as the track and stays centred when
+         the switch lands on a fractional position */
+      display: inline-flex;
+      align-items: center;
 
-      display: inline-block;
-
+      box-sizing: border-box;
       inline-size: var(--_track-width);
       block-size: var(--_track-height);
-      border-radius: var(--eds-spacing-border-radius-pill);
+      border: var(--_stroke-width) solid var(--_stroke);
+      border-radius: var(--eds-corner-radius-pill);
 
-      background-color: var(--_track-bg);
+      background-color: var(--_fill);
 
-      transition: background-color 150ms;
+      transition:
+        background-color var(--_transition-duration),
+        border-color var(--_transition-duration);
+    }
+
+    /* Checked: the track has no border in Figma, so the border takes the
+       fill colour and the size stays the same */
+    & .input:checked + .track {
+      --_fill: var(--_track-bg-checked);
+      --_stroke: var(--_fill);
+      --_knob: var(--_handle-bg-checked);
+      --_knob-start: calc(100% - var(--_handle-size) - var(--_handle-offset));
     }
 
     & .handle {
-      /* Declared on the element, not the root: the appearance-switched token
-         must resolve under .control's data-color-appearance */
-      --_handle-bg: var(--eds-color-bg-fill-emphasis-default);
-
       pointer-events: none;
 
-      position: absolute;
-      inset-block-start: 50%;
-      inset-inline-start: 0;
-      translate: 0 -50%;
+      flex-shrink: 0;
 
       inline-size: var(--_handle-size);
       block-size: var(--_handle-size);
-      border-radius: var(--eds-spacing-border-radius-pill);
+      margin-inline-start: var(--_knob-start);
+      border-radius: var(--eds-corner-radius-pill);
 
-      background-color: var(--_handle-bg);
+      background-color: var(--_knob);
 
       transition:
-        inset-inline-start 150ms,
-        background-color 150ms;
+        margin-inline-start var(--_transition-duration),
+        background-color var(--_transition-duration);
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: var(--_switch-hover-color);
+        --_bg-color: var(--_bg-muted-hover);
+        --_track-border: var(--eds-border-interactive-neutral-muted-hover);
+        --_track-bg-checked: var(--_icon-on-muted);
       }
+    }
+  }
 
-      &:hover .track {
-        --_track-bg: var(--_track-hover-bg);
-      }
+  @media (prefers-reduced-motion: reduce) {
+    .eds-switch {
+      --_transition-duration: 0ms;
     }
   }
 }
