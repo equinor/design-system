@@ -3,26 +3,30 @@
     /* Private color variables. The --_eds-field-* colour variables are
        intended override points for Field-based components (Checkbox, Radio
        and Switch set them from their own CSS) — keep the names stable */
-    --_eds-field-label-color: var(--eds-color-text-strong);
-    --_eds-field-description-color: var(--eds-color-text-subtle);
-    --_eds-field-indicator-color: var(--eds-color-text-neutral-subtle);
-    --_eds-field-helper-color: var(--eds-color-text-subtle);
+    --_eds-field-label-color: var(--eds-text-primary);
+    --_eds-field-description-color: var(--eds-text-secondary);
+    --_eds-field-indicator-color: var(--eds-text-secondary);
+    --_eds-field-helper-color: var(--eds-text-secondary);
+    --_gap: var(--eds-spacing-2xs);
 
     /* Layout - use CSS variable for configurable width */
     display: flex;
     flex-direction: column;
-    gap: var(--eds-generic-gap-vertical);
+    gap: var(--_gap);
     align-items: flex-start;
 
     width: var(--eds-field-width, 100%);
 
-    /* Shared font-family — inherits to all text children */
-    font-family: var(--eds-typography-ui-body-font-family);
+    /* Shared font-family and weight — inherit to all text children, so a
+       Field inside bold text keeps its parts normal */
+    font-family: var(--eds-font-family-ui);
+    font-weight: var(--eds-font-weight-normal);
 
     /* Horizontal layout for toggle inputs (checkbox, radio, switch) */
     &:is([data-position='start'], [data-position='end']) {
+      --_gap: var(--eds-spacing-xs);
+
       flex-flow: row wrap;
-      gap: var(--eds-generic-gap-horizontal);
       align-items: center;
     }
 
@@ -36,56 +40,93 @@
       flex-basis: 100%;
     }
 
-    /* Label uses data-baseline="center" for text-box trim + grid-snap padding —
-       see [data-baseline='center'] rule in eds-tokens/src/css/typography.css */
-    & .label {
+    /* Field.Label: a direct child, or a child of a label row wrapper such
+       as TextField's header. The child combinators keep out a .label nested
+       deeper, such as a Tooltip's in the label row or a Button's inside an
+       Input. Field does not take a Button or Chip as a direct child, whose
+       .label would match the second selector.
+       Text is not trimmed (ADR-0029), so the line height sets the height.
+       The label stays a block, not flex, so a label with inline elements
+       keeps the spaces between them. */
+    & > .label,
+    & > * > .label {
       display: block;
-
-      font-size: var(--eds-typography-ui-body-md-font-size);
-      font-weight: var(--eds-typography-ui-body-md-font-weight-normal);
-      line-height: var(--eds-typography-ui-body-md-line-height-default);
+      font-size: var(--eds-typography-label-md-font-size);
+      line-height: var(--eds-typography-label-md-line-height);
       color: var(--_eds-field-label-color);
     }
 
-    & .indicator {
-      margin-inline-start: var(--eds-selectable-space-horizontal);
-
-      font-size: var(--eds-typography-ui-body-sm-font-size);
-      line-height: var(--eds-typography-ui-body-sm-line-height-default);
-      color: var(--_eds-field-indicator-color);
-      vertical-align: middle;
+    /* The label fills its row, as the label row in the Figma TextField and
+       Select does, so the indicator can sit at the end of it. In the column
+       layout that is the width; inside a label row wrapper it is the free
+       space next to e.g. the info button. The horizontal layout of
+       Checkbox, Radio and Switch keeps a label that hugs its text. */
+    & > * > .label {
+      flex-grow: 1;
     }
 
+    &:not([data-position]) > .label {
+      align-self: stretch;
+    }
+
+    /* Figma places the indicator at the end of the label row, with no gap,
+       centred on the label line. The indicator comes after the label text,
+       so on a label that wraps it sits at the end of the last line. Where
+       the label hugs its text, as in Checkbox, Radio and Switch, the Field
+       gap keeps the indicator off the text. */
+    & > .label > .indicator,
+    & > * > .label > .indicator {
+      float: inline-end;
+
+      margin-block-start: calc(
+        (
+            var(--eds-typography-label-md-line-height) -
+              var(--eds-typography-label-xs-line-height)
+          ) /
+          2
+      );
+      margin-inline-start: var(--_gap);
+
+      font-size: var(--eds-typography-label-xs-font-size);
+      line-height: var(--eds-typography-label-xs-line-height);
+      color: var(--_eds-field-indicator-color);
+    }
+
+    /* label-sm, not body-sm, as in the Figma TextField: the description is
+       12/16 and the helper message below is body-sm 12/20. */
     & .description {
       margin: 0;
+      font-size: var(--eds-typography-label-sm-font-size);
+      line-height: var(--eds-typography-label-sm-line-height);
       color: var(--_eds-field-description-color);
     }
 
-    & .helper-message {
-      margin: 0;
-      color: var(--_eds-field-helper-color);
+    /* Figma has no gap between the label and the description, so the
+       description cancels the column gap when it follows the label, or a
+       label row wrapper such as TextField's header. A description placed
+       anywhere else keeps the gap. */
+    &:not([data-position]) > .label + .description,
+    &:not([data-position]) > :has(> .label) + .description {
+      margin-block-start: calc(var(--_gap) * -1);
     }
 
-    /* data-baseline="grid" on these elements handles text-box trim via
-       [data-baseline='grid'] in eds-tokens/src/css/typography.css */
-    & .description,
     & .helper-message {
-      font-size: var(--eds-typography-ui-body-sm-font-size);
-      line-height: var(--eds-typography-ui-body-sm-line-height-default);
+      margin: 0;
+      font-size: var(--eds-typography-body-sm-font-size);
+      line-height: var(--eds-typography-body-sm-line-height);
+      color: var(--_eds-field-helper-color);
     }
 
     /* Only helper message changes color when disabled. The :has() arm covers
        disabling inherited from an ancestor, e.g. fieldset[disabled], and is
        scoped to the form controls a Field labels — a bare :has(:disabled)
        would also match a placeholder <option disabled> inside an enabled
-       select. Not --eds-color-text-disabled: that token is switched by
-       data-color-appearance and renders tinted, not grey, under non-neutral
-       appearances. TODO: Replace with semantic token when available */
+       select. */
     &:is(
-        [data-disabled='true'],
-        :has(input:disabled, select:disabled, textarea:disabled)
-      ) {
-      --_eds-field-helper-color: var(--eds-color-neutral-7);
+      [data-disabled='true'],
+      :has(input:disabled, select:disabled, textarea:disabled)
+    ) {
+      --_eds-field-helper-color: var(--eds-text-interactive-disabled);
     }
   }
 }
