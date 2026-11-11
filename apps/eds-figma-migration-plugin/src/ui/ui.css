@@ -734,3 +734,12 @@ code {
   justify-content: space-between;
   padding-block-end: var(--eds-spacing-xs);
 }
+
+/* Frames and layers without EDS variables, hidden behind a button. */
+.empty-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  align-items: flex-start;
+  padding-block-start: var(--eds-spacing-xs);
+}

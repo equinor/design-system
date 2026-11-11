@@ -103,6 +103,14 @@ function GroupTitle({ group, showPage }: { group: Group; showPage: boolean }) {
   )
 }
 
+/** “12 frames”, or “12 frames and layers” when some are loose layers. */
+function entryNoun(entries: EntrySummary[]): string {
+  const frames = entries.filter((entry) => entry.kind === 'frame').length
+  if (frames === entries.length) return frames === 1 ? 'frame' : 'frames'
+  if (frames === 0) return entries.length === 1 ? 'layer' : 'layers'
+  return 'frames and layers'
+}
+
 function frameCount(entries: EntrySummary[]): string {
   const frames = entries.filter((entry) => entry.kind === 'frame').length
   return `${frames} frame${frames === 1 ? '' : 's'}`
@@ -119,9 +127,16 @@ function Groups({
   onOpen: (entry: EntrySummary) => void
   onGoTo: (entry: EntrySummary) => void
 }) {
+  // Frames and layers without EDS variables have nothing to migrate; they
+  // are hidden unless asked for, so the list shows the work.
+  const [showEmpty, setShowEmpty] = useState(false)
+  const empty = entries.filter((entry) => entry.health === null)
+  const visible = showEmpty
+    ? entries
+    : entries.filter((entry) => entry.health !== null)
   return (
     <div className="entry-groups">
-      {groupEntries(entries).map((group) => (
+      {groupEntries(visible).map((group) => (
         <section key={group.key} className="entry-group">
           {(showPage || group.sections.length > 0) && (
             <GroupTitle group={group} showPage={showPage} />
@@ -140,13 +155,19 @@ function Groups({
                     )}
                     {entry.name}
                   </span>
-                  <span className="entry-meta">{countsText(entry)}</span>
-                  <span className="entry-health-row">
-                    <HealthBar counts={entry.counts} size="small" />
-                    <span className="entry-health">
-                      {formatHealth(entry.health)}
-                    </span>
-                  </span>
+                  {entry.health === null ? (
+                    <span className="entry-meta">No EDS variables</span>
+                  ) : (
+                    <>
+                      <span className="entry-meta">{countsText(entry)}</span>
+                      <span className="entry-health-row">
+                        <HealthBar counts={entry.counts} size="small" />
+                        <span className="entry-health">
+                          {formatHealth(entry.health)}
+                        </span>
+                      </span>
+                    </>
+                  )}
                 </div>
                 <div className="entry-actions">
                   <Button
@@ -171,6 +192,22 @@ function Groups({
           </ul>
         </section>
       ))}
+      {empty.length > 0 && (
+        <div className="empty-entries">
+          {visible.length === 0 && (
+            <p className="muted">Nothing here uses EDS variables.</p>
+          )}
+          <Button
+            variant="ghost"
+            size="small"
+            onClick={() => setShowEmpty((previous) => !previous)}
+          >
+            {showEmpty
+              ? `Hide ${empty.length} ${entryNoun(empty)} without EDS variables`
+              : `Show ${empty.length} ${entryNoun(empty)} without EDS variables`}
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
@@ -212,6 +249,7 @@ export function EntryList({
     <Accordion className="binding-groups">
       {[...pages.entries()].map(([pageId, page]) => {
         const counts = sumCounts(page.entries.map((entry) => entry.counts))
+        const health = healthOf(counts)
         const isOpen = open.has(pageId)
         return (
           <Accordion.Item
@@ -231,15 +269,19 @@ export function EntryList({
                 <span className="binding-name">
                   <span className="kind-label">Page</span> {page.name}
                 </span>
-                <span className="entry-health-row">
-                  <HealthBar counts={counts} size="small" />
-                  <span className="entry-health">
-                    {formatHealth(healthOf(counts))}
-                  </span>
+                {health === null ? (
                   <span className="binding-path">
-                    {frameCount(page.entries)} · {oldCount(counts)} legacy
+                    No EDS variables · {frameCount(page.entries)}
                   </span>
-                </span>
+                ) : (
+                  <span className="entry-health-row">
+                    <HealthBar counts={counts} size="small" />
+                    <span className="entry-health">{formatHealth(health)}</span>
+                    <span className="binding-path">
+                      {frameCount(page.entries)} · {oldCount(counts)} legacy
+                    </span>
+                  </span>
+                )}
               </span>
             </Accordion.Header>
             <Accordion.Panel>

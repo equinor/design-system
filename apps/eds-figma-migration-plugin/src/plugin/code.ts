@@ -3,7 +3,12 @@
  * document, and talks to the plugin window (src/ui) through messages.
  */
 import { MAPPING_VERSION } from '../mapping/version'
-import { buildMappingGroups, isMappable } from '../scan/mapping'
+import {
+  buildMappingGroups,
+  effectiveCategory,
+  isMappable,
+} from '../scan/mapping'
+import { recount } from '../scan/summary'
 import type { Overrides } from '../scan/mapping'
 import type {
   Command,
@@ -134,6 +139,21 @@ function setOverrides(changes: OverrideChange[]) {
   }
   overrides = { records, rows }
   post({ type: 'overrides', overrides })
+  if (lastScan) {
+    // A target the designer chose counts as Ready, and a choice to leave a
+    // binding as No equivalent, so the health bars follow every change.
+    const current = overrides
+    lastScan = {
+      ...lastScan,
+      summary: recount(
+        lastScan.summary,
+        lastScan.records,
+        lastScan.oldInstances,
+        (record) => effectiveCategory(record, current),
+      ),
+    }
+    post({ type: 'summary', summary: lastScan.summary })
+  }
 }
 
 function entryDetail(entryId: string) {

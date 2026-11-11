@@ -10,7 +10,7 @@
  * single binding in the inspector, which wins over the row.
  */
 import type { BindingKind, Outcome } from '../mapping/types'
-import type { BindingRecord, PropertyGroup } from './types'
+import type { BindingRecord, Category, PropertyGroup } from './types'
 
 /** A chosen target, or null to leave the legacy binding as it is. */
 export type OverrideValue = string | null
@@ -43,18 +43,53 @@ export type EffectiveTarget = {
 }
 
 /** The target that will be applied: the binding's own override, then its row's, then the proposal. */
+export function resolveTarget(
+  id: string,
+  key: string,
+  proposal: string | undefined,
+  overrides: Overrides,
+): EffectiveTarget {
+  if (id in overrides.records) {
+    return { target: overrides.records[id], source: 'record' }
+  }
+  if (key in overrides.rows) {
+    return { target: overrides.rows[key], source: 'row' }
+  }
+  return { target: proposal ?? null, source: 'proposal' }
+}
+
 export function effectiveTarget(
   record: BindingRecord,
   overrides: Overrides,
 ): EffectiveTarget {
-  if (record.id in overrides.records) {
-    return { target: overrides.records[record.id], source: 'record' }
-  }
-  const key = rowKey(record)
-  if (key in overrides.rows) {
-    return { target: overrides.rows[key], source: 'row' }
-  }
-  return { target: record.candidates?.[0] ?? null, source: 'proposal' }
+  return resolveTarget(
+    record.id,
+    rowKey(record),
+    record.candidates?.[0],
+    overrides,
+  )
+}
+
+/**
+ * The category once a designer has decided: a target they chose is Ready,
+ * whatever the rule said, and a choice to leave the binding is No
+ * equivalent. Without a choice, the rule's category stands.
+ */
+export function categoryAfter(
+  category: Category,
+  target: EffectiveTarget,
+): Category {
+  if (target.source === 'proposal') return category
+  return target.target === null ? 'none' : 'sure'
+}
+
+export function effectiveCategory(
+  record: BindingRecord,
+  overrides: Overrides,
+): Category {
+  return isMappable(record)
+    ? categoryAfter(record.category, effectiveTarget(record, overrides))
+    : record.category
 }
 
 /** One binding in a mapping row, enough to list and select it. */
@@ -63,6 +98,8 @@ export type MappingBinding = {
   nodeId: string
   nodeName: string
   entryId: string
+  /** Layer names from the entry down to the layer's parent */
+  path: string[]
   property: BindingRecord['property']
   kind?: BindingKind
 }
@@ -130,6 +167,7 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
       nodeId: record.nodeId,
       nodeName: record.nodeName,
       entryId: record.entryId,
+      path: record.path,
       property: record.property,
       kind: record.kind,
     })
@@ -140,4 +178,47 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
   return [...groups.values()].sort(
     (a, b) => b.count - a.count || a.old.localeCompare(b.old, 'en'),
   )
+}
+
+/** What one binding in a row gets, after the designer's choices. */
+export type BindingOutcome = EffectiveTarget & { category: Category }
+
+export function bindingOutcome(
+  row: MappingRow,
+  binding: MappingBinding,
+  overrides: Overrides,
+): BindingOutcome {
+  const target = resolveTarget(binding.id, row.key, row.proposal, overrides)
+  return { ...target, category: categoryAfter(row.outcome, target) }
+}
+
+/** How many bindings get each target, most first. */
+export type TargetCount = {
+  target: string | null
+  /** True when the rule found no equivalent and nobody chose anything */
+  noEquivalent: boolean
+  count: number
+}
+
+export function targetCounts(
+  rows: MappingRow[],
+  overrides: Overrides,
+): TargetCount[] {
+  const counts = new Map<string, TargetCount>()
+  for (const row of rows) {
+    for (const binding of row.bindings) {
+      const outcome = bindingOutcome(row, binding, overrides)
+      const noEquivalent =
+        row.outcome === 'none' && outcome.source === 'proposal'
+      const key = `${outcome.target}|${noEquivalent}`
+      const entry = counts.get(key) ?? {
+        target: outcome.target,
+        noEquivalent,
+        count: 0,
+      }
+      entry.count += 1
+      counts.set(key, entry)
+    }
+  }
+  return [...counts.values()].sort((a, b) => b.count - a.count)
 }

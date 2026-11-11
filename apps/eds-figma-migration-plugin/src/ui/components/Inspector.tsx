@@ -9,7 +9,11 @@ import {
 } from '@equinor/eds-core-react/next'
 import { arrow_back } from '@equinor/eds-icons'
 import { CATEGORY_LABELS, GROUP_LABELS, propertyLabel } from '../../scan/labels'
-import { effectiveTarget, isMappable } from '../../scan/mapping'
+import {
+  effectiveCategory,
+  effectiveTarget,
+  isMappable,
+} from '../../scan/mapping'
 import type { Overrides } from '../../scan/mapping'
 import { formatHealth } from '../../scan/summary'
 import { PROPERTY_GROUPS, SCORED_CATEGORIES } from '../../scan/types'
@@ -20,6 +24,7 @@ import type {
   OldInstance,
   PropertyGroup,
 } from '../../scan/types'
+import { pathBelow } from '../paths'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
 import { sourceLabel, targetLabel } from '../targets'
@@ -70,6 +75,40 @@ export function selectable(record: BindingRecord): SelectedBinding {
   }
 }
 
+type InstanceGroup = {
+  key: string
+  name: string
+  /** Where the main component is */
+  source: string
+  ids: string[]
+  /** Legacy variables in all of them */
+  count: number
+}
+
+/** Instances of the same main component in one row, most legacy variables first. */
+function groupInstances(instances: OldInstance[]): InstanceGroup[] {
+  const groups = new Map<string, InstanceGroup>()
+  for (const instance of instances) {
+    const main = instance.mainComponent
+    const key = main ? `main:${main.key}` : `name:${instance.name}`
+    const group = groups.get(key) ?? {
+      key,
+      name: main?.name ?? instance.name,
+      source: main
+        ? main.remote
+          ? 'from a library'
+          : 'in this file'
+        : 'main component not found',
+      ids: [],
+      count: 0,
+    }
+    group.ids.push(instance.id)
+    group.count += instance.count
+    groups.set(key, group)
+  }
+  return [...groups.values()].sort((a, b) => b.count - a.count)
+}
+
 type Group = {
   key: string
   title: string
@@ -77,7 +116,11 @@ type Group = {
   records: BindingRecord[]
 }
 
-function groupRecords(records: BindingRecord[], pivot: Pivot): Group[] {
+function groupRecords(
+  records: BindingRecord[],
+  pivot: Pivot,
+  entryName: string,
+): Group[] {
   const groups = new Map<string, Group>()
   for (const record of records) {
     const key =
@@ -91,7 +134,7 @@ function groupRecords(records: BindingRecord[], pivot: Pivot): Group[] {
           ? {
               key,
               title: record.nodeName,
-              subtitle: record.path.join(' / ') || undefined,
+              subtitle: pathBelow(record.path, entryName),
               records: [],
             }
           : {
@@ -113,11 +156,14 @@ function groupRecords(records: BindingRecord[], pivot: Pivot): Group[] {
 }
 
 /** How many bindings a group has, and how many need attention. */
-function groupSummary(records: BindingRecord[]): string {
+function groupSummary(
+  records: BindingRecord[],
+  categoryOf: (record: BindingRecord) => Category,
+): string {
   const parts = [`${records.length} binding${records.length === 1 ? '' : 's'}`]
   for (const category of ['check', 'none'] as const) {
     const count = records.filter(
-      (record) => record.category === category,
+      (record) => categoryOf(record) === category,
     ).length
     if (count > 0) {
       parts.push(`${count} ${CATEGORY_LABELS[category].toLowerCase()}`)
@@ -150,8 +196,12 @@ export function Inspector({
     ...SCORED_CATEGORIES,
     ...(entry.counts.other > 0 ? (['other'] as const) : []),
   ]
+  // After a designer's choice a binding counts as Ready or No equivalent,
+  // the same as in the health bar.
+  const categoryOf = (record: BindingRecord) =>
+    effectiveCategory(record, overrides)
   const byStatus = (records ?? []).filter(
-    (record) => filter === 'all' || record.category === filter,
+    (record) => filter === 'all' || categoryOf(record) === filter,
   )
   const properties = PROPERTY_GROUPS.filter((candidate) =>
     (records ?? []).some((record) => record.group === candidate),
@@ -159,7 +209,7 @@ export function Inspector({
   const shown = byStatus.filter(
     (record) => property === 'all' || record.group === property,
   )
-  const groups = groupRecords(shown, pivot)
+  const groups = groupRecords(shown, pivot, entry.name)
   const toggleOpen = (key: string, isOpen: boolean) =>
     setOpen((previous) => {
       const next = new Set(previous)
@@ -271,7 +321,10 @@ export function Inspector({
                     <span className="group-header">
                       <span className="binding-name">{group.title}</span>
                       <span className="binding-path">
-                        {[group.subtitle, groupSummary(group.records)]
+                        {[
+                          group.subtitle,
+                          groupSummary(group.records, categoryOf),
+                        ]
                           .filter(Boolean)
                           .join(' · ')}
                       </span>
@@ -316,39 +369,48 @@ export function Inspector({
                           </Button>
                         </div>
                         <ul className="binding-list">
-                          {group.records.map((record) => (
-                            <BindingRow
-                              key={record.id}
-                              title={
-                                pivot === 'layers'
-                                  ? propertyLabel(record.property)
-                                  : `${record.nodeName} · ${propertyLabel(record.property)}`
-                              }
-                              subtitle={
-                                pivot === 'variables'
-                                  ? record.path.join(' / ') || undefined
-                                  : undefined
-                              }
-                              old={pivot === 'layers' ? record.old : undefined}
-                              target={targetText(record, overrides)}
-                              note={
-                                isMappable(record)
-                                  ? sourceLabel(
-                                      effectiveTarget(record, overrides).source,
-                                    )
-                                  : undefined
-                              }
-                              reason={record.reason}
-                              category={record.category}
-                              changeable={isMappable(record)}
-                              selected={selection.has(record.id)}
-                              onToggle={(selected) =>
-                                selection.set([selectable(record)], selected)
-                              }
-                              onSelectLayer={() => onSelect([record.nodeId])}
-                              onChange={() => onChange(record)}
-                            />
-                          ))}
+                          {group.records.map((record) => {
+                            const decided =
+                              isMappable(record) &&
+                              effectiveTarget(record, overrides).source !==
+                                'proposal'
+                            return (
+                              <BindingRow
+                                key={record.id}
+                                title={
+                                  pivot === 'layers'
+                                    ? propertyLabel(record.property)
+                                    : `${record.nodeName} · ${propertyLabel(record.property)}`
+                                }
+                                subtitle={
+                                  pivot === 'variables'
+                                    ? pathBelow(record.path, entry.name)
+                                    : undefined
+                                }
+                                old={
+                                  pivot === 'layers' ? record.old : undefined
+                                }
+                                target={targetText(record, overrides)}
+                                note={
+                                  isMappable(record)
+                                    ? sourceLabel(
+                                        effectiveTarget(record, overrides)
+                                          .source,
+                                      )
+                                    : undefined
+                                }
+                                reason={decided ? undefined : record.reason}
+                                category={categoryOf(record)}
+                                changeable={isMappable(record)}
+                                selected={selection.has(record.id)}
+                                onToggle={(selected) =>
+                                  selection.set([selectable(record)], selected)
+                                }
+                                onSelectLayer={() => onSelect([record.nodeId])}
+                                onChange={() => onChange(record)}
+                              />
+                            )
+                          })}
                         </ul>
                       </div>
                     )}
@@ -370,21 +432,26 @@ export function Inspector({
             hand. The plugin never changes anything inside an instance.
           </p>
           <ul className="binding-list">
-            {oldInstances.map((instance) => (
-              <li key={instance.id} className="binding-row">
-                <button
-                  type="button"
-                  className="binding-select"
-                  onClick={() => onSelect([instance.id])}
-                >
-                  <span className="binding-name">{instance.name}</span>
+            {groupInstances(oldInstances).map((group) => (
+              <li key={group.key} className="binding-row">
+                <div className="entry-info">
+                  <span className="binding-name">{group.name}</span>
                   <span className="binding-path">
-                    {instance.mainComponent
-                      ? `${instance.mainComponent.name}${instance.mainComponent.remote ? ', from a library' : ', in this file'}`
-                      : 'Main component not found'}
+                    {group.ids.length} instance
+                    {group.ids.length === 1 ? '' : 's'}, {group.source}
                   </span>
-                </button>
-                <Badge tone="neutral">{instance.count} legacy</Badge>
+                </div>
+                <div className="binding-actions">
+                  <Badge tone="neutral">{group.count} legacy</Badge>
+                  <Button
+                    size="small"
+                    variant="secondary"
+                    aria-label={`Go to the ${group.ids.length} instances of ${group.name}`}
+                    onClick={() => onSelect(group.ids)}
+                  >
+                    Go to
+                  </Button>
+                </div>
               </li>
             ))}
           </ul>

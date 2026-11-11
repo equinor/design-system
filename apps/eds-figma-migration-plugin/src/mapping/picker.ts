@@ -17,8 +17,57 @@ export type PickerSubject = {
 export type PickerOptions = {
   /** The rule's candidates, the proposal first */
   proposed: string[]
-  /** Everything else that fits, in inventory order */
+  /** Everything else that fits, in the order of compareNames */
   others: string[]
+}
+
+/** Where a size sits on the scale: none, 9xs … 2xs, xs, sm, md, lg, xl, 2xl … 9xl. */
+function sizeRank(segment: string): number | undefined {
+  if (segment === 'none') return -100
+  const match = /^(\d*)(xs|sm|md|lg|xl)$/.exec(segment)
+  if (!match) return undefined
+  const times = match[1] ? Number(match[1]) : 1
+  switch (match[2]) {
+    case 'xs':
+      return 2 - times
+    case 'sm':
+      return 2
+    case 'md':
+      return 3
+    case 'lg':
+      return 4
+    default:
+      return 4 + times
+  }
+}
+
+/** States and weights in the order a designer reads them. */
+const WORD_ORDER = ['default', 'medium', 'bold', 'hover', 'pressed']
+
+function compareSegments(a: string, b: string): number {
+  const sizeA = sizeRank(a)
+  const sizeB = sizeRank(b)
+  if (sizeA !== undefined && sizeB !== undefined) return sizeA - sizeB
+  const wordA = WORD_ORDER.indexOf(a)
+  const wordB = WORD_ORDER.indexOf(b)
+  if (wordA >= 0 && wordB >= 0) return wordA - wordB
+  return a.localeCompare(b, 'en', { numeric: true })
+}
+
+/**
+ * Orders names the way Figma's picker lists the EDS Foundation library:
+ * sizes from small to large (sm before md before lg, xs before 2xl),
+ * default before hover and pressed, and numbers by value (cat/2 before
+ * cat/10). The inventory itself is sorted by plain string comparison.
+ */
+export function compareNames(a: string, b: string): number {
+  const partsA = a.split('/')
+  const partsB = b.split('/')
+  for (let index = 0; index < Math.min(partsA.length, partsB.length); index++) {
+    const result = compareSegments(partsA[index], partsB[index])
+    if (result !== 0) return result
+  }
+  return partsA.length - partsB.length
 }
 
 const COLOUR_KINDS: BindingKind[] = ['fill', 'stroke', 'effect', 'textFill']
@@ -58,7 +107,10 @@ export function pickerOptions(subject: PickerSubject): PickerOptions {
     names.filter((name) => !proposed.includes(name))
 
   if (subject.group === 'typography') {
-    return { proposed, others: without(NEW_TEXT_STYLES.map((s) => s.name)) }
+    return {
+      proposed,
+      others: without(NEW_TEXT_STYLES.map((s) => s.name)).sort(compareNames),
+    }
   }
   if (subject.group === 'modes') {
     const collection = proposed[0]?.split(':')[0]
@@ -80,7 +132,9 @@ export function pickerOptions(subject: PickerSubject): PickerOptions {
       variable.type === type &&
       !FORBIDDEN_TARGETS.includes(variable.name) &&
       (!scopes || variable.scopes.some((scope) => scopes.includes(scope))),
-  ).map((variable) => variable.name)
+  )
+    .map((variable) => variable.name)
+    .sort(compareNames)
   // Data visualisation colours fit every colour property; they go last.
   const isDataViz = (name: string) => name.startsWith('data-visualization/')
   return {

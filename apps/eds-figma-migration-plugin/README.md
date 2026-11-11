@@ -15,16 +15,16 @@ The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md).
 
 ## Status
 
-| Milestone                                     | State                            |
-| --------------------------------------------- | -------------------------------- |
-| 1. Scaffold, manifest, build, inventory export | Done                             |
-| 2. Rules and tests                            | Done                             |
-| 3. Read-only scan                             | Done                             |
-| 4. Mapping view and overrides                 | Done; to be tried in Figma       |
-| 5. Apply                                      | Next                             |
-| 6. Review and the remaining views             |                                  |
-| 7. Report and saved health                    |                                  |
-| 8. Release                                    |                                  |
+| Milestone                                      | State                                  |
+| ---------------------------------------------- | -------------------------------------- |
+| 1. Scaffold, manifest, build, inventory export | Done                                   |
+| 2. Rules and tests                             | Done                                   |
+| 3. Read-only scan                              | Done                                   |
+| 4. Mapping view and overrides                  | Done; tested on the test file in Figma |
+| 5. Apply                                       | Next                                   |
+| 6. Review and the remaining views              |                                        |
+| 7. Report and saved health                     |                                        |
+| 8. Release                                     |                                        |
 
 ## Build
 
@@ -59,7 +59,7 @@ Always try the plugin on a duplicate of a frame. The test frame is
 
 ## Scan
 
-**Open** scans the selected layers, the current page or the whole file, and changes nothing. The window calls the variables from the deprecated libraries *legacy*, since EDS 1.0 may be added later.
+**Open** scans the selected layers, the current page or the whole file, and changes nothing. The window calls the variables from the deprecated libraries _legacy_, since EDS 1.0 may be added later.
 
 - A file scan loads one page at a time with `page.loadAsync()`, so the view
   stays on the page you are on, and shows its progress with a Cancel button.

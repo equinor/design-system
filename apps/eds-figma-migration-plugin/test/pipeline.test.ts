@@ -134,12 +134,13 @@ describe.skipIf(!fixture)('pipeline on the test frame', () => {
       (record) =>
         record.nodeName === 'Cell' && record.property.type === 'typography',
     )
-    expect(cells).toHaveLength(9)
+    // A header row and three body rows of three cells each.
+    expect(cells).toHaveLength(12)
     expect(
       cells.filter((record) => record.candidates?.[0] === 'label/sm/medium'),
     ).toHaveLength(3)
     expect(
       cells.filter((record) => record.candidates?.[0] === 'label/sm/default'),
-    ).toHaveLength(6)
+    ).toHaveLength(9)
   })
 })

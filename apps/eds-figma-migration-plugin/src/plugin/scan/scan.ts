@@ -6,7 +6,7 @@
 import { OLD_COLLECTION_KEYS, OLD_DENSITY_KEY } from '../../mapping/old-keys'
 import { MAPPING_VERSION } from '../../mapping/version'
 import { classifyUnits } from '../../scan/classify'
-import { healthOf, summariseEntries, sumCounts } from '../../scan/summary'
+import { healthOf, summariseEntries, totalsOf } from '../../scan/summary'
 import type { EntryMeta } from '../../scan/summary'
 import type {
   BindingRecord,
@@ -202,8 +202,7 @@ export async function runScan(
   const records = classifyUnits(collector.units)
   const oldInstances = await findOldInstances(collector, records)
   const summaries = summariseEntries(entries, records, oldInstances)
-  const scored = summaries.filter((entry) => entry.kind !== 'component')
-  const totals = sumCounts(scored.map((entry) => entry.counts))
+  const totals = totalsOf(summaries)
 
   return {
     summary: {

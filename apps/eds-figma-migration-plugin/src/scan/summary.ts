@@ -1,13 +1,29 @@
 /** Counting and health, shared by the scan, the window and the report. */
 import { SCORED_CATEGORIES } from './types'
-import type { BindingRecord, Counts, EntrySummary, OldInstance } from './types'
+import type {
+  BindingRecord,
+  Category,
+  Counts,
+  EntrySummary,
+  OldInstance,
+  ScanSummary,
+} from './types'
+
+/** The category a record is counted in; the rule's own unless a designer has decided. */
+export type CategoryOf = (record: BindingRecord) => Category
+
+const ruleCategory: CategoryOf = (record) => record.category
 
 export function emptyCounts(): Counts {
   return { migrated: 0, sure: 0, check: 0, none: 0, inInstance: 0, other: 0 }
 }
 
-export function addToCounts(counts: Counts, record: BindingRecord): void {
-  counts[record.category] += 1
+export function addToCounts(
+  counts: Counts,
+  record: BindingRecord,
+  categoryOf: CategoryOf = ruleCategory,
+): void {
+  counts[categoryOf(record)] += 1
 }
 
 export function sumCounts(all: Counts[]): Counts {
@@ -42,11 +58,12 @@ export function summariseEntries(
   entries: EntryMeta[],
   records: BindingRecord[],
   oldInstances: OldInstance[],
+  categoryOf: CategoryOf = ruleCategory,
 ): EntrySummary[] {
   const counts = new Map(entries.map((entry) => [entry.id, emptyCounts()]))
   for (const record of records) {
     const entryCounts = counts.get(record.entryId)
-    if (entryCounts) addToCounts(entryCounts, record)
+    if (entryCounts) addToCounts(entryCounts, record, categoryOf)
   }
   const instancesPerEntry = new Map<string, number>()
   for (const instance of oldInstances) {
@@ -64,6 +81,36 @@ export function summariseEntries(
       oldInstances: instancesPerEntry.get(entry.id) ?? 0,
     }
   })
+}
+
+/** The totals of a scan: every entry except local main components, which are counted only on request. */
+export function totalsOf(entries: EntrySummary[]): Counts {
+  return sumCounts(
+    entries
+      .filter((entry) => entry.kind !== 'component')
+      .map((entry) => entry.counts),
+  )
+}
+
+/** The same scan, counted again after a designer has changed targets. */
+export function recount(
+  summary: ScanSummary,
+  records: BindingRecord[],
+  oldInstances: OldInstance[],
+  categoryOf: CategoryOf,
+): ScanSummary {
+  const meta: EntryMeta[] = summary.entries.map((entry) => ({
+    id: entry.id,
+    kind: entry.kind,
+    name: entry.name,
+    pageId: entry.pageId,
+    pageName: entry.pageName,
+    sections: entry.sections,
+    nodeIds: entry.nodeIds,
+  }))
+  const entries = summariseEntries(meta, records, oldInstances, categoryOf)
+  const totals = totalsOf(entries)
+  return { ...summary, entries, totals, health: healthOf(totals) }
 }
 
 /** Health as a whole percentage, for display. */

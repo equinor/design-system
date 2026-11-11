@@ -1,0 +1,6848 @@
+{
+  "generatedAt": "2026-11-11",
+  "fileName": "AI Testing",
+  "frame": {
+    "id": "2300:3213",
+    "name": "Migration test – old EDS variables"
+  },
+  "variables": {
+    "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0": {
+      "id": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0",
+      "key": "e2c3f325f2cb47727f7cbe5a34f8773fbad53f83",
+      "name": "Bg/Neutral/Surface",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:874aba4183e9e9ea534d0a193d4beff97faa8653/7033:9": {
+      "id": "VariableID:874aba4183e9e9ea534d0a193d4beff97faa8653/7033:9",
+      "key": "874aba4183e9e9ea534d0a193d4beff97faa8653",
+      "name": "Bg/Info/Fill Muted/Default",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:4c1064d6a3df22a54c2292a4f6edb2ddc10f3640/7033:6": {
+      "id": "VariableID:4c1064d6a3df22a54c2292a4f6edb2ddc10f3640/7033:6",
+      "key": "4c1064d6a3df22a54c2292a4f6edb2ddc10f3640",
+      "name": "Bg/Success/Fill Muted/Default",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:757cf39d29ab71cec2887d7e6976a71ea109a3d3/5336:94": {
+      "id": "VariableID:757cf39d29ab71cec2887d7e6976a71ea109a3d3/5336:94",
+      "key": "757cf39d29ab71cec2887d7e6976a71ea109a3d3",
+      "name": "Bg/Input",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    },
+    "VariableID:91d9f7645569202891ce4ea6ed27adf3c0d02ba4/9155:0": {
+      "id": "VariableID:91d9f7645569202891ce4ea6ed27adf3c0d02ba4/9155:0",
+      "key": "91d9f7645569202891ce4ea6ed27adf3c0d02ba4",
+      "name": "Bg/Fill/Muted/Default",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:08e09c310d52c59413a9c14c3e4c178189c092da/7028:15": {
+      "id": "VariableID:08e09c310d52c59413a9c14c3e4c178189c092da/7028:15",
+      "key": "08e09c310d52c59413a9c14c3e4c178189c092da",
+      "name": "Bg/Accent/Fill Emphasis/Default",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16": {
+      "id": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16",
+      "key": "d95156765c58531da7e18517c108c6f379c8ecc1",
+      "name": "Bg/Accent/Fill Emphasis/Hover",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:5aa31be762b57920bc0dccdf5913ae31ebbe0213/7033:4": {
+      "id": "VariableID:5aa31be762b57920bc0dccdf5913ae31ebbe0213/7033:4",
+      "key": "5aa31be762b57920bc0dccdf5913ae31ebbe0213",
+      "name": "Bg/Accent/Fill Muted/Hover",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:69e8e174d44fbb957e489d6df6e6db9474201263/9152:6": {
+      "id": "VariableID:69e8e174d44fbb957e489d6df6e6db9474201263/9152:6",
+      "key": "69e8e174d44fbb957e489d6df6e6db9474201263",
+      "name": "Bg/Fill/Emphasis/Default",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:e866210bf4678ae3cbd8c70a16611988e5bb63e7/7526:5": {
+      "id": "VariableID:e866210bf4678ae3cbd8c70a16611988e5bb63e7/7526:5",
+      "key": "e866210bf4678ae3cbd8c70a16611988e5bb63e7",
+      "name": "Bg/Disabled",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    },
+    "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1": {
+      "id": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1",
+      "key": "28d836cdfce9913253d2e09375c1c23f9cfa2f17",
+      "name": "Bg/Neutral/Fill Muted/Hover",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1": {
+      "id": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1",
+      "key": "7c2a7081d4fdc3995a923c08884ab93591dbacc1",
+      "name": "Bg/Floating",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    },
+    "VariableID:d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4/7033:5": {
+      "id": "VariableID:d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4/7033:5",
+      "key": "d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4",
+      "name": "Bg/Accent/Fill Muted/Active",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:10c712e6c2f5a15257360893105c836d1627e1e0/4012:953": {
+      "id": "VariableID:10c712e6c2f5a15257360893105c836d1627e1e0/4012:953",
+      "key": "10c712e6c2f5a15257360893105c836d1627e1e0",
+      "name": "spacing/vertical/lg",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905": {
+      "id": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905",
+      "key": "20d5d95ab87b3957f6dabafc7c4615890cea8dbd",
+      "name": "spacing/horizontal/xl",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954": {
+      "id": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954",
+      "key": "d2d7e55f558094c61255a395755dbe3e7e7600e9",
+      "name": "spacing/vertical/xl",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:22a34d1fc051438b283b74837d1de8d2d36b9748/5336:13": {
+      "id": "VariableID:22a34d1fc051438b283b74837d1de8d2d36b9748/5336:13",
+      "key": "22a34d1fc051438b283b74837d1de8d2d36b9748",
+      "name": "Bg/Neutral/Canvas",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3": {
+      "id": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+      "key": "433994f1ec77738d82952d42b43f761a8dd3898f",
+      "name": "Container/Space horizontal",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4": {
+      "id": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+      "key": "0b539a34dcf867c832fc3e87c2c5c14964ec2fd0",
+      "name": "Container/Space vertical",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600": {
+      "id": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600",
+      "key": "84dab3c47d79089983a8df9bfa8c6d5c443b0d06",
+      "name": "spacing/border-radius/rounded",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1": {
+      "id": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1",
+      "key": "de8f7542cc034d4650fe39fd5869e10883349edd",
+      "name": "Border/Neutral/Subtle",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902": {
+      "id": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902",
+      "key": "b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910",
+      "name": "spacing/horizontal/sm",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490": {
+      "id": "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490",
+      "key": "e7b76dcfb92164a508f7224d0441946ce692c7c9",
+      "name": "sizing/icon/lg",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3": {
+      "id": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3",
+      "key": "405099a8f707d533e7d538528bdb34104ec2caa6",
+      "name": "Text/Neutral/Strong",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:285647d729ee052f9994c394561648978daffd04/4038:693": {
+      "id": "VariableID:285647d729ee052f9994c394561648978daffd04/4038:693",
+      "key": "285647d729ee052f9994c394561648978daffd04",
+      "name": "typography/header/lg/tracking-normal",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:8f8a018dfeebb2966dafdd6e567f9322fc79f96b/4038:691": {
+      "id": "VariableID:8f8a018dfeebb2966dafdd6e567f9322fc79f96b/4038:691",
+      "key": "8f8a018dfeebb2966dafdd6e567f9322fc79f96b",
+      "name": "typography/header/lg/font-size",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755": {
+      "id": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755",
+      "key": "40e5000a8c20493735f1408cdc56c25ba2600e0d",
+      "name": "typography/header/font-family",
+      "type": "STRING",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:1765afeb6fa1f3d8bdb893df96467890a1fbb72c/4038:736": {
+      "id": "VariableID:1765afeb6fa1f3d8bdb893df96467890a1fbb72c/4038:736",
+      "key": "1765afeb6fa1f3d8bdb893df96467890a1fbb72c",
+      "name": "typography/header/lg/line-height-squished",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:c53f23608cb032af06075f1debfec02e3115a8a3/4038:697": {
+      "id": "VariableID:c53f23608cb032af06075f1debfec02e3115a8a3/4038:697",
+      "key": "c53f23608cb032af06075f1debfec02e3115a8a3",
+      "name": "typography/header/lg/font-weight-bolder",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:939f14349ed713d8a3d171cda580e6a5fa6882e2/7028:83": {
+      "id": "VariableID:939f14349ed713d8a3d171cda580e6a5fa6882e2/7028:83",
+      "key": "939f14349ed713d8a3d171cda580e6a5fa6882e2",
+      "name": "Text/Link",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    },
+    "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730": {
+      "id": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730",
+      "key": "b0311958581e7054d32cdb51ce0231ca9fd49766",
+      "name": "typography/ui-body/md/line-height-squished",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754": {
+      "id": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754",
+      "key": "dde0c584b29530ebd570894768641728e7f31781",
+      "name": "typography/ui-body/font-family",
+      "type": "STRING",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670": {
+      "id": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670",
+      "key": "0844346c06135ce5eea1935dc8389669d0683f26",
+      "name": "typography/ui-body/md/font-size",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873": {
+      "id": "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873",
+      "key": "aee9635ee04605d940033956d9a0516e6520fc2e",
+      "name": "spacing/inset/md/horizontal",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993": {
+      "id": "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993",
+      "key": "16b27d27180544f67c9a76e441078cf5ea7e3e7e",
+      "name": "spacing/inset/md/vertical-squished",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:f378d8000ad4c46980c514d2f4a7ed275b1c6f27/7028:74": {
+      "id": "VariableID:f378d8000ad4c46980c514d2f4a7ed275b1c6f27/7028:74",
+      "key": "f378d8000ad4c46980c514d2f4a7ed275b1c6f27",
+      "name": "Text/Info/Strong",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729": {
+      "id": "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729",
+      "key": "cc9af39b6636abde15335164d827b81f8a99d905",
+      "name": "typography/ui-body/md/line-height-default",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904": {
+      "id": "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904",
+      "key": "f52103cadbfeef977fa05b173488bbcdb1ce9d83",
+      "name": "spacing/horizontal/lg",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:5ee96afffc988e42f4c51d4be03e58a940723c33/4018:10": {
+      "id": "VariableID:5ee96afffc988e42f4c51d4be03e58a940723c33/4018:10",
+      "key": "5ee96afffc988e42f4c51d4be03e58a940723c33",
+      "name": "Container/Gap vertical",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:57c492802ed5f89bef9bc61e15c3b7c278ab9d7e/7028:0": {
+      "id": "VariableID:57c492802ed5f89bef9bc61e15c3b7c278ab9d7e/7028:0",
+      "key": "57c492802ed5f89bef9bc61e15c3b7c278ab9d7e",
+      "name": "Border/Neutral/Medium",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663": {
+      "id": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663",
+      "key": "96a2b0b17dace8c909ad2409c246dccb12ca046e",
+      "name": "typography/header/sm/font-size",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728": {
+      "id": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728",
+      "key": "bb49181808e55c952d81888530f484513674c2f7",
+      "name": "typography/header/sm/line-height-squished",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669": {
+      "id": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669",
+      "key": "962a49f1083ffb6a2351bce4861e2558551ef436",
+      "name": "typography/header/sm/font-weight-bolder",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2": {
+      "id": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2",
+      "key": "70a53591db7a6d09f55db15afc87070ccb95ba18",
+      "name": "Text/Neutral/Subtle",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:6b525012413190c666548ba55ba39f9fc0453429/4018:0": {
+      "id": "VariableID:6b525012413190c666548ba55ba39f9fc0453429/4018:0",
+      "key": "6b525012413190c666548ba55ba39f9fc0453429",
+      "name": "Selectable/Space horizontal",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:7d412fe23fe2f35044662e4418b13be3e4c8dc94/4018:1": {
+      "id": "VariableID:7d412fe23fe2f35044662e4418b13be3e4c8dc94/4018:1",
+      "key": "7d412fe23fe2f35044662e4418b13be3e4c8dc94",
+      "name": "Selectable/Space vertical",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756": {
+      "id": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+      "key": "d6a5fcea9820325069761585ffde20e1d35f614e",
+      "name": "Generic/Corner radius",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:da51f68a85f0294b3ebd862c4f632c7f75c32a55/7028:71": {
+      "id": "VariableID:da51f68a85f0294b3ebd862c4f632c7f75c32a55/7028:71",
+      "key": "da51f68a85f0294b3ebd862c4f632c7f75c32a55",
+      "name": "Text/Success/Strong",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23": {
+      "id": "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23",
+      "key": "35fc8f53acb295f6bd0101028ded4d7e3ba38470",
+      "name": "Typography/Line height",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902": {
+      "id": "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902",
+      "key": "d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea",
+      "name": "Typography/Font family",
+      "type": "STRING",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8": {
+      "id": "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8",
+      "key": "7e185b83cf30d6f965f9fcc63d6dce0b836b07eb",
+      "name": "Typography/Font size",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950": {
+      "id": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950",
+      "key": "7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e",
+      "name": "spacing/vertical/xs",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726": {
+      "id": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726",
+      "key": "67ebded171dc476cbe080f1c3e2d53bf6fd5abe3",
+      "name": "typography/ui-body/sm/line-height-squished",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656": {
+      "id": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656",
+      "key": "2eea464198f03f84e51bf6354818f22109f57f36",
+      "name": "typography/ui-body/sm/font-size",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:1229fce177c22e271e3562932889c9846a47f4ce/7028:84": {
+      "id": "VariableID:1229fce177c22e271e3562932889c9846a47f4ce/7028:84",
+      "key": "1229fce177c22e271e3562932889c9846a47f4ce",
+      "name": "Border/Focus",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    },
+    "VariableID:ebf56aa57b96cad500b66c3425f91a0e6103e348/7028:80": {
+      "id": "VariableID:ebf56aa57b96cad500b66c3425f91a0e6103e348/7028:80",
+      "key": "ebf56aa57b96cad500b66c3425f91a0e6103e348",
+      "name": "Text/Danger/Strong",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:6a5c325f5c183cd9c541eb01c453096a465b6a95/4038:725": {
+      "id": "VariableID:6a5c325f5c183cd9c541eb01c453096a465b6a95/4038:725",
+      "key": "6a5c325f5c183cd9c541eb01c453096a465b6a95",
+      "name": "typography/ui-body/sm/line-height-default",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901": {
+      "id": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901",
+      "key": "dee898422a3d6e85cf664f6fe256ae5350a1a249",
+      "name": "spacing/horizontal/xs",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1": {
+      "id": "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1",
+      "key": "a910f606b5064699233e8df89d266c6c3ef921a5",
+      "name": "Border/Subtle",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:1d541b5784a730485b7ea5cc448b710dfdc545f1/9152:3": {
+      "id": "VariableID:1d541b5784a730485b7ea5cc448b710dfdc545f1/9152:3",
+      "key": "1d541b5784a730485b7ea5cc448b710dfdc545f1",
+      "name": "Text/Strong",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951": {
+      "id": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951",
+      "key": "627b2b97e22cf01e65a4ab46d72d81d4e405605a",
+      "name": "spacing/vertical/sm",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903": {
+      "id": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903",
+      "key": "45febbda67b7782c9af071998a3fd1f29179d8b1",
+      "name": "spacing/horizontal/md",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73": {
+      "id": "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73",
+      "key": "0fca56c221a0c15bb7063424491ec22c1bdc3dc8",
+      "name": "Text/Accent/Strong on emphasis",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676": {
+      "id": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676",
+      "key": "ce619bea7415afff8a93acc0d73547d3c0773c37",
+      "name": "typography/ui-body/md/font-weight-bolder",
+      "type": "FLOAT",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density"
+    },
+    "VariableID:d5cd9e5205c6becb08a03c5dcf9550c1f3d88531/7028:69": {
+      "id": "VariableID:d5cd9e5205c6becb08a03c5dcf9550c1f3d88531/7028:69",
+      "key": "d5cd9e5205c6becb08a03c5dcf9550c1f3d88531",
+      "name": "Text/Accent/Subtle on emphasis",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:652f6b1eab150b8b039e928ed3e59549dfde2608/7028:53": {
+      "id": "VariableID:652f6b1eab150b8b039e928ed3e59549dfde2608/7028:53",
+      "key": "652f6b1eab150b8b039e928ed3e59549dfde2608",
+      "name": "Border/Accent/Medium",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68": {
+      "id": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68",
+      "key": "12b6fc0e3b778fd1218723c20fe9122a01f71bd0",
+      "name": "Text/Accent/Strong",
+      "type": "COLOR",
+      "collectionKey": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7",
+      "collectionName": "Semantic"
+    },
+    "VariableID:5fb92d4de90b2d65e03e6a30ea6316f3a8d2ae8e/9162:3": {
+      "id": "VariableID:5fb92d4de90b2d65e03e6a30ea6316f3a8d2ae8e/9162:3",
+      "key": "5fb92d4de90b2d65e03e6a30ea6316f3a8d2ae8e",
+      "name": "Text/Strong on emphasis",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:b67c014afe14f5588764cd4105f62df2f181055d/7526:1": {
+      "id": "VariableID:b67c014afe14f5588764cd4105f62df2f181055d/7526:1",
+      "key": "b67c014afe14f5588764cd4105f62df2f181055d",
+      "name": "Border/Disabled",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    },
+    "VariableID:1ef95d5598461ed8e55f8c903192bf9c0bce611c/7526:3": {
+      "id": "VariableID:1ef95d5598461ed8e55f8c903192bf9c0bce611c/7526:3",
+      "key": "1ef95d5598461ed8e55f8c903192bf9c0bce611c",
+      "name": "Text/Disabled",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    },
+    "VariableID:64821b485e1b2e273604d09a7786ae5bc8363efc/7028:82": {
+      "id": "VariableID:64821b485e1b2e273604d09a7786ae5bc8363efc/7028:82",
+      "key": "64821b485e1b2e273604d09a7786ae5bc8363efc",
+      "name": "Bg/Backdrop",
+      "type": "COLOR",
+      "collectionKey": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc",
+      "collectionName": "Concept"
+    }
+  },
+  "nodes": {
+    "2300:3213": {
+      "name": "Migration test – old EDS variables",
+      "type": "FRAME",
+      "path": [],
+      "context": {
+        "nodeType": "FRAME",
+        "names": ["Migration test – old EDS variables"],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3214": {
+      "name": "Top bar",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": ["Top bar", "Migration test – old EDS variables"],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2300:3215": {
+      "name": "Title group",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Top bar"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Title group",
+          "Top bar",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3216": {
+      "name": "Icon / menu",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Top bar", "Title group"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Icon / menu",
+          "Title group",
+          "Top bar",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3217": {
+      "name": "Vector",
+      "type": "VECTOR",
+      "path": [
+        "Migration test – old EDS variables",
+        "Top bar",
+        "Title group",
+        "Icon / menu"
+      ],
+      "context": {
+        "nodeType": "VECTOR",
+        "names": [
+          "Vector",
+          "Icon / menu",
+          "Title group",
+          "Top bar",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      },
+      "fillUnder": {
+        "owner": "2300:3214",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3218": {
+      "name": "Page title",
+      "type": "TEXT",
+      "path": ["Migration test – old EDS variables", "Top bar", "Title group"],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Page title",
+          "Title group",
+          "Top bar",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3214",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3219": {
+      "name": "Link",
+      "type": "TEXT",
+      "path": ["Migration test – old EDS variables", "Top bar"],
+      "context": {
+        "nodeType": "TEXT",
+        "names": ["Link", "Top bar", "Migration test – old EDS variables"],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3214",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3220": {
+      "name": "Banner / Info",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": ["Banner / Info", "Migration test – old EDS variables"],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3221": {
+      "name": "Message",
+      "type": "TEXT",
+      "path": ["Migration test – old EDS variables", "Banner / Info"],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Message",
+          "Banner / Info",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3220",
+        "variable": "VariableID:874aba4183e9e9ea534d0a193d4beff97faa8653/7033:9"
+      }
+    },
+    "2300:3222": {
+      "name": "Card row",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": ["Card row", "Migration test – old EDS variables"],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3223": {
+      "name": "Card / Well",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Card row"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Card / Well",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2300:3224": {
+      "name": "Card title",
+      "type": "TEXT",
+      "path": ["Migration test – old EDS variables", "Card row", "Card / Well"],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Card title",
+          "Card / Well",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3223",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3225": {
+      "name": "Description",
+      "type": "TEXT",
+      "path": ["Migration test – old EDS variables", "Card row", "Card / Well"],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Description",
+          "Card / Well",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": false
+      },
+      "fillUnder": {
+        "owner": "2300:3223",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3226": {
+      "name": "Chip / Status",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Card row", "Card / Well"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Chip / Status",
+          "Card / Well",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
+          "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c": "Pill",
+          "5e01d647e5d248607b79bc6e21b29e4615dd8058": "XS",
+          "ad2d2a041fb4a36ed3a5279efd43ba853b88992e": "SM",
+          "d53851cec89ec6a8a213f80e0e2cad832b6b15cf": "Squished",
+          "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a": "UI Body"
+        }
+      }
+    },
+    "2300:3227": {
+      "name": "Chip label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card row",
+        "Card / Well",
+        "Chip / Status"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Chip label",
+          "Chip / Status",
+          "Card / Well",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
+          "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c": "Pill",
+          "5e01d647e5d248607b79bc6e21b29e4615dd8058": "XS",
+          "ad2d2a041fb4a36ed3a5279efd43ba853b88992e": "SM",
+          "d53851cec89ec6a8a213f80e0e2cad832b6b15cf": "Squished",
+          "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a": "UI Body"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3226",
+        "variable": "VariableID:4c1064d6a3df22a54c2292a4f6edb2ddc10f3640/7033:6"
+      }
+    },
+    "2300:3228": {
+      "name": "Card / Form",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Card row"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2300:3229": {
+      "name": "Card title",
+      "type": "TEXT",
+      "path": ["Migration test – old EDS variables", "Card row", "Card / Form"],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Card title",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3228",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3230": {
+      "name": "Text field (focused, error)",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Card row", "Card / Form"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Text field (focused, error)",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3231": {
+      "name": "Field label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card row",
+        "Card / Form",
+        "Text field (focused, error)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Field label",
+          "Text field (focused, error)",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3228",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3232": {
+      "name": "Input",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card row",
+        "Card / Form",
+        "Text field (focused, error)"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Input",
+          "Text field (focused, error)",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [2, 2, 2, 2]
+      }
+    },
+    "2300:3233": {
+      "name": "Value",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card row",
+        "Card / Form",
+        "Text field (focused, error)",
+        "Input"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Value",
+          "Input",
+          "Text field (focused, error)",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3232",
+        "variable": "VariableID:757cf39d29ab71cec2887d7e6976a71ea109a3d3/5336:94"
+      }
+    },
+    "2300:3234": {
+      "name": "Helper text (error)",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card row",
+        "Card / Form",
+        "Text field (focused, error)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Helper text (error)",
+          "Text field (focused, error)",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3228",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3235": {
+      "name": "Chip / Warning (dynamic)",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Card row", "Card / Form"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Chip / Warning (dynamic)",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Warning"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2300:3236": {
+      "name": "Chip label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card row",
+        "Card / Form",
+        "Chip / Warning (dynamic)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Chip label",
+          "Chip / Warning (dynamic)",
+          "Card / Form",
+          "Card row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Warning"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3235",
+        "variable": "VariableID:91d9f7645569202891ce4ea6ed27adf3c0d02ba4/9155:0"
+      }
+    },
+    "2300:3237": {
+      "name": "Card / Actions",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": ["Card / Actions", "Migration test – old EDS variables"],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2300:3238": {
+      "name": "Card title",
+      "type": "TEXT",
+      "path": ["Migration test – old EDS variables", "Card / Actions"],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Card title",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3237",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3239": {
+      "name": "Buttons",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Card / Actions"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3240": {
+      "name": "Button / Primary",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Button / Primary",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3241": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons",
+        "Button / Primary"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Button / Primary",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3240",
+        "variable": "VariableID:08e09c310d52c59413a9c14c3e4c178189c092da/7028:15"
+      }
+    },
+    "2300:3242": {
+      "name": "Button / Primary (hover)",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Button / Primary (hover)",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3243": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons",
+        "Button / Primary (hover)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Button / Primary (hover)",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3242",
+        "variable": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16"
+      }
+    },
+    "2300:3244": {
+      "name": "Shortcut hint",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons",
+        "Button / Primary (hover)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Shortcut hint",
+          "Button / Primary (hover)",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3242",
+        "variable": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16"
+      }
+    },
+    "2300:3245": {
+      "name": "Button / Outlined",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Button / Outlined",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2300:3246": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons",
+        "Button / Outlined"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Button / Outlined",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3237",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2300:3247": {
+      "name": "Button / Ghost (hover)",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Button / Ghost (hover)",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2300:3248": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons",
+        "Button / Ghost (hover)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Button / Ghost (hover)",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3247",
+        "variable": "VariableID:5aa31be762b57920bc0dccdf5913ae31ebbe0213/7033:4"
+      }
+    },
+    "2300:3249": {
+      "name": "Button / Danger (dynamic)",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Button / Danger (dynamic)",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Danger"
+        }
+      }
+    },
+    "2300:3250": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons",
+        "Button / Danger (dynamic)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Button / Danger (dynamic)",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Danger"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3249",
+        "variable": "VariableID:69e8e174d44fbb957e489d6df6e6db9474201263/9152:6"
+      }
+    },
+    "2300:3251": {
+      "name": "Button / Disabled",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Button / Disabled",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2300:3252": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Card / Actions",
+        "Buttons",
+        "Button / Disabled"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Button / Disabled",
+          "Buttons",
+          "Card / Actions",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2300:3251",
+        "variable": "VariableID:e866210bf4678ae3cbd8c70a16611988e5bb63e7/7526:5"
+      }
+    },
+    "2301:2904": {
+      "name": "Bottom row",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": ["Bottom row", "Migration test – old EDS variables"],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        }
+      }
+    },
+    "2301:2905": {
+      "name": "Table / Wells (dense)",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Bottom row"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2301:2906": {
+      "name": "Row / Header",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Row / Header",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [0, 0, 1, 0]
+      }
+    },
+    "2301:2907": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row / Header"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row / Header",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2908": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row / Header"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row / Header",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2909": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row / Header"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row / Header",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2910": {
+      "name": "Row",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [0, 0, 1, 0]
+      }
+    },
+    "2301:2911": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2912": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2913": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2914": {
+      "name": "Row (hover)",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Row (hover)",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [0, 0, 1, 0]
+      }
+    },
+    "2301:2915": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row (hover)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row (hover)",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2914",
+        "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
+      }
+    },
+    "2301:2916": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row (hover)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row (hover)",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2914",
+        "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
+      }
+    },
+    "2301:2917": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row (hover)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row (hover)",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2914",
+        "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
+      }
+    },
+    "2301:2918": {
+      "name": "Row",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "strokeSides": [0, 0, 1, 0]
+      }
+    },
+    "2301:2919": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2920": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2921": {
+      "name": "Cell",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Table / Wells (dense)",
+        "Row"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Cell",
+          "Row",
+          "Table / Wells (dense)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2905",
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    "2301:2922": {
+      "name": "Overlay (dark scheme)",
+      "type": "FRAME",
+      "path": ["Migration test – old EDS variables", "Bottom row"],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        }
+      }
+    },
+    "2301:2923": {
+      "name": "Menu",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Overlay (dark scheme)"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Menu",
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        },
+        "strokeSides": [1, 1, 1, 1]
+      }
+    },
+    "2301:2924": {
+      "name": "Menu item",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Overlay (dark scheme)",
+        "Menu"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Menu item",
+          "Menu",
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        }
+      }
+    },
+    "2301:2925": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Overlay (dark scheme)",
+        "Menu",
+        "Menu item"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Menu item",
+          "Menu",
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2923",
+        "variable": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1"
+      }
+    },
+    "2301:2926": {
+      "name": "Menu item (selected)",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Overlay (dark scheme)",
+        "Menu"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Menu item (selected)",
+          "Menu",
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        }
+      }
+    },
+    "2301:2927": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Overlay (dark scheme)",
+        "Menu",
+        "Menu item (selected)"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Menu item (selected)",
+          "Menu",
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2926",
+        "variable": "VariableID:d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4/7033:5"
+      }
+    },
+    "2301:2928": {
+      "name": "Menu item",
+      "type": "FRAME",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Overlay (dark scheme)",
+        "Menu"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Menu item",
+          "Menu",
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        }
+      }
+    },
+    "2301:2929": {
+      "name": "Label",
+      "type": "TEXT",
+      "path": [
+        "Migration test – old EDS variables",
+        "Bottom row",
+        "Overlay (dark scheme)",
+        "Menu",
+        "Menu item"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Label",
+          "Menu item",
+          "Menu",
+          "Overlay (dark scheme)",
+          "Bottom row",
+          "Migration test – old EDS variables"
+        ],
+        "modes": {
+          "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
+          "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
+        },
+        "singleLine": true
+      },
+      "fillUnder": {
+        "owner": "2301:2923",
+        "variable": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1"
+      }
+    }
+  },
+  "units": [
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:a0090fc9e5f10901592819d77214a0b6b62fba64/2408:519"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:a0090fc9e5f10901592819d77214a0b6b62fba64/2408:519",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density",
+      "modeId": "1:0",
+      "modeName": "Spacious"
+    },
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:d323d76c6333d5655c51cee7d829139a07f4cc3a/8154:102"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:d323d76c6333d5655c51cee7d829139a07f4cc3a/8154:102",
+      "collectionKey": "d323d76c6333d5655c51cee7d829139a07f4cc3a",
+      "collectionName": "🌗 Color scheme",
+      "modeId": "8005:1",
+      "modeName": "Light"
+    },
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:10c712e6c2f5a15257360893105c836d1627e1e0/4012:953"
+      }
+    },
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+      }
+    },
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+      }
+    },
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+      }
+    },
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+      }
+    },
+    {
+      "node": "2300:3213",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:22a34d1fc051438b283b74837d1de8d2d36b9748/5336:13"
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    {
+      "node": "2300:3214",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2300:3215",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2300:3216",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "width"
+      },
+      "unit": "variable",
+      "kind": "size",
+      "ref": {
+        "variable": "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490"
+      }
+    },
+    {
+      "node": "2300:3216",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "height"
+      },
+      "unit": "variable",
+      "kind": "size",
+      "ref": {
+        "variable": "VariableID:e7b76dcfb92164a508f7224d0441946ce692c7c9/2795:1490"
+      }
+    },
+    {
+      "node": "2300:3217",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2300:3218",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2300:3218",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "letterSpacing": {
+          "variable": "VariableID:285647d729ee052f9994c394561648978daffd04/4038:693"
+        },
+        "fontSize": {
+          "variable": "VariableID:8f8a018dfeebb2966dafdd6e567f9322fc79f96b/4038:691"
+        },
+        "fontFamily": {
+          "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
+        },
+        "lineHeight": {
+          "variable": "VariableID:1765afeb6fa1f3d8bdb893df96467890a1fbb72c/4038:736"
+        },
+        "fontWeight": {
+          "variable": "VariableID:c53f23608cb032af06075f1debfec02e3115a8a3/4038:697"
+        }
+      },
+      "font": {
+        "family": "Equinor",
+        "style": "Medium"
+      },
+      "fontSize": 18
+    },
+    {
+      "node": "2300:3219",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:939f14349ed713d8a3d171cda580e6a5fa6882e2/7028:83"
+      }
+    },
+    {
+      "node": "2300:3219",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:aee9635ee04605d940033956d9a0516e6520fc2e/4012:873"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:16b27d27180544f67c9a76e441078cf5ea7e3e7e/4012:993"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3220",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:874aba4183e9e9ea534d0a193d4beff97faa8653/7033:9"
+      }
+    },
+    {
+      "node": "2300:3221",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:f378d8000ad4c46980c514d2f4a7ed275b1c6f27/7028:74"
+      }
+    },
+    {
+      "node": "2300:3221",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3222",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904"
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:5ee96afffc988e42f4c51d4be03e58a940723c33/4018:10",
+        "chain": [
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/vertical/md"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    {
+      "node": "2300:3223",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:57c492802ed5f89bef9bc61e15c3b7c278ab9d7e/7028:0"
+      }
+    },
+    {
+      "node": "2300:3224",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2300:3224",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663"
+        },
+        "fontFamily": {
+          "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
+        },
+        "lineHeight": {
+          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728"
+        },
+        "fontWeight": {
+          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669"
+        }
+      },
+      "font": {
+        "family": "Equinor",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3225",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+      }
+    },
+    {
+      "node": "2300:3225",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:cc9af39b6636abde15335164d827b81f8a99d905/4038:729"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c/2577:228"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c/2577:228",
+      "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+      "collectionName": "⭕️ Border radius",
+      "modeId": "2571:20",
+      "modeName": "Pill"
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:5e01d647e5d248607b79bc6e21b29e4615dd8058/2638:28"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:5e01d647e5d248607b79bc6e21b29e4615dd8058/2638:28",
+      "collectionKey": "5e01d647e5d248607b79bc6e21b29e4615dd8058",
+      "collectionName": "🪐 Selectable space",
+      "modeId": "2268:0",
+      "modeName": "XS"
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:ad2d2a041fb4a36ed3a5279efd43ba853b88992e/4375:2"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:ad2d2a041fb4a36ed3a5279efd43ba853b88992e/4375:2",
+      "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+      "collectionName": "🅰️ Font and icon size",
+      "modeId": "7:8",
+      "modeName": "SM"
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:d53851cec89ec6a8a213f80e0e2cad832b6b15cf/4036:6"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:d53851cec89ec6a8a213f80e0e2cad832b6b15cf/4036:6",
+      "collectionKey": "d53851cec89ec6a8a213f80e0e2cad832b6b15cf",
+      "collectionName": "🅰️ Line height",
+      "modeId": "10:12",
+      "modeName": "Squished"
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a/3685:150"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a/3685:150",
+      "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+      "collectionName": "🅰️ Font family",
+      "modeId": "50:0",
+      "modeName": "UI Body"
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:6b525012413190c666548ba55ba39f9fc0453429/4018:0",
+        "chain": [
+          {
+            "collectionKey": "5e01d647e5d248607b79bc6e21b29e4615dd8058",
+            "name": "selectable-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/xs/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/xs/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7d412fe23fe2f35044662e4418b13be3e4c8dc94/4018:1",
+        "chain": [
+          {
+            "collectionKey": "5e01d647e5d248607b79bc6e21b29e4615dd8058",
+            "name": "selectable-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/xs/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/xs/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:6b525012413190c666548ba55ba39f9fc0453429/4018:0",
+        "chain": [
+          {
+            "collectionKey": "5e01d647e5d248607b79bc6e21b29e4615dd8058",
+            "name": "selectable-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/xs/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/xs/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7d412fe23fe2f35044662e4418b13be3e4c8dc94/4018:1",
+        "chain": [
+          {
+            "collectionKey": "5e01d647e5d248607b79bc6e21b29e4615dd8058",
+            "name": "selectable-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/xs/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/xs/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/border-radius/pill"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/border-radius/pill"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/border-radius/pill"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/border-radius/pill"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3226",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:4c1064d6a3df22a54c2292a4f6edb2ddc10f3640/7033:6"
+      }
+    },
+    {
+      "node": "2300:3227",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:da51f68a85f0294b3ebd862c4f632c7f75c32a55/7028:71"
+      }
+    },
+    {
+      "node": "2300:3227",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23",
+          "chain": [
+            {
+              "collectionKey": "d53851cec89ec6a8a213f80e0e2cad832b6b15cf",
+              "name": "typography/line-height"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/line-height-squished"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/sm/line-height-squished"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/sm/line-height-squished"
+            }
+          ]
+        },
+        "fontFamily": {
+          "variable": "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902",
+          "chain": [
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "typography/font-family"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/font-family"
+            }
+          ]
+        },
+        "fontSize": {
+          "variable": "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8",
+          "chain": [
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/font-size"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/sm/font-size"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/sm/font-size"
+            }
+          ]
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 12
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:5ee96afffc988e42f4c51d4be03e58a940723c33/4018:10",
+        "chain": [
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/vertical/md"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    {
+      "node": "2300:3228",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2300:3229",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2300:3229",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663"
+        },
+        "fontFamily": {
+          "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
+        },
+        "lineHeight": {
+          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728"
+        },
+        "fontWeight": {
+          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669"
+        }
+      },
+      "font": {
+        "family": "Equinor",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3230",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3231",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+      }
+    },
+    {
+      "node": "2300:3231",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 12
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:757cf39d29ab71cec2887d7e6976a71ea109a3d3/5336:94"
+      }
+    },
+    {
+      "node": "2300:3232",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:1229fce177c22e271e3562932889c9846a47f4ce/7028:84"
+      }
+    },
+    {
+      "node": "2300:3233",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2300:3233",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3234",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:ebf56aa57b96cad500b66c3425f91a0e6103e348/7028:80"
+      }
+    },
+    {
+      "node": "2300:3234",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:6a5c325f5c183cd9c541eb01c453096a465b6a95/4038:725"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 12
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance",
+      "modeId": "7002:3",
+      "modeName": "Warning"
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:91d9f7645569202891ce4ea6ed27adf3c0d02ba4/9155:0"
+      }
+    },
+    {
+      "node": "2300:3235",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1"
+      }
+    },
+    {
+      "node": "2300:3236",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:1d541b5784a730485b7ea5cc448b710dfdc545f1/9152:3"
+      }
+    },
+    {
+      "node": "2300:3236",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 12
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:5ee96afffc988e42f4c51d4be03e58a940723c33/4018:10",
+        "chain": [
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/vertical/md"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:433994f1ec77738d82952d42b43f761a8dd3898f/4018:3",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/horizontal"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/horizontal"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/horizontal"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0b539a34dcf867c832fc3e87c2c5c14964ec2fd0/4018:4",
+        "chain": [
+          {
+            "collectionKey": "b312a7902ac82bc36bf701e29cc24b90e78a902a",
+            "name": "container-space/vertical"
+          },
+          {
+            "collectionKey": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29",
+            "name": "spacing-proportions/md/vertical"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "spacing/inset/md/vertical-squared"
+          }
+        ]
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    {
+      "node": "2300:3237",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2300:3238",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2300:3238",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:96a2b0b17dace8c909ad2409c246dccb12ca046e/4038:663"
+        },
+        "fontFamily": {
+          "variable": "VariableID:40e5000a8c20493735f1408cdc56c25ba2600e0d/4038:755"
+        },
+        "lineHeight": {
+          "variable": "VariableID:bb49181808e55c952d81888530f484513674c2f7/4038:728"
+        },
+        "fontWeight": {
+          "variable": "VariableID:962a49f1083ffb6a2351bce4861e2558551ef436/4038:669"
+        }
+      },
+      "font": {
+        "family": "Equinor",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3239",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2300:3239",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "counterAxisSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3240",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:08e09c310d52c59413a9c14c3e4c178189c092da/7028:15"
+      }
+    },
+    {
+      "node": "2300:3241",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73"
+      }
+    },
+    {
+      "node": "2300:3241",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontWeight": {
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3242",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:d95156765c58531da7e18517c108c6f379c8ecc1/7028:16"
+      }
+    },
+    {
+      "node": "2300:3243",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:0fca56c221a0c15bb7063424491ec22c1bdc3dc8/5336:73"
+      }
+    },
+    {
+      "node": "2300:3243",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontWeight": {
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3244",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:d5cd9e5205c6becb08a03c5dcf9550c1f3d88531/7028:69"
+      }
+    },
+    {
+      "node": "2300:3244",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3245",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:652f6b1eab150b8b039e928ed3e59549dfde2608/7028:53"
+      }
+    },
+    {
+      "node": "2300:3246",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68"
+      }
+    },
+    {
+      "node": "2300:3246",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontWeight": {
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3247",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:5aa31be762b57920bc0dccdf5913ae31ebbe0213/7033:4"
+      }
+    },
+    {
+      "node": "2300:3248",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68"
+      }
+    },
+    {
+      "node": "2300:3248",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontWeight": {
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance",
+      "modeId": "7002:4",
+      "modeName": "Danger"
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3249",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:69e8e174d44fbb957e489d6df6e6db9474201263/9152:6"
+      }
+    },
+    {
+      "node": "2300:3250",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:5fb92d4de90b2d65e03e6a30ea6316f3a8d2ae8e/9162:3"
+      }
+    },
+    {
+      "node": "2300:3250",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontWeight": {
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:dee898422a3d6e85cf664f6fe256ae5350a1a249/4012:901"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:e866210bf4678ae3cbd8c70a16611988e5bb63e7/7526:5"
+      }
+    },
+    {
+      "node": "2300:3251",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:b67c014afe14f5588764cd4105f62df2f181055d/7526:1"
+      }
+    },
+    {
+      "node": "2300:3252",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:1ef95d5598461ed8e55f8c903192bf9c0bce611c/7526:3"
+      }
+    },
+    {
+      "node": "2300:3252",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontWeight": {
+          "variable": "VariableID:ce619bea7415afff8a93acc0d73547d3c0773c37/4038:676"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2301:2904",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:f52103cadbfeef977fa05b173488bbcdb1ce9d83/4012:904"
+      }
+    },
+    {
+      "node": "2301:2905",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:a0090fc9e5f10901592819d77214a0b6b62fba64/2408:519"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:a0090fc9e5f10901592819d77214a0b6b62fba64/2408:519",
+      "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+      "collectionName": "💎 Density",
+      "modeId": "1:1",
+      "modeName": "Comfortable"
+    },
+    {
+      "node": "2301:2905",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2905",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2905",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2905",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2905",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0"
+      }
+    },
+    {
+      "node": "2301:2905",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2301:2906",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2906",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2906",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2906",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2906",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2906",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2301:2907",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+      }
+    },
+    {
+      "node": "2301:2907",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2908",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+      }
+    },
+    {
+      "node": "2301:2908",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2909",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:70a53591db7a6d09f55db15afc87070ccb95ba18/7028:2"
+      }
+    },
+    {
+      "node": "2301:2909",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Medium"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2910",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2910",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2910",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2910",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2910",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2910",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2301:2911",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2911",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2912",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2912",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2913",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2913",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2914",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2914",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2914",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2914",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2914",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2914",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:28d836cdfce9913253d2e09375c1c23f9cfa2f17/7033:1"
+      }
+    },
+    {
+      "node": "2301:2914",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2301:2915",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2915",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2916",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2916",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2917",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2917",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2918",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2918",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2918",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2918",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:b463b774b3eb4ccc0ba1aaf5d16d9da2ec921910/4012:902"
+      }
+    },
+    {
+      "node": "2301:2918",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2918",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2301:2919",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2919",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2920",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2920",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2921",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2921",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:67ebded171dc476cbe080f1c3e2d53bf6fd5abe3/4038:726"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:2eea464198f03f84e51bf6354818f22109f57f36/4038:656"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5
+    },
+    {
+      "node": "2301:2922",
+      "entry": "2300:3213",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:d323d76c6333d5655c51cee7d829139a07f4cc3a/8154:102"
+      },
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:d323d76c6333d5655c51cee7d829139a07f4cc3a/8154:102",
+      "collectionKey": "d323d76c6333d5655c51cee7d829139a07f4cc3a",
+      "collectionName": "🌗 Color scheme",
+      "modeId": "8005:0",
+      "modeName": "Dark"
+    },
+    {
+      "node": "2301:2922",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+      }
+    },
+    {
+      "node": "2301:2922",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+      }
+    },
+    {
+      "node": "2301:2922",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:20d5d95ab87b3957f6dabafc7c4615890cea8dbd/4012:905"
+      }
+    },
+    {
+      "node": "2301:2922",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:d2d7e55f558094c61255a395755dbe3e7e7600e9/4012:954"
+      }
+    },
+    {
+      "node": "2301:2922",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:64821b485e1b2e273604d09a7786ae5bc8363efc/7028:82"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:7a5c8b2e81d29ab8dd05a3e595de3e52fa93831e/4012:950"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:84dab3c47d79089983a8df9bfa8c6d5c443b0d06/4038:600"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:7c2a7081d4fdc3995a923c08884ab93591dbacc1/7009:1"
+      }
+    },
+    {
+      "node": "2301:2923",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:de8f7542cc034d4650fe39fd5869e10883349edd/7028:1"
+      }
+    },
+    {
+      "node": "2301:2924",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2301:2924",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+      }
+    },
+    {
+      "node": "2301:2924",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2301:2924",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+      }
+    },
+    {
+      "node": "2301:2925",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2925",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2301:2926",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2301:2926",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+      }
+    },
+    {
+      "node": "2301:2926",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2301:2926",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+      }
+    },
+    {
+      "node": "2301:2926",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:d4bb6b872868e3500f08e6d05f7a70f1e7b1f2d4/7033:5"
+      }
+    },
+    {
+      "node": "2301:2927",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:12b6fc0e3b778fd1218723c20fe9122a01f71bd0/7028:68"
+      }
+    },
+    {
+      "node": "2301:2927",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    },
+    {
+      "node": "2301:2928",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2301:2928",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+      }
+    },
+    {
+      "node": "2301:2928",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:45febbda67b7782c9af071998a3fd1f29179d8b1/4012:903"
+      }
+    },
+    {
+      "node": "2301:2928",
+      "entry": "2300:3213",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:627b2b97e22cf01e65a4ab46d72d81d4e405605a/4012:951"
+      }
+    },
+    {
+      "node": "2301:2929",
+      "entry": "2300:3213",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "unit": "variable",
+      "kind": "textFill",
+      "ref": {
+        "variable": "VariableID:405099a8f707d533e7d538528bdb34104ec2caa6/7028:3"
+      }
+    },
+    {
+      "node": "2301:2929",
+      "entry": "2300:3213",
+      "property": {
+        "type": "typography"
+      },
+      "unit": "typography",
+      "fields": {
+        "lineHeight": {
+          "variable": "VariableID:b0311958581e7054d32cdb51ce0231ca9fd49766/4038:730"
+        },
+        "fontFamily": {
+          "variable": "VariableID:dde0c584b29530ebd570894768641728e7f31781/4038:754"
+        },
+        "fontSize": {
+          "variable": "VariableID:0844346c06135ce5eea1935dc8389669d0683f26/4038:670"
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 14
+    }
+  ]
+}

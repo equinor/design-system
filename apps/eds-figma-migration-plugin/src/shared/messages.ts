@@ -46,6 +46,8 @@ export type PluginToUi =
   | { type: 'selection'; count: number; firstName?: string }
   | { type: 'scan-progress'; progress: ScanProgress }
   | { type: 'scan-done'; summary: ScanSummary }
+  /** The same scan counted again after targets were changed */
+  | { type: 'summary'; summary: ScanSummary }
   /** Every binding still to migrate, grouped by legacy variable, sent after a scan */
   | { type: 'mapping'; groups: MappingGroup[] }
   | { type: 'overrides'; overrides: Overrides }

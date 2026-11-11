@@ -1,13 +1,21 @@
 /** The Mapping view: grouping, overrides and the picker options. */
 import { describe, expect, it } from 'vitest'
-import { pickerOptions, sharedSubject } from '../src/mapping/picker'
 import {
+  compareNames,
+  pickerOptions,
+  sharedSubject,
+} from '../src/mapping/picker'
+import {
+  bindingOutcome,
   buildMappingGroups,
+  effectiveCategory,
   effectiveTarget,
   NO_OVERRIDES,
   rowKey,
+  targetCounts,
 } from '../src/scan/mapping'
-import type { BindingRecord } from '../src/scan/types'
+import { recount } from '../src/scan/summary'
+import type { BindingRecord, ScanSummary } from '../src/scan/types'
 
 const record = (
   id: string,
@@ -188,5 +196,171 @@ describe('sharedSubject', () => {
         { kind: 'spacing', group: 'spacing', candidates: ['spacing/md'] },
       ]),
     ).toBeUndefined()
+  })
+})
+
+describe('effectiveCategory', () => {
+  const [, , button, icon, done] = records
+
+  it("is the rule's category until someone decides", () => {
+    expect(effectiveCategory(button, NO_OVERRIDES)).toBe('check')
+    expect(effectiveCategory(icon, NO_OVERRIDES)).toBe('none')
+  })
+
+  it('makes a chosen target Ready, the proposal included', () => {
+    const confirmed = {
+      records: { button: 'border/interactive/neutral/muted/default' },
+      rows: {},
+    }
+    expect(effectiveCategory(button, confirmed)).toBe('sure')
+    const chosen = { records: { icon: 'icon/size/lg' }, rows: {} }
+    expect(effectiveCategory(icon, chosen)).toBe('sure')
+  })
+
+  it('makes a choice to leave the binding No equivalent', () => {
+    const left = { records: {}, rows: { [rowKey(records[0])]: null } }
+    expect(effectiveCategory(records[0], left)).toBe('none')
+  })
+
+  it('leaves migrated bindings and bindings in instances alone', () => {
+    expect(effectiveCategory(done, { records: { done: null }, rows: {} })).toBe(
+      'migrated',
+    )
+  })
+})
+
+describe('targetCounts', () => {
+  const [group] = buildMappingGroups(records)
+  const row = group.rows[0]
+
+  it('counts the proposal when nothing is changed', () => {
+    expect(targetCounts([row], NO_OVERRIDES)).toEqual([
+      {
+        target: 'border/non-interactive/neutral/muted',
+        noEquivalent: false,
+        count: 2,
+      },
+    ])
+  })
+
+  it('follows changes on single bindings, so the heading shows them', () => {
+    const overrides = { records: { 'card-1': null, 'card-2': null }, rows: {} }
+    expect(targetCounts([row], overrides)).toEqual([
+      { target: null, noEquivalent: false, count: 2 },
+    ])
+    expect(bindingOutcome(row, row.bindings[0], overrides)).toEqual({
+      target: null,
+      source: 'record',
+      category: 'none',
+    })
+  })
+
+  it('tells a missing equivalent from a choice to leave the binding', () => {
+    const none = buildMappingGroups(records).find(
+      (candidate) => candidate.old === 'sizing/icon/lg',
+    )
+    expect(targetCounts(none?.rows ?? [], NO_OVERRIDES)).toEqual([
+      { target: null, noEquivalent: true, count: 1 },
+    ])
+  })
+})
+
+describe('recount', () => {
+  it('moves a decided binding to Ready in the entry and the totals', () => {
+    const summary: ScanSummary = {
+      scope: 'page',
+      scannedAt: '2026-11-11',
+      mappingVersion: 'test',
+      pages: [],
+      nodesScanned: 6,
+      totals: {
+        migrated: 1,
+        sure: 2,
+        check: 1,
+        none: 1,
+        inInstance: 1,
+        other: 0,
+      },
+      health: 1 / 6,
+      entries: [
+        {
+          id: 'frame',
+          kind: 'frame',
+          name: 'Frame',
+          pageId: 'page',
+          pageName: 'Page',
+          sections: [],
+          nodeIds: ['frame'],
+          counts: {
+            migrated: 1,
+            sure: 2,
+            check: 1,
+            none: 1,
+            inInstance: 1,
+            other: 0,
+          },
+          health: 1 / 6,
+          oldInstances: 0,
+        },
+      ],
+    }
+    const overrides = {
+      records: { button: 'border/interactive/neutral/muted/default' },
+      rows: {},
+    }
+    const result = recount(summary, records, [], (candidate) =>
+      effectiveCategory(candidate, overrides),
+    )
+    expect(result.totals).toEqual({
+      migrated: 1,
+      sure: 3,
+      check: 0,
+      none: 1,
+      inInstance: 1,
+      other: 0,
+    })
+    expect(result.entries[0].counts.check).toBe(0)
+  })
+})
+
+describe('compareNames', () => {
+  it('orders sizes from small to large', () => {
+    expect(
+      [
+        'spacing/2xl',
+        'spacing/md',
+        'spacing/none',
+        'spacing/2xs',
+        'spacing/xs',
+        'spacing/xl',
+        'spacing/sm',
+        'spacing/lg',
+      ].sort(compareNames),
+    ).toEqual([
+      'spacing/none',
+      'spacing/2xs',
+      'spacing/xs',
+      'spacing/sm',
+      'spacing/md',
+      'spacing/lg',
+      'spacing/xl',
+      'spacing/2xl',
+    ])
+  })
+
+  it('orders numbers by value, and states and weights the way they are read', () => {
+    expect(['cat/10/1', 'cat/2/1', 'cat/1/1'].sort(compareNames)).toEqual([
+      'cat/1/1',
+      'cat/2/1',
+      'cat/10/1',
+    ])
+    expect(['a/pressed', 'a/hover', 'a/default'].sort(compareNames)).toEqual([
+      'a/default',
+      'a/hover',
+      'a/pressed',
+    ])
+    expect(
+      ['body/md/bold', 'body/md/default', 'body/sm/default'].sort(compareNames),
+    ).toEqual(['body/sm/default', 'body/md/default', 'body/md/bold'])
   })
 })

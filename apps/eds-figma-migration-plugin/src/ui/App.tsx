@@ -235,6 +235,9 @@ export function App() {
           setDetail(undefined)
           clearBulk()
           break
+        case 'summary':
+          setSummary(message.summary)
+          break
         case 'scan-cancelled':
           setScanning(false)
           setProgress(undefined)
@@ -284,14 +287,17 @@ export function App() {
   /**
    * The value to store for one binding. Choosing the proposal again removes
    * the binding's own change, unless its row has a change that would then
-   * apply instead.
+   * apply instead. On a binding that needs a check or has no equivalent,
+   * choosing the proposal is kept: it settles the binding, which then counts
+   * as Ready.
    */
   const recordValue = (
     value: OverrideValue | undefined,
     proposal: string | undefined,
     rowChanged: boolean,
+    settles: boolean,
   ) =>
-    value === undefined || (value === proposal && !rowChanged)
+    value === undefined || (value === proposal && !rowChanged && !settles)
       ? undefined
       : value
 
@@ -312,7 +318,12 @@ export function App() {
         sendOverrides([
           {
             target: { type: 'record', id: record.id },
-            value: recordValue(value, record.candidates?.[0], rowChanged),
+            value: recordValue(
+              value,
+              record.candidates?.[0],
+              rowChanged,
+              record.category !== 'sure',
+            ),
           },
         ]),
     })
@@ -343,7 +354,12 @@ export function App() {
         sendOverrides([
           {
             target: { type: 'record', id: binding.id },
-            value: recordValue(value, row.proposal, rowChanged),
+            value: recordValue(
+              value,
+              row.proposal,
+              rowChanged,
+              row.outcome !== 'sure',
+            ),
           },
         ]),
     })
@@ -368,7 +384,10 @@ export function App() {
         sendOverrides([
           {
             target: { type: 'row', key: row.key },
-            value: value === row.proposal ? undefined : value,
+            value:
+              value === row.proposal && row.outcome === 'sure'
+                ? undefined
+                : value,
           },
         ]),
     })
@@ -473,23 +492,27 @@ export function App() {
                 onChange={changeRecord}
               />
             )}
-            {summary && !scanning && !openEntry && (
-              <Overview
-                summary={summary}
-                view={view}
-                onView={setView}
-                mapping={mapping}
-                overrides={overrides}
-                onSelectOld={(oldKey) => send({ type: 'select-old', oldKey })}
-                onChangeRow={changeRow}
-                onChangeBinding={changeBinding}
-                onSelectLayer={select}
-                selection={bulk}
-                showComponents={showComponents}
-                onShowComponents={setShowComponents}
-                onOpen={open}
-                onGoTo={(entry) => select(entry.nodeIds)}
-              />
+            {/* Hidden rather than unmounted while a frame is open, so Back
+                returns to the same tab, filters and open accordion items. */}
+            {summary && !scanning && (
+              <div hidden={openEntry !== undefined}>
+                <Overview
+                  summary={summary}
+                  view={view}
+                  onView={setView}
+                  mapping={mapping}
+                  overrides={overrides}
+                  onSelectOld={(oldKey) => send({ type: 'select-old', oldKey })}
+                  onChangeRow={changeRow}
+                  onChangeBinding={changeBinding}
+                  onSelectLayer={select}
+                  selection={bulk}
+                  showComponents={showComponents}
+                  onShowComponents={setShowComponents}
+                  onOpen={open}
+                  onGoTo={(entry) => select(entry.nodeIds)}
+                />
+              </div>
             )}
           </>
         )}
