@@ -3,7 +3,7 @@
  * document, and talks to the plugin window (src/ui) through messages.
  */
 import { MAPPING_VERSION } from '../mapping/version'
-import type { Command, PluginToUi, UiToPlugin } from '../shared/messages'
+import type { Command, PluginToUi, Scope, UiToPlugin } from '../shared/messages'
 import { collectFixture } from './dev/export-fixture'
 import { exportInventory } from './dev/export-inventory'
 import { ScanCancelled } from './scan/collect'
@@ -21,8 +21,8 @@ const command: Command = COMMANDS.includes(figma.command as Command)
 
 figma.showUI(__html__, {
   themeColors: true,
-  width: 440,
-  height: 680,
+  width: 480,
+  height: 720,
   title: 'EDS variable migration',
 })
 
@@ -34,7 +34,19 @@ let lastScan: ScanState | undefined
 let scanning = false
 let cancelRequested = false
 
-async function scan(scope: 'page' | 'file') {
+function postSelection() {
+  const selection = figma.currentPage.selection
+  post({
+    type: 'selection',
+    count: selection.length,
+    firstName: selection[0]?.name,
+  })
+}
+
+figma.on('selectionchange', postSelection)
+figma.on('currentpagechange', postSelection)
+
+async function scan(scope: Scope) {
   if (scanning) return
   scanning = true
   cancelRequested = false
@@ -133,6 +145,7 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
           fileName: figma.root.name,
           currentPageName: figma.currentPage.name,
         })
+        postSelection()
         if (command === 'dev-export-inventory') await runDevExportInventory()
         if (command === 'dev-export-fixture') await runDevExportFixture()
         break

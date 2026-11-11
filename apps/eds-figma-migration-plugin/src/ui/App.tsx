@@ -19,6 +19,7 @@ import { EntryList } from './components/EntryList'
 import { HealthBar, HealthLegend } from './components/HealthBar'
 import { Inspector } from './components/Inspector'
 import { ScanControls } from './components/ScanControls'
+import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
 
 type EntryDetail = {
@@ -61,17 +62,19 @@ function Overview({
         <p className="muted">
           {summary.scope === 'file'
             ? `${summary.pages.length} pages`
-            : summary.pages[0]?.name}
-          , {summary.nodesScanned} layers, mapping {summary.mappingVersion}
+            : summary.scope === 'selection'
+              ? `Selection on ${summary.pages[0]?.name}`
+              : summary.pages[0]?.name}
+          , {summary.nodesScanned} layers
         </p>
       </section>
 
       <section className="stack-tight" aria-labelledby="frames-title">
         <h2 id="frames-title" className="section-title">
-          Frames
+          Frames and layers
         </h2>
         {frames.length === 0 ? (
-          <p className="muted">No frames in the scope.</p>
+          <p className="muted">Nothing in the scope.</p>
         ) : (
           <EntryList
             entries={frames}
@@ -115,7 +118,7 @@ function Overview({
 export function App() {
   useFigmaColorScheme()
   const [command, setCommand] = useState<Command>()
-  const [mappingVersion, setMappingVersion] = useState<string>()
+  const [selection, setSelection] = useState<SelectionInfo>({ count: 0 })
   const [scope, setScope] = useState<Scope>('page')
   const [scanning, setScanning] = useState(false)
   const [progress, setProgress] = useState<ScanProgress>()
@@ -133,7 +136,9 @@ export function App() {
     switch (message.type) {
       case 'init':
         setCommand(message.command)
-        setMappingVersion(message.mappingVersion)
+        break
+      case 'selection':
+        setSelection({ count: message.count, firstName: message.firstName })
         break
       case 'scan-progress':
         setProgress(message.progress)
@@ -189,9 +194,6 @@ export function App() {
     <div className="app">
       <header className="app-header">
         <h1 className="app-title">EDS variable migration</h1>
-        {mappingVersion && (
-          <span className="muted">Mapping {mappingVersion}</span>
-        )}
       </header>
       <main className="app-main stack">
         {error && (
@@ -219,6 +221,7 @@ export function App() {
               <ScanControls
                 scope={scope}
                 onScopeChange={setScope}
+                selection={selection}
                 scanning={scanning}
                 progress={progress}
                 onScan={scan}
@@ -227,8 +230,8 @@ export function App() {
             )}
             {!summary && !scanning && (
               <p className="muted">
-                Scan the page or the whole file to see which layers still use
-                variables from the deprecated EDS libraries.
+                Scan the selection, the page or the whole file to see which
+                layers still use legacy EDS variables.
               </p>
             )}
             {summary && !scanning && openEntry && (

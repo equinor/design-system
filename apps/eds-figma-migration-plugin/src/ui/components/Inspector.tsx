@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { Badge, Button, Chip, Icon } from '@equinor/eds-core-react/next'
 import type { BadgeTone } from '@equinor/eds-core-react/next'
-import { arrow_back, arrow_forward } from '@equinor/eds-icons'
-import { CATEGORY_LABELS, propertyLabel } from '../../scan/labels'
+import { arrow_back } from '@equinor/eds-icons'
+import { CATEGORY_LABELS, GROUP_LABELS, propertyLabel } from '../../scan/labels'
 import { formatHealth } from '../../scan/summary'
+import { PROPERTY_GROUPS, SCORED_CATEGORIES } from '../../scan/types'
 import type {
   BindingRecord,
   Category,
   EntrySummary,
   OldInstance,
+  PropertyGroup,
 } from '../../scan/types'
 import { HealthBar, HealthLegend } from './HealthBar'
 
@@ -20,22 +22,34 @@ type InspectorProps = {
   onSelect: (nodeIds: string[]) => void
 }
 
-const TONES: Record<Category, BadgeTone> = {
-  migrated: 'success',
-  sure: 'accent',
-  check: 'warning',
-  none: 'danger',
-  inInstance: 'neutral',
-  other: 'neutral',
+const BADGES: Record<
+  Category,
+  { tone: BadgeTone; emphasis: 'low' | 'medium' }
+> = {
+  migrated: { tone: 'success', emphasis: 'medium' },
+  sure: { tone: 'info', emphasis: 'low' },
+  check: { tone: 'warning', emphasis: 'medium' },
+  none: { tone: 'danger', emphasis: 'low' },
+  inInstance: { tone: 'neutral', emphasis: 'low' },
+  other: { tone: 'neutral', emphasis: 'low' },
 }
 
-const FILTERS: { label: string; categories: Category[] }[] = [
-  { label: 'Old', categories: ['sure', 'check', 'none'] },
-  { label: 'Needs check', categories: ['check'] },
-  { label: 'No equivalent', categories: ['none'] },
-  { label: 'In instance', categories: ['inInstance'] },
-  { label: 'Migrated', categories: ['migrated'] },
-]
+function targetText(record: BindingRecord): string {
+  switch (record.category) {
+    case 'migrated':
+    case 'other':
+      return record.current ?? ''
+    case 'inInstance':
+      return 'Not changed inside an instance'
+    case 'none':
+      return 'No equivalent; stays as it is'
+    default:
+      return (
+        record.candidates?.[0] ??
+        'Cleared when nothing below uses legacy variables'
+      )
+  }
+}
 
 function Row({
   record,
@@ -44,22 +58,13 @@ function Row({
   record: BindingRecord
   onSelect: (nodeIds: string[]) => void
 }) {
-  const proposal = record.candidates?.[0]
-  const target =
-    record.category === 'migrated' || record.category === 'other'
-      ? record.current
-      : record.category === 'inInstance'
-        ? 'Not changed inside an instance'
-        : record.category === 'none'
-          ? 'No equivalent; stays'
-          : (proposal ?? 'Cleared when nothing below uses old variables')
+  const badge = BADGES[record.category]
   return (
     <li className="binding-row">
       <button
         type="button"
         className="binding-select"
         onClick={() => onSelect([record.nodeId])}
-        title={record.reason}
       >
         <span className="binding-layer">
           <span className="binding-name">{record.nodeName}</span>
@@ -73,16 +78,13 @@ function Row({
         <span className="binding-swap">
           {record.old && <span className="binding-old">{record.old}</span>}
           {record.old && <span aria-hidden="true"> → </span>}
-          <span className="binding-new">{target}</span>
+          <span className="binding-new">{targetText(record)}</span>
         </span>
         {record.reason && record.category !== 'sure' && (
           <span className="binding-reason">{record.reason}</span>
         )}
       </button>
-      <Badge
-        tone={TONES[record.category]}
-        emphasis={record.category === 'check' ? 'medium' : 'low'}
-      >
+      <Badge tone={badge.tone} emphasis={badge.emphasis}>
         {record.category === 'check' ? '⚠ ' : ''}
         {CATEGORY_LABELS[record.category]}
       </Badge>
@@ -90,7 +92,12 @@ function Row({
   )
 }
 
-/** Every binding in one frame, with a filter by category, and the instances in it that still use old variables. */
+type Filter = 'all' | Category
+
+/**
+ * Every binding in one entry, filtered by the same categories as the health
+ * bar, and the instances in it that still use legacy variables.
+ */
 export function Inspector({
   entry,
   records,
@@ -98,48 +105,85 @@ export function Inspector({
   onBack,
   onSelect,
 }: InspectorProps) {
-  const [filter, setFilter] = useState(0)
-  const shown = (records ?? []).filter((record) =>
-    FILTERS[filter].categories.includes(record.category),
+  const [filter, setFilter] = useState<Filter>('all')
+  const [group, setGroup] = useState<'all' | PropertyGroup>('all')
+  const categories: Category[] = [
+    ...SCORED_CATEGORIES,
+    ...(entry.counts.other > 0 ? (['other'] as const) : []),
+  ]
+  const byStatus = (records ?? []).filter(
+    (record) => filter === 'all' || record.category === filter,
+  )
+  const groups = PROPERTY_GROUPS.filter((candidate) =>
+    (records ?? []).some((record) => record.group === candidate),
+  )
+  const shown = byStatus.filter(
+    (record) => group === 'all' || record.group === group,
   )
   return (
     <div className="stack">
       <div className="inspector-header">
-        <Button
-          icon
-          variant="ghost"
-          size="small"
-          aria-label="Back to frames"
-          onClick={onBack}
-        >
+        <Button variant="ghost" size="small" onClick={onBack}>
           <Icon data={arrow_back} size="md" />
+          Back
         </Button>
-        <h2 className="inspector-title">{entry.name}</h2>
-        <span className="entry-health">{formatHealth(entry.health)}</span>
         <Button
-          icon
-          variant="ghost"
+          variant="secondary"
           size="small"
           aria-label={`Go to ${entry.name}`}
           onClick={() => onSelect(entry.nodeIds)}
         >
-          <Icon data={arrow_forward} size="md" />
+          Go to
         </Button>
+      </div>
+      <div className="health-heading">
+        <h2 className="inspector-title">{entry.name}</h2>
+        <span className="health-value">{formatHealth(entry.health)}</span>
       </div>
       <HealthBar counts={entry.counts} />
       <HealthLegend counts={entry.counts} />
 
-      <div className="filters" role="group" aria-label="Show">
-        {FILTERS.map((option, index) => (
-          <Chip
-            key={option.label}
-            selected={filter === index}
-            onClick={() => setFilter(index)}
-          >
-            {option.label}
+      <div className="filter-row">
+        <span className="filter-label" id="status-filter">
+          Status
+        </span>
+        <div className="filters" role="group" aria-labelledby="status-filter">
+          <Chip selected={filter === 'all'} onClick={() => setFilter('all')}>
+            All
           </Chip>
-        ))}
+          {categories.map((category) => (
+            <Chip
+              key={category}
+              selected={filter === category}
+              onClick={() => setFilter(category)}
+            >
+              {CATEGORY_LABELS[category]} {entry.counts[category]}
+            </Chip>
+          ))}
+        </div>
       </div>
+      {groups.length > 1 && (
+        <div className="filter-row">
+          <span className="filter-label" id="group-filter">
+            Property
+          </span>
+          <div className="filters" role="group" aria-labelledby="group-filter">
+            <Chip selected={group === 'all'} onClick={() => setGroup('all')}>
+              All
+            </Chip>
+            {groups.map((candidate) => (
+              <Chip
+                key={candidate}
+                selected={group === candidate}
+                onClick={() => setGroup(candidate)}
+              >
+                {GROUP_LABELS[candidate]}{' '}
+                {byStatus.filter((record) => record.group === candidate).length}
+              </Chip>
+            ))}
+          </div>
+        </div>
+      )}
 
       {!records ? (
         <p className="muted">Loading…</p>
@@ -156,7 +200,7 @@ export function Inspector({
       {oldInstances && oldInstances.length > 0 && (
         <section className="stack-tight" aria-labelledby="old-instances">
           <h3 id="old-instances" className="section-title">
-            Instances that still use old variables
+            Instances with legacy variables
           </h3>
           <p className="muted">
             Update the component in its library, then swap these instances by
@@ -177,7 +221,7 @@ export function Inspector({
                       : 'Main component not found'}
                   </span>
                 </button>
-                <Badge tone="neutral">{instance.count} old</Badge>
+                <Badge tone="neutral">{instance.count} legacy</Badge>
               </li>
             ))}
           </ul>

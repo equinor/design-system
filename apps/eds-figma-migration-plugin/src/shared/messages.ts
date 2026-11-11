@@ -8,7 +8,7 @@ import type { BindingRecord, OldInstance, ScanSummary } from '../scan/types'
 /** The menu commands in manifest.json. */
 export type Command = 'open' | 'dev-export-inventory' | 'dev-export-fixture'
 
-export type Scope = 'page' | 'file'
+export type Scope = 'selection' | 'page' | 'file'
 
 export type DevExportFile = {
   /** File name for a download, such as new-library.json */
@@ -33,6 +33,8 @@ export type PluginToUi =
       fileName: string
       currentPageName: string
     }
+  /** The current selection, sent when the window opens and when it changes */
+  | { type: 'selection'; count: number; firstName?: string }
   | { type: 'scan-progress'; progress: ScanProgress }
   | { type: 'scan-done'; summary: ScanSummary }
   | { type: 'scan-cancelled' }

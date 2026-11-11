@@ -148,6 +148,30 @@ describe('classifyUnit', () => {
   })
 })
 
+describe('property groups', () => {
+  it('groups paints as colour, and fields by what they size', () => {
+    const variable = raw(OLD.density, 'spacing/horizontal/md', {
+      type: 'FLOAT',
+    })
+    const unit = (kind: string, field: string) =>
+      ({
+        ...base,
+        unit: 'variable',
+        kind,
+        property: { type: 'field', field },
+        variable,
+        context: context(['Card']),
+      }) as RawUnit
+    expect(
+      classifyUnit(fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface')))?.group,
+    ).toBe('colour')
+    expect(classifyUnit(unit('spacing', 'paddingLeft'))?.group).toBe('spacing')
+    expect(classifyUnit(unit('size', 'width'))?.group).toBe('size')
+    expect(classifyUnit(unit('radius', 'topLeftRadius'))?.group).toBe('radius')
+    expect(classifyUnit(unit('opacity', 'opacity'))?.group).toBe('other')
+  })
+})
+
 describe('health', () => {
   it('is migrated divided by everything scored, leaving other libraries out', () => {
     const counts = {

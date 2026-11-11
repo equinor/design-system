@@ -112,6 +112,20 @@ export type ScoredCategory = (typeof SCORED_CATEGORIES)[number]
 
 export type Counts = Record<ScoredCategory, number> & { other: number }
 
+/** What kind of property a binding is on, for filtering. */
+export type PropertyGroup =
+  'colour' | 'typography' | 'spacing' | 'size' | 'radius' | 'modes' | 'other'
+
+export const PROPERTY_GROUPS: PropertyGroup[] = [
+  'colour',
+  'typography',
+  'spacing',
+  'size',
+  'radius',
+  'modes',
+  'other',
+]
+
 /** A unit after classification, as the inspector and the report show it. */
 export type BindingRecord = {
   id: string
@@ -121,6 +135,7 @@ export type BindingRecord = {
   entryId: string
   path: string[]
   property: PropertyRef
+  group: PropertyGroup
   category: Category
   /** The old variable, a summary of old typography variables, or the old mode */
   old?: string
@@ -170,7 +185,7 @@ export type OldInstance = {
 }
 
 export type ScanSummary = {
-  scope: 'page' | 'file'
+  scope: 'selection' | 'page' | 'file'
   scannedAt: string
   mappingVersion: string
   pages: { id: string; name: string }[]

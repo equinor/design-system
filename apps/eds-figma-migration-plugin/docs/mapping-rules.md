@@ -161,11 +161,13 @@ Medium without any weight variable.
 
 Every old variable resolves to one of three outcomes:
 
-- **sure**: one target. The plugin applies it with "Apply sure".
+- **sure**: one target. The window calls it **Ready**, and the plugin
+  applies it without asking.
 - **check**: the target depends on the role of the layer. The plugin proposes
-  the first candidate, marks it ⚠, and applies it only after a designer
-  confirms it in the review.
-- **none**: no equivalent. The old binding stays and is listed.
+  the first candidate, marks it ⚠ **Needs check**, and applies it only after
+  a designer confirms it in the review.
+- **none**: no equivalent, shown as **No equivalent**. The old binding stays
+  and is listed.
 
 ### Mode-driven variables are read through their aliases
 

@@ -15,6 +15,7 @@ import type {
 } from '../mapping/types'
 import type {
   BindingRecord,
+  PropertyGroup,
   PropertyRef,
   RawContext,
   RawUnit,
@@ -68,6 +69,26 @@ function describe(variable: RawVariable): string {
     : variable.name
 }
 
+export function groupOf(unit: RawUnit): PropertyGroup {
+  if (unit.unit === 'typography') return 'typography'
+  if (unit.unit === 'mode') return 'modes'
+  switch (unit.kind) {
+    case 'fill':
+    case 'stroke':
+    case 'effect':
+    case 'textFill':
+      return 'colour'
+    case 'spacing':
+      return 'spacing'
+    case 'size':
+      return 'size'
+    case 'radius':
+      return 'radius'
+    default:
+      return 'other'
+  }
+}
+
 /** Classifies one unit, or returns null when it is not counted (text with no bound typography). */
 export function classifyUnit(unit: RawUnit): BindingRecord | null {
   const base = {
@@ -78,6 +99,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     entryId: unit.entryId,
     path: unit.path,
     property: unit.property,
+    group: groupOf(unit),
     instanceId: unit.instanceId,
   }
 

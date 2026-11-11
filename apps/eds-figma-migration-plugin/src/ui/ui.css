@@ -83,23 +83,35 @@ body {
 
 .scope {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--eds-spacing-md);
-  align-items: center;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
   margin: 0;
   padding: 0;
   border: 0;
 }
 
 .scope legend {
-  float: inline-start;
-  margin-inline-end: var(--eds-spacing-sm);
+  margin-block-end: var(--eds-spacing-xs);
+  padding: 0;
 }
 
 .scope-options {
   display: flex;
   flex: 1;
-  gap: var(--eds-spacing-md);
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-md);
+}
+
+.selection-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scan-action {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
 }
 
 .export-file {
@@ -152,8 +164,8 @@ code {
   line-height: var(--eds-typography-label-md-line-height);
 }
 
-/* Health bar. One segment per category; the colours are the non-interactive
-   emphasis fills of the status tones, so they follow the colour scheme. */
+/* Health bar. One segment per category, in the non-interactive fills of the
+   status tones, so they follow the colour scheme. */
 .health-heading {
   display: flex;
   align-items: baseline;
@@ -195,8 +207,9 @@ code {
     --_color: var(--eds-background-non-interactive-success-emphasis);
   }
 
+  /* Ready is information, not done yet, so it is blue rather than green. */
   &[data-category='sure'] {
-    --_color: var(--eds-background-non-interactive-accent-emphasis);
+    --_color: var(--eds-background-non-interactive-info-emphasis);
   }
 
   &[data-category='check'] {
@@ -215,6 +228,45 @@ code {
 .health-segment {
   flex-basis: 0;
   min-inline-size: 2px;
+}
+
+.health-legend-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.legend-help {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+  margin: 0;
+
+  & dt {
+    display: flex;
+    gap: var(--eds-spacing-2xs);
+    align-items: center;
+    font-weight: var(--eds-font-weight-medium);
+  }
+
+  & dd {
+    margin: 0;
+    color: var(--eds-text-secondary);
+  }
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+}
+
+.filter-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
 }
 
 .health-legend {
@@ -253,10 +305,9 @@ code {
 
 .group-title {
   margin: 0 0 var(--eds-spacing-3xs);
-  font-size: var(--eds-typography-label-sm-font-size);
+  font-size: var(--eds-typography-label-md-font-size);
   font-weight: var(--eds-font-weight-medium);
-  line-height: var(--eds-typography-label-sm-line-height);
-  color: var(--eds-text-secondary);
+  line-height: var(--eds-typography-label-md-line-height);
 }
 
 .entry-list,
@@ -276,7 +327,6 @@ code {
   border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
 }
 
-.entry-open,
 .binding-select {
   display: flex;
   flex: 1;
@@ -326,6 +376,35 @@ code {
   color: var(--eds-text-secondary);
 }
 
+.entry-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  padding-block: var(--eds-spacing-3xs);
+}
+
+.entry-health-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.entry-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-2xs);
+}
+
+/* The kind of a row or group: Page, Section, Frame, Layers or Component. */
+.kind-label {
+  font-size: var(--eds-typography-label-xs-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--eds-text-secondary);
+}
+
 .entry-health {
   min-inline-size: var(--eds-spacing-2xl);
   font-size: var(--eds-typography-label-md-font-size);
@@ -339,6 +418,7 @@ code {
   display: flex;
   gap: var(--eds-spacing-xs);
   align-items: center;
+  justify-content: space-between;
 }
 
 .inspector-title {

@@ -37,7 +37,10 @@ export async function runScan(
   figma.skipInvisibleInstanceChildren = false
 
   const pages =
-    scope === 'page' ? [figma.currentPage] : [...figma.root.children]
+    scope === 'file' ? [...figma.root.children] : [figma.currentPage]
+  if (scope === 'selection' && figma.currentPage.selection.length === 0) {
+    throw new Error('Select one or more frames, then scan again.')
+  }
   const entries: EntryMeta[] = []
   let pageIndex = 0
   let currentPage = pages[0]
@@ -86,6 +89,59 @@ export async function runScan(
     }
   }
 
+  /** Splits one layer on a page or in a section into its entry. Loose layers are gathered for the caller. */
+  async function collectTopLevel(
+    node: SceneNode,
+    page: PageNode,
+    sections: string[],
+    modes: Modes,
+    loose: SceneNode[],
+  ) {
+    if (node.type === 'SECTION') {
+      await collectContainer(node, page, [...sections, node.name], {
+        ...modes,
+        ...explicitModes(node),
+      })
+    } else if (
+      node.type === 'FRAME' ||
+      node.type === 'COMPONENT' ||
+      node.type === 'COMPONENT_SET'
+    ) {
+      const kind = node.type === 'FRAME' ? 'frame' : 'component'
+      addEntry(
+        { id: node.id, kind, name: node.name, sections, nodeIds: [node.id] },
+        page,
+      )
+      await collector.collectEntry([node], node.id, modes, kind === 'component')
+      await collectNestedComponents(page, sections)
+    } else {
+      loose.push(node)
+    }
+  }
+
+  async function collectLoose(
+    loose: SceneNode[],
+    id: string,
+    name: string,
+    page: PageNode,
+    sections: string[],
+    modes: Modes,
+  ) {
+    if (loose.length === 0) return
+    addEntry(
+      {
+        id,
+        kind: 'loose',
+        name,
+        sections,
+        nodeIds: loose.map((node) => node.id),
+      },
+      page,
+    )
+    await collector.collectEntry(loose, id, modes)
+    await collectNestedComponents(page, sections)
+  }
+
   async function collectContainer(
     container: PageNode | SectionNode,
     page: PageNode,
@@ -94,52 +150,38 @@ export async function runScan(
   ) {
     const loose: SceneNode[] = []
     for (const child of container.children) {
-      if (child.type === 'SECTION') {
-        await collectContainer(child, page, [...sections, child.name], {
-          ...modes,
-          ...explicitModes(child),
-        })
-      } else if (
-        child.type === 'FRAME' ||
-        child.type === 'COMPONENT' ||
-        child.type === 'COMPONENT_SET'
-      ) {
-        const kind = child.type === 'FRAME' ? 'frame' : 'component'
-        addEntry(
-          {
-            id: child.id,
-            kind,
-            name: child.name,
-            sections,
-            nodeIds: [child.id],
-          },
-          page,
-        )
-        await collector.collectEntry(
-          [child],
-          child.id,
-          modes,
-          kind === 'component',
-        )
-        await collectNestedComponents(page, sections)
-      } else {
-        loose.push(child)
-      }
+      await collectTopLevel(child, page, sections, modes, loose)
     }
-    if (loose.length > 0) {
-      const id = `loose:${container.id}`
-      addEntry(
-        {
-          id,
-          kind: 'loose',
-          name: LOOSE_NAME,
-          sections,
-          nodeIds: loose.map((node) => node.id),
-        },
-        page,
-      )
-      await collector.collectEntry(loose, id, modes)
-      await collectNestedComponents(page, sections)
+    await collectLoose(
+      loose,
+      `loose:${container.id}`,
+      LOOSE_NAME,
+      page,
+      sections,
+      modes,
+    )
+  }
+
+  /** Scans the selected layers, each as its own entry, with the sections and modes around it. */
+  async function collectSelection(page: PageNode) {
+    for (const node of page.selection) {
+      const ancestors: BaseNode[] = []
+      for (
+        let parent = node.parent;
+        parent && parent.type !== 'PAGE';
+        parent = parent.parent
+      ) {
+        ancestors.unshift(parent)
+      }
+      const sections = ancestors
+        .filter((ancestor) => ancestor.type === 'SECTION')
+        .map((ancestor) => ancestor.name)
+      const modes = explicitModes(page)
+      for (const ancestor of ancestors)
+        Object.assign(modes, explicitModes(ancestor))
+      const loose: SceneNode[] = []
+      await collectTopLevel(node, page, sections, modes, loose)
+      await collectLoose(loose, node.id, node.name, page, sections, modes)
     }
   }
 
@@ -152,7 +194,8 @@ export async function runScan(
       nodes: collector.nodes,
     })
     await page.loadAsync()
-    await collectContainer(page, page, [], explicitModes(page))
+    if (scope === 'selection') await collectSelection(page)
+    else await collectContainer(page, page, [], explicitModes(page))
     pageIndex += 1
   }
 

@@ -59,7 +59,7 @@ Always try the plugin on a duplicate of a frame. The test frame is
 
 ## Scan
 
-**Open** scans the current page or the whole file and changes nothing.
+**Open** scans the selected layers, the current page or the whole file, and changes nothing. The window calls the variables from the deprecated libraries *legacy*, since EDS 1.0 may be added later.
 
 - A file scan loads one page at a time with `page.loadAsync()`, so the view
   stays on the page you are on, and shows its progress with a Cancel button.
@@ -70,14 +70,26 @@ Always try the plugin on a duplicate of a frame. The test frame is
   layers inside instances were missing.
 - The list shows each top-level frame, the frames inside sections grouped
   under the section's name, and the loose layers of each page or section,
-  lowest health first. The arrow selects the frame and zooms to it.
-- Opening a frame lists every binding in it, with the old variable, the
-  proposal and the outcome, and the instances in it that still use old
-  variables. Clicking a row selects that layer.
+  lowest health first. Each row is labelled Frame, Layer or Component, and
+  each group Page or Section. **Open** shows the bindings in the row, and
+  **Go to** selects it and zooms to it.
+- Opening a row lists every binding in it, with the legacy variable, the
+  proposal and the outcome, filtered by the same categories as the health
+  bar, and the instances in it that still use legacy variables. Clicking a
+  binding selects that layer.
+- The categories are Migrated, Ready (one target, applied without asking;
+  `sure` in the code), Needs check, No equivalent and In instance. Ready is
+  blue, since it still has to be applied; only Migrated is green. The info
+  button next to the legend explains each category in a dialog.
+- The bindings in a row can be filtered by status, with the same names as the
+  legend, and by property: colour, typography, spacing, size, corner radius
+  and modes.
+- The window runs in the comfortable density. The rules version is not
+  shown; it goes into the change log and the report.
 - Main components in the file are scanned as their own group, shown and
   counted in the health only when you switch them on.
 
-Health is migrated ÷ (migrated + sure + check + none + in instance). Variables
+Health is migrated ÷ (migrated + ready + needs check + no equivalent + in instance). Variables
 from other libraries and local variables are counted apart and left out.
 The plugin API gives no library name for a main component, so the window says
 whether it comes from a library or from this file.

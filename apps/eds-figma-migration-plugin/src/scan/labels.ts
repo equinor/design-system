@@ -1,5 +1,5 @@
 /** Names for properties and categories, as the window and the report show them. */
-import type { Category, PropertyRef } from './types'
+import type { Category, PropertyGroup, PropertyRef } from './types'
 
 const FIELD_LABELS: Record<string, string> = {
   paddingLeft: 'Padding left',
@@ -52,11 +52,39 @@ export function propertyLabel(property: PropertyRef): string {
   }
 }
 
+/**
+ * The names designers see. The outcome `sure` is shown as Ready: one target,
+ * applied without asking.
+ */
 export const CATEGORY_LABELS: Record<Category, string> = {
   migrated: 'Migrated',
-  sure: 'Sure',
+  sure: 'Ready',
   check: 'Needs check',
   none: 'No equivalent',
   inInstance: 'In instance',
   other: 'Other libraries',
+}
+
+export const GROUP_LABELS: Record<PropertyGroup, string> = {
+  colour: 'Colour',
+  typography: 'Typography',
+  spacing: 'Spacing',
+  size: 'Size',
+  radius: 'Corner radius',
+  modes: 'Modes',
+  other: 'Other',
+}
+
+/** What each category means, for the legend dialog. */
+export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
+  migrated:
+    'Bound to a variable or text style in EDS Foundation [EDS Beta]. Nothing left to do.',
+  sure: 'A legacy variable with one target in EDS Foundation. The plugin swaps it without asking when you apply.',
+  check:
+    'A legacy variable whose target depends on what the layer is: interactive or not, selected, the kind of border, or the fill under a text. The plugin proposes a target, and you confirm, change or skip it.',
+  none: 'A legacy variable with nothing to swap to, such as an icon size or Bg/Backdrop. It stays as it is and is listed in the report.',
+  inInstance:
+    'A legacy variable inside an instance, or on one. The plugin never changes instances, because a change there becomes an override. Update the component in its library, then swap the instance.',
+  other:
+    'A variable from another library, or a local one. Not counted in the health.',
 }

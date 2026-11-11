@@ -2,6 +2,7 @@ import { CATEGORY_LABELS } from '../../scan/labels'
 import { formatHealth, healthOf, scoredTotal } from '../../scan/summary'
 import { SCORED_CATEGORIES } from '../../scan/types'
 import type { Counts } from '../../scan/types'
+import { LegendHelp } from './LegendHelp'
 
 type HealthBarProps = {
   counts: Counts
@@ -44,25 +45,28 @@ export function HealthBar({ counts, size = 'large' }: HealthBarProps) {
   )
 }
 
-/** The totals next to the bar, one per category, with the colour of its segment. */
+/** The totals next to the bar, one per category, with the colour of its segment and a button that explains them. */
 export function HealthLegend({ counts }: { counts: Counts }) {
   return (
-    <ul className="health-legend">
-      {SCORED_CATEGORIES.map((category) => (
-        <li key={category}>
-          <span
-            className="health-swatch"
-            data-category={category}
-            aria-hidden="true"
-          />
-          {CATEGORY_LABELS[category]} <strong>{counts[category]}</strong>
-        </li>
-      ))}
-      {counts.other > 0 && (
-        <li className="muted">
-          {CATEGORY_LABELS.other} {counts.other}
-        </li>
-      )}
-    </ul>
+    <div className="health-legend-row">
+      <ul className="health-legend">
+        {SCORED_CATEGORIES.map((category) => (
+          <li key={category}>
+            <span
+              className="health-swatch"
+              data-category={category}
+              aria-hidden="true"
+            />
+            {CATEGORY_LABELS[category]} <strong>{counts[category]}</strong>
+          </li>
+        ))}
+        {counts.other > 0 && (
+          <li className="muted">
+            {CATEGORY_LABELS.other} {counts.other}
+          </li>
+        )}
+      </ul>
+      <LegendHelp />
+    </div>
   )
 }
