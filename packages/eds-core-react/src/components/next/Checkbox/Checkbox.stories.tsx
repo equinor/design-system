@@ -205,48 +205,6 @@ Density.parameters = {
   },
 }
 
-export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
-  <div style={{ display: 'flex', gap: '32px' }}>
-    <div
-      data-color-scheme="light"
-      style={{ padding: '24px', background: 'var(--eds-background-surface)' }}
-    >
-      <Wrapper>
-        <ExampleLabel>Light Mode</ExampleLabel>
-        <Checkbox label="Unchecked" />
-        <Checkbox label="Checked" defaultChecked />
-        <Checkbox label="Indeterminate" indeterminate />
-        <Checkbox label="Disabled" disabled />
-        <Checkbox label="Disabled checked" disabled defaultChecked />
-      </Wrapper>
-    </div>
-    <div
-      data-color-scheme="dark"
-      style={{ padding: '24px', background: 'var(--eds-background-surface)' }}
-    >
-      <Wrapper>
-        <ExampleLabel style={{ color: 'var(--eds-text-primary)' }}>
-          Dark Mode
-        </ExampleLabel>
-        <Checkbox label="Unchecked" />
-        <Checkbox label="Checked" defaultChecked />
-        <Checkbox label="Indeterminate" indeterminate />
-        <Checkbox label="Disabled" disabled />
-        <Checkbox label="Disabled checked" disabled defaultChecked />
-      </Wrapper>
-    </div>
-  </div>
-)
-
-LightAndDarkMode.parameters = {
-  docs: {
-    description: {
-      story:
-        'Checkbox follows the colour scheme set with `data-color-scheme` on a parent element.',
-    },
-  },
-}
-
 export const GroupedCheckbox: StoryFn<CheckboxProps> = () => (
   <fieldset>
     <legend>Select your options</legend>
