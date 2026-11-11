@@ -10,6 +10,8 @@ type EntryListProps = {
   showPages: boolean
   onOpen: (entry: EntrySummary) => void
   onGoTo: (entry: EntrySummary) => void
+  /** Switches Figma to a page, in a scan of the whole file */
+  onGoToPage?: (pageId: string) => void
 }
 
 type Group = {
@@ -184,6 +186,7 @@ export function EntryList({
   showPages,
   onOpen,
   onGoTo,
+  onGoToPage,
 }: EntryListProps) {
   const [open, setOpen] = useState<Set<string>>(new Set())
   if (!showPages) {
@@ -240,6 +243,19 @@ export function EntryList({
               </span>
             </Accordion.Header>
             <Accordion.Panel>
+              {isOpen && onGoToPage && (
+                <div className="panel-actions">
+                  <span />
+                  <Button
+                    size="small"
+                    variant="secondary"
+                    aria-label={`Go to the page ${page.name}`}
+                    onClick={() => onGoToPage(pageId)}
+                  >
+                    Go to page
+                  </Button>
+                </div>
+              )}
               {isOpen && (
                 <Groups
                   entries={page.entries}

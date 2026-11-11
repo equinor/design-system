@@ -71,6 +71,8 @@ export type UiToPlugin =
   | { type: 'get-entry'; entryId: string }
   /** Selects layers in Figma and scrolls to them, switching page when needed */
   | { type: 'select'; nodeIds: string[] }
+  /** Switches Figma to a page */
+  | { type: 'go-to-page'; pageId: string }
   /** Selects every layer with a binding to migrate that uses one legacy variable */
   | { type: 'select-old'; oldKey: string }
   /**

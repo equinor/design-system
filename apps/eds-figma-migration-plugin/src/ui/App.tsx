@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Banner, Switch } from '@equinor/eds-core-react/next'
+import { Badge, Banner, Switch } from '@equinor/eds-core-react/next'
 import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
 import { NO_OVERRIDES, effectiveTarget, rowKey } from '../scan/mapping'
@@ -146,6 +146,7 @@ function Overview({
                 <EntryList
                   entries={frames}
                   showPages={summary.scope === 'file'}
+                  onGoToPage={(pageId) => send({ type: 'go-to-page', pageId })}
                   onOpen={onOpen}
                   onGoTo={onGoTo}
                 />
@@ -174,6 +175,9 @@ function Overview({
                     <EntryList
                       entries={components}
                       showPages={summary.scope === 'file'}
+                      onGoToPage={(pageId) =>
+                        send({ type: 'go-to-page', pageId })
+                      }
                       onOpen={onOpen}
                       onGoTo={onGoTo}
                     />
@@ -407,7 +411,10 @@ export function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">EDS variable migration</h1>
+        <h1 className="app-title">EDS Variable Migration</h1>
+        <Badge tone="warning" emphasis="medium">
+          WIP beta
+        </Badge>
       </header>
       <main className="app-main stack">
         {error && (

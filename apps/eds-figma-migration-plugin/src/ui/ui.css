@@ -724,3 +724,13 @@ code {
   color: var(--eds-text-secondary);
   font-variant-numeric: tabular-nums;
 }
+
+/* The actions at the top of an accordion panel: Select all and Go to. The
+   accordion header is a summary, which cannot hold buttons. */
+.panel-actions {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--eds-spacing-xs);
+}

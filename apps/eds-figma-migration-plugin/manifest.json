@@ -1,6 +1,6 @@
 {
-  "name": "EDS variable migration",
-  "id": "eds-variable-migration-dev",
+  "name": "EDS Variable Migration [WIP BETA]",
+  "id": "1702357333472971124",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html",

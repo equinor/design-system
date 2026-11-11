@@ -123,6 +123,29 @@ from other libraries and local variables are counted apart and left out.
 The plugin API gives no library name for a main component, so the window says
 whether it comes from a library or from this file.
 
+## Publish a test version to Equinor
+
+The test version is published privately to the Equinor organisation as
+**EDS Variable Migration [WIP BETA]**. Publishing is only possible from the
+Figma desktop app, with the plugin imported from `manifest.json`:
+
+1. Build it: `pnpm run build` at the root, then
+   `pnpm --filter @equinor/eds-figma-migration-plugin run build`. Figma uploads
+   `dist/code.js` and `dist/ui.html` as they are when you publish.
+2. Choose **Plugins → Development → Manage plugins in development**, open the
+   menu on **EDS Variable Migration [WIP BETA]** and choose **Publish**.
+3. Publish to **Equinor** (private to the organisation), not to the Community.
+4. The `id` in `manifest.json` is a placeholder. If the publish dialog asks
+   for an ID, or says the ID is not valid, let Figma create one and put it in
+   `manifest.json`, so later versions update the same plugin.
+
+Figma's documentation and forum disagree on whether any member or only an
+admin can publish a private plugin. If Publish is not offered, ask the Figma
+admin.
+
+The published test version keeps the Developer menu. Both commands only read
+the file.
+
 ## Developer command: export the inventories
 
 The mapping is checked against two generated files in

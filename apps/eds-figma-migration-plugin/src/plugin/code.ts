@@ -31,7 +31,7 @@ figma.showUI(__html__, {
   themeColors: true,
   width: 480,
   height: 720,
-  title: 'EDS variable migration',
+  title: 'EDS Variable Migration [WIP BETA]',
 })
 
 function post(message: PluginToUi) {
@@ -204,6 +204,11 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
       case 'select':
         await select(message.nodeIds)
         break
+      case 'go-to-page': {
+        const page = await figma.getNodeByIdAsync(message.pageId)
+        if (page?.type === 'PAGE') await figma.setCurrentPageAsync(page)
+        break
+      }
       case 'select-old':
         await selectOld(message.oldKey)
         break

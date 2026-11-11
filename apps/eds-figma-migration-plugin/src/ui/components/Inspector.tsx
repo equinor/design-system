@@ -280,19 +280,41 @@ export function Inspector({
                   <Accordion.Panel>
                     {isOpen && (
                       <div className="stack-tight">
-                        {mappable.length > 1 && (
-                          <Checkbox
-                            label={`Select all ${mappable.length} to change`}
-                            checked={state.checked}
-                            indeterminate={state.indeterminate}
-                            onChange={(event) =>
-                              selection.set(
-                                mappable.map(selectable),
-                                event.target.checked,
-                              )
+                        <div className="panel-actions">
+                          {mappable.length > 1 ? (
+                            <Checkbox
+                              label={`Select all ${mappable.length} to change`}
+                              checked={state.checked}
+                              indeterminate={state.indeterminate}
+                              onChange={(event) =>
+                                selection.set(
+                                  mappable.map(selectable),
+                                  event.target.checked,
+                                )
+                              }
+                            />
+                          ) : (
+                            <span />
+                          )}
+                          <Button
+                            size="small"
+                            variant="secondary"
+                            aria-label={
+                              pivot === 'layers'
+                                ? `Go to ${group.title}`
+                                : `Go to the layers that use ${group.title}`
                             }
-                          />
-                        )}
+                            onClick={() =>
+                              onSelect([
+                                ...new Set(
+                                  group.records.map((record) => record.nodeId),
+                                ),
+                              ])
+                            }
+                          >
+                            {pivot === 'layers' ? 'Go to' : 'Go to layers'}
+                          </Button>
+                        </div>
                         <ul className="binding-list">
                           {group.records.map((record) => (
                             <BindingRow

@@ -212,10 +212,10 @@ export function MappingView({
                       <Button
                         size="small"
                         variant="secondary"
-                        aria-label={`Select the layers that use ${group.old}`}
+                        aria-label={`Go to the layers that use ${group.old}`}
                         onClick={() => onSelectOld(group.oldKey)}
                       >
-                        Select layers
+                        Go to layers
                       </Button>
                     </div>
                     {group.rows.map((row) => {
