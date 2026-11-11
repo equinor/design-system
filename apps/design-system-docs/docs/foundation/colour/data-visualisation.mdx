@@ -1,0 +1,215 @@
+---
+title: Data visualisation
+hide_title: true
+description: Choose chart colours from the data-visualization tokens, pick a step for each mark, and check contrast in light and dark.
+---
+
+import DataVizPalette from '@site/src/components/colour/DataVizPalette'
+
+Charts need more colours than an interface does, and they use them for a different job. The
+`data-visualization.*` tokens are a separate group for that job: they help a reader tell series apart
+and read an amount from a colour. No EDS component binds them, and they are not meant for buttons,
+banners or other interface elements. Token names below use Figma's dotted form;
+[Getting Started](./getting_started.mdx#one-name-in-figma-css-and-typescript) shows the CSS and
+TypeScript forms.
+
+Place charts on `background.surface`. Every contrast figure on this page is measured against it, in
+both colour schemes.
+
+## Choose a group
+
+The kind of data decides the group:
+
+| Data | Group | Tokens | Example |
+| --- | --- | --- | --- |
+| Categories with no order between them | Categorical | `data-visualization.cat.1` to `cat.10`, each with steps `1` to `5` | Production per field, incidents per region |
+| Ordered values that run from low to high | Sequential | `data-visualization.seq.1` to `seq.7` | Utilisation in a heatmap, depth on a map |
+| Values that run in two directions from a midpoint | Diverging | `data-visualization.div.1` to `div.9` | Above and below plan, change since last year |
+
+Use one group per chart. When a chart mixes groups, the reader has to guess whether a colour stands
+for a category or for an amount.
+
+<DataVizPalette />
+
+## Categorical colours
+
+There are ten categorical hues, `cat.1` to `cat.10`, with five steps each. Use the hues to tell series
+apart. Use the steps within one hue when a single series needs more than one shade, for example a
+forecast next to the measured values, or a selected bar among the others.
+
+### What the step numbers mean
+
+As in [the palette](./palette.mdx#what-the-step-numbers-mean), a step number is a position relative
+to the background rather than a lightness. Step 1 is the step closest to the background and step 5 is
+the furthest from it, in both colour schemes. On a light surface a ramp runs from light to dark, and
+on a dark surface it runs from dark to light.
+
+Step 3 is the anchor of each hue and has the same value in both schemes. The other steps swap places
+around it: dark step 1 takes the value of light step 5, dark step 2 takes light step 4, and so on.
+For `cat.1`:
+
+| Step | Light | Dark |
+| --- | --- | --- |
+| 1 | `#adc3c4` | `#00282c` |
+| 2 | `#5d8386` | `#00383c` |
+| 3 | `#03484c` | `#03484c` |
+| 4 | `#00383c` | `#5d8386` |
+| 5 | `#00282c` | `#adc3c4` |
+
+The swap is intended. Each step keeps its position relative to the background, so step 1 is the
+subtlest step and step 5 the strongest in both schemes.
+
+Because step 3 keeps its value, its contrast changes with the scheme. A dark hue such as `cat.1.3`
+stands out on a light surface and almost disappears on a dark one, and the yellow `cat.2.3` does the
+opposite. [Contrast](#contrast) lists the hues this affects.
+
+### Which step to use
+
+| Step | Use it for | Why |
+| --- | --- | --- |
+| 1 | Decorative areas that carry no meaning, such as a hover background or a tint behind the plot area | Closest to the background, and below 3:1 for every hue in both schemes |
+| 2 | Bands that carry meaning, such as a target range or an uncertainty band, always with a label; series that should step back; the other series when one is selected | Reaches 3:1 for only 2 of 10 hues in light and 4 of 10 in dark, so it needs a label or an outline |
+| 3 | The default colour for bars, areas and other filled marks | The anchor of the hue, the same in both schemes |
+| 4 | Lines, points and a series that should stand out | Reaches 3:1 for every hue in both schemes |
+| 5 | Outlines on step 3 fills that are too weak on their own | Furthest from the background in both schemes. Not for several series at once: at step 5 most of the first five hues look alike |
+
+Where step 3 of a hue is too weak in a scheme, give the mark a step 5 outline or label it directly, so
+that the colour is not the only way to find it. [Contrast](#contrast) lists those hues, and the two
+hues whose step 4 lines need a label in dark.
+
+### Series order and how many series
+
+Assign hues in token order, starting at `cat.1`, and keep each series on the same hue when a filter
+changes what the chart shows.
+
+Colour alone tells up to five series apart. `cat.1` to `cat.5` at step 3 stay distinguishable with
+normal colour vision and with the three common forms of colour blindness (protanopia, deuteranopia
+and tritanopia). Step 3 has the same values in both schemes, so this is true in light and dark.
+
+From six series, add a second cue. Pairs start to look alike from the sixth hue: pink `cat.4` and
+purple `cat.6` are close even with full colour vision, and at seven and eight hues, `cat.1` and
+`cat.7` (dark teal and red) and `cat.4` and `cat.8` (pink and green-teal) merge for readers with red
+or green colour blindness. No set of eight hues can be told apart by colour alone. A chart with six or
+more series can still use all ten hues if each series also has one of these:
+
+- A direct label at the end of the line or on the bar, instead of only a legend
+- A marker shape or a line dash
+- A place in an "Other" group, for the smallest series
+
+These results come from simulating colour blindness with the model by Machado, Oliveira and
+Fernandes (2009) and with the check in the EDS palette generator, and counting a pair as distinct only
+when it passes both.
+
+## Sequential and diverging colours
+
+Sequential and diverging ramps follow the same rule as the categorical steps: the distance from the
+background carries the meaning. In both schemes `seq.1` sits closest to the background and stands for
+the lowest values, and `seq.7` sits furthest from it and stands for the highest. In the diverging ramp
+the midpoint `div.5` sits closest to the background and stands for no difference, and the two ends,
+the blue `div.1` and the orange `div.9`, sit furthest from it.
+
+These two ramps are generated separately for each scheme, so the dark values are not the light values
+in reverse order.
+
+The low end of the sequential ramp and the middle of the diverging ramp are close to invisible on the
+surface, especially in dark, where `seq.1` and `div.4` to `div.6` score APCA Lc 0. That is intended,
+because low values and values near the midpoint should recede in a heatmap or a map. The contrast goal
+for chart marks therefore does not apply to cells in a sequential or diverging fill. A reader still has
+to tell "low", "zero" and "no data" apart:
+
+- Give cells at the low end or the midpoint a thin border, so that their shape stays visible.
+- Show missing data with its own pattern or label, never with the low-end colour.
+- Make exact values available another way: labels, a tooltip or a table.
+
+## Light and dark
+
+Most data-visualisation values change between schemes: 56 of the 66 values are different, and only
+the categorical step 3 values stay the same. A chart keeps its meaning when the scheme changes,
+because each step keeps its position relative to the background, but it does not keep its exact
+colours. Check every chart in both schemes, and use the tokens rather than the hex values of one
+scheme.
+
+## Contrast
+
+Chart marks are graphical objects, so WCAG 2.1 asks for a contrast of at least 3:1 against the
+colours next to them when a reader needs the mark to understand the chart (success criterion 1.4.11).
+EDS designs for APCA and treats WCAG as the minimum, as it does for text (see the
+[colour introduction](./intro.mdx#contrast)). For chart marks:
+
+| Mark | Minimum | Goal |
+| --- | --- | --- |
+| Bars, areas and other filled marks | WCAG 3:1 | APCA Lc 30 |
+| Lines and small markers | WCAG 3:1 | APCA Lc 45 |
+
+Measured against `background.surface`:
+
+| Categorical step | Light: reaches 3:1 | Light: APCA Lc | Dark: reaches 3:1 | Dark: APCA Lc |
+| --- | --- | --- | --- | --- |
+| 1 | 0 of 10 hues | 10 to 35 | 0 of 10 hues | 0 to 10 |
+| 2 | 2 of 10 hues | 18 to 69 | 4 of 10 hues | 0 to 38 |
+| 3 | 6 of 10 hues | 26 to 94 | 9 of 10 hues | 9 to 77 |
+| 4 | 10 of 10 hues | 64 to 99 | 10 of 10 hues | 33 to 86 |
+| 5 | 10 of 10 hues | 93 to 102 | 10 of 10 hues | 68 to 94 |
+
+These hues miss the minimum or the goal at the step they are used for, and need a step 5 outline or a
+direct label:
+
+| Use | Light | Dark |
+| --- | --- | --- |
+| Step 3 fills, below 3:1 | `cat.2`, `cat.3`, `cat.8`, `cat.10` | `cat.1` |
+| Step 3 fills, above 3:1 but below Lc 30 | none | `cat.6` (Lc 22), `cat.7` (Lc 20) |
+| Step 4 lines, below Lc 45 | none | `cat.1` (Lc 33), `cat.7` (Lc 43) |
+
+In dark the two measures disagree more than in light. `cat.7.3` reaches 3.13:1 but only Lc 20, so it
+passes the minimum while still looking faint on the dark surface.
+
+### Text in charts
+
+Use the `text.*` tokens for axis labels, data labels and legends. The `data-visualization.*` values
+are tuned for marks and do not reach the contrast text needs on every step. When a data label sits on
+a coloured bar, check its contrast against the bar rather than against the surface.
+
+### Colour is not the only cue
+
+Some readers cannot tell certain hues apart, and screenshots and printouts can lose colour. Pair
+colour with a second cue: direct labels, marker shapes, line dashes, or a table with the same data.
+The [accessibility foundation](../accessibility.md#colour) covers the general rule.
+
+## Solid colours only
+
+Use the data-visualisation colours as they are, without opacity. A see-through mark has no fixed
+contrast, because its colour depends on whatever is behind it, so it cannot be checked against the
+goals above. The rest of the EDS colour scale follows the same rule. Instead of transparency:
+
+- For a target range or an uncertainty band, use step 2 of the same hue, drawn behind the data, with a
+  label.
+- To fade the other series when one is selected, switch them to step 2.
+- For overlapping areas, use stacked areas, lines or small multiples.
+- For dense scatter plots, use smaller or hollow markers, or group the points into bins.
+
+## Do's and Don'ts
+
+:::info **Do**
+
+- Choose the group from the data before choosing any colours.
+- Keep a series on the same hue when a filter changes the chart.
+- Add a second cue as soon as a chart has six or more series.
+- Check every chart in light and dark.
+
+:::
+
+:::danger **Don't**
+
+- Use `data-visualization.*` for interface elements such as buttons, banners or status badges. Use the semantic tone tokens for those.
+- Use step 1 for anything that carries meaning, or step 1 or 2 for a line or a point.
+- Use `data-visualization.*` for text.
+- Make the colours see-through with opacity.
+
+:::
+
+## Where to go next
+
+- [Data visualisation](../datavisualisation.md) covers dashboards, layout and choosing a chart type.
+- [The palette](./palette.mdx#data-visualisation) shows how these values sit next to the main colour
+  scale.
+- [Reference](./reference.mdx#data-visualisation) lists every value in both schemes.

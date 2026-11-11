@@ -33,6 +33,7 @@ const PROSE = [
   'foundation/colour/intro.mdx',
   'foundation/colour/getting_started.mdx',
   'foundation/colour/usage.mdx',
+  'foundation/colour/data-visualisation.mdx',
   'foundation/colour/palette.mdx',
   'foundation/colour/migration.mdx',
   'foundation/colour/token-anatomy.mdx',
