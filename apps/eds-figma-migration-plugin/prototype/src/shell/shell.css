@@ -48,7 +48,7 @@ body {
 
 .shell-body {
   display: grid;
-  grid-template-columns: 200px 1fr 480px;
+  grid-template-columns: 200px 1fr var(--plugin-width, 480px);
   block-size: calc(100vh - 48px);
 }
 
@@ -142,7 +142,7 @@ body {
 
   & iframe {
     flex: 1;
-    inline-size: 480px;
+    inline-size: 100%;
     border: 0;
   }
 }

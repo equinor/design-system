@@ -142,6 +142,8 @@ export type UiToPlugin =
   | { type: 'revert'; entryId: string }
   /** Builds the report of the latest scan */
   | { type: 'get-report' }
+  /** Resizes the window; done when the drag ends, so the size is kept */
+  | { type: 'resize'; width: number; height: number; done: boolean }
   | { type: 'run-dev-export-inventory' }
   | { type: 'run-dev-export-fixture' }
   | { type: 'notify'; message: string }

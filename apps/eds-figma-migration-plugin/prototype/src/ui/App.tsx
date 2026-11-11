@@ -50,6 +50,7 @@ import { MappingView } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
 import { SavedHealth } from './components/SavedHealth'
 import { SettingsMenu } from './components/SettingsMenu'
+import { ResizeHandle } from './components/ResizeHandle'
 import { RunResult } from './components/RunResult'
 import type { Run } from './components/RunResult'
 import { ScanControls } from './components/ScanControls'
@@ -892,6 +893,7 @@ export function App() {
           onClear={bulk.clear}
         />
       )}
+      <ResizeHandle />
       <TargetPicker
         request={picker}
         onClose={() => setPicker(undefined)}

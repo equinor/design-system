@@ -895,8 +895,8 @@ code {
 .check-section {
   display: flex;
   flex-direction: column;
-  gap: var(--eds-spacing-2xs);
-  padding-block-start: var(--eds-spacing-sm);
+  gap: var(--eds-spacing-3xs);
+  padding-block-start: var(--eds-spacing-xs);
 }
 
 .check-section-header {
@@ -910,7 +910,7 @@ code {
 .check-rows {
   display: flex;
   flex-direction: column;
-  gap: var(--eds-spacing-xs);
+  gap: var(--eds-spacing-4xs);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -919,7 +919,7 @@ code {
 .check-row-block {
   display: flex;
   flex-direction: column;
-  gap: var(--eds-spacing-3xs);
+  gap: var(--eds-spacing-4xs);
 }
 
 .check-row {
@@ -935,10 +935,11 @@ code {
   gap: var(--eds-spacing-2xs);
   align-items: center;
   min-inline-size: 0;
-  padding: var(--eds-spacing-3xs) var(--eds-spacing-xs);
+  min-block-size: var(--eds-spacing-xl);
+  padding: var(--eds-spacing-4xs) var(--eds-spacing-2xs);
   font: inherit;
-  font-size: var(--eds-typography-label-md-font-size);
-  line-height: var(--eds-typography-label-md-line-height);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
   color: var(--eds-text-primary);
   text-align: start;
   cursor: pointer;
@@ -954,28 +955,56 @@ code {
     outline: 2px solid var(--eds-border-interactive-focus);
     outline-offset: 1px;
   }
+
+  & .swatch,
+  & .option-preview {
+    inline-size: var(--eds-spacing-md);
+    block-size: var(--eds-spacing-md);
+  }
 }
 
 .check-count {
-  min-inline-size: var(--eds-spacing-lg);
+  min-inline-size: var(--eds-spacing-md);
   color: var(--eds-text-secondary);
   font-variant-numeric: tabular-nums;
 }
 
 .check-legacy-name,
 .check-target-name {
-  /* Two lines before cutting, so names such as “UI body · sm · squished”
-     and “Remove the legacy mode” can be read (final review FR2, FR3). */
-  display: -webkit-box;
+  /* Compact rows stay on one line; the full name is in the tooltip and the
+     picker. Typography keeps its size and font on a second line (FR2). */
   flex: 1;
   overflow: hidden;
-  overflow-wrap: anywhere;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .check-arrow {
   color: var(--eds-text-secondary);
+}
+
+.check-status {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-4xs);
+  align-items: center;
+  font-size: var(--eds-typography-label-sm-font-size);
+  color: var(--eds-text-on-default-warning);
+}
+
+.check-choice {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--eds-icon-secondary);
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
 }
 
 .check-row-meta {
@@ -1131,4 +1160,34 @@ code {
   display: flex;
   gap: var(--eds-spacing-xs);
   align-items: center;
+}
+
+/* The grip that resizes the window, in the bottom right corner. */
+.resize-handle {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  z-index: 5;
+  inline-size: var(--eds-spacing-lg);
+  block-size: var(--eds-spacing-lg);
+  padding: 2px;
+  color: var(--eds-icon-secondary);
+  cursor: nwse-resize;
+  touch-action: none;
+  background: none;
+  border: 0;
+
+  & svg {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
 }

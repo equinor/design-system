@@ -3,6 +3,7 @@ import { Button, Dialog } from '@equinor/eds-core-react/next'
 import { pickerOptions } from '../../mapping/picker'
 import type { PickerSubject } from '../../mapping/picker'
 import type { OverrideValue } from '../../scan/mapping'
+import { targetMeaning } from '../plain'
 import { VariableList } from './VariableList'
 
 export type PickerRequest = {
@@ -44,6 +45,7 @@ function PickerBody({
           value={value}
           onChange={setValue}
           colorScheme={colorScheme}
+          describe={targetMeaning}
         />
       </Dialog.Content>
       <Dialog.Actions>

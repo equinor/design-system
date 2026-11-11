@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { Button, Icon } from '@equinor/eds-core-react/next'
 import { arrow_back } from '@equinor/eds-icons'
 import { pickerOptions } from '../../mapping/picker'
-import { propertyLabel } from '../../scan/labels'
+import { propertyLabel } from '../labels'
 import type { OverrideValue } from '../../scan/mapping'
 import { pathBelow } from '../paths'
+import { plainReason, targetMeaning } from '../plain'
 import type { ReviewItem } from '../review'
 import { targetLabel } from '../targets'
 import { VariableList } from './VariableList'
@@ -115,6 +116,10 @@ export function ReviewView({
   const isProposal = value === row.proposal
   const entryName = entryNames.get(binding.entryId)
   const path = pathBelow(binding.path, entryName)
+  // Many layers share a name, such as Label or Cell, so the title says where
+  // the layer is (UX review F10).
+  const parent = binding.path[binding.path.length - 1]
+  const plain = plainReason(row.reason)
 
   return (
     <section className="stack review" aria-labelledby="review-title">
@@ -140,9 +145,11 @@ export function ReviewView({
 
       <div className="stack-tight">
         <h2 id="review-title" className="inspector-title">
-          {binding.nodeName} · {propertyLabel(binding.property)}
+          {binding.nodeName}
+          {parent && parent !== binding.nodeName ? ` in ${parent}` : ''}
         </h2>
         <span className="binding-path">
+          {propertyLabel(binding.property)} ·{' '}
           {[entryName, path].filter(Boolean).join(' / ')}
         </span>
         <span className="binding-swap">
@@ -151,10 +158,16 @@ export function ReviewView({
           <span className="binding-new">{targetLabel(value ?? null)}</span>
         </span>
         {row.reason && (
-          <p className="review-reason">
+          <div className="review-reason">
             <strong>Why it needs a check: </strong>
-            {row.reason}
-          </p>
+            {plain ?? row.reason}
+            {plain && (
+              <details className="review-details">
+                <summary>Details</summary>
+                {row.reason}
+              </details>
+            )}
+          </div>
         )}
         <div>
           <Button
@@ -172,6 +185,7 @@ export function ReviewView({
         value={value}
         onChange={setValue}
         colorScheme={colorScheme}
+        describe={targetMeaning}
       />
 
       <div className="review-actions">

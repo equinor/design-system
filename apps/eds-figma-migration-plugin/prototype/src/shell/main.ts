@@ -83,6 +83,11 @@ const plugin = new MockPlugin(post, {
   },
   onPage: (pageId) => renderPages(pageId),
   onNotify: notify,
+  // The plugin window's grip resizes the window, as figma.ui.resize does.
+  onResize: (width) => {
+    document.body.style.setProperty('--plugin-width', `${width}px`)
+    drawSelection(plugin.selection, plugin.selectionLabel())
+  },
 })
 
 function renderPages(current = plugin.pageId) {

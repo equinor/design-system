@@ -15,7 +15,7 @@ export function sourceLabel(
 ): string | undefined {
   switch (source) {
     case 'record':
-      return 'Your choice for this binding'
+      return 'Your choice for this value'
     case 'row':
       return 'Your choice for all of these'
     default:

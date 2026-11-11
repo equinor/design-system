@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Badge, Banner, Switch } from '@equinor/eds-core-react/next'
+import { Badge, Banner, Button } from '@equinor/eds-core-react/next'
 import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
 import { NO_OVERRIDES, effectiveTarget, rowKey } from '../scan/mapping'
@@ -10,7 +10,7 @@ import type {
   OverrideValue,
   Overrides,
 } from '../scan/mapping'
-import { propertyLabel } from '../scan/labels'
+import { propertyLabel } from './labels'
 import type { Report } from '../scan/report'
 import {
   formatHealth,
@@ -45,6 +45,8 @@ import { InstancesView } from './components/InstancesView'
 import { MappingView } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
 import { SavedHealth } from './components/SavedHealth'
+import { SettingsMenu } from './components/SettingsMenu'
+import { ResizeHandle } from './components/ResizeHandle'
 import { RunResult } from './components/RunResult'
 import type { Run } from './components/RunResult'
 import { ScanControls } from './components/ScanControls'
@@ -55,6 +57,7 @@ import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
 import { reviewItems } from './review'
 import type { ReviewItem } from './review'
+import { filterGroups } from './groups'
 import { useSelection } from './selection'
 import type { Selection } from './selection'
 
@@ -73,7 +76,6 @@ function Overview({
   mapping,
   overrides,
   showComponents,
-  onShowComponents,
   onOpen,
   onGoTo,
   onSelectOld,
@@ -88,6 +90,10 @@ function Overview({
   report,
   onReport,
   onCloseReport,
+  colorScheme,
+  showCounts,
+  showEmpty,
+  onShowComponents,
 }: {
   summary: ScanSummary
   view: View
@@ -95,7 +101,6 @@ function Overview({
   mapping: MappingGroup[]
   overrides: Overrides
   showComponents: boolean
-  onShowComponents: (show: boolean) => void
   onOpen: (entry: EntrySummary) => void
   onGoTo: (entry: EntrySummary) => void
   onSelectOld: (oldKey: string) => void
@@ -114,6 +119,10 @@ function Overview({
   report?: Report
   onReport: () => void
   onCloseReport: () => void
+  colorScheme: 'light' | 'dark'
+  showCounts: boolean
+  showEmpty: boolean
+  onShowComponents: (show: boolean) => void
 }) {
   const entryNames = new Map(
     summary.entries.map((entry) => [entry.id, entry.name]),
@@ -125,6 +134,30 @@ function Overview({
   const totals = showComponents
     ? sumCounts(summary.entries.map((entry) => entry.counts))
     : summary.totals
+  const applied = showComponents ? summary.entries : frames
+  // Final review FR10: Changes counts what the health bar counts.
+  const componentIds = new Set(components.map((entry) => entry.id))
+  const changes = showComponents
+    ? mapping
+    : filterGroups(mapping, (binding) => !componentIds.has(binding.entryId))
+  // Final review FR5: a component with legacy variables is not hidden away.
+  const legacyComponents = components.filter(
+    (entry) => oldCount(entry.counts) > 0,
+  )
+  // UX review F8: Apply says where it applies.
+  const readyIn = applied.filter((entry) => entry.counts.sure > 0)
+  const pageCount = new Set(readyIn.map((entry) => entry.pageId)).size
+  const reach =
+    readyIn.length === 0
+      ? undefined
+      : `in ${readyIn.length} frame${readyIn.length === 1 ? '' : 's'}${
+          pageCount > 1 ? ` on ${pageCount} pages` : ''
+        }`
+  // UX review F3: where the work is, across pages.
+  const mostWork = frames
+    .filter((entry) => oldCount(entry.counts) > 0)
+    .sort((a, b) => oldCount(b.counts) - oldCount(a.counts))
+    .slice(0, 3)
   return (
     <div className="stack">
       <section className="stack-tight" aria-labelledby="health-title">
@@ -136,20 +169,7 @@ function Overview({
         </div>
         <HealthBar counts={totals} />
         <HealthLegend counts={totals} />
-        <ApplyActions
-          ready={totals.sure}
-          toReview={totals.check}
-          where="in the scope"
-          busy={busy}
-          onReview={onReview}
-          onApply={() =>
-            onApply(
-              (showComponents ? summary.entries : frames).map(
-                (entry) => entry.id,
-              ),
-            )
-          }
-        />
+
         {scoredTotal(totals) === 0 ? (
           <p className="muted">
             No layer in the scope uses EDS variables. Choose another scope, or
@@ -185,8 +205,8 @@ function Overview({
       <Tabs
         label="View"
         tabs={[
+          { id: 'mapping', label: 'Changes' },
           { id: 'frames', label: 'Frames' },
-          { id: 'mapping', label: 'Mapping' },
           { id: 'instances', label: `Instances ${instances.length}` },
         ]}
         selected={view}
@@ -200,9 +220,11 @@ function Overview({
           />
         ) : view === 'mapping' ? (
           <MappingView
-            groups={mapping}
+            groups={changes}
             overrides={overrides}
             entryNames={entryNames}
+            colorScheme={colorScheme}
+            showCounts={showCounts}
             selection={selection}
             onSelectOld={onSelectOld}
             onSelectLayer={onSelectLayer}
@@ -215,6 +237,37 @@ function Overview({
               <h2 id="frames-title" className="section-title">
                 Frames and layers
               </h2>
+              {mostWork.length > 1 && summary.scope !== 'selection' && (
+                <div className="most-work">
+                  <h3 className="group-title">Most work left</h3>
+                  <ul className="entry-list">
+                    {mostWork.map((entry) => (
+                      <li key={entry.id} className="entry-row">
+                        <div className="entry-info">
+                          <span className="entry-name">{entry.name}</span>
+                          <span className="entry-meta">
+                            {entry.pageName} · {oldCount(entry.counts)} legacy
+                            values
+                            {entry.counts.check > 0
+                              ? ` · ${entry.counts.check} to check`
+                              : ''}
+                          </span>
+                        </div>
+                        <div className="entry-actions">
+                          <Button
+                            size="small"
+                            variant="secondary"
+                            aria-label={`Open ${entry.name}`}
+                            onClick={() => onOpen(entry)}
+                          >
+                            Open
+                          </Button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {frames.length === 0 ? (
                 <p className="muted">Nothing in the scope.</p>
               ) : (
@@ -224,11 +277,32 @@ function Overview({
                   onGoToPage={(pageId) => send({ type: 'go-to-page', pageId })}
                   onOpen={onOpen}
                   onGoTo={onGoTo}
+                  showEmpty={showEmpty}
                 />
               )}
             </section>
 
-            {components.length > 0 && (
+            {legacyComponents.length > 0 && !showComponents && (
+              <div className="components-note">
+                <span className="muted">
+                  {legacyComponents.length} local component
+                  {legacyComponents.length === 1 ? ' uses' : 's use'} legacy
+                  variables
+                  {legacyComponents[0].instanceCount !== undefined
+                    ? ` and ${legacyComponents.length === 1 ? 'is' : 'are'} used ${legacyComponents.reduce((sum, entry) => sum + (entry.instanceCount ?? 0), 0)} times in the file`
+                    : ''}
+                  .
+                </span>
+                <Button
+                  variant="ghost"
+                  size="small"
+                  onClick={() => onShowComponents(true)}
+                >
+                  Show
+                </Button>
+              </div>
+            )}
+            {components.length > 0 && showComponents && (
               <section
                 className="stack-tight"
                 aria-labelledby="components-title"
@@ -236,11 +310,6 @@ function Overview({
                 <h2 id="components-title" className="section-title">
                   Local components
                 </h2>
-                <Switch
-                  label={`Show and count ${components.length} main component${components.length === 1 ? '' : 's'}`}
-                  checked={showComponents}
-                  onChange={(event) => onShowComponents(event.target.checked)}
-                />
                 {showComponents && (
                   <>
                     <p className="muted">
@@ -263,6 +332,16 @@ function Overview({
           </div>
         )}
       </Tabs>
+      {selection.items.size === 0 && (
+        <ApplyActions
+          ready={totals.sure}
+          toReview={totals.check}
+          where={reach ?? 'in the scope'}
+          busy={busy}
+          onReview={onReview}
+          onApply={() => onApply(applied.map((entry) => entry.id))}
+        />
+      )}
     </div>
   )
 }
@@ -280,7 +359,10 @@ export function App() {
   const [openEntryId, setOpenEntryId] = useState<string>()
   const [detail, setDetail] = useState<EntryDetail>()
   const [showComponents, setShowComponents] = useState(false)
-  const [view, setView] = useState<View>('frames')
+  // Check designs: the changes are the first thing shown after a scan.
+  const [view, setView] = useState<View>('mapping')
+  const [showCounts, setShowCounts] = useState(true)
+  const [showEmpty, setShowEmpty] = useState(false)
   const [mapping, setMapping] = useState<MappingGroup[]>([])
   const [instances, setInstances] = useState<OldInstance[]>([])
   const [review, setReview] = useState<ReviewItem[]>()
@@ -297,6 +379,13 @@ export function App() {
   const [applying, setApplying] = useState<{ done: number; total: number }>()
   const [run, setRun] = useState<Run>()
   const openEntryRef = useRef<string | undefined>(undefined)
+  // UX review F4: until the designer chooses a scope or scans, the scope
+  // follows the selection: Selection when something is selected.
+  const scopeChosen = useRef(false)
+  // Final review FR1: after a scan the designer started, a selection opens
+  // on Changes and a page or the file on Frames, where the work is.
+  const userScan = useRef(false)
+  const [lastApplied, setLastApplied] = useState<string[]>([])
   useEffect(() => {
     openEntryRef.current = openEntryId
   }, [openEntryId])
@@ -309,11 +398,21 @@ export function App() {
           break
         case 'selection':
           setSelection({ count: message.count, firstName: message.firstName })
+          if (!scopeChosen.current) {
+            setScope(message.count > 0 ? 'selection' : 'page')
+          }
           break
         case 'scan-progress':
           setProgress(message.progress)
           break
         case 'scan-done': {
+          scopeChosen.current = true
+          if (userScan.current) {
+            userScan.current = false
+            setView(
+              message.summary.scope === 'selection' ? 'mapping' : 'frames',
+            )
+          }
           setScanning(false)
           setProgress(undefined)
           setSummary(message.summary)
@@ -395,6 +494,7 @@ export function App() {
   useEffect(() => send({ type: 'ready' }), [])
 
   const scan = () => {
+    userScan.current = true
     setError(undefined)
     setScanning(true)
     send({ type: 'scan', scope })
@@ -407,6 +507,7 @@ export function App() {
   const select = (nodeIds: string[]) => send({ type: 'select', nodeIds })
   const busy = scanning || applying !== undefined
   const applyEntries = (entryIds: string[]) => {
+    setLastApplied(entryIds)
     setError(undefined)
     setRun(undefined)
     setApplying({ done: 0, total: 0 })
@@ -443,7 +544,7 @@ export function App() {
     const rowChanged = rowKey(record) in overrides.rows
     setPicker({
       title: record.old ?? record.nodeName,
-      description: `${record.nodeName}, ${propertyLabel(record.property)}. Changes this binding only, and wins over a change on its row.`,
+      description: `${record.nodeName}, ${propertyLabel(record.property)}. Changes this value only, and wins over a change on its row.`,
       subject: {
         kinds: record.kind ? [record.kind] : [],
         group: record.group,
@@ -475,7 +576,7 @@ export function App() {
     const rowChanged = row.key in overrides.rows
     setPicker({
       title: group.old,
-      description: `${binding.nodeName}, ${propertyLabel(binding.property)}. Changes this binding only, and wins over a change on its row.`,
+      description: `${binding.nodeName}, ${propertyLabel(binding.property)}. Changes this value only, and wins over a change on its row.`,
       subject: {
         kinds: binding.kind ? [binding.kind] : [],
         group: group.group,
@@ -513,7 +614,7 @@ export function App() {
     ]
     setPicker({
       title: group.old,
-      description: `Changes all ${row.count} binding${row.count === 1 ? '' : 's'} in this row. A change on a single binding wins over it.`,
+      description: `Changes all ${row.count} value${row.count === 1 ? '' : 's'} in this row. A change on a single value wins over it.`,
       subject: { kinds, group: group.group, candidates: row.candidates },
       current: changed ? overrides.rows[row.key] : (row.proposal ?? null),
       changed,
@@ -535,9 +636,9 @@ export function App() {
   const changeSelected = () => {
     if (!shared) return
     setPicker({
-      title: `${selected.length} bindings`,
+      title: `${selected.length} values`,
       description:
-        'Sets the same target on every selected binding. It wins over a change on their rows.',
+        'Sets the same target on every selected value. It wins over a change on their rows.',
       subject: shared,
       onSave: (value) => {
         sendOverrides(
@@ -571,6 +672,43 @@ export function App() {
         <Badge tone="warning" emphasis="medium">
           WIP beta
         </Badge>
+        {command === 'open' && (
+          <div className="header-actions">
+            <SettingsMenu
+              settings={[
+                {
+                  id: 'counts',
+                  label: 'Layer counts',
+                  checked: showCounts,
+                  onChange: setShowCounts,
+                },
+                {
+                  id: 'empty',
+                  label: 'Frames without EDS variables',
+                  checked: showEmpty,
+                  onChange: setShowEmpty,
+                },
+                {
+                  id: 'components',
+                  label: 'Local components',
+                  checked: showComponents,
+                  onChange: setShowComponents,
+                },
+              ]}
+              actions={
+                summary
+                  ? [
+                      {
+                        id: 'report',
+                        label: 'Export report…',
+                        onSelect: () => send({ type: 'get-report' }),
+                      },
+                    ]
+                  : []
+              }
+            />
+          </div>
+        )}
       </header>
       <main className="app-main stack">
         {error && (
@@ -594,6 +732,11 @@ export function App() {
             run={run}
             onDismiss={() => setRun(undefined)}
             onSelect={select}
+            onRevert={
+              run.kind === 'apply' && lastApplied.length === 1
+                ? () => revertEntry(lastApplied[0])
+                : undefined
+            }
           />
         )}
         {isDevCommand &&
@@ -611,12 +754,26 @@ export function App() {
             {!openEntry && !review && (
               <ScanControls
                 scope={scope}
-                onScopeChange={setScope}
+                onScopeChange={(next) => {
+                  scopeChosen.current = true
+                  setScope(next)
+                }}
                 selection={selection}
                 scanning={scanning}
                 progress={progress}
                 onScan={scan}
                 onCancel={() => send({ type: 'cancel-scan' })}
+                compact={summary !== undefined}
+                onGoToScope={
+                  summary
+                    ? () =>
+                        select(
+                          summary.entries
+                            .filter((entry) => entry.kind !== 'component')
+                            .flatMap((entry) => entry.nodeIds),
+                        )
+                    : undefined
+                }
               />
             )}
             {!summary && !scanning && !saved && (
@@ -680,6 +837,11 @@ export function App() {
                 onBack={() => setOpenEntryId(undefined)}
                 onSelect={select}
                 onChange={changeRecord}
+                mapping={mapping}
+                colorScheme={colorScheme}
+                showCounts={showCounts}
+                onChangeRow={changeRow}
+                onChangeBinding={changeBinding}
               />
             )}
             {/* Hidden rather than unmounted while a frame is open, so Back
@@ -698,7 +860,6 @@ export function App() {
                   onSelectLayer={select}
                   selection={bulk}
                   showComponents={showComponents}
-                  onShowComponents={setShowComponents}
                   onOpen={open}
                   onGoTo={(entry) => select(entry.nodeIds)}
                   busy={busy}
@@ -708,6 +869,10 @@ export function App() {
                   report={report}
                   onReport={() => send({ type: 'get-report' })}
                   onCloseReport={() => setReport(undefined)}
+                  colorScheme={colorScheme}
+                  showCounts={showCounts}
+                  showEmpty={showEmpty}
+                  onShowComponents={setShowComponents}
                 />
               </div>
             )}
@@ -724,6 +889,7 @@ export function App() {
           onClear={bulk.clear}
         />
       )}
+      <ResizeHandle />
       <TargetPicker
         request={picker}
         onClose={() => setPicker(undefined)}

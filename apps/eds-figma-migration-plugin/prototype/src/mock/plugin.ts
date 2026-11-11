@@ -63,6 +63,7 @@ export type ShellEvents = {
   onSelect: (nodeIds: string[], label: string) => void
   onPage: (pageId: string) => void
   onNotify: (message: string) => void
+  onResize: (width: number, height: number) => void
 }
 
 function wait(ms: number) {
@@ -602,6 +603,9 @@ export class MockPlugin {
         break
       case 'notify':
         this.shell.onNotify(message.message)
+        break
+      case 'resize':
+        this.shell.onResize(message.width, message.height)
         break
       default:
         break

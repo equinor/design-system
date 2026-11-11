@@ -1,12 +1,6 @@
 import { useState } from 'react'
-import {
-  Badge,
-  Button,
-  Checkbox,
-  Chip,
-  Icon,
-} from '@equinor/eds-core-react/next'
-import { chevron_down, chevron_up } from '@equinor/eds-icons'
+import { Button, Checkbox, Chip, Icon } from '@equinor/eds-core-react/next'
+import { chevron_down, chevron_up, edit } from '@equinor/eds-icons'
 import { bindingOutcome, targetCounts } from '../../../../src/scan/mapping'
 import type {
   MappingBinding,
@@ -18,7 +12,6 @@ import type {
 import { PROPERTY_GROUPS } from '../../../../src/scan/types'
 import type { Category, PropertyGroup } from '../../../../src/scan/types'
 import { CLEAR_MODE } from '../../../../src/scan/classify'
-import { BADGES } from '../badges'
 import { CATEGORY_LABELS, propertyLabel, values } from '../labels'
 import { pathBelow } from '../paths'
 import { groupState } from '../selection'
@@ -167,20 +160,34 @@ function rowCategories(
   return [...counts.entries()].sort((a, b) => b[1] - a[1])
 }
 
-function CategoryBadge({
-  category,
-  count,
-}: {
-  category: Category
-  count?: number
-}) {
-  const badge = BADGES[category]
+/**
+ * The status of a row as dots in the colours of the health bar, so a row
+ * stays on one line, as in Check designs. The names are there for screen
+ * readers and on hover.
+ */
+function StatusDots({ categories }: { categories: [Category, number][] }) {
+  const text = categories
+    .map(([category, count]) =>
+      categories.length === 1
+        ? CATEGORY_LABELS[category]
+        : `${CATEGORY_LABELS[category]} ${count}`,
+    )
+    .join(', ')
   return (
-    <Badge tone={badge.tone} emphasis={badge.emphasis}>
-      {category === 'check' ? '⚠ ' : ''}
-      {CATEGORY_LABELS[category]}
-      {count === undefined ? '' : ` ${count}`}
-    </Badge>
+    <span className="check-status" title={text}>
+      {categories.map(([category]) => (
+        <span
+          key={category}
+          className="health-swatch"
+          data-category={category}
+          aria-hidden="true"
+        />
+      ))}
+      {categories.some(([category]) => category === 'check') && (
+        <span aria-hidden="true">⚠</span>
+      )}
+      <span className="visually-hidden">{text}</span>
+    </span>
   )
 }
 
@@ -407,6 +414,21 @@ export function MappingView({
                               <span className="option-value">{extra}</span>
                             )}
                           </span>
+                          {(own > 0 || row.key in overrides.rows) && (
+                            <span
+                              className="check-choice"
+                              title={
+                                row.key in overrides.rows
+                                  ? sourceLabel('row')
+                                  : own === row.count
+                                    ? 'Your choice for each value'
+                                    : `Your choice for ${own} of ${row.count}`
+                              }
+                            >
+                              <Icon data={edit} size="sm" />
+                            </span>
+                          )}
+                          <StatusDots categories={categories} />
                           <Icon data={chevron_down} size="sm" />
                         </button>
                         <Button
@@ -423,34 +445,9 @@ export function MappingView({
                         >
                           <Icon
                             data={isOpen ? chevron_up : chevron_down}
-                            size="md"
+                            size="sm"
                           />
                         </Button>
-                      </div>
-                      <div className="check-row-meta">
-                        {categories.length === 1 ? (
-                          <CategoryBadge category={categories[0][0]} />
-                        ) : (
-                          categories.map(([category, count]) => (
-                            <CategoryBadge
-                              key={category}
-                              category={category}
-                              count={count}
-                            />
-                          ))
-                        )}
-                        {row.key in overrides.rows && (
-                          <span className="override-note">
-                            {sourceLabel('row')}
-                          </span>
-                        )}
-                        {own > 0 && (
-                          <span className="override-note">
-                            {own === row.count
-                              ? 'Your choice for each value'
-                              : `Your choice for ${own} of ${row.count}`}
-                          </span>
-                        )}
                       </div>
                       {isOpen && (
                         <ul className="binding-list nested">

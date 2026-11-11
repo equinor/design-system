@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, Dialog, Icon } from '@equinor/eds-core-react/next'
 import { info_circle } from '@equinor/eds-icons'
-import { CATEGORY_DESCRIPTIONS, CATEGORY_LABELS } from '../../scan/labels'
+import { CATEGORY_DESCRIPTIONS, CATEGORY_LABELS } from '../labels'
 import { SCORED_CATEGORIES } from '../../scan/types'
 
 /** An info button that explains the categories of the health bar in a dialog. */

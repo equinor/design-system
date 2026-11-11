@@ -25,6 +25,7 @@ import { currentTarget, runScan } from './scan/scan'
 import { loadChoices, loadHealth, saveChoices, saveHealth } from './store'
 import { buildReport } from '../scan/report'
 import type { ScanState, ScanTarget } from './scan/scan'
+import { clampSize, WINDOW, WINDOW_SIZE_KEY } from '../shared/window'
 
 const COMMANDS: Command[] = [
   'open',
@@ -37,10 +38,24 @@ const command: Command = COMMANDS.includes(figma.command as Command)
 
 figma.showUI(__html__, {
   themeColors: true,
-  width: 480,
-  height: 720,
+  width: WINDOW.width,
+  height: WINDOW.height,
   title: 'EDS Variable Migration [WIP BETA]',
 })
+
+// The window opens at the size the person last gave it.
+figma.clientStorage
+  .getAsync(WINDOW_SIZE_KEY)
+  .then((saved: unknown) => {
+    const size = saved as { width?: unknown; height?: unknown } | undefined
+    if (typeof size?.width === 'number' && typeof size.height === 'number') {
+      const { width, height } = clampSize(size.width, size.height)
+      figma.ui.resize(width, height)
+    }
+  })
+  .catch(() => {
+    // No saved size; the default stays.
+  })
 
 function post(message: PluginToUi) {
   figma.ui.postMessage(message)
@@ -309,6 +324,16 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
       case 'revert':
         await revert(message.entryId)
         break
+      case 'resize': {
+        const { width, height } = clampSize(message.width, message.height)
+        figma.ui.resize(width, height)
+        if (message.done) {
+          await figma.clientStorage
+            .setAsync(WINDOW_SIZE_KEY, { width, height })
+            .catch(() => undefined)
+        }
+        break
+      }
       case 'get-report':
         if (lastScan) {
           post({

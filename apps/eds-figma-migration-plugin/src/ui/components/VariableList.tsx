@@ -11,6 +11,8 @@ type VariableListProps = {
   value: string | null | undefined
   onChange: (value: string | null) => void
   colorScheme: 'light' | 'dark'
+  /** A line under each proposed target that says what it is for */
+  describe?: (name: string) => string | undefined
 }
 
 type Item = {
@@ -63,7 +65,7 @@ function sections(options: PickerOptions): Section[] {
   return result
 }
 
-function Preview({
+export function Preview({
   name,
   colorScheme,
 }: {
@@ -86,7 +88,7 @@ function Preview({
   return <span className="option-preview" aria-hidden="true" />
 }
 
-function valueText(name: string | null): string | undefined {
+export function valueText(name: string | null): string | undefined {
   if (name === null) return undefined
   const variable = getNewVariable(name)
   if (variable?.values?.comfortable !== undefined) {
@@ -108,6 +110,7 @@ export function VariableList({
   value,
   onChange,
   colorScheme,
+  describe,
 }: VariableListProps) {
   const id = useId()
   const [query, setQuery] = useState('')
@@ -191,7 +194,17 @@ export function VariableList({
                   onKeyDown={(event) => onKeyDown(event, item)}
                 >
                   <Preview name={item.value} colorScheme={colorScheme} />
-                  <span className="option-label">{item.label}</span>
+                  <span className="option-text">
+                    <span className="option-label">{item.label}</span>
+                    {describe &&
+                      section.title === 'Proposed' &&
+                      item.value !== null &&
+                      describe(item.value) && (
+                        <span className="option-meaning">
+                          {describe(item.value)}
+                        </span>
+                      )}
+                  </span>
                   {extra && <span className="option-value">{extra}</span>}
                 </div>
               )

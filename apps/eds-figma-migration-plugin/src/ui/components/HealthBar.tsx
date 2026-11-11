@@ -1,4 +1,4 @@
-import { CATEGORY_LABELS } from '../../scan/labels'
+import { CATEGORY_LABELS } from '../labels'
 import { formatHealth, healthOf, scoredTotal } from '../../scan/summary'
 import { SCORED_CATEGORIES } from '../../scan/types'
 import type { Counts } from '../../scan/types'

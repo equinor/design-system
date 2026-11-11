@@ -13,7 +13,7 @@ frame or in a branch first, and tell the EDS team what does not work.
 1. Enable **EDS Foundation [EDS Beta]** in the file: **Assets → Libraries**.
    The plugin imports its variables and text styles from there.
 2. Keep the legacy libraries enabled until you are done. Revert frame needs
-   them to put bindings back.
+   them to put the legacy variables back.
 3. Open the plugin: **Plugins → Equinor → EDS Variable Migration [WIP BETA]**.
 
 ## 1. Scan
@@ -27,46 +27,51 @@ Choose a scope and press **Scan**:
 
 ## 2. Read the health
 
-The health bar counts every binding to a variable, every text's typography
+The health bar counts every property bound to a variable, every text's typography
 and every mode set on a frame:
 
-| Status        | What it means                                                                             |
-| ------------- | ----------------------------------------------------------------------------------------- |
-| Migrated      | Already uses EDS Foundation. Green, because it is done.                                   |
-| Ready         | A legacy variable with one clear replacement. Blue: the plugin can apply it.              |
-| Needs check ⚠ | The replacement depends on what the layer does, for example interactive or not.           |
-| No equivalent | There is nothing to replace it with yet, such as icon sizes. The binding stays.           |
-| In instance   | Inside an instance. The plugin leaves it; the component has to be updated in its library. |
+| Status           | What it means                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| Migrated         | Already uses EDS Foundation. Green, because it is done.                                   |
+| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.              |
+| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.           |
+| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays.   |
+| Inside instances | Inside an instance. The plugin leaves it; the component has to be updated in its library. |
 
 Health is the share that is migrated. The **i** button next to the legend
 explains the statuses again.
 
 ## 3. Look at what will change
 
-- **Frames** lists the frames, lowest health first. **Open** shows every
-  binding in a frame, grouped by layer or by legacy variable. **Go to**
-  selects the layer in Figma.
-- **Mapping** lists every legacy variable in the scope with what it becomes.
-  **Change all** changes the target for every layer that uses it.
+- **Frames** starts with the frames that have the most work left, then lists
+  every frame, lowest health first. **Open** shows every value in a frame,
+  grouped by layer or by legacy variable. **Go to** selects the layer in
+  Figma.
+- **Changes** lists every legacy variable in the scope with what it becomes,
+  in tabs by kind of value. A click on the legacy variable selects its
+  layers; a click on the target changes it for every layer that uses it.
 - **Instances** lists the instances that still use legacy variables, grouped
   by component.
 
-To change a target, press **Change** on one binding, **Change all** on a row,
-or tick several bindings and use the bar at the bottom of the window. You can
-also choose **Leave as it is**.
+To change a target, press **Change** on one value or the target of a row, or
+tick several values and use the bar at the bottom of the window. You can also
+choose **Leave as it is**.
 
-## 4. Review the ⚠ bindings
+The window is too narrow? Drag the grip in its bottom right corner. The
+plugin remembers the size.
 
-**Review** shows the bindings that need a check one at a time. The plugin
+## 4. Review the ⚠ values
+
+**Review**, in the footer, shows the values that need a check one at a time. The plugin
 selects the layer, tells you why it was unsure, and shows its proposal and
 the other targets that fit. Confirm the proposal, choose another target,
-leave the binding, or skip it for later. Whatever you choose then counts as
+leave the value, or skip it for later. Whatever you choose then counts as
 Ready, or as No equivalent when you leave it.
 
 ## 5. Apply
 
-**Apply** makes every Ready change in the scope, or in one frame when you are
-in it. It binds the new variables, applies the text styles, and sets the new
+**Apply**, in the footer, makes every Ready change in the scope, or in one
+frame when you are in it. It binds the new variables, applies the text styles, and sets the new
 modes on the frames that had the legacy ones:
 
 - Spacious becomes **comfortable**, and Comfortable becomes **compact**. The
@@ -85,11 +90,11 @@ the new token values, not from the plugin.
 - **Ctrl or Cmd+Z** right after an apply undoes the whole apply.
 - **Revert frame**, in a frame the plugin has changed, puts the legacy
   variables back later, from a log the plugin keeps on every layer it
-  changes. A binding you have changed since is left as you made it.
+  changes. A value you have changed since is left as you made it.
 
 ## Share the result
 
-**Export report** makes a Markdown report and a CSV for a spreadsheet, with
+**Export report**, beside the scope line, makes a Markdown report and a CSV for a spreadsheet, with
 the health, the frames, what needs a check, what has no equivalent and the
 instances. The plugin also keeps the latest scan and your choices in the
 file, so the next time you open it, you see where you left off.
@@ -101,7 +106,7 @@ becomes an override, which stops the instance from getting updates. Update
 the component in its library and publish it; the instances follow.
 
 **Why is a legacy mode still on my frame?** Something below it still uses a
-legacy variable through it: an instance, an icon size, or a binding you have
+legacy variable through it: an instance, an icon size, or a value you have
 not reviewed yet.
 
 **Ready and Migrated sound the same.** Ready means the plugin knows the

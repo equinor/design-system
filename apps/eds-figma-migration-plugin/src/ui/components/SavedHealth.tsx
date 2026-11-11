@@ -15,6 +15,17 @@ function when(iso: string): string {
       })
 }
 
+function lowest(frames: Saved['frames']) {
+  const merged = new Map<string, Saved['frames'][number] & { count: number }>()
+  for (const frame of frames) {
+    const key = `${frame.pageName}|${frame.name}`
+    const found = merged.get(key)
+    if (found) found.count += 1
+    else merged.set(key, { ...frame, count: 1 })
+  }
+  return [...merged.values()].slice(0, 5)
+}
+
 /** The latest scan saved in the file, shown before the designer scans again. */
 export function SavedHealth({ saved }: { saved: Saved }) {
   return (
@@ -35,10 +46,12 @@ export function SavedHealth({ saved }: { saved: Saved }) {
         <>
           <h3 className="group-title">Lowest health</h3>
           <ul className="saved-frames">
-            {saved.frames.slice(0, 5).map((frame) => (
+            {/* UX review F12: one line per name and page. */}
+            {lowest(saved.frames).map((frame) => (
               <li key={`${frame.pageName}|${frame.name}`}>
                 <span>
                   {frame.name}
+                  {frame.count > 1 ? ` ×${frame.count}` : ''}
                   <span className="binding-path"> · {frame.pageName}</span>
                 </span>
                 <span className="entry-health">

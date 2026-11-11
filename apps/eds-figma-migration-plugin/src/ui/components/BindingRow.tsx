@@ -1,5 +1,5 @@
 import { Badge, Button, Checkbox } from '@equinor/eds-core-react/next'
-import { CATEGORY_LABELS } from '../../scan/labels'
+import { CATEGORY_LABELS } from '../labels'
 import type { Category } from '../../scan/types'
 import { BADGES } from '../badges'
 

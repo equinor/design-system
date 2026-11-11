@@ -21,3 +21,10 @@ the plugin grows.
 | `Autocomplete` does not fill its container                      | The search in the target picker                        | The root takes the width, but the input wrapper (`.anchor`) keeps about 200px, so `ui.css` stretches it from outside; this reaches into the component's internals |
 | `Accordion.Header` is a `summary`, so it cannot hold a checkbox | Ticking every binding of a layer or variable at once   | A “Select all” checkbox at the top of the panel                                                                                                                   |
 | No sticky action bar or toolbar                                 | The actions on the ticked bindings                     | `BulkBar.tsx`, a sticky region at the bottom of the window                                                                                                        |
+
+## Menu
+
+`Menu` and `MenuItem` style a list, but do not open, close, position or
+handle the keyboard. The settings menu in the header adds a button with
+`aria-haspopup`, opening and closing (outside click and Escape), focus on the
+first item, and arrow keys (`src/ui/components/SettingsMenu.tsx`).

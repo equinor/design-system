@@ -90,37 +90,66 @@ Always try the plugin on a duplicate of a frame. The test frame is
 - Main components in the file are scanned as their own group, shown and
   counted in the health only when you switch them on.
 
-## Mapping and overrides
+## The window
 
-Bindings are shown in accordions, so a layer or a variable appears once with
-what changes under it:
+The window follows the prototype in [`prototype/`](./prototype/README.md),
+which was designed on Figma's Check designs and reviewed twice with a
+designer persona ([`prototype/ux-review/final/findings.md`](./prototype/ux-review/final/findings.md)).
 
-- **In a frame**, a **Layers** / **Variables** switch groups the bindings by
-  layer, or by legacy variable with the most used first.
-- **The Mapping tab** has one accordion item per legacy variable in the
-  scope. It opens to one row per proposal, since the same variable can get
-  different targets in different places, with the layers under each row.
-  **Go to layers** selects every layer that uses the variable.
-- **A file scan** lists one page at a time, each with its own health bar.
+- **The header** has the title and a **settings** menu: layer counts in the
+  rows, frames without EDS variables, local components, and Export report.
+- **The scope line** has Selection, Page and File, and Scan. The scope starts
+  on Selection when something is selected. After a scan it shows **Go to
+  scope**, which selects the scanned layers, and **Scan again**.
+- **The footer** says what Apply changes ("Change 492 values in 3 frames on
+  2 pages") and has **Review** and **Apply**. While values are ticked, the
+  bulk bar takes its place.
+- **The size**: drag the grip in the bottom right corner, or focus it and use
+  the arrow keys. Figma does not let people resize a plugin window, so the
+  grip asks the main thread to resize it (`figma.ui.resize`), and the size is
+  kept per person in `figma.clientStorage` for the next time. The window is
+  between 380 × 480 and 1600 × 1400.
 
-Targets can be changed one binding, one row or many bindings at a time:
+## Changes, frames and instances
 
-- **Change** on a binding changes that binding only, and wins over its row.
-- **Change all** on a row in the Mapping tab changes every binding in it.
-- **Ticking bindings**, or “Select all” in an accordion item, opens a bar at
-  the bottom of the window: **Change target**, **Leave as they are** and
-  **Undo my changes**. Change target is offered when the ticked bindings take
-  the same kind of value, such as only colours.
+After a scan of the selection the window opens on **Changes**; after a scan
+of a page or the file it opens on **Frames**, where the work is.
+
+- **Changes** is laid out like Check designs: tabs by kind of value (Colour,
+  Type, Spacing, Size, Radius, Modes) with counts, sections by what the values
+  are on (Text colour, Fill, Stroke, Padding and gaps, Text style, Mode, …),
+  and one row per legacy variable and target: the number of layers, the
+  legacy variable, and the target with its swatch or value. Rows are compact, one line each, with the status as a dot in the colours of the health bar (and ⚠ for Needs check); the full names are in the tooltip. Typography reads
+  "UI body · sm · squished", and a mode reads "Density: Comfortable →
+  density: compact". A click on the legacy variable selects its layers, a
+  click on the target opens the picker and changes every value in the row,
+  and the chevron lists the layers, each with its own **Change**.
+- **Frames** starts with **Most work left**, the three frames with the most
+  legacy values, then the frames by page and section, lowest health first.
+  A file scan lists one page at a time, and the page with the most work is
+  open. Frames without EDS variables are hidden behind a button. A local
+  component that uses legacy variables is mentioned in one line, with Show.
+- **A frame** shows its health, a **Filter** line, and a **Layers** /
+  **Variables** switch: Layers groups the values by layer in an accordion,
+  Variables is the Changes layout for that frame.
+
+Targets can be changed for one value, one row or many values at a time:
+**Change** on a value wins over its row, the target of a row changes every
+value in it, and ticking values opens a bar with **Change target**, **Leave
+as they are** and **Undo my changes**.
 
 The picker follows Figma's variable picker: a search field, the proposed
-targets, then every variable or text style that fits the property, grouped by
-path, with colour swatches in the current theme and the comfortable value of
-numbers. On a Ready binding, choosing the proposal again removes the change.
-On a binding that needs a check or has no equivalent, any choice settles it:
-the binding then counts as Ready, or as No equivalent when it is left as it
-is, and the health bars follow. Choices are kept while the plugin is open,
-also across scans, since they are stored by layer and property and by legacy
-variable and proposal.
+targets with a line that says what each is for, then every variable or text
+style that fits the property, grouped by path, with colour swatches in the
+current theme and the comfortable value of numbers. On a Ready value,
+choosing the proposal again removes the change. On a value that needs a check
+or has no equivalent, any choice settles it: the value then counts as Ready,
+or as No equivalent when it is left as it is, and the health bars follow.
+Choices are kept across scans and in the file.
+
+The window counts **values**: a value is a property bound to a variable, the
+typography of a text or a range, or a mode. The categories are Migrated,
+Ready, Needs check, No equivalent and Inside instances.
 
 Health is migrated ÷ (migrated + ready + needs check + no equivalent + in instance). Variables
 from other libraries and local variables are counted apart and left out.
@@ -129,8 +158,8 @@ whether it comes from a library or from this file.
 
 ## Apply and revert
 
-**Apply N ready**, under the health bar of the scope or of a frame, makes
-every Ready change, after a confirmation:
+**Apply**, in the footer of the scope or of a frame, makes every Ready
+change, after a confirmation that says what stays:
 
 - binds the EDS Foundation variable on the same field, paint or effect, and
   keeps the other bindings on the layer;
@@ -167,10 +196,11 @@ equivalent, and until the review above a binding that needs a check.
 
 ## Review, instances and local components
 
-**Review N ⚠**, next to Apply, steps through the bindings that need a check
-and that nobody has decided on, one at a time, in the order of the Mapping
-tab. Each step selects the layer in Figma and shows the legacy variable, why
-the rule was unsure, the proposal and every other target that fits. **Confirm
+**Review N ⚠**, next to Apply, steps through the values that need a check
+and that nobody has decided on, one at a time, in the order of the Changes
+tab. Each step selects the layer in Figma and says where it is ("Label in
+Button / Outlined"), why the rule was unsure in plain words (with the rule's
+own words under Details), the proposal and every other target that fits. **Confirm
 proposal**, **Use this target** and **Leave as it is** store the choice, so
 the binding counts as Ready or No equivalent; **Skip** leaves it for later.
 The review ends with what was confirmed, changed, left and skipped. From a
@@ -182,13 +212,13 @@ whether the component is in this file or in a library, and Go to for one
 instance or all of them. The plugin never changes inside an instance; the
 component is updated in its library, then the instances follow.
 
-**Local components** stay an opt-in group under the frames. A component that
+**Local components** are shown from the settings menu. A component that
 still uses legacy variables says how many times it is used in the file,
 because changing it changes every instance.
 
 ## Report and what the plugin keeps in the file
 
-**Export report**, beside the scope line, makes a Markdown report (health,
+**Export report**, beside the scope line and in the settings menu, makes a Markdown report (health,
 every frame with its health and the layers the plugin changed, the bindings
 that need a check or have no equivalent, the instances with legacy variables
 grouped by component, and the rules version) and a CSV with one row per
@@ -205,7 +235,7 @@ The plugin keeps two things in the shared plugin data of the document
   day. When they are too many to keep, the window says so.
 
 The window follows Figma's light or dark theme. A scope without EDS
-variables, a scope with nothing left to migrate, an empty Mapping or
+variables, a scope with nothing left to migrate, an empty Changes or
 Instances tab and a search without matches each say so in the window.
 
 ## Publish a test version to Equinor

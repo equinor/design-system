@@ -11,6 +11,10 @@ type ScanControlsProps = {
   progress?: ScanProgress
   onScan: () => void
   onCancel: () => void
+  /** After a scan: scope and Scan on one line, as Check designs keeps its controls small */
+  compact?: boolean
+  /** Selects the scanned layers, as Check designs' refocus (final review FR6) */
+  onGoToScope?: () => void
 }
 
 function selectionText({ count, firstName }: SelectionInfo): string {
@@ -27,10 +31,12 @@ export function ScanControls({
   progress,
   onScan,
   onCancel,
+  compact = false,
+  onGoToScope,
 }: ScanControlsProps) {
   const nothingSelected = scope === 'selection' && selection.count === 0
   return (
-    <div className="stack-tight">
+    <div className={compact ? 'scan-controls compact' : 'stack-tight'}>
       <fieldset className="scope" disabled={scanning}>
         <legend className="section-title">Scope</legend>
         <div className="scope-options">
@@ -76,8 +82,17 @@ export function ScanControls({
         </div>
       ) : (
         <div className="scan-action">
-          <Button onClick={onScan} disabled={nothingSelected}>
-            Scan
+          {compact && onGoToScope && (
+            <Button variant="secondary" size="small" onClick={onGoToScope}>
+              Go to scope
+            </Button>
+          )}
+          <Button
+            size={compact ? 'small' : undefined}
+            onClick={onScan}
+            disabled={nothingSelected}
+          >
+            {compact ? 'Scan again' : 'Scan'}
           </Button>
           {nothingSelected && (
             <span className="muted">Select one or more frames first.</span>

@@ -9,6 +9,8 @@ type RunResultProps = {
   run: Run
   onDismiss: () => void
   onSelect: (nodeIds: string[]) => void
+  /** UX review F11: the way back, right after an apply in one frame */
+  onRevert?: () => void
 }
 
 function summary(run: Run): string {
@@ -29,7 +31,12 @@ function summary(run: Run): string {
 }
 
 /** What an apply or a revert did, and what it could not do, with Go to for each failure. */
-export function RunResult({ run, onDismiss, onSelect }: RunResultProps) {
+export function RunResult({
+  run,
+  onDismiss,
+  onSelect,
+  onRevert,
+}: RunResultProps) {
   const { failed } = run.result
   return (
     <Banner
@@ -40,7 +47,17 @@ export function RunResult({ run, onDismiss, onSelect }: RunResultProps) {
         {summary(run)}
         {failed.length > 0 &&
           ` ${failed.length} could not be ${run.kind === 'apply' ? 'made' : 'put back'}:`}
+        {run.kind === 'apply' &&
+          !onRevert &&
+          ' Each frame can be reverted from the frame.'}
       </Banner.Message>
+      {onRevert && failed.length === 0 && (
+        <Banner.Actions>
+          <Button size="small" variant="secondary" onClick={onRevert}>
+            Revert
+          </Button>
+        </Banner.Actions>
+      )}
       {failed.length > 0 && (
         <Banner.Actions placement="bottom">
           <ul className="run-failures">

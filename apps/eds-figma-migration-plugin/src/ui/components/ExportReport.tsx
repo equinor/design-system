@@ -6,6 +6,8 @@ type ExportReportProps = {
   report?: Report
   onRequest: () => void
   onClose: () => void
+  /** False when the report is opened from the settings menu */
+  showButton?: boolean
 }
 
 function download(text: string, fileName: string, type: string) {
@@ -47,13 +49,16 @@ export function ExportReport({
   report,
   onRequest,
   onClose,
+  showButton = true,
 }: ExportReportProps) {
   const [copied, setCopied] = useState<boolean>()
   return (
     <>
-      <Button variant="ghost" size="small" onClick={onRequest}>
-        Export report
-      </Button>
+      {showButton && (
+        <Button variant="ghost" size="small" onClick={onRequest}>
+          Export report
+        </Button>
+      )}
       <Dialog
         open={report !== undefined}
         onOpenChange={(open) => {

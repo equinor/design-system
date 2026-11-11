@@ -35,23 +35,27 @@ export function ApplyActions({
   const [confirm, setConfirm] = useState<Confirm>()
   const close = () => setConfirm(undefined)
   return (
-    <div className="apply-actions">
-      <div className="apply-buttons">
-        <Button
-          disabled={busy || ready === 0}
-          onClick={() => setConfirm('apply')}
-        >
-          Apply {ready} ready
-        </Button>
-        {onReview && (
-          <Button
-            variant="secondary"
-            disabled={busy || toReview === 0}
-            onClick={onReview}
-          >
-            Review {toReview} ⚠
-          </Button>
+    // UX review F8 and Check designs: a footer that says what Apply
+    // changes and where, with Review and Apply beside it.
+    <div className="apply-actions apply-footer">
+      <div className="apply-summary">
+        <span>
+          {ready > 0 ? (
+            <>
+              Change <strong>{ready}</strong> value{ready === 1 ? '' : 's'}{' '}
+              {where}
+            </>
+          ) : (
+            `Nothing is ready to apply ${where}`
+          )}
+        </span>
+        {toReview > 0 && (
+          <span className="muted">
+            {toReview} need{toReview === 1 ? 's' : ''} a check first
+          </span>
         )}
+      </div>
+      <div className="apply-buttons">
         {onRevert && changed > 0 && (
           <Button
             variant="ghost"
@@ -61,13 +65,18 @@ export function ApplyActions({
             Revert frame
           </Button>
         )}
+        {onReview && toReview > 0 && (
+          <Button variant="secondary" disabled={busy} onClick={onReview}>
+            Review {toReview} ⚠
+          </Button>
+        )}
+        <Button
+          disabled={busy || ready === 0}
+          onClick={() => setConfirm('apply')}
+        >
+          Apply {ready}
+        </Button>
       </div>
-      {onReview && ready === 0 && toReview > 0 && (
-        <p className="muted">
-          Nothing is ready to apply {where}. Review the bindings that need a
-          check first.
-        </p>
-      )}
       <Dialog
         open={confirm !== undefined}
         onOpenChange={(open) => {
@@ -88,9 +97,11 @@ export function ApplyActions({
                 layer below it uses a legacy variable any more.
               </p>
               <p className="muted">
-                Nothing inside an instance changes, and bindings that need a
-                check stay until you review them. Undo with Ctrl or Cmd+Z, or
-                later with Revert frame.
+                Nothing inside an instance changes.
+                {toReview > 0
+                  ? ` ${toReview} value${toReview === 1 ? '' : 's'} that need a check stay as they are until you review them.`
+                  : ''}{' '}
+                Undo with Ctrl or Cmd+Z, or later with Revert frame.
               </p>
             </Dialog.Content>
             <Dialog.Actions>

@@ -33,7 +33,7 @@ export function BulkBar({
           title={
             canChange
               ? undefined
-              : 'Select bindings that take the same kind of value, such as only colours'
+              : 'Select values of the same kind, such as only colours'
           }
         >
           Change target

@@ -12,6 +12,8 @@ type EntryListProps = {
   onGoTo: (entry: EntrySummary) => void
   /** Switches Figma to a page, in a scan of the whole file */
   onGoToPage?: (pageId: string) => void
+  /** Show frames without EDS variables, from the settings menu */
+  showEmpty?: boolean
 }
 
 type Group = {
@@ -76,8 +78,11 @@ function groupEntries(entries: EntrySummary[]): Group[] {
 
 function countsText(entry: EntrySummary): string {
   const { counts } = entry
-  const parts = [`${counts.migrated} migrated`, `${oldCount(counts)} legacy`]
-  if (counts.check > 0) parts.push(`${counts.check} need check`)
+  const parts = [
+    `${oldCount(counts)} legacy value${oldCount(counts) === 1 ? '' : 's'}`,
+    `${counts.migrated} migrated`,
+  ]
+  if (counts.check > 0) parts.push(`${counts.check} to check`)
   if (entry.instanceCount !== undefined) {
     parts.push(
       `used ${entry.instanceCount} time${entry.instanceCount === 1 ? '' : 's'} in the file`,
@@ -126,15 +131,18 @@ function Groups({
   showPage,
   onOpen,
   onGoTo,
+  forceEmpty,
 }: {
   entries: EntrySummary[]
   showPage: boolean
   onOpen: (entry: EntrySummary) => void
   onGoTo: (entry: EntrySummary) => void
+  forceEmpty?: boolean
 }) {
   // Frames and layers without EDS variables have nothing to migrate; they
   // are hidden unless asked for, so the list shows the work.
-  const [showEmpty, setShowEmpty] = useState(false)
+  const [ownShowEmpty, setShowEmpty] = useState(false)
+  const showEmpty = forceEmpty || ownShowEmpty
   const empty = entries.filter((entry) => entry.health === null)
   const visible = showEmpty
     ? entries
@@ -197,7 +205,7 @@ function Groups({
           </ul>
         </section>
       ))}
-      {empty.length > 0 && (
+      {empty.length > 0 && !forceEmpty && (
         <div className="empty-entries">
           {visible.length === 0 && (
             <p className="muted">Nothing here uses EDS variables.</p>
@@ -229,8 +237,20 @@ export function EntryList({
   onOpen,
   onGoTo,
   onGoToPage,
+  showEmpty,
 }: EntryListProps) {
-  const [open, setOpen] = useState<Set<string>>(new Set())
+  // UX review F3: the page with the most work left opens by itself.
+  const [open, setOpen] = useState<Set<string>>(() => {
+    const work = new Map<string, number>()
+    for (const entry of entries) {
+      work.set(
+        entry.pageId,
+        (work.get(entry.pageId) ?? 0) + oldCount(entry.counts),
+      )
+    }
+    const [busiest] = [...work.entries()].sort((a, b) => b[1] - a[1])
+    return new Set(busiest && busiest[1] > 0 ? [busiest[0]] : [])
+  })
   if (!showPages) {
     return (
       <Groups
@@ -238,6 +258,7 @@ export function EntryList({
         showPage={false}
         onOpen={onOpen}
         onGoTo={onGoTo}
+        forceEmpty={showEmpty}
       />
     )
   }
@@ -284,6 +305,7 @@ export function EntryList({
                     <span className="entry-health">{formatHealth(health)}</span>
                     <span className="binding-path">
                       {frameCount(page.entries)} · {oldCount(counts)} legacy
+                      values
                     </span>
                   </span>
                 )}
@@ -309,6 +331,7 @@ export function EntryList({
                   showPage={false}
                   onOpen={onOpen}
                   onGoTo={onGoTo}
+                  forceEmpty={showEmpty}
                 />
               )}
             </Accordion.Panel>
