@@ -6,6 +6,8 @@ export type InstanceGroup = {
   name: string
   /** Where the main component is */
   source: string
+  /** The main component, when it is in this file */
+  mainId?: string
   instances: OldInstance[]
   /** Legacy variables in all of them */
   count: number
@@ -24,6 +26,7 @@ export function groupInstances(instances: OldInstance[]): InstanceGroup[] {
           ? 'from a library'
           : 'in this file'
         : 'main component not found',
+      ...(main?.id && !main.remote ? { mainId: main.id } : {}),
       instances: [],
       count: 0,
     }

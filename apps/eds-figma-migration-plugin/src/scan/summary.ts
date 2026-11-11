@@ -23,17 +23,35 @@ export function addToCounts(
   record: BindingRecord,
   categoryOf: CategoryOf = ruleCategory,
 ): void {
-  counts[categoryOf(record)] += 1
+  const category = categoryOf(record)
+  counts[category] += 1
+  if (category === 'migrated' && record.instanceId) {
+    counts.migratedInInstances = (counts.migratedInInstances ?? 0) + 1
+  }
 }
 
 export function sumCounts(all: Counts[]): Counts {
   const total = emptyCounts()
   for (const counts of all) {
-    for (const key of Object.keys(total) as (keyof Counts)[]) {
+    for (const key of [...SCORED_CATEGORIES, 'other'] as const) {
       total[key] += counts[key]
+    }
+    if (counts.migratedInInstances) {
+      total.migratedInInstances =
+        (total.migratedInInstances ?? 0) + counts.migratedInInstances
     }
   }
   return total
+}
+
+/**
+ * The share migrated of the values outside instances: what the plugin can
+ * change in the scope. Null when nothing outside instances is scored.
+ */
+export function healthOutsideInstances(counts: Counts): number | null {
+  const migrated = counts.migrated - (counts.migratedInInstances ?? 0)
+  const total = migrated + counts.sure + counts.check + counts.none
+  return total === 0 ? null : migrated / total
 }
 
 /** Units that count towards health: everything except other libraries and local variables. */

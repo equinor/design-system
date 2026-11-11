@@ -801,9 +801,6 @@ function resolveFromModes(
       ? check([`spacing/${step}`], `${name}${fromModes}`, 'spacing/modes')
       : undefined
   }
-  if (name === 'Generic/Gap horizontal') {
-    return check(['spacing/xs'], `${name}${fromModes}`, 'spacing/modes')
-  }
   if (
     (name === 'Border/radius' || name === 'Generic/Corner radius') &&
     kind === 'radius'
@@ -814,6 +811,58 @@ function resolveFromModes(
       : undefined
   }
   return undefined
+}
+
+const GENERIC_SPACING = /^Generic\/(Space|Gap) (horizontal|vertical)$/
+
+/**
+ * `Generic/Space *` and `Generic/Gap *` take their step from the `🪐
+ * Horizontal space`, `🪐 Vertical space`, `🪐 Horizontal gap` or `🪐 Vertical
+ * gap` mode in force. A step mode aliases a `💎 Density` variable, which the
+ * density rules handle. This covers the rest: the mode None, where the
+ * variable is 0px with no alias to follow, and a chain that could not be
+ * read. The spacing docs give `xs` where code set no step; in Figma the
+ * default mode None is 0px, and the migration keeps what the layer shows.
+ */
+function resolveGeneric(
+  variable: OldVariable,
+  context: RoleContext,
+): Resolution | undefined {
+  const match = GENERIC_SPACING.exec(variable.name)
+  if (!match) return undefined
+  const [, family, direction] = match
+  const horizontal = direction === 'horizontal'
+  const key =
+    family === 'Space'
+      ? horizontal
+        ? OLD.horizontalSpace
+        : OLD.verticalSpace
+      : horizontal
+        ? OLD.horizontalGap
+        : OLD.verticalGap
+  const collection = `🪐 ${horizontal ? 'Horizontal' : 'Vertical'} ${family.toLowerCase()}`
+  const modeName = context.modes[key]
+  const mode = modeName?.toLowerCase()
+  const value = variable.resolvedValue ?? variable.value
+  if (value === 0 || (mode === 'none' && value === undefined)) {
+    return sure(
+      'spacing/none',
+      `${variable.name} is 0px, since the ${collection} mode in force is ${modeName ?? 'None'}`,
+      'spacing/generic',
+    )
+  }
+  if (mode && mode !== 'none' && SPACING_STEPS.includes(mode)) {
+    return check(
+      [`spacing/${mode}`],
+      `${variable.name}: the ${collection} mode is ${modeName} (read from the old modes, since the alias chain could not be read)`,
+      'spacing/generic',
+    )
+  }
+  return check(
+    ['spacing/xs'],
+    `${variable.name}: no ${collection} mode or value could be read; the spacing docs give xs where no step was set`,
+    'spacing/generic',
+  )
 }
 
 /** Corner radius from a resolved value: 0 is none, up to 8 is rounded, 999 and above is pill. */
@@ -876,6 +925,9 @@ function resolveNumber(
     return none(`No rule for ${density}${via}`, 'spacing/unknown')
   }
 
+  const generic = resolveGeneric(variable, context)
+  if (generic) return generic
+
   const fromModes = resolveFromModes(variable, kind, context)
   if (fromModes) return fromModes
 
@@ -916,7 +968,7 @@ export function resolveVariable(input: VariableInput): Resolution {
         getNewVariable(name) !== undefined || literalValue(name) !== undefined,
     ),
     kind,
-    context.nodeType,
+    context,
   )
 }
 
@@ -961,18 +1013,38 @@ export function acceptedScopes(kind: BindingKind, nodeType: string): string[] {
   }
 }
 
+/**
+ * A shape at most 2px thick and at least four times as long, such as a
+ * connector or a divider drawn as a rectangle: a fill on it draws a line.
+ */
+export function isLineShape(context: RoleContext): boolean {
+  if (!context.size) return false
+  const [width, height] = context.size
+  const thin = Math.min(width, height)
+  return thin > 0 && thin <= 2 && Math.max(width, height) >= thin * 4
+}
+
 /** Turns a sure proposal into a check item when its scopes do not include the property. */
 function fitScope(
   resolution: Resolution,
   kind: BindingKind,
-  nodeType: string,
+  context: RoleContext,
 ): Resolution {
   const proposal = resolution.candidates[0]
   if (resolution.outcome !== 'sure' || !proposal) return resolution
   if (literalValue(proposal) !== undefined) return resolution
   const scopes = getNewVariable(proposal)?.scopes ?? []
-  const accepted = acceptedScopes(kind, nodeType)
+  const accepted = acceptedScopes(kind, context.nodeType)
   if (scopes.some((scope) => accepted.includes(scope))) return resolution
+  // A border colour on a line drawn as a filled shape is the right token;
+  // the scope only keeps it out of the fill picker.
+  if (kind === 'fill' && /^border\//.test(proposal) && isLineShape(context)) {
+    const [width, height] = context.size ?? [0, 0]
+    return {
+      ...resolution,
+      reason: `${resolution.reason}; the layer is a line (${width}×${height}px) drawn with a fill, so the border token fits although it is scoped for strokes`,
+    }
+  }
   return {
     ...resolution,
     outcome: 'check',

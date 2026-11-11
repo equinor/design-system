@@ -45,6 +45,12 @@ export type ApplyResult = {
   /** Changes the run tried */
   planned: number
   applied: number
+  /** Of the changes made: values bound to EDS Foundation variables or text styles */
+  values: number
+  /** Of the changes made: values set as numbers, such as border widths */
+  numbers: number
+  /** Of the changes made: legacy modes removed or replaced */
+  modes: number
   /** Layers changed */
   layers: number
   /** Legacy modes left in place because layers below still use legacy variables */
@@ -56,6 +62,10 @@ export type ConvertResult = {
   converted: number
   /** Converted instances that used mono numbers, which a text style cannot carry */
   monoNumbers: number
+  /** The new text layers that need tabular figures set by hand */
+  monoNumberIds: string[]
+  /** Instances of main components whose own text was kept on the new text layer */
+  instanceTexts: number
   failed: ChangeFailure[]
 }
 
@@ -102,6 +112,8 @@ export type PluginToUi =
   | { type: 'apply-done'; result: ApplyResult }
   | { type: 'revert-done'; result: RevertResult }
   | { type: 'convert-done'; result: ConvertResult }
+  /** The current page changed since the scan, by an undo or an edit */
+  | { type: 'stale' }
   /** Every binding still to migrate, grouped by legacy variable, sent after a scan */
   | { type: 'mapping'; groups: MappingGroup[] }
   /** Every instance in the scan that still uses legacy variables */
@@ -148,8 +160,8 @@ export type UiToPlugin =
   | { type: 'apply'; entryIds: string[] }
   /** Puts back what the plugin changed in an entry, from the change log */
   | { type: 'revert'; entryId: string }
-  /** Builds the report of the latest scan */
-  | { type: 'get-report' }
+  /** Builds the report of the latest scan, counting local components when the window does */
+  | { type: 'get-report'; includeComponents: boolean }
   /** Replaces Typography component instances with text layers */
   | { type: 'convert-typography'; instanceIds: string[] }
   /** Resizes the window; done when the drag ends, so the size is kept */

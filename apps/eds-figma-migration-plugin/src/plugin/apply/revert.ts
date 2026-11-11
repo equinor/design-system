@@ -9,6 +9,7 @@ import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
 import type { LogEntry } from '../../shared/changelog'
 import type { ChangeFailure, RevertResult } from '../../shared/messages'
 import { Fonts, LayerChanged } from './apply'
+import { restoreInstanceTexts } from './instance-texts'
 import { readLog, writeLog } from './log'
 import { Targets } from './targets'
 
@@ -107,7 +108,12 @@ async function revertEntry(
       instance.x = node.x
       instance.y = node.y
     }
+    if (entry.old.exposed) instance.isExposedInstance = true
     node.remove()
+    // In a main component: each instance gets back the text it showed.
+    if (entry.old.instances) {
+      await restoreInstanceTexts(instance, entry.old.instances, fonts)
+    }
     return
   }
 

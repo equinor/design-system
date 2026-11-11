@@ -15,6 +15,15 @@ body {
   height: 100%;
 }
 
+/*
+ * Test session finding 9: the sticky Apply footer covered buttons that were
+ * scrolled to the bottom of the window. Scrolling to an element or focusing
+ * it keeps it above the footer.
+ */
+html {
+  scroll-padding-block-end: 96px;
+}
+
 body {
   font-family: var(--eds-font-family-ui);
   font-size: var(--eds-typography-body-md-font-size);

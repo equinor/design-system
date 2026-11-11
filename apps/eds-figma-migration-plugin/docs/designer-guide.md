@@ -30,16 +30,18 @@ Choose a scope and press **Scan**:
 The health bar counts every property bound to a variable, every text's typography
 and every mode set on a frame:
 
-| Status           | What it means                                                                             |
-| ---------------- | ----------------------------------------------------------------------------------------- |
-| Migrated         | Already uses EDS Foundation. Green, because it is done.                                   |
-| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.              |
-| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.           |
-| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays.   |
-| Inside instances | Inside an instance. The plugin leaves it; the component has to be updated in its library. |
+| Status           | What it means                                                                           |
+| ---------------- | --------------------------------------------------------------------------------------- |
+| Migrated         | Already uses EDS Foundation. Green, because it is done.                                 |
+| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.            |
+| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.         |
+| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays. |
+| Inside instances | Inside an instance. The plugin leaves it; its main component has to be migrated.        |
 
 Health is the share that is migrated. The **i** button next to the legend
-explains the statuses again.
+explains the statuses again. When values sit inside instances, a line under
+the legend gives the share migrated outside instances, which is what the
+plugin can change in the scope.
 
 ## 3. Look at what will change
 
@@ -51,7 +53,12 @@ explains the statuses again.
   in tabs by kind of value. A click on the legacy variable selects its
   layers; a click on the target changes it for every layer that uses it.
 - **Instances** lists the instances that still use legacy variables, grouped
-  by component.
+  by component. For a component in this file, **Go to main component** takes
+  you to it: migrate its page, and every instance follows.
+
+On a page of main components, such as a components page, the plugin shows
+the **Local components** by default, since that is where the work is. You can
+turn them on or off in the settings menu.
 
 To change a target, press **Change** on one value or the target of a row, or
 tick several values and use the bar at the bottom of the window. You can also
@@ -85,25 +92,40 @@ and the plugin says why.
 Check the frame afterwards. Small differences in colour and spacing come from
 the new token values, not from the plugin.
 
+Applying in a main component changes every instance of it in the file. The
+confirmation says how many instances there are.
+
+## Typography components
+
+The legacy Typography component can become a text layer with the matching
+text style: **Convert to text** in the Instances tab. In a main component,
+each instance of that component keeps the text it showed. A Typography
+component with mono numbers loses them, since a text style cannot carry
+tabular figures; the result has a button that selects those texts.
+
 ## Undo and revert
 
 - **Ctrl or Cmd+Z** right after an apply undoes the whole apply.
 - **Revert frame**, in a frame the plugin has changed, puts the legacy
   variables back later, from a log the plugin keeps on every layer it
   changes. A value you have changed since is left as you made it.
+- After an undo or an edit, the plugin says the page has changed since the
+  scan, and Apply waits until you scan again.
 
 ## Share the result
 
 **Export report**, beside the scope line, makes a Markdown report and a CSV for a spreadsheet, with
 the health, the frames, what needs a check, what has no equivalent and the
-instances. The plugin also keeps the latest scan and your choices in the
+instances. It counts what the window counts: the local components only when
+**Local components** is on. The plugin also keeps the latest scan and your choices in the
 file, so the next time you open it, you see where you left off.
 
 ## Questions
 
 **Why does the plugin not change my instances?** A change inside an instance
-becomes an override, which stops the instance from getting updates. Update
-the component in its library and publish it; the instances follow.
+becomes an override, which stops the instance from getting updates. For a
+component in this file, migrate its main component; for a library component,
+update it in its library and publish it. The instances follow.
 
 **Why is a legacy mode still on my frame?** Something below it still uses a
 legacy variable through it: an instance, an icon size, or a value you have

@@ -6,6 +6,10 @@
  * when the rule is sure, and keeps the legacy variable otherwise, so it shows
  * up in the review. Each text layer logs the component it replaced, so
  * Revert frame can put the instance back.
+ *
+ * A Typography instance inside a main component also carries the text of
+ * every instance of that component. That text is read before the
+ * conversion and put on the new text layer in each instance afterwards.
  */
 import { MAPPING_VERSION } from '../../mapping/version'
 import { classifyUnit } from '../../scan/classify'
@@ -13,6 +17,11 @@ import type { RawUnit } from '../../scan/types'
 import type { LogEntry } from '../../shared/changelog'
 import type { ChangeFailure, ConvertResult } from '../../shared/messages'
 import { Fonts } from './apply'
+import {
+  owningComponent,
+  readInstanceTexts,
+  writeInstanceTexts,
+} from './instance-texts'
 import { appendLog } from './log'
 import { Targets } from './targets'
 
@@ -90,6 +99,8 @@ export async function convertTypography(
   const failed: ChangeFailure[] = []
   let converted = 0
   let monoNumbers = 0
+  let instanceTexts = 0
+  const monoNumberIds: string[] = []
   const at = new Date().toISOString()
   await fonts.load({ family: 'Inter', style: 'Regular' })
 
@@ -132,6 +143,13 @@ export async function convertTypography(
       const style = await targets.textStyle(styleName)
       await fonts.load(style.fontName)
 
+      // Read what each instance of the main component shows here before
+      // the layer it is set on goes away.
+      const component = owningComponent(node)
+      const texts = component
+        ? await readInstanceTexts(component, node, source)
+        : []
+
       const text = figma.createText()
       try {
         await text.setTextStyleIdAsync(style.id)
@@ -173,6 +191,7 @@ export async function convertTypography(
         )
       ) {
         monoNumbers += 1
+        monoNumberIds.push(text.id)
       }
       const entry: LogEntry = {
         property: { type: 'typography' },
@@ -195,6 +214,8 @@ export async function convertTypography(
                 ) as unknown[],
               }
             : {}),
+          ...(node.isExposedInstance ? { exposed: true } : {}),
+          ...(texts.length > 0 ? { instances: texts } : {}),
         },
         new: { type: 'textStyle', key: style.key, name: style.name },
         outcome: record.category === 'sure' ? 'sure' : 'confirmed',
@@ -203,11 +224,12 @@ export async function convertTypography(
       }
       appendLog(text, entry)
       node.remove()
+      instanceTexts += await writeInstanceTexts(text, texts, fonts)
       converted += 1
     } catch (error) {
       fail(error instanceof Error ? error.message : String(error))
     }
   }
   figma.commitUndo()
-  return { converted, monoNumbers, failed }
+  return { converted, monoNumbers, monoNumberIds, instanceTexts, failed }
 }

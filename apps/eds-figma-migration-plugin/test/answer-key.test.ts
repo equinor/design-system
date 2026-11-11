@@ -1030,3 +1030,70 @@ describe('rules added on 2026-11-11', () => {
     ).toBe('none')
   })
 })
+
+describe('rules added after the FRIOD test session (2026-11-11)', () => {
+  const generic = (name: string, resolvedValue?: number): OldVariable => ({
+    collectionKey: OLD.spacingSemantic,
+    name,
+    type: 'FLOAT',
+    ...(resolvedValue !== undefined ? { resolvedValue } : {}),
+  })
+
+  it('Generic/Space under the mode None is 0px and becomes spacing/none', () => {
+    for (const name of [
+      'Generic/Space horizontal',
+      'Generic/Space vertical',
+      'Generic/Gap horizontal',
+      'Generic/Gap vertical',
+    ]) {
+      expect(resolve('spacing', generic(name, 0), ctx(['Body']))).toMatchObject(
+        { outcome: 'sure', candidates: ['spacing/none'] },
+      )
+    }
+  })
+
+  it('a Generic/Space step mode with no readable chain is proposed from the mode', () => {
+    const result = resolve(
+      'spacing',
+      generic('Generic/Space vertical'),
+      ctx(['Body'], { modes: { [OLD.verticalSpace]: 'MD' } }),
+    )
+    expect(result).toMatchObject({
+      outcome: 'check',
+      candidates: ['spacing/md'],
+    })
+  })
+
+  it('a Generic/Gap step mode reaches 💎 Density and is sure', () => {
+    expect(
+      resolve(
+        'spacing',
+        spacingSemantic('Generic/Gap horizontal', 'spacing/horizontal/sm'),
+        ctx(['Body']),
+      ),
+    ).toMatchObject({ outcome: 'sure', candidates: ['spacing/sm'] })
+  })
+
+  it('Generic/Space with nothing to read falls back to xs, as the docs say', () => {
+    expect(
+      resolve('spacing', generic('Generic/Space horizontal'), ctx(['Body'])),
+    ).toMatchObject({ outcome: 'check', candidates: ['spacing/xs'] })
+  })
+
+  it('a border colour on a line drawn as a filled shape is Ready', () => {
+    const line = ctx(['Connector', 'P&A stepper'], {
+      nodeType: 'RECTANGLE',
+      size: [120, 2],
+    })
+    const result = resolve('fill', appearance('Border/Medium'), line)
+    expect(result.outcome).toBe('sure')
+    expect(result.candidates[0]).toMatch(/^border\//)
+  })
+
+  it('a border colour on a filled box still needs a check', () => {
+    const box = ctx(['Swatch'], { nodeType: 'RECTANGLE', size: [24, 24] })
+    expect(resolve('fill', appearance('Border/Medium'), box).outcome).toBe(
+      'check',
+    )
+  })
+})

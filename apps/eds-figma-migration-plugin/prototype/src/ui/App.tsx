@@ -741,7 +741,11 @@ export function App() {
                       {
                         id: 'report',
                         label: 'Export report…',
-                        onSelect: () => send({ type: 'get-report' }),
+                        onSelect: () =>
+                          send({
+                            type: 'get-report',
+                            includeComponents: showComponents,
+                          }),
                       },
                     ]
                   : []
@@ -907,7 +911,12 @@ export function App() {
                   instances={instances}
                   onReview={() => setReview(reviewItems(mapping, overrides))}
                   report={report}
-                  onReport={() => send({ type: 'get-report' })}
+                  onReport={() =>
+                    send({
+                      type: 'get-report',
+                      includeComponents: showComponents,
+                    })
+                  }
                   onCloseReport={() => setReport(undefined)}
                   colorScheme={colorScheme}
                   showCounts={showCounts}

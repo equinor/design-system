@@ -460,9 +460,21 @@ export class MockPlugin {
       await step()
     }
 
+    const appliedRecords = plan.filter((change) =>
+      changed.has(change.record.id),
+    )
+    const modeCount = appliedRecords.filter(
+      (change) => change.record.property.type === 'mode',
+    ).length
+    const numberCount = appliedRecords.filter((change) =>
+      String(change.target ?? '').startsWith('value:'),
+    ).length
     const result: ApplyResult = {
       planned: plan.length,
       applied: changed.size,
+      values: changed.size - modeCount - numberCount,
+      numbers: numberCount,
+      modes: modeCount,
       layers: layers.size,
       modesKept,
       failed,

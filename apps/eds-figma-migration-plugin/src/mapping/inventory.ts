@@ -129,6 +129,13 @@ export const OLD = {
     'spacing-typography',
     '🪐 Selectable space',
   ),
+  horizontalSpace: oldCollectionKey(
+    'spacing-typography',
+    '🪐 Horizontal space',
+  ),
+  verticalSpace: oldCollectionKey('spacing-typography', '🪐 Vertical space'),
+  horizontalGap: oldCollectionKey('spacing-typography', '🪐 Horizontal gap'),
+  verticalGap: oldCollectionKey('spacing-typography', '🪐 Vertical gap'),
   borderRadius: oldCollectionKey('spacing-typography', '⭕️ Border radius'),
   box: oldCollectionKey('spacing-typography', '📦 Box'),
   fontSize: oldCollectionKey('spacing-typography', '🅰️ Font and icon size'),

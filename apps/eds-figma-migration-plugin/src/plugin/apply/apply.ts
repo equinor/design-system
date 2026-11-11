@@ -285,6 +285,9 @@ export async function applyChanges(
   const layers = new Set<string>()
   const failed: ChangeFailure[] = []
   let modesKept = 0
+  let values = 0
+  let numbers = 0
+  let modeChanges = 0
   let done = 0
 
   const step = async () => {
@@ -321,6 +324,8 @@ export async function applyChanges(
       appendLog(found, entry)
       changed.add(change.record.id)
       layers.add(found.id)
+      if (entry.new.type === 'value') numbers += 1
+      else values += 1
     } catch (error) {
       if (error instanceof Error && error.message === LIBRARY_MISSING) {
         figma.commitUndo()
@@ -356,6 +361,7 @@ export async function applyChanges(
         appendLog(found, entry)
         changed.add(change.record.id)
         layers.add(found.id)
+        modeChanges += 1
       }
       if (mustKeep) modesKept += 1
     } catch (error) {
@@ -373,6 +379,9 @@ export async function applyChanges(
   return {
     planned: plan.length,
     applied: changed.size,
+    values,
+    numbers,
+    modes: modeChanges,
     layers: layers.size,
     modesKept,
     failed,

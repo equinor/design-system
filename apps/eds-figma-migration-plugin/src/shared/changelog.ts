@@ -46,6 +46,24 @@ export type LoggedComponent = {
   }
   /** The fills of the text in the instance, with their variable bindings, as Figma paints */
   textFills?: unknown[]
+  /** The instance sat in a main component and was exposed to its instances */
+  exposed?: boolean
+  /**
+   * For an instance in a main component: what each instance of that main
+   * component showed in it, kept on the new text layer and put back by
+   * Revert frame. Instance ids, the outermost instance first.
+   */
+  instances?: InstanceText[]
+}
+
+/** The text one instance of a main component showed in a converted layer. */
+export type InstanceText = {
+  id: string
+  characters: string
+  /** Only when the instance hid or showed the layer differently from the main component */
+  visible?: boolean
+  /** Only when the instance had its own text colour, as Figma paints */
+  fills?: unknown[]
 }
 
 export type LoggedOldMode = {

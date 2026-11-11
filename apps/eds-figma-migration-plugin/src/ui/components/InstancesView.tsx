@@ -15,9 +15,9 @@ type InstancesViewProps = {
 
 /**
  * Every instance in the scope that still uses legacy variables, grouped by
- * main component. The plugin never changes inside an instance: the
- * component is updated in its library, then the instances are swapped by
- * hand.
+ * main component. The plugin never changes inside an instance. A library
+ * component is updated in its library; a component in this file changes
+ * every instance when its main component is migrated.
  */
 export function InstancesView({
   instances,
@@ -35,11 +35,15 @@ export function InstancesView({
   const groups = groupInstances(instances)
   return (
     <div className="stack">
+      {/* Test session finding 16: local components need other advice
+          than library components. */}
       <p className="muted">
-        The plugin never changes anything inside an instance. Update each
-        component in its library, publish it, then swap these instances or
-        accept the update. The legacy Typography component is the exception: it
-        can become a text layer with the matching text style.
+        The plugin never changes anything inside an instance. A component in
+        this file changes every instance of it once its main component is
+        migrated: go to the main component and migrate its page first. A
+        component from a library is updated in its library and published, then
+        the instances take the update. The legacy Typography component is the
+        exception: it can become a text layer with the matching text style.
       </p>
       <Accordion className="binding-groups">
         {[...groups]
@@ -88,6 +92,12 @@ export function InstancesView({
                           as a variable. Revert frame puts the component back.
                         </p>
                       )}
+                      {group.mainId && (
+                        <p className="muted">
+                          {group.name} is a component in this file. Migrate its
+                          main component, and every instance follows.
+                        </p>
+                      )}
                       <div className="panel-actions">
                         {typography ? (
                           <Button
@@ -96,6 +106,13 @@ export function InstancesView({
                             onClick={() => onConvert(ids)}
                           >
                             Convert {ids.length} to text
+                          </Button>
+                        ) : group.mainId ? (
+                          <Button
+                            size="small"
+                            onClick={() => onSelect([group.mainId as string])}
+                          >
+                            Go to main component
                           </Button>
                         ) : (
                           <span />

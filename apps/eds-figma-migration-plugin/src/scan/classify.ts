@@ -109,6 +109,7 @@ export function readsOf(variable: RawVariable): string[] {
 export function groupOf(unit: RawUnit): PropertyGroup {
   if (unit.unit === 'typography') return 'typography'
   if (unit.unit === 'mode') return 'modes'
+  if (unit.unit === 'value') return 'size'
   switch (unit.kind) {
     case 'fill':
     case 'stroke':
@@ -141,6 +142,15 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     instanceId: unit.instanceId,
     density: targetDensity(unit.context.modes),
     ...(unit.modeHolders ? { modeHolders: unit.modeHolders } : {}),
+  }
+
+  // Test session finding 8: a border width set as a number is migrated.
+  if (unit.unit === 'value') {
+    return {
+      ...base,
+      category: 'migrated',
+      current: `${unit.value}px, set as a number by the plugin`,
+    }
   }
 
   if (unit.unit === 'variable') {

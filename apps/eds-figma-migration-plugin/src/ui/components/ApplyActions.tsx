@@ -8,6 +8,8 @@ type ApplyActionsProps = {
   toReview: number
   /** “in the scope” or “in this frame” */
   where: string
+  /** The main components among the entries, and how many instances they have in the file */
+  mainComponents?: { count: number; instances: number }
   /** Layers in the entry the plugin has changed before, for Revert */
   changed?: number
   busy: boolean
@@ -26,6 +28,7 @@ export function ApplyActions({
   ready,
   toReview,
   where,
+  mainComponents,
   changed = 0,
   busy,
   onApply,
@@ -96,8 +99,22 @@ export function ApplyActions({
                 and sets the new modes. A legacy mode is cleared only when no
                 layer below it uses a legacy variable any more.
               </p>
+              {mainComponents && (
+                <p>
+                  {mainComponents.count === 1
+                    ? 'The main component is'
+                    : `The ${mainComponents.count} main components are`}{' '}
+                  used {mainComponents.instances} time
+                  {mainComponents.instances === 1 ? '' : 's'} in the file. Every
+                  instance changes with{' '}
+                  {mainComponents.count === 1 ? 'it' : 'them'}, and keeps the
+                  text and other overrides set in it.
+                </p>
+              )}
               <p className="muted">
-                Nothing inside an instance changes.
+                {mainComponents
+                  ? 'The plugin changes nothing in an instance directly.'
+                  : 'Nothing inside an instance changes.'}
                 {toReview > 0
                   ? ` ${toReview} value${toReview === 1 ? '' : 's'} that need a check stay as they are until you review them.`
                   : ''}{' '}

@@ -90,6 +90,11 @@ export type RawUnit = {
       fontSize: number
       textStyle?: RawTextStyle
     }
+  /**
+   * A number the plugin set in place of a legacy variable, such as a border
+   * width, read from the change log while the layer still has that number
+   */
+  | { unit: 'value'; value: number }
   | {
       unit: 'mode'
       collectionId: string
@@ -121,7 +126,11 @@ export const SCORED_CATEGORIES = [
 
 export type ScoredCategory = (typeof SCORED_CATEGORIES)[number]
 
-export type Counts = Record<ScoredCategory, number> & { other: number }
+export type Counts = Record<ScoredCategory, number> & {
+  other: number
+  /** Of `migrated`: values inside instances, which follow their main component */
+  migratedInInstances?: number
+}
 
 /** What kind of property a binding is on, for filtering. */
 export type PropertyGroup =
@@ -234,6 +243,8 @@ export type OldInstance = {
     name: string
     key: string
     remote: boolean
+    /** For a main component in this file, to go to it */
+    id?: string
   }
 }
 

@@ -15,6 +15,7 @@ import type { Report } from '../scan/report'
 import {
   formatHealth,
   healthOf,
+  healthOutsideInstances,
   oldCount,
   scoredTotal,
   sumCounts,
@@ -152,12 +153,33 @@ function Overview({
   // UX review F8: Apply says where it applies.
   const readyIn = applied.filter((entry) => entry.counts.sure > 0)
   const pageCount = new Set(readyIn.map((entry) => entry.pageId)).size
+  // Test session finding 15: main components are named as such, with the
+  // instances that change with them.
+  const readyFrames = readyIn.filter((entry) => entry.kind !== 'component')
+  const readyComponents = readyIn.filter((entry) => entry.kind === 'component')
+  const reachParts = [
+    readyFrames.length > 0 &&
+      `${readyFrames.length} frame${readyFrames.length === 1 ? '' : 's'}`,
+    readyComponents.length > 0 &&
+      `${readyComponents.length} main component${readyComponents.length === 1 ? '' : 's'}`,
+  ].filter((part): part is string => Boolean(part))
   const reach =
     readyIn.length === 0
       ? undefined
-      : `in ${readyIn.length} frame${readyIn.length === 1 ? '' : 's'}${
+      : `in ${reachParts.join(' and ')}${
           pageCount > 1 ? ` on ${pageCount} pages` : ''
         }`
+  const mainComponents =
+    readyComponents.length > 0
+      ? {
+          count: readyComponents.length,
+          instances: readyComponents.reduce(
+            (sum, entry) => sum + (entry.instanceCount ?? 0),
+            0,
+          ),
+        }
+      : undefined
+  const outside = healthOutsideInstances(totals)
   // UX review F3: where the work is, across pages.
   const mostWork = frames
     .filter((entry) => oldCount(entry.counts) > 0)
@@ -174,6 +196,14 @@ function Overview({
         </div>
         <HealthBar counts={totals} />
         <HealthLegend counts={totals} />
+        {/* Test session finding 7: health counts every value inside
+            instances, so a complete run can still read 6%. */}
+        {totals.inInstance > 0 && outside !== null && (
+          <p className="muted">
+            Outside instances: {formatHealth(outside)} migrated. The values
+            inside instances change with their main component or library.
+          </p>
+        )}
 
         {scoredTotal(totals) === 0 ? (
           <p className="muted">
@@ -362,6 +392,7 @@ function Overview({
           ready={totals.sure}
           toReview={totals.check}
           where={reach ?? 'in the scope'}
+          mainComponents={mainComponents}
           busy={busy}
           onReview={onReview}
           onApply={() => onApply(applied.map((entry) => entry.id))}
@@ -384,6 +415,15 @@ export function App() {
   const [openEntryId, setOpenEntryId] = useState<string>()
   const [detail, setDetail] = useState<EntryDetail>()
   const [showComponents, setShowComponents] = useState(false)
+  // Test session finding 14: until the designer chooses, local components
+  // are shown when they hold most of what the plugin can change.
+  const componentsChosen = useRef(false)
+  const chooseComponents = (show: boolean) => {
+    componentsChosen.current = true
+    setShowComponents(show)
+  }
+  // Test session finding 17: the scan is out of date after an undo or an edit.
+  const [stale, setStale] = useState(false)
   // Check designs: the changes are the first thing shown after a scan.
   const [view, setView] = useState<View>('mapping')
   const [showCounts, setShowCounts] = useState(true)
@@ -440,6 +480,28 @@ export function App() {
           }
           setScanning(false)
           setProgress(undefined)
+          setStale(false)
+          if (!componentsChosen.current) {
+            const changeable = (entries: EntrySummary[]) =>
+              entries.reduce(
+                (sum, entry) =>
+                  sum +
+                  entry.counts.sure +
+                  entry.counts.check +
+                  entry.counts.none,
+                0,
+              )
+            const components = message.summary.entries.filter(
+              (entry) => entry.kind === 'component',
+            )
+            const frames = message.summary.entries.filter(
+              (entry) => entry.kind !== 'component',
+            )
+            setShowComponents(
+              components.length > 0 &&
+                changeable(components) > changeable(frames),
+            )
+          }
           setSummary(message.summary)
           setDetail(undefined)
           setReview(undefined)
@@ -477,6 +539,9 @@ export function App() {
           break
         case 'summary':
           setSummary(message.summary)
+          break
+        case 'stale':
+          setStale(true)
           break
         case 'scan-cancelled':
           setScanning(false)
@@ -536,6 +601,8 @@ export function App() {
   }
   const select = (nodeIds: string[]) => send({ type: 'select', nodeIds })
   const busy = scanning || applying !== undefined
+  /** Apply, Convert and Revert wait for a new scan when the file has changed */
+  const locked = busy || stale
   const applyEntries = (entryIds: string[]) => {
     setLastApplied(entryIds)
     setError(undefined)
@@ -728,7 +795,7 @@ export function App() {
                   id: 'components',
                   label: 'Local components',
                   checked: showComponents,
-                  onChange: setShowComponents,
+                  onChange: chooseComponents,
                 },
               ]}
               actions={
@@ -737,7 +804,11 @@ export function App() {
                       {
                         id: 'report',
                         label: 'Export report…',
-                        onSelect: () => send({ type: 'get-report' }),
+                        onSelect: () =>
+                          send({
+                            type: 'get-report',
+                            includeComponents: showComponents,
+                          }),
                       },
                     ]
                   : []
@@ -819,6 +890,19 @@ export function App() {
               </p>
             )}
             {!summary && !scanning && saved && <SavedHealth saved={saved} />}
+            {summary && !scanning && stale && (
+              <Banner tone="warning">
+                <Banner.Message>
+                  The page has changed since the scan, by an undo or an edit.
+                  Scan again before you apply or convert anything.
+                </Banner.Message>
+                <Banner.Actions>
+                  <Button size="small" variant="secondary" onClick={scan}>
+                    Scan again
+                  </Button>
+                </Banner.Actions>
+              </Banner>
+            )}
             {choicesNotSaved && (
               <Banner
                 tone="warning"
@@ -864,7 +948,7 @@ export function App() {
                 }
                 overrides={overrides}
                 selection={bulk}
-                busy={busy}
+                busy={locked}
                 onApply={() => applyEntries([openEntry.id])}
                 onReview={() =>
                   setReview(reviewItems(mapping, overrides, openEntry.id))
@@ -898,17 +982,22 @@ export function App() {
                   showComponents={showComponents}
                   onOpen={open}
                   onGoTo={(entry) => select(entry.nodeIds)}
-                  busy={busy}
+                  busy={locked}
                   onApply={applyEntries}
                   instances={instances}
                   onReview={() => setReview(reviewItems(mapping, overrides))}
                   report={report}
-                  onReport={() => send({ type: 'get-report' })}
+                  onReport={() =>
+                    send({
+                      type: 'get-report',
+                      includeComponents: showComponents,
+                    })
+                  }
                   onCloseReport={() => setReport(undefined)}
                   colorScheme={colorScheme}
                   showCounts={showCounts}
                   showEmpty={showEmpty}
-                  onShowComponents={setShowComponents}
+                  onShowComponents={chooseComponents}
                   onConvert={convertTypography}
                 />
               </div>

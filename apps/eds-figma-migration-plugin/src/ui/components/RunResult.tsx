@@ -18,33 +18,53 @@ type RunResultProps = {
   onRevert?: () => void
 }
 
+const plural = (count: number, one: string, many = `${one}s`) =>
+  `${count} ${count === 1 ? one : many}`
+
 function summary(run: Run): string {
   if (run.kind === 'apply') {
-    const { applied, layers, modesKept } = run.result
+    const { values, numbers, modes, layers, modesKept } = run.result
+    // Test session finding 10: values, widths and modes are told apart.
+    const done = [
+      values > 0 && `migrated ${plural(values, 'value')}`,
+      numbers > 0 && `set ${plural(numbers, 'border width')} as numbers`,
+      modes > 0 && `removed or replaced ${plural(modes, 'legacy mode')}`,
+    ].filter((part): part is string => Boolean(part))
+    const what =
+      done.length === 0
+        ? 'Changed nothing'
+        : done.length === 1
+          ? done[0]
+          : `${done.slice(0, -1).join(', ')} and ${done[done.length - 1]}`
     const parts = [
-      `Applied ${applied} change${applied === 1 ? '' : 's'} on ${layers} layer${layers === 1 ? '' : 's'}.`,
+      `${what.charAt(0).toUpperCase()}${what.slice(1)}, on ${plural(layers, 'layer')}.`,
     ]
     if (modesKept > 0) {
       parts.push(
-        `${modesKept} legacy mode${modesKept === 1 ? '' : 's'} stay${modesKept === 1 ? 's' : ''} because layers below still use legacy variables.`,
+        `${plural(modesKept, 'legacy mode')} stay${modesKept === 1 ? 's' : ''} because layers below still use legacy variables.`,
       )
     }
     return parts.join(' ')
   }
   if (run.kind === 'convert') {
-    const { converted, monoNumbers } = run.result
+    const { converted, monoNumbers, instanceTexts } = run.result
     const parts = [
-      `Converted ${converted} Typography component${converted === 1 ? '' : 's'} to text.`,
+      `Converted ${plural(converted, 'Typography component')} to text.`,
     ]
+    if (instanceTexts > 0) {
+      parts.push(
+        `In main components, ${plural(instanceTexts, 'instance')} kept ${instanceTexts === 1 ? 'its' : 'their'} own text.`,
+      )
+    }
     if (monoNumbers > 0) {
       parts.push(
-        `${monoNumbers} used mono numbers, which a text style cannot carry; set tabular figures by hand where they matter.`,
+        `${monoNumbers} used mono numbers, which a text style cannot carry and a plugin cannot set; set tabular figures on ${monoNumbers === 1 ? 'it' : 'them'} by hand where they matter.`,
       )
     }
     return parts.join(' ')
   }
   const { reverted, layers } = run.result
-  return `Put back ${reverted} change${reverted === 1 ? '' : 's'} on ${layers} layer${layers === 1 ? '' : 's'}.`
+  return `Put back ${plural(reverted, 'change')} on ${plural(layers, 'layer')}.`
 }
 
 /** What an apply or a revert did, and what it could not do, with Go to for each failure. */
@@ -72,6 +92,17 @@ export function RunResult({
         <Banner.Actions>
           <Button size="small" variant="secondary" onClick={onRevert}>
             Revert
+          </Button>
+        </Banner.Actions>
+      )}
+      {run.kind === 'convert' && run.result.monoNumberIds.length > 0 && (
+        <Banner.Actions>
+          <Button
+            size="small"
+            variant="secondary"
+            onClick={() => onSelect(run.result.monoNumberIds)}
+          >
+            Select the mono number texts
           </Button>
         </Banner.Actions>
       )}

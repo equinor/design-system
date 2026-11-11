@@ -15,6 +15,7 @@ import type {
   VariableType,
 } from '../../mapping/types'
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
+import { readLog } from '../apply/log'
 import type {
   PropertyRef,
   RawFillUnder,
@@ -379,6 +380,16 @@ export class Collector {
       }
     }
     if (node.type === 'TEXT') context.singleLine = isSingleLine(node)
+    // A thin shape or an empty frame can be a line drawn with a fill.
+    if (
+      SHAPE_TYPES.has(node.type) ||
+      (node.type === 'FRAME' && node.children.length === 0)
+    ) {
+      context.size = [
+        Math.round(node.width * 100) / 100,
+        Math.round(node.height * 100) / 100,
+      ]
+    }
     return context
   }
 
@@ -531,6 +542,28 @@ export class Collector {
             variable,
           })
         }
+      }
+    }
+
+    // Numbers the plugin set in place of a legacy variable, such as border
+    // widths, count as migrated while the layer keeps them.
+    if (!instanceId && node.getSharedPluginData(NAMESPACE, LOG_KEY)) {
+      const counted = new Set<string>()
+      for (const entry of readLog(node)) {
+        if (entry.new.type !== 'value' || entry.property.type !== 'field') {
+          continue
+        }
+        const { field } = entry.property
+        if (counted.has(field) || field in bound) continue
+        const current = (node as unknown as Record<string, unknown>)[field]
+        if (current !== entry.new.value) continue
+        counted.add(field)
+        push({
+          ...base,
+          unit: 'value',
+          property: entry.property,
+          value: entry.new.value,
+        })
       }
     }
 

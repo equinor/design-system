@@ -83,6 +83,8 @@ export type RoleContext = {
   strokeSides?: [number, number, number, number]
   /** For text: true when the text sits on one line */
   singleLine?: boolean
+  /** Width and height of the layer in px, for shapes */
+  size?: [number, number]
   /** The nearest visible fill under the layer, when there is one */
   fillUnder?: FillUnder
 }

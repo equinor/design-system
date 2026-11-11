@@ -322,6 +322,7 @@ async function findOldInstances(
           name: set ? set.name : main.name,
           key: set ? set.key : main.key,
           remote: main.remote,
+          ...(main.remote ? {} : { id: set ? set.id : main.id }),
         }
         if (isTypographyComponent(set ? set.name : main.name)) {
           instance.typography = true

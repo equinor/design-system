@@ -96,6 +96,37 @@ figma.on('selectionchange', postSelection)
 figma.on('currentpagechange', postSelection)
 
 /**
+ * Test session finding 17: after an undo or an edit, the window kept
+ * offering the changes of the earlier scan. A change on the current page
+ * that the plugin did not make marks the scan as out of date, once per scan.
+ * The plugin's own changes are ignored while it works and for a moment
+ * after, since Figma reports changes a little later.
+ */
+let quietUntil = 0
+let staleSent = false
+let watchedPage: PageNode | undefined
+
+function onNodeChange() {
+  if (!lastScan || staleSent || busy || Date.now() < quietUntil) return
+  staleSent = true
+  post({ type: 'stale' })
+}
+
+function watchPage() {
+  watchedPage?.off('nodechange', onNodeChange)
+  watchedPage = figma.currentPage
+  watchedPage.on('nodechange', onNodeChange)
+}
+
+/** Ignores the changes Figma reports for what the plugin just did. */
+function quietAfterOwnChanges() {
+  quietUntil = Date.now() + 1500
+}
+
+watchPage()
+figma.on('currentpagechange', watchPage)
+
+/**
  * Scans the target. The designer's choices are kept from one scan to the
  * next: they are stored by layer and property, and by legacy variable and
  * proposal, so they still apply to what is left after an apply.
@@ -112,6 +143,7 @@ async function scan(target: ScanTarget) {
     )
     lastTarget = target
     lastScan = withChoices(state)
+    staleSent = false
     saveHealth(lastScan.summary)
     post({ type: 'scan-done', summary: lastScan.summary })
     post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
@@ -122,6 +154,7 @@ async function scan(target: ScanTarget) {
     else throw error
   } finally {
     busy = false
+    quietUntil = Math.max(quietUntil, Date.now() + 500)
   }
 }
 
@@ -139,6 +172,7 @@ async function apply(entryIds: string[]) {
     post({ type: 'apply-done', result })
   } finally {
     busy = false
+    quietAfterOwnChanges()
   }
   await scan(lastTarget)
 }
@@ -152,6 +186,7 @@ async function convert(instanceIds: string[]) {
     post({ type: 'convert-done', result })
   } finally {
     busy = false
+    quietAfterOwnChanges()
   }
   await scan(lastTarget)
 }
@@ -180,6 +215,7 @@ async function revert(entryId: string) {
     post({ type: 'revert-done', result })
   } finally {
     busy = false
+    quietAfterOwnChanges()
   }
   await scan(lastTarget)
 }
@@ -361,6 +397,7 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
               records: lastScan.records,
               oldInstances: lastScan.oldInstances,
               overrides,
+              includeComponents: message.includeComponents,
             }),
           })
         }

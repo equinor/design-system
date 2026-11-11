@@ -44,6 +44,7 @@ type PackedUnit = {
       fontSize: number
       textStyle?: RawTextStyle
     }
+  | { unit: 'value'; value: number }
   | {
       unit: 'mode'
       collectionId: string
@@ -159,6 +160,9 @@ export function packFixture(
         ...(unit.textStyle ? { textStyle: unit.textStyle } : {}),
       }
     }
+    if (unit.unit === 'value') {
+      return { ...base, unit: 'value', value: unit.value }
+    }
     return {
       ...base,
       unit: 'mode',
@@ -232,6 +236,9 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
         fontSize: unit.fontSize,
         textStyle: unit.textStyle,
       }
+    }
+    if (unit.unit === 'value') {
+      return { ...base, unit: 'value', value: unit.value }
     }
     return {
       ...base,
