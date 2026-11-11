@@ -27,6 +27,31 @@ export type OverrideChange = {
   value?: OverrideValue
 }
 
+/** A change that could not be made or undone, and why. */
+export type ChangeFailure = {
+  nodeId: string
+  nodeName: string
+  property: string
+  message: string
+}
+
+export type ApplyResult = {
+  /** Changes the run tried */
+  planned: number
+  applied: number
+  /** Layers changed */
+  layers: number
+  /** Legacy modes left in place because layers below still use legacy variables */
+  modesKept: number
+  failed: ChangeFailure[]
+}
+
+export type RevertResult = {
+  reverted: number
+  layers: number
+  failed: ChangeFailure[]
+}
+
 export type ScanProgress = {
   pageName: string
   pageIndex: number
@@ -48,6 +73,9 @@ export type PluginToUi =
   | { type: 'scan-done'; summary: ScanSummary }
   /** The same scan counted again after targets were changed */
   | { type: 'summary'; summary: ScanSummary }
+  | { type: 'apply-progress'; done: number; total: number }
+  | { type: 'apply-done'; result: ApplyResult }
+  | { type: 'revert-done'; result: RevertResult }
   /** Every binding still to migrate, grouped by legacy variable, sent after a scan */
   | { type: 'mapping'; groups: MappingGroup[] }
   | { type: 'overrides'; overrides: Overrides }
@@ -83,6 +111,10 @@ export type UiToPlugin =
    * override, so the row's target or the proposal applies again.
    */
   | { type: 'set-overrides'; changes: OverrideChange[] }
+  /** Applies every Ready change in the entries */
+  | { type: 'apply'; entryIds: string[] }
+  /** Puts back what the plugin changed in an entry, from the change log */
+  | { type: 'revert'; entryId: string }
   | { type: 'run-dev-export-inventory' }
   | { type: 'run-dev-export-fixture' }
   | { type: 'notify'; message: string }

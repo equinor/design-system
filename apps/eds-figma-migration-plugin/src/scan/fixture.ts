@@ -22,6 +22,7 @@ type PackedNode = {
   context: Omit<RoleContext, 'fillUnder'>
   /** The layer that owns the fill under this one, and the variable on that fill */
   fillUnder?: { owner: string; variable?: string }
+  modeHolders?: string[]
 }
 
 type PackedUnit = {
@@ -95,6 +96,7 @@ export function packFixture(
         type: unit.nodeType,
         path: unit.path,
         context,
+        ...(unit.modeHolders ? { modeHolders: unit.modeHolders } : {}),
       }
       owners.push({ id: unit.nodeId, context })
     }
@@ -198,6 +200,7 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
       property: unit.property,
       instanceId: unit.instance,
       context,
+      ...(node.modeHolders ? { modeHolders: node.modeHolders } : {}),
     }
     if (unit.unit === 'variable') {
       return {

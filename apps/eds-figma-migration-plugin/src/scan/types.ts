@@ -69,6 +69,8 @@ export type RawUnit = {
   property: PropertyRef
   /** Id of the outermost instance the node is in, or the node itself when it is an instance */
   instanceId?: string
+  /** Ids of the node and its ancestors in the entry that set explicit modes, outermost first */
+  modeHolders?: string[]
   context: RawContext
 } & (
   | { unit: 'variable'; kind: BindingKind; variable: RawVariable }
@@ -156,6 +158,21 @@ export type BindingRecord = {
   reason?: string
   rule?: string
   instanceId?: string
+  /** Ids of the node and its ancestors in the entry that set explicit modes */
+  modeHolders?: string[]
+  /** The legacy variable, for a binding on a variable; the change log and revert need its key */
+  oldVariable?: { id: string; key: string; name: string }
+  /** The legacy typography variables by field, for a text or range */
+  oldFields?: Partial<Record<TypographyField, { key: string; name: string }>>
+  /** The font of a text or range before the change */
+  oldFont?: { family: string; style: string }
+  /** The legacy mode, for an explicit mode */
+  oldMode?: {
+    collectionId: string
+    collectionKey: string
+    modeId: string
+    modeName: string
+  }
 }
 
 export type EntryKind = 'frame' | 'loose' | 'component'
@@ -176,6 +193,8 @@ export type EntrySummary = {
   health: number | null
   /** Instances in the entry that still contain old variables */
   oldInstances: number
+  /** Layers the plugin has changed, with a change log Revert can use */
+  changed?: number
 }
 
 export type OldInstance = {

@@ -107,6 +107,7 @@ export function recount(
     pageName: entry.pageName,
     sections: entry.sections,
     nodeIds: entry.nodeIds,
+    changed: entry.changed,
   }))
   const entries = summariseEntries(meta, records, oldInstances, categoryOf)
   const totals = totalsOf(entries)

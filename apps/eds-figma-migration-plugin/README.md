@@ -15,16 +15,16 @@ The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md).
 
 ## Status
 
-| Milestone                                      | State                                  |
-| ---------------------------------------------- | -------------------------------------- |
-| 1. Scaffold, manifest, build, inventory export | Done                                   |
-| 2. Rules and tests                             | Done                                   |
-| 3. Read-only scan                              | Done                                   |
-| 4. Mapping view and overrides                  | Done; tested on the test file in Figma |
-| 5. Apply                                       | Next                                   |
-| 6. Review and the remaining views              |                                        |
-| 7. Report and saved health                     |                                        |
-| 8. Release                                     |                                        |
+| Milestone                                      | State                                                  |
+| ---------------------------------------------- | ------------------------------------------------------ |
+| 1. Scaffold, manifest, build, inventory export | Done                                                   |
+| 2. Rules and tests                             | Done                                                   |
+| 3. Read-only scan                              | Done                                                   |
+| 4. Mapping view and overrides                  | Done; tested on the test file in Figma                 |
+| 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma |
+| 6. Review and the remaining views              | Next                                                   |
+| 7. Report and saved health                     |                                                        |
+| 8. Release                                     |                                                        |
 
 ## Build
 
@@ -99,7 +99,7 @@ what changes under it:
 - **The Mapping tab** has one accordion item per legacy variable in the
   scope. It opens to one row per proposal, since the same variable can get
   different targets in different places, with the layers under each row.
-  **Select layers** selects every layer that uses the variable.
+  **Go to layers** selects every layer that uses the variable.
 - **A file scan** lists one page at a time, each with its own health bar.
 
 Targets can be changed one binding, one row or many bindings at a time:
@@ -114,14 +114,55 @@ Targets can be changed one binding, one row or many bindings at a time:
 The picker follows Figma's variable picker: a search field, the proposed
 targets, then every variable or text style that fits the property, grouped by
 path, with colour swatches in the current theme and the comfortable value of
-numbers. Choosing the proposal again removes the change. Changes are kept
-while the plugin is open, and a new scan clears them. Apply, in the next
-milestone, uses them.
+numbers. On a Ready binding, choosing the proposal again removes the change.
+On a binding that needs a check or has no equivalent, any choice settles it:
+the binding then counts as Ready, or as No equivalent when it is left as it
+is, and the health bars follow. Choices are kept while the plugin is open,
+also across scans, since they are stored by layer and property and by legacy
+variable and proposal.
 
 Health is migrated ÷ (migrated + ready + needs check + no equivalent + in instance). Variables
 from other libraries and local variables are counted apart and left out.
 The plugin API gives no library name for a main component, so the window says
 whether it comes from a library or from this file.
+
+## Apply and revert
+
+**Apply N ready**, under the health bar of the scope or of a frame, makes
+every Ready change, after a confirmation:
+
+- binds the EDS Foundation variable on the same field, paint or effect, and
+  keeps the other bindings on the layer;
+- applies the text style to a text or a range of text, after loading its
+  fonts, and keeps the fill bindings;
+- sets the new `density` or `color-scheme` mode on the layer that had the
+  legacy one (Spacious → comfortable, Comfortable → compact, Light → light,
+  Dark → dark);
+- clears a legacy mode only when no layer below it uses a legacy variable
+  through it any more, including inside instances. A binding only depends on
+  the nearest legacy mode above it of a collection in its own library, colour
+  or spacing and typography.
+
+Bindings that need a check are not applied until a designer has chosen a
+target for them. Nothing inside an instance changes. Before each change the
+plugin checks that the layer still has the legacy binding from the scan, and
+lists what it could not change, with Go to. One run is one step in Figma's
+undo history (`figma.commitUndo`). After the run the plugin scans the same
+layers again.
+
+Every change is logged on its layer in shared plugin data (namespace
+`eds_migration`, key `log`): the property, the legacy variable, typography or
+mode, what replaced it, whether it was sure, confirmed or an override, the
+rules version and the time. **Revert frame**, in a frame that has changes,
+puts the legacy bindings, typography and modes back from that log, newest
+first, as long as the legacy libraries are still published. A binding someone
+has changed since the apply is left alone and reported. Shared plugin data is
+used because private plugin data needs a published plugin id, so a
+development copy could not keep a log.
+
+A legacy mode that has nothing to do yet counts as No equivalent, with the
+reason: it stays for good above a binding in an instance or with no
+equivalent, and until the review above a binding that needs a check.
 
 ## Publish a test version to Equinor
 
@@ -208,7 +249,7 @@ font; everything else works.
 manifest.json
 src/mapping/     rules, role guesses, inventories; pure, tested without Figma
 src/scan/        classification, counting and the fixture format; pure
-src/plugin/      the main thread (code.ts), the scanner and the developer commands
+src/plugin/      the main thread (code.ts), the scanner, apply and revert, and the developer commands
 src/shared/      message types between the main thread and the window
 src/ui/          the plugin window, React and the EDS Beta components
 docs/            mapping-rules.md, the source for the rules

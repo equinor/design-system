@@ -27,8 +27,25 @@ export type ScanState = {
 
 const LOOSE_NAME = 'Loose layers'
 
+/** What a scan covers, so the plugin can scan the same layers again after an apply. */
+export type ScanTarget = {
+  scope: Scope
+  pageId: string
+  /** The selected layers, for a scan of the selection */
+  nodeIds: string[]
+}
+
+/** The scope as it is now: the current page and the current selection. */
+export function currentTarget(scope: Scope): ScanTarget {
+  return {
+    scope,
+    pageId: figma.currentPage.id,
+    nodeIds: figma.currentPage.selection.map((node) => node.id),
+  }
+}
+
 export async function runScan(
-  scope: Scope,
+  target: ScanTarget,
   onProgress: (progress: ScanProgress) => void,
   isCancelled: () => boolean,
 ): Promise<ScanState> {
@@ -36,10 +53,26 @@ export async function runScan(
   // must see them.
   figma.skipInvisibleInstanceChildren = false
 
-  const pages =
-    scope === 'file' ? [...figma.root.children] : [figma.currentPage]
-  if (scope === 'selection' && figma.currentPage.selection.length === 0) {
-    throw new Error('Select one or more frames, then scan again.')
+  const { scope } = target
+  const targetPage = await figma.getNodeByIdAsync(target.pageId)
+  const scopePage = targetPage?.type === 'PAGE' ? targetPage : figma.currentPage
+  const pages = scope === 'file' ? [...figma.root.children] : [scopePage]
+  const selected: SceneNode[] = []
+  if (scope === 'selection') {
+    for (const id of target.nodeIds) {
+      const node = await figma.getNodeByIdAsync(id)
+      if (
+        node &&
+        !node.removed &&
+        node.type !== 'PAGE' &&
+        node.type !== 'DOCUMENT'
+      ) {
+        selected.push(node as SceneNode)
+      }
+    }
+    if (selected.length === 0) {
+      throw new Error('Select one or more frames, then scan again.')
+    }
   }
   const entries: EntryMeta[] = []
   let pageIndex = 0
@@ -164,7 +197,7 @@ export async function runScan(
 
   /** Scans the selected layers, each as its own entry, with the sections and modes around it. */
   async function collectSelection(page: PageNode) {
-    for (const node of page.selection) {
+    for (const node of selected) {
       const ancestors: BaseNode[] = []
       for (
         let parent = node.parent;
@@ -201,6 +234,8 @@ export async function runScan(
 
   const records = classifyUnits(collector.units)
   const oldInstances = await findOldInstances(collector, records)
+  for (const entry of entries)
+    entry.changed = collector.changed.get(entry.id) ?? 0
   const summaries = summariseEntries(entries, records, oldInstances)
   const totals = totalsOf(summaries)
 

@@ -743,3 +743,32 @@ code {
   align-items: flex-start;
   padding-block-start: var(--eds-spacing-xs);
 }
+
+/* Apply, Review and Revert under a health bar. */
+.apply-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+}
+
+.apply-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+}
+
+.run-failures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-xs);
+    align-items: center;
+    justify-content: space-between;
+  }
+}

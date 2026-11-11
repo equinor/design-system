@@ -14,6 +14,7 @@ import type {
   TypographyField,
   VariableType,
 } from '../../mapping/types'
+import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
 import type {
   PropertyRef,
   RawFillUnder,
@@ -52,6 +53,8 @@ type WalkState = {
   /** True inside a local component, whose nested components are not split off */
   inComponent: boolean
   isRoot: boolean
+  /** Ids of ancestors in the entry that set explicit modes */
+  modeHolders: string[]
 }
 
 /** The fields every unit of a node shares. */
@@ -63,6 +66,7 @@ type UnitBase = Pick<
   | 'entryId'
   | 'path'
   | 'instanceId'
+  | 'modeHolders'
   | 'context'
 >
 
@@ -152,6 +156,8 @@ export function explicitModes(node: BaseNode): Modes {
 export class Collector {
   readonly units: RawUnit[] = []
   readonly instances = new Map<string, FoundInstance>()
+  /** Layers with a change log, by entry */
+  readonly changed = new Map<string, number>()
   /** Local components found inside frames, to be listed as their own entries */
   readonly nestedComponents: {
     node: ComponentNode | ComponentSetNode
@@ -190,6 +196,7 @@ export class Collector {
         reactions: false,
         inComponent,
         isRoot: true,
+        modeHolders: [],
       })
     }
   }
@@ -387,6 +394,10 @@ export class Collector {
 
     const explicit = explicitModes(node)
     const modes = { ...state.modes, ...explicit }
+    const modeHolders =
+      Object.keys(explicit).length > 0
+        ? [...state.modeHolders, node.id]
+        : state.modeHolders
     const instanceId =
       state.instanceId ?? (node.type === 'INSTANCE' ? node.id : undefined)
     if (node.type === 'INSTANCE' && !state.instanceId) {
@@ -395,6 +406,12 @@ export class Collector {
         name: node.name,
         entryId: state.entryId,
       })
+    }
+    if (!instanceId && node.getSharedPluginData(NAMESPACE, LOG_KEY)) {
+      this.changed.set(
+        state.entryId,
+        (this.changed.get(state.entryId) ?? 0) + 1,
+      )
     }
     const names = [node.name, ...state.names]
     const reactions =
@@ -412,6 +429,7 @@ export class Collector {
       path: state.path,
       instanceId,
       context,
+      ...(modeHolders.length > 0 ? { modeHolders } : {}),
     }
     const push = (unit: RawUnit) => this.units.push(unit)
 
@@ -523,6 +541,7 @@ export class Collector {
           node.type === 'COMPONENT' ||
           node.type === 'COMPONENT_SET',
         isRoot: false,
+        modeHolders,
       }
       for (const child of node.children) await this.walk(child, childState)
     }

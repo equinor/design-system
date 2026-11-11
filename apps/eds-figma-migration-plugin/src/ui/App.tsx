@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Badge, Banner, Switch } from '@equinor/eds-core-react/next'
 import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
@@ -26,12 +26,15 @@ import type {
   ScanProgress,
   Scope,
 } from '../shared/messages'
+import { ApplyActions } from './components/ApplyActions'
 import { BulkBar } from './components/BulkBar'
 import { DevExport } from './components/DevExport'
 import { EntryList } from './components/EntryList'
 import { HealthBar, HealthLegend } from './components/HealthBar'
 import { Inspector } from './components/Inspector'
 import { MappingView } from './components/MappingView'
+import { RunResult } from './components/RunResult'
+import type { Run } from './components/RunResult'
 import { ScanControls } from './components/ScanControls'
 import { Tabs } from './components/Tabs'
 import { TargetPicker } from './components/TargetPicker'
@@ -64,6 +67,8 @@ function Overview({
   onChangeBinding,
   onSelectLayer,
   selection,
+  busy,
+  onApply,
 }: {
   summary: ScanSummary
   view: View
@@ -83,6 +88,8 @@ function Overview({
   ) => void
   onSelectLayer: (nodeIds: string[]) => void
   selection: Selection
+  busy: boolean
+  onApply: (entryIds: string[]) => void
 }) {
   const frames = summary.entries.filter((entry) => entry.kind !== 'component')
   const components = summary.entries.filter(
@@ -102,6 +109,19 @@ function Overview({
         </div>
         <HealthBar counts={totals} />
         <HealthLegend counts={totals} />
+        <ApplyActions
+          ready={totals.sure}
+          toReview={totals.check}
+          where="in the scope"
+          busy={busy}
+          onApply={() =>
+            onApply(
+              (showComponents ? summary.entries : frames).map(
+                (entry) => entry.id,
+              ),
+            )
+          }
+        />
         <p className="muted">
           {summary.scope === 'file'
             ? `${summary.pages.length} pages`
@@ -214,6 +234,12 @@ export function App() {
     notes: string[]
   }>()
   const [error, setError] = useState<string>()
+  const [applying, setApplying] = useState<{ done: number; total: number }>()
+  const [run, setRun] = useState<Run>()
+  const openEntryRef = useRef<string | undefined>(undefined)
+  useEffect(() => {
+    openEntryRef.current = openEntryId
+  }, [openEntryId])
 
   const onMessage = useCallback(
     (message: PluginToUi) => {
@@ -227,13 +253,37 @@ export function App() {
         case 'scan-progress':
           setProgress(message.progress)
           break
-        case 'scan-done':
+        case 'scan-done': {
           setScanning(false)
           setProgress(undefined)
           setSummary(message.summary)
-          setOpenEntryId(undefined)
           setDetail(undefined)
           clearBulk()
+          // After an apply or a revert the plugin scans again; an open
+          // frame stays open when it is still in the scan.
+          const openId = openEntryRef.current
+          if (
+            openId &&
+            message.summary.entries.some((entry) => entry.id === openId)
+          ) {
+            send({ type: 'get-entry', entryId: openId })
+          } else {
+            setOpenEntryId(undefined)
+          }
+          break
+        }
+        case 'apply-progress':
+          setApplying({ done: message.done, total: message.total })
+          break
+        case 'apply-done':
+          setApplying(undefined)
+          setRun({ kind: 'apply', result: message.result })
+          setScanning(true)
+          break
+        case 'revert-done':
+          setApplying(undefined)
+          setRun({ kind: 'revert', result: message.result })
+          setScanning(true)
           break
         case 'summary':
           setSummary(message.summary)
@@ -260,6 +310,7 @@ export function App() {
           break
         case 'error':
           setScanning(false)
+          setApplying(undefined)
           setError(message.message)
           break
       }
@@ -281,6 +332,19 @@ export function App() {
     send({ type: 'get-entry', entryId: entry.id })
   }
   const select = (nodeIds: string[]) => send({ type: 'select', nodeIds })
+  const busy = scanning || applying !== undefined
+  const applyEntries = (entryIds: string[]) => {
+    setError(undefined)
+    setRun(undefined)
+    setApplying({ done: 0, total: 0 })
+    send({ type: 'apply', entryIds })
+  }
+  const revertEntry = (entryId: string) => {
+    setError(undefined)
+    setRun(undefined)
+    setApplying({ done: 0, total: 0 })
+    send({ type: 'revert', entryId })
+  }
   const sendOverrides = (changes: OverrideChange[]) =>
     send({ type: 'set-overrides', changes })
 
@@ -445,6 +509,20 @@ export function App() {
             <Banner.Message>{error}</Banner.Message>
           </Banner>
         )}
+        {applying && (
+          <p className="muted" role="status">
+            {applying.total > 0
+              ? `Applying ${applying.done} of ${applying.total}…`
+              : 'Working…'}
+          </p>
+        )}
+        {run && !applying && (
+          <RunResult
+            run={run}
+            onDismiss={() => setRun(undefined)}
+            onSelect={select}
+          />
+        )}
         {isDevCommand &&
           (devExport ? (
             <DevExport
@@ -487,6 +565,9 @@ export function App() {
                 }
                 overrides={overrides}
                 selection={bulk}
+                busy={busy}
+                onApply={() => applyEntries([openEntry.id])}
+                onRevert={() => revertEntry(openEntry.id)}
                 onBack={() => setOpenEntryId(undefined)}
                 onSelect={select}
                 onChange={changeRecord}
@@ -511,6 +592,8 @@ export function App() {
                   onShowComponents={setShowComponents}
                   onOpen={open}
                   onGoTo={(entry) => select(entry.nodeIds)}
+                  busy={busy}
+                  onApply={applyEntries}
                 />
               </div>
             )}

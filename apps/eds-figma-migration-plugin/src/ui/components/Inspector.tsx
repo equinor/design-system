@@ -28,6 +28,7 @@ import { pathBelow } from '../paths'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
 import { sourceLabel, targetLabel } from '../targets'
+import { ApplyActions } from './ApplyActions'
 import { BindingRow } from './BindingRow'
 import { HealthBar, HealthLegend } from './HealthBar'
 import { Tabs } from './Tabs'
@@ -38,6 +39,9 @@ type InspectorProps = {
   oldInstances?: OldInstance[]
   overrides: Overrides
   selection: Selection
+  busy: boolean
+  onApply: () => void
+  onRevert: () => void
   onBack: () => void
   onSelect: (nodeIds: string[]) => void
   onChange: (record: BindingRecord) => void
@@ -183,6 +187,9 @@ export function Inspector({
   oldInstances,
   overrides,
   selection,
+  busy,
+  onApply,
+  onRevert,
   onBack,
   onSelect,
   onChange,
@@ -240,6 +247,15 @@ export function Inspector({
       </div>
       <HealthBar counts={entry.counts} />
       <HealthLegend counts={entry.counts} />
+      <ApplyActions
+        ready={entry.counts.sure}
+        toReview={entry.counts.check}
+        where="in this frame"
+        changed={entry.changed}
+        busy={busy}
+        onApply={onApply}
+        onRevert={onRevert}
+      />
 
       <div className="filter-row">
         <span className="filter-label" id="status-filter">

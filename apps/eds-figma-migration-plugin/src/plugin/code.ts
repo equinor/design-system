@@ -14,14 +14,15 @@ import type {
   Command,
   OverrideChange,
   PluginToUi,
-  Scope,
   UiToPlugin,
 } from '../shared/messages'
+import { applyChanges } from './apply/apply'
+import { revertRoots } from './apply/revert'
 import { collectFixture } from './dev/export-fixture'
 import { exportInventory } from './dev/export-inventory'
 import { ScanCancelled } from './scan/collect'
-import { runScan } from './scan/scan'
-import type { ScanState } from './scan/scan'
+import { currentTarget, runScan } from './scan/scan'
+import type { ScanState, ScanTarget } from './scan/scan'
 
 const COMMANDS: Command[] = [
   'open',
@@ -44,9 +45,25 @@ function post(message: PluginToUi) {
 }
 
 let lastScan: ScanState | undefined
+let lastTarget: ScanTarget | undefined
 let overrides: Overrides = { records: {}, rows: {} }
-let scanning = false
+/** True while a scan, an apply or a revert runs; only one at a time */
+let busy = false
 let cancelRequested = false
+
+/** The scan counted with the designer's choices: a chosen target is Ready, a choice to leave a binding No equivalent. */
+function withChoices(state: ScanState): ScanState {
+  const current = overrides
+  return {
+    ...state,
+    summary: recount(
+      state.summary,
+      state.records,
+      state.oldInstances,
+      (record) => effectiveCategory(record, current),
+    ),
+  }
+}
 
 function postSelection() {
   const selection = figma.currentPage.selection
@@ -60,17 +77,23 @@ function postSelection() {
 figma.on('selectionchange', postSelection)
 figma.on('currentpagechange', postSelection)
 
-async function scan(scope: Scope) {
-  if (scanning) return
-  scanning = true
+/**
+ * Scans the target. The designer's choices are kept from one scan to the
+ * next: they are stored by layer and property, and by legacy variable and
+ * proposal, so they still apply to what is left after an apply.
+ */
+async function scan(target: ScanTarget) {
+  if (busy) return
+  busy = true
   cancelRequested = false
   try {
-    lastScan = await runScan(
-      scope,
+    const state = await runScan(
+      target,
       (progress) => post({ type: 'scan-progress', progress }),
       () => cancelRequested,
     )
-    overrides = { records: {}, rows: {} }
+    lastTarget = target
+    lastScan = withChoices(state)
     post({ type: 'scan-done', summary: lastScan.summary })
     post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
     post({ type: 'overrides', overrides })
@@ -78,8 +101,54 @@ async function scan(scope: Scope) {
     if (error instanceof ScanCancelled) post({ type: 'scan-cancelled' })
     else throw error
   } finally {
-    scanning = false
+    busy = false
   }
+}
+
+/** Applies the Ready changes in the entries, then scans the same layers again. */
+async function apply(entryIds: string[]) {
+  if (!lastScan || !lastTarget || busy) return
+  busy = true
+  try {
+    const result = await applyChanges(
+      lastScan.records,
+      overrides,
+      new Set(entryIds),
+      (done, total) => post({ type: 'apply-progress', done, total }),
+    )
+    post({ type: 'apply-done', result })
+  } finally {
+    busy = false
+  }
+  await scan(lastTarget)
+}
+
+/** Puts back what the plugin changed in an entry, then scans again. */
+async function revert(entryId: string) {
+  const entry = lastScan?.summary.entries.find(
+    (candidate) => candidate.id === entryId,
+  )
+  if (!entry || !lastTarget || busy) return
+  busy = true
+  try {
+    const roots: SceneNode[] = []
+    for (const id of entry.nodeIds) {
+      const node = await figma.getNodeByIdAsync(id)
+      if (
+        node &&
+        !node.removed &&
+        node.type !== 'PAGE' &&
+        node.type !== 'DOCUMENT'
+      ) {
+        roots.push(node as SceneNode)
+      }
+    }
+    const result = await revertRoots(roots)
+    post({ type: 'revert-done', result })
+  } finally {
+    busy = false
+  }
+  await scan(lastTarget)
 }
 
 function pageOf(node: BaseNode): PageNode | null {
@@ -140,18 +209,8 @@ function setOverrides(changes: OverrideChange[]) {
   overrides = { records, rows }
   post({ type: 'overrides', overrides })
   if (lastScan) {
-    // A target the designer chose counts as Ready, and a choice to leave a
-    // binding as No equivalent, so the health bars follow every change.
-    const current = overrides
-    lastScan = {
-      ...lastScan,
-      summary: recount(
-        lastScan.summary,
-        lastScan.records,
-        lastScan.oldInstances,
-        (record) => effectiveCategory(record, current),
-      ),
-    }
+    // The health bars, the legend and the filters follow every change.
+    lastScan = withChoices(lastScan)
     post({ type: 'summary', summary: lastScan.summary })
   }
 }
@@ -213,7 +272,7 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         if (command === 'dev-export-fixture') await runDevExportFixture()
         break
       case 'scan':
-        await scan(message.scope)
+        await scan(currentTarget(message.scope))
         break
       case 'cancel-scan':
         cancelRequested = true
@@ -234,6 +293,12 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'set-overrides':
         setOverrides(message.changes)
+        break
+      case 'apply':
+        await apply(message.entryIds)
+        break
+      case 'revert':
+        await revert(message.entryId)
         break
       case 'run-dev-export-inventory':
         await runDevExportInventory()
