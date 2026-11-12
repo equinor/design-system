@@ -210,8 +210,13 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       highlightedIndex,
       getItemProps,
       openMenu,
+      closeMenu,
       selectedItem,
     } = useCombobox(comboboxProps)
+
+    useEffect(() => {
+      if (disabled && isOpen) closeMenu()
+    }, [disabled, isOpen, closeMenu])
 
     const openSelect = () => {
       if (!isOpen && !(disabled || readOnly)) {
@@ -248,6 +253,7 @@ const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
           </StyledInputWrapper>
           <StyledList {...getMenuProps()} role="dialog">
             {isOpen &&
+              !disabled &&
               timeValues.map((item, index) => (
                 <PaddedStyledListItem
                   highlighted={highlightedIndex === index ? 'true' : 'false'}
