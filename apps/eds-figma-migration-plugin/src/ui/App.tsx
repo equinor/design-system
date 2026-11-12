@@ -299,10 +299,10 @@ function Overview({
                         <div className="entry-info">
                           <span className="entry-name">{entry.name}</span>
                           <span className="entry-meta">
-                            {entry.pageName} · {oldCount(entry.counts)} legacy
+                            {entry.pageName}, {oldCount(entry.counts)} legacy
                             values
                             {entry.counts.check > 0
-                              ? ` · ${entry.counts.check} to check`
+                              ? `, ${entry.counts.check} to check`
                               : ''}
                           </span>
                         </div>

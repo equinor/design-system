@@ -147,7 +147,7 @@ export function ReviewView({
           {parent && parent !== binding.nodeName ? ` in ${parent}` : ''}
         </h2>
         <span className="binding-path">
-          {propertyLabel(binding.property)} ·{' '}
+          {propertyLabel(binding.property)},{' '}
           {[entryName, path].filter(Boolean).join(' / ')}
         </span>
         <span className="binding-swap">

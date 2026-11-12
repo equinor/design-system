@@ -87,7 +87,7 @@ const TAB_LABELS: Record<PropertyGroup, string> = {
 
 /**
  * The legacy side of a row in words (final review FR2 and FR3): typography as
- * “UI body · sm · squished” instead of three variable names, and a mode with
+ * “UI body, sm, squished” instead of three variable names, and a mode with
  * its collection, “Appearance: Danger”.
  */
 function legacyText(group: MappingGroup): string {
@@ -105,7 +105,7 @@ function legacyText(group: MappingGroup): string {
     const weight = names.some((name) => name.includes('font-weight-bolder'))
       ? 'bolder'
       : undefined
-    return [family, step, lineHeight, weight].filter(Boolean).join(' · ')
+    return [family, step, lineHeight, weight].filter(Boolean).join(', ')
   }
   if (group.group === 'modes' && group.oldCollection) {
     const collection = group.oldCollection.replace(/^[^\p{L}]+/u, '')
@@ -505,7 +505,7 @@ export function MappingView({
                             <span className="check-target-name">
                               {counts.length === 1
                                 ? shortTarget(row, overrides)
-                                : counts.map(countText).join(' · ')}
+                                : counts.map(countText).join(', ')}
                             </span>
                             {extra && counts.length === 1 && (
                               <span className="option-value">{extra}</span>
@@ -564,7 +564,7 @@ export function MappingView({
                               return (
                                 <BindingRow
                                   key={binding.id}
-                                  title={`${binding.nodeName} · ${propertyLabel(binding.property)}`}
+                                  title={`${binding.nodeName}, ${propertyLabel(binding.property)}`}
                                   subtitle={bindingPath(binding)}
                                   target={
                                     mine

@@ -112,7 +112,7 @@ export function RunResult({
             {failed.slice(0, 8).map((failure) => (
               <li key={`${failure.nodeId}|${failure.property}`}>
                 <span>
-                  <strong>{failure.nodeName}</strong> · {failure.property}:{' '}
+                  <strong>{failure.nodeName}</strong>, {failure.property}:{' '}
                   {failure.message}
                 </span>
                 <Button

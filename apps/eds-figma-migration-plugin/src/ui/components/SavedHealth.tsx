@@ -52,7 +52,7 @@ export function SavedHealth({ saved }: { saved: Saved }) {
                 <span>
                   {frame.name}
                   {frame.count > 1 ? ` ×${frame.count}` : ''}
-                  <span className="binding-path"> · {frame.pageName}</span>
+                  <span className="binding-path">, {frame.pageName}</span>
                 </span>
                 <span className="entry-health">
                   {formatHealth(frame.health)}

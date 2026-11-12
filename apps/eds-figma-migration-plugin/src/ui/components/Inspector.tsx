@@ -158,7 +158,7 @@ function groupSummary(
       parts.push(`${count} ${CATEGORY_LABELS[category].toLowerCase()}`)
     }
   }
-  return parts.join(' · ')
+  return parts.join(', ')
 }
 
 /**
@@ -253,7 +253,7 @@ export function Inspector({
               <strong>
                 {filter === 'all' ? 'every status' : CATEGORY_LABELS[filter]}
               </strong>
-              {' · '}
+              {' and '}
               <strong>
                 {property === 'all' ? 'every property' : GROUP_LABELS[property]}
               </strong>
@@ -397,7 +397,7 @@ export function Inspector({
                           groupSummary(group.records, categoryOf),
                         ]
                           .filter(Boolean)
-                          .join(' · ')}
+                          .join(', ')}
                       </span>
                     </span>
                   </Accordion.Header>

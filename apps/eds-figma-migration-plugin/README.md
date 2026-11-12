@@ -120,7 +120,7 @@ of a page or the file it opens on **Frames**, where the work is.
   are on (Text colour, Fill, Stroke, Padding and gaps, Text style, Mode, …),
   and one row per legacy variable and target: the number of layers, the
   legacy variable, and the target with its swatch or value. The legacy side shows the colour a legacy variable resolves to on its layers as a swatch, beside the new one. A row that needs a check says why in plain words under it. Both sides show their numbers in px: the legacy variable as it resolves on each layer, and the target in the density the layer will have (Spacious → comfortable, Comfortable → compact), so a change in size shows before it is applied. Rows are compact, one line each, with the status as a dot in the colours of the health bar (and ⚠ for Needs check); the full names are in the tooltip. Typography reads
-  "UI body · sm · squished", and a mode reads "Density: Comfortable →
+  "UI body, sm, squished", and a mode reads "Density: Comfortable →
   density: compact". A click on the legacy variable selects its layers, a
   click on the target opens the picker and changes every value in the row,
   and the chevron lists the layers, each with its own **Change**.

@@ -76,8 +76,8 @@ export function InstancesView({
                     <span className="binding-name">{group.name}</span>
                     <span className="binding-path">
                       {group.instances.length} instance
-                      {group.instances.length === 1 ? '' : 's'}, {group.source}{' '}
-                      · {group.count} legacy binding
+                      {group.instances.length === 1 ? '' : 's'} {group.source},{' '}
+                      {group.count} legacy binding
                       {group.count === 1 ? '' : 's'}
                     </span>
                   </span>

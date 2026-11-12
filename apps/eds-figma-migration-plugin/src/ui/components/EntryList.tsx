@@ -93,10 +93,10 @@ function countsText(entry: EntrySummary): string {
       `${entry.oldInstances} legacy instance${entry.oldInstances === 1 ? '' : 's'}`,
     )
   }
-  return parts.join(' · ')
+  return parts.join(', ')
 }
 
-/** “Page · Name”, then “Section · Name” for each section the entries are in. */
+/** “Page Name”, then “Section Name” for each section the entries are in. */
 function GroupTitle({ group, showPage }: { group: Group; showPage: boolean }) {
   const parts: [string, string][] = []
   if (showPage || group.sections.length === 0) parts.push(['Page', group.page])
@@ -297,14 +297,14 @@ export function EntryList({
                 </span>
                 {health === null ? (
                   <span className="binding-path">
-                    No EDS variables · {frameCount(page.entries)}
+                    No EDS variables, {frameCount(page.entries)}
                   </span>
                 ) : (
                   <span className="entry-health-row">
                     <HealthBar counts={counts} size="small" />
                     <span className="entry-health">{formatHealth(health)}</span>
                     <span className="binding-path">
-                      {frameCount(page.entries)} · {oldCount(counts)} legacy
+                      {frameCount(page.entries)}, {oldCount(counts)} legacy
                       values
                     </span>
                   </span>

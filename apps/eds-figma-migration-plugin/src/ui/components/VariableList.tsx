@@ -133,7 +133,7 @@ export function valueText(
   }
   const style = getNewTextStyle(name)
   if (style) {
-    return `${style.fontSize}px · ${style.fontFamily} ${style.fontStyle}`
+    return `${style.fontSize}px, ${style.fontFamily} ${style.fontStyle}`
   }
   return undefined
 }
