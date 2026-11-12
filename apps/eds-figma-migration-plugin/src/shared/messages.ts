@@ -160,8 +160,10 @@ export type UiToPlugin =
   | { type: 'apply'; entryIds: string[] }
   /** Puts back what the plugin changed in an entry, from the change log */
   | { type: 'revert'; entryId: string }
-  /** Builds the report of the latest scan, counting local components when the window does */
-  | { type: 'get-report'; includeComponents: boolean }
+  /** Builds the report of the latest scan */
+  | { type: 'get-report' }
+  /** Goes to the page a main component is on, selects it and scans the page */
+  | { type: 'scan-page-of'; nodeId: string }
   /** Replaces Typography component instances with text layers */
   | { type: 'convert-typography'; instanceIds: string[] }
   /** Resizes the window; done when the drag ends, so the size is kept */

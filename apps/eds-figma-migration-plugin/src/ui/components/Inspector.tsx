@@ -103,23 +103,44 @@ type Group = {
   title: string
   subtitle?: string
   records: BindingRecord[]
+  /** In the Layers view: an instance, with everything inside it in one group */
+  instance?: { id: string; mainId?: string }
 }
 
 function groupRecords(
   records: BindingRecord[],
   pivot: Pivot,
   entryName: string,
+  oldInstances: OldInstance[],
 ): Group[] {
+  const instances = new Map(oldInstances.map((item) => [item.id, item]))
   const groups = new Map<string, Group>()
   for (const record of records) {
-    const key =
-      pivot === 'layers'
+    // An instance is one group in the Layers view: the plugin changes nothing
+    // inside it, so its layers are not listed as layers of the frame.
+    const instanceId = pivot === 'layers' ? record.instanceId : undefined
+    const key = instanceId
+      ? `instance:${instanceId}`
+      : pivot === 'layers'
         ? record.nodeId
         : (record.oldKey ?? `current:${record.current ?? record.id}`)
     let group = groups.get(key)
     if (!group) {
-      group =
-        pivot === 'layers'
+      const known = instanceId ? instances.get(instanceId) : undefined
+      group = instanceId
+        ? {
+            key,
+            title: known?.name ?? record.nodeName,
+            subtitle: undefined,
+            records: [],
+            instance: {
+              id: instanceId,
+              ...(known?.mainComponent?.id && !known.mainComponent.remote
+                ? { mainId: known.mainComponent.id }
+                : {}),
+            },
+          }
+        : pivot === 'layers'
           ? {
               key,
               title: record.nodeName,
@@ -134,12 +155,20 @@ function groupRecords(
             }
       groups.set(key, group)
     }
+    // The instance's own record gives its name and where it is.
+    if (instanceId && record.nodeId === instanceId) {
+      group.title = record.nodeName
+      group.subtitle = pathBelow(record.path, entryName)
+    }
     group.records.push(record)
   }
   const result = [...groups.values()]
-  // In the Variables view, the most used variables first.
+  // In the Variables view, the most used variables first; in the Layers
+  // view, the layers of the frame first and the instances after them.
   if (pivot === 'variables') {
     result.sort((a, b) => b.records.length - a.records.length)
+  } else {
+    result.sort((a, b) => Number(!!a.instance) - Number(!!b.instance))
   }
   return result
 }
@@ -211,7 +240,7 @@ export function Inspector({
   const shown = byStatus.filter(
     (record) => property === 'all' || record.group === property,
   )
-  const groups = groupRecords(shown, pivot, entry.name)
+  const groups = groupRecords(shown, pivot, entry.name, oldInstances ?? [])
   const toggleOpen = (key: string, isOpen: boolean) =>
     setOpen((previous) => {
       const next = new Set(previous)
@@ -391,7 +420,12 @@ export function Inspector({
                 >
                   <Accordion.Header>
                     <span className="group-header">
-                      <span className="binding-name">{group.title}</span>
+                      <span className="binding-name">
+                        {group.instance && (
+                          <span className="kind-label">Instance</span>
+                        )}{' '}
+                        {group.title}
+                      </span>
                       <span className="binding-path">
                         {[
                           group.subtitle,
@@ -405,8 +439,24 @@ export function Inspector({
                   <Accordion.Panel>
                     {isOpen && (
                       <div className="stack-tight">
+                        {group.instance && (
+                          <p className="muted">
+                            The plugin changes nothing inside an instance. These
+                            values change with its main component or library.
+                          </p>
+                        )}
                         <div className="panel-actions">
-                          {mappable.length > 1 ? (
+                          {group.instance?.mainId ? (
+                            <Button
+                              size="small"
+                              variant="secondary"
+                              onClick={() =>
+                                onSelect([group.instance?.mainId as string])
+                              }
+                            >
+                              Go to main component
+                            </Button>
+                          ) : mappable.length > 1 ? (
                             <Checkbox
                               label={`Select all ${mappable.length} to change`}
                               checked={state.checked}
@@ -445,7 +495,12 @@ export function Inspector({
                             return (
                               <BindingRow
                                 key={record.id}
-                                title={propertyLabel(record.property)}
+                                title={
+                                  group.instance &&
+                                  record.nodeId !== group.instance.id
+                                    ? `${record.nodeName}: ${propertyLabel(record.property)}`
+                                    : propertyLabel(record.property)
+                                }
                                 old={record.old}
                                 target={targetText(record, overrides)}
                                 note={

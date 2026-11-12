@@ -7,7 +7,7 @@ import { CLEAR_MODE } from './classify'
 import { CATEGORY_LABELS, propertyLabel } from './labels'
 import { effectiveCategory, effectiveTarget, isMappable } from './mapping'
 import type { Overrides } from './mapping'
-import { formatHealth, healthOf, oldCount, sumCounts } from './summary'
+import { formatHealth, oldCount } from './summary'
 import type { BindingRecord, OldInstance, ScanSummary } from './types'
 
 export type ReportInput = {
@@ -16,11 +16,6 @@ export type ReportInput = {
   records: BindingRecord[]
   oldInstances: OldInstance[]
   overrides: Overrides
-  /**
-   * Count the local components, as the window does when Local components is
-   * on. Off, the report counts what the health bar counts by default.
-   */
-  includeComponents?: boolean
 }
 
 export type Report = { markdown: string; csv: string; baseName: string }
@@ -62,23 +57,13 @@ function layerPath(record: BindingRecord): string {
 }
 
 export function buildReport(input: ReportInput): Report {
-  const { fileName, summary, overrides } = input
-  const includeComponents = input.includeComponents ?? false
+  const { fileName, summary, records, oldInstances, overrides } = input
   const entries = new Map(summary.entries.map((entry) => [entry.id, entry]))
-  // Test session finding 11: the report counts what the window counts.
-  const counted = (entryId: string) =>
-    includeComponents || entries.get(entryId)?.kind !== 'component'
-  const records = input.records.filter((record) => counted(record.entryId))
-  const oldInstances = input.oldInstances.filter((instance) =>
-    counted(instance.entryId),
-  )
   const components = summary.entries.filter(
     (entry) => entry.kind === 'component',
   )
-  const totals = includeComponents
-    ? sumCounts(summary.entries.map((entry) => entry.counts))
-    : summary.totals
-  const health = includeComponents ? healthOf(totals) : summary.health
+  const totals = summary.totals
+  const health = summary.health
   const category = (record: BindingRecord) =>
     effectiveCategory(record, overrides)
   const date = summary.scannedAt.slice(0, 10)
@@ -92,9 +77,10 @@ export function buildReport(input: ReportInput): Report {
   const frames = summary.entries
     .filter((entry) => entry.kind !== 'component')
     .sort((a, b) => (a.health ?? 2) - (b.health ?? 2))
-  const changes = summary.entries
-    .filter((entry) => counted(entry.id))
-    .reduce((sum, entry) => sum + (entry.changed ?? 0), 0)
+  const changes = summary.entries.reduce(
+    (sum, entry) => sum + (entry.changed ?? 0),
+    0,
+  )
   const check = records.filter((record) => category(record) === 'check')
   const none = records.filter((record) => category(record) === 'none')
 
@@ -117,21 +103,11 @@ export function buildReport(input: ReportInput): Report {
   }
 
   const t = totals
-  const componentNote =
-    components.length === 0
-      ? []
-      : [
-          includeComponents
-            ? `The counts include the ${components.length} local component${components.length === 1 ? '' : 's'} in the scope, as the window does with Local components on.`
-            : `The ${components.length} local component${components.length === 1 ? ' in the scope is' : 's in the scope are'} left out, as in the window. Turn on Local components in the plugin's settings to count ${components.length === 1 ? 'it' : 'them'}.`,
-          '',
-        ]
   const markdown = [
     `# EDS variable migration report: ${fileName}`,
     '',
     `Scanned ${scope} on ${date}, ${summary.nodesScanned} layers. Rules version ${summary.mappingVersion}.`,
     '',
-    ...componentNote,
     `## Health: ${formatHealth(health)}`,
     '',
     table(
@@ -173,9 +149,9 @@ export function buildReport(input: ReportInput): Report {
       ]),
     ),
     '',
-    ...(includeComponents && components.length > 0
+    ...(components.length > 0
       ? [
-          `## Local components (${components.length})`,
+          `## Main components (${components.length})`,
           '',
           table(
             [

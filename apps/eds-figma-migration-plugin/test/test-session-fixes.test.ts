@@ -98,7 +98,7 @@ describe('counts', () => {
   })
 })
 
-describe('report and Local components', () => {
+describe('report and main components', () => {
   const entries = summariseEntries(
     [
       {
@@ -124,7 +124,7 @@ describe('report and Local components', () => {
     [record('a', 'frame', 'sure'), record('b', 'button', 'sure')],
     [],
   )
-  const frameTotals = totalsOf(entries.filter((e) => e.kind !== 'component'))
+  const frameTotals = totalsOf(entries)
   const summary: ScanSummary = {
     scope: 'page',
     scannedAt: '2026-11-11T12:00:00.000Z',
@@ -137,29 +137,16 @@ describe('report and Local components', () => {
   }
   const records = [record('a', 'frame', 'sure'), record('b', 'button', 'sure')]
 
-  it('leaves local components out when the window does', () => {
+  it('counts the main components in the scope and lists them', () => {
     const report = buildReport({
       fileName: 'File',
       summary,
       records,
       oldInstances: [],
       overrides: NO_OVERRIDES,
-    })
-    expect(report.csv.trim().split('\n')).toHaveLength(2)
-    expect(report.markdown).toContain('left out, as in the window')
-  })
-
-  it('counts them when Local components is on', () => {
-    const report = buildReport({
-      fileName: 'File',
-      summary,
-      records,
-      oldInstances: [],
-      overrides: NO_OVERRIDES,
-      includeComponents: true,
     })
     expect(report.csv.trim().split('\n')).toHaveLength(3)
-    expect(report.markdown).toContain('## Local components (1)')
+    expect(report.markdown).toContain('## Main components (1)')
     expect(report.markdown).toMatch(/\| Button \| Page \|.*\| 15 \|/)
   })
 })

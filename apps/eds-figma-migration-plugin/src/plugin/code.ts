@@ -357,6 +357,19 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
       case 'select':
         await select(message.nodeIds)
         break
+      case 'scan-page-of': {
+        const node = await figma.getNodeByIdAsync(message.nodeId)
+        const page = node ? pageOf(node) : null
+        if (node && page) {
+          await figma.setCurrentPageAsync(page)
+          if (node.type !== 'PAGE' && node.type !== 'DOCUMENT') {
+            figma.currentPage.selection = [node as SceneNode]
+            figma.viewport.scrollAndZoomIntoView([node as SceneNode])
+          }
+        }
+        await scan(currentTarget('page'))
+        break
+      }
       case 'go-to-page': {
         const page = await figma.getNodeByIdAsync(message.pageId)
         if (page?.type === 'PAGE') await figma.setCurrentPageAsync(page)
@@ -397,7 +410,6 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
               records: lastScan.records,
               oldInstances: lastScan.oldInstances,
               overrides,
-              includeComponents: message.includeComponents,
             }),
           })
         }

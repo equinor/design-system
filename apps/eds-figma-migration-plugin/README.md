@@ -227,12 +227,15 @@ components stay until those components are updated.
 **The Instances tab** lists every instance in the scope that still uses
 legacy variables, grouped by main component, with the number of instances,
 whether the component is in this file or in a library, and Go to for one
-instance or all of them. The plugin never changes inside an instance; the
-component is updated in its library, then the instances follow.
+instance or all of them. The plugin never changes inside an instance; a
+library component is updated in its library, and a component in this file
+changes with its main component.
 
-**Local components** are shown from the settings menu. A component that
-still uses legacy variables says how many times it is used in the file,
-because changing it changes every instance.
+**Main components** lists the main components in the scope, which count in
+the health bar and which Apply changes with the frames, each with how many
+times it is used in the file. It also lists the main components on other
+pages that instances in the scope use, with Go to and Scan its page. In a
+frame, the Layers view shows each instance as one row.
 
 ## Report and what the plugin keeps in the file
 

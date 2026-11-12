@@ -19,7 +19,6 @@ import {
   healthOutsideInstances,
   oldCount,
   scoredTotal,
-  sumCounts,
 } from '../scan/summary'
 import type {
   BindingRecord,
@@ -44,6 +43,10 @@ import { EntryList } from './components/EntryList'
 import { HealthBar, HealthLegend } from './components/HealthBar'
 import { Inspector } from './components/Inspector'
 import { InstancesView } from './components/InstancesView'
+import {
+  MainComponentsView,
+  mainComponentsElsewhere,
+} from './components/MainComponentsView'
 import { MappingView } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
 import { SavedHealth } from './components/SavedHealth'
@@ -59,7 +62,6 @@ import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
 import { reviewItems } from './review'
 import type { ReviewItem } from './review'
-import { filterGroups } from './groups'
 import { useSelection } from './selection'
 import type { Selection } from './selection'
 
@@ -69,7 +71,7 @@ type EntryDetail = {
   oldInstances: OldInstance[]
 }
 
-type View = 'frames' | 'mapping' | 'instances'
+type View = 'frames' | 'mapping' | 'instances' | 'components'
 
 function Overview({
   summary,
@@ -77,7 +79,6 @@ function Overview({
   onView,
   mapping,
   overrides,
-  showComponents,
   onOpen,
   onGoTo,
   onSelectOld,
@@ -94,7 +95,7 @@ function Overview({
   onCloseReport,
   showCounts,
   showEmpty,
-  onShowComponents,
+  onScanPageOf,
   onConvert,
 }: {
   summary: ScanSummary
@@ -102,7 +103,6 @@ function Overview({
   onView: (view: View) => void
   mapping: MappingGroup[]
   overrides: Overrides
-  showComponents: boolean
   onOpen: (entry: EntrySummary) => void
   onGoTo: (entry: EntrySummary) => void
   onSelectOld: (oldKey: string) => void
@@ -123,7 +123,7 @@ function Overview({
   onCloseReport: () => void
   showCounts: boolean
   showEmpty: boolean
-  onShowComponents: (show: boolean) => void
+  onScanPageOf: (nodeId: string) => void
   onConvert: (instanceIds: string[]) => void
 }) {
   const entryNames = new Map(
@@ -136,19 +136,14 @@ function Overview({
   const components = summary.entries.filter(
     (entry) => entry.kind === 'component',
   )
-  const totals = showComponents
-    ? sumCounts(summary.entries.map((entry) => entry.counts))
-    : summary.totals
-  const applied = showComponents ? summary.entries : frames
-  // Final review FR10: Changes counts what the health bar counts.
-  const componentIds = new Set(components.map((entry) => entry.id))
-  const changes = showComponents
-    ? mapping
-    : filterGroups(mapping, (binding) => !componentIds.has(binding.entryId))
-  // Final review FR5: a component with legacy variables is not hidden away.
-  const legacyComponents = components.filter(
-    (entry) => oldCount(entry.counts) > 0,
-  )
+  // Main components in the scope count like the frames, and Apply changes
+  // them too; the Main components tab lists them with those used elsewhere.
+  const totals = summary.totals
+  const applied = summary.entries
+  const changes = mapping
+  const componentsTabCount =
+    components.filter((entry) => oldCount(entry.counts) > 0).length +
+    mainComponentsElsewhere(components, instances).length
   // UX review F8: Apply says where it applies.
   const readyIn = applied.filter((entry) => entry.counts.sure > 0)
   const pageCount = new Set(readyIn.map((entry) => entry.pageId)).size
@@ -260,6 +255,10 @@ function Overview({
           { id: 'mapping', label: 'Changes' },
           { id: 'frames', label: 'Frames' },
           { id: 'instances', label: `Instances ${instances.length}` },
+          {
+            id: 'components',
+            label: `Main components ${componentsTabCount}`,
+          },
         ]}
         selected={view}
         onSelect={onView}
@@ -270,6 +269,18 @@ function Overview({
             entryNames={entryNames}
             onSelect={onSelectLayer}
             onConvert={onConvert}
+            busy={busy}
+          />
+        ) : view === 'components' ? (
+          <MainComponentsView
+            components={components}
+            instances={instances}
+            showPages={summary.scope === 'file'}
+            onGoToPage={(pageId) => send({ type: 'go-to-page', pageId })}
+            onOpen={onOpen}
+            onGoTo={onGoTo}
+            onSelect={onSelectLayer}
+            onScanPageOf={onScanPageOf}
             busy={busy}
           />
         ) : view === 'mapping' ? (
@@ -335,54 +346,6 @@ function Overview({
                 />
               )}
             </section>
-
-            {legacyComponents.length > 0 && !showComponents && (
-              <div className="components-note">
-                <span className="muted">
-                  {legacyComponents.length} local component
-                  {legacyComponents.length === 1 ? ' uses' : 's use'} legacy
-                  variables
-                  {legacyComponents[0].instanceCount !== undefined
-                    ? ` and ${legacyComponents.length === 1 ? 'is' : 'are'} used ${legacyComponents.reduce((sum, entry) => sum + (entry.instanceCount ?? 0), 0)} times in the file`
-                    : ''}
-                  .
-                </span>
-                <Button
-                  variant="ghost"
-                  size="small"
-                  onClick={() => onShowComponents(true)}
-                >
-                  Show
-                </Button>
-              </div>
-            )}
-            {components.length > 0 && showComponents && (
-              <section
-                className="stack-tight"
-                aria-labelledby="components-title"
-              >
-                <h2 id="components-title" className="section-title">
-                  Local components
-                </h2>
-                {showComponents && (
-                  <>
-                    <p className="muted">
-                      Changing a main component changes every instance of it in
-                      the file.
-                    </p>
-                    <EntryList
-                      entries={components}
-                      showPages={summary.scope === 'file'}
-                      onGoToPage={(pageId) =>
-                        send({ type: 'go-to-page', pageId })
-                      }
-                      onOpen={onOpen}
-                      onGoTo={onGoTo}
-                    />
-                  </>
-                )}
-              </section>
-            )}
           </div>
         )}
       </Tabs>
@@ -415,14 +378,6 @@ export function App() {
   const [summary, setSummary] = useState<ScanSummary>()
   const [openEntryId, setOpenEntryId] = useState<string>()
   const [detail, setDetail] = useState<EntryDetail>()
-  const [showComponents, setShowComponents] = useState(false)
-  // Test session finding 14: until the designer chooses, local components
-  // are shown when they hold most of what the plugin can change.
-  const componentsChosen = useRef(false)
-  const chooseComponents = (show: boolean) => {
-    componentsChosen.current = true
-    setShowComponents(show)
-  }
   // Test session finding 17: the scan is out of date after an undo or an edit.
   const [stale, setStale] = useState(false)
   // Check designs: the changes are the first thing shown after a scan.
@@ -451,6 +406,8 @@ export function App() {
   // Final review FR1: after a scan the designer started, a selection opens
   // on Changes and a page or the file on Frames, where the work is.
   const userScan = useRef(false)
+  // After Scan its page, the scan opens on the Main components tab.
+  const toComponents = useRef(false)
   const [lastApplied, setLastApplied] = useState<string[]>([])
   useEffect(() => {
     openEntryRef.current = openEntryId
@@ -476,33 +433,17 @@ export function App() {
           if (userScan.current) {
             userScan.current = false
             setView(
-              message.summary.scope === 'selection' ? 'mapping' : 'frames',
+              toComponents.current
+                ? 'components'
+                : message.summary.scope === 'selection'
+                  ? 'mapping'
+                  : 'frames',
             )
+            toComponents.current = false
           }
           setScanning(false)
           setProgress(undefined)
           setStale(false)
-          if (!componentsChosen.current) {
-            const changeable = (entries: EntrySummary[]) =>
-              entries.reduce(
-                (sum, entry) =>
-                  sum +
-                  entry.counts.sure +
-                  entry.counts.check +
-                  entry.counts.none,
-                0,
-              )
-            const components = message.summary.entries.filter(
-              (entry) => entry.kind === 'component',
-            )
-            const frames = message.summary.entries.filter(
-              (entry) => entry.kind !== 'component',
-            )
-            setShowComponents(
-              components.length > 0 &&
-                changeable(components) > changeable(frames),
-            )
-          }
           setSummary(message.summary)
           setDetail(undefined)
           setReview(undefined)
@@ -594,6 +535,16 @@ export function App() {
     setError(undefined)
     setScanning(true)
     send({ type: 'scan', scope })
+  }
+  /** Goes to a main component's page and scans it, from the Main components tab */
+  const scanPageOf = (nodeId: string) => {
+    scopeChosen.current = true
+    userScan.current = true
+    toComponents.current = true
+    setScope('page')
+    setError(undefined)
+    setScanning(true)
+    send({ type: 'scan-page-of', nodeId })
   }
   const open = (entry: EntrySummary) => {
     setOpenEntryId(entry.id)
@@ -796,12 +747,6 @@ export function App() {
                   checked: showEmpty,
                   onChange: setShowEmpty,
                 },
-                {
-                  id: 'components',
-                  label: 'Local components',
-                  checked: showComponents,
-                  onChange: chooseComponents,
-                },
               ]}
               actions={
                 summary
@@ -809,11 +754,7 @@ export function App() {
                       {
                         id: 'report',
                         label: 'Export report…',
-                        onSelect: () =>
-                          send({
-                            type: 'get-report',
-                            includeComponents: showComponents,
-                          }),
+                        onSelect: () => send({ type: 'get-report' }),
                       },
                     ]
                   : []
@@ -982,7 +923,6 @@ export function App() {
                   onChangeBinding={changeBinding}
                   onSelectLayer={select}
                   selection={bulk}
-                  showComponents={showComponents}
                   onOpen={open}
                   onGoTo={(entry) => select(entry.nodeIds)}
                   busy={locked}
@@ -990,16 +930,11 @@ export function App() {
                   instances={instances}
                   onReview={() => setReview(reviewItems(mapping, overrides))}
                   report={report}
-                  onReport={() =>
-                    send({
-                      type: 'get-report',
-                      includeComponents: showComponents,
-                    })
-                  }
+                  onReport={() => send({ type: 'get-report' })}
                   onCloseReport={() => setReport(undefined)}
                   showCounts={showCounts}
                   showEmpty={showEmpty}
-                  onShowComponents={chooseComponents}
+                  onScanPageOf={scanPageOf}
                   onConvert={convertTypography}
                 />
               </div>

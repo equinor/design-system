@@ -56,10 +56,12 @@ plugin can change in the scope.
 - **Instances** lists the instances that still use legacy variables, grouped
   by component. For a component in this file, **Go to main component** takes
   you to it: migrate its page, and every instance follows.
+- **Main components** lists the main components in the scope, which Apply
+  changes together with the frames, and the main components on other pages
+  that instances in the scope use, with **Go to** and **Scan its page**.
 
-On a page of main components, such as a components page, the plugin shows
-the **Local components** by default, since that is where the work is. You can
-turn them on or off in the settings menu.
+In a frame, the **Layers** view shows each instance as one row, marked
+Instance: the plugin changes nothing inside it.
 
 To change a target, press **Change** on one value or the target of a row, or
 tick several values and use the bar at the bottom of the window. You can also
@@ -117,8 +119,7 @@ tabular figures; the result has a button that selects those texts.
 
 **Export report**, beside the scope line, makes a Markdown report and a CSV for a spreadsheet, with
 the health, the frames, what needs a check, what has no equivalent and the
-instances. It counts what the window counts: the local components only when
-**Local components** is on. The plugin also keeps the latest scan and your choices in the
+instances. It counts what the window counts, main components in the scope included. The plugin also keeps the latest scan and your choices in the
 file, so the next time you open it, you see where you left off.
 
 ## Questions

@@ -102,12 +102,9 @@ export function summariseEntries(
 }
 
 /** The totals of a scan: every entry except local main components, which are counted only on request. */
+/** The counts of every entry in the scan: frames, loose layers and the main components in the scope. */
 export function totalsOf(entries: EntrySummary[]): Counts {
-  return sumCounts(
-    entries
-      .filter((entry) => entry.kind !== 'component')
-      .map((entry) => entry.counts),
-  )
+  return sumCounts(entries.map((entry) => entry.counts))
 }
 
 /** The same scan, counted again after a designer has changed targets. */
