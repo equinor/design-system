@@ -239,7 +239,7 @@ frame, the Layers view shows each instance as one row.
 
 ## Report and what the plugin keeps in the file
 
-**Export report**, beside the scope line and in the settings menu, makes a Markdown report (health,
+**Export report**, beside the scope line and in Settings, makes a Markdown report (health,
 every frame with its health and the layers the plugin changed, the bindings
 that need a check or have no equivalent, the instances with legacy variables
 grouped by component, and the rules version) and a CSV with one row per

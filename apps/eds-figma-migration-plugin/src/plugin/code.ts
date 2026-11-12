@@ -26,7 +26,15 @@ import { currentTarget, runScan } from './scan/scan'
 import { loadChoices, loadHealth, saveChoices, saveHealth } from './store'
 import { buildReport } from '../scan/report'
 import type { ScanState, ScanTarget } from './scan/scan'
-import { clampSize, WINDOW, WINDOW_SIZE_KEY } from '../shared/window'
+import {
+  clampSize,
+  INTRO_KEY,
+  INTRO_VERSION,
+  readSettings,
+  SETTINGS_KEY,
+  WINDOW,
+  WINDOW_SIZE_KEY,
+} from '../shared/window'
 
 const COMMANDS: Command[] = [
   'open',
@@ -339,6 +347,20 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         })
         postSelection()
         {
+          // The person's own preferences, kept in clientStorage, not the file.
+          const seen = (await figma.clientStorage
+            .getAsync(INTRO_KEY)
+            .catch(() => undefined)) as unknown
+          const settings = (await figma.clientStorage
+            .getAsync(SETTINGS_KEY)
+            .catch(() => undefined)) as unknown
+          post({
+            type: 'prefs',
+            introSeen: typeof seen === 'number' && seen >= INTRO_VERSION,
+            settings: readSettings(settings),
+          })
+        }
+        {
           const saved = loadHealth()
           if (saved) post({ type: 'saved-health', saved })
         }
@@ -356,6 +378,22 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'select':
         await select(message.nodeIds)
+        break
+      case 'intro-seen':
+        await figma.clientStorage
+          .setAsync(INTRO_KEY, INTRO_VERSION)
+          .catch(() => undefined)
+        break
+      case 'save-settings':
+        await figma.clientStorage
+          .setAsync(SETTINGS_KEY, message.settings)
+          .catch(() => undefined)
+        break
+      case 'reset-window-size':
+        figma.ui.resize(WINDOW.width, WINDOW.height)
+        await figma.clientStorage
+          .deleteAsync(WINDOW_SIZE_KEY)
+          .catch(() => undefined)
         break
       case 'scan-page-of': {
         const node = await figma.getNodeByIdAsync(message.nodeId)

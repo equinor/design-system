@@ -1042,7 +1042,7 @@ code {
   justify-content: space-between;
   padding: var(--eds-spacing-sm) var(--eds-spacing-md);
   /* Room for the resize grip in the corner */
-  padding-inline-end: calc(var(--eds-spacing-md) + var(--eds-spacing-lg));
+  padding-inline-end: calc(var(--eds-spacing-md) + 32px);
   background: var(--eds-background-surface);
   border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
 }
@@ -1196,9 +1196,10 @@ code {
   inset-block-end: 0;
   inset-inline-end: 0;
   z-index: 5;
-  inline-size: var(--eds-spacing-lg);
-  block-size: var(--eds-spacing-lg);
-  padding: 2px;
+  /* A target large enough to find and drag; the grip is drawn inside it */
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 6px;
   color: var(--eds-icon-secondary);
   cursor: nwse-resize;
   touch-action: none;
@@ -1211,7 +1212,7 @@ code {
     block-size: 100%;
     fill: none;
     stroke: currentColor;
-    stroke-width: 1.5;
+    stroke-width: 1.75;
   }
 
   &:focus-visible {
@@ -1274,4 +1275,290 @@ code {
 
 .check-why[data-kind='none'] {
   color: var(--eds-icon-secondary);
+}
+
+/*
+ * The introduction. Equinor's own look: the Equinor typeface for the
+ * heading, a moss green band with a picture made of the window's own parts,
+ * and plenty of space. Only EDS Beta tokens, so it follows light and dark.
+ */
+.intro {
+  inline-size: min(calc(100vw - 2 * var(--eds-spacing-md)), 520px);
+  /* One height for every step, so the dialog does not jump */
+  block-size: min(calc(100vh - 2 * var(--eds-spacing-md)), 640px);
+  overflow: hidden;
+  background: var(--eds-background-surface);
+
+  /* Only when open: a closed dialog keeps the browser's display: none */
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.intro-hero {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 168px;
+  padding: var(--eds-spacing-xl) var(--eds-spacing-lg);
+  color: var(--eds-text-on-emphasis-accent);
+  background: var(--eds-background-non-interactive-accent-emphasis);
+}
+
+.intro-hero-tokens {
+  /* Both cards as wide as the longer name, the arrow centred between them */
+  display: grid;
+  gap: var(--eds-spacing-xs);
+  justify-items: stretch;
+  inline-size: max-content;
+  max-inline-size: 100%;
+
+  & .intro-hero-arrow {
+    justify-self: center;
+  }
+}
+
+.intro-token {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  color: var(--eds-text-primary);
+  background: var(--eds-background-surface);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-high);
+
+  & code {
+    font-family: var(--eds-font-family-mono);
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+  }
+}
+
+.intro-token-library {
+  font-size: var(--eds-typography-label-xs-font-size);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.intro-token-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.intro-hero-arrow {
+  color: var(--eds-icon-on-emphasis-accent);
+}
+
+.intro-hero-health {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+  inline-size: min(100%, 320px);
+  padding: var(--eds-spacing-md);
+  color: var(--eds-text-primary);
+  background: var(--eds-background-surface);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-high);
+}
+
+.intro-hero-figure {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-lg-font-size);
+  line-height: var(--eds-typography-header-lg-line-height);
+}
+
+.intro-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+}
+
+.intro-hero-instance {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.intro-instance-card {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  color: var(--eds-text-primary);
+  background: var(--eds-background-surface);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-high);
+
+  & svg {
+    color: var(--eds-icon-secondary);
+  }
+}
+
+.intro-hero-caption {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+}
+
+.intro-hero-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--eds-spacing-xs);
+  inline-size: min(100%, 320px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-xs);
+    align-items: center;
+    padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+    font-weight: var(--eds-font-weight-medium);
+    color: var(--eds-text-primary);
+    background: var(--eds-background-surface);
+    border-radius: var(--eds-corner-radius-rounded);
+    box-shadow: var(--eds-elevation-high);
+  }
+}
+
+.intro-step-number {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--eds-spacing-xl);
+  block-size: var(--eds-spacing-xl);
+  font-size: var(--eds-typography-label-sm-font-size);
+  color: var(--eds-text-on-emphasis-accent);
+  background: var(--eds-background-non-interactive-accent-emphasis);
+  border-radius: var(--eds-corner-radius-pill);
+}
+
+.intro-hero-ready svg {
+  inline-size: 72px;
+  block-size: 72px;
+  color: var(--eds-icon-on-emphasis-accent);
+}
+
+.intro-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+  min-block-size: 0;
+  overflow-y: auto;
+  padding: var(--eds-spacing-lg) var(--eds-spacing-lg) var(--eds-spacing-sm);
+}
+
+.intro-progress {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intro-step-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.intro-segments {
+  display: flex;
+  gap: var(--eds-spacing-3xs, 2px);
+}
+
+.intro-segment {
+  inline-size: 24px;
+  block-size: 4px;
+  background: var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-pill);
+
+  &[data-done] {
+    background: var(--eds-background-non-interactive-accent-emphasis);
+  }
+}
+
+/* The Equinor typeface, larger than the Dialog's own title */
+.eds-dialog .intro-title {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-xl-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-header-xl-line-height);
+  color: var(--eds-text-primary);
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+
+  & p {
+    margin: 0;
+  }
+}
+
+.intro-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding-inline-start: var(--eds-spacing-lg);
+}
+
+.intro-actions {
+  display: flex;
+  flex: none;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-lg) var(--eds-spacing-lg);
+}
+
+.intro-actions-end {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  margin-inline-start: auto;
+}
+
+/* Settings: sections of switches and buttons */
+.settings-dialog {
+  inline-size: min(calc(100vw - 2 * var(--eds-spacing-md)), 420px);
+  max-block-size: calc(100vh - 2 * var(--eds-spacing-md));
+
+  /* In a short window the sections scroll, and Done stays in view */
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & > .content {
+    min-block-size: 0;
+    overflow-y: auto;
+  }
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+
+  & + & {
+    padding-block-start: var(--eds-spacing-md);
+    border-block-start: 1px solid
+      var(--eds-border-non-interactive-neutral-muted);
+  }
+
+  & p {
+    margin: 0;
+  }
+}
+
+.settings-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
 }

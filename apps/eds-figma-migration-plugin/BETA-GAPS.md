@@ -25,6 +25,6 @@ the plugin grows.
 ## Menu
 
 `Menu` and `MenuItem` style a list, but do not open, close, position or
-handle the keyboard. The settings menu in the header adds a button with
-`aria-haspopup`, opening and closing (outside click and Escape), focus on the
-first item, and arrow keys (`src/ui/components/SettingsMenu.tsx`).
+handle the keyboard. The settings used to be such a menu, with all of that
+added by hand; they are now a Beta `Dialog` with `Switch`es and buttons
+(`src/ui/components/SettingsDialog.tsx`), which needs none of it.

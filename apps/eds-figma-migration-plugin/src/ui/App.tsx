@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Badge, Banner, Button } from '@equinor/eds-core-react/next'
+import { Badge, Banner, Button, Icon } from '@equinor/eds-core-react/next'
+import { tune } from '@equinor/eds-icons'
 import { schemesOf } from '../mapping/scheme'
 import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
@@ -35,6 +36,8 @@ import type {
   ScanProgress,
   Scope,
 } from '../shared/messages'
+import { DEFAULT_SETTINGS } from '../shared/window'
+import type { DisplaySettings } from '../shared/window'
 import { ApplyActions } from './components/ApplyActions'
 import { BulkBar } from './components/BulkBar'
 import { DevExport } from './components/DevExport'
@@ -50,7 +53,8 @@ import {
 import { MappingView } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
 import { SavedHealth } from './components/SavedHealth'
-import { SettingsMenu } from './components/SettingsMenu'
+import { Onboarding } from './components/Onboarding'
+import { SettingsDialog } from './components/SettingsDialog'
 import { ResizeHandle } from './components/ResizeHandle'
 import { RunResult } from './components/RunResult'
 import type { Run } from './components/RunResult'
@@ -365,9 +369,6 @@ function Overview({
 }
 
 export function App() {
-  // Sets the window's own theme. The colours shown for layers follow each
-  // layer's colour scheme instead (scan/types.ts, BindingRecord.scheme).
-  useFigmaColorScheme()
   const bulk = useSelection()
   const clearBulk = bulk.clear
   const [command, setCommand] = useState<Command>()
@@ -382,8 +383,20 @@ export function App() {
   const [stale, setStale] = useState(false)
   // Check designs: the changes are the first thing shown after a scan.
   const [view, setView] = useState<View>('mapping')
-  const [showCounts, setShowCounts] = useState(true)
-  const [showEmpty, setShowEmpty] = useState(false)
+  // Kept per person in clientStorage, and sent when the window opens.
+  const [settings, setSettings] = useState<DisplaySettings>(DEFAULT_SETTINGS)
+  const { showCounts, showEmpty } = settings
+  // Sets the window's own theme: Figma's, or the one chosen in Settings. The
+  // colours shown for layers follow each layer's colour scheme instead
+  // (scan/types.ts, BindingRecord.scheme).
+  const windowScheme = useFigmaColorScheme(settings.theme)
+  const changeSettings = (next: DisplaySettings) => {
+    setSettings(next)
+    send({ type: 'save-settings', settings: next })
+  }
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  // The introduction opens by itself once per person, then from Settings.
+  const [introOpen, setIntroOpen] = useState(false)
   const [mapping, setMapping] = useState<MappingGroup[]>([])
   const [instances, setInstances] = useState<OldInstance[]>([])
   const [review, setReview] = useState<ReviewItem[]>()
@@ -497,6 +510,10 @@ export function App() {
           break
         case 'saved-health':
           setSaved(message.saved)
+          break
+        case 'prefs':
+          setSettings(message.settings)
+          if (!message.introSeen) setIntroOpen(true)
           break
         case 'report':
           setReport(message.report)
@@ -733,33 +750,15 @@ export function App() {
         </Badge>
         {command === 'open' && (
           <div className="header-actions">
-            <SettingsMenu
-              settings={[
-                {
-                  id: 'counts',
-                  label: 'Layer counts',
-                  checked: showCounts,
-                  onChange: setShowCounts,
-                },
-                {
-                  id: 'empty',
-                  label: 'Frames without EDS variables',
-                  checked: showEmpty,
-                  onChange: setShowEmpty,
-                },
-              ]}
-              actions={
-                summary
-                  ? [
-                      {
-                        id: 'report',
-                        label: 'Export report…',
-                        onSelect: () => send({ type: 'get-report' }),
-                      },
-                    ]
-                  : []
-              }
-            />
+            <Button
+              variant="ghost"
+              icon
+              aria-label="Settings"
+              aria-haspopup="dialog"
+              onClick={() => setSettingsOpen(true)}
+            >
+              <Icon data={tune} />
+            </Button>
           </div>
         )}
       </header>
@@ -954,6 +953,42 @@ export function App() {
       )}
       <ResizeHandle />
       <TargetPicker request={picker} onClose={() => setPicker(undefined)} />
+      {command === 'open' && (
+        <>
+          <SettingsDialog
+            open={settingsOpen}
+            onClose={() => setSettingsOpen(false)}
+            settings={settings}
+            windowScheme={windowScheme}
+            onChange={changeSettings}
+            canReport={summary !== undefined}
+            onReport={() => {
+              setSettingsOpen(false)
+              send({ type: 'get-report' })
+            }}
+            onIntroduction={() => {
+              setSettingsOpen(false)
+              setIntroOpen(true)
+            }}
+            onResetWindow={() => send({ type: 'reset-window-size' })}
+          />
+          <Onboarding
+            open={introOpen}
+            onClose={(scanPage) => {
+              setIntroOpen(false)
+              send({ type: 'intro-seen' })
+              if (scanPage) {
+                scopeChosen.current = true
+                userScan.current = true
+                setScope('page')
+                setError(undefined)
+                setScanning(true)
+                send({ type: 'scan', scope: 'page' })
+              }
+            }}
+          />
+        </>
+      )}
     </div>
   )
 }

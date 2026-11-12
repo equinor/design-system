@@ -28,3 +28,50 @@ export function clampSize(
     ),
   }
 }
+
+/**
+ * The introduction is shown once per person, on the first open. The key in
+ * figma.clientStorage holds the version that was seen; raise INTRO_VERSION
+ * to show it again after a large change.
+ */
+export const INTRO_KEY = 'intro-seen'
+export const INTRO_VERSION = 1
+
+/** The display settings, kept per person in figma.clientStorage. */
+export const SETTINGS_KEY = 'settings'
+
+/** The window's own theme: Figma's, or one the person chose in Settings. */
+export type WindowTheme = 'figma' | 'light' | 'dark'
+
+export type DisplaySettings = {
+  /** The number of layers in each Changes row */
+  showCounts: boolean
+  /** Frames that use no EDS variables, in the Frames list */
+  showEmpty: boolean
+  theme: WindowTheme
+}
+
+export const DEFAULT_SETTINGS: DisplaySettings = {
+  showCounts: true,
+  showEmpty: false,
+  theme: 'figma',
+}
+
+/** Settings read from storage, with the defaults for anything missing or of the wrong type. */
+export function readSettings(saved: unknown): DisplaySettings {
+  const value = (saved ?? {}) as Partial<Record<keyof DisplaySettings, unknown>>
+  return {
+    showCounts:
+      typeof value.showCounts === 'boolean'
+        ? value.showCounts
+        : DEFAULT_SETTINGS.showCounts,
+    showEmpty:
+      typeof value.showEmpty === 'boolean'
+        ? value.showEmpty
+        : DEFAULT_SETTINGS.showEmpty,
+    theme:
+      value.theme === 'light' || value.theme === 'dark'
+        ? value.theme
+        : DEFAULT_SETTINGS.theme,
+  }
+}

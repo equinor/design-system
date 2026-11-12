@@ -164,3 +164,19 @@ describe('colour scheme of a layer', () => {
     expect(schemesOf([])).toEqual(['light'])
   })
 })
+
+describe('display settings kept per person', () => {
+  it('fills in the defaults for anything missing or wrong', async () => {
+    const { readSettings, DEFAULT_SETTINGS } =
+      await import('../src/shared/window')
+    expect(readSettings(undefined)).toEqual(DEFAULT_SETTINGS)
+    expect(
+      readSettings({ showCounts: false, showEmpty: 'yes', theme: 'dark' }),
+    ).toEqual({
+      showCounts: false,
+      showEmpty: DEFAULT_SETTINGS.showEmpty,
+      theme: 'dark',
+    })
+    expect(readSettings({ theme: 'purple' }).theme).toBe('figma')
+  })
+})

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { PluginToUi, UiToPlugin } from '../shared/messages'
+import type { WindowTheme } from '../shared/window'
 
 /** Sends a message to the plugin main thread. */
 export function send(message: UiToPlugin) {
@@ -25,12 +26,16 @@ function figmaScheme(): 'light' | 'dark' {
 }
 
 /**
- * Follows Figma's light or dark theme. With `themeColors: true`, Figma puts
- * the class `figma-dark` or `figma-light` on <html>; the EDS tokens switch on
- * `data-color-scheme`, so this copies the one to the other.
+ * The window's theme. It follows Figma's light or dark theme unless the
+ * person chose one in Settings. With `themeColors: true`, Figma puts the
+ * class `figma-dark` or `figma-light` on <html>; the EDS tokens switch on
+ * `data-color-scheme`, so this sets that.
  */
-export function useFigmaColorScheme(): 'light' | 'dark' {
-  const [scheme, setScheme] = useState(figmaScheme)
+export function useFigmaColorScheme(
+  theme: WindowTheme = 'figma',
+): 'light' | 'dark' {
+  const [figma, setScheme] = useState(figmaScheme)
+  const scheme = theme === 'figma' ? figma : theme
   useEffect(() => {
     const observer = new MutationObserver(() => setScheme(figmaScheme()))
     observer.observe(document.documentElement, {

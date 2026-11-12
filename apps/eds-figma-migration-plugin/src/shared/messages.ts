@@ -3,6 +3,7 @@
  * the plugin window (src/ui, an iframe). Both sides import these types, so a
  * change to a message is checked on both.
  */
+import type { DisplaySettings } from './window'
 import type { MappingGroup, OverrideValue, Overrides } from '../scan/mapping'
 import type { Report } from '../scan/report'
 import type {
@@ -120,6 +121,8 @@ export type PluginToUi =
   | { type: 'instances'; instances: OldInstance[] }
   /** The latest scan saved in the file, sent when the window opens */
   | { type: 'saved-health'; saved: SavedHealth }
+  /** The person's own preferences, sent when the window opens */
+  | { type: 'prefs'; introSeen: boolean; settings: DisplaySettings }
   | { type: 'report'; report: Report }
   /** The choices could not be kept in the file */
   | { type: 'choices-not-saved' }
@@ -164,6 +167,11 @@ export type UiToPlugin =
   | { type: 'get-report' }
   /** Goes to the page a main component is on, selects it and scans the page */
   | { type: 'scan-page-of'; nodeId: string }
+  /** The introduction was closed, so it does not open by itself again */
+  | { type: 'intro-seen' }
+  | { type: 'save-settings'; settings: DisplaySettings }
+  /** Puts the window back to its first size and forgets the saved one */
+  | { type: 'reset-window-size' }
   /** Replaces Typography component instances with text layers */
   | { type: 'convert-typography'; instanceIds: string[] }
   /** Resizes the window; done when the drag ends, so the size is kept */

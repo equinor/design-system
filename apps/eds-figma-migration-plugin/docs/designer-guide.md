@@ -16,6 +16,10 @@ frame or in a branch first, and tell the EDS team what does not work.
 2. Keep the legacy libraries enabled until you are done. Revert frame needs
    them to put the legacy variables back.
 3. Open the plugin: **Plugins → Equinor → EDS Variable Migration [WIP BETA]**.
+   The first time, a short introduction explains what the plugin does, what it
+   does not do and how to use it. **Settings** (the sliders button in the
+   header) opens it again, and holds the display switches, a Dark mode switch
+   for the window, the report and a reset for the window size. The switches are kept for you, in every file.
 
 ## 1. Scan
 
