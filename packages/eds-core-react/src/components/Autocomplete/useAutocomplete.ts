@@ -300,6 +300,7 @@ export const useAutocomplete = <T>({
     items: availableItems as T[], //can not pass readonly type to downshift so we cast it to regular T[]
     initialSelectedItem: initialSelectedOptions[0],
     isItemDisabled(item) {
+      if (disabled) return true
       if (item === AddSymbol) return !typedInputValue.trim()
       return optionDisabled(item)
     },
