@@ -206,7 +206,8 @@ WithDescription.parameters = {
 }
 
 export const Disabled: StoryFn<FieldProps> = () => {
-  const { inputId, descriptionId, getDescribedBy } = useFieldIds()
+  const { inputId, descriptionId, helperMessageId, getDescribedBy } =
+    useFieldIds()
 
   return (
     <Field disabled>
@@ -218,8 +219,11 @@ export const Disabled: StoryFn<FieldProps> = () => {
         id={inputId}
         value="john.doe"
         disabled
-        aria-describedby={getDescribedBy()}
+        aria-describedby={getDescribedBy({ hasHelperMessage: true })}
       />
+      <Field.HelperMessage id={helperMessageId}>
+        Contact an administrator to change it
+      </Field.HelperMessage>
     </Field>
   )
 }
@@ -227,7 +231,7 @@ Disabled.parameters = {
   docs: {
     description: {
       story:
-        'Set `disabled` on Field to style the label, description and helper message as disabled. Set `disabled` on the input as well, because Field only passes the state to its own parts.',
+        'Set `disabled` on Field to show the helper message in the disabled colour. The label and description keep their colours. Set `disabled` on the input as well, because Field only passes the state to its own parts.',
     },
   },
 }

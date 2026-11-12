@@ -158,18 +158,22 @@ identical to the ones above, so a design and its implementation refer to the sam
 Only the semantic layer is published to the variable picker. The numbered scale underneath it is
 hidden, so a raw palette value cannot be bound to a component by accident.
 
-### Tokens are scoped to the property they belong on
+### How variable scopes filter the picker
 
-The variable picker is filtered by what you are colouring. Open the fill picker and you get fill
-tokens; open the stroke picker and you get border tokens. Text and icon tokens do not appear where a
-background belongs, and vice versa.
+Each variable has scopes that decide which pickers in Figma offer it. The scopes are a general
+guideline that steers each picker towards the property a token is usually used on. Background
+tokens are offered for the fill of a frame or shape, border tokens for strokes, and text tokens for
+the fill of a text layer, so the list you open is already narrowed to the usual choices.
 
-This scoping is part of each token's definition:
+The scopes do not define which tokens are allowed on which property. Some tokens are offered in
+more than one picker on purpose:
 
-- The list is already limited to tokens relevant to the selected property.
-- You cannot bind `text.primary` to a rectangle's fill or apply a background token to a stroke.
+- `background.surface` is also offered for strokes, because some places in Figma need a stroke in
+  the surface colour.
+- The spacing variables are also offered for width and height, because icons are sized with them.
+  Button binds the width and height of its icon to `spacing.lg`.
 
-If a token is missing from a picker, it usually belongs on a different property.
+If a token is missing from a picker, it is usually meant for a different property.
 
 ## Next step
 

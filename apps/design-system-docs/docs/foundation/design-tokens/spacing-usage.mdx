@@ -35,10 +35,10 @@ usually right.
 | You are spacing                               | Use                                      | Why                                                                                   |
 | --------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------- |
 | a button's interior, block axis               | `spacing.xs`                             | text needs less room above it than beside it                                          |
-| a button's interior, inline axis              | `spacing.md`                             | and more beside it, or the label looks off-centre                                     |
+| a button's interior, inline axis              | `spacing.sm`                             | and more beside it, or the label looks off-centre                                     |
 | an icon from its label, inside a control      | `spacing.xs`                             | one control, two parts                                                                |
 | a chip or badge interior                      | `spacing.3xs`                            | dense by definition. `2xs` if it carries an icon                                      |
-| an input's interior                           | `spacing.xs` block, `spacing.sm` inline  | shorter inline than a button: the value needs to look aligned with the label above it |
+| an input's interior                           | `spacing.xs` block, `spacing.sm` inline  | the same steps as a button. Inline, the value lines up with the label above it        |
 | one field from the next                       | `spacing.sm`                             | related, separate                                                                     |
 | one fieldset from the next                    | `spacing.lg`                             | a group boundary                                                                      |
 | a card's interior                             | `spacing.md`                             | the default container padding                                                         |
@@ -65,7 +65,7 @@ follow the density around them.
   caption="A button at Comfortable density. Horizontal and vertical padding are different steps on purpose."
   bindings={{
     paddingBlock: { token: 'spacing.xs', label: 'block padding' },
-    paddingInline: { token: 'spacing.md', label: 'inline padding' },
+    paddingInline: { token: 'spacing.sm', label: 'inline padding' },
     gap: { token: 'spacing.xs', label: 'icon to label' },
     borderRadius: { token: 'corner-radius.rounded' },
   }}
@@ -83,15 +83,15 @@ follow the density around them.
 ```css
 .button {
   padding-block: var(--eds-spacing-xs);
-  padding-inline: var(--eds-spacing-md);
+  padding-inline: var(--eds-spacing-sm);
   gap: var(--eds-spacing-xs);
   border-radius: var(--eds-corner-radius-rounded);
 }
 ```
 
-Two steps apart on the two axes is deliberate rather than sloppy. Text needs more room beside it
-than above it to look optically centred, because the letterforms already carry their own vertical
-space in the line box. Equal padding on both axes reads as too tight horizontally.
+The block and inline axes take different steps on purpose: text needs more room beside it than
+above it to look optically centred, because the letterforms already carry their own vertical space
+in the line box. Equal padding on both axes reads as too tight horizontally.
 
 ### A focus ring
 
@@ -107,7 +107,7 @@ a second radius:
   border-radius: var(--eds-corner-radius-rounded); /* 4px at Comfortable */
 }
 .button:focus-visible {
-  outline: 2px solid var(--eds-border-interactive-focus);
+  outline: 1px solid var(--eds-border-interactive-focus);
   outline-offset: 1px; /* the ring's inner edge comes out at 5px on its own */
 }
 ```
@@ -199,6 +199,8 @@ a normal thing to want. Two cautions:
 - Let density resize things, with one attribute on a wrapper
 - Use different steps on the block and inline axes when the optics need it
 - Let a focus ring's `outline-offset` produce its curve, rather than naming a second radius
+- Size an icon by binding its width and height to a spacing token. Button uses `spacing.lg`, and an
+  [Icon](../../components/data-display/icon.md) without `size` is `spacing.xl`
 
 :::
 
@@ -208,8 +210,6 @@ a normal thing to want. Two cautions:
 - Hand-pick a smaller step through a dense area. That reimplements Compact badly and drifts from
   every other dense view in the product
 - Use a spacing token for a component's height. Height falls out of type size plus padding
-- Use a spacing token for icon size. They resolve to the same values today, so it works, and it
-  breaks silently the day icon sizing changes
 - Use `corner-radius.rounded-outer`. It exists for Figma's focus rings, not for code
 - Space everything equally. If every gap is `md`, nothing is grouped
 
