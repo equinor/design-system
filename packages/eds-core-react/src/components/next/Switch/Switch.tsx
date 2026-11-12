@@ -10,30 +10,49 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   // `||`, not `??`: an empty string is treated as no id
   const inputId = id || generatedId
 
+  const control = (
+    <span className="control">
+      <input
+        type="checkbox"
+        role="switch"
+        id={inputId}
+        className="input"
+        disabled={disabled}
+        ref={ref}
+        {...rest}
+      />
+      <span className="track">
+        <span className="handle" />
+      </span>
+    </span>
+  )
+
+  const rootClassName = ['eds-switch', className].filter(Boolean).join(' ')
+
+  if (label) {
+    return (
+      <Field
+        position="start"
+        disabled={disabled}
+        className={rootClassName}
+        style={style}
+        data-tone="accent"
+      >
+        {control}
+        <Field.Label htmlFor={inputId}>{label}</Field.Label>
+      </Field>
+    )
+  }
+
   return (
-    <Field
-      position="start"
-      disabled={disabled}
-      className={['eds-switch', className].filter(Boolean).join(' ')}
+    <span
+      className={rootClassName}
       style={style}
+      data-standalone={true}
       data-tone="accent"
     >
-      <span className="control">
-        <input
-          type="checkbox"
-          role="switch"
-          id={inputId}
-          className="input"
-          disabled={disabled}
-          ref={ref}
-          {...rest}
-        />
-        <span className="track">
-          <span className="handle" />
-        </span>
-      </span>
-      <Field.Label htmlFor={inputId}>{label}</Field.Label>
-    </Field>
+      {control}
+    </span>
   )
 })
 

@@ -11,7 +11,7 @@
     /* Track and handle colours, unchecked and checked. Set by the states
      * below and read by .track */
     --_track-bg: var(--eds-icon-on-emphasis-neutral);
-    --_track-border: var(--eds-border-interactive-neutral-muted-default);
+    --_track-border: var(--eds-border-interactive-neutral-emphasis-default);
     --_handle-bg: var(--eds-icon-on-default-neutral);
     --_track-bg-checked: var(--_icon-on-default);
     --_handle-bg-checked: var(--_icon-on-emphasis);
@@ -52,10 +52,18 @@
 
     transition: background-color var(--_transition-duration);
 
+    /* Without a label: a circle around the 24px icon, 36px at comfortable */
+    &[data-standalone] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--eds-corner-radius-pill);
+    }
+
     /* Focus takes the hover fill and track too, as in Figma */
     &:has(.input:focus-visible) {
       --_bg-color: var(--_bg-muted-hover);
-      --_track-border: var(--eds-border-interactive-neutral-muted-hover);
+      --_track-border: var(--eds-border-interactive-neutral-emphasis-hover);
       --_track-bg-checked: var(--_icon-on-muted);
 
       outline: var(--_stroke-width) solid var(--eds-border-interactive-focus);
@@ -179,7 +187,7 @@
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         --_bg-color: var(--_bg-muted-hover);
-        --_track-border: var(--eds-border-interactive-neutral-muted-hover);
+        --_track-border: var(--eds-border-interactive-neutral-emphasis-hover);
         --_track-bg-checked: var(--_icon-on-muted);
       }
     }

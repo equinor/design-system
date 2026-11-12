@@ -2,9 +2,10 @@ import type { CSSProperties, InputHTMLAttributes, ReactNode } from 'react'
 
 export type SwitchProps = {
   /**
-   * Visible label for the switch (required).
+   * Visible label for the switch. Without one, give the switch an accessible
+   * name with `aria-label` or `aria-labelledby`.
    */
-  label: ReactNode
+  label?: ReactNode
   /** CSS class names applied to the outer wrapper element, not the hidden input */
   className?: string
   /** Inline styles applied to the outer wrapper element, not the hidden input */

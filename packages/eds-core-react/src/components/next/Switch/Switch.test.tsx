@@ -56,6 +56,22 @@ describe('Switch (next)', () => {
       expect(input).not.toHaveClass('custom-switch')
       expect(input).toHaveClass('input')
     })
+    it('renders without Field and marks the wrapper standalone without a label', () => {
+      render(
+        <Switch
+          aria-label="standalone"
+          className="custom-switch"
+          style={{ marginTop: '8px' }}
+        />,
+      )
+      const input = screen.getByRole('switch')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = input.closest('.eds-switch')
+      expect(wrapper).toHaveAttribute('data-standalone', 'true')
+      expect(wrapper).not.toHaveClass('eds-field')
+      expect(wrapper).toHaveClass('custom-switch')
+      expect(wrapper).toHaveStyle({ marginTop: '8px' })
+    })
   })
 
   describe('Accessibility', () => {
@@ -70,6 +86,18 @@ describe('Switch (next)', () => {
 
     it('should pass a11y test with label', async () => {
       const { container } = render(<Switch label="switch-test" />)
+      expect(await axe(container)).toHaveNoViolations()
+    })
+
+    it('takes its accessible name from aria-label without a label', () => {
+      render(<Switch aria-label="Dark mode" />)
+      expect(
+        screen.getByRole('switch', { name: 'Dark mode' }),
+      ).toBeInTheDocument()
+    })
+
+    it('should pass a11y test without a label', async () => {
+      const { container } = render(<Switch aria-label="Dark mode" />)
       expect(await axe(container)).toHaveNoViolations()
     })
   })
@@ -189,6 +217,14 @@ describe('Switch (next)', () => {
   describe('Tone', () => {
     it('sets the accent tone', () => {
       render(<Switch label="Option" />)
+      const switchEl = screen.getByRole('switch')
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapper = switchEl.closest('.eds-switch')
+      expect(wrapper).toHaveAttribute('data-tone', 'accent')
+    })
+
+    it('sets the accent tone without a label', () => {
+      render(<Switch aria-label="Option" />)
       const switchEl = screen.getByRole('switch')
       // eslint-disable-next-line testing-library/no-node-access
       const wrapper = switchEl.closest('.eds-switch')

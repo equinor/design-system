@@ -162,6 +162,19 @@ InheritedDisabled.parameters = {
   },
 }
 
+export const WithoutVisibleLabel: StoryFn<SwitchProps> = () => (
+  <Switch aria-label="Dark mode" />
+)
+
+WithoutVisibleLabel.parameters = {
+  docs: {
+    description: {
+      story:
+        'When no visible label is needed, use `aria-label` to provide an accessible name for screen readers.',
+    },
+  },
+}
+
 export const Density: StoryFn<SwitchProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
     {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
