@@ -191,6 +191,46 @@
     }
   }
 
+  /* Forced colours replace every background with Canvas, so the knob
+   * disappears into the track and on looks the same as off. System colours
+   * draw the track, the knob and the checked fill instead, as native toggles
+   * do. Custom properties are not forced, so the system colours pass through
+   * them; forced-color-adjust stops the browser replacing them again on the
+   * track and the knob. */
+  @media (forced-colors: active) {
+    .eds-switch {
+      --_forced-stroke: CanvasText;
+      --_forced-knob: CanvasText;
+      --_forced-fill-checked: Highlight;
+      --_forced-knob-checked: HighlightText;
+
+      &:has(.input:disabled) {
+        --_forced-stroke: GrayText;
+        --_forced-knob: GrayText;
+        --_forced-fill-checked: Canvas;
+        --_forced-knob-checked: GrayText;
+      }
+
+      & .track {
+        --_fill: Canvas;
+        --_stroke: var(--_forced-stroke);
+        --_knob: var(--_forced-knob);
+
+        forced-color-adjust: none;
+      }
+
+      & .input:checked + .track {
+        --_fill: var(--_forced-fill-checked);
+        --_stroke: var(--_forced-stroke);
+        --_knob: var(--_forced-knob-checked);
+      }
+
+      & .handle {
+        forced-color-adjust: none;
+      }
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .eds-switch {
       --_transition-duration: 0ms;
