@@ -31,6 +31,14 @@ overrides:
   'brace-expansion@^1': '>=1.1.21 <2'
   'brace-expansion@^2': '>=2.1.7 <3'
   'brace-expansion@^5': '>=5.0.12 <6'
+  # minimatch has no patched 9.x or 10.x release; 11.0.1 is the first fix
+  # (alert #719). glob 10, 11 and 13 read the Minimatch internals that 11
+  # changed and then match no files, so they move to glob 14, which is built
+  # for minimatch 11. Check that `figma connect parse` still finds the
+  # *.figma.tsx files before changing these.
+  'glob@^10': '>=14 <15'
+  'glob@^11': '>=14 <15'
+  'glob@^13': '>=14 <15'
   'minimatch@^9': '>=11.0.1 <12'
   'minimatch@^10': '>=11.0.1 <12'
   'image-size@^2': '>=2.0.3 <3'
