@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
 
 type ApplyActionsProps = {
@@ -37,10 +37,30 @@ export function ApplyActions({
 }: ApplyActionsProps) {
   const [confirm, setConfirm] = useState<Confirm>()
   const close = () => setConfirm(undefined)
+  // The footer is fixed to the bottom of the window; the content keeps its
+  // height free at the end (ui.css, .app-main).
+  const footer = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const element = footer.current
+    if (!element) return
+    const root = document.documentElement
+    const update = () =>
+      root.style.setProperty(
+        '--apply-footer-height',
+        `${element.getBoundingClientRect().height}px`,
+      )
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(element)
+    return () => {
+      observer.disconnect()
+      root.style.removeProperty('--apply-footer-height')
+    }
+  }, [])
   return (
     // UX review F8 and Check designs: a footer that says what Apply
     // changes and where, with Review and Apply beside it.
-    <div className="apply-actions apply-footer">
+    <div ref={footer} className="apply-actions apply-footer">
       <div className="apply-summary">
         <span>
           {ready > 0 ? (

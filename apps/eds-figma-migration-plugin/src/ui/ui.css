@@ -16,12 +16,14 @@ body {
 }
 
 /*
- * Test session finding 9: the sticky Apply footer covered buttons that were
- * scrolled to the bottom of the window. Scrolling to an element or focusing
- * it keeps it above the footer.
+ * The Apply footer is fixed to the bottom of the window. ApplyActions sets
+ * --apply-footer-height to its height, so the content ends above it and
+ * scrolling to or focusing an element keeps it clear of the footer.
  */
 html {
-  scroll-padding-block-end: 96px;
+  scroll-padding-block-end: calc(
+    var(--apply-footer-height, 0px) + var(--eds-spacing-sm)
+  );
 }
 
 body {
@@ -67,6 +69,9 @@ body {
 .app-main {
   flex: 1;
   padding: var(--eds-spacing-md);
+  padding-block-end: calc(
+    var(--eds-spacing-md) + var(--apply-footer-height, 0px)
+  );
 }
 
 .stack {
@@ -1024,18 +1029,20 @@ code {
   padding-inline-start: calc(var(--eds-spacing-lg) + var(--eds-spacing-2xs));
 }
 
-/* UX review F8: Apply in a footer that stays at the bottom of the window. */
+/* UX review F8: Apply in a footer fixed to the bottom of the window. */
 .apply-footer {
-  position: sticky;
+  position: fixed;
+  inset-inline: 0;
   inset-block-end: 0;
-  z-index: 1;
+  z-index: 4;
   flex-direction: row;
   flex-wrap: wrap;
   gap: var(--eds-spacing-xs);
   align-items: center;
   justify-content: space-between;
-  margin-inline: calc(var(--eds-spacing-md) * -1);
   padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  /* Room for the resize grip in the corner */
+  padding-inline-end: calc(var(--eds-spacing-md) + var(--eds-spacing-lg));
   background: var(--eds-background-surface);
   border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
 }
