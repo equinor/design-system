@@ -11,7 +11,8 @@ const meta: Meta<typeof Switch> = {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Visible label for the switch (required)',
+      description:
+        'Visible label for the switch. Without one, give the switch an accessible name with `aria-label` or `aria-labelledby`.',
       table: { category: 'Core' },
     },
     disabled: {

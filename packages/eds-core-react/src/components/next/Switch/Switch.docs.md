@@ -9,7 +9,7 @@ Switch turns a single setting on or off immediately, with no separate confirmati
 
 ## Features
 
-- Always shows a visible label. There is no label-less variant.
+- Can be shown without a visible label, as a round control on its own.
 - Works as a controlled or an uncontrolled component, using `checked` or `defaultChecked`.
 - Is disabled along with the rest of a disabled fieldset.
 
@@ -23,7 +23,7 @@ Switch turns a single setting on or off immediately, with no separate confirmati
 
 - Switch renders a native checkbox input with `role="switch"`, so the browser provides focus and keyboard behaviour, and screen readers announce it as a switch rather than a checkbox.
 - It can be toggled with the Space key once it has focus.
-- The `label` prop is required, so Switch always has an accessible name.
+- A visible `label` provides the accessible name. Without one, the consumer must supply `aria-label` or `aria-labelledby`.
 - Switch does not announce what toggling it changed elsewhere on the page. If that matters, add your own `aria-live` region, as the example below shows.
 
 ## Related components
