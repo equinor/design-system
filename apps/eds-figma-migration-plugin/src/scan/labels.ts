@@ -77,9 +77,8 @@ export const GROUP_LABELS: Record<PropertyGroup, string> = {
 
 /** What each category means, for the legend dialog. */
 export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
-  migrated:
-    'Bound to a variable or text style in EDS Foundation [EDS Beta]. Nothing left to do.',
-  sure: 'A legacy variable with one target in EDS Foundation. The plugin swaps it without asking when you apply.',
+  migrated: 'Bound to an EDS Beta variable or text style. Nothing left to do.',
+  sure: 'A legacy variable with one target in the EDS Beta. The plugin swaps it without asking when you apply.',
   check:
     'A legacy variable whose target depends on what the layer is: interactive or not, selected, the kind of border, or the fill under a text. The plugin proposes a target, and you confirm, change or skip it.',
   none: 'A legacy variable with nothing to swap to, such as an icon size or Bg/Backdrop. It stays as it is and is listed in the report.',

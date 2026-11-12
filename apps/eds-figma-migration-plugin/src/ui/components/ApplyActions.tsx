@@ -115,9 +115,9 @@ export function ApplyActions({
             </Dialog.Header>
             <Dialog.Content>
               <p>
-                The plugin binds the EDS Foundation variables and text styles,
-                and sets the new modes. A legacy mode is cleared only when no
-                layer below it uses a legacy variable any more.
+                The plugin binds the EDS Beta variables and text styles, and
+                sets the new modes. A legacy mode is cleared only when no layer
+                below it uses a legacy variable any more.
               </p>
               {mainComponents && (
                 <p>

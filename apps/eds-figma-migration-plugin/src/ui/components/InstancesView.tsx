@@ -88,8 +88,8 @@ export function InstancesView({
                       {typography && (
                         <p className="muted">
                           Each instance becomes a text layer with the same text,
-                          the matching EDS Foundation text style, and its colour
-                          as a variable. Revert frame puts the component back.
+                          the matching EDS Beta text style, and its colour as a
+                          variable. Revert frame puts the component back.
                         </p>
                       )}
                       {group.mainId && (

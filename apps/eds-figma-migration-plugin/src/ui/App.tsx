@@ -208,8 +208,8 @@ function Overview({
           oldCount(totals) === 0 && (
             <Banner tone="success">
               <Banner.Message>
-                Everything in the scope uses EDS Foundation. Nothing is left to
-                migrate.
+                Everything in the scope uses the EDS Beta tokens. Nothing is
+                left to migrate.
               </Banner.Message>
             </Banner>
           )

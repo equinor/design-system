@@ -1,9 +1,10 @@
 # EDS Variable Migration: a guide for designers
 
-EDS Variable Migration moves the layers in your Figma file from the legacy EDS
-variables (the deprecated EDS Colours, Spacing and Typography libraries) to
-**EDS Foundation [EDS Beta]**. It runs in your file, uses no AI credits, and
-never changes anything inside an instance.
+EDS Variable Migration updates your Figma file from the legacy EDS variables
+(the deprecated EDS Colours, Spacing and Typography libraries) to the EDS Beta
+tokens. In Figma's library list the Beta is called **EDS Foundation [EDS
+Beta]**. The plugin runs in your file, uses no AI credits, and never changes
+anything inside an instance.
 
 The plugin is a test version, marked **[WIP BETA]**. Try it on a copy of a
 frame or in a branch first, and tell the EDS team what does not work.
@@ -32,7 +33,7 @@ and every mode set on a frame:
 
 | Status           | What it means                                                                           |
 | ---------------- | --------------------------------------------------------------------------------------- |
-| Migrated         | Already uses EDS Foundation. Green, because it is done.                                 |
+| Migrated         | Already uses the EDS Beta tokens. Green, because it is done.                            |
 | Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.            |
 | Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.         |
 | No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays. |
