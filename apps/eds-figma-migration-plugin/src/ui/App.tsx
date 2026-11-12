@@ -278,6 +278,7 @@ function Overview({
             overrides={overrides}
             entryNames={entryNames}
             showCounts={showCounts}
+            inInstances={totals.inInstance}
             selection={selection}
             onSelectOld={onSelectOld}
             onSelectLayer={onSelectLayer}

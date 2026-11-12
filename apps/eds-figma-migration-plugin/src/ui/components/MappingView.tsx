@@ -44,6 +44,8 @@ type MappingViewProps = {
   selection: Selection
   /** Show the number of layers in each row, from the settings menu */
   showCounts?: boolean
+  /** Legacy values inside instances in the scope, which Changes leaves out */
+  inInstances?: number
   onSelectOld: (oldKey: string) => void
   onSelectLayer: (nodeIds: string[]) => void
   onChangeRow: (group: MappingGroup, row: MappingRow) => void
@@ -249,6 +251,7 @@ export function MappingView({
   entryNames,
   selection,
   showCounts = true,
+  inInstances = 0,
   onSelectOld,
   onSelectLayer,
   onChangeRow,
@@ -264,8 +267,23 @@ export function MappingView({
   const [open, setOpen] = useState<Set<string>>(new Set())
   const [why, setWhy] = useState<Item>()
 
+  // Values inside instances are never listed here, and the designer should
+  // not have to guess why the numbers differ from the health bar.
+  const instancesNote = (
+    <p className="muted">
+      {inInstances > 0
+        ? `Instances are not part of Changes. The ${inInstances} legacy value${inInstances === 1 ? '' : 's'} inside instances change${inInstances === 1 ? 's' : ''} with ${inInstances === 1 ? 'its' : 'their'} main component or library; the Instances tab lists them.`
+        : 'Instances are not part of Changes. Values inside an instance change with its main component or library.'}
+    </p>
+  )
+
   if (groups.length === 0) {
-    return <p className="muted">Nothing left to migrate in the scope.</p>
+    return (
+      <div className="stack">
+        {instancesNote}
+        <p className="muted">Nothing left to migrate in the scope.</p>
+      </div>
+    )
   }
 
   const matches = (row: MappingRow, binding: MappingBinding) =>
@@ -314,6 +332,7 @@ export function MappingView({
 
   return (
     <div className="stack">
+      {instancesNote}
       <Tabs
         compact
         label="Kind of value"

@@ -354,6 +354,7 @@ export function Inspector({
             entryNames={new Map([[entry.id, entry.name]])}
             selection={selection}
             showCounts={showCounts}
+            inInstances={entry.counts.inInstance}
             onSelectOld={(oldKey) =>
               onSelect([
                 ...new Set(

@@ -50,7 +50,8 @@ plugin can change in the scope.
   grouped by layer or by legacy variable. **Go to** selects the layer in
   Figma.
 - **Changes** lists every legacy variable in the scope with what it becomes,
-  in tabs by kind of value. A click on the legacy variable selects its
+  in tabs by kind of value. Values inside instances are not part of it; they
+  change with their main component or library. A click on the legacy variable selects its
   layers; a click on the target changes it for every layer that uses it.
 - **Instances** lists the instances that still use legacy variables, grouped
   by component. For a component in this file, **Go to main component** takes
