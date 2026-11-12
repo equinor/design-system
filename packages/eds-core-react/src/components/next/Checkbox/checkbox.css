@@ -156,6 +156,32 @@
     }
   }
 
+  /* Forced colours (Windows High Contrast) replace text and fills with system
+     colours but leave the icon's SVG fill alone, so the icon takes a system
+     colour here. The hover fill disappears, so hover shows an outline instead,
+     as in Button and Chip. While focused, the focus ring takes over outline. */
+  @media (forced-colors: active) {
+    .eds-checkbox {
+      --_icon: CanvasText;
+      --_icon-hover: CanvasText;
+
+      &:has(.input:disabled) {
+        --_icon-color: GrayText;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover:not(:has(.input:focus-visible, .input:disabled)) {
+          outline: var(--_stroke-width) solid;
+          outline-offset: var(--_stroke-width);
+        }
+      }
+    }
+
+    .eds-field.eds-checkbox:has(.input:disabled) {
+      --_eds-field-label-color: GrayText;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .eds-checkbox {
       --_transition-duration: 0ms;
