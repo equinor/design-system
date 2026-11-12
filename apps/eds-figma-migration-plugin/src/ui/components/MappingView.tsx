@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { schemesOf } from '../../mapping/scheme'
 import {
   Button,
   Checkbox,
@@ -41,7 +42,6 @@ type MappingViewProps = {
   /** Entry id → name, to say which frame a binding is in */
   entryNames: Map<string, string>
   selection: Selection
-  colorScheme: 'light' | 'dark'
   /** Show the number of layers in each row, from the settings menu */
   showCounts?: boolean
   onSelectOld: (oldKey: string) => void
@@ -158,6 +158,7 @@ function selectableBinding(
     kind: binding.kind,
     group: item.group.group,
     candidates: item.row.candidates,
+    ...(binding.scheme ? { scheme: binding.scheme } : {}),
   }
 }
 
@@ -247,7 +248,6 @@ export function MappingView({
   overrides,
   entryNames,
   selection,
-  colorScheme,
   showCounts = true,
   onSelectOld,
   onSelectLayer,
@@ -497,7 +497,10 @@ export function MappingView({
                           aria-label={`Change the target of all ${row.count}: now ${rowTargetText(row, overrides)}`}
                           onClick={() => onChangeRow(group, row)}
                         >
-                          <Preview name={target} colorScheme={colorScheme} />
+                          <Preview
+                            name={target}
+                            schemes={schemesOf(row.bindings)}
+                          />
                           <span className="check-target-text">
                             <span className="check-target-name">
                               {counts.length === 1

@@ -2,6 +2,7 @@
  * The options an override picker offers: the rule's candidates first, then
  * every other variable or text style that fits the property.
  */
+import type { ColorScheme } from './scheme'
 import { NEW_TEXT_STYLES, NEW_VARIABLES } from './inventory'
 import { FORBIDDEN_TARGETS } from './rules'
 import type { BindingKind } from './types'
@@ -150,6 +151,8 @@ export type PickerItem = {
   kind?: BindingKind
   group: PickerSubject['group']
   candidates: string[]
+  /** The colour scheme the layer will have, for the colours the picker shows */
+  scheme?: ColorScheme
 }
 
 /**

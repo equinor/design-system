@@ -56,7 +56,6 @@ type InspectorProps = {
   onChange: (record: BindingRecord) => void
   /** The Changes rows of the scan, narrowed to this frame for the Variables view (final review FR9) */
   mapping: MappingGroup[]
-  colorScheme: 'light' | 'dark'
   showCounts: boolean
   onChangeRow: (group: MappingGroup, row: MappingRow) => void
   onChangeBinding: (
@@ -95,6 +94,7 @@ export function selectable(record: BindingRecord): SelectedBinding {
     kind: record.kind,
     group: record.group,
     candidates: record.candidates ?? [],
+    ...(record.scheme ? { scheme: record.scheme } : {}),
   }
 }
 
@@ -180,7 +180,6 @@ export function Inspector({
   onSelect,
   onChange,
   mapping,
-  colorScheme,
   showCounts,
   onChangeRow,
   onChangeBinding,
@@ -354,7 +353,6 @@ export function Inspector({
             overrides={overrides}
             entryNames={new Map([[entry.id, entry.name]])}
             selection={selection}
-            colorScheme={colorScheme}
             showCounts={showCounts}
             onSelectOld={(oldKey) =>
               onSelect([

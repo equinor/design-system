@@ -10,6 +10,7 @@
  * single binding in the inspector, which wins over the row.
  */
 import type { BindingKind, Outcome } from '../mapping/types'
+import type { ColorScheme } from '../mapping/scheme'
 import type { BindingRecord, Category, Density, PropertyGroup } from './types'
 
 /** A chosen target, or null to leave the legacy binding as it is. */
@@ -106,6 +107,8 @@ export type MappingBinding = {
   oldColour?: string
   /** The density the layer has after the migration */
   density?: Density
+  /** The colour scheme the layer has after the migration */
+  scheme?: ColorScheme
   property: BindingRecord['property']
   kind?: BindingKind
 }
@@ -182,6 +185,7 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
         ? { oldColour: record.oldColour }
         : {}),
       ...(record.density ? { density: record.density } : {}),
+      ...(record.scheme ? { scheme: record.scheme } : {}),
       property: record.property,
       kind: record.kind,
     })

@@ -163,3 +163,17 @@ describe('report and Local components', () => {
     expect(report.markdown).toMatch(/\| Button \| Page \|.*\| 15 \|/)
   })
 })
+
+describe('colour scheme of a layer', () => {
+  it('follows the layer, not the theme of the window', async () => {
+    const { targetScheme, schemesOf } = await import('../src/mapping/scheme')
+    const { NEW, OLD } = await import('../src/mapping/inventory')
+    expect(targetScheme({})).toBe('light')
+    expect(targetScheme({ [OLD.colorScheme]: 'Dark' })).toBe('dark')
+    expect(
+      targetScheme({ [OLD.colorScheme]: 'Dark', [NEW.colorScheme]: 'light' }),
+    ).toBe('light')
+    expect(schemesOf([{ scheme: 'dark' }, {}])).toEqual(['light', 'dark'])
+    expect(schemesOf([])).toEqual(['light'])
+  })
+})

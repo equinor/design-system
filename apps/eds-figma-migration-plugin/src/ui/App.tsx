@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Badge, Banner, Button } from '@equinor/eds-core-react/next'
+import { schemesOf } from '../mapping/scheme'
 import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
 import { NO_OVERRIDES, effectiveTarget, rowKey } from '../scan/mapping'
@@ -91,7 +92,6 @@ function Overview({
   report,
   onReport,
   onCloseReport,
-  colorScheme,
   showCounts,
   showEmpty,
   onShowComponents,
@@ -121,7 +121,6 @@ function Overview({
   report?: Report
   onReport: () => void
   onCloseReport: () => void
-  colorScheme: 'light' | 'dark'
   showCounts: boolean
   showEmpty: boolean
   onShowComponents: (show: boolean) => void
@@ -278,7 +277,6 @@ function Overview({
             groups={changes}
             overrides={overrides}
             entryNames={entryNames}
-            colorScheme={colorScheme}
             showCounts={showCounts}
             selection={selection}
             onSelectOld={onSelectOld}
@@ -403,7 +401,9 @@ function Overview({
 }
 
 export function App() {
-  const colorScheme = useFigmaColorScheme()
+  // Sets the window's own theme. The colours shown for layers follow each
+  // layer's colour scheme instead (scan/types.ts, BindingRecord.scheme).
+  useFigmaColorScheme()
   const bulk = useSelection()
   const clearBulk = bulk.clear
   const [command, setCommand] = useState<Command>()
@@ -648,6 +648,7 @@ export function App() {
     setPicker({
       title: record.old ?? record.nodeName,
       description: `${record.nodeName}, ${propertyLabel(record.property)}. Changes this value only, and wins over a change on its row.`,
+      schemes: [record.scheme ?? 'light'],
       subject: {
         kinds: record.kind ? [record.kind] : [],
         group: record.group,
@@ -680,6 +681,7 @@ export function App() {
     setPicker({
       title: group.old,
       description: `${binding.nodeName}, ${propertyLabel(binding.property)}. Changes this value only, and wins over a change on its row.`,
+      schemes: [binding.scheme ?? 'light'],
       subject: {
         kinds: binding.kind ? [binding.kind] : [],
         group: group.group,
@@ -718,6 +720,7 @@ export function App() {
     setPicker({
       title: group.old,
       description: `Changes all ${row.count} value${row.count === 1 ? '' : 's'} in this row. A change on a single value wins over it.`,
+      schemes: schemesOf(row.bindings),
       subject: { kinds, group: group.group, candidates: row.candidates },
       current: changed ? overrides.rows[row.key] : (row.proposal ?? null),
       changed,
@@ -742,6 +745,7 @@ export function App() {
       title: `${selected.length} values`,
       description:
         'Sets the same target on every selected value. It wins over a change on their rows.',
+      schemes: schemesOf(selected),
       subject: shared,
       onSave: (value) => {
         sendOverrides(
@@ -922,7 +926,6 @@ export function App() {
                     summary.entries.map((entry) => [entry.id, entry.name]),
                   )
                 }
-                colorScheme={colorScheme}
                 onSelect={select}
                 onDecide={(item, value) =>
                   sendOverrides([
@@ -958,7 +961,6 @@ export function App() {
                 onSelect={select}
                 onChange={changeRecord}
                 mapping={mapping}
-                colorScheme={colorScheme}
                 showCounts={showCounts}
                 onChangeRow={changeRow}
                 onChangeBinding={changeBinding}
@@ -994,7 +996,6 @@ export function App() {
                     })
                   }
                   onCloseReport={() => setReport(undefined)}
-                  colorScheme={colorScheme}
                   showCounts={showCounts}
                   showEmpty={showEmpty}
                   onShowComponents={chooseComponents}
@@ -1016,11 +1017,7 @@ export function App() {
         />
       )}
       <ResizeHandle />
-      <TargetPicker
-        request={picker}
-        onClose={() => setPicker(undefined)}
-        colorScheme={colorScheme}
-      />
+      <TargetPicker request={picker} onClose={() => setPicker(undefined)} />
     </div>
   )
 }

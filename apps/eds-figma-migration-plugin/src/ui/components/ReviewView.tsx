@@ -17,7 +17,6 @@ type ReviewViewProps = {
   items: ReviewItem[]
   /** Entry id → name, to say which frame a binding is in */
   entryNames: Map<string, string>
-  colorScheme: 'light' | 'dark'
   onSelect: (nodeIds: string[]) => void
   /** Stores a choice for one binding; null leaves it as it is */
   onDecide: (item: ReviewItem, value: OverrideValue) => void
@@ -33,7 +32,6 @@ type ReviewViewProps = {
 export function ReviewView({
   items,
   entryNames,
-  colorScheme,
   onSelect,
   onDecide,
   onDone,
@@ -184,7 +182,7 @@ export function ReviewView({
         options={options}
         value={value}
         onChange={setValue}
-        colorScheme={colorScheme}
+        schemes={[binding.scheme ?? 'light']}
         describe={targetMeaning}
       />
 

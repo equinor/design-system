@@ -33,6 +33,7 @@ export type RawVariable = {
 }
 
 import type { Density } from '../mapping/density'
+import type { ColorScheme } from '../mapping/scheme'
 
 export type { Density }
 
@@ -196,6 +197,8 @@ export type BindingRecord = {
   oldColour?: string
   /** The density the layer has after the migration, which decides the new numbers */
   density?: Density
+  /** The colour scheme the layer has after the migration, which decides the new colours shown */
+  scheme?: ColorScheme
   /** The legacy mode, for an explicit mode */
   oldMode?: {
     collectionId: string

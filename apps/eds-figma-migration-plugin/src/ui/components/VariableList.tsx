@@ -3,6 +3,7 @@ import type { KeyboardEvent } from 'react'
 import { Search } from '@equinor/eds-core-react/next'
 import { getNewTextStyle, getNewVariable } from '../../mapping/inventory'
 import type { PickerOptions } from '../../mapping/picker'
+import type { ColorScheme } from '../../mapping/scheme'
 import type { Density } from '../../scan/types'
 import { targetLabel } from '../targets'
 
@@ -11,7 +12,8 @@ type VariableListProps = {
   /** The chosen target; null leaves the legacy binding; undefined is nothing chosen yet */
   value: string | null | undefined
   onChange: (value: string | null) => void
-  colorScheme: 'light' | 'dark'
+  /** The colour schemes of the layers being changed, for the swatches */
+  schemes: ColorScheme[]
   /** A line under each proposed target that says what it is for */
   describe?: (name: string) => string | undefined
 }
@@ -66,27 +68,39 @@ function sections(options: PickerOptions): Section[] {
   return result
 }
 
+/**
+ * The colour of a new variable in the colour scheme of the layers it goes
+ * on, which can differ from the theme of Figma's interface. Layers in both
+ * schemes get a swatch split in two, light on the left.
+ */
 export function Preview({
   name,
-  colorScheme,
+  schemes,
 }: {
   name: string | null
-  colorScheme: 'light' | 'dark'
+  schemes: ColorScheme[]
 }) {
   if (name === null)
     return <span className="option-preview" aria-hidden="true" />
-  const variable = getNewVariable(name)
-  const colour = variable?.values?.[colorScheme]
-  if (colour) {
-    return (
-      <span
-        className="swatch"
-        style={{ backgroundColor: colour }}
-        aria-hidden="true"
-      />
-    )
+  const values = getNewVariable(name)?.values
+  const colours = schemes
+    .map((scheme) => values?.[scheme])
+    .filter((colour): colour is string => typeof colour === 'string')
+  if (colours.length === 0) {
+    return <span className="option-preview" aria-hidden="true" />
   }
-  return <span className="option-preview" aria-hidden="true" />
+  const background =
+    colours.length === 1 || colours[0] === colours[1]
+      ? colours[0]
+      : `linear-gradient(90deg, ${colours[0]} 50%, ${colours[1]} 50%)`
+  return (
+    <span
+      className="swatch"
+      style={{ background }}
+      title={schemes.length > 1 ? 'Light and dark' : undefined}
+      aria-hidden="true"
+    />
+  )
 }
 
 /** A number as the window writes it: px, except font weights, which have no unit. */
@@ -134,7 +148,7 @@ export function VariableList({
   options,
   value,
   onChange,
-  colorScheme,
+  schemes,
   describe,
 }: VariableListProps) {
   const id = useId()
@@ -218,7 +232,7 @@ export function VariableList({
                   onClick={() => onChange(item.value)}
                   onKeyDown={(event) => onKeyDown(event, item)}
                 >
-                  <Preview name={item.value} colorScheme={colorScheme} />
+                  <Preview name={item.value} schemes={schemes} />
                   <span className="option-text">
                     <span className="option-label">{item.label}</span>
                     {describe &&

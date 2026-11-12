@@ -3,6 +3,7 @@
  * and for old variables outside instances, what the rules propose.
  */
 import { targetDensity } from '../mapping/density'
+import { targetScheme } from '../mapping/scheme'
 import {
   collectionOrigin,
   isNewTextStyleKey,
@@ -141,6 +142,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     group: groupOf(unit),
     instanceId: unit.instanceId,
     density: targetDensity(unit.context.modes),
+    scheme: targetScheme(unit.context.modes),
     ...(unit.modeHolders ? { modeHolders: unit.modeHolders } : {}),
   }
 

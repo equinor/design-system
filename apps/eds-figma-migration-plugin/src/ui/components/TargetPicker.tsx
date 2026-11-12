@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
 import { pickerOptions } from '../../mapping/picker'
 import type { PickerSubject } from '../../mapping/picker'
+import type { ColorScheme } from '../../mapping/scheme'
 import type { OverrideValue } from '../../scan/mapping'
 import { targetMeaning } from '../plain'
 import { VariableList } from './VariableList'
@@ -12,6 +13,8 @@ export type PickerRequest = {
   /** Where and how far the change reaches */
   description: string
   subject: PickerSubject
+  /** The colour schemes of the layers being changed, for the swatches */
+  schemes: ColorScheme[]
   /** The target in force now; undefined when the bindings differ */
   current?: string | null
   /** True when the target in force is a change someone made, so it can be undone */
@@ -23,13 +26,12 @@ export type PickerRequest = {
 function PickerBody({
   request,
   onClose,
-  colorScheme,
 }: {
   request: PickerRequest
   onClose: () => void
-  colorScheme: 'light' | 'dark'
 }) {
-  const { title, description, subject, current, changed, onSave } = request
+  const { title, description, subject, schemes, current, changed, onSave } =
+    request
   const options = useMemo(() => pickerOptions(subject), [subject])
   const [value, setValue] = useState<string | null | undefined>(current)
 
@@ -44,7 +46,7 @@ function PickerBody({
           options={options}
           value={value}
           onChange={setValue}
-          colorScheme={colorScheme}
+          schemes={schemes}
           describe={targetMeaning}
         />
       </Dialog.Content>
@@ -81,11 +83,9 @@ function PickerBody({
 export function TargetPicker({
   request,
   onClose,
-  colorScheme,
 }: {
   request?: PickerRequest
   onClose: () => void
-  colorScheme: 'light' | 'dark'
 }) {
   return (
     <Dialog
@@ -95,13 +95,7 @@ export function TargetPicker({
         if (!open) onClose()
       }}
     >
-      {request && (
-        <PickerBody
-          request={request}
-          onClose={onClose}
-          colorScheme={colorScheme}
-        />
-      )}
+      {request && <PickerBody request={request} onClose={onClose} />}
     </Dialog>
   )
 }
