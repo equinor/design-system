@@ -303,8 +303,8 @@ main[class*='docMainContainer']:has([class*='docHero']) {
  * surface is too close to black for a dark shadow to show.
  *
  * Infima makes each markdown table its own scroll container, hence
- * `.markdown > table`. The colour reference and migration tables scroll in a
- * wrapper instead, so the wrapper carries the shadows. Scoped to the
+ * `.markdown > table`. The colour reference, migration and data visualisation
+ * tables scroll in a wrapper instead, so the wrapper carries the shadows. Scoped to the
  * redesigned versions and unversioned pages; 1.1.0 keeps its stock rendering.
  * ====================================== */
 html:where(
@@ -312,7 +312,14 @@ html:where(
     [class*='docs-version-2.0.0-beta'],
     :not([class*='docs-version-'])
   )
-  :is(.markdown > table, .colour-reference, .migration-map) {
+  :is(
+    .markdown > table,
+    .colour-reference,
+    .migration-map,
+    .dataviz-step-swap,
+    .dv-table-scroll,
+    .dv-plot-scroll
+  ) {
   --_cover: var(--eds-background-surface);
   --_shadow: color-mix(in srgb, var(--eds-text-primary) 18%, transparent);
 
@@ -337,7 +344,14 @@ html:where(
     [class*='docs-version-2.0.0-beta'],
     :not([class*='docs-version-'])
   ):not([data-theme='dark'])
-  :is(.markdown > table, .colour-reference, .migration-map) {
+  :is(
+    .markdown > table,
+    .colour-reference,
+    .migration-map,
+    .dataviz-step-swap,
+    .dv-table-scroll,
+    .dv-plot-scroll
+  ) {
   --ifm-code-background: color-mix(
     in srgb,
     var(--eds-text-primary) 4%,
