@@ -11,7 +11,8 @@ const meta: Meta<typeof Switch> = {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Visible label for the switch (required)',
+      description:
+        'Visible label for the switch. Without one, give the switch an accessible name with `aria-label` or `aria-labelledby`.',
       table: { category: 'Core' },
     },
     disabled: {
@@ -162,65 +163,22 @@ InheritedDisabled.parameters = {
   },
 }
 
-export const LightAndDarkMode: StoryFn<SwitchProps> = () => (
-  <div style={{ display: 'flex', gap: '32px' }}>
-    <div
-      data-color-scheme="light"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
-    >
-      <ExampleLabel>Light Mode</ExampleLabel>
-      <UnstyledList>
-        <li>
-          <Switch label="Email notifications" />
-        </li>
-        <li>
-          <Switch label="Push notifications" defaultChecked />
-        </li>
-        <li>
-          <Switch label="Biometric login" disabled />
-        </li>
-        <li>
-          <Switch label="Two-factor authentication" disabled defaultChecked />
-        </li>
-      </UnstyledList>
-    </div>
-    <div
-      data-color-scheme="dark"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
-    >
-      <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
-        Dark Mode
-      </ExampleLabel>
-      <UnstyledList>
-        <li>
-          <Switch label="Email notifications" />
-        </li>
-        <li>
-          <Switch label="Push notifications" defaultChecked />
-        </li>
-        <li>
-          <Switch label="Biometric login" disabled />
-        </li>
-        <li>
-          <Switch label="Two-factor authentication" disabled defaultChecked />
-        </li>
-      </UnstyledList>
-    </div>
-  </div>
+export const WithoutVisibleLabel: StoryFn<SwitchProps> = () => (
+  <Switch aria-label="Dark mode" />
 )
 
-LightAndDarkMode.parameters = {
+WithoutVisibleLabel.parameters = {
   docs: {
     description: {
       story:
-        'Switch follows the colour scheme set with `data-color-scheme` on a parent element.',
+        'When no visible label is needed, use `aria-label` to provide an accessible name for screen readers.',
     },
   },
 }
 
 export const Density: StoryFn<SwitchProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
-    {(['spacious', 'comfortable'] as const).map((density) => (
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
       <div key={density} data-density={density}>
         <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
@@ -245,7 +203,7 @@ Density.parameters = {
   docs: {
     description: {
       story:
-        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }

@@ -31,7 +31,7 @@ Switch turns a single setting on or off immediately, with no separate confirmati
 
 ## Features
 
-- Always shows a visible label. There is no label-less variant.
+- Can be shown without a visible label, as a round control on its own.
 - Works as a controlled or an uncontrolled component, using `checked` or `defaultChecked`.
 - Is disabled along with the rest of a disabled fieldset.
 
@@ -68,15 +68,15 @@ Switches inside a `<fieldset disabled>` are disabled by the browser without a `d
 
 <Canvas of={Stories.InheritedDisabled} />
 
-### Light and dark mode
+### Without visible label
 
-Switch follows the colour scheme set with `data-color-scheme` on a parent element.
+When no visible label is needed, use `aria-label` to provide an accessible name for screen readers.
 
-<Canvas of={Stories.LightAndDarkMode} />
+<Canvas of={Stories.WithoutVisibleLabel} />
 
 ### Density
 
-Set `data-density` on a parent element to change the size. Comfortable is more compact.
+Set `data-density` on a parent element to change the size. The default is comfortable.
 
 <Canvas of={Stories.Density} />
 
@@ -90,7 +90,7 @@ If toggling a switch causes an important change elsewhere on the page, announce 
 
 - Switch renders a native checkbox input with `role="switch"`, so the browser provides focus and keyboard behaviour, and screen readers announce it as a switch rather than a checkbox.
 - It can be toggled with the Space key once it has focus.
-- The `label` prop is required, so Switch always has an accessible name.
+- A visible `label` provides the accessible name. Without one, the consumer must supply `aria-label` or `aria-labelledby`.
 - Switch does not announce what toggling it changed elsewhere on the page. If that matters, add your own `aria-live` region, as the example below shows.
 
 ## Related components

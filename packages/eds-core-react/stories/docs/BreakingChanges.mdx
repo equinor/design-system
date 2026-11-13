@@ -374,10 +374,10 @@ New component, no 2.x counterpart. Use it where you used `Typography` with `link
 
 **Props**
 
-- `label` is required and accepts a ReactNode.
-- `size` (`default` | `small`) is removed. For the compact variant set `data-density="comfortable"` on an ancestor.
+- `label` accepts a ReactNode.
+- `size` (`default` | `small`) is removed. For the small variant set `data-density="compact"` on an ancestor.
 
-**Markup**: the input has `role="switch"`, so `getByRole('checkbox')` → `getByRole('switch')`. The component always renders inside a Field wrapper with the internal classes `control`, `track` and `handle`. `className` and `style` land on that root and are merged with `eds-switch`, so `.your-class input` reaches the native input. The component keeps internal checked state to drive its colour, so `onChange` is intercepted and re-emitted.
+**Markup**: the input has `role="switch"`, so `getByRole('checkbox')` → `getByRole('switch')`. With a `label`, the root is `<div class="eds-field eds-switch">`; without a label it is `<span class="eds-switch" data-standalone>`. Both hold the internal classes `control`, `track` and `handle`. `className` and `style` land on that root and are merged with `eds-switch`, so `.your-class input` reaches the native input.
 
 **Known issues**
 
