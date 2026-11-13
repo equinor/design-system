@@ -259,6 +259,12 @@ code {
   &[data-category='inInstance'] {
     --_color: var(--eds-background-non-interactive-neutral-emphasis);
   }
+
+  /* A legacy mode waiting for the layers below it. It counts as No
+     equivalent, but nothing is wrong, so it is not red. */
+  &[data-category='held'] {
+    --_color: var(--eds-background-non-interactive-neutral-emphasis);
+  }
 }
 
 .health-segment {

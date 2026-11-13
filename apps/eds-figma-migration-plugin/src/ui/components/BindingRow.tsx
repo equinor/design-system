@@ -1,7 +1,7 @@
 import { Badge, Button, Checkbox } from '@equinor/eds-core-react/next'
-import { CATEGORY_LABELS } from '../labels'
+import { CATEGORY_LABELS, HELD_LABEL } from '../labels'
 import type { Category } from '../../scan/types'
-import { BADGES } from '../badges'
+import { BADGES, HELD_BADGE } from '../badges'
 
 type BindingRowProps = {
   /** The main line: a property in the Layers view, a layer in the Variables view */
@@ -14,6 +14,8 @@ type BindingRowProps = {
   note?: string
   reason?: string
   category: Category
+  /** A legacy mode kept until the layers below it are migrated, badged Waiting */
+  held?: boolean
   /** Shows a checkbox and a Change button */
   changeable: boolean
   selected: boolean
@@ -31,13 +33,14 @@ export function BindingRow({
   note,
   reason,
   category,
+  held = false,
   changeable,
   selected,
   onToggle,
   onSelectLayer,
   onChange,
 }: BindingRowProps) {
-  const badge = BADGES[category]
+  const badge = held ? HELD_BADGE : BADGES[category]
   return (
     <li className="binding-row">
       {changeable ? (
@@ -66,7 +69,7 @@ export function BindingRow({
       <div className="binding-actions">
         <Badge tone={badge.tone} emphasis={badge.emphasis}>
           {category === 'check' ? '⚠ ' : ''}
-          {CATEGORY_LABELS[category]}
+          {held ? HELD_LABEL : CATEGORY_LABELS[category]}
         </Badge>
         {changeable && (
           <Button

@@ -14,3 +14,12 @@ export const BADGES: Record<
   inInstance: { tone: 'neutral', emphasis: 'low' },
   other: { tone: 'neutral', emphasis: 'low' },
 }
+
+/**
+ * A legacy mode that waits for the layers below it (labels.ts, HELD_LABEL).
+ * Neutral, since nothing is wrong and the designer has nothing to decide.
+ */
+export const HELD_BADGE: { tone: BadgeTone; emphasis: 'low' | 'medium' } = {
+  tone: 'neutral',
+  emphasis: 'low',
+}

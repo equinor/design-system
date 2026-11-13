@@ -121,7 +121,9 @@ modes on the frames that had the legacy ones:
 
 A legacy mode is removed only when no layer below it uses a legacy variable
 any more. While an instance or an icon size below still needs it, it stays,
-and the plugin says why.
+and the plugin says why. Such a mode is marked **Waiting**: the change is to
+clear it, and Apply makes that change once the layers below are migrated. In
+the health bar it counts as No equivalent.
 
 Check the frame afterwards. Small differences in colour and spacing come from
 the new token values, not from the plugin.

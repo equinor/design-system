@@ -29,7 +29,13 @@ import type {
 import { PROPERTY_GROUPS } from '../../scan/types'
 import type { Category, OldInstance, PropertyGroup } from '../../scan/types'
 import { CLEAR_MODE } from '../../scan/classify'
-import { CATEGORY_LABELS, propertyLabel, values } from '../labels'
+import {
+  CATEGORY_LABELS,
+  isHeld,
+  propertyLabel,
+  statusLabel,
+  values,
+} from '../labels'
 import { pathBelow } from '../paths'
 import { plainReason } from '../plain'
 import { groupState } from '../selection'
@@ -240,18 +246,21 @@ function rowCategories(
  */
 function StatusCell({
   categories,
+  rule,
   why,
   onWhy,
 }: {
   categories: [Category, number][]
+  /** The row's rule; a held legacy mode shows as Waiting */
+  rule?: string
   why?: string
   onWhy: () => void
 }) {
   const text = categories
     .map(([category, count]) =>
       categories.length === 1
-        ? CATEGORY_LABELS[category]
-        : `${CATEGORY_LABELS[category]} ${count}`,
+        ? statusLabel(category, rule)
+        : `${statusLabel(category, rule)} ${count}`,
     )
     .join(', ')
   const needsCheck = categories.some(([category]) => category === 'check')
@@ -259,7 +268,7 @@ function StatusCell({
     <span
       key={category}
       className="health-swatch"
-      data-category={category}
+      data-category={isHeld(category, rule) ? 'held' : category}
       aria-hidden="true"
     />
   ))
@@ -666,6 +675,7 @@ export function MappingView({
                               )}
                               <StatusCell
                                 categories={categories}
+                                rule={row.rule}
                                 why={reason}
                                 onWhy={() => setWhy({ group, row })}
                               />
@@ -713,6 +723,7 @@ export function MappingView({
                                         mine ? sourceLabel('record') : undefined
                                       }
                                       category={outcome.category}
+                                      held={isHeld(outcome.category, row.rule)}
                                       changeable
                                       selected={selection.has(binding.id)}
                                       onToggle={(selected) =>

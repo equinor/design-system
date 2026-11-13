@@ -8,7 +8,14 @@ import {
   Icon,
 } from '@equinor/eds-core-react/next'
 import { arrow_back } from '@equinor/eds-icons'
-import { CATEGORY_LABELS, GROUP_LABELS, propertyLabel, values } from '../labels'
+import {
+  CATEGORY_LABELS,
+  GROUP_LABELS,
+  HELD_LABEL,
+  isHeld,
+  propertyLabel,
+  values,
+} from '../labels'
 import {
   effectiveCategory,
   effectiveTarget,
@@ -180,14 +187,20 @@ function groupSummary(
   categoryOf: (record: BindingRecord) => Category,
 ): string {
   const parts = [values(records.length)]
+  const held = (record: BindingRecord) =>
+    isHeld(categoryOf(record), record.rule)
   for (const category of ['check', 'none', 'excluded'] as const) {
     const count = records.filter(
-      (record) => categoryOf(record) === category,
+      (record) => categoryOf(record) === category && !held(record),
     ).length
     if (count > 0) {
       parts.push(`${count} ${CATEGORY_LABELS[category].toLowerCase()}`)
     }
   }
+  // Held modes are No equivalent in the counts, but say Waiting here, as
+  // their badges do.
+  const waiting = records.filter(held).length
+  if (waiting > 0) parts.push(`${waiting} ${HELD_LABEL.toLowerCase()}`)
   return parts.join(', ')
 }
 
@@ -563,6 +576,7 @@ export function Inspector({
                                 }
                                 reason={decided ? undefined : record.reason}
                                 category={categoryOf(record)}
+                                held={isHeld(categoryOf(record), record.rule)}
                                 changeable={isMappable(record)}
                                 selected={selection.has(record.id)}
                                 onToggle={(selected) =>
