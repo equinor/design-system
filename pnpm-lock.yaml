@@ -1167,8 +1167,8 @@ importers:
         specifier: ^1.21.0
         version: 1.21.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       dotenv:
-        specifier: ^17.4.0
-        version: 17.4.2
+        specifier: ^18.0.9
+        version: 18.0.9
       prettier:
         specifier: ^3.9.10
         version: 3.9.10
@@ -1279,8 +1279,8 @@ importers:
   scripts/figma-broker:
     dependencies:
       dotenv:
-        specifier: ^17.4.0
-        version: 17.4.2
+        specifier: ^18.0.9
+        version: 18.0.9
       svgo:
         specifier: ^4.1.0
         version: 4.1.0
@@ -7981,9 +7981,10 @@ packages:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
-  dotenv@17.4.2:
-    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
+  dotenv@18.0.9:
+    resolution: {integrity: sha512-3fVOW4cB02R066PUSwn8O4TJyz9NckQl7F81blIbaq9jKBm2tSmOKky7ZHIXzGvkVPXCSn6jkpziBPZdGFs8Tw==}
     engines: {node: '>=12'}
+    hasBin: true
 
   downshift@9.3.2:
     resolution: {integrity: sha512-5VD0WZLQDhipWiDU+K5ili3VDhGrXwlvOlSaSG1Cb0eS4XpssxVuoD09JNgju+bAzxB2Wvlwx+FwTE/FNdrqow==}
@@ -22794,7 +22795,7 @@ snapshots:
 
   dotenv@16.6.1: {}
 
-  dotenv@17.4.2: {}
+  dotenv@18.0.9: {}
 
   downshift@9.3.2(react@19.3.1):
     dependencies:
