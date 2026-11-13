@@ -8,6 +8,14 @@ type ApplyActionsProps = {
   toReview: number
   /** “in the scope” or “in this frame” */
   where: string
+  /**
+   * What the actions change: frames and layers, or main components only,
+   * which names Revert for the main component and marks the footer in
+   * Figma's component purple
+   */
+  kind?: 'frame' | 'component'
+  /** The changes are inside a main component, which also marks the footer in purple */
+  inComponent?: boolean
   /** The main components among the entries, and how many instances they have in the file */
   mainComponents?: { count: number; instances: number }
   /** Layers in the entry the plugin has changed before, for Revert */
@@ -28,6 +36,8 @@ export function ApplyActions({
   ready,
   toReview,
   where,
+  kind = 'frame',
+  inComponent = false,
   mainComponents,
   changed = 0,
   busy,
@@ -37,6 +47,8 @@ export function ApplyActions({
 }: ApplyActionsProps) {
   const [confirm, setConfirm] = useState<Confirm>()
   const close = () => setConfirm(undefined)
+  const revertLabel =
+    kind === 'component' ? 'Revert main component' : 'Revert frame'
   // The footer is fixed to the bottom of the window; the content keeps its
   // height free at the end (ui.css, .app-main).
   const footer = useRef<HTMLDivElement>(null)
@@ -60,7 +72,11 @@ export function ApplyActions({
   return (
     // UX review F8 and Check designs: a footer that says what Apply
     // changes and where, with Review and Apply beside it.
-    <div ref={footer} className="apply-actions apply-footer">
+    <div
+      ref={footer}
+      className="apply-actions apply-footer"
+      data-main-component={kind === 'component' || inComponent || undefined}
+    >
       <div className="apply-summary">
         <span>
           {ready > 0 ? (
@@ -85,7 +101,7 @@ export function ApplyActions({
             disabled={busy}
             onClick={() => setConfirm('revert')}
           >
-            Revert frame
+            {revertLabel}
           </Button>
         )}
         {onReview && toReview > 0 && (
@@ -138,7 +154,7 @@ export function ApplyActions({
                 {toReview > 0
                   ? ` ${toReview} value${toReview === 1 ? '' : 's'} that need a check stay as they are until you review them.`
                   : ''}{' '}
-                Undo with Ctrl or Cmd+Z, or later with Revert frame.
+                Undo with Ctrl or Cmd+Z, or later with {revertLabel}.
               </p>
             </Dialog.Content>
             <Dialog.Actions>
@@ -159,7 +175,10 @@ export function ApplyActions({
         {confirm === 'revert' && (
           <>
             <Dialog.Header>
-              <Dialog.Title>Revert the changes in this frame?</Dialog.Title>
+              <Dialog.Title>
+                Revert the changes in this{' '}
+                {kind === 'component' ? 'main component' : 'frame'}?
+              </Dialog.Title>
             </Dialog.Header>
             <Dialog.Content>
               <p>
@@ -167,6 +186,8 @@ export function ApplyActions({
                 on {changed} layer{changed === 1 ? '' : 's'} it changed, from
                 the change log on each layer. A binding someone has changed
                 since is left as it is.
+                {kind === 'component' &&
+                  ' Every instance of the main component changes back with it.'}
               </p>
             </Dialog.Content>
             <Dialog.Actions>

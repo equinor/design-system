@@ -69,9 +69,12 @@ plugin can change in the scope.
   you to it: migrate its page, and every instance follows. Instances of the
   legacy Typography component are not listed here; **Show** opens their tab
   in Changes.
-- **Main components** lists the main components in the scope, which Apply
-  changes together with the frames, and the main components on other pages
-  that instances in the scope use, with **Go to** and **Scan its page**.
+- **Main components** lists the main components in the scope. On this tab,
+  Apply in the footer changes all of them in one run and leaves the frames
+  as they are; Apply on Changes or Frames changes the main components and
+  the frames together. The tab also lists the main components on other pages
+  that instances in the scope use, with **Go to** and **Scan its page** for
+  one, and **Scan the whole file** to have them all on the tab.
 
 In a frame, the **Layers** view shows each instance as one row, marked
 Instance: the plugin changes nothing inside it.
@@ -125,6 +128,12 @@ the new token values, not from the plugin.
 
 Applying in a main component changes every instance of it in the file. The
 confirmation says how many instances there are.
+
+The plugin marks main components in the purple Figma uses for them: the rows
+on the Main components tab, an opened main component, and the Apply footer
+when it applies to main components only. A selected main component, or a
+layer selected inside one, is marked beside the scope too, since a change
+there also reaches every instance.
 
 ## Typography components
 

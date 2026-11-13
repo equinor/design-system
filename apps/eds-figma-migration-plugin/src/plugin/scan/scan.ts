@@ -213,8 +213,20 @@ export async function runScan(
       for (const ancestor of ancestors)
         Object.assign(modes, explicitModes(ancestor))
       const loose: SceneNode[] = []
+      const first = entries.length
       await collectTopLevel(node, page, sections, modes, loose)
       await collectLoose(loose, node.id, node.name, page, sections, modes)
+      // A layer selected inside a main component is changed in every
+      // instance of it, so its entry says which component it is in.
+      const inside = ancestors.find(
+        (ancestor) =>
+          ancestor.type === 'COMPONENT_SET' || ancestor.type === 'COMPONENT',
+      )
+      if (inside) {
+        for (const entry of entries.slice(first)) {
+          entry.insideComponent = { id: inside.id, name: inside.name }
+        }
+      }
     }
   }
 
@@ -259,9 +271,9 @@ export async function runScan(
 
 /**
  * Counts the instances of each local component that still uses legacy
- * variables, since changing the main component changes all of them. Only
- * those components are counted, because finding instances can load every
- * page.
+ * variables, and of the component around a selected layer inside one, since
+ * changing the main component changes all of them. Only those components are
+ * counted, because finding instances can load every page.
  */
 async function countInstances(
   entries: EntryMeta[],
@@ -275,8 +287,10 @@ async function countInstances(
       .map((record) => record.entryId),
   )
   for (const entry of entries) {
-    if (entry.kind !== 'component' || !legacy.has(entry.id)) continue
-    const node = await figma.getNodeByIdAsync(entry.id)
+    const componentId =
+      entry.kind === 'component' ? entry.id : entry.insideComponent?.id
+    if (!componentId || !legacy.has(entry.id)) continue
+    const node = await figma.getNodeByIdAsync(componentId)
     const components =
       node?.type === 'COMPONENT_SET'
         ? node.children.filter(

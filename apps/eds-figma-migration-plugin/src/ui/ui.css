@@ -26,6 +26,19 @@ html {
   );
 }
 
+/*
+ * The purple Figma uses for main components. The window uses it wherever it
+ * shows a main component, or a layer inside one, since a change there
+ * changes every instance. EDS has no token for it, so the value is local to
+ * the plugin. White text on it measures 5.3:1, so the label stays readable
+ * in both colour schemes. The purple is not used as a text colour, because
+ * on the dark canvas it measures 3.3:1, below the 4.5:1 text needs.
+ */
+:root {
+  --main-component-colour: #8a38f5;
+  --main-component-on-colour: #fff;
+}
+
 body {
   font-family: var(--eds-font-family-ui);
   font-size: var(--eds-typography-body-md-font-size);
@@ -426,6 +439,62 @@ code {
   font-weight: var(--eds-font-weight-medium);
   line-height: var(--eds-typography-label-xs-line-height);
   color: var(--eds-text-secondary);
+}
+
+/* A main component, or a place inside one, in Figma's component purple
+   (--main-component-colour at the top of this file). */
+.main-component-label {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-3xs);
+  align-items: center;
+  max-inline-size: 100%;
+  padding-inline: var(--eds-spacing-2xs);
+  overflow: hidden;
+  font-size: var(--eds-typography-label-xs-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--main-component-on-colour);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: var(--main-component-colour);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.inside-main-component {
+  display: inline-flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  vertical-align: middle;
+}
+
+.main-component-glyph {
+  flex-shrink: 0;
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  fill: currentcolor;
+}
+
+/* The heading of an opened main component, or of a layer inside one, and
+   the Apply footer when it applies to main components only, carry the
+   purple at their edge, as Figma marks a selection in a component. */
+.main-component-context {
+  padding-inline-start: var(--eds-spacing-sm);
+  border-inline-start: 3px solid var(--main-component-colour);
+}
+
+.apply-footer[data-main-component] {
+  border-block-start: 2px solid var(--main-component-colour);
+}
+
+.selection-line {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  min-inline-size: 0;
 }
 
 .entry-health {

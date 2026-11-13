@@ -1,6 +1,7 @@
 import { Button } from '@equinor/eds-core-react/next'
 import type { EntrySummary, OldInstance } from '../../scan/types'
 import { EntryList } from './EntryList'
+import { MainComponentLabel } from './MainComponentLabel'
 
 type MainComponentsViewProps = {
   /** The local main components in the scope */
@@ -15,6 +16,8 @@ type MainComponentsViewProps = {
   onSelect: (nodeIds: string[]) => void
   /** Goes to a main component's page and scans it */
   onScanPageOf: (nodeId: string) => void
+  /** Scans the whole file, so every main component is in the scope */
+  onScanFile: () => void
   busy: boolean
 }
 
@@ -53,8 +56,9 @@ export function mainComponentsElsewhere(
 
 /**
  * The main components the migration depends on: those in the scope, which
- * Apply changes with the frames, and those on other pages that instances in
- * the scope use, with a way to go to them and scan their page.
+ * Apply in the footer of this tab changes in one run, without the frames,
+ * and those on other pages that instances in the scope use, with a way to
+ * go to them, scan their page, or scan the file to bring them all in.
  */
 export function MainComponentsView({
   components,
@@ -65,6 +69,7 @@ export function MainComponentsView({
   onGoTo,
   onSelect,
   onScanPageOf,
+  onScanFile,
   busy,
 }: MainComponentsViewProps) {
   const elsewhere = mainComponentsElsewhere(components, instances)
@@ -87,7 +92,9 @@ export function MainComponentsView({
             In the scope
           </h2>
           <p className="muted">
-            Apply in the footer changes these together with the frames.
+            Apply in the footer changes all of these main components in one run,
+            and nothing else. The frames in the scope stay as they are until you
+            apply them from Changes or Frames.
           </p>
           <EntryList
             entries={components}
@@ -105,14 +112,26 @@ export function MainComponentsView({
           </h2>
           <p className="muted">
             Instances in the scope use these, but their main components are
-            outside it. Migrate them on their page, and every instance follows.
+            outside it. Scan the whole file to have every main component on this
+            tab and apply them all at once, or scan the page of one.
           </p>
+          <div className="panel-actions">
+            <span />
+            <Button
+              size="small"
+              variant="secondary"
+              disabled={busy}
+              onClick={onScanFile}
+            >
+              Scan the whole file
+            </Button>
+          </div>
           <ul className="entry-list">
             {elsewhere.map((item) => (
               <li key={item.id} className="entry-row">
                 <div className="entry-info">
                   <span className="entry-name">
-                    <span className="kind-label">Component</span> {item.name}
+                    <MainComponentLabel /> {item.name}
                   </span>
                   <span className="entry-meta">
                     {item.instances} instance{item.instances === 1 ? '' : 's'}{' '}

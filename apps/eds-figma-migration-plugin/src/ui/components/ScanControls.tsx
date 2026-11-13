@@ -1,7 +1,17 @@
 import { Button, Radio } from '@equinor/eds-core-react/next'
-import type { ScanProgress, Scope } from '../../shared/messages'
+import type {
+  ScanProgress,
+  Scope,
+  SelectionComponent,
+} from '../../shared/messages'
+import { InsideMainComponent, MainComponentLabel } from './MainComponentLabel'
 
-export type SelectionInfo = { count: number; firstName?: string }
+export type SelectionInfo = {
+  count: number
+  firstName?: string
+  /** The selection is main components, or one layer inside a main component */
+  component?: SelectionComponent
+}
 
 type ScanControlsProps = {
   scope: Scope
@@ -15,6 +25,11 @@ type ScanControlsProps = {
   compact?: boolean
   /** Selects the scanned layers, as Check designs' refocus (final review FR6) */
   onGoToScope?: () => void
+}
+
+/** “Main component” or “2 main components”, in the purple label */
+function componentText({ count }: SelectionInfo): string {
+  return count === 1 ? 'Main component' : `${count} main components`
 }
 
 function selectionText({ count, firstName }: SelectionInfo): string {
@@ -64,8 +79,19 @@ export function ScanControls({
           />
         </div>
         {scope === 'selection' && (
-          <span className="muted selection-text">
-            {selectionText(selection)}
+          <span className="selection-line">
+            <span className="muted selection-text">
+              {selectionText(selection)}
+            </span>
+            {selection.component?.kind === 'inside' ? (
+              <InsideMainComponent name={selection.component.name} />
+            ) : (
+              selection.component && (
+                <MainComponentLabel>
+                  {componentText(selection)}
+                </MainComponentLabel>
+              )
+            )}
           </span>
         )}
       </fieldset>

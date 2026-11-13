@@ -101,6 +101,7 @@ function Overview({
   showCounts,
   showEmpty,
   onScanPageOf,
+  onScanFile,
   onConvert,
 }: {
   summary: ScanSummary
@@ -122,13 +123,15 @@ function Overview({
   busy: boolean
   onApply: (entryIds: string[]) => void
   instances: OldInstance[]
-  onReview: () => void
+  /** Opens the review, of the entries given or of the whole scope */
+  onReview: (entryIds?: string[]) => void
   report?: Report
   onReport: () => void
   onCloseReport: () => void
   showCounts: boolean
   showEmpty: boolean
   onScanPageOf: (nodeId: string) => void
+  onScanFile: () => void
   onConvert: (instanceIds: string[]) => void
 }) {
   const entryNames = new Map(
@@ -184,6 +187,32 @@ function Overview({
           ),
         }
       : undefined
+  // The Main components tab applies to its main components only, all of
+  // them in one run, and leaves the frames in the scope as they are.
+  const componentsReady = components.filter((entry) => entry.counts.sure > 0)
+  const componentPages = new Set(componentsReady.map((entry) => entry.pageId))
+    .size
+  const componentFooter = {
+    ready: components.reduce((sum, entry) => sum + entry.counts.sure, 0),
+    toReview: components.reduce((sum, entry) => sum + entry.counts.check, 0),
+    where:
+      componentsReady.length === 0
+        ? 'in the main components'
+        : `in ${componentsReady.length} main component${componentsReady.length === 1 ? '' : 's'}${
+            componentPages > 1 ? ` on ${componentPages} pages` : ''
+          }`,
+    mainComponents:
+      componentsReady.length > 0
+        ? {
+            count: componentsReady.length,
+            instances: componentsReady.reduce(
+              (sum, entry) => sum + (entry.instanceCount ?? 0),
+              0,
+            ),
+          }
+        : undefined,
+    entryIds: components.map((entry) => entry.id),
+  }
   const outside = healthOutsideInstances(totals)
   // UX review F3: where the work is, across pages.
   const mostWork = frames
@@ -277,6 +306,7 @@ function Overview({
             onGoTo={onGoTo}
             onSelect={onSelectLayer}
             onScanPageOf={onScanPageOf}
+            onScanFile={onScanFile}
             busy={busy}
           />
         ) : view === 'mapping' ? (
@@ -350,17 +380,31 @@ function Overview({
           </div>
         )}
       </Tabs>
-      {selection.items.size === 0 && (
-        <ApplyActions
-          ready={totals.sure}
-          toReview={totals.check}
-          where={reach ?? 'in the scope'}
-          mainComponents={mainComponents}
-          busy={busy}
-          onReview={onReview}
-          onApply={() => onApply(applied.map((entry) => entry.id))}
-        />
-      )}
+      {selection.items.size === 0 &&
+        (view === 'components' && components.length > 0 ? (
+          <ApplyActions
+            key="components"
+            ready={componentFooter.ready}
+            toReview={componentFooter.toReview}
+            where={componentFooter.where}
+            kind="component"
+            mainComponents={componentFooter.mainComponents}
+            busy={busy}
+            onReview={() => onReview(componentFooter.entryIds)}
+            onApply={() => onApply(componentFooter.entryIds)}
+          />
+        ) : (
+          <ApplyActions
+            key="scope"
+            ready={totals.sure}
+            toReview={totals.check}
+            where={reach ?? 'in the scope'}
+            mainComponents={mainComponents}
+            busy={busy}
+            onReview={() => onReview()}
+            onApply={() => onApply(applied.map((entry) => entry.id))}
+          />
+        ))}
     </div>
   )
 }
@@ -430,7 +474,11 @@ export function App() {
           setCommand(message.command)
           break
         case 'selection':
-          setSelection({ count: message.count, firstName: message.firstName })
+          setSelection({
+            count: message.count,
+            firstName: message.firstName,
+            component: message.component,
+          })
           if (!scopeChosen.current) {
             setScope(message.count > 0 ? 'selection' : 'page')
           }
@@ -559,6 +607,16 @@ export function App() {
     setError(undefined)
     setScanning(true)
     send({ type: 'scan-page-of', nodeId })
+  }
+  /** Scans the whole file from the Main components tab, and returns to it */
+  const scanFile = () => {
+    scopeChosen.current = true
+    userScan.current = true
+    toComponents.current = true
+    setScope('file')
+    setError(undefined)
+    setScanning(true)
+    send({ type: 'scan', scope: 'file' })
   }
   const open = (entry: EntrySummary) => {
     setOpenEntryId(entry.id)
@@ -901,7 +959,9 @@ export function App() {
                 busy={locked}
                 onApply={() => applyEntries([openEntry.id])}
                 onReview={() =>
-                  setReview(reviewItems(mapping, overrides, openEntry.id))
+                  setReview(
+                    reviewItems(mapping, overrides, new Set([openEntry.id])),
+                  )
                 }
                 onRevert={() => revertEntry(openEntry.id)}
                 onBack={() => setOpenEntryId(undefined)}
@@ -933,13 +993,22 @@ export function App() {
                   busy={locked}
                   onApply={applyEntries}
                   instances={instances}
-                  onReview={() => setReview(reviewItems(mapping, overrides))}
+                  onReview={(entryIds) =>
+                    setReview(
+                      reviewItems(
+                        mapping,
+                        overrides,
+                        entryIds ? new Set(entryIds) : undefined,
+                      ),
+                    )
+                  }
                   report={report}
                   onReport={() => send({ type: 'get-report' })}
                   onCloseReport={() => setReport(undefined)}
                   showCounts={showCounts}
                   showEmpty={showEmpty}
                   onScanPageOf={scanPageOf}
+                  onScanFile={scanFile}
                   onConvert={convertTypography}
                 />
               </div>

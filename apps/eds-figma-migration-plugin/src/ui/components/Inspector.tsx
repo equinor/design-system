@@ -39,6 +39,7 @@ import { ApplyActions } from './ApplyActions'
 import { MappingView } from './MappingView'
 import { BindingRow } from './BindingRow'
 import { HealthBar, HealthLegend } from './HealthBar'
+import { InsideMainComponent, MainComponentLabel } from './MainComponentLabel'
 import { Tabs } from './Tabs'
 
 type InspectorProps = {
@@ -191,6 +192,22 @@ function groupSummary(
 }
 
 /**
+ * For a main component, or a layer inside one: how far a change reaches,
+ * since every instance of the component follows it.
+ */
+function componentReach(entry: EntrySummary): string {
+  const count = entry.instanceCount
+  const parts = [
+    entry.insideComponent &&
+      `This layer is inside the main component ${entry.insideComponent.name}.`,
+    count !== undefined &&
+      `${entry.insideComponent ? 'It is used' : 'Used'} ${count} time${count === 1 ? '' : 's'} in the file.`,
+    'Every instance changes with it, and keeps the text and other overrides set in it.',
+  ]
+  return parts.filter(Boolean).join(' ')
+}
+
+/**
  * Every binding in one entry, grouped by layer or by legacy variable in an
  * accordion, filtered by the same categories as the health bar, and the
  * instances in it that still use legacy variables.
@@ -241,6 +258,16 @@ export function Inspector({
     (record) => property === 'all' || record.group === property,
   )
   const groups = groupRecords(shown, pivot, entry.name, oldInstances ?? [])
+  // Opened main components, and layers inside one, are marked in Figma's
+  // component purple, since a change there reaches every instance.
+  const isMain = entry.kind === 'component'
+  const inside = entry.insideComponent
+  const heading = (
+    <div className="health-heading">
+      <h2 className="inspector-title">{entry.name}</h2>
+      <span className="health-value">{formatHealth(entry.health)}</span>
+    </div>
+  )
   const toggleOpen = (key: string, isOpen: boolean) =>
     setOpen((previous) => {
       const next = new Set(previous)
@@ -256,19 +283,42 @@ export function Inspector({
           <Icon data={arrow_back} size="md" />
           Back
         </Button>
-        <Button
-          variant="secondary"
-          size="small"
-          aria-label={`Go to ${entry.name}`}
-          onClick={() => onSelect(entry.nodeIds)}
-        >
-          Go to
-        </Button>
+        <div className="entry-actions">
+          {inside && (
+            <Button
+              variant="secondary"
+              size="small"
+              aria-label={`Go to the main component ${inside.name}`}
+              onClick={() => onSelect([inside.id])}
+            >
+              Go to main component
+            </Button>
+          )}
+          <Button
+            variant="secondary"
+            size="small"
+            aria-label={`Go to ${entry.name}`}
+            onClick={() => onSelect(entry.nodeIds)}
+          >
+            Go to
+          </Button>
+        </div>
       </div>
-      <div className="health-heading">
-        <h2 className="inspector-title">{entry.name}</h2>
-        <span className="health-value">{formatHealth(entry.health)}</span>
-      </div>
+      {isMain || inside ? (
+        <div className="stack-tight main-component-context">
+          <span>
+            {inside ? (
+              <InsideMainComponent name={inside.name} />
+            ) : (
+              <MainComponentLabel />
+            )}
+          </span>
+          {heading}
+          <p className="muted">{componentReach(entry)}</p>
+        </div>
+      ) : (
+        heading
+      )}
       <HealthBar counts={entry.counts} />
       <HealthLegend counts={entry.counts} />
 
@@ -575,7 +625,14 @@ export function Inspector({
         <ApplyActions
           ready={entry.counts.sure}
           toReview={entry.counts.check}
-          where="in this frame"
+          where={isMain ? 'in this main component' : 'in this frame'}
+          kind={isMain ? 'component' : 'frame'}
+          inComponent={inside !== undefined}
+          mainComponents={
+            isMain || inside
+              ? { count: 1, instances: entry.instanceCount ?? 0 }
+              : undefined
+          }
           changed={entry.changed}
           busy={busy}
           onApply={onApply}

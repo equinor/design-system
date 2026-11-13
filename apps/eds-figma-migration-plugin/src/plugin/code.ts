@@ -14,6 +14,7 @@ import type {
   Command,
   OverrideChange,
   PluginToUi,
+  SelectionComponent,
   UiToPlugin,
 } from '../shared/messages'
 import { applyChanges } from './apply/apply'
@@ -91,12 +92,44 @@ function withChoices(state: ScanState): ScanState {
   }
 }
 
+function isMainComponent(node: BaseNode): boolean {
+  return node.type === 'COMPONENT' || node.type === 'COMPONENT_SET'
+}
+
+/**
+ * Whether the selection is main components, or one layer inside a main
+ * component. A change there changes every instance of the component.
+ */
+function selectionComponent(
+  selection: readonly SceneNode[],
+): SelectionComponent | undefined {
+  if (selection.length === 0) return undefined
+  if (selection.every(isMainComponent)) return { kind: 'main' }
+  if (selection.length > 1) return undefined
+  for (
+    let parent = selection[0].parent;
+    parent && parent.type !== 'PAGE';
+    parent = parent.parent
+  ) {
+    if (isMainComponent(parent)) {
+      const set =
+        parent.type === 'COMPONENT' && parent.parent?.type === 'COMPONENT_SET'
+          ? parent.parent
+          : parent
+      return { kind: 'inside', name: set.name }
+    }
+  }
+  return undefined
+}
+
 function postSelection() {
   const selection = figma.currentPage.selection
+  const component = selectionComponent(selection)
   post({
     type: 'selection',
     count: selection.length,
     firstName: selection[0]?.name,
+    ...(component ? { component } : {}),
   })
 }
 

@@ -94,6 +94,15 @@ export type SavedHealth = {
   frames: { name: string; pageName: string; health: number | null }[]
 }
 
+/**
+ * A selection that is one or more main components, or one layer inside a
+ * main component, which the window marks in Figma's component colour.
+ */
+export type SelectionComponent =
+  | { kind: 'main' }
+  /** The component, or its component set when it is a variant */
+  | { kind: 'inside'; name: string }
+
 export type ScanProgress = {
   pageName: string
   pageIndex: number
@@ -110,7 +119,12 @@ export type PluginToUi =
       currentPageName: string
     }
   /** The current selection, sent when the window opens and when it changes */
-  | { type: 'selection'; count: number; firstName?: string }
+  | {
+      type: 'selection'
+      count: number
+      firstName?: string
+      component?: SelectionComponent
+    }
   | { type: 'scan-progress'; progress: ScanProgress }
   | { type: 'scan-done'; summary: ScanSummary }
   /** The same scan counted again after targets were changed */

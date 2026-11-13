@@ -236,6 +236,11 @@ export type EntrySummary = {
   changed?: number
   /** For a local component with legacy variables: its instances in the file */
   instanceCount?: number
+  /**
+   * For a selected layer inside a main component: that component, or its
+   * component set. A change here changes every instance of it.
+   */
+  insideComponent?: { id: string; name: string }
 }
 
 export type OldInstance = {

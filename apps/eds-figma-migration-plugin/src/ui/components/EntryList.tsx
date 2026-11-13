@@ -3,6 +3,7 @@ import { Accordion, Button } from '@equinor/eds-core-react/next'
 import { formatHealth, healthOf, oldCount, sumCounts } from '../../scan/summary'
 import type { EntryKind, EntrySummary } from '../../scan/types'
 import { HealthBar } from './HealthBar'
+import { InsideMainComponent, MainComponentLabel } from './MainComponentLabel'
 
 type EntryListProps = {
   entries: EntrySummary[]
@@ -32,6 +33,22 @@ function kindLabel(entry: EntrySummary): string | undefined {
     component: 'Component',
   }
   return labels[entry.kind]
+}
+
+/**
+ * The label before a row's name. Main components, and layers inside one, get
+ * Figma's component purple, since a change there reaches every instance.
+ */
+function KindLabel({ entry }: { entry: EntrySummary }) {
+  const label =
+    entry.kind === 'component' ? (
+      <MainComponentLabel />
+    ) : entry.insideComponent ? (
+      <InsideMainComponent name={entry.insideComponent.name} />
+    ) : (
+      kindLabel(entry) && <span className="kind-label">{kindLabel(entry)}</span>
+    )
+  return label ? <>{label} </> : null
 }
 
 /** Lowest health first; entries with nothing to score last. */
@@ -159,13 +176,7 @@ function Groups({
               <li key={entry.id} className="entry-row">
                 <div className="entry-info">
                   <span className="entry-name">
-                    {kindLabel(entry) && (
-                      <>
-                        <span className="kind-label">
-                          {kindLabel(entry)}
-                        </span>{' '}
-                      </>
-                    )}
+                    <KindLabel entry={entry} />
                     {entry.name}
                   </span>
                   {entry.health === null ? (

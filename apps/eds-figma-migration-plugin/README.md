@@ -242,10 +242,18 @@ library component is updated in its library, and a component in this file
 changes with its main component.
 
 **Main components** lists the main components in the scope, which count in
-the health bar and which Apply changes with the frames, each with how many
-times it is used in the file. It also lists the main components on other
-pages that instances in the scope use, with Go to and Scan its page. In a
-frame, the Layers view shows each instance as one row.
+the health bar, each with how many times it is used in the file. On this tab
+the Apply footer changes the main components only, all in one run; on
+Changes and Frames it changes them with the frames. The tab also lists the
+main components on other pages that instances in the scope use, with Go to
+and Scan its page, and Scan the whole file to bring them all into the scope.
+In a frame, the Layers view shows each instance as one row.
+
+Main components, and layers selected inside one, are marked in Figma's
+component purple, `#8A38F5`. The value is `--main-component-colour` in
+`src/ui/ui.css`, local to the plugin since EDS has no token for it. It is
+used as a fill with white text (5.3:1) and as an edge, never as a text
+colour, which would measure 3.3:1 on the dark canvas.
 
 ## Report and what the plugin keeps in the file
 
