@@ -105,7 +105,7 @@
     "styled-components": "^6"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.10",
+    "@babel/runtime": "^7.29.13",
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
@@ -116,7 +116,7 @@
     "@react-stately/datepicker": "^3.17.1",
     "@react-types/shared": "^3.37.0",
     "@tanstack/react-virtual": "3.14.26",
-    "downshift": "9.4.0",
+    "downshift": "9.4.1",
     "react-aria": "^3.53.1"
   }
 }

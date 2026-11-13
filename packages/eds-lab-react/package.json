@@ -92,14 +92,14 @@
     "styled-components": "^6"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.10",
+    "@babel/runtime": "^7.29.13",
     "@equinor/eds-core-react": "workspace:^",
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "@types/react-datepicker": "^7.0.0",
     "date-fns": "^4.4.0",
-    "downshift": "9.4.0",
+    "downshift": "9.4.1",
     "react-datepicker": "^9.1.0",
     "react-fast-compare": "3.2.2"
   }
