@@ -221,10 +221,12 @@ The review ends with what was confirmed, changed, excluded and skipped. From a
 frame, the review covers that frame only.
 
 **Typography components.** The legacy Typography component is a text in a
-component. When the scan finds instances of it (outside other instances), the
-overview says how many, and the Instances tab offers **Convert to text**, for
-all of them or one at a time. Each instance becomes a text layer with the same
-text, the matching EDS Foundation text style, the same place and sizing, and
+component. When the scan finds instances of it (outside other instances),
+Changes gets a Typography tab after the kinds of value, which offers **Convert
+to text** for all of them or one at a time. The Instances tab leaves them out
+of its list and count, and links to that tab instead. Each instance becomes a
+text layer with the same text, the matching EDS Foundation text style, the
+same place and sizing, and
 its colour as an EDS Foundation variable when the rule is sure (otherwise the
 legacy colour stays, for the review). Mono numbers cannot be carried by a text
 style, so the result says how many used them. The text layer logs the
@@ -232,7 +234,7 @@ component it replaced, its properties, modes, sizing and colour, so Revert
 frame puts the instance back as it was. Typography instances inside other
 components stay until those components are updated.
 
-**The Instances tab** lists every instance in the scope that still uses
+**The Instances tab** lists every other instance in the scope that still uses
 legacy variables, grouped by main component, with the number of instances,
 whether the component is in this file or in a library, and Go to for one
 instance or all of them. The plugin never changes inside an instance; a

@@ -101,6 +101,7 @@ export async function convertTypography(
   let monoNumbers = 0
   let instanceTexts = 0
   const monoNumberIds: string[] = []
+  const caseIds: string[] = []
   const at = new Date().toISOString()
   await fonts.load({ family: 'Inter', style: 'Regular' })
 
@@ -154,7 +155,15 @@ export async function convertTypography(
       try {
         await text.setTextStyleIdAsync(style.id)
         text.characters = source.characters
-        if (source.textCase !== figma.mixed) text.textCase = source.textCase
+        // Setting any style property, such as the text case, detaches the
+        // text style in Figma and leaves its variables bound to the layer.
+        // The style wins; a different case is reported instead.
+        if (
+          source.textCase !== figma.mixed &&
+          source.textCase !== style.textCase
+        ) {
+          caseIds.push(text.id)
+        }
 
         const fill = own.find(
           (unit) => unit.unit === 'variable' && unit.kind === 'textFill',
@@ -231,5 +240,12 @@ export async function convertTypography(
     }
   }
   figma.commitUndo()
-  return { converted, monoNumbers, monoNumberIds, instanceTexts, failed }
+  return {
+    converted,
+    monoNumbers,
+    monoNumberIds,
+    caseIds,
+    instanceTexts,
+    failed,
+  }
 }

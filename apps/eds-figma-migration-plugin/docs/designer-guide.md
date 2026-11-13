@@ -57,11 +57,18 @@ plugin can change in the scope.
   Figma.
 - **Changes** lists every legacy variable in the scope with what it becomes,
   in tabs by kind of value. Values inside instances are not part of it; they
-  change with their main component or library. A click on the legacy variable selects its
+  change with their main component or library. A row marked with an eye has a new
+  colour that looks clearly different from the legacy one on its layers: the
+  mapping is right by role, but check the look. **Looks different** filters
+  those rows. A click on the legacy variable selects its
   layers; a click on the target changes it for every layer that uses it.
+  The **Typography** tab in Changes lists the instances of the legacy
+  Typography component (see [Typography components](#typography-components)).
 - **Instances** lists the instances that still use legacy variables, grouped
   by component. For a component in this file, **Go to main component** takes
-  you to it: migrate its page, and every instance follows.
+  you to it: migrate its page, and every instance follows. Instances of the
+  legacy Typography component are not listed here; **Show** opens their tab
+  in Changes.
 - **Main components** lists the main components in the scope, which Apply
   changes together with the frames, and the main components on other pages
   that instances in the scope use, with **Go to** and **Scan its page**.
@@ -122,7 +129,7 @@ confirmation says how many instances there are.
 ## Typography components
 
 The legacy Typography component can become a text layer with the matching
-text style: **Convert to text** in the Instances tab. In a main component,
+text style: **Convert to text** on the Typography tab in Changes. In a main component,
 each instance of that component keeps the text it showed. A Typography
 component with mono numbers loses them, since a text style cannot carry
 tabular figures; the result has a button that selects those texts.

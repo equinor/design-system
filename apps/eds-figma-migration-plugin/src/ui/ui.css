@@ -1571,3 +1571,17 @@ code {
   gap: var(--eds-spacing-xs);
   align-items: center;
 }
+
+/* Rule review 2026-11-12: a row whose new colour looks clearly different,
+   in the status column so the row keeps its grid */
+.check-status-group {
+  display: inline-flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.check-visible-change {
+  display: inline-flex;
+  align-items: center;
+  color: var(--eds-icon-secondary);
+}

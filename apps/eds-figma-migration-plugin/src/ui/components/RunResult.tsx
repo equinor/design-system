@@ -47,13 +47,18 @@ function summary(run: Run): string {
     return parts.join(' ')
   }
   if (run.kind === 'convert') {
-    const { converted, monoNumbers, instanceTexts } = run.result
+    const { converted, monoNumbers, instanceTexts, caseIds } = run.result
     const parts = [
       `Converted ${plural(converted, 'Typography component')} to text.`,
     ]
     if (instanceTexts > 0) {
       parts.push(
         `In main components, ${plural(instanceTexts, 'instance')} kept ${instanceTexts === 1 ? 'its' : 'their'} own text.`,
+      )
+    }
+    if (caseIds.length > 0) {
+      parts.push(
+        `${caseIds.length} had another text case, such as uppercase, which the text style does not have; the style is kept, so the text shows as written.`,
       )
     }
     if (monoNumbers > 0) {

@@ -51,6 +51,7 @@ import {
   mainComponentsElsewhere,
 } from './components/MainComponentsView'
 import { MappingView } from './components/MappingView'
+import type { ChangesTab } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
 import { SavedHealth } from './components/SavedHealth'
 import { Onboarding } from './components/Onboarding'
@@ -133,9 +134,15 @@ function Overview({
   const entryNames = new Map(
     summary.entries.map((entry) => [entry.id, entry.name]),
   )
-  const typographyCount = instances.filter(
+  // The legacy Typography component is converted on its own tab in Changes,
+  // and the Instances tab lists the other instances with a link there.
+  const typographyInstances = instances.filter(
     (instance) => instance.typography,
-  ).length
+  )
+  const otherInstances = instances.filter((instance) => !instance.typography)
+  // Kept here rather than in Changes, so the Instances tab can open a tab
+  // in Changes, and Changes opens on the tab it was left on.
+  const [changesTab, setChangesTab] = useState<ChangesTab>('colour')
   const frames = summary.entries.filter((entry) => entry.kind !== 'component')
   const components = summary.entries.filter(
     (entry) => entry.kind === 'component',
@@ -235,30 +242,12 @@ function Overview({
         </div>
       </section>
 
-      {typographyCount > 0 && view !== 'instances' && (
-        <Banner tone="info">
-          <Banner.Message>
-            {typographyCount} instance{typographyCount === 1 ? '' : 's'} of the
-            legacy Typography component can become text layers with the matching
-            text style.
-          </Banner.Message>
-          <Banner.Actions>
-            <Button
-              size="small"
-              variant="secondary"
-              onClick={() => onView('instances')}
-            >
-              Show
-            </Button>
-          </Banner.Actions>
-        </Banner>
-      )}
       <Tabs
         label="View"
         tabs={[
           { id: 'mapping', label: 'Changes' },
           { id: 'frames', label: 'Frames' },
-          { id: 'instances', label: `Instances ${instances.length}` },
+          { id: 'instances', label: `Instances ${otherInstances.length}` },
           {
             id: 'components',
             label: `Main components ${componentsTabCount}`,
@@ -269,11 +258,14 @@ function Overview({
       >
         {view === 'instances' ? (
           <InstancesView
-            instances={instances}
+            instances={otherInstances}
             entryNames={entryNames}
             onSelect={onSelectLayer}
-            onConvert={onConvert}
-            busy={busy}
+            typographyCount={typographyInstances.length}
+            onShowTypography={() => {
+              setChangesTab('typography-component')
+              onView('mapping')
+            }}
           />
         ) : view === 'components' ? (
           <MainComponentsView
@@ -294,6 +286,11 @@ function Overview({
             entryNames={entryNames}
             showCounts={showCounts}
             inInstances={totals.inInstance}
+            tab={changesTab}
+            onTab={setChangesTab}
+            typographyInstances={typographyInstances}
+            onConvert={onConvert}
+            busy={busy}
             selection={selection}
             onSelectOld={onSelectOld}
             onSelectLayer={onSelectLayer}

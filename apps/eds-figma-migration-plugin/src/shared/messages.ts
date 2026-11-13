@@ -65,6 +65,12 @@ export type ConvertResult = {
   monoNumbers: number
   /** The new text layers that need tabular figures set by hand */
   monoNumberIds: string[]
+  /**
+   * The new text layers whose instance had another text case, such as
+   * uppercase. A text style cannot carry it, and setting it would detach
+   * the style, so the style is kept.
+   */
+  caseIds: string[]
   /** Instances of main components whose own text was kept on the new text layer */
   instanceTexts: number
   failed: ChangeFailure[]
