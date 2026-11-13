@@ -1,0 +1,114 @@
+# Marks who owns a PR and whether a reviewer has left comments for the author.
+#
+# - When a PR is opened, the author is assigned.
+# - When someone other than the author submits a Comment or Request changes
+#   review, the PR gets the `awaiting author` label. Approvals do not add it,
+#   because nits on an approval are optional.
+# - When new commits are pushed, the author re-requests review, or someone
+#   approves while no Request changes is still open, the label is removed.
+#
+# Uses only the built-in token (pull-requests: write), so it needs no secret.
+# It never checks out or runs code from the PR. Bot PRs and PRs from forks are
+# skipped: the built-in token is read-only on forks, and bot PRs follow their
+# own routines (see AGENTS.md § PR Reviews and the Project Board).
+#
+# Known limits: a reply in a review thread counts as a Comment review, and a
+# merge of `main` or "Update branch" counts as a push, so the label can be set
+# or cleared when it should not be. The event payload cannot tell these apart.
+name: PR review signals
+on:
+  pull_request:
+    types: [opened, synchronize, review_requested]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  assign-author:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.action == 'opened' &&
+      github.event.pull_request.user.type != 'Bot' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign the author
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/assignees" -f "assignees[]=$AUTHOR"
+
+  add-awaiting-author:
+    if: >-
+      github.event_name == 'pull_request_review' &&
+      github.event.review.state != 'approved' &&
+      github.event.pull_request.user.type != 'Bot' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.review.user.type != 'Bot' &&
+      github.event.review.user.login != github.event.pull_request.user.login
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add the awaiting author label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels" -f "labels[]=awaiting author"
+
+  # Runs when the label is on and one of three things happens: new commits are
+  # pushed, the author re-requests review (a reviewer claiming the PR does not
+  # count), or a review is approved. GitHub does not let anyone approve their
+  # own PR, so no author check is needed for the approval. An open Request
+  # changes outranks an approval, which the first step checks.
+  remove-awaiting-author:
+    if: >-
+      github.event.pull_request.user.type != 'Bot' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      contains(github.event.pull_request.labels.*.name, 'awaiting author') &&
+      (
+        (github.event_name == 'pull_request' &&
+          (github.event.action == 'synchronize' ||
+            (github.event.action == 'review_requested' &&
+              github.event.sender.login == github.event.pull_request.user.login))) ||
+        (github.event_name == 'pull_request_review' &&
+          github.event.review.state == 'approved')
+      )
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      # An approval does not clear the label while another reviewer's Request
+      # changes is still open. If the lookup fails, the label is removed.
+      - name: Check whether changes are still requested
+        id: decision
+        if: github.event_name == 'pull_request_review'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          query='query($owner: String!, $repo: String!, $number: Int!) { repository(owner: $owner, name: $repo) { pullRequest(number: $number) { reviewDecision } } }'
+          decision=$(gh api graphql -f query="$query" -f owner="${GITHUB_REPOSITORY%/*}" -f repo="${GITHUB_REPOSITORY#*/}" -F number="$PR_NUMBER" --jq '.data.repository.pullRequest.reviewDecision') || decision=""
+          if [ "$decision" = "CHANGES_REQUESTED" ]; then
+            echo "changes_requested=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changes_requested=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Remove the awaiting author label
+        if: steps.decision.outputs.changes_requested != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        # A push and a re-request, or several re-requests, can start more than
+        # one run with the label still in the payload. The first removes it and
+        # the rest get a 404, which means the label is already gone.
+        run: |
+          if ! out=$(gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels/awaiting%20author" 2>&1); then
+            case "$out" in
+              *"Label does not exist"*) echo "The label was already removed." ;;
+              *) echo "$out"; exit 1 ;;
+            esac
+          fi
