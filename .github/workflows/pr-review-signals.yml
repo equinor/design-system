@@ -4,16 +4,21 @@
 # - When someone other than the author submits a Comment or Request changes
 #   review, the PR gets the `awaiting author` label. Approvals do not add it,
 #   because nits on an approval are optional.
-# - When new commits are pushed, the label is removed.
+# - When new commits are pushed, or the author re-requests review, the label is
+#   removed.
 #
 # Uses only the built-in token (pull-requests: write), so it needs no secret.
 # It never checks out or runs code from the PR. Bot PRs and PRs from forks are
 # skipped: the built-in token is read-only on forks, and bot PRs follow their
 # own routines (see AGENTS.md § PR Reviews and the Project Board).
+#
+# Known limits: a reply in a review thread counts as a Comment review, and a
+# merge of `main` or "Update branch" counts as a push, so the label can be set
+# or cleared when it should not be. The event payload cannot tell these apart.
 name: PR review signals
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, review_requested]
   pull_request_review:
     types: [submitted]
 
@@ -56,7 +61,10 @@ jobs:
   remove-awaiting-author:
     if: >-
       github.event_name == 'pull_request' &&
-      github.event.action == 'synchronize' &&
+      (github.event.action == 'synchronize' ||
+        (github.event.action == 'review_requested' &&
+          github.event.sender.login == github.event.pull_request.user.login)) &&
+      github.event.pull_request.user.type != 'Bot' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       contains(github.event.pull_request.labels.*.name, 'awaiting author')
     permissions:

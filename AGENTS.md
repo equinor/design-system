@@ -506,7 +506,7 @@ The board moves a PR to "Needs revision" on a **Request changes** review and to 
 - Nits are optional and do not send the PR back. Reviews post under the user's account.
 - When reviewers disagree, the latest review decides the column. Request changes blocks the merge until it is dismissed or the same reviewer approves.
 - Nobody is requested as a reviewer automatically. When the user says they are reviewing a PR, add them as its reviewer (`gh pr edit <number> --add-reviewer <login>`, with their login from `gh api user --jq .login`). The reviewer list on the board then shows who has claimed the PR. The same command re-requests a reviewer who has already reviewed.
-- A workflow (`.github/workflows/pr-review-signals.yml`) assigns the author when a PR is opened, adds an `awaiting author` label when someone other than the author leaves a Comment or Request changes review, and removes it when new commits are pushed. It skips bot and fork PRs.
+- A workflow (`.github/workflows/pr-review-signals.yml`) assigns the author when a PR is opened, adds an `awaiting author` label when someone other than the author leaves a Comment or Request changes review, and removes it when new commits are pushed or the author re-requests review. It skips bot and fork PRs. A reply in a review thread counts as a Comment review and a merge of `main` counts as a push, so fix the label by hand when it is wrong.
 
 The board does not give a new PR a status, move it between draft and ready, or move it back after feedback, so the author's agent does:
 
