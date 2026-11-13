@@ -3,7 +3,7 @@ import { anchor, search, close } from '@equinor/eds-icons'
 import { Input } from './Input'
 import type { InputProps } from './Input.types'
 import { Field } from '../Field'
-import { ExampleLabel, Stack } from './../../../../.storybook/components'
+import { Stack } from './../../../../.storybook/components'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
 
@@ -267,27 +267,22 @@ RequiredIndicator.parameters = {
 
 export const Density: StoryFn<InputProps> = () => (
   <>
-    <div data-density="spacious">
-      <Input
-        aria-label="Spacious density"
-        placeholder="Spacious (default)"
-        autoComplete="off"
-      />
-    </div>
-    <div data-density="comfortable">
-      <Input
-        aria-label="Comfortable density"
-        placeholder="Comfortable (compact)"
-        autoComplete="off"
-      />
-    </div>
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
+      <div key={density} data-density={density}>
+        <Input
+          aria-label={`${density} density`}
+          placeholder={density.charAt(0).toUpperCase() + density.slice(1)}
+          autoComplete="off"
+        />
+      </div>
+    ))}
   </>
 )
 Density.parameters = {
   docs: {
     description: {
       story:
-        'Use `data-density="comfortable"` on a parent element to render a more compact input. Spacious is the default density.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }
@@ -379,9 +374,9 @@ export const OverrideBackground: StoryFn<InputProps> = (args) => {
     <div
       style={
         {
-          '--eds-color-neutral-1': '#fff',
+          '--eds-background-input': 'var(--eds-background-surface)',
           padding: '24px',
-          background: '#f7f7f7',
+          background: 'var(--eds-background-canvas)',
         } as React.CSSProperties
       }
     >
@@ -393,81 +388,7 @@ OverrideBackground.parameters = {
   docs: {
     description: {
       story:
-        'Wrap the input in a container that sets the `--eds-color-neutral-1` CSS variable to customise its background colour. This overrides the base colour token the input reads for its background.',
-    },
-  },
-}
-
-export const LightAndDarkMode: StoryFn<InputProps> = () => {
-  return (
-    <div
-      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}
-    >
-      {/* Light mode */}
-      <div
-        data-color-scheme="light"
-        style={{
-          padding: '24px',
-          background: 'var(--eds-color-bg-canvas)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-        }}
-      >
-        <ExampleLabel>Light mode</ExampleLabel>
-        <Input aria-label="Default" placeholder="Default" autoComplete="off" />
-        <Input
-          aria-label="With value"
-          defaultValue="With value"
-          autoComplete="off"
-        />
-        <Input
-          aria-label="Invalid"
-          defaultValue="Invalid"
-          invalid
-          autoComplete="off"
-        />
-        <Input aria-label="Read only" defaultValue="Read only" readOnly />
-        <Input aria-label="Disabled" placeholder="Disabled" disabled />
-      </div>
-
-      {/* Dark mode */}
-      <div
-        data-color-scheme="dark"
-        style={{
-          padding: '24px',
-          background: 'var(--eds-color-bg-canvas)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-        }}
-      >
-        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
-          Dark mode
-        </ExampleLabel>
-        <Input aria-label="Default" placeholder="Default" autoComplete="off" />
-        <Input
-          aria-label="With value"
-          defaultValue="With value"
-          autoComplete="off"
-        />
-        <Input
-          aria-label="Invalid"
-          defaultValue="Invalid"
-          invalid
-          autoComplete="off"
-        />
-        <Input aria-label="Read only" defaultValue="Read only" readOnly />
-        <Input aria-label="Disabled" placeholder="Disabled" disabled />
-      </div>
-    </div>
-  )
-}
-LightAndDarkMode.parameters = {
-  docs: {
-    description: {
-      story:
-        'Input adapts automatically to light and dark `data-color-scheme`, with no extra props needed.',
+        'Wrap the input in a container that sets `--eds-background-input` to customise its background colour. This is the token the input reads for its background.',
     },
   },
 }
