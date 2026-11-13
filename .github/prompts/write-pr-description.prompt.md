@@ -15,3 +15,4 @@ Write a PR description for the current branch, or for this PR if one is given: $
 2. Draft the title and body per § PR descriptions in the canonical doc, describing the final change.
 3. Check the draft against § Before posting. Count the prose and cut until it is within 300 words.
 4. Show the draft to the user. Run `gh pr create` or `gh pr edit` only after they approve it. Create the PR with `--assignee @me`, then move the card as [`AGENTS.md`](../../AGENTS.md) § PR Reviews and the Project Board says.
+5. For a PR that is already open, the same table applies after every push, draft or ready change and review re-request. Move the card in the same step, read the status back, and do not ask first.

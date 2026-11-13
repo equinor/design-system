@@ -515,6 +515,7 @@ The board does not give a new PR a status, move it between draft and ready, or m
 | A PR is opened as a draft, or converted back to a draft                                           | **In Progress**               |
 | A PR is opened as ready, a draft is marked ready, or review is re-requested after Request changes | **Review**                    |
 | A push to an approved PR (while `main` dismisses stale approvals, even a nit fix)                 | **Review**, and re-request it |
+| A push of fixes for a Request changes review (`reviewDecision` is `CHANGES_REQUESTED`)            | **Review**, and re-request it |
 
 - Change the draft state with `gh pr ready` or `gh pr ready --undo` and move the card in the same step. A click on github.com leaves the card where it was. Name the move when you ask to open the PR, because the user's request for the action covers it.
 - The board is project 1076. Get the Status option IDs with `gh project field-list 1076 --owner equinor --format json` and set the status with `gh project item-edit`. A new PR's card appears a few seconds after it opens, so tell the user if it has not appeared after a minute. Set the status, read it back, and set it again if it shows something else.
