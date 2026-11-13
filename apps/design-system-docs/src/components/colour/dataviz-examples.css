@@ -380,7 +380,6 @@
 
 .dv-donut-label {
   font-size: var(--eds-typography-label-xs-font-size);
-  letter-spacing: 0.04em;
   fill: var(--eds-text-secondary);
 }
 
@@ -445,4 +444,36 @@
 
 .dv-donut .dv-disclaimer {
   flex-basis: 100%;
+}
+
+.dv-check {
+  flex: none;
+
+  width: var(--eds-spacing-sm);
+  height: var(--eds-spacing-sm);
+
+  color: var(--eds-icon-primary);
+
+  visibility: hidden;
+}
+
+/* A selected toggle shows a check mark as well as the selected fill, because the fill alone is far
+ * below 3:1 against the surface. */
+.dv-toggle[aria-pressed='true'] .dv-check {
+  visibility: visible;
+}
+
+.dv-visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(50%);
 }

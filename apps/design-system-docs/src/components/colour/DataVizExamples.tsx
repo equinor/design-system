@@ -274,7 +274,7 @@ export function LineChartExample() {
       <div className="dv-wells" role="group" aria-label="Wells">
         {WELLS.map((w) => {
           const on = visible.includes(w.id)
-          const colour = on ? dv(w.hue, 4) : dv(w.hue, 2)
+          const colour = dv(w.hue, 4)
           return (
             <label key={w.id} className="dv-well">
               <input
@@ -508,14 +508,28 @@ export function LineChartExample() {
         </div>
       </div>
 
+      <p className="dv-visually-hidden" aria-live="polite">
+        {index !== null
+          ? `${monthLabel(index)}. ${shown
+              .map(
+                (w) =>
+                  `${w.name}, ${w.field}: gas ${fmt(data[w.id].gas[index])} kSm³/d, water ${fmt(
+                    data[w.id].water[index],
+                  )} m³/d, cumulative gas ${fmt(data[w.id].cum[index], 3)} GSm³`,
+              )
+              .join('. ')}.`
+          : ''}
+      </p>
+
       <Disclaimer />
       <DataTable
-        caption="Yearly average per well, random example data"
+        caption="Yearly values per well, random example data"
         head={[
           'Year',
           ...WELLS.flatMap((w) => [
             `${w.name} gas (kSm³/d)`,
             `${w.name} water (m³/d)`,
+            `${w.name} cumulative gas, end of year (GSm³)`,
           ]),
         ]}
         rows={Array.from({ length: 6 }, (_, k) => [
@@ -523,6 +537,7 @@ export function LineChartExample() {
           ...WELLS.flatMap((w) => [
             fmt(avg(data[w.id].gas.slice(k * 12, k * 12 + 12))),
             fmt(avg(data[w.id].water.slice(k * 12, k * 12 + 12))),
+            fmt(data[w.id].cum[k * 12 + 11], 3),
           ]),
         ])}
       />
@@ -621,6 +636,16 @@ export function BarChartExample() {
             aria-pressed={focus === f.id}
             onClick={() => setFocus((c) => (c === f.id ? null : f.id))}
           >
+            <svg className="dv-check" viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M3.5 8.5l3 3 6-7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
             <span className="dv-swatch" style={{ background: dv(f.hue, 3) }} />
             {f.name}
           </button>
@@ -633,7 +658,7 @@ export function BarChartExample() {
             viewBox={`0 0 ${W} ${H}`}
             width="100%"
             role="img"
-            aria-label="Random example data: monthly production for four fields, stacked, with a plan line at 1 150 kSm³/d."
+            aria-label={`Random example data: monthly production for four fields, stacked, with a plan line at ${fmt(PLAN)} kSm³/d.`}
           >
             {[0, 350, 700, 1050, 1400].map((t) => (
               <g key={t}>
@@ -849,7 +874,7 @@ export function DonutChartExample() {
           {fmt(focused ? focused.value : total)}
         </text>
         <text x={c} y={c + 16} textAnchor="middle" className="dv-donut-label">
-          {focused ? focused.name.toUpperCase() : 'TOTAL KSM³/D'}
+          {focused ? focused.name : 'Total, kSm³/d'}
         </text>
       </svg>
 
@@ -862,6 +887,16 @@ export function DonutChartExample() {
               aria-pressed={selected === s.id}
               onClick={() => setSelected((f) => (f === s.id ? null : s.id))}
             >
+              <svg className="dv-check" viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M3.5 8.5l3 3 6-7"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
               <span
                 className="dv-swatch"
                 style={{ background: dv(s.hue, 3) }}
