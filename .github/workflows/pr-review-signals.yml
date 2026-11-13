@@ -58,6 +58,10 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/labels" -f "labels[]=awaiting author"
 
+  # Runs when the label is on and one of three things happens: new commits are
+  # pushed, the author re-requests review (a reviewer claiming the PR does not
+  # count), or a review is approved. GitHub does not let anyone approve their
+  # own PR, so no author check is needed for the approval.
   remove-awaiting-author:
     if: >-
       github.event.pull_request.user.type != 'Bot' &&
@@ -69,9 +73,7 @@ jobs:
             (github.event.action == 'review_requested' &&
               github.event.sender.login == github.event.pull_request.user.login))) ||
         (github.event_name == 'pull_request_review' &&
-          github.event.review.state == 'approved' &&
-          github.event.review.user.type != 'Bot' &&
-          github.event.review.user.login != github.event.pull_request.user.login)
+          github.event.review.state == 'approved')
       )
     permissions:
       pull-requests: write
