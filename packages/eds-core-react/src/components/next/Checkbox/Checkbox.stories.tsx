@@ -180,7 +180,7 @@ States.parameters = {
 
 export const Density: StoryFn<CheckboxProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
-    {(['spacious', 'comfortable'] as const).map((density) => (
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
       <div key={density} data-density={density}>
         <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
@@ -200,49 +200,7 @@ Density.parameters = {
   docs: {
     description: {
       story:
-        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
-    },
-  },
-}
-
-export const LightAndDarkMode: StoryFn<CheckboxProps> = () => (
-  <div style={{ display: 'flex', gap: '32px' }}>
-    <div
-      data-color-scheme="light"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
-    >
-      <Wrapper>
-        <ExampleLabel>Light Mode</ExampleLabel>
-        <Checkbox label="Unchecked" />
-        <Checkbox label="Checked" defaultChecked />
-        <Checkbox label="Indeterminate" indeterminate />
-        <Checkbox label="Disabled" disabled />
-        <Checkbox label="Disabled checked" disabled defaultChecked />
-      </Wrapper>
-    </div>
-    <div
-      data-color-scheme="dark"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
-    >
-      <Wrapper>
-        <ExampleLabel style={{ color: 'var(--eds-color-text-strong)' }}>
-          Dark Mode
-        </ExampleLabel>
-        <Checkbox label="Unchecked" />
-        <Checkbox label="Checked" defaultChecked />
-        <Checkbox label="Indeterminate" indeterminate />
-        <Checkbox label="Disabled" disabled />
-        <Checkbox label="Disabled checked" disabled defaultChecked />
-      </Wrapper>
-    </div>
-  </div>
-)
-
-LightAndDarkMode.parameters = {
-  docs: {
-    description: {
-      story:
-        'Checkbox follows the colour scheme set with `data-color-scheme` on a parent element.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }
