@@ -1,7 +1,10 @@
 @layer eds-components {
   .eds-checkbox {
     /* Tone slots, accent by default. Slot names match Button and Chip
-     * (#5711). Checkbox only has the accent tone. */
+     * (#5711). Checkbox only has the accent tone, so no rule reads its
+     * data-tone. The component still sets data-tone="accent", as every
+     * migrated component sets its default tone, so it never picks one up
+     * from a parent. */
     --_icon: var(--eds-icon-interactive-accent-default);
     --_icon-hover: var(--eds-icon-interactive-accent-hover);
     --_bg-muted-hover: var(--eds-background-interactive-accent-muted-hover);
