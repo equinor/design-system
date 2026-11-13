@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0](https://github.com/equinor/design-system/compare/eds-icons@v1.6.0...eds-icons@v1.7.0) (2026-11-13)
+
+
+### ✨ Added
+
+* add dark_mode_filled and sun_filled icons ([#5880](https://github.com/equinor/design-system/issues/5880)) ([b1f3777](https://github.com/equinor/design-system/commit/b1f3777377ae6256454a8e21346486e2b07af5b5))
+
 ## [1.6.0](https://github.com/equinor/design-system/compare/eds-icons@v1.5.1...eds-icons@v1.6.0) (2026-09-08)
 
 

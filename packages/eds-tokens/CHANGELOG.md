@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-beta.11](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.10...eds-tokens@v3.0.0-beta.11) (2026-11-13)
+
+
+### ✨ Added
+
+* update tokens from Tokens Studio release ([#5846](https://github.com/equinor/design-system/issues/5846)) ([b5e4c0d](https://github.com/equinor/design-system/commit/b5e4c0d433632fc572911035ee19bc21137064b8)), closes [#5843](https://github.com/equinor/design-system/issues/5843)
+* update tokens from Tokens Studio release ([#5885](https://github.com/equinor/design-system/issues/5885)) ([a858342](https://github.com/equinor/design-system/commit/a858342e66ae7dbda420009593d3e46648e88858))
+
+
+### 🐛 Fixed
+
+* default beta colour tokens to light when no data-color-scheme is set ([#5835](https://github.com/equinor/design-system/issues/5835)) ([b26fde5](https://github.com/equinor/design-system/commit/b26fde564e142708977665d42bfd9c2cb45445bb))
+* fall back to monospace for the mono font family ([#5830](https://github.com/equinor/design-system/issues/5830)) ([72adb95](https://github.com/equinor/design-system/commit/72adb9510cd86dba3104d422b346070e0c912549)), closes [#5800](https://github.com/equinor/design-system/issues/5800)
+
 ## [3.0.0-beta.10](https://github.com/equinor/design-system/compare/eds-tokens@v3.0.0-beta.9...eds-tokens@v3.0.0-beta.10) (2026-11-02)
 
 
