@@ -4,8 +4,8 @@
 # - When someone other than the author submits a Comment or Request changes
 #   review, the PR gets the `awaiting author` label. Approvals do not add it,
 #   because nits on an approval are optional.
-# - When new commits are pushed, or the author re-requests review, the label is
-#   removed.
+# - When new commits are pushed, the author re-requests review, or someone other
+#   than the author approves, the label is removed.
 #
 # Uses only the built-in token (pull-requests: write), so it needs no secret.
 # It never checks out or runs code from the PR. Bot PRs and PRs from forks are
@@ -60,13 +60,19 @@ jobs:
 
   remove-awaiting-author:
     if: >-
-      github.event_name == 'pull_request' &&
-      (github.event.action == 'synchronize' ||
-        (github.event.action == 'review_requested' &&
-          github.event.sender.login == github.event.pull_request.user.login)) &&
       github.event.pull_request.user.type != 'Bot' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
-      contains(github.event.pull_request.labels.*.name, 'awaiting author')
+      contains(github.event.pull_request.labels.*.name, 'awaiting author') &&
+      (
+        (github.event_name == 'pull_request' &&
+          (github.event.action == 'synchronize' ||
+            (github.event.action == 'review_requested' &&
+              github.event.sender.login == github.event.pull_request.user.login))) ||
+        (github.event_name == 'pull_request_review' &&
+          github.event.review.state == 'approved' &&
+          github.event.review.user.type != 'Bot' &&
+          github.event.review.user.login != github.event.pull_request.user.login)
+      )
     permissions:
       pull-requests: write
     runs-on: ubuntu-latest
