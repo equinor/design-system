@@ -4,8 +4,8 @@
 # - When someone other than the author submits a Comment or Request changes
 #   review, the PR gets the `awaiting author` label. Approvals do not add it,
 #   because nits on an approval are optional.
-# - When new commits are pushed, the author re-requests review, or someone other
-#   than the author approves, the label is removed.
+# - When new commits are pushed, the author re-requests review, or someone
+#   approves while no Request changes is still open, the label is removed.
 #
 # Uses only the built-in token (pull-requests: write), so it needs no secret.
 # It never checks out or runs code from the PR. Bot PRs and PRs from forks are
@@ -61,7 +61,8 @@ jobs:
   # Runs when the label is on and one of three things happens: new commits are
   # pushed, the author re-requests review (a reviewer claiming the PR does not
   # count), or a review is approved. GitHub does not let anyone approve their
-  # own PR, so no author check is needed for the approval.
+  # own PR, so no author check is needed for the approval. An open Request
+  # changes outranks an approval, which the first step checks.
   remove-awaiting-author:
     if: >-
       github.event.pull_request.user.type != 'Bot' &&
@@ -79,7 +80,25 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
+      # An approval does not clear the label while another reviewer's Request
+      # changes is still open. If the lookup fails, the label is removed.
+      - name: Check whether changes are still requested
+        id: decision
+        if: github.event_name == 'pull_request_review'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          query='query($owner: String!, $repo: String!, $number: Int!) { repository(owner: $owner, name: $repo) { pullRequest(number: $number) { reviewDecision } } }'
+          decision=$(gh api graphql -f query="$query" -f owner="${GITHUB_REPOSITORY%/*}" -f repo="${GITHUB_REPOSITORY#*/}" -F number="$PR_NUMBER" --jq '.data.repository.pullRequest.reviewDecision') || decision=""
+          if [ "$decision" = "CHANGES_REQUESTED" ]; then
+            echo "changes_requested=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changes_requested=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Remove the awaiting author label
+        if: steps.decision.outputs.changes_requested != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
