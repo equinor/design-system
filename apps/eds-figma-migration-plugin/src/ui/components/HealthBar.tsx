@@ -10,13 +10,17 @@ type HealthBarProps = {
   size?: 'large' | 'small'
 }
 
+/** Categories the legend lists only when they have values: rare ones. */
+const ONLY_WHEN_USED = new Set(['excluded', 'byHand'])
+
 /**
  * The categories to list: Excluded only once a designer has excluded
- * something, since the scan itself never puts a value there.
+ * something, since the scan itself never puts a value there, and Manual fix
+ * only when a value needs one.
  */
 function listed(counts: Counts) {
   return SCORED_CATEGORIES.filter(
-    (category) => category !== 'excluded' || counts.excluded > 0,
+    (category) => !ONLY_WHEN_USED.has(category) || counts[category] > 0,
   )
 }
 

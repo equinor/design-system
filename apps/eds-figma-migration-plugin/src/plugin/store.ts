@@ -1,8 +1,8 @@
 /**
  * What the plugin keeps in the document between sessions, in the shared
  * plugin data of the document root: the latest scan summary, shown when the
- * plugin opens, and the designer's choices, so a review can continue
- * another day.
+ * plugin opens, the designer's choices, so a review can continue another
+ * day, and the pages a scan of the file leaves out.
  */
 import type { Overrides } from '../scan/mapping'
 import { emptyCounts } from '../scan/summary'
@@ -12,6 +12,7 @@ import type { SavedHealth } from '../shared/messages'
 
 const HEALTH_KEY = 'health'
 const CHOICES_KEY = 'choices'
+const LEFT_OUT_PAGES_KEY = 'left-out-pages'
 /** Figma limits how much plugin data a node holds; past this the choices are not saved. */
 const MAX_CHOICES_LENGTH = 90_000
 
@@ -35,9 +36,14 @@ function write(key: string, value: unknown): boolean {
 }
 
 export function saveHealth(summary: ScanSummary): void {
+  const pageTotal = figma.root.children.filter(
+    (page) => !page.isPageDivider,
+  ).length
   const place =
     summary.scope === 'file'
-      ? 'The whole file'
+      ? summary.pages.length < pageTotal
+        ? `${summary.pages.length} of ${pageTotal} pages`
+        : 'The whole file'
       : summary.scope === 'page'
         ? `Page ${summary.pages[0]?.name ?? ''}`
         : `Selection on ${summary.pages[0]?.name ?? ''}`
@@ -71,6 +77,19 @@ export function saveChoices(overrides: Overrides): boolean {
   const json = JSON.stringify(overrides)
   if (json.length > MAX_CHOICES_LENGTH) return false
   return write(CHOICES_KEY, overrides)
+}
+
+/** Saves the pages a scan of the file leaves out; false when the file cannot store it. */
+export function saveLeftOutPages(pageIds: string[]): boolean {
+  return write(LEFT_OUT_PAGES_KEY, pageIds)
+}
+
+/** The pages a scan of the file leaves out; none until someone chooses. */
+export function loadLeftOutPages(): string[] {
+  const saved = read<unknown>(LEFT_OUT_PAGES_KEY)
+  return Array.isArray(saved)
+    ? saved.filter((id): id is string => typeof id === 'string')
+    : []
 }
 
 export function loadChoices(): Overrides {

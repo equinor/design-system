@@ -2,6 +2,7 @@
  * What an apply run changes, worked out from the scan and the designer's
  * choices without touching the document, so it can be tested without Figma.
  */
+import { isResetTarget } from '../mapping/reset'
 import { blockedModes, CLEAR_MODE } from './classify'
 import { effectiveCategory, effectiveTarget, isMappable } from './mapping'
 import type { Overrides } from './mapping'
@@ -18,7 +19,7 @@ export type ChangeOutcome =
 
 export type PlannedChange = {
   record: BindingRecord
-  /** A variable or text style name, `collection: mode`, or CLEAR_MODE */
+  /** A variable or text style name, `collection: mode`, CLEAR_MODE, or a reset (mapping/reset.ts) */
   target: string
   outcome: ChangeOutcome
 }
@@ -55,8 +56,12 @@ export function planChanges(
   }
   const isMode = (change: PlannedChange) =>
     change.record.property.type === 'mode'
+  // A reset removes the changes on a layer and the layers below it, and puts
+  // them back as they were, so it runs before anything else changes there.
+  const isReset = (change: PlannedChange) => isResetTarget(change.target)
   return [
-    ...changes.filter((change) => !isMode(change)),
+    ...changes.filter(isReset),
+    ...changes.filter((change) => !isMode(change) && !isReset(change)),
     ...changes.filter(isMode),
   ]
 }
@@ -65,7 +70,7 @@ export function planChanges(
 function isLegacyBinding(record: BindingRecord): boolean {
   return (
     record.property.type !== 'mode' &&
-    ['sure', 'check', 'none', 'inInstance'].includes(record.category)
+    ['sure', 'check', 'byHand', 'none', 'inInstance'].includes(record.category)
   )
 }
 

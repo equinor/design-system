@@ -23,8 +23,21 @@ import { revertRoots } from './apply/revert'
 import { collectFixture } from './dev/export-fixture'
 import { exportInventory } from './dev/export-inventory'
 import { ScanCancelled } from './scan/collect'
-import { currentTarget, runScan } from './scan/scan'
-import { loadChoices, loadHealth, saveChoices, saveHealth } from './store'
+import {
+  componentInstances,
+  currentTarget,
+  filePages,
+  pagesOfFile,
+  runScan,
+} from './scan/scan'
+import {
+  loadChoices,
+  loadHealth,
+  loadLeftOutPages,
+  saveChoices,
+  saveHealth,
+  saveLeftOutPages,
+} from './store'
 import { buildReport } from '../scan/report'
 import type { ScanState, ScanTarget } from './scan/scan'
 import {
@@ -74,6 +87,12 @@ function post(message: PluginToUi) {
 let lastScan: ScanState | undefined
 let lastTarget: ScanTarget | undefined
 let overrides: Overrides = loadChoices()
+/**
+ * The pages a scan of the file leaves out. Kept here as well as in the file,
+ * so a file that cannot store the choice still uses it until the plugin
+ * closes.
+ */
+let leftOutPages: string[] = loadLeftOutPages()
 /** True while a scan, an apply or a revert runs; only one at a time */
 let busy = false
 let cancelRequested = false
@@ -136,6 +155,14 @@ function postSelection() {
 figma.on('selectionchange', postSelection)
 figma.on('currentpagechange', postSelection)
 
+function postPages() {
+  post({ type: 'pages', pages: filePages(), leftOut: leftOutPages })
+}
+
+// A page added in Figma is usually opened at once, so the page count
+// beside Select pages follows it. The page picker asks again as it opens.
+figma.on('currentpagechange', postPages)
+
 /**
  * Test session finding 17: after an undo or an edit, the window kept
  * offering the changes of the earlier scan. A change on the current page
@@ -177,10 +204,17 @@ async function scan(target: ScanTarget) {
   busy = true
   cancelRequested = false
   try {
+    post({
+      type: 'scan-start',
+      scope: target.scope,
+      pageCount:
+        target.scope === 'file' ? pagesOfFile(target.pageIds).length : 1,
+    })
     const state = await runScan(
       target,
       (progress) => post({ type: 'scan-progress', progress }),
       () => cancelRequested,
+      (pageIndex, map) => post({ type: 'scan-map', pageIndex, map }),
     )
     lastTarget = target
     lastScan = withChoices(state)
@@ -214,6 +248,16 @@ async function apply(entryIds: string[], recordIds?: Set<string>) {
       (done, total) => post({ type: 'apply-progress', done, total }),
       recordIds,
     )
+    // A Manual fix that failed goes back to being one, so the designer sees
+    // it again instead of an accepted fix that will fail the same way.
+    if (result.failedFixes.length > 0) {
+      setOverrides(
+        result.failedFixes.map((id) => ({
+          target: { type: 'record' as const, id },
+          value: undefined,
+        })),
+      )
+    }
     post({ type: 'apply-done', result })
   } finally {
     busy = false
@@ -330,15 +374,27 @@ function setOverrides(changes: OverrideChange[]) {
   }
 }
 
-function entryDetail(entryId: string) {
+async function entryDetail(entryId: string) {
   if (!lastScan) return
+  const scan = lastScan
+  const entry = scan.summary.entries.find((item) => item.id === entryId)
+  const records = scan.records.filter((record) => record.entryId === entryId)
+  // A main component lists every instance in it, to show which of them
+  // still use legacy values and where those change.
+  const inComponent =
+    entry?.kind === 'component' || entry?.insideComponent !== undefined
   post({
     type: 'entry-detail',
     entryId,
-    records: lastScan.records.filter((record) => record.entryId === entryId),
-    oldInstances: lastScan.oldInstances.filter(
+    records,
+    oldInstances: scan.oldInstances.filter(
       (instance) => instance.entryId === entryId,
     ),
+    ...(inComponent
+      ? {
+          instances: await componentInstances(scan.instances, records, entryId),
+        }
+      : {}),
   })
 }
 
@@ -383,6 +439,7 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
           currentPageName: figma.currentPage.name,
         })
         postSelection()
+        postPages()
         {
           // The person's own preferences, kept in clientStorage, not the file.
           const seen = (await figma.clientStorage
@@ -405,13 +462,21 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         if (command === 'dev-export-fixture') await runDevExportFixture()
         break
       case 'scan':
-        await scan(currentTarget(message.scope))
+        await scan(currentTarget(message.scope, leftOutPages))
         break
       case 'cancel-scan':
         cancelRequested = true
         break
+      case 'get-pages':
+        postPages()
+        break
+      case 'set-left-out-pages':
+        leftOutPages = message.pageIds
+        saveLeftOutPages(leftOutPages)
+        postPages()
+        break
       case 'get-entry':
-        entryDetail(message.entryId)
+        await entryDetail(message.entryId)
         break
       case 'select':
         await select(message.nodeIds)
@@ -442,7 +507,7 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
             figma.viewport.scrollAndZoomIntoView([node as SceneNode])
           }
         }
-        await scan(currentTarget('page'))
+        await scan(currentTarget('page', leftOutPages))
         break
       }
       case 'go-to-page': {

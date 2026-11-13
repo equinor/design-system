@@ -32,17 +32,21 @@ import { PROPERTY_GROUPS, SCORED_CATEGORIES } from '../../scan/types'
 import type {
   BindingRecord,
   Category,
+  ComponentInstance,
   EntrySummary,
   OldInstance,
   PropertyGroup,
 } from '../../scan/types'
 import { groupInstances } from '../instances'
 import { pathBelow } from '../paths'
+import { reviewItems } from '../review'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
+import { manualFixTarget } from '../../scan/classify'
 import { sourceLabel, targetLabel, unchangedLabel } from '../targets'
 import { filterGroups } from '../groups'
 import { ApplyActions } from './ApplyActions'
+import { ComponentInstances } from './ComponentInstances'
 import { MappingView } from './MappingView'
 import { BindingRow } from './BindingRow'
 import { HealthBar, HealthLegend } from './HealthBar'
@@ -53,6 +57,8 @@ type InspectorProps = {
   entry: EntrySummary
   records?: BindingRecord[]
   oldInstances?: OldInstance[]
+  /** For a main component, or a layer inside one: every instance in it */
+  componentInstances?: ComponentInstance[]
   overrides: Overrides
   selection: Selection
   busy: boolean
@@ -86,6 +92,8 @@ export function targetText(
       return record.current ?? ''
     case 'inInstance':
       return 'Not changed inside an instance'
+    case 'byHand':
+      return manualFixTarget(record)
     default: {
       const { target, source } = effectiveTarget(record, overrides)
       if (record.category === 'none' && source === 'proposal') {
@@ -124,8 +132,9 @@ function groupRecords(
   const instances = new Map(oldInstances.map((item) => [item.id, item]))
   const groups = new Map<string, Group>()
   for (const record of records) {
-    // An instance is one group in the Layers view: the plugin changes nothing
-    // inside it, so its layers are not listed as layers of the frame.
+    // An instance is one group in the Layers view, with the values it takes
+    // from its main component and the ones it overrides, so its layers are
+    // not listed as layers of the frame.
     const instanceId = pivot === 'layers' ? record.instanceId : undefined
     const key = instanceId
       ? `instance:${instanceId}`
@@ -171,6 +180,13 @@ function groupRecords(
     group.records.push(record)
   }
   const result = [...groups.values()]
+  // In an instance, the values it overrides first: those are the ones the
+  // plugin can change there.
+  for (const group of result) {
+    if (group.instance) {
+      group.records.sort((a, b) => Number(!a.override) - Number(!b.override))
+    }
+  }
   // In the Variables view, the most used variables first; in the Layers
   // view, the layers of the frame first and the instances after them.
   if (pivot === 'variables') {
@@ -189,7 +205,7 @@ function groupSummary(
   const parts = [values(records.length)]
   const held = (record: BindingRecord) =>
     isHeld(categoryOf(record), record.rule)
-  for (const category of ['check', 'none', 'excluded'] as const) {
+  for (const category of ['check', 'byHand', 'none', 'excluded'] as const) {
     const count = records.filter(
       (record) => categoryOf(record) === category && !held(record),
     ).length
@@ -202,6 +218,22 @@ function groupSummary(
   const waiting = records.filter(held).length
   if (waiting > 0) parts.push(`${waiting} ${HELD_LABEL.toLowerCase()}`)
   return parts.join(', ')
+}
+
+/** What an instance group says about the values it overrides and the ones it takes from its main component. */
+function instanceNote(overridden: number, inherited: number): string {
+  const own =
+    overridden === 1
+      ? 'This instance overrides 1 value. It is marked Overridden in the instance, and a legacy one changes here.'
+      : `This instance overrides ${overridden} values. They are marked Overridden in the instance, and the legacy ones change here.`
+  const main =
+    inherited === 1
+      ? 'The value marked From the main component changes with its main component or library.'
+      : 'The values marked From the main component change with its main component or library.'
+  if (overridden === 0) {
+    return 'This instance overrides none of these values. They come from its main component and change with it or its library.'
+  }
+  return inherited === 0 ? own : `${own} ${main}`
 }
 
 /**
@@ -229,6 +261,7 @@ export function Inspector({
   entry,
   records,
   oldInstances,
+  componentInstances,
   overrides,
   selection,
   busy,
@@ -247,7 +280,14 @@ export function Inspector({
     mapping,
     (binding) => binding.entryId === entry.id,
   )
-  const [filter, setFilter] = useState<Filter>('all')
+  const [chosenFilter, setFilter] = useState<Filter>('all')
+  // The frame stays open through the scan after an apply. When the apply
+  // empties the status that was chosen, such as Ready, its chip is no longer
+  // offered, so the list shows every status instead of nothing.
+  const filter: Filter =
+    chosenFilter !== 'all' && entry.counts[chosenFilter] === 0
+      ? 'all'
+      : chosenFilter
   const [property, setProperty] = useState<'all' | PropertyGroup>('all')
   const [showFilters, setShowFilters] = useState(false)
   const [pivot, setPivot] = useState<Pivot>('layers')
@@ -470,7 +510,14 @@ export function Inspector({
           <Accordion className="binding-groups">
             {groups.map((group) => {
               const isOpen = open.has(group.key)
-              const mappable = group.records.filter(isMappable)
+              // A Manual fix is decided one at a time, never in a bulk change.
+              const mappable = group.records.filter(
+                (record) => isMappable(record) && record.category !== 'byHand',
+              )
+              const overridden = group.records.filter(
+                (record) => record.override,
+              ).length
+              const inherited = group.records.length - overridden
               const state = groupState(
                 selection,
                 mappable.map((record) => record.id),
@@ -493,6 +540,9 @@ export function Inspector({
                         {[
                           group.subtitle,
                           groupSummary(group.records, categoryOf),
+                          group.instance &&
+                            overridden > 0 &&
+                            `${overridden} overridden`,
                         ]
                           .filter(Boolean)
                           .join(', ')}
@@ -504,22 +554,11 @@ export function Inspector({
                       <div className="stack-tight">
                         {group.instance && (
                           <p className="muted">
-                            The plugin changes nothing inside an instance. These
-                            values change with its main component or library.
+                            {instanceNote(overridden, inherited)}
                           </p>
                         )}
                         <div className="panel-actions">
-                          {group.instance?.mainId ? (
-                            <Button
-                              size="small"
-                              variant="secondary"
-                              onClick={() =>
-                                onSelect([group.instance?.mainId as string])
-                              }
-                            >
-                              Go to main component
-                            </Button>
-                          ) : mappable.length > 1 ? (
+                          {mappable.length > 1 ? (
                             <Checkbox
                               label={`Select all ${mappable.length} to change`}
                               checked={state.checked}
@@ -534,20 +573,35 @@ export function Inspector({
                           ) : (
                             <span />
                           )}
-                          <Button
-                            size="small"
-                            variant="secondary"
-                            aria-label={`Go to ${group.title}`}
-                            onClick={() =>
-                              onSelect([
-                                ...new Set(
-                                  group.records.map((record) => record.nodeId),
-                                ),
-                              ])
-                            }
-                          >
-                            Go to
-                          </Button>
+                          <span className="apply-buttons">
+                            {group.instance?.mainId && (
+                              <Button
+                                size="small"
+                                variant="secondary"
+                                onClick={() =>
+                                  onSelect([group.instance?.mainId as string])
+                                }
+                              >
+                                Go to main component
+                              </Button>
+                            )}
+                            <Button
+                              size="small"
+                              variant="secondary"
+                              aria-label={`Go to ${group.title}`}
+                              onClick={() =>
+                                onSelect([
+                                  ...new Set(
+                                    group.records.map(
+                                      (record) => record.nodeId,
+                                    ),
+                                  ),
+                                ])
+                              }
+                            >
+                              Go to
+                            </Button>
+                          </span>
                         </div>
                         <ul className="binding-list">
                           {group.records.map((record) => {
@@ -577,7 +631,18 @@ export function Inspector({
                                 reason={decided ? undefined : record.reason}
                                 category={categoryOf(record)}
                                 held={isHeld(categoryOf(record), record.rule)}
+                                {...(group.instance
+                                  ? {
+                                      origin: record.override
+                                        ? ('override' as const)
+                                        : ('main' as const),
+                                    }
+                                  : {})}
                                 changeable={isMappable(record)}
+                                selectable={
+                                  isMappable(record) &&
+                                  record.category !== 'byHand'
+                                }
                                 selected={selection.has(record.id)}
                                 onToggle={(selected) =>
                                   selection.set([selectable(record)], selected)
@@ -598,14 +663,23 @@ export function Inspector({
         )}
       </Tabs>
 
-      {oldInstances && oldInstances.length > 0 && (
+      {(isMain || inside) && (
+        <ComponentInstances
+          instances={componentInstances}
+          componentName={entry.name}
+          onSelect={onSelect}
+        />
+      )}
+      {!isMain && !inside && oldInstances && oldInstances.length > 0 && (
         <section className="stack-tight" aria-labelledby="old-instances">
           <h3 id="old-instances" className="section-title">
             Instances with legacy variables
           </h3>
           <p className="muted">
             Update the component in its library, then swap these instances by
-            hand. The plugin never changes anything inside an instance.
+            hand. The plugin does not change a value an instance takes from its
+            main component. A value an instance overrides is listed above,
+            marked Overridden in the instance, and changes here.
           </p>
           <ul className="binding-list">
             {groupInstances(oldInstances).map((group) => (
@@ -638,7 +712,7 @@ export function Inspector({
       {selection.items.size === 0 && (
         <ApplyActions
           ready={entry.counts.sure}
-          toReview={entry.counts.check}
+          toReview={reviewItems(mapping, overrides, new Set([entry.id])).length}
           where={isMain ? 'in this main component' : 'in this frame'}
           kind={isMain ? 'component' : 'frame'}
           inComponent={inside !== undefined}
@@ -648,6 +722,7 @@ export function Inspector({
               : undefined
           }
           changed={entry.changed}
+          done={entry.health === 1}
           busy={busy}
           onApply={onApply}
           onReview={onReview}

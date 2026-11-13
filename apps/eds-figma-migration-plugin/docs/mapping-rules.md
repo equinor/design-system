@@ -267,3 +267,42 @@ variables and the font, and when single-line text in a control takes label
 (ADR-0027). It is a check item when the plugin has to choose: the nearest step
 for a role, body for text with no line height variable, Semi Bold as medium,
 or medium on body.
+
+### Instances
+
+A legacy variable an instance takes from its main component is reported as
+**Inside instances** and is not changed, because the main component is where
+it changes. A legacy variable the instance overrides itself goes through the
+rules above like a value on any other layer (decided 2026-11-13). The scan
+reads the overrides from the outermost instance and compares each binding
+with the layer at the same place in the main component; the README describes
+how.
+
+Figma does not let a plugin bind a variable to the width, height or minimum
+and maximum size of a layer inside an instance, and it ignores `resize()` on
+such a layer as well; only removing the binding works. Removing the
+instance's overrides with `removeOverrides()` would reset the size, but it
+also undoes a swapped icon and the icon's colour (tested on FRIOD
+2026-11-13). A legacy size the instance overrides on a layer inside it is
+therefore a **Manual fix** (category `byHand`, rule
+`instance/size-override`, decided 2026-11-13): the plugin flags it, Apply
+leaves it, and the row gives the fix in Figma. The fix is a reset of the
+layer, which brings back the size of the layer at the same place in the main
+component; a swapped icon turns back into the main component's icon, and is
+swapped again afterwards, which keeps the size. When that layer in the main
+component uses a legacy variable too, the main component is migrated first.
+The target is the EDS Beta variable the main component's layer binds, when it
+has one, otherwise the variable the rules propose. Since the reset removes
+every change on the layer and the layers below it, the row lists the
+variables the instance sets there, each with its EDS Beta value to set again.
+A size on the instance itself is not affected: a plugin can bind that.
+
+When the layer is an instance and the reset would give an EDS Beta variable
+or a number, the plugin can make the fix itself (target `reset:<variable>`).
+It is never applied as the rule's outcome: a designer accepts it in Review,
+since a reset is more than a swap of variables, and the run then reads every
+override on the layer and the layers below it, resets the layer, swaps it
+back, sets the overrides again and reads them back. A layer with an override
+the plugin cannot copy is refused before anything changes. When the swap was made through an instance-swap property of the instance above, as Text Field does with the Icon property of `.Icon Wrapper`, a reset of the layer keeps the property's icon without the slot's size, so the plugin sets the property to its default and back, which brings the size; the row's steps say the same for a designer. Tested on FRIOD
+on 2026-11-13 with a swapped icon, its colour style, stroke weights, a
+hidden layer and the plugin's own change log.

@@ -4,7 +4,7 @@ import { Button, Dialog } from '@equinor/eds-core-react/next'
 type ApplyActionsProps = {
   /** Ready changes the run would make */
   ready: number
-  /** Needs check bindings nobody has decided on, for the review */
+  /** Needs check bindings and Manual fixes nobody has decided on, for the review */
   toReview: number
   /** “in the scope” or “in this frame” */
   where: string
@@ -20,6 +20,11 @@ type ApplyActionsProps = {
   mainComponents?: { count: number; instances: number }
   /** Layers in the entry the plugin has changed before, for Revert */
   changed?: number
+  /**
+   * Every EDS value in the entry uses the Beta tokens (health 100%), so
+   * nothing is left to apply, rather than something waiting for a check
+   */
+  done?: boolean
   busy: boolean
   onApply: () => void
   onReview?: () => void
@@ -40,6 +45,7 @@ export function ApplyActions({
   inComponent = false,
   mainComponents,
   changed = 0,
+  done = false,
   busy,
   onApply,
   onReview,
@@ -79,7 +85,9 @@ export function ApplyActions({
     >
       <div className="apply-summary">
         <span>
-          {ready > 0 ? (
+          {done ? (
+            `Everything ${where} is migrated`
+          ) : ready > 0 ? (
             <>
               Change <strong>{ready}</strong> value{ready === 1 ? '' : 's'}{' '}
               {where}
@@ -89,9 +97,7 @@ export function ApplyActions({
           )}
         </span>
         {toReview > 0 && (
-          <span className="muted">
-            {toReview} need{toReview === 1 ? 's' : ''} a check first
-          </span>
+          <span className="muted">{toReview} to review first</span>
         )}
       </div>
       <div className="apply-buttons">
@@ -109,12 +115,14 @@ export function ApplyActions({
             Review {toReview} ⚠
           </Button>
         )}
-        <Button
-          disabled={busy || ready === 0}
-          onClick={() => setConfirm('apply')}
-        >
-          Apply {ready}
-        </Button>
+        {!done && (
+          <Button
+            disabled={busy || ready === 0}
+            onClick={() => setConfirm('apply')}
+          >
+            Apply {ready}
+          </Button>
+        )}
       </div>
       <Dialog
         open={confirm !== undefined}
@@ -152,7 +160,7 @@ export function ApplyActions({
                   ? 'The plugin changes nothing in an instance directly.'
                   : 'Nothing inside an instance changes.'}
                 {toReview > 0
-                  ? ` ${toReview} value${toReview === 1 ? '' : 's'} that need a check stay as they are until you review them.`
+                  ? ` ${toReview} value${toReview === 1 ? '' : 's'} to review stay as they are until you review them.`
                   : ''}{' '}
                 Undo with Ctrl or Cmd+Z, or later with {revertLabel}.
               </p>

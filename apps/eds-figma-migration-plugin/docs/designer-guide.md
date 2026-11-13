@@ -3,8 +3,9 @@
 EDS Variable Migration updates your Figma file from the legacy EDS variables
 (the deprecated EDS Colours, Spacing and Typography libraries) to the EDS Beta
 tokens. In Figma's library list the Beta is called **EDS Foundation [EDS
-Beta]**. The plugin runs in your file, uses no AI credits, and never changes
-anything inside an instance.
+Beta]**. The plugin runs in your file and uses no AI credits. Inside an
+instance it only changes what the instance overrides itself; the rest changes
+with the main component.
 
 The plugin is a test version, marked **[WIP BETA]**. Try it on a copy of a
 frame or in a branch first, and tell the EDS team what does not work.
@@ -28,26 +29,61 @@ Choose a scope and press **Scan**:
 - **Selection**: the frames you have selected.
 - **Page**: every frame on the current page.
 - **File**: every page, one at a time. A large file takes a while; you can
-  cancel.
+  cancel. **Select pages**, beside File, opens a list of the pages where you
+  untick the ones to leave out, such as an archive. The count beside the
+  button shows how many are ticked, for example 5/8 pages. The choice is kept
+  in the file for everyone who scans it, and a page added later is ticked
+  until someone leaves it out.
+
+While the plugin scans, it draws the page: each frame turns coloured when it
+has been read, a box shows the frame it is reading now, and grey and green
+dots show where it found legacy and migrated values.
 
 ## 2. Read the health
 
 The health bar counts every property bound to a variable, every text's typography
 and every mode set on a frame:
 
-| Status           | What it means                                                                               |
-| ---------------- | ------------------------------------------------------------------------------------------- |
-| Migrated         | Already uses the EDS Beta tokens. Green, because it is done.                                |
-| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.                |
-| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.             |
-| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays.     |
-| Excluded         | You chose to keep the legacy variable. Apply leaves it out. Shown only when there are some. |
-| Inside instances | Inside an instance. The plugin leaves it; its main component has to be migrated.            |
+| Status           | What it means                                                                                                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Migrated         | Already uses the EDS Beta tokens. Green, because it is done.                                                                                                       |
+| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.                                                                                       |
+| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.                                                                                    |
+| Manual fix       | A legacy value Figma lets nobody change where it is, such as an icon size inside an instance. The row says how to fix it in Figma. Shown only when there are some. |
+| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays.                                                                            |
+| Excluded         | You chose to keep the legacy variable. Apply leaves it out. Shown only when there are some.                                                                        |
+| Inside instances | Comes from an instance's main component. The plugin leaves it; migrate the main component.                                                                         |
 
 Health is the share that is migrated. The **i** button next to the legend
 explains the statuses again. When values sit inside instances, a line under
 the legend gives the share migrated outside instances, which is what the
 plugin can change in the scope.
+
+A value an instance overrides itself, such as an icon you swapped and gave
+another size, gets a status like any other layer, because changing the main
+component does not change it. Figma lets nobody change the width or height
+of a layer inside an instance, in the editor or from a plugin, so a legacy
+size there is marked **Manual fix**. This happens when an icon was swapped
+while its slot still used a legacy size: the swap copied the size onto the
+icon, and it stayed when the main component was migrated. The row says how
+to fix it: click the row to select the layer, right-click it in Figma and
+choose **Reset all changes**. A swapped icon turns back into the icon the
+main component has there, with its EDS Beta size; swap it to your icon again,
+and the size stays. When the icon was picked with a property of the instance
+above it, such as Icon on Error icon in Text Field, the reset keeps the icon
+but not the size: set the property to the default icon and back instead, as
+the row says. The reset also removes the layer's other changes, such as
+its colour, so the row lists them with the EDS Beta value to set again.
+
+The plugin can make this fix for you, but only after you accept it, since it
+is more than a swap of one variable for another. Manual fixes are part of
+**Review**: the step explains the fix, and **Accept the fix** lets the plugin
+read every change on the layer, reset it, swap it back and set the changes
+again on the next Apply. It checks each change afterwards; if one cannot be
+copied, it leaves the layer as it was and says why. **Keep the legacy
+variable** excludes the value. When the main component itself still uses a
+legacy size, or the layer is not an instance, the plugin cannot make the fix,
+and the row only gives the steps.
 
 ## 3. Look at what will change
 
@@ -56,8 +92,10 @@ plugin can change in the scope.
   grouped by layer or by legacy variable. **Go to** selects the layer in
   Figma.
 - **Changes** lists every legacy variable in the scope with what it becomes,
-  in tabs by kind of value. Values inside instances are not part of it; they
-  change with their main component or library. A row marked with an eye has a new
+  in tabs by kind of value. Values instances take from their main component
+  are not part of it; they change with their main component or library. A
+  value an instance overrides is listed, marked **Overridden in the
+  instance**. A row marked with an eye has a new
   colour that looks clearly different from the legacy one on its layers: the
   mapping is right by role, but check the look. **Looks different** filters
   those rows. A click on the legacy variable selects its
@@ -75,9 +113,18 @@ plugin can change in the scope.
   the frames together. The tab also lists the main components on other pages
   that instances in the scope use, with **Go to** and **Scan its page** for
   one, and **Scan the whole file** to have them all on the tab.
+  A scan of one selected main component or component set opens it
+  directly. In a main component, **Instances in this component** lists
+  every instance in it, grouped by its own main component, with how many
+  legacy values each one overrides (they change here) and takes from its
+  main component (they change there).
 
 In a frame, the **Layers** view shows each instance as one row, marked
-Instance: the plugin changes nothing inside it.
+Instance. Each value in it is marked **Overridden in the instance** or **From
+the main component**, and the row says how many are overridden. A legacy value
+the instance overrides can be changed there, like any other layer. A value
+from the main component cannot: it changes with the main component or its
+library.
 
 To change a target, press **Change** on one value or the target of a row, or
 tick several values and use the bar at the bottom of the window. In the
@@ -163,9 +210,11 @@ file, so the next time you open it, you see where you left off.
 
 ## Questions
 
-**Why does the plugin not change my instances?** A change inside an instance
-becomes an override, which stops the instance from getting updates. For a
-component in this file, migrate its main component; for a library component,
+**Why does the plugin not change my instances?** It changes the values an
+instance overrides itself, and leaves the values it takes from its main
+component. A change to one of those would become an override, which stops the
+instance from getting updates. For a component in this file, migrate its main
+component; for a library component,
 update it in its library and publish it. The instances follow.
 
 **Why is a legacy mode still on my frame?** Something below it still uses a

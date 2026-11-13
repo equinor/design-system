@@ -4,10 +4,12 @@
  * change to a message is checked on both.
  */
 import type { DisplaySettings } from './window'
+import type { FilePage } from './pages'
 import type { MappingGroup, OverrideValue, Overrides } from '../scan/mapping'
 import type { Report } from '../scan/report'
 import type {
   BindingRecord,
+  ComponentInstance,
   Counts,
   OldInstance,
   ScanSummary,
@@ -56,6 +58,10 @@ export type ApplyResult = {
   layers: number
   /** Legacy modes left in place because layers below still use legacy variables */
   modesKept: number
+  /** Layers inside instances the run reset for a Manual fix, whether the size came out right or not */
+  resets: number
+  /** Manual fixes that failed: their acceptance is withdrawn, so they are Manual fixes again */
+  failedFixes: string[]
   failed: ChangeFailure[]
 }
 
@@ -107,8 +113,43 @@ export type ScanProgress = {
   pageName: string
   pageIndex: number
   pageCount: number
+  /** Layers read so far, on every page */
   nodes: number
+  /** Index in the page's map of the top-level layer being read */
+  current?: number
+  /** Top-level layers on the page's map that are read */
+  tilesDone?: number
+  /**
+   * Where EDS values were found since the previous message, for the window
+   * to draw on the map. A sample: at most one per layer, and only so many
+   * per message and per page, so a large page does not flood the window.
+   */
+  dots?: ScanDot[]
 }
+
+/** A rectangle on the scan map: x, y, width and height in px, from the top left corner of the area the map covers. */
+export type MapRect = [number, number, number, number]
+
+/**
+ * The top-level layers a scan reads on one page, with their place on the
+ * page, so the window can draw the page and show which layer is being read.
+ */
+export type ScanMap = {
+  pageId: string
+  /** Width and height of the area the layers cover, in px */
+  width: number
+  height: number
+  /** Frames, components and loose layers, in the order the scan reads them */
+  tiles: MapRect[]
+  /** Sections, drawn behind the layers in them */
+  sections: MapRect[]
+}
+
+/**
+ * A layer where the scan found an EDS value: x and y of its centre on the
+ * map, and 1 for a legacy value or 0 for a Beta value.
+ */
+export type ScanDot = [number, number, 0 | 1]
 
 export type PluginToUi =
   | {
@@ -125,6 +166,16 @@ export type PluginToUi =
       firstName?: string
       component?: SelectionComponent
     }
+  /**
+   * The pages in the file and the ones a scan of the file leaves out, sent
+   * when the window opens, when the page changes, when the page picker opens
+   * and after the choice is changed
+   */
+  | { type: 'pages'; pages: FilePage[]; leftOut: string[] }
+  /** A scan starts; sent before anything else of it */
+  | { type: 'scan-start'; scope: Scope; pageCount: number }
+  /** The layers on the next page, sent when the page is loaded and before it is read */
+  | { type: 'scan-map'; pageIndex: number; map: ScanMap }
   | { type: 'scan-progress'; progress: ScanProgress }
   | { type: 'scan-done'; summary: ScanSummary }
   /** The same scan counted again after targets were changed */
@@ -153,6 +204,8 @@ export type PluginToUi =
       entryId: string
       records: BindingRecord[]
       oldInstances: OldInstance[]
+      /** For a main component, or a layer inside one: every instance in it */
+      instances?: ComponentInstance[]
     }
   | {
       type: 'dev-export'
@@ -166,6 +219,10 @@ export type UiToPlugin =
   | { type: 'ready' }
   | { type: 'scan'; scope: Scope }
   | { type: 'cancel-scan' }
+  /** Sends the pages again, as the page picker opens, since pages may have been added or renamed */
+  | { type: 'get-pages' }
+  /** The pages a scan of the file leaves out, kept in the file */
+  | { type: 'set-left-out-pages'; pageIds: string[] }
   | { type: 'get-entry'; entryId: string }
   /** Selects layers in Figma and scrolls to them, switching page when needed */
   | { type: 'select'; nodeIds: string[] }

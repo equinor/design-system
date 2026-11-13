@@ -35,6 +35,8 @@ type PackedUnit = {
   entry: string
   property: PropertyRef
   instance?: string
+  /** An override of the instance, which the plugin can change */
+  override?: true
 } & (
   | { unit: 'variable'; kind: string; ref: PackedRef }
   | {
@@ -137,6 +139,7 @@ export function packFixture(
       entry: unit.entryId,
       property: unit.property,
       ...(unit.instanceId ? { instance: unit.instanceId } : {}),
+      ...(unit.override ? { override: true as const } : {}),
     }
     if (unit.unit === 'variable') {
       return {
@@ -212,6 +215,7 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
       path: node.path,
       property: unit.property,
       instanceId: unit.instance,
+      ...(unit.override ? { override: true as const } : {}),
       context,
       ...(node.modeHolders ? { modeHolders: node.modeHolders } : {}),
     }

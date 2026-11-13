@@ -2,7 +2,10 @@
  * Turns the raw units of a scan into records: which category each one is in,
  * and for old variables outside instances, what the rules propose.
  */
+import { literalText } from '../mapping/literal'
 import { nearNamesMatch } from '../mapping/role'
+import { isResetTarget, resetTarget, resetVariable } from '../mapping/reset'
+import { propertyLabel } from './labels'
 import { targetDensity } from '../mapping/density'
 import { targetScheme } from '../mapping/scheme'
 import {
@@ -109,6 +112,142 @@ export function readsOf(variable: RawVariable): string[] {
   ]
 }
 
+/** Fields a plugin cannot bind a variable to on a layer inside an instance; it can only unbind them. */
+export const INSTANCE_LOCKED_FIELDS = new Set([
+  'width',
+  'height',
+  'minWidth',
+  'maxWidth',
+  'minHeight',
+  'maxHeight',
+])
+
+const LOCKED_FIELD_NAMES: Record<string, string> = {
+  width: 'width',
+  height: 'height',
+  minWidth: 'minimum width',
+  maxWidth: 'maximum width',
+  minHeight: 'minimum height',
+  maxHeight: 'maximum height',
+}
+
+type VariableUnit = Extract<RawUnit, { unit: 'variable' }>
+
+/**
+ * Figma lets nobody change the size of a layer inside an instance: a plugin
+ * that binds a variable to it or calls resize() is ignored without an error
+ * (tested 2026-11-13), and the editor does not offer it either. A legacy
+ * size the instance overrides there is a Manual fix: the plugin flags it and
+ * says how to fix it in Figma, which is to reset the layer so it takes the
+ * size from its main component again. A swapped icon goes back to the
+ * component the main component has there, so it is swapped again after the
+ * reset, and a swap keeps the size (tested on FRIOD 2026-11-13). The target
+ * is the EDS Beta variable the main component uses there, or else the rules'
+ * proposal. Null for a layer outside these rules, such as the instance
+ * itself, which a plugin can bind.
+ */
+export function manualFix(
+  unit: VariableUnit,
+): { target?: string; reason: string } | null {
+  if (
+    !unit.override ||
+    unit.property.type !== 'field' ||
+    !INSTANCE_LOCKED_FIELDS.has(unit.property.field) ||
+    unit.nodeId === unit.instanceId
+  ) {
+    return null
+  }
+  const field = LOCKED_FIELD_NAMES[unit.property.field]
+  const main = unit.mainVariable
+  const mainIsBeta =
+    main !== undefined && collectionOrigin(main.collectionKey) === 'new'
+  // A reset gives the main component's value; with a legacy variable there
+  // the main component has to be migrated first, so the plugin offers no fix.
+  // Only an instance can be reset on its own by a plugin.
+  const target =
+    (main && !mainIsBeta) || unit.nodeType !== 'INSTANCE'
+      ? undefined
+      : resetTarget(mainIsBeta ? main.name : undefined)
+  const swap = unit.swap
+  const why = `The instance overrides the ${field} of this layer with the legacy ${unit.variable.name}. Figma lets nobody change the size of a layer inside an instance, in the editor or from a plugin, so the fix is to reset the layer in Figma.`
+  const reset =
+    'click the row to select the layer, then right-click it in Figma and choose Reset all changes'
+  let steps: string
+  if (main && !mainIsBeta) {
+    steps = `The main component uses the legacy ${main.name} here too, so migrate the main component first. Then ${reset}${swap ? `, and swap it to ${swap.to} again` : ''}.`
+  } else if (swap?.property) {
+    steps = `To fix it, ${reset}: it stays ${swap.to}, but without a size variable. Then select ${swap.property.on}, set its ${swap.property.name} property to ${swap.from} and back to ${swap.to}, which brings ${mainIsBeta ? main.name : 'the size'} from the main component.`
+  } else if (swap) {
+    steps = `To fix it, ${reset}. It turns back into ${swap.from}${mainIsBeta ? ` and takes ${main.name} from the main component` : ''}. Then swap it to ${swap.to} again, which keeps that size.`
+  } else {
+    steps = `To fix it, ${reset}. It takes ${mainIsBeta ? main.name : 'its size'} from the main component again.`
+  }
+  const offer = target
+    ? ' The plugin can make this fix for you once you accept it in Review.'
+    : ''
+  return {
+    ...(target ? { target } : {}),
+    reason: `${why} ${steps}${offer}`,
+  }
+}
+
+/** What a Manual fix row shows as its target: the variable the reset gives, or the main component's size. */
+export function manualFixTarget(record: BindingRecord): string {
+  const target = record.candidates?.[0]
+  return target && isResetTarget(target)
+    ? (resetVariable(target) ?? "The main component's size")
+    : "The main component's size, once it is migrated"
+}
+
+/** What to set again after a reset, for a value the reset removes: its EDS Beta value. */
+function valueAfterReset(record: BindingRecord): string {
+  switch (record.category) {
+    case 'migrated':
+    case 'other':
+      return record.current ?? ''
+    case 'sure':
+    case 'check': {
+      const target = record.candidates?.[0]
+      if (!target) return record.old ?? ''
+      return literalText(target) ?? target
+    }
+    default:
+      return `${record.old ?? ''}, which has no EDS Beta equivalent yet`
+  }
+}
+
+/**
+ * A reset removes every change on the layer and the layers below it, so a
+ * Manual fix lists the variables the instance sets there, each with the EDS
+ * Beta value to set again after the reset. Layers below an instance layer
+ * have ids that start with its id and a semicolon.
+ */
+function withResetList(records: BindingRecord[]): BindingRecord[] {
+  return records.map((record) => {
+    if (record.category !== 'byHand') return record
+    const lost = records.filter(
+      (other) =>
+        other.override &&
+        other.category !== 'byHand' &&
+        (other.nodeId === record.nodeId ||
+          other.nodeId.startsWith(`${record.nodeId};`)),
+    )
+    const items = [
+      ...new Set(
+        lost.map(
+          (other) =>
+            `${other.nodeName}, ${propertyLabel(other.property).toLowerCase()}: ${valueAfterReset(other)}${other.old ? ` (now ${other.old})` : ''}`,
+        ),
+      ),
+    ]
+    const list =
+      items.length > 0
+        ? ` The reset also removes the other changes on the layer. Set these again afterwards, with the EDS Beta values: ${items.join('; ')}. Changes without a variable, such as a hidden layer, have to be set again too.`
+        : ' The reset also removes any other change on the layer, such as its colour, so set those again afterwards.'
+    return { ...record, reason: `${record.reason ?? ''}${list}` }
+  })
+}
+
 export function groupOf(unit: RawUnit): PropertyGroup {
   if (unit.unit === 'typography') return 'typography'
   if (unit.unit === 'mode') return 'modes'
@@ -145,6 +284,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     instanceId: unit.instanceId,
     density: targetDensity(unit.context.modes),
     scheme: targetScheme(unit.context.modes),
+    ...(unit.override ? { override: true as const } : {}),
     ...(unit.modeHolders ? { modeHolders: unit.modeHolders } : {}),
   }
 
@@ -179,20 +319,35 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
       ...(variable.value !== undefined ? { oldValue: variable.value } : {}),
       ...(variable.colour !== undefined ? { oldColour: variable.colour } : {}),
     }
-    if (unit.instanceId) return { ...base, ...old, category: 'inInstance' }
-    const resolution = resolveVariable({
+    // An instance takes the value from its main component, unless it
+    // overrides it: then the value is the instance's own and changes here.
+    if (unit.instanceId && !unit.override) {
+      return { ...base, ...old, category: 'inInstance' }
+    }
+    const rules = resolveVariable({
       kind: unit.kind,
       variable: toOldVariable(variable),
       context: toRoleContext(unit.context),
     })
+    const fix = manualFix(unit)
+    if (fix) {
+      return {
+        ...base,
+        ...old,
+        category: 'byHand',
+        candidates: fix.target ? [fix.target] : [],
+        reason: fix.reason,
+        rule: 'instance/size-override',
+      }
+    }
     return {
       ...base,
       ...old,
-      category: resolution.outcome,
-      outcome: resolution.outcome,
-      candidates: resolution.candidates,
-      reason: resolution.reason,
-      rule: resolution.rule,
+      category: rules.outcome,
+      outcome: rules.outcome,
+      candidates: rules.candidates,
+      reason: rules.reason,
+      rule: rules.rule,
     }
   }
 
@@ -225,7 +380,9 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
           ]),
         ),
       }
-      if (unit.instanceId) return { ...base, ...old, category: 'inInstance' }
+      if (unit.instanceId && !unit.override) {
+        return { ...base, ...old, category: 'inInstance' }
+      }
       const resolution = resolveTypography({
         fields: Object.fromEntries(
           oldFields.map(([field, variable]) => [
@@ -260,7 +417,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
         styleForVariables(unit.fields),
         toRoleContext(unit.context),
       )
-      if (style && !unit.instanceId) {
+      if (style && (!unit.instanceId || unit.override)) {
         const names = newFields
           .map(([, variable]) => variable.name)
           .sort((a, b) => a.localeCompare(b, 'en'))
@@ -427,9 +584,9 @@ export function blockedModes(
   return blocked
 }
 
-/** Bindings that will not change: inside instances, or with no equivalent. */
+/** Bindings that will not change: inside instances, with no equivalent, or to change by hand. */
 function staysAsItIs(record: BindingRecord): boolean {
-  return record.category === 'inInstance' || record.category === 'none'
+  return ['inInstance', 'none', 'byHand'].includes(record.category)
 }
 
 /**
@@ -466,7 +623,7 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
     }
     const key = `${record.nodeId}|${record.oldMode.collectionKey}`
     const stays = forGood.has(key)
-      ? 'The legacy mode stays while layers below use legacy variables that are not changed, inside instances or with no equivalent.'
+      ? 'The legacy mode stays while layers below use legacy variables that are not changed: inside instances, with no equivalent, or to change by hand.'
       : untilReview.has(key)
         ? 'The legacy mode is cleared once the bindings below that need a check are reviewed and applied.'
         : undefined
@@ -492,9 +649,11 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
 }
 
 export function classifyUnits(units: RawUnit[]): BindingRecord[] {
-  return holdModes(
-    units
-      .map(classifyUnit)
-      .filter((record): record is BindingRecord => record !== null),
+  return withResetList(
+    holdModes(
+      units
+        .map(classifyUnit)
+        .filter((record): record is BindingRecord => record !== null),
+    ),
   )
 }

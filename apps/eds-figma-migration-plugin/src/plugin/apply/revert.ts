@@ -8,9 +8,9 @@ import { propertyLabel } from '../../scan/labels'
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
 import type { LogEntry } from '../../shared/changelog'
 import type { ChangeFailure, RevertResult } from '../../shared/messages'
-import { Fonts, LayerChanged } from './apply'
+import { expectBound, Fonts, LayerChanged } from './apply'
 import { restoreInstanceTexts } from './instance-texts'
-import { readLog, writeLog } from './log'
+import { logIsInherited, readLog, writeLog } from './log'
 import { Targets } from './targets'
 
 const legacyVariables = new Map<string, Promise<Variable>>()
@@ -182,10 +182,12 @@ async function revertEntry(
     if (aliasId((bindable.boundVariables ?? {})[property.field])) {
       throw new LayerChanged()
     }
+    const legacy = await legacyVariable(entry.old.key)
     bindable.setBoundVariable(
       property.field as VariableBindableNodeField,
-      await legacyVariable(entry.old.key),
+      legacy,
     )
+    expectBound(bindable, property.field, legacy)
     return
   }
   if (entry.old.type !== 'variable' || entry.new.type !== 'variable') {
@@ -205,6 +207,7 @@ async function revertEntry(
     const current = aliasId((bindable.boundVariables ?? {})[property.field])
     if ((await variableKey(current)) !== expected) throw new LayerChanged()
     bindable.setBoundVariable(property.field as VariableBindableNodeField, old)
+    expectBound(bindable, property.field, old)
     return
   }
 
@@ -261,7 +264,12 @@ async function revertEntry(
   }
 }
 
-/** Layers in the roots that have a change log, the roots included. */
+/**
+ * Layers in the roots that have a change log of their own, the roots
+ * included. A layer inside an instance also shows the log of the main
+ * component's layer, and reverting that would put an override on the
+ * instance, so it is left to the main component.
+ */
 function loggedLayers(roots: SceneNode[]): SceneNode[] {
   const found: SceneNode[] = []
   for (const root of roots) {
@@ -274,7 +282,7 @@ function loggedLayers(roots: SceneNode[]): SceneNode[] {
       )
     }
   }
-  return found
+  return found.filter((node) => !logIsInherited(node))
 }
 
 export async function revertRoots(roots: SceneNode[]): Promise<RevertResult> {

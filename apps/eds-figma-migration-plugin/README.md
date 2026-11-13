@@ -6,10 +6,37 @@ libraries and swaps them for variables and text styles from
 and uses no AI credits.
 
 The plugin works on layout: the frames, text and shapes a designer built in
-their own file. It never changes anything inside an instance, because a change
-there becomes an instance override. An instance that still uses old variables
-comes from a component that has not been updated in its library; the plugin
-reports it and leaves it alone.
+their own file. It does not change a value an instance takes from its main
+component, because a change there becomes an instance override. An instance
+that still uses old variables that way comes from a component that has not
+been updated in its library; the plugin reports it and leaves it alone.
+
+A value the instance overrides itself is different: it is already an
+override, stored on the instance, and updating the main component does not
+reach it. The scan finds these with `InstanceNode.overrides` on the
+outermost instance, which lists the fields this instance overrides on each
+layer below it and leaves out what it inherits. That list says
+`boundVariables` for any bound field, so the scan also compares the binding
+with the layer at the same child position in the main component: the value is
+the instance's own when that layer binds another variable, or when there is
+no such layer, as below a swapped instance. These values go through the same
+rules as any other layer. Figma ignores a plugin that binds a variable to the
+width or height of a layer inside an instance, and ignores `resize()` there
+too, so a legacy size override there is flagged as **Manual fix** (category
+`byHand`, rule `instance/size-override`). The row says how to fix it in
+Figma: reset the layer, swap it again if it was a swapped icon (a swap keeps
+the slot's size), and set its other changes again, which the row lists with
+their EDS Beta values. The target is the EDS Beta variable the main
+component uses at that place. Such a legacy size comes from a swap made while
+the slot used a legacy size: the swap copies the size onto the icon as an
+override (tested on FRIOD 2026-11-13). The plugin can make the fix itself
+(target `reset:<variable>`, `src/mapping/reset.ts`), but only after a
+designer accepts it in Review; `src/plugin/apply/reset.ts` reads the layer's
+overrides, calls `removeOverrides()`, swaps it back, sets the overrides
+again and reads them back, and refuses a layer with an override it cannot
+copy. Apply reads every binding back to report the ones Figma did not
+take. Explicit modes inside instances are not checked for
+overrides yet.
 
 The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md),
 and the guide for designers in [`docs/designer-guide.md`](./docs/designer-guide.md).
@@ -69,6 +96,15 @@ Always try the plugin on a duplicate of a frame. The test frame is
   2026-11-11 found the same 3,940 layers on a page after `loadAsync()` as
   after switching to it, once that flag was off; with the flag on, 169 hidden
   layers inside instances were missing.
+- While it scans, the window draws a map of the page from its top-level
+  layers (`scan-map`, built in `src/plugin/scan/trace.ts`): each frame,
+  component or loose layer fills in when it is read, a box marks the one being
+  read, and dots mark a sample of the layers with legacy or Beta values. The
+  progress bar weighs a layer half by its area and half by its count, since
+  the scan cannot count the layers inside a frame before it reads it. The
+  first scan after the window opens fills the window and ends with the health
+  for a moment; a later scan is a card above the faded results. With reduced
+  motion, nothing animates and the first scan shows its results at once.
 - The list shows each top-level frame, the frames inside sections grouped
   under the section's name, and the loose layers of each page or section,
   lowest health first. Each row is labelled Frame, Layer or Component, and
@@ -79,7 +115,8 @@ Always try the plugin on a duplicate of a frame. The test frame is
   bar, and the instances in it that still use legacy variables. Clicking a
   binding selects that layer.
 - The categories are Migrated, Ready (one target, applied without asking;
-  `sure` in the code), Needs check, No equivalent and In instance. Ready is
+  `sure` in the code), Needs check, Manual fix (`byHand`), No
+  equivalent, Excluded and Inside instances. Ready is
   blue, since it still has to be applied; only Migrated is green. The info
   button next to the legend explains each category in a dialog.
 - The bindings in a row can be filtered by status, with the same names as the
@@ -99,7 +136,10 @@ designer persona ([`prototype/ux-review/final/findings.md`](./prototype/ux-revie
 - **The header** has the title and a **settings** menu: layer counts in the
   rows, frames without EDS variables, local components, and Export report.
 - **The scope line** has Selection, Page and File, and Scan. The scope starts
-  on Selection when something is selected. After a scan it shows **Go to
+  on Selection when something is selected. With File chosen, **Select pages**
+  and a count such as 5/8 pages appear beside it. The page picker keeps the
+  pages it leaves out in the file's shared plugin data (`left-out-pages`), so
+  a page added later is scanned, and page dividers are never scanned. After a scan it shows **Go to
   scope**, which selects the scanned layers, and **Scan again**.
 - **The footer** says what Apply changes ("Change 492 values in 3 frames on
   2 pages") and has **Review** and **Apply**. While values are ticked, the
@@ -157,9 +197,10 @@ Choices are kept across scans and in the file.
 
 The window counts **values**: a value is a property bound to a variable, the
 typography of a text or a range, or a mode. The categories are Migrated,
-Ready, Needs check, No equivalent, Excluded and Inside instances.
+Ready, Needs check, Manual fix, No equivalent, Excluded and Inside
+instances.
 
-Health is migrated ÷ (migrated + ready + needs check + no equivalent + excluded + in instance). Variables
+Health is migrated ÷ (migrated + ready + needs check + manual fix + no equivalent + excluded + in instance). Variables
 from other libraries and local variables are counted apart and left out.
 The plugin API gives no library name for a main component, so the window says
 whether it comes from a library or from this file.
@@ -184,7 +225,7 @@ change, after a confirmation that says what stays:
 An icon size (`sizing/icon/*` and the like) is proposed as the spacing token with the same px in the layer's density (`sizing/icon/lg`, 24px → `spacing/xl`), as a Needs check, since EDS sizes icons with spacing tokens. A variable on a stroke weight becomes the number it resolves to, without a variable, since EDS has no stroke width variable yet; Revert frame binds the legacy variable again.
 
 Bindings that need a check are not applied until a designer has chosen a
-target for them. Nothing inside an instance changes. Before each change the
+target for them. Inside an instance only its own overrides change. Before each change the
 plugin checks that the layer still has the legacy binding from the scan, and
 lists what it could not change, with Go to. One run is one step in Figma's
 undo history (`figma.commitUndo`). After the run the plugin scans the same
@@ -237,9 +278,16 @@ components stay until those components are updated.
 **The Instances tab** lists every other instance in the scope that still uses
 legacy variables, grouped by main component, with the number of instances,
 whether the component is in this file or in a library, and Go to for one
-instance or all of them. The plugin never changes inside an instance; a
-library component is updated in its library, and a component in this file
-changes with its main component.
+instance or all of them. The plugin does not change what an instance takes
+from its main component; a library component is updated in its library, and
+a component in this file changes with its main component. Overrides of an
+instance are listed with the other changes instead.
+
+A layer inside an instance reads the change log of the main component's
+layer until the instance has plugin data of its own on it (`pluginData` in
+`overrides`). The scan and Revert frame only read a log the instance owns, and
+Apply starts the instance's own log empty, so a main component's changes are
+never reverted through one of its instances.
 
 **Main components** lists the main components in the scope, which count in
 the health bar, each with how many times it is used in the file. On this tab

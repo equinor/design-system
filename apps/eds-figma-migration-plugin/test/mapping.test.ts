@@ -15,6 +15,7 @@ import {
   targetCounts,
 } from '../src/scan/mapping'
 import { recount } from '../src/scan/summary'
+import { reviewItems } from '../src/ui/review'
 import { selectionStatus } from '../src/ui/selection'
 import type { BindingRecord, ScanSummary } from '../src/scan/types'
 
@@ -79,6 +80,25 @@ describe('buildMappingGroups', () => {
   it('leaves out migrated bindings and bindings inside instances', () => {
     const olds = buildMappingGroups(records).map((group) => group.old)
     expect(olds).not.toContain('Bg/Neutral/Surface')
+  })
+
+  it('marks a binding an instance overrides, so Changes can say so', () => {
+    const overridden: BindingRecord = {
+      ...record('icon', 'Icon/Size', 'check', '24'),
+      instanceId: 'add-box',
+      override: true,
+    }
+    const [group] = buildMappingGroups([
+      overridden,
+      record('frame', 'Icon/Size', 'check', '24'),
+    ])
+    const bindings = group.rows[0].bindings
+    expect(bindings.find((binding) => binding.id === 'icon')?.override).toBe(
+      true,
+    )
+    expect(
+      bindings.find((binding) => binding.id === 'frame')?.override,
+    ).toBeUndefined()
   })
 })
 
@@ -200,6 +220,36 @@ describe('sharedSubject', () => {
   })
 })
 
+describe('Manual fix', () => {
+  it('goes to Review when the plugin can make the fix', () => {
+    const groups = buildMappingGroups([
+      record('icon', 'Selectable/Icon size', 'byHand', 'reset:spacing/md'),
+    ])
+    expect(groups[0].rows[0].outcome).toBe('byHand')
+    expect(
+      reviewItems(groups, NO_OVERRIDES).map((item) => item.binding.id),
+    ).toEqual(['icon'])
+  })
+
+  it('stays out of Review when only a designer can fix it', () => {
+    const groups = buildMappingGroups([
+      record('icon', 'Selectable/Icon size', 'byHand'),
+    ])
+    expect(groups).toEqual([])
+  })
+
+  it('counts as Ready once accepted, and Excluded when the legacy variable is kept', () => {
+    const fix = record('icon', 'Selectable/Icon size', 'byHand', 'reset:')
+    expect(
+      effectiveCategory(fix, { records: { icon: 'reset:' }, rows: {} }),
+    ).toBe('sure')
+    expect(effectiveCategory(fix, { records: { icon: null }, rows: {} })).toBe(
+      'excluded',
+    )
+    expect(effectiveCategory(fix, NO_OVERRIDES)).toBe('byHand')
+  })
+})
+
 describe('effectiveCategory', () => {
   const [, , button, icon, done] = records
 
@@ -310,6 +360,7 @@ describe('recount', () => {
         migrated: 1,
         sure: 2,
         check: 1,
+        byHand: 0,
         none: 1,
         excluded: 0,
         inInstance: 1,
@@ -329,6 +380,7 @@ describe('recount', () => {
             migrated: 1,
             sure: 2,
             check: 1,
+            byHand: 0,
             none: 1,
             excluded: 0,
             inInstance: 1,
@@ -350,6 +402,7 @@ describe('recount', () => {
       migrated: 1,
       sure: 3,
       check: 0,
+      byHand: 0,
       none: 1,
       excluded: 0,
       inInstance: 1,

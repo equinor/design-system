@@ -42,6 +42,7 @@ const SAMPLE_COUNTS = {
   migrated: 62,
   sure: 24,
   check: 8,
+  byHand: 0,
   none: 4,
   excluded: 0,
   inInstance: 12,

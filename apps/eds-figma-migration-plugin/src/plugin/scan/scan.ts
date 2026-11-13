@@ -10,18 +10,24 @@ import { healthOf, summariseEntries, totalsOf } from '../../scan/summary'
 import type { EntryMeta } from '../../scan/summary'
 import type {
   BindingRecord,
+  ComponentInstance,
   OldInstance,
   RawUnit,
   ScanSummary,
 } from '../../scan/types'
-import type { ScanProgress, Scope } from '../../shared/messages'
+import type { ScanMap, ScanProgress, Scope } from '../../shared/messages'
+import { pagesToScan } from '../../shared/pages'
+import type { FilePage } from '../../shared/pages'
 import { Collector, explicitModes } from './collect'
-import type { Modes } from './collect'
+import type { FoundInstance, Modes } from './collect'
+import { ScanTracer } from './trace'
 
 export type ScanState = {
   summary: ScanSummary
   records: BindingRecord[]
   oldInstances: OldInstance[]
+  /** Every outermost instance the scan read, for the instance list of a main component */
+  instances: FoundInstance[]
   units: RawUnit[]
 }
 
@@ -33,14 +39,40 @@ export type ScanTarget = {
   pageId: string
   /** The selected layers, for a scan of the selection */
   nodeIds: string[]
+  /** For a scan of the file: the pages chosen in the page picker; every page when absent */
+  pageIds?: string[]
 }
 
-/** The scope as it is now: the current page and the current selection. */
-export function currentTarget(scope: Scope): ScanTarget {
+/** The pages in the file, in the order of Figma's page list, for the page picker. */
+export function filePages(): FilePage[] {
+  return figma.root.children.map((page) => ({
+    id: page.id,
+    name: page.name,
+    ...(page.isPageDivider ? { divider: true } : {}),
+  }))
+}
+
+/**
+ * The pages a scan of the file reads, in the file's order. Page dividers
+ * are left out, as they hold nothing.
+ */
+export function pagesOfFile(pageIds?: string[]): PageNode[] {
+  const chosen = pageIds && new Set(pageIds)
+  return figma.root.children.filter(
+    (page) => !page.isPageDivider && (!chosen || chosen.has(page.id)),
+  )
+}
+
+/**
+ * The scope as it is now: the current page and the current selection, and
+ * for a scan of the file the pages that are not left out.
+ */
+export function currentTarget(scope: Scope, leftOut: string[]): ScanTarget {
   return {
     scope,
     pageId: figma.currentPage.id,
     nodeIds: figma.currentPage.selection.map((node) => node.id),
+    ...(scope === 'file' ? { pageIds: pagesToScan(filePages(), leftOut) } : {}),
   }
 }
 
@@ -48,6 +80,7 @@ export async function runScan(
   target: ScanTarget,
   onProgress: (progress: ScanProgress) => void,
   isCancelled: () => boolean,
+  onMap: (pageIndex: number, map: ScanMap) => void = () => {},
 ): Promise<ScanState> {
   // Hidden layers inside instances are skipped when this is true, and a scan
   // must see them.
@@ -56,7 +89,10 @@ export async function runScan(
   const { scope } = target
   const targetPage = await figma.getNodeByIdAsync(target.pageId)
   const scopePage = targetPage?.type === 'PAGE' ? targetPage : figma.currentPage
-  const pages = scope === 'file' ? [...figma.root.children] : [scopePage]
+  const pages = scope === 'file' ? pagesOfFile(target.pageIds) : [scopePage]
+  if (pages.length === 0) {
+    throw new Error('Choose one or more pages to scan, then scan again.')
+  }
   const selected: SceneNode[] = []
   if (scope === 'selection') {
     for (const id of target.nodeIds) {
@@ -76,22 +112,23 @@ export async function runScan(
   }
   const entries: EntryMeta[] = []
   let pageIndex = 0
-  let currentPage = pages[0]
 
+  // The map the window draws while the scan reads the page.
+  const tracer: ScanTracer = new ScanTracer(
+    () => collector.nodes,
+    onProgress,
+    onMap,
+  )
   const collector = new Collector({
     densityKey: OLD_DENSITY_KEY,
     oldKeys: OLD_COLLECTION_KEYS,
-    onProgress: async (nodes) => {
-      onProgress({
-        pageName: currentPage.name,
-        pageIndex,
-        pageCount: pages.length,
-        nodes,
-      })
-      // Gives the window a moment to send a cancel.
+    onProgress: async () => {
+      tracer.progress()
+      // Gives the window a moment to draw and to send a cancel.
       await new Promise((resolve) => setTimeout(resolve, 0))
       return isCancelled()
     },
+    onUnit: (node, unit) => tracer.unit(node, unit),
   })
 
   const addEntry = (
@@ -145,8 +182,10 @@ export async function runScan(
         { id: node.id, kind, name: node.name, sections, nodeIds: [node.id] },
         page,
       )
+      tracer.tileStart(node.id)
       await collector.collectEntry([node], node.id, modes, kind === 'component')
       await collectNestedComponents(page, sections)
+      tracer.tileDone(node.id)
     } else {
       loose.push(node)
     }
@@ -171,7 +210,13 @@ export async function runScan(
       },
       page,
     )
-    await collector.collectEntry(loose, id, modes)
+    // One layer at a time, which reads the same as all of them at once, so
+    // the window can show which one is being read.
+    for (const node of loose) {
+      tracer.tileStart(node.id)
+      await collector.collectEntry([node], id, modes)
+      tracer.tileDone(node.id)
+    }
     await collectNestedComponents(page, sections)
   }
 
@@ -231,16 +276,16 @@ export async function runScan(
   }
 
   for (const page of pages) {
-    currentPage = page
-    onProgress({
-      pageName: page.name,
-      pageIndex,
-      pageCount: pages.length,
-      nodes: collector.nodes,
-    })
+    tracer.startPage(page.name, pageIndex, pages.length)
     await page.loadAsync()
-    if (scope === 'selection') await collectSelection(page)
-    else await collectContainer(page, page, [], explicitModes(page))
+    if (scope === 'selection') {
+      tracer.mapPage(page.id, selected, true)
+      await collectSelection(page)
+    } else {
+      tracer.mapPage(page.id, page.children, false)
+      await collectContainer(page, page, [], explicitModes(page))
+    }
+    tracer.endPage()
     pageIndex += 1
   }
 
@@ -265,6 +310,7 @@ export async function runScan(
     },
     records,
     oldInstances,
+    instances: [...collector.instances.values()],
     units: collector.units,
   }
 }
@@ -282,7 +328,9 @@ async function countInstances(
   const legacy = new Set(
     records
       .filter((record) =>
-        ['sure', 'check', 'none', 'inInstance'].includes(record.category),
+        ['sure', 'check', 'byHand', 'none', 'inInstance'].includes(
+          record.category,
+        ),
       )
       .map((record) => record.entryId),
   )
@@ -312,6 +360,63 @@ export function isTypographyComponent(name: string): boolean {
   return /^typography$/i.test(name.trim())
 }
 
+/** The main component of an instance, or its component set, as the window shows it. */
+function mainComponentInfo(
+  main: ComponentNode,
+): NonNullable<OldInstance['mainComponent']> {
+  const set = main.parent?.type === 'COMPONENT_SET' ? main.parent : null
+  return {
+    name: set ? set.name : main.name,
+    key: set ? set.key : main.key,
+    remote: main.remote,
+    ...(main.remote ? {} : { id: set ? set.id : main.id }),
+  }
+}
+
+/**
+ * Every instance directly in a main component (not inside another
+ * instance), with its main component and how many legacy values it
+ * overrides and takes from its main component. Read when the component's
+ * inspector opens, since looking up main components costs a little.
+ */
+export async function componentInstances(
+  instances: FoundInstance[],
+  records: BindingRecord[],
+  entryId: string,
+): Promise<ComponentInstance[]> {
+  const result: ComponentInstance[] = []
+  for (const found of instances) {
+    if (found.entryId !== entryId) continue
+    let overridden = 0
+    let fromMain = 0
+    for (const record of records) {
+      if (record.instanceId !== found.id) continue
+      if (record.category === 'inInstance') fromMain += 1
+      else if (
+        record.override &&
+        record.category !== 'migrated' &&
+        record.category !== 'other'
+      ) {
+        overridden += 1
+      }
+    }
+    const node = await figma.getNodeByIdAsync(found.id)
+    const main =
+      node?.type === 'INSTANCE'
+        ? await node.getMainComponentAsync().catch(() => null)
+        : null
+    result.push({
+      id: found.id,
+      name: found.name,
+      path: found.path,
+      ...(main ? { mainComponent: mainComponentInfo(main) } : {}),
+      overridden,
+      fromMain,
+    })
+  }
+  return result
+}
+
 async function findOldInstances(
   collector: Collector,
   records: BindingRecord[],
@@ -326,19 +431,18 @@ async function findOldInstances(
   for (const [id, count] of counts) {
     const found = collector.instances.get(id)
     if (!found) continue
-    const instance: OldInstance = { ...found, count }
+    const instance: OldInstance = {
+      id: found.id,
+      name: found.name,
+      entryId: found.entryId,
+      count,
+    }
     const node = await figma.getNodeByIdAsync(id)
     if (node?.type === 'INSTANCE') {
       const main = await node.getMainComponentAsync()
       if (main) {
-        const set = main.parent?.type === 'COMPONENT_SET' ? main.parent : null
-        instance.mainComponent = {
-          name: set ? set.name : main.name,
-          key: set ? set.key : main.key,
-          remote: main.remote,
-          ...(main.remote ? {} : { id: set ? set.id : main.id }),
-        }
-        if (isTypographyComponent(set ? set.name : main.name)) {
+        instance.mainComponent = mainComponentInfo(main)
+        if (isTypographyComponent(instance.mainComponent.name)) {
           instance.typography = true
           const text = node.findOne((child) => child.type === 'TEXT')
           if (text?.type === 'TEXT')

@@ -477,6 +477,8 @@ export class MockPlugin {
       modes: modeCount,
       layers: layers.size,
       modesKept,
+      resets: 0,
+      failedFixes: [],
       failed,
     }
     this.busy = false

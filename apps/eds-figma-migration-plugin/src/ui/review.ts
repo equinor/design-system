@@ -1,4 +1,8 @@
-/** The items of the ⚠ review: every binding that needs a check and has no choice yet. */
+/**
+ * The items of the ⚠ review: every binding that needs a check, and every
+ * Manual fix the plugin can make, that has no choice yet. A Manual fix is
+ * only applied once a designer accepts it here.
+ */
 import { bindingOutcome } from '../scan/mapping'
 import type {
   MappingBinding,
@@ -26,7 +30,7 @@ export function reviewItems(
   const items: ReviewItem[] = []
   for (const group of groups) {
     for (const row of group.rows) {
-      if (row.outcome !== 'check') continue
+      if (row.outcome !== 'check' && row.outcome !== 'byHand') continue
       for (const binding of row.bindings) {
         if (entryIds && !entryIds.has(binding.entryId)) continue
         const outcome = bindingOutcome(row, binding, overrides)

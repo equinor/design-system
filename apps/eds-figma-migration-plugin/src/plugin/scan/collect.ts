@@ -14,8 +14,18 @@ import type {
   TypographyField,
   VariableType,
 } from '../../mapping/types'
+import { INSTANCE_LOCKED_FIELDS } from '../../scan/classify'
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
 import { readLog } from '../apply/log'
+import {
+  effectVariableId,
+  fieldVariableId,
+  InstanceOverrides,
+  paintVariableId,
+  textFillHas,
+  textTypographyHas,
+} from './overrides'
+import type { SameBinding } from './overrides'
 import type {
   PropertyRef,
   RawFillUnder,
@@ -37,6 +47,8 @@ export type CollectOptions = {
   oldKeys: Set<string>
   /** Called every few hundred nodes with the count so far; return true to stop */
   onProgress?: (nodes: number) => boolean | Promise<boolean>
+  /** Called for every unit as it is collected, with its layer; for the scan map in the window */
+  onUnit?: (node: SceneNode, unit: RawUnit) => void
 }
 
 export type Modes = Record<string, string>
@@ -51,6 +63,10 @@ type WalkState = {
   reactions: boolean
   fillUnder?: RawFillUnder
   instanceId?: string
+  /** The outermost instance the node is in */
+  instanceRoot?: InstanceNode
+  /** Child positions from the outermost instance down to the node */
+  instancePath: number[]
   /** True inside a local component, whose nested components are not split off */
   inComponent: boolean
   isRoot: boolean
@@ -71,10 +87,22 @@ type UnitBase = Pick<
   | 'context'
 >
 
+/** Whether a binding on the layer is an override of the instance it is in; false outside instances. */
+type Ownership = (property: PropertyRef, same: SameBinding) => Promise<boolean>
+
 export type FoundInstance = {
   id: string
   name: string
   entryId: string
+  /** Layer names from the entry down to the instance's parent */
+  path: string[]
+}
+
+/** A component's name as the window shows it: its component set's, for a variant. */
+function componentName(component: ComponentNode): string {
+  return component.parent?.type === 'COMPONENT_SET'
+    ? component.parent.name
+    : component.name
 }
 
 const FIELD_KINDS: Record<string, BindingKind> = {
@@ -178,6 +206,7 @@ export class Collector {
     string,
     Promise<Record<string, string>>
   >()
+  private readonly overrides = new InstanceOverrides()
 
   constructor(private readonly options: CollectOptions) {}
 
@@ -195,6 +224,7 @@ export class Collector {
         path: [],
         modes: inheritedModes,
         reactions: false,
+        instancePath: [],
         inComponent,
         isRoot: true,
         modeHolders: [],
@@ -298,6 +328,59 @@ export class Collector {
       this.chains.set(signature, found)
     }
     return found
+  }
+
+  /**
+   * The layer at the same place in the main component: the variable on a
+   * field of it, and, when the layer is an instance of another component,
+   * the swap a reset would undo.
+   */
+  private async mainSide(
+    node: SceneNode,
+    instance: InstanceNode,
+    path: number[],
+    field: string,
+    modes: Modes,
+  ): Promise<{
+    mainVariable?: RawVariable
+    swap?: {
+      from: string
+      to: string
+      property?: { name: string; on: string }
+    }
+  }> {
+    const counterpart = await this.overrides.counterpart(instance, path)
+    if (!counterpart) return {}
+    const id = fieldVariableId(counterpart, field)
+    const mainVariable = id
+      ? await this.rawVariable(id, counterpart, modes)
+      : undefined
+    let swap:
+      | { from: string; to: string; property?: { name: string; on: string } }
+      | undefined
+    if (node.type === 'INSTANCE' && counterpart.type === 'INSTANCE') {
+      const [now, before] = await Promise.all([
+        node.getMainComponentAsync().catch(() => null),
+        counterpart.getMainComponentAsync().catch(() => null),
+      ])
+      if (now && before && now.id !== before.id) {
+        // A swap made through an instance-swap property of the instance
+        // above, such as Icon on .Icon Wrapper, is undone through it.
+        const key = node.componentPropertyReferences?.mainComponent
+        const holder = node.parent
+        swap = {
+          from: componentName(before),
+          to: componentName(now),
+          ...(key && holder?.type === 'INSTANCE'
+            ? { property: { name: key.split('#')[0], on: holder.name } }
+            : {}),
+        }
+      }
+    }
+    return {
+      ...(mainVariable ? { mainVariable } : {}),
+      ...(swap ? { swap } : {}),
+    }
   }
 
   private async rawVariable(
@@ -423,14 +506,33 @@ export class Collector {
         : state.modeHolders
     const instanceId =
       state.instanceId ?? (node.type === 'INSTANCE' ? node.id : undefined)
+    const instanceRoot =
+      state.instanceRoot ?? (node.type === 'INSTANCE' ? node : undefined)
+    const instancePath = state.instanceRoot ? state.instancePath : []
     if (node.type === 'INSTANCE' && !state.instanceId) {
       this.instances.set(node.id, {
         id: node.id,
         name: node.name,
         entryId: state.entryId,
+        path: state.path,
       })
     }
-    if (!instanceId && node.getSharedPluginData(NAMESPACE, LOG_KEY)) {
+    const owns: Ownership = (property, same) =>
+      instanceRoot
+        ? this.overrides.isOverride(
+            instanceRoot,
+            node.id,
+            instancePath,
+            property,
+            same,
+          )
+        : Promise.resolve(false)
+    // A layer in an instance reads the main component's change log until
+    // the instance has its own.
+    const hasLog =
+      node.getSharedPluginData(NAMESPACE, LOG_KEY) !== '' &&
+      (!instanceRoot || this.overrides.ownsPluginData(instanceRoot, node.id))
+    if (hasLog) {
       this.changed.set(
         state.entryId,
         (this.changed.get(state.entryId) ?? 0) + 1,
@@ -454,7 +556,10 @@ export class Collector {
       context,
       ...(modeHolders.length > 0 ? { modeHolders } : {}),
     }
-    const push = (unit: RawUnit) => this.units.push(unit)
+    const push = (unit: RawUnit) => {
+      this.units.push(unit)
+      this.options.onUnit?.(node, unit)
+    }
 
     // Explicit modes
     for (const [collectionId, modeId] of Object.entries(explicit)) {
@@ -479,12 +584,26 @@ export class Collector {
       if (SKIPPED_FIELDS.has(field) || !isAlias(alias)) continue
       const variable = await this.rawVariable(alias.id, node, modes)
       if (!variable) continue
+      const property: PropertyRef = { type: 'field', field }
+      const override = await owns(
+        property,
+        (counterpart) => fieldVariableId(counterpart, field) === alias.id,
+      )
+      // A size the instance overrides on a layer inside it is a manual
+      // fix in Figma: a reset of the layer, so the main component's layer
+      // there decides the target and whether the layer was swapped.
+      const mainSide =
+        override && instanceRoot && INSTANCE_LOCKED_FIELDS.has(field)
+          ? await this.mainSide(node, instanceRoot, instancePath, field, modes)
+          : undefined
       push({
         ...base,
+        ...(override ? { override: true } : {}),
         unit: 'variable',
         kind: FIELD_KINDS[field] ?? 'other',
-        property: { type: 'field', field },
+        property,
         variable,
+        ...mainSide,
       })
     }
 
@@ -499,6 +618,7 @@ export class Collector {
         modes,
         base,
         push,
+        owns,
       )
     } else if (isText) {
       for (const segment of node.getStyledTextSegments(['fills'])) {
@@ -510,6 +630,7 @@ export class Collector {
           modes,
           base,
           push,
+          owns,
           [segment.start, segment.end],
         )
       }
@@ -523,6 +644,7 @@ export class Collector {
         modes,
         base,
         push,
+        owns,
       )
     }
     if ('effects' in node) {
@@ -534,11 +656,18 @@ export class Collector {
           if (!alias) continue
           const variable = await this.rawVariable(alias.id, node, modes)
           if (!variable) continue
+          const property: PropertyRef = { type: 'effect', index, field }
+          const override = await owns(
+            property,
+            (counterpart) =>
+              effectVariableId(counterpart, index, field) === alias.id,
+          )
           push({
             ...base,
+            ...(override ? { override: true } : {}),
             unit: 'variable',
             kind: field === 'color' ? 'effect' : 'other',
-            property: { type: 'effect', index, field },
+            property,
             variable,
           })
         }
@@ -547,7 +676,7 @@ export class Collector {
 
     // Numbers the plugin set in place of a legacy variable, such as border
     // widths, count as migrated while the layer keeps them.
-    if (!instanceId && node.getSharedPluginData(NAMESPACE, LOG_KEY)) {
+    if (hasLog) {
       const counted = new Set<string>()
       for (const entry of readLog(node)) {
         if (entry.new.type !== 'value' || entry.property.type !== 'field') {
@@ -560,6 +689,8 @@ export class Collector {
         counted.add(field)
         push({
           ...base,
+          // Only a change log of the instance's own is read inside one.
+          ...(instanceRoot ? { override: true } : {}),
           unit: 'value',
           property: entry.property,
           value: entry.new.value,
@@ -568,7 +699,9 @@ export class Collector {
     }
 
     // Typography
-    if (node.type === 'TEXT') await this.typography(node, modes, base, push)
+    if (node.type === 'TEXT') {
+      await this.typography(node, modes, base, push, owns)
+    }
 
     // Children
     if ('children' in node) {
@@ -581,6 +714,8 @@ export class Collector {
         reactions,
         fillUnder: fill ?? state.fillUnder,
         instanceId,
+        instanceRoot,
+        instancePath,
         inComponent:
           state.inComponent ||
           node.type === 'COMPONENT' ||
@@ -588,7 +723,12 @@ export class Collector {
         isRoot: false,
         modeHolders,
       }
-      for (const child of node.children) await this.walk(child, childState)
+      for (const [index, child] of node.children.entries()) {
+        await this.walk(child, {
+          ...childState,
+          instancePath: instanceRoot ? [...instancePath, index] : [],
+        })
+      }
     }
   }
 
@@ -600,6 +740,7 @@ export class Collector {
     modes: Modes,
     base: UnitBase,
     push: (unit: RawUnit) => void,
+    owns: Ownership,
     range?: [number, number],
   ): Promise<void> {
     for (const [index, paint] of paints.entries()) {
@@ -611,7 +752,19 @@ export class Collector {
       const property: PropertyRef = range
         ? { type: 'paint', field, index, range }
         : { type: 'paint', field, index }
-      push({ ...base, unit: 'variable', kind, property, variable })
+      const override = await owns(property, (counterpart) =>
+        range
+          ? textFillHas(counterpart, index, alias.id)
+          : paintVariableId(counterpart, field, index) === alias.id,
+      )
+      push({
+        ...base,
+        ...(override ? { override: true } : {}),
+        unit: 'variable',
+        kind,
+        property,
+        variable,
+      })
     }
   }
 
@@ -620,6 +773,7 @@ export class Collector {
     modes: Modes,
     base: UnitBase,
     push: (unit: RawUnit) => void,
+    owns: Ownership,
   ): Promise<void> {
     const segments = node.getStyledTextSegments([
       'fontName',
@@ -629,6 +783,7 @@ export class Collector {
     ])
     for (const segment of segments) {
       const fields: Partial<Record<TypographyField, RawVariable>> = {}
+      const variableIds: Record<string, string> = {}
       const segmentBound = (segment.boundVariables ?? {}) as Record<
         string,
         VariableAlias | undefined
@@ -638,19 +793,31 @@ export class Collector {
           continue
         }
         const variable = await this.rawVariable(alias.id, node, modes)
-        if (variable) fields[field as TypographyField] = variable
+        if (variable) {
+          fields[field as TypographyField] = variable
+          variableIds[field] = alias.id
+        }
       }
       const textStyle = segment.textStyleId
         ? ((await this.textStyle(segment.textStyleId)) ?? undefined)
         : undefined
       if (Object.keys(fields).length === 0 && !textStyle) continue
+      const property: PropertyRef =
+        segments.length > 1
+          ? { type: 'typography', range: [segment.start, segment.end] }
+          : { type: 'typography' }
+      const override = await owns(property, (counterpart) =>
+        textTypographyHas(
+          counterpart,
+          variableIds,
+          segment.textStyleId || undefined,
+        ),
+      )
       push({
         ...base,
+        ...(override ? { override: true } : {}),
         unit: 'typography',
-        property:
-          segments.length > 1
-            ? { type: 'typography', range: [segment.start, segment.end] }
-            : { type: 'typography' },
+        property,
         fields,
         font: {
           family: segment.fontName.family,

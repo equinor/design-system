@@ -4,15 +4,20 @@
  */
 import { describe, expect, it } from 'vitest'
 import { NEW, NEW_TEXT_STYLES, OLD } from '../src/mapping/inventory'
-import { classifyUnit } from '../src/scan/classify'
+import {
+  classifyUnit,
+  classifyUnits,
+  manualFixTarget,
+} from '../src/scan/classify'
 import { packFixture, unpackFixture } from '../src/scan/fixture'
 import {
+  addToCounts,
   emptyCounts,
   formatHealth,
   healthOf,
   summariseEntries,
 } from '../src/scan/summary'
-import type { RawUnit, RawVariable } from '../src/scan/types'
+import type { BindingRecord, RawUnit, RawVariable } from '../src/scan/types'
 import { ROOT } from './helpers'
 
 const context = (names: string[], extra = {}) => ({
@@ -86,6 +91,155 @@ describe('classifyUnit', () => {
     )
     expect(record).toMatchObject({ category: 'inInstance', instanceId: '1:9' })
     expect(record?.candidates).toBeUndefined()
+  })
+
+  it('proposes a target for a legacy variable an instance overrides', () => {
+    const record = classifyUnit(
+      fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface'), {
+        instanceId: '1:9',
+        override: true,
+      }),
+    )
+    expect(record).toMatchObject({
+      category: 'sure',
+      candidates: ['background/surface'],
+      instanceId: '1:9',
+      override: true,
+    })
+  })
+
+  // EDS Core Components, Text Field: the swapped error icon inside the
+  // .Icon Wrapper instance overrides its size with `Selectable/Icon size`.
+  const iconSize = (extra: Partial<RawUnit> = {}): RawUnit =>
+    ({
+      ...base,
+      nodeId: 'I385:1962;66:4158',
+      nodeName: 'error filled',
+      nodeType: 'INSTANCE',
+      unit: 'variable',
+      kind: 'size',
+      property: { type: 'field', field: 'width' },
+      variable: raw(OLD.spacingSemantic, 'Selectable/Icon size', {
+        type: 'FLOAT',
+        value: 16,
+        chain: [
+          { collectionKey: OLD.fontSize, name: 'typography/icon-size' },
+          { collectionKey: OLD.density, name: 'sizing/icon/xs' },
+        ],
+      }),
+      context: context(['error filled', 'Error icon'], {
+        nodeType: 'INSTANCE',
+      }),
+      instanceId: '385:1962',
+      override: true,
+      ...extra,
+    }) as RawUnit
+
+  it('flags a size an instance overrides on a layer inside it as a Manual fix', () => {
+    const record = classifyUnit(iconSize())
+    expect(record).toMatchObject({
+      category: 'byHand',
+      rule: 'instance/size-override',
+      override: true,
+    })
+    expect(record?.reason).toContain('Figma lets nobody change the size')
+    expect(record?.reason).toContain('Reset all changes')
+  })
+
+  it('names the variable the main component uses there, which the reset gives', () => {
+    const record = classifyUnit(
+      iconSize({
+        mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+        swap: { from: 'Placeholder Icon', to: 'error filled' },
+      } as Partial<RawUnit>),
+    )
+    // The fix the plugin can make once a designer accepts it in Review
+    expect(record).toMatchObject({
+      category: 'byHand',
+      candidates: ['reset:spacing/md'],
+    })
+    expect(manualFixTarget(record as BindingRecord)).toBe('spacing/md')
+    expect(record?.reason).toContain(
+      'It turns back into Placeholder Icon and takes spacing/md from the main component',
+    )
+    expect(record?.reason).toContain('swap it to error filled again')
+  })
+
+  it('gives the steps through the instance-swap property when the swap was made with one', () => {
+    const record = classifyUnit(
+      iconSize({
+        mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+        swap: {
+          from: 'Placeholder Icon',
+          to: 'error filled',
+          property: { name: 'Icon', on: 'Error icon' },
+        },
+      } as Partial<RawUnit>),
+    )
+    expect(record?.reason).toContain(
+      'set its Icon property to Placeholder Icon and back to error filled',
+    )
+    expect(record?.candidates).toEqual(['reset:spacing/md'])
+  })
+
+  it('says to migrate the main component first when it uses a legacy variable too', () => {
+    const record = classifyUnit(
+      iconSize({
+        mainVariable: raw(OLD.spacingSemantic, 'Selectable/Icon size', {
+          type: 'FLOAT',
+        }),
+      } as Partial<RawUnit>),
+    )
+    expect(record?.category).toBe('byHand')
+    expect(record?.reason).toContain('migrate the main component first')
+    // A reset would give the legacy variable back, so the plugin offers no fix.
+    expect(record?.candidates).toEqual([])
+  })
+
+  it('offers no plugin fix on a layer that is not an instance', () => {
+    const record = classifyUnit(
+      iconSize({
+        nodeType: 'FRAME',
+        mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+      } as Partial<RawUnit>),
+    )
+    expect(record).toMatchObject({ category: 'byHand', candidates: [] })
+  })
+
+  it('lists the changes a reset removes, with the values to set again', () => {
+    const icon = iconSize({
+      mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+    } as Partial<RawUnit>)
+    const colour = fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface'), {
+      nodeId: 'I385:1962;66:4158;72:4046',
+      nodeName: 'icon',
+      instanceId: '385:1962',
+      override: true,
+    })
+    const elsewhere = fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface'), {
+      nodeId: 'I385:1962;99:1',
+      nodeName: 'label',
+      instanceId: '385:1962',
+      override: true,
+    })
+    const records = classifyUnits([icon, colour, elsewhere])
+    const fix = records.find((record) => record.category === 'byHand')
+    expect(fix?.reason).toContain(
+      'icon, fill: background/surface (now Bg/Neutral/Surface)',
+    )
+    expect(fix?.reason).not.toContain('label')
+  })
+
+  it('keeps the rules for a size overridden on the instance itself', () => {
+    const record = classifyUnit(iconSize({ nodeId: '385:1962' }))
+    expect(record?.rule).not.toBe('instance/size-override')
+    expect(record?.category).not.toBe('inInstance')
+  })
+
+  it('reports a size the instance takes from its main component as inside instances', () => {
+    expect(classifyUnit(iconSize({ override: undefined }))).toMatchObject({
+      category: 'inInstance',
+    })
   })
 
   it('counts text set in an EDS Foundation text style as migrated', () => {
@@ -192,6 +346,24 @@ describe('health', () => {
     expect(formatHealth(null)).toBe('–')
   })
 
+  it('counts a migrated override as outside instances', () => {
+    const counts = emptyCounts()
+    const migrated = classifyUnit(
+      fill(raw(NEW.semantic, 'background/surface'), {
+        instanceId: '1:9',
+        override: true,
+      }),
+    )
+    const inherited = classifyUnit(
+      fill(raw(NEW.semantic, 'background/surface'), { instanceId: '1:9' }),
+    )
+    if (!migrated || !inherited) throw new Error('not classified')
+    addToCounts(counts, migrated)
+    addToCounts(counts, inherited)
+    expect(counts.migrated).toBe(2)
+    expect(counts.migratedInInstances).toBe(1)
+  })
+
   it('sums records per entry and counts the old instances in each', () => {
     const records = [
       classifyUnit(fill(raw(NEW.semantic, 'background/surface'))),
@@ -270,6 +442,11 @@ describe('fixture format', () => {
         instanceId: '1:9',
         context: context(['Card']),
       },
+      fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface'), {
+        nodeId: 'I1:9;2:1',
+        instanceId: '1:9',
+        override: true,
+      }),
     ]
     const packed = packFixture(
       {
@@ -279,7 +456,7 @@ describe('fixture format', () => {
       },
       units,
     )
-    expect(Object.keys(packed.variables)).toHaveLength(2)
+    expect(Object.keys(packed.variables)).toHaveLength(3)
     expect(unpackFixture(packed)).toEqual(units)
   })
 })

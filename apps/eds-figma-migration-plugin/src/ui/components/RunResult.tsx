@@ -23,9 +23,10 @@ const plural = (count: number, one: string, many = `${one}s`) =>
 
 function summary(run: Run): string {
   if (run.kind === 'apply') {
-    const { values, numbers, modes, layers, modesKept } = run.result
+    const { values, numbers, modes, layers, modesKept, resets } = run.result
     // Test session finding 10: values, widths and modes are told apart.
     const done = [
+      resets > 0 && `reset ${plural(resets, 'layer')} inside instances`,
       values > 0 && `migrated ${plural(values, 'value')}`,
       numbers > 0 && `set ${plural(numbers, 'border width')} as numbers`,
       modes > 0 && `removed or replaced ${plural(modes, 'legacy mode')}`,

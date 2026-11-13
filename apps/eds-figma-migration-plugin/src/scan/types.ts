@@ -79,11 +79,36 @@ export type RawUnit = {
   property: PropertyRef
   /** Id of the outermost instance the node is in, or the node itself when it is an instance */
   instanceId?: string
+  /**
+   * Inside an instance: the instance sets this value itself, as an override,
+   * instead of taking it from its main component, so it can change here.
+   */
+  override?: true
   /** Ids of the node and its ancestors in the entry that set explicit modes, outermost first */
   modeHolders?: string[]
   context: RawContext
 } & (
-  | { unit: 'variable'; kind: BindingKind; variable: RawVariable }
+  | {
+      unit: 'variable'
+      kind: BindingKind
+      variable: RawVariable
+      /**
+       * For a size an instance overrides on a layer inside it: the variable
+       * the layer at the same place in the main component binds, if any
+       */
+      mainVariable?: RawVariable
+      /**
+       * For such a layer that is a swapped instance: the component the main
+       * component has there, which a reset goes back to, and the one it was
+       * swapped to
+       */
+      swap?: {
+        from: string
+        to: string
+        /** The instance-swap property it was swapped with, and the instance that has it */
+        property?: { name: string; on: string }
+      }
+    }
   | {
       unit: 'typography'
       fields: Partial<Record<TypographyField, RawVariable>>
@@ -111,13 +136,19 @@ export type Category =
   | 'migrated'
   | 'sure'
   | 'check'
+  /**
+   * Manual fix: a legacy variable the instance overrides where Figma lets
+   * nobody change it, such as the size of a layer inside an instance. The
+   * plugin flags it and says how to reset it in Figma; Apply leaves it.
+   */
+  | 'byHand'
   | 'none'
   /**
    * A designer chose to keep the legacy variable, so Apply leaves the value
    * out. Never set by the scan, only by a choice (mapping.ts, categoryAfter).
    */
   | 'excluded'
-  /** An old variable inside an instance, or on an instance node */
+  /** A legacy variable an instance takes from its main component */
   | 'inInstance'
   /** Bound to another library or to a local variable; left out of the score */
   | 'other'
@@ -126,6 +157,7 @@ export const SCORED_CATEGORIES = [
   'migrated',
   'sure',
   'check',
+  'byHand',
   'none',
   'excluded',
   'inInstance',
@@ -135,7 +167,7 @@ export type ScoredCategory = (typeof SCORED_CATEGORIES)[number]
 
 export type Counts = Record<ScoredCategory, number> & {
   other: number
-  /** Of `migrated`: values inside instances, which follow their main component */
+  /** Of `migrated`: values inside instances that follow their main component, without overrides */
   migratedInInstances?: number
 }
 
@@ -183,6 +215,8 @@ export type BindingRecord = {
   reason?: string
   rule?: string
   instanceId?: string
+  /** Inside an instance: a value the instance overrides, which the plugin can change there */
+  override?: true
   /** Ids of the node and its ancestors in the entry that set explicit modes */
   modeHolders?: string[]
   /**
@@ -260,6 +294,19 @@ export type OldInstance = {
     /** For a main component in this file, to go to it */
     id?: string
   }
+}
+
+/** An instance inside a main component, for the list in the component's inspector. */
+export type ComponentInstance = {
+  id: string
+  name: string
+  /** Layer names from the main component down to the instance's parent */
+  path: string[]
+  mainComponent?: OldInstance['mainComponent']
+  /** Legacy values the instance overrides: they change in this component */
+  overridden: number
+  /** Legacy values it takes from its main component: they change there */
+  fromMain: number
 }
 
 export type ScanSummary = {

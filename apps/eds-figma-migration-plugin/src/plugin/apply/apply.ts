@@ -6,6 +6,7 @@
  */
 import { NEW } from '../../mapping/inventory'
 import { literalValue } from '../../mapping/literal'
+import { isResetTarget, resetVariable } from '../../mapping/reset'
 import { MAPPING_VERSION } from '../../mapping/version'
 import {
   modesToKeep,
@@ -18,13 +19,37 @@ import type { Overrides } from '../../scan/mapping'
 import type { BindingRecord } from '../../scan/types'
 import type { LogEntry } from '../../shared/changelog'
 import type { ChangeFailure, ApplyResult } from '../../shared/messages'
-import { appendLog } from './log'
+import { appendLog, logIsInherited } from './log'
+import { resetLayer } from './reset'
 import { LIBRARY_MISSING, Targets } from './targets'
 
 export class LayerChanged extends Error {
   constructor() {
     super('The layer has changed since the scan. Scan again.')
   }
+}
+
+/**
+ * Figma ignores a plugin that binds a variable to the width or height of a
+ * layer inside an instance, without an error, so every bound field is read
+ * back after it is set.
+ */
+export class NotBound extends Error {
+  constructor() {
+    super(
+      'Figma does not let a plugin bind a variable here, such as the width or height of a layer inside an instance. Change it in Figma.',
+    )
+  }
+}
+
+/** Throws NotBound unless the field is now bound to the variable. */
+export function expectBound(
+  node: SceneNode,
+  field: string,
+  variable: Variable,
+): void {
+  const bound = (node.boundVariables ?? {}) as Record<string, unknown>
+  if (aliasId(bound[field]) !== variable.id) throw new NotBound()
 }
 
 /** Loads fonts once per run; text cannot change without its fonts. */
@@ -73,6 +98,16 @@ function aliasId(value: unknown): string | undefined {
     : undefined
 }
 
+/** The variable on the field a record is about, before any change. */
+function fieldAlias(node: BaseNode, record: BindingRecord): string | undefined {
+  if (record.property.type !== 'field') return undefined
+  const bound = ((node as Bindable).boundVariables ?? {}) as Record<
+    string,
+    unknown
+  >
+  return aliasId(bound[record.property.field])
+}
+
 function expectOld(record: BindingRecord, currentId: string | undefined) {
   if (!record.oldVariable || currentId !== record.oldVariable.id) {
     throw new LayerChanged()
@@ -99,6 +134,41 @@ async function applyBinding(
   const { record, target, outcome } = change
   const { property } = record
   const entry = { property, outcome, mappingVersion: MAPPING_VERSION, at }
+
+  // A Manual fix a designer accepted: the layer has been reset already
+  // (resetLayer, once per layer), so this checks the size it now has.
+  if (isResetTarget(target)) {
+    if (property.type !== 'field') throw new LayerChanged()
+    const now = fieldAlias(node, record)
+    const name = resetVariable(target)
+    if (name) {
+      const variable = await targets.variable(name)
+      if (now !== variable.id) {
+        const size = (node as unknown as Record<string, unknown>)[
+          property.field
+        ]
+        throw new Error(
+          `The plugin reset the layer and swapped it back, but Figma did not keep ${name} on it: the size is ${String(size)}px ${now ? 'with another variable' : 'without a variable'}. Undo the run with Ctrl or Cmd+Z, or keep it; the value is a Manual fix again.`,
+        )
+      }
+      return {
+        ...entry,
+        old: oldVariableLog(record),
+        new: { type: 'variable', key: variable.key, name: variable.name },
+      }
+    }
+    if (now !== undefined) {
+      throw new Error(
+        'The reset did not remove the legacy variable here. Scan again.',
+      )
+    }
+    const value = (node as unknown as Record<string, unknown>)[property.field]
+    return {
+      ...entry,
+      old: oldVariableLog(record),
+      new: { type: 'value', value: typeof value === 'number' ? value : null },
+    }
+  }
 
   if (property.type === 'typography') {
     if (node.type !== 'TEXT') throw new LayerChanged()
@@ -131,8 +201,18 @@ async function applyBinding(
     const bindable = node as Bindable & Record<string, unknown>
     const bound = (bindable.boundVariables ?? {}) as Record<string, unknown>
     expectOld(record, aliasId(bound[property.field]))
+    // Width and height have no setter. The layer keeps its size when the
+    // variable is removed, which is how a size inside an instance changes.
+    const keepsSize = property.field === 'width' || property.field === 'height'
+    if (
+      keepsSize &&
+      (literal === null ||
+        Math.abs(Number(bindable[property.field]) - literal) > 0.01)
+    ) {
+      throw new LayerChanged()
+    }
     bindable.setBoundVariable(property.field as VariableBindableNodeField, null)
-    bindable[property.field] = literal
+    if (!keepsSize) bindable[property.field] = literal
     return {
       ...entry,
       old: oldVariableLog(record),
@@ -155,6 +235,7 @@ async function applyBinding(
       property.field as VariableBindableNodeField,
       variable,
     )
+    expectBound(bindable, property.field, variable)
     return { ...entry, old: oldVariableLog(record), new: newLog }
   }
 
@@ -286,6 +367,8 @@ export async function applyChanges(
   const layers = new Set<string>()
   const failed: ChangeFailure[] = []
   let modesKept = 0
+  let resets = 0
+  const failedFixes: string[] = []
   let values = 0
   let numbers = 0
   let modeChanges = 0
@@ -304,6 +387,9 @@ export async function applyChanges(
   )
   const modes = plan.filter((change) => change.record.property.type === 'mode')
 
+  // Layers reset in this run, and the ones whose reset failed: a layer is
+  // reset once, for its width and height together.
+  const reset = new Map<string, Error | null>()
   for (const change of bindings) {
     try {
       const found = await node(change.record.nodeId)
@@ -315,6 +401,28 @@ export async function applyChanges(
       ) {
         throw new Error('The layer is no longer in the file. Scan again.')
       }
+      if (isResetTarget(change.target)) {
+        if (!reset.has(found.id)) {
+          try {
+            expectOld(change.record, fieldAlias(found, change.record))
+            await resetLayer(found as SceneNode)
+            reset.set(found.id, null)
+            resets += 1
+            // The layer has changed, whatever the check below says.
+            layers.add(found.id)
+          } catch (error) {
+            reset.set(
+              found.id,
+              error instanceof Error ? error : new Error(String(error)),
+            )
+          }
+        }
+        const failedReset = reset.get(found.id)
+        if (failedReset) throw failedReset
+      }
+      // Read before the change: the first log entry on a layer inside an
+      // instance gives the instance its own plugin data there.
+      const inherited = logIsInherited(found)
       const entry = await applyBinding(
         change,
         found as SceneNode,
@@ -322,7 +430,7 @@ export async function applyChanges(
         fonts,
         at,
       )
-      appendLog(found, entry)
+      appendLog(found, entry, inherited)
       changed.add(change.record.id)
       layers.add(found.id)
       if (entry.new.type === 'value') numbers += 1
@@ -333,6 +441,7 @@ export async function applyChanges(
         throw error
       }
       failed.push(failure(change.record, error))
+      if (isResetTarget(change.target)) failedFixes.push(change.record.id)
     }
     await step()
   }
@@ -359,7 +468,7 @@ export async function applyChanges(
         at,
       )
       if (entry) {
-        appendLog(found, entry)
+        appendLog(found, entry, logIsInherited(found))
         changed.add(change.record.id)
         layers.add(found.id)
         modeChanges += 1
@@ -385,6 +494,8 @@ export async function applyChanges(
     modes: modeChanges,
     layers: layers.size,
     modesKept,
+    resets,
+    failedFixes,
     failed,
   }
 }

@@ -28,8 +28,14 @@ export const NO_OVERRIDES: Overrides = { records: {}, rows: {} }
 /** Categories the Mapping view lists: the ones a designer can still decide on. */
 const MAPPED: BindingRecord['category'][] = ['sure', 'check', 'none']
 
+/**
+ * Whether a designer can decide on the binding. A Manual fix counts when the
+ * plugin can make it: it is accepted in Review, never applied without that.
+ */
 export function isMappable(record: BindingRecord): boolean {
-  return MAPPED.includes(record.category) && record.oldKey !== undefined
+  if (record.oldKey === undefined) return false
+  if (record.category === 'byHand') return (record.candidates?.length ?? 0) > 0
+  return MAPPED.includes(record.category)
 }
 
 /** The key of the mapping row a record belongs to. */
@@ -113,11 +119,16 @@ export type MappingBinding = {
   scheme?: ColorScheme
   property: BindingRecord['property']
   kind?: BindingKind
+  /** Inside an instance, which overrides the value itself */
+  override?: true
+  /** For a Manual fix: how to fix this layer, which differs per layer */
+  reason?: string
 }
 
 export type MappingRow = {
   key: string
-  outcome: Outcome
+  /** The rule's outcome, or byHand for a Manual fix */
+  outcome: Outcome | 'byHand'
   proposal?: string
   candidates: string[]
   /** One reason, from the first binding in the row */
@@ -163,7 +174,7 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
     if (!row) {
       row = {
         key,
-        outcome: record.category as Outcome,
+        outcome: record.category as MappingRow['outcome'],
         proposal: record.candidates?.[0],
         candidates: record.candidates ?? [],
         reason: record.reason,
@@ -190,6 +201,10 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
       ...(record.scheme ? { scheme: record.scheme } : {}),
       property: record.property,
       kind: record.kind,
+      ...(record.override ? { override: true as const } : {}),
+      ...(record.category === 'byHand' && record.reason
+        ? { reason: record.reason }
+        : {}),
     })
   }
   for (const group of groups.values()) {

@@ -141,6 +141,42 @@ body {
   align-items: center;
 }
 
+/* Select pages and the page count, beside File */
+.pages-line {
+  display: inline-flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.pages-count {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The page picker: one checkbox per page, dividers as lines as in Figma */
+.pages-dialog {
+  & p {
+    margin: 0;
+  }
+
+  & .pages-all {
+    padding-block-end: var(--eds-spacing-xs);
+    border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  }
+}
+
+.pages-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pages-divider {
+  margin-block: var(--eds-spacing-2xs);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
 .export-file {
   display: flex;
   flex-direction: column;
@@ -182,13 +218,457 @@ code {
   gap: var(--eds-spacing-xs);
 }
 
-.scan-progress {
+/*
+ * Scan loader (ScanLoader.tsx): a map of the page being scanned, with the
+ * frames and layers as outlines that fill in when they are read, a box on
+ * the layer being read, and dots where EDS values are found. The first scan
+ * gets the whole window, a later one a card.
+ *
+ * Colours: the accent for what the scan is doing, and the dots in the same
+ * colours as the health bar's Migrated (success) and neutral for legacy
+ * values, which are not sorted into Ready, Needs check or No equivalent
+ * until the scan ends. EDS has no motion tokens, so the durations are local
+ * (BETA-GAPS.md). Every animation is inside the no-preference query at the
+ * end, so reduced motion keeps the map and the numbers but nothing moves.
+ */
+.scan-loader {
   display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-md);
+
+  &[data-variant='rescan'] {
+    gap: var(--eds-spacing-sm);
+    padding: var(--eds-spacing-sm);
+    background-color: var(--eds-background-surface);
+    border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+    border-radius: var(--eds-corner-radius-rounded);
+  }
+}
+
+.scan-loader-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  min-inline-size: 0;
+}
+
+.scan-loader-eyebrow {
+  margin: 0;
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.scan-loader-title {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-xl-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-xl-line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The map: a canvas with Figma's dot grid, and the page drawn to fit it. */
+.scan-map {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  block-size: clamp(160px, 36vh, 320px);
+  /* The canvas inside sizes itself from this box (cqw, cqh). */
+  container-type: size;
+  background-color: var(--eds-background-surface);
+  background-image: radial-gradient(
+    circle,
+    var(--eds-border-non-interactive-neutral-muted) 1px,
+    transparent 1.5px
+  );
+  background-size: var(--eds-spacing-md) var(--eds-spacing-md);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  /* The card's thumbnail; the size is the plugin's own, not a token. */
+  &[data-size='small'] {
+    flex-shrink: 0;
+    inline-size: 96px;
+    block-size: 60px;
+    background-image: none;
+  }
+
+  /* Before the page is loaded: a sheen across the empty canvas. */
+  &[data-loading]::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      var(--eds-background-non-interactive-neutral-muted),
+      transparent
+    );
+    transform: translateX(-100%);
+  }
+}
+
+.scan-map-canvas {
+  position: relative;
+  aspect-ratio: var(--_aspect);
+  inline-size: min(100cqw, 100cqh * var(--_aspect));
+
+  & svg {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: visible;
+  }
+
+  & rect {
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+.scan-map-sections rect {
+  fill: var(--eds-background-non-interactive-neutral-muted);
+  stroke: var(--eds-border-non-interactive-neutral-muted);
+}
+
+.scan-map-tiles rect {
+  fill: var(--eds-background-surface);
+  stroke: var(--eds-border-non-interactive-neutral-default);
+}
+
+.scan-map-read rect {
+  fill: var(--eds-background-non-interactive-accent-muted);
+  stroke: var(--eds-border-non-interactive-accent-default);
+}
+
+.scan-map-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* One pixel per value found, so the dots fill the layers in as a texture
+   instead of standing out one by one. */
+.scan-dot {
+  --_size: 1px;
+
+  position: absolute;
+  inline-size: var(--_size);
+  block-size: var(--_size);
+  margin: calc(var(--_size) / -2) 0 0 calc(var(--_size) / -2);
+  background-color: var(--eds-background-non-interactive-success-emphasis);
+
+  &[data-legacy] {
+    background-color: var(--eds-background-non-interactive-neutral-emphasis);
+  }
+}
+
+/* The layer being read: an accent box with a scan line running down it. */
+.scan-focus {
+  position: absolute;
+  overflow: hidden;
+  min-inline-size: 6px;
+  min-block-size: 6px;
+  background-color: color-mix(
+    in srgb,
+    var(--eds-background-non-interactive-accent-emphasis) 12%,
+    transparent
+  );
+  border: 2px solid var(--eds-border-non-interactive-accent-emphasis);
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px
+    color-mix(
+      in srgb,
+      var(--eds-border-non-interactive-accent-emphasis) 25%,
+      transparent
+    );
+
+  &::after {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    block-size: 40%;
+    content: '';
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      color-mix(
+        in srgb,
+        var(--eds-background-non-interactive-accent-emphasis) 45%,
+        transparent
+      ),
+      transparent
+    );
+    transform: translateY(-100%);
+  }
+}
+
+/* The progress bar. The Beta has no progress bar (BETA-GAPS.md). */
+.scan-bar {
+  position: relative;
+  overflow: hidden;
+  block-size: var(--eds-spacing-xs);
+  background-color: var(--eds-background-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-pill);
+
+  &[data-size='small'] {
+    block-size: var(--eds-spacing-3xs);
+  }
+}
+
+.scan-bar-fill {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+  background-color: var(--eds-background-non-interactive-accent-emphasis);
+  border-radius: inherit;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--eds-text-on-emphasis-accent) 45%, transparent),
+      transparent
+    );
+    transform: translateX(-100%);
+  }
+}
+
+/* Where each page of a file scan starts on the bar. */
+.scan-bar-page {
+  position: absolute;
+  inset-block: 0;
+  inline-size: 2px;
+  margin-inline-start: -1px;
+  background-color: var(--eds-background-canvas);
+}
+
+/* The numbers: the lead one large, the others as labels beside it. */
+.scan-loader-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-sm) var(--eds-spacing-xl);
+  align-items: flex-end;
+  margin: 0;
+
+  & > div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--eds-spacing-3xs);
+  }
+
+  & dt {
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+    color: var(--eds-text-secondary);
+  }
+
+  & dd {
+    margin: 0;
+    font-size: var(--eds-typography-label-lg-font-size);
+    font-weight: var(--eds-font-weight-medium);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--eds-typography-label-lg-line-height);
+  }
+
+  & [data-lead] dd {
+    font-family: var(--eds-font-family-header);
+    font-size: var(--eds-typography-header-3xl-font-size);
+    line-height: var(--eds-typography-header-3xl-line-height);
+  }
+}
+
+.scan-loader-footer {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--eds-spacing-sm);
   align-items: center;
   justify-content: space-between;
+}
+
+.scan-loader-legend {
+  display: flex;
+  gap: var(--eds-spacing-md);
+  margin: 0;
+  padding: 0;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-2xs);
+    align-items: center;
+  }
+
+  /* The legend's swatch is larger than the map's dots, so it can be seen. */
+  & .scan-dot {
+    --_size: 6px;
+
+    position: static;
+    margin: 0;
+    border-radius: var(--eds-corner-radius-pill);
+  }
+}
+
+.scan-loader-row {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+}
+
+.scan-loader-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+
+  /* The page name stays on one line; the counts under it may wrap. */
+  & > .scan-loader-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.scan-loader-line {
   font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
   line-height: var(--eds-typography-label-md-line-height);
+}
+
+/* The results under the scan card while a later scan runs. */
+.results[data-updating] {
+  opacity: 0.4;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .results {
+    transition: opacity 200ms ease-out;
+  }
+
+  .scan-loader[data-variant='initial'] {
+    animation: scan-rise 450ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .scan-loader[data-variant='rescan'] {
+    animation: scan-rise 250ms ease-out both;
+  }
+
+  .scan-map[data-loading]::after {
+    animation: scan-sheen 1.4s ease-in-out infinite;
+  }
+
+  .scan-map-canvas {
+    animation: scan-map-in 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* A layer flashes in the accent as it is read. */
+  .scan-map-read rect {
+    animation: scan-tile-read 700ms ease-out both;
+  }
+
+  .scan-dot {
+    animation: scan-dot-in 400ms ease-out both;
+  }
+
+  .scan-loader-legend .scan-dot {
+    animation: none;
+  }
+
+  /* The box glides from one layer to the next. */
+  .scan-focus {
+    transition:
+      left 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      top 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      width 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      height 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &::after {
+      animation: scan-beam 1.1s linear infinite;
+    }
+  }
+
+  .scan-bar-fill {
+    transition: inline-size 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &::after {
+      animation: scan-sheen 1.6s ease-in-out infinite;
+    }
+  }
+
+  /* The end of the first scan: the map settles and the health bar grows. */
+  .scan-loader[data-done] {
+    & .scan-map-canvas {
+      animation: scan-done 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    & .health-bar {
+      transform-origin: left;
+      animation: scan-grow 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+  }
+}
+
+@keyframes scan-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes scan-map-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes scan-tile-read {
+  from {
+    fill: var(--eds-background-non-interactive-accent-emphasis);
+  }
+}
+
+@keyframes scan-dot-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes scan-beam {
+  to {
+    transform: translateY(250%);
+  }
+}
+
+@keyframes scan-sheen {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes scan-done {
+  40% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes scan-grow {
+  from {
+    transform: scaleX(0);
+  }
 }
 
 /* Health bar. One segment per category, in the non-interactive fills of the
@@ -258,6 +738,15 @@ code {
 
   &[data-category='inInstance'] {
     --_color: var(--eds-background-non-interactive-neutral-emphasis);
+  }
+
+  /* Manual fix: work left for the designer in Figma, warning like Needs
+     check, drawn as an outline because the plugin will not apply it. */
+  &[data-category='byHand'] {
+    --_color: transparent;
+
+    box-shadow: inset 0 0 0 1.5px
+      var(--eds-border-non-interactive-warning-emphasis);
   }
 
   /* A legacy mode waiting for the layers below it. It counts as No
@@ -667,6 +1156,23 @@ code {
   font-weight: var(--eds-font-weight-medium);
   line-height: var(--eds-typography-label-sm-line-height);
   color: var(--eds-text-on-default-info);
+}
+
+/* Inside an instance: overridden there, or taken from the main component.
+   An override is the one the plugin can change, so it reads stronger. */
+.origin-label {
+  --_weight: var(--eds-font-weight-medium);
+  --_color: var(--eds-text-primary);
+
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--_weight);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--_color);
+
+  &[data-origin='main'] {
+    --_weight: var(--eds-font-weight-normal);
+    --_color: var(--eds-text-secondary);
+  }
 }
 
 /* Target picker */
@@ -1362,6 +1868,22 @@ code {
 }
 
 /*
+ * The tooltips that give a reason hold a sentence or two. The Beta Tooltip
+ * sets width: max-content, so the text stays on one line, and when no side
+ * of the trigger has room for that line, the tooltip keeps its preferred side
+ * and runs out of the window. Here the text wraps to the room on the side the
+ * tooltip is placed on, up to a width that stays readable in a wide window.
+ * The minimum width stops it from wrapping into a narrow column above or
+ * below a trigger at the edge of the window: that side does not fit, so the
+ * tooltip moves on to a side with more room.
+ */
+.reason-tooltip {
+  inline-size: fit-content;
+  min-inline-size: 240px;
+  max-inline-size: 360px;
+}
+
+/*
  * The introduction. Equinor's own look: the Equinor typeface for the
  * heading, a moss green band with a picture made of the window's own parts,
  * and plenty of space. Only EDS Beta tokens, so it follows light and dark.
@@ -1607,8 +2129,10 @@ code {
   margin-inline-start: auto;
 }
 
-/* Settings: sections of switches and buttons */
-.settings-dialog {
+/* Settings: sections of switches and buttons. The page picker scrolls the
+   same way, for a file with many pages. */
+.settings-dialog,
+.pages-dialog {
   inline-size: min(calc(100vw - 2 * var(--eds-spacing-md)), 420px);
   max-block-size: calc(100vh - 2 * var(--eds-spacing-md));
 

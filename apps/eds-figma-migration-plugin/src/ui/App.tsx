@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import { Badge, Banner, Button, Icon } from '@equinor/eds-core-react/next'
 import { tune } from '@equinor/eds-icons'
 import { schemesOf } from '../mapping/scheme'
@@ -20,9 +20,11 @@ import {
   healthOutsideInstances,
   oldCount,
   scoredTotal,
+  sumCounts,
 } from '../scan/summary'
 import type {
   BindingRecord,
+  ComponentInstance,
   EntrySummary,
   OldInstance,
   ScanSummary,
@@ -33,11 +35,12 @@ import type {
   OverrideChange,
   PluginToUi,
   SavedHealth as Saved,
-  ScanProgress,
   Scope,
 } from '../shared/messages'
 import { DEFAULT_SETTINGS } from '../shared/window'
 import type { DisplaySettings } from '../shared/window'
+import { pagesToScan, scannablePages } from '../shared/pages'
+import type { FilePage } from '../shared/pages'
 import { ApplyActions } from './components/ApplyActions'
 import { BulkBar } from './components/BulkBar'
 import { DevExport } from './components/DevExport'
@@ -50,6 +53,7 @@ import {
   MainComponentsView,
   mainComponentsElsewhere,
 } from './components/MainComponentsView'
+import type { PartialFile } from './components/MainComponentsView'
 import { MappingView } from './components/MappingView'
 import type { ChangesTab } from './components/MappingView'
 import { ReviewView } from './components/ReviewView'
@@ -60,6 +64,9 @@ import { ResizeHandle } from './components/ResizeHandle'
 import { RunResult } from './components/RunResult'
 import type { Run } from './components/RunResult'
 import { ScanControls } from './components/ScanControls'
+import { ScanLoader, prefersReducedMotion } from './components/ScanLoader'
+import type { ScanFinale } from './components/ScanLoader'
+import { NO_TRACE, traceScan } from './scanTrace'
 import { Tabs } from './components/Tabs'
 import { TargetPicker } from './components/TargetPicker'
 import type { PickerRequest } from './components/TargetPicker'
@@ -70,13 +77,22 @@ import type { ReviewItem } from './review'
 import { selectionStatus, useSelection } from './selection'
 import type { Selection } from './selection'
 
+/** What the picker says on a Manual fix: what the plugin does when the fix is accepted. */
+const MANUAL_FIX_PICKER =
+  'Figma lets nobody change this size inside the instance. Choose the fix to let the plugin reset the layer, swap it back if it was swapped, and set its other changes again, or keep the legacy variable.'
+
 type EntryDetail = {
   entryId: string
   records: BindingRecord[]
   oldInstances: OldInstance[]
+  /** For a main component: every instance in it */
+  instances?: ComponentInstance[]
 }
 
 type View = 'frames' | 'mapping' | 'instances' | 'components'
+
+/** How long the end of the first scan stays on screen before the results */
+const FINALE_MS = 1600
 
 function Overview({
   summary,
@@ -102,6 +118,7 @@ function Overview({
   showEmpty,
   onScanPageOf,
   onScanFile,
+  partialFile,
   onConvert,
 }: {
   summary: ScanSummary
@@ -132,6 +149,8 @@ function Overview({
   showEmpty: boolean
   onScanPageOf: (nodeId: string) => void
   onScanFile: () => void
+  /** Set when the page picker leaves pages out of a scan of the file */
+  partialFile?: PartialFile
   onConvert: (instanceIds: string[]) => void
 }) {
   const entryNames = new Map(
@@ -194,7 +213,11 @@ function Overview({
     .size
   const componentFooter = {
     ready: components.reduce((sum, entry) => sum + entry.counts.sure, 0),
-    toReview: components.reduce((sum, entry) => sum + entry.counts.check, 0),
+    toReview: reviewItems(
+      mapping,
+      overrides,
+      new Set(components.map((entry) => entry.id)),
+    ).length,
     where:
       componentsReady.length === 0
         ? 'in the main components'
@@ -212,6 +235,7 @@ function Overview({
           }
         : undefined,
     entryIds: components.map((entry) => entry.id),
+    done: healthOf(sumCounts(components.map((entry) => entry.counts))) === 1,
   }
   const outside = healthOutsideInstances(totals)
   // UX review F3: where the work is, across pages.
@@ -235,7 +259,8 @@ function Overview({
         {totals.inInstance > 0 && outside !== null && (
           <p className="muted">
             Outside instances: {formatHealth(outside)} migrated. The values
-            inside instances change with their main component or library.
+            instances take from their main component change with it or its
+            library.
           </p>
         )}
 
@@ -307,6 +332,7 @@ function Overview({
             onSelect={onSelectLayer}
             onScanPageOf={onScanPageOf}
             onScanFile={onScanFile}
+            partialFile={partialFile}
             busy={busy}
           />
         ) : view === 'mapping' ? (
@@ -389,6 +415,7 @@ function Overview({
             where={componentFooter.where}
             kind="component"
             mainComponents={componentFooter.mainComponents}
+            done={componentFooter.done}
             busy={busy}
             onReview={() => onReview(componentFooter.entryIds)}
             onApply={() => onApply(componentFooter.entryIds)}
@@ -397,9 +424,10 @@ function Overview({
           <ApplyActions
             key="scope"
             ready={totals.sure}
-            toReview={totals.check}
+            toReview={reviewItems(mapping, overrides).length}
             where={reach ?? 'in the scope'}
             mainComponents={mainComponents}
+            done={healthOf(totals) === 1}
             busy={busy}
             onReview={() => onReview()}
             onApply={() => onApply(applied.map((entry) => entry.id))}
@@ -414,10 +442,20 @@ export function App() {
   const clearBulk = bulk.clear
   const [command, setCommand] = useState<Command>()
   const [selection, setSelection] = useState<SelectionInfo>({ count: 0 })
+  // The pages in the file, and the ones a scan of the file leaves out.
+  const [filePages, setFilePages] = useState<{
+    pages: FilePage[]
+    leftOut: string[]
+  }>({ pages: [], leftOut: [] })
   const [scope, setScope] = useState<Scope>('page')
   const [scanning, setScanning] = useState(false)
-  const [progress, setProgress] = useState<ScanProgress>()
+  // What the scan loader draws: the page's map and how far the scan is.
+  const [trace, dispatchTrace] = useReducer(traceScan, NO_TRACE)
   const [summary, setSummary] = useState<ScanSummary>()
+  // The first scan after the window opens ends with its result for a
+  // moment, before the window shows it (scan loader, finale).
+  const [finale, setFinale] = useState<ScanFinale>()
+  const hadSummary = useRef(false)
   const [openEntryId, setOpenEntryId] = useState<string>()
   const [detail, setDetail] = useState<EntryDetail>()
   // Test session finding 17: the scan is out of date after an undo or an edit.
@@ -466,6 +504,14 @@ export function App() {
   useEffect(() => {
     openEntryRef.current = openEntryId
   }, [openEntryId])
+  useEffect(() => {
+    hadSummary.current = summary !== undefined
+  }, [summary])
+  useEffect(() => {
+    if (!finale) return
+    const timer = setTimeout(() => setFinale(undefined), FINALE_MS)
+    return () => clearTimeout(timer)
+  }, [finale])
 
   const onMessage = useCallback(
     (message: PluginToUi) => {
@@ -483,15 +529,30 @@ export function App() {
             setScope(message.count > 0 ? 'selection' : 'page')
           }
           break
+        case 'pages':
+          setFilePages({ pages: message.pages, leftOut: message.leftOut })
+          break
+        case 'scan-start':
+        case 'scan-map':
         case 'scan-progress':
-          setProgress(message.progress)
+          dispatchTrace(message)
           break
         case 'scan-done': {
           scopeChosen.current = true
+          // A scan of one selected main component, such as a component set,
+          // opens it: there is nothing else in the scan to choose.
+          const { entries } = message.summary
+          const onlyComponent =
+            userScan.current &&
+            message.summary.scope === 'selection' &&
+            entries.length === 1 &&
+            entries[0].kind === 'component'
+              ? entries[0].id
+              : undefined
           if (userScan.current) {
             userScan.current = false
             setView(
-              toComponents.current
+              toComponents.current || onlyComponent
                 ? 'components'
                 : message.summary.scope === 'selection'
                   ? 'mapping'
@@ -500,15 +561,27 @@ export function App() {
             toComponents.current = false
           }
           setScanning(false)
-          setProgress(undefined)
           setStale(false)
+          if (!hadSummary.current && !prefersReducedMotion()) {
+            setFinale({
+              // The same health the overview shows after the finale.
+              health: healthOf(message.summary.totals),
+              totals: message.summary.totals,
+              nodes: message.summary.nodesScanned,
+            })
+          }
           setSummary(message.summary)
-          setDetail(undefined)
           setReview(undefined)
           clearBulk()
           // After an apply or a revert the plugin scans again; an open
-          // frame stays open when it is still in the scan.
-          const openId = openEntryRef.current
+          // frame stays open when it is still in the scan. Its layers stay
+          // listed until the new ones arrive, so the list does not collapse
+          // to Loading and lose the place the designer was at.
+          const openId = onlyComponent ?? openEntryRef.current
+          if (onlyComponent && onlyComponent !== openEntryRef.current) {
+            setOpenEntryId(onlyComponent)
+            setDetail(undefined)
+          }
           if (
             openId &&
             message.summary.entries.some((entry) => entry.id === openId)
@@ -516,6 +589,7 @@ export function App() {
             send({ type: 'get-entry', entryId: openId })
           } else {
             setOpenEntryId(undefined)
+            setDetail(undefined)
           }
           break
         }
@@ -526,16 +600,19 @@ export function App() {
           setApplying(undefined)
           setRun({ kind: 'apply', result: message.result })
           setScanning(true)
+          dispatchTrace({ type: 'trace-reset' })
           break
         case 'revert-done':
           setApplying(undefined)
           setRun({ kind: 'revert', result: message.result })
           setScanning(true)
+          dispatchTrace({ type: 'trace-reset' })
           break
         case 'convert-done':
           setApplying(undefined)
           setRun({ kind: 'convert', result: message.result })
           setScanning(true)
+          dispatchTrace({ type: 'trace-reset' })
           break
         case 'summary':
           setSummary(message.summary)
@@ -545,7 +622,6 @@ export function App() {
           break
         case 'scan-cancelled':
           setScanning(false)
-          setProgress(undefined)
           break
         case 'mapping':
           setMapping(message.groups)
@@ -574,6 +650,7 @@ export function App() {
             entryId: message.entryId,
             records: message.records,
             oldInstances: message.oldInstances,
+            ...(message.instances ? { instances: message.instances } : {}),
           })
           break
         case 'dev-export':
@@ -596,6 +673,7 @@ export function App() {
     userScan.current = true
     setError(undefined)
     setScanning(true)
+    dispatchTrace({ type: 'trace-reset' })
     send({ type: 'scan', scope })
   }
   /** Goes to a main component's page and scans it, from the Main components tab */
@@ -606,6 +684,7 @@ export function App() {
     setScope('page')
     setError(undefined)
     setScanning(true)
+    dispatchTrace({ type: 'trace-reset' })
     send({ type: 'scan-page-of', nodeId })
   }
   /** Scans the whole file from the Main components tab, and returns to it */
@@ -616,6 +695,7 @@ export function App() {
     setScope('file')
     setError(undefined)
     setScanning(true)
+    dispatchTrace({ type: 'trace-reset' })
     send({ type: 'scan', scope: 'file' })
   }
   const open = (entry: EntrySummary) => {
@@ -624,6 +704,12 @@ export function App() {
     send({ type: 'get-entry', entryId: entry.id })
   }
   const select = (nodeIds: string[]) => send({ type: 'select', nodeIds })
+  const pageTotal = scannablePages(filePages.pages).length
+  const pagesChosen = pagesToScan(filePages.pages, filePages.leftOut).length
+  const partialFile: PartialFile | undefined =
+    pagesChosen < pageTotal
+      ? { chosen: pagesChosen, total: pageTotal }
+      : undefined
   const busy = scanning || applying !== undefined
   /** Apply, Convert and Revert wait for a new scan when the file has changed */
   const locked = busy || stale
@@ -671,10 +757,15 @@ export function App() {
     const rowChanged = rowKey(record) in overrides.rows
     setPicker({
       title: record.old ?? record.nodeName,
-      description: `${record.nodeName}, ${propertyLabel(record.property)}. Changes this value only, and wins over a change on its row.`,
+      description:
+        record.category === 'byHand'
+          ? `${record.nodeName}, ${propertyLabel(record.property)}. ${MANUAL_FIX_PICKER}`
+          : `${record.nodeName}, ${propertyLabel(record.property)}. Changes this value only, and wins over a change on its row.`,
       schemes: [record.scheme ?? 'light'],
       subject: {
-        kinds: record.kind ? [record.kind] : [],
+        // A Manual fix offers the plugin's fix or keeping the legacy
+        // variable, never another variable: Figma would not take it there.
+        kinds: record.kind && record.category !== 'byHand' ? [record.kind] : [],
         group: record.group,
         candidates: record.candidates ?? [],
       },
@@ -867,7 +958,17 @@ export function App() {
           ))}
         {command === 'open' && (
           <>
-            {!openEntry && !review && (
+            {/* The first scan after the window opens takes the whole window,
+                with the scope controls hidden until it ends. */}
+            {((scanning && !summary) || finale) && (
+              <ScanLoader
+                trace={trace}
+                variant="initial"
+                finale={finale}
+                onCancel={() => send({ type: 'cancel-scan' })}
+              />
+            )}
+            {!openEntry && !review && !(scanning && !summary) && !finale && (
               <ScanControls
                 scope={scope}
                 onScopeChange={(next) => {
@@ -876,9 +977,7 @@ export function App() {
                 }}
                 selection={selection}
                 scanning={scanning}
-                progress={progress}
                 onScan={scan}
-                onCancel={() => send({ type: 'cancel-scan' })}
                 compact={summary !== undefined}
                 onGoToScope={
                   summary
@@ -890,6 +989,13 @@ export function App() {
                         )
                     : undefined
                 }
+                pages={filePages.pages}
+                leftOutPages={filePages.leftOut}
+                onOpenPages={() => send({ type: 'get-pages' })}
+                onLeftOutPagesChange={(pageIds) => {
+                  setFilePages((current) => ({ ...current, leftOut: pageIds }))
+                  send({ type: 'set-left-out-pages', pageIds })
+                }}
               />
             )}
             {!summary && !scanning && !saved && (
@@ -923,6 +1029,17 @@ export function App() {
                 </Banner.Message>
               </Banner>
             )}
+            {/* A later scan, by Scan again or after an apply, a revert or a
+                convert, is a card above the results. The scan controls are
+                hidden while a frame or the review is open, so the card is
+                what shows the scan there. */}
+            {scanning && summary && (
+              <ScanLoader
+                trace={trace}
+                variant="rescan"
+                onCancel={() => send({ type: 'cancel-scan' })}
+              />
+            )}
             {summary && !scanning && review && (
               <ReviewView
                 items={review}
@@ -943,7 +1060,10 @@ export function App() {
                 onDone={() => setReview(undefined)}
               />
             )}
-            {summary && !scanning && !review && openEntry && (
+            {/* An open frame stays on screen during that scan, with its
+                actions locked, so the designer is back where they were
+                when it ends: same tab, filters and open layers. */}
+            {summary && !finale && !review && openEntry && (
               <Inspector
                 entry={openEntry}
                 records={
@@ -952,6 +1072,11 @@ export function App() {
                 oldInstances={
                   detail?.entryId === openEntry.id
                     ? detail.oldInstances
+                    : undefined
+                }
+                componentInstances={
+                  detail?.entryId === openEntry.id
+                    ? detail.instances
                     : undefined
                 }
                 overrides={overrides}
@@ -973,10 +1098,23 @@ export function App() {
                 onChangeBinding={changeBinding}
               />
             )}
-            {/* Hidden rather than unmounted while a frame is open, so Back
-                returns to the same tab, filters and open accordion items. */}
-            {summary && !scanning && (
-              <div hidden={openEntry !== undefined || review !== undefined}>
+            {/* Hidden rather than unmounted while a frame or the review is
+                open, so Back, and the end of the scan after an apply,
+                return to the same tab, filters and open accordion items. */}
+            {summary && (
+              <div
+                className="results"
+                hidden={
+                  finale !== undefined ||
+                  openEntry !== undefined ||
+                  review !== undefined
+                }
+                // During a later scan the results stay in view, faded and
+                // out of reach, under the scan card, until the new ones
+                // replace them.
+                inert={scanning}
+                data-updating={scanning ? '' : undefined}
+              >
                 <Overview
                   summary={summary}
                   view={view}
@@ -1009,6 +1147,7 @@ export function App() {
                   showEmpty={showEmpty}
                   onScanPageOf={scanPageOf}
                   onScanFile={scanFile}
+                  partialFile={partialFile}
                   onConvert={convertTypography}
                 />
               </div>
@@ -1062,6 +1201,7 @@ export function App() {
                 setScope('page')
                 setError(undefined)
                 setScanning(true)
+                dispatchTrace({ type: 'trace-reset' })
                 send({ type: 'scan', scope: 'page' })
               }
             }}

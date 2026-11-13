@@ -188,6 +188,21 @@ describe('holdModes and the review', () => {
   })
 })
 
+describe('instance overrides', () => {
+  it('plans an override inside an instance, and leaves what the instance inherits', () => {
+    const records = [
+      binding('override', 'sure', { instanceId: 'instance', override: true }),
+      binding('inherited', 'inInstance', { instanceId: 'instance' }),
+    ]
+    const plan = planChanges(
+      records,
+      { records: {}, rows: {} },
+      new Set(['frame']),
+    )
+    expect(plan.map((change) => change.record.id)).toEqual(['override'])
+  })
+})
+
 describe('parseModeTarget', () => {
   it('reads the collection and the mode', () => {
     expect(parseModeTarget('density: compact')).toEqual({
@@ -232,5 +247,43 @@ describe('modes held only by what reads them', () => {
     const chosen = { records: { [held.id]: CLEAR_MODE }, rows: {} }
     const plan = planChanges(records, chosen, new Set(['frame']))
     expect(plan.map((change) => change.outcome)).toEqual(['confirmed'])
+  })
+})
+
+describe('Manual fix', () => {
+  const fix = binding('icon', 'byHand', {
+    property: { type: 'field', field: 'width' },
+    group: 'size',
+    kind: 'size',
+    candidates: ['reset:spacing/md'],
+    instanceId: 'wrapper',
+    override: true,
+  })
+  const padding = binding('pad', 'sure', {
+    candidates: ['spacing/md'],
+  })
+
+  it('is not applied until a designer accepts it in Review', () => {
+    const plan = planChanges([fix, padding], NO_OVERRIDES, new Set(['frame']))
+    expect(plan.map((change) => change.record.id)).toEqual(['pad'])
+  })
+
+  it('runs first once accepted, before other changes on the layers below', () => {
+    const accepted = {
+      records: { icon: 'reset:spacing/md' },
+      rows: {},
+    }
+    const plan = planChanges([padding, fix], accepted, new Set(['frame']))
+    expect(plan.map((change) => change.record.id)).toEqual(['icon', 'pad'])
+    expect(plan[0]).toMatchObject({
+      target: 'reset:spacing/md',
+      outcome: 'confirmed',
+    })
+  })
+
+  it('is left out when a designer keeps the legacy variable', () => {
+    const kept = { records: { icon: null }, rows: {} }
+    const plan = planChanges([fix], kept, new Set(['frame']))
+    expect(plan).toEqual([])
   })
 })

@@ -19,6 +19,7 @@ export function emptyCounts(): Counts {
     migrated: 0,
     sure: 0,
     check: 0,
+    byHand: 0,
     none: 0,
     excluded: 0,
     inInstance: 0,
@@ -33,7 +34,8 @@ export function addToCounts(
 ): void {
   const category = categoryOf(record)
   counts[category] += 1
-  if (category === 'migrated' && record.instanceId) {
+  // An override the plugin changed is the scope's own value, not the main component's.
+  if (category === 'migrated' && record.instanceId && !record.override) {
     counts.migratedInInstances = (counts.migratedInInstances ?? 0) + 1
   }
 }
@@ -59,7 +61,12 @@ export function sumCounts(all: Counts[]): Counts {
 export function healthOutsideInstances(counts: Counts): number | null {
   const migrated = counts.migrated - (counts.migratedInInstances ?? 0)
   const total =
-    migrated + counts.sure + counts.check + counts.none + counts.excluded
+    migrated +
+    counts.sure +
+    counts.check +
+    counts.byHand +
+    counts.none +
+    counts.excluded
   return total === 0 ? null : migrated / total
 }
 
@@ -68,17 +75,18 @@ export function scoredTotal(counts: Counts): number {
   return SCORED_CATEGORIES.reduce((sum, category) => sum + counts[category], 0)
 }
 
-/** migrated ÷ (migrated + sure + check + none + excluded + in instance), or null when nothing is scored. */
+/** migrated ÷ (migrated + sure + check + manual fix + none + excluded + in instance), or null when nothing is scored. */
 export function healthOf(counts: Counts): number | null {
   const total = scoredTotal(counts)
   return total === 0 ? null : counts.migrated / total
 }
 
-/** Old variables that are not migrated yet: sure, check, none, excluded and in instance. */
+/** Old variables that are not migrated yet: sure, check, manual fix, none, excluded and in instance. */
 export function oldCount(counts: Counts): number {
   return (
     counts.sure +
     counts.check +
+    counts.byHand +
     counts.none +
     counts.excluded +
     counts.inInstance

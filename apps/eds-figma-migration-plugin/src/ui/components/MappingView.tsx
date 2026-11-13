@@ -281,7 +281,7 @@ function StatusCell({
     )
   }
   return (
-    <Tooltip title={why} placement="left">
+    <Tooltip title={why} placement="left" className="reason-tooltip">
       <button
         type="button"
         className="check-status check-why"
@@ -345,13 +345,14 @@ export function MappingView({
   const [open, setOpen] = useState<Set<string>>(new Set())
   const [why, setWhy] = useState<Item>()
 
-  // Values inside instances are never listed here, and the designer should
-  // not have to guess why the numbers differ from the health bar.
+  // Values instances take from their main component are never listed here,
+  // and the designer should not have to guess why the numbers differ from
+  // the health bar. Values an instance overrides are listed.
   const instancesNote = (
     <p className="muted">
       {inInstances > 0
-        ? `Instances are not part of Changes. The ${inInstances} legacy value${inInstances === 1 ? '' : 's'} inside instances change${inInstances === 1 ? 's' : ''} with ${inInstances === 1 ? 'its' : 'their'} main component or library; the Instances tab lists them.`
-        : 'Instances are not part of Changes. Values inside an instance change with its main component or library.'}
+        ? `Values that instances take from their main component are not part of Changes. The ${inInstances} legacy value${inInstances === 1 ? '' : 's'} inside instances change${inInstances === 1 ? 's' : ''} with ${inInstances === 1 ? 'its' : 'their'} main component or library; the Instances tab lists them. Values an instance overrides are listed here, marked Overridden in the instance.`
+        : 'Values that instances take from their main component are not part of Changes; they change with the main component or its library. Values an instance overrides are listed here, marked Overridden in the instance.'}
       {typographyInstances.length > 0 &&
         ' The legacy Typography component is the exception: its instances are on the Typography tab, to be converted to text.'}
     </p>
@@ -369,8 +370,12 @@ export function MappingView({
   const matches = (row: MappingRow, binding: MappingBinding) =>
     status === 'all' ||
     bindingOutcome(row, binding, overrides).category === status
+  // A Manual fix is accepted in Review and listed with its frame, never
+  // changed here, since it is not a swap of one variable for another.
   const items: Item[] = groups.flatMap((group) =>
-    group.rows.map((row) => ({ group, row })),
+    group.rows
+      .filter((row) => row.outcome !== 'byHand')
+      .map((row) => ({ group, row })),
   )
   const countIn = (
     filter: (item: Item) => boolean,
@@ -663,7 +668,11 @@ export function MappingView({
                             </button>
                             <span className="check-status-group">
                               {looksDifferent(row, overrides) && (
-                                <Tooltip title="The new colour looks clearly different from the legacy colour on these layers. The mapping is right by role; check the look before you apply.">
+                                <Tooltip
+                                  title="The new colour looks clearly different from the legacy colour on these layers. The mapping is right by role; check the look before you apply."
+                                  placement="left"
+                                  className="reason-tooltip"
+                                >
                                   <span
                                     className="check-visible-change"
                                     role="img"
@@ -724,6 +733,9 @@ export function MappingView({
                                       }
                                       category={outcome.category}
                                       held={isHeld(outcome.category, row.rule)}
+                                      {...(binding.override
+                                        ? { origin: 'override' as const }
+                                        : {})}
                                       changeable
                                       selected={selection.has(binding.id)}
                                       onToggle={(selected) =>

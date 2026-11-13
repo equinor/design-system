@@ -60,6 +60,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   migrated: 'Migrated',
   sure: 'Ready',
   check: 'Needs check',
+  byHand: 'Manual fix',
   none: 'No equivalent',
   excluded: 'Excluded',
   inInstance: 'In instance',
@@ -82,11 +83,13 @@ export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
   sure: 'A legacy variable with one target in the EDS Beta. The plugin swaps it without asking when you apply.',
   check:
     'A legacy variable whose target depends on what the layer is: interactive or not, selected, the kind of border, or the fill under a text. The plugin proposes a target, and you confirm, change or skip it.',
+  byHand:
+    'A legacy variable an instance overrides where Figma lets nobody change it, in the editor or from a plugin, such as the width or height of an icon inside an instance. The row says how to fix it in Figma, usually by resetting the layer so it takes the variable from its main component again. Apply leaves it, and the report lists it.',
   none: 'A legacy variable with nothing to swap to, such as an icon size or Bg/Backdrop. It stays as it is and is listed in the report.',
   excluded:
     'A legacy variable you chose to keep. Apply leaves it out, and the report lists it. Select it and choose Reset choices to get the proposal back.',
   inInstance:
-    'A legacy variable inside an instance, or on one. The plugin never changes instances, because a change there becomes an override. Update the component in its library, then swap the instance.',
+    'A legacy variable an instance takes from its main component. The plugin does not change it in the instance, because a change there becomes an override. Update the component in its library, then swap the instance. A value the instance overrides itself is listed with the other changes.',
   other:
     'A variable from another library, or a local one. Not counted in the health.',
 }

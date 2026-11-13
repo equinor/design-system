@@ -101,8 +101,8 @@ export function ReviewView({
           </li>
         </ul>
         <p className="muted">
-          Confirmed and changed bindings now count as Ready. Apply them from the
-          overview or the frame.
+          Confirmed and changed bindings, and accepted fixes, now count as
+          Ready. Apply them from the overview or the frame.
         </p>
         <div>
           <Button onClick={onDone}>Back</Button>
@@ -112,6 +112,7 @@ export function ReviewView({
   }
 
   const { group, row, binding } = item
+  const isManualFix = row.outcome === 'byHand'
   const isProposal = value === row.proposal
   const entryName = entryNames.get(binding.entryId)
   const path = pathBelow(binding.path, entryName)
@@ -154,9 +155,26 @@ export function ReviewView({
         <span className="binding-swap">
           <span className="binding-old">{group.old}</span>
           <span aria-hidden="true"> → </span>
-          <span className="binding-new">{targetLabel(value ?? null)}</span>
+          <span className="binding-new">
+            {targetLabel(
+              isManualFix ? (row.proposal ?? null) : (value ?? null),
+            )}
+          </span>
         </span>
-        {row.reason && (
+        {isManualFix && (
+          <div className="review-reason">
+            <strong>Why it needs a manual fix: </strong>
+            {binding.reason ?? row.reason}
+            <p>
+              <strong>What the plugin does if you accept: </strong>
+              it reads every change on the layer, resets the layer, swaps it
+              back if it was swapped, and sets the changes again. It checks each
+              change afterwards. If a change cannot be copied, the plugin leaves
+              this layer as it is and says why.
+            </p>
+          </div>
+        )}
+        {!isManualFix && row.reason && (
           <div className="review-reason">
             <strong>Why it needs a check: </strong>
             {plain ?? row.reason}
@@ -179,42 +197,73 @@ export function ReviewView({
         </div>
       </div>
 
-      <VariableList
-        options={options}
-        value={value}
-        onChange={setValue}
-        schemes={[binding.scheme ?? 'light']}
-        describe={targetMeaning}
-      />
-
-      <div className="review-actions">
-        <Button
-          disabled={value === undefined}
-          onClick={() => {
-            if (value === undefined) return
-            onDecide(item, value)
-            next(
-              value === null
-                ? 'excluded'
+      {isManualFix ? (
+        <div className="review-actions">
+          <Button
+            disabled={row.proposal === undefined}
+            onClick={() => {
+              if (row.proposal === undefined) return
+              onDecide(item, row.proposal)
+              next('confirmed')
+            }}
+          >
+            Accept the fix
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              onDecide(item, null)
+              next('excluded')
+            }}
+          >
+            Keep the legacy variable
+          </Button>
+          <Button variant="secondary" onClick={() => next('skipped')}>
+            Skip
+          </Button>
+          <Button variant="ghost" disabled={index === 0} onClick={back}>
+            Previous
+          </Button>
+        </div>
+      ) : (
+        <>
+          <VariableList
+            options={options}
+            value={value}
+            onChange={setValue}
+            schemes={[binding.scheme ?? 'light']}
+            describe={targetMeaning}
+          />
+          <div className="review-actions">
+            <Button
+              disabled={value === undefined}
+              onClick={() => {
+                if (value === undefined) return
+                onDecide(item, value)
+                next(
+                  value === null
+                    ? 'excluded'
+                    : isProposal
+                      ? 'confirmed'
+                      : 'changed',
+                )
+              }}
+            >
+              {value === null
+                ? 'Exclude'
                 : isProposal
-                  ? 'confirmed'
-                  : 'changed',
-            )
-          }}
-        >
-          {value === null
-            ? 'Exclude'
-            : isProposal
-              ? 'Confirm proposal'
-              : 'Use this target'}
-        </Button>
-        <Button variant="secondary" onClick={() => next('skipped')}>
-          Skip
-        </Button>
-        <Button variant="ghost" disabled={index === 0} onClick={back}>
-          Previous
-        </Button>
-      </div>
+                  ? 'Confirm proposal'
+                  : 'Use this target'}
+            </Button>
+            <Button variant="secondary" onClick={() => next('skipped')}>
+              Skip
+            </Button>
+            <Button variant="ghost" disabled={index === 0} onClick={back}>
+              Previous
+            </Button>
+          </div>
+        </>
+      )}
     </section>
   )
 }

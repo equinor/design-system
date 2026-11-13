@@ -16,10 +16,15 @@ type MainComponentsViewProps = {
   onSelect: (nodeIds: string[]) => void
   /** Goes to a main component's page and scans it */
   onScanPageOf: (nodeId: string) => void
-  /** Scans the whole file, so every main component is in the scope */
+  /** Scans the file, so every main component on the scanned pages is in the scope */
   onScanFile: () => void
+  /** Set when the page picker leaves pages out of a scan of the file */
+  partialFile?: PartialFile
   busy: boolean
 }
+
+/** The pages a scan of the file reads, when the page picker leaves some out */
+export type PartialFile = { chosen: number; total: number }
 
 type Elsewhere = {
   id: string
@@ -70,6 +75,7 @@ export function MainComponentsView({
   onSelect,
   onScanPageOf,
   onScanFile,
+  partialFile,
   busy,
 }: MainComponentsViewProps) {
   const elsewhere = mainComponentsElsewhere(components, instances)
@@ -111,9 +117,9 @@ export function MainComponentsView({
             Used here, on another page
           </h2>
           <p className="muted">
-            Instances in the scope use these, but their main components are
-            outside it. Scan the whole file to have every main component on this
-            tab and apply them all at once, or scan the page of one.
+            {partialFile
+              ? 'Instances in the scope use these, but their main components are outside it. Scan the pages chosen for File to have the main components on them on this tab, or scan the page of one.'
+              : 'Instances in the scope use these, but their main components are outside it. Scan the whole file to have every main component on this tab and apply them all at once, or scan the page of one.'}
           </p>
           <div className="panel-actions">
             <span />
@@ -123,7 +129,9 @@ export function MainComponentsView({
               disabled={busy}
               onClick={onScanFile}
             >
-              Scan the whole file
+              {partialFile
+                ? `Scan ${partialFile.chosen} of ${partialFile.total} pages`
+                : 'Scan the whole file'}
             </Button>
           </div>
           <ul className="entry-list">

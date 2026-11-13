@@ -21,6 +21,32 @@ export function writeLog(node: BaseNode, entries: LogEntry[]): void {
   )
 }
 
-export function appendLog(node: BaseNode, entry: LogEntry): void {
-  writeLog(node, [...readLog(node), entry])
+/**
+ * Adds an entry to the layer's change log. A layer inside an instance reads
+ * the main component's log until the instance has its own plugin data on it,
+ * so `inherited` starts the instance's log empty instead of copying that one.
+ */
+export function appendLog(
+  node: BaseNode,
+  entry: LogEntry,
+  inherited = false,
+): void {
+  writeLog(node, [...(inherited ? [] : readLog(node)), entry])
+}
+
+/**
+ * Whether the log on a layer is the main component's, read through an
+ * instance: the layer is in an instance, or is one, and the outermost
+ * instance has no plugin data of its own on it.
+ */
+export function logIsInherited(node: BaseNode): boolean {
+  let outermost: InstanceNode | undefined
+  for (let current: BaseNode | null = node; current; current = current.parent) {
+    if (current.type === 'INSTANCE') outermost = current
+  }
+  if (!outermost) return false
+  const own = outermost.overrides.find((override) => override.id === node.id)
+  return !(own?.overriddenFields as string[] | undefined)?.includes(
+    'pluginData',
+  )
 }

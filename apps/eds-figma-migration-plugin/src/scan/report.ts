@@ -3,7 +3,8 @@
  * Pure, so it is tested without Figma.
  */
 import { CLEAR_VALUE, literalText } from '../mapping/literal'
-import { CLEAR_MODE } from './classify'
+import { isResetTarget, resetText } from '../mapping/reset'
+import { CLEAR_MODE, manualFixTarget } from './classify'
 import { CATEGORY_LABELS, propertyLabel } from './labels'
 import { effectiveCategory, effectiveTarget, isMappable } from './mapping'
 import type { Overrides } from './mapping'
@@ -22,6 +23,7 @@ export type Report = { markdown: string; csv: string; baseName: string }
 
 function targetText(target: string | null): string {
   if (target === null) return 'Keeps the legacy variable'
+  if (isResetTarget(target)) return resetText(target)
   const literal = literalText(target)
   if (literal !== undefined) {
     return target === CLEAR_VALUE ? literal : `${literal}, without a variable`
@@ -84,6 +86,7 @@ export function buildReport(input: ReportInput): Report {
     0,
   )
   const check = records.filter((record) => category(record) === 'check')
+  const byHand = records.filter((record) => category(record) === 'byHand')
   const none = records.filter((record) => category(record) === 'none')
   const excluded = records.filter((record) => category(record) === 'excluded')
 
@@ -118,6 +121,7 @@ export function buildReport(input: ReportInput): Report {
         'Migrated',
         'Ready',
         'Needs check',
+        'Manual fix',
         'No equivalent',
         'Excluded',
         'In instance',
@@ -128,6 +132,7 @@ export function buildReport(input: ReportInput): Report {
           t.migrated,
           t.sure,
           t.check,
+          t.byHand,
           t.none,
           t.excluded,
           t.inInstance,
@@ -136,7 +141,7 @@ export function buildReport(input: ReportInput): Report {
       ],
     ),
     '',
-    'Health is migrated ÷ (migrated + ready + needs check + no equivalent + excluded + in instance).',
+    'Health is migrated ÷ (migrated + ready + needs check + manual fix + no equivalent + excluded + in instance).',
     '',
     `## Frames (${frames.length})`,
     '',
@@ -212,6 +217,26 @@ export function buildReport(input: ReportInput): Report {
         )
       : 'Nothing needs a check.',
     '',
+    `## Manual fix (${byHand.length})`,
+    '',
+    byHand.length > 0
+      ? [
+          'Legacy values that Figma lets nobody change where they are, in the editor or from a plugin. Each row says how to fix it in Figma.',
+          '',
+          table(
+            ['Frame', 'Layer', 'Property', 'Legacy', 'After the fix', 'How'],
+            byHand.map((record) => [
+              entries.get(record.entryId)?.name,
+              layerPath(record),
+              propertyLabel(record.property),
+              record.old,
+              manualFixTarget(record),
+              record.reason,
+            ]),
+          ),
+        ].join('\n')
+      : 'Nothing needs a manual fix.',
+    '',
     `## No equivalent (${none.length})`,
     '',
     none.length > 0
@@ -285,7 +310,11 @@ export function buildReport(input: ReportInput): Report {
         propertyLabel(record.property),
         CATEGORY_LABELS[category(record)],
         record.old ?? '',
-        target ? targetText(target.target) : (record.current ?? ''),
+        target
+          ? targetText(target.target)
+          : record.category === 'byHand'
+            ? manualFixTarget(record)
+            : (record.current ?? ''),
         target ? (target.source === 'proposal' ? 'Rule' : 'Designer') : '',
         record.reason ?? '',
         summary.mappingVersion,
