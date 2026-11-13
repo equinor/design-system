@@ -1,6 +1,6 @@
 ## Summary
 
-Input is a low-level text field for collecting a single line of text in custom compositions, so use TextField instead when you need a complete, labelled form field with validation handled for you.
+Input is a low-level text field for collecting a single line of text in custom compositions, so use TextField instead when you need a complete, labelled form field with a helper message and an error state.
 
 ## Features
 
@@ -24,5 +24,5 @@ Input is a low-level text field for collecting a single line of text in custom c
 
 ## Related components
 
-- [`TextField`](?path=/docs/beta-inputs-textfield--docs) wraps Input with a label, description, helper message and validation handled for you.
+- [`TextField`](?path=/docs/beta-inputs-textfield--docs) wraps Input with a label, description and helper message. Set `invalid` to show its error state.
 - [`TextArea`](?path=/docs/beta-inputs-textarea--docs) is the complete, labelled field for multi-line text, the same relationship TextField has to single-line Input.
