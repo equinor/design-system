@@ -217,11 +217,11 @@ describe('answer key: Migration test – old EDS variables', () => {
     ).toMatchObject({ outcome: 'sure', candidates: ['icon/primary'] })
   })
 
-  it('row 9: icon size sizing/icon/lg (24px) is proposed as spacing/xl, the same px', () => {
+  it('row 9: icon size sizing/icon/lg (24px) becomes spacing/xl, the same px', () => {
     const icon = ctx(['Icon / menu', 'Title group', 'Top bar'])
     expect(
       resolve('size', { ...density('sizing/icon/lg'), value: 24 }, icon),
-    ).toMatchObject({ outcome: 'check', candidates: ['spacing/xl'] })
+    ).toMatchObject({ outcome: 'sure', candidates: ['spacing/xl'] })
   })
 
   it('row 10: page title takes header/lg and text/primary', () => {
@@ -542,7 +542,7 @@ describe('answer key: Migration test – old EDS variables', () => {
     ).toBe('text/primary')
   })
 
-  it('row 31: error helper text on the card surface takes on-default, as a check item', () => {
+  it('row 31 (changed 2026-11-12): error helper text on the card surface takes on-default, Ready since the fill under it was found', () => {
     const helper = text('Helper text (error)', ctx([...textField]), {
       singleLine: false,
       fillUnder: on(surface, cardForm),
@@ -561,7 +561,7 @@ describe('answer key: Migration test – old EDS variables', () => {
       staticColour('Text/Danger/Strong'),
       helper,
     )
-    expect(colour.outcome).toBe('check')
+    expect(colour.outcome).toBe('sure')
     expect(colour.candidates[0]).toBe('text/on-default/danger')
   })
 
@@ -704,16 +704,16 @@ describe('answer key: Migration test – old EDS variables', () => {
     })
   })
 
-  it('row 42: shortcut hint maps Subtle on emphasis with a note, and takes label/md/default', () => {
+  it('row 42 (changed 2026-11-12): shortcut hint maps Subtle on emphasis without a check, and takes label/md/default', () => {
     const hint = text('Shortcut hint', button('Button / Primary (hover)'))
     const colour = resolve(
       'textFill',
       staticColour('Text/Accent/Subtle on emphasis'),
       hint,
     )
-    expect(colour.outcome).toBe('check')
+    expect(colour.outcome).toBe('sure')
     expect(colour.candidates[0]).toBe('text/on-emphasis/accent')
-    expect(colour.reason).toMatch(/no equivalent/)
+    expect(colour.reason).toMatch(/one foreground per tone/)
     expect(
       resolveTypography(
         textInput(
@@ -896,10 +896,10 @@ describe('answer key: Migration test – old EDS variables', () => {
     ).toMatchObject({ target: { collection: 'color-scheme', mode: 'dark' } })
   })
 
-  it('row 55: Bg/Backdrop is reported and never bound to background/backdrop', () => {
+  it('row 55 (changed 2026-11-12): Bg/Backdrop becomes overlay/scrim as a check, never background/backdrop', () => {
     const backdrop = resolve('fill', concept('Bg/Backdrop'), overlay)
-    expect(backdrop.outcome).toBe('none')
-    expect(backdrop.candidates).toEqual([])
+    expect(backdrop.outcome).toBe('check')
+    expect(backdrop.candidates).toEqual(['overlay/scrim'])
   })
 
   it('row 56: overlay padding', () => {
@@ -971,21 +971,21 @@ describe('answer key: Migration test – old EDS variables', () => {
 })
 
 describe('expected “Needs a decision” list', () => {
-  it('lists the backdrop and the shortcut hint, and proposes the icon size', () => {
+  it('lists the backdrop; the icon size and the shortcut hint are no longer on it', () => {
     const icon = ctx(['Icon / menu', 'Title group', 'Top bar'])
     expect(
       resolve('size', { ...density('sizing/icon/lg'), value: 24 }, icon)
         .outcome,
-    ).toBe('check')
+    ).toBe('sure')
     expect(resolve('fill', concept('Bg/Backdrop'), overlay).outcome).toBe(
-      'none',
+      'check',
     )
     const hint = resolve(
       'textFill',
       staticColour('Text/Accent/Subtle on emphasis'),
       text('Shortcut hint', button('Button / Primary (hover)')),
     )
-    expect(hint.outcome).toBe('check')
+    expect(hint.outcome).toBe('sure')
   })
 })
 
@@ -1039,7 +1039,7 @@ describe('rules added after the FRIOD test session (2026-11-11)', () => {
     ...(resolvedValue !== undefined ? { resolvedValue } : {}),
   })
 
-  it('Generic/Space under the mode None is 0px and becomes spacing/none', () => {
+  it('Generic/Space under the mode None is 0px and becomes 0 without a variable', () => {
     for (const name of [
       'Generic/Space horizontal',
       'Generic/Space vertical',
@@ -1047,7 +1047,7 @@ describe('rules added after the FRIOD test session (2026-11-11)', () => {
       'Generic/Gap vertical',
     ]) {
       expect(resolve('spacing', generic(name, 0), ctx(['Body']))).toMatchObject(
-        { outcome: 'sure', candidates: ['spacing/none'] },
+        { outcome: 'sure', candidates: ['value:0'] },
       )
     }
   })
@@ -1095,5 +1095,196 @@ describe('rules added after the FRIOD test session (2026-11-11)', () => {
     expect(resolve('fill', appearance('Border/Medium'), box).outcome).toBe(
       'check',
     )
+  })
+})
+
+describe('decisions from the rule review (2026-11-12)', () => {
+  it('a neutral canvas on an interactive element becomes the ghost-control fill, as a check', () => {
+    const result = resolve(
+      'fill',
+      appearance('Bg/Canvas'),
+      ctx(['Button / Ghost (hover)']),
+    )
+    expect(result.outcome).toBe('check')
+    expect(result.candidates[0]).toBe(
+      'background/interactive/neutral/muted/hover',
+    )
+    expect(result.candidates).toContain('background/canvas')
+  })
+
+  it('a surface on an interactive element keeps the plane, as a check', () => {
+    const result = resolve(
+      'fill',
+      appearance('Bg/Surface'),
+      ctx(['Button / Ghost']),
+    )
+    expect(result).toMatchObject({
+      outcome: 'check',
+      candidates: ['background/surface'],
+    })
+  })
+
+  it('a canvas on plain layout stays the plane and Ready', () => {
+    expect(
+      resolve('fill', appearance('Bg/Canvas'), ctx(['Page'])),
+    ).toMatchObject({ outcome: 'sure', candidates: ['background/canvas'] })
+  })
+})
+
+describe('icon gaps (rule review 2026-11-12)', () => {
+  it('the gap between an icon and its text becomes spacing/xs, as spacing.mdx says', () => {
+    expect(
+      resolve(
+        'spacing',
+        spacingSemantic(
+          'Selectable/Icon + text gap ↔︎',
+          'spacing/icon/xs/gap-horizontal',
+        ),
+        ctx(['Status chip']),
+      ),
+    ).toMatchObject({ outcome: 'sure', candidates: ['spacing/xs'] })
+  })
+})
+
+describe('legacy numbers with no EDS Beta token (rule review 2026-11-12)', () => {
+  it('icon container padding is removed, as a check', () => {
+    expect(
+      resolve(
+        'spacing',
+        density('sizing/icon/xs-container-padding-vertical'),
+        ctx(['Icon']),
+      ),
+    ).toMatchObject({ outcome: 'check', candidates: ['value:0'] })
+  })
+
+  it('a baseline trim is removed, as a check', () => {
+    expect(
+      resolve(
+        'spacing',
+        spacingSemantic('Typography/Baseline adjust top'),
+        ctx(['Label']),
+      ),
+    ).toMatchObject({ outcome: 'check', candidates: ['value:0'] })
+  })
+
+  it('a minimum height is cleared, as a check', () => {
+    expect(
+      resolve(
+        'size',
+        { collectionKey: OLD.box, name: 'Min height', type: 'FLOAT' },
+        ctx(['Card']),
+      ),
+    ).toMatchObject({ outcome: 'check', candidates: ['value:none'] })
+  })
+
+  it('an opacity becomes a percent without a variable, as a check', () => {
+    expect(
+      resolve(
+        'opacity',
+        { ...density('Opacity/Disabled'), value: 30 },
+        ctx(['Button']),
+      ),
+    ).toMatchObject({ outcome: 'check', candidates: ['value:30%'] })
+  })
+})
+
+describe('a state fill on a layer named as static (rule review 2026-11-12)', () => {
+  it('is proposed as the interactive state, as a check, with the static fill as the other option', () => {
+    const result = resolve(
+      'fill',
+      staticColour('Bg/Info/Fill Muted/Hover'),
+      ctx(['Banner / Info']),
+    )
+    expect(result.outcome).toBe('check')
+    expect(result.candidates).toEqual([
+      'background/interactive/info/muted/hover',
+      'background/non-interactive/info/muted',
+    ])
+  })
+})
+
+describe('a selected element in a semantic tone (rule review 2026-11-12)', () => {
+  it('keeps its tone at the legacy level in the default state, as a check', () => {
+    const result = resolve(
+      'fill',
+      staticColour('Bg/Warning/Fill Muted/Active'),
+      ctx(['Chip / Warning (selected)']),
+    )
+    expect(result).toMatchObject({
+      outcome: 'check',
+      candidates: ['background/interactive/warning/muted/default'],
+    })
+  })
+})
+
+describe('single-line text in a control (rule review 2026-11-12)', () => {
+  it('takes label without a check, as ADR-0027 says, though its variables say body', () => {
+    const result = resolveTypography(
+      textInput(
+        densityType({ family: 'ui-body', step: 'md', lineHeight: 'default' }),
+        'Inter Regular',
+        ctx(['Label', 'Button / Primary'], { singleLine: true }),
+      ),
+    )
+    expect(result.outcome).toBe('sure')
+    expect(result.candidates[0]).toBe('label/md/default')
+  })
+
+  it('stays body when it wraps', () => {
+    const result = resolveTypography(
+      textInput(
+        densityType({ family: 'ui-body', step: 'md', lineHeight: 'default' }),
+        'Inter Regular',
+        ctx(['Description', 'Card'], { singleLine: false }),
+      ),
+    )
+    expect(result).toMatchObject({
+      outcome: 'sure',
+      candidates: ['body/md/default'],
+    })
+  })
+})
+
+describe('container gaps (rule review 2026-11-12)', () => {
+  it('become spacing/md without a check, with a note on lg and xl', () => {
+    const result = resolve(
+      'spacing',
+      spacingSemantic('Container/Gap vertical', 'spacing/vertical/md'),
+      ctx(['Card']),
+    )
+    expect(result).toMatchObject({
+      outcome: 'sure',
+      candidates: ['spacing/md'],
+    })
+    expect(result.reason).toMatch(/spacing\/lg separates groups/)
+  })
+})
+
+describe('toned text with no fill found under it (rule review 2026-11-12)', () => {
+  it('stays a check, since its background may be a sibling shape', () => {
+    const loose = text('Warning text', ctx(['Notes']), { singleLine: true })
+    expect(
+      resolve('textFill', staticColour('Text/Warning/Strong'), loose).outcome,
+    ).toBe('check')
+  })
+})
+
+describe('Border/Medium on another interactive element (rule review 2026-11-12)', () => {
+  it('proposes the muted interactive border, as a check', () => {
+    const result = resolve(
+      'stroke',
+      staticColour('Border/Neutral/Medium'),
+      ctx(['Tile / Clickable'], {
+        strokeSides: [1, 1, 1, 1],
+        hasReactions: true,
+      }),
+    )
+    expect(result).toMatchObject({
+      outcome: 'check',
+      candidates: [
+        'border/interactive/neutral/muted/default',
+        'border/interactive/neutral/emphasis/default',
+      ],
+    })
   })
 })

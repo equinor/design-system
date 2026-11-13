@@ -18,7 +18,12 @@ import {
   OLD,
   oldCollectionInfo,
 } from './inventory'
-import { literalTarget, literalValue } from './literal'
+import {
+  CLEAR_VALUE,
+  literalTarget,
+  literalValue,
+  opacityTarget,
+} from './literal'
 import { guessRole, isDivider, nearNamesMatch, roleNameMatches } from './role'
 import type { RoleGuess } from './role'
 import type {
@@ -84,6 +89,15 @@ const MISSING_NOTE = 'is not in EDS Foundation'
 
 // ---------------------------------------------------------------------------
 // Outcome helpers
+
+/** A sure outcome from a list of candidates, the first being the target. */
+function sureOf(
+  candidates: string[],
+  reason: string,
+  rule: string,
+): Resolution {
+  return { ...sure(candidates[0], reason, rule), candidates }
+}
 
 function sure(candidate: string, reason: string, rule: string): Resolution {
   return { outcome: 'sure', candidates: [candidate], reason, rule }
@@ -228,9 +242,13 @@ function resolveBackground(
       'colour/plane',
     )
   }
+  // The dimmed layer behind a dialog is the scrim's role, not a background
+  // (background/backdrop was removed in #5846). A check, since the docs have
+  // not settled backdrop and scrim yet (decided 2026-11-12).
   if (slot === 'Backdrop') {
-    return none(
-      'Bg/Backdrop has no equivalent; background/backdrop has been removed (#5846)',
+    return check(
+      ['overlay/scrim'],
+      'Bg/Backdrop dims what is behind a dialog, which is the role of overlay/scrim; the docs have not settled the scrim yet, and its opacity differs between Figma and the docs',
       'colour/backdrop',
     )
   }
@@ -244,7 +262,25 @@ function resolveBackground(
       tone === 'neutral'
         ? `background/${slot.toLowerCase()}`
         : `background/non-interactive/${tone}/${slot === 'Canvas' ? 'muted' : 'default'}`
-    // There is no interactive canvas or surface. The plane is proposed
+    // On an interactive element, the neutral canvas becomes the ghost-control
+    // fill: background/interactive/neutral/muted is the canvas colour at rest,
+    // with hover and pressed states (decided 2026-11-12).
+    if (
+      guess.role === 'interactive' &&
+      slot === 'Canvas' &&
+      tone === 'neutral'
+    ) {
+      const ghost =
+        guess.state === 'disabled'
+          ? 'background/interactive/disabled'
+          : `background/interactive/neutral/muted/${guess.state === 'focus' ? 'hover' : guess.state}`
+      return check(
+        [ghost, target],
+        `Bg/Canvas on an interactive element: the ghost-control fill, which is the canvas colour at rest and has hover and pressed states (${guess.because})`,
+        'colour/canvas-interactive',
+      )
+    }
+    // There is no interactive surface, or toned canvas. The plane is proposed
     // anyway, so a designer can confirm it instead of leaving the old
     // binding, for example on a table row filled with the surface.
     if (guess.role === 'interactive') {
@@ -267,9 +303,14 @@ function resolveBackground(
   const oldStateAsNew = oldState === 'Active' ? 'pressed' : 'default'
 
   if (guess.selected) {
+    // Only accent and neutral have a selected level: selection is a UI
+    // state, not a semantic condition (usage.mdx). A toned element keeps its
+    // tone at the legacy level in the default state, as the Beta Chip does,
+    // which shows selection with a check icon (decided 2026-11-12).
     if (tone !== 'accent' && tone !== 'neutral') {
-      return none(
-        `Only accent and neutral have a selected level (${guess.because})`,
+      return check(
+        [interactive(oldState === 'Hover' ? 'hover' : 'default')],
+        `Selected element in ${tone} (${guess.because}): only accent and neutral have a selected level, since selection is a UI state. The element keeps its tone, and its selection has to show another way, as the Beta Chip does with a check icon`,
         'colour/selected-tone',
       )
     }
@@ -300,11 +341,13 @@ function resolveBackground(
     )
   }
 
-  // Hover and Active only exist on interactive elements. A layer named as
-  // non-interactive with such a fill is reported.
+  // Hover and Active only exist on interactive elements. On a layer named as
+  // non-interactive the fill and the name contradict each other; the fill is
+  // trusted and a designer settles it (decided 2026-11-12).
   if (guess.keyword === 'non-interactive' && guess.role === 'non-interactive') {
-    return none(
-      `${oldState} on an element that is not interactive (${guess.because}); non-interactive fills have no states`,
+    return check(
+      [interactive(oldState === 'Hover' ? 'hover' : 'pressed'), nonInteractive],
+      `${oldState} fill on an element named as not interactive (${guess.because}): the fill has a state, so it is proposed as interactive; the static fill is the other option${toneNote(parsed)}`,
       'colour/fill-state-non-interactive',
     )
   }
@@ -401,8 +444,11 @@ function resolveBorder(parsed: ParsedColour, context: RoleContext): Resolution {
       'colour/border-medium-field',
     )
   }
-  return none(
-    `Border/Medium on an interactive element that is neither an outlined control nor a field (${guess.because})`,
+  // A border on a clickable card, row or tile is rarely its main outline, so
+  // the quieter level is proposed (decided 2026-11-12).
+  return check(
+    [muted, emphasis],
+    `Border/Medium on an interactive element that is neither an outlined control nor a field (${guess.because}): the quieter interactive border is proposed, with emphasis as the other option`,
     'colour/border-medium-other',
   )
 }
@@ -413,6 +459,8 @@ type SurfaceKind = 'plain' | 'tinted' | 'emphasis' | 'state-only'
 function classifyFillUnder(fillUnder: FillUnder | undefined): {
   kind: SurfaceKind
   because: string
+  /** False when no fill was found under the text, or it could not be resolved */
+  found?: boolean
 } {
   if (!fillUnder) return { kind: 'plain', because: 'no fill under it' }
   let target = fillUnder.newVariableName
@@ -427,6 +475,13 @@ function classifyFillUnder(fillUnder: FillUnder | undefined): {
   const owner = fillUnder.context.names[0] ?? 'the layer'
   const on = target ? `${target} on “${owner}”` : `the fill of “${owner}”`
   if (!target) return { kind: 'plain', because: `it sits on ${on}` }
+  return { ...classifyTarget(target, on), found: true }
+}
+
+function classifyTarget(
+  target: string,
+  on: string,
+): { kind: SurfaceKind; because: string } {
   if (/\/selected\//.test(target)) {
     return { kind: 'tinted', because: `it sits on a selected fill, ${on}` }
   }
@@ -478,10 +533,12 @@ function resolveTextColour(
       'colour/text-on-emphasis',
     )
   }
+  // One foreground per tone on an emphasis fill now; the subtle level is
+  // gone, and the docs give the target, so it is sure (decided 2026-11-12).
   if (slot === 'Subtle on emphasis') {
-    return check(
-      [`text/on-emphasis/${tone}`],
-      `Subtle on emphasis has no equivalent: there is one foreground per tone on an emphasis fill${toneNote(parsed)}`,
+    return sure(
+      `text/on-emphasis/${tone}`,
+      `Subtle on emphasis: there is one foreground per tone on an emphasis fill now, so the text is as strong as Strong on emphasis${toneNote(parsed)}`,
       'colour/text-subtle-on-emphasis',
     )
   }
@@ -504,19 +561,23 @@ function resolveTextColour(
   const onDefault = `text/on-default/${tone}`
   const onMuted = `text/on-muted/${tone}`
   const reason = `Text is named for what ${surface.because}${toneNote(parsed)}${subtleNote}`
+  // Sure when an ancestor's fill decided it; a check when no fill was found,
+  // since a background drawn as a sibling shape is invisible here (decided
+  // 2026-11-12).
+  const decide = surface.found ? sureOf : check
   switch (surface.kind) {
     case 'tinted':
-      return check([onMuted, onDefault], reason, 'colour/text-on-fill')
+      return decide([onMuted, onDefault], reason, 'colour/text-on-fill')
     case 'emphasis':
-      return check(
+      return decide(
         [`text/on-emphasis/${tone}`, onDefault],
         reason,
         'colour/text-on-fill',
       )
     case 'state-only':
-      return check([onDefault, onMuted], reason, 'colour/text-on-fill')
+      return decide([onDefault, onMuted], reason, 'colour/text-on-fill')
     default:
-      return check([onDefault, onMuted], reason, 'colour/text-on-fill')
+      return decide([onDefault, onMuted], reason, 'colour/text-on-fill')
   }
 }
 
@@ -642,12 +703,14 @@ const SPACING_STEP = /^spacing\/[a-z0-9]+$/
 function resolveIconSize(
   variable: OldVariable,
   context: RoleContext,
+  sized: 'icon' | 'control' = 'icon',
 ): Resolution {
+  const rule = sized === 'icon' ? 'size/icon' : 'size/control'
   const value = variable.value ?? variable.resolvedValue
   if (typeof value !== 'number') {
     return none(
       `${variable.name}: the size could not be read, so no spacing token can be matched to it`,
-      'size/icon',
+      rule,
     )
   }
   const density = targetDensity(context.modes)
@@ -663,12 +726,17 @@ function resolveIconSize(
         typeof step.size === 'number',
     )
   const exact = steps.find((step) => step.size === value)
-  const why = `${variable.name} is ${value}px. Icons are sized with spacing tokens in EDS`
+  const why =
+    sized === 'icon'
+      ? `${variable.name} is ${value}px. Icons are sized with spacing tokens in EDS`
+      : `${variable.name} is ${value}px. Selectable controls are sized with spacing tokens in EDS (Checkbox and Radio use spacing-lg)`
+  // spacing-usage.mdx and the Beta Icon size icons with the spacing token of
+  // the same px, so an exact match is sure.
   if (exact) {
-    return check(
-      [exact.name],
+    return sure(
+      exact.name,
       `${why}, and ${exact.name} is ${value}px in ${density}`,
-      'size/icon',
+      rule,
     )
   }
   const nearest = [...steps]
@@ -679,8 +747,58 @@ function resolveIconSize(
     `${why}, but no step is ${value}px in ${density}; the nearest are ${nearest
       .map((step) => `${step.name} (${step.size}px)`)
       .join(' and ')}`,
-    'size/icon',
+    rule,
   )
+}
+
+const ICON_CONTAINER = /container-padding|container padding/i
+const BASELINE_TRIM = [
+  /^Typography\/Baseline adjust/,
+  /^baseline\//,
+  /(^|\/)padding-(centred|baselined)$/,
+  /(^|\/)cap-(rounded|height-rounded)$/,
+]
+const MIN_HEIGHT = /^Min height$/
+const CONTROL_SIZE = [
+  /^sizing\/selectable\//,
+  /^(Selectable\/Size|Size\/Selectables\/Size)$/,
+]
+
+function isControlSize(name: string | undefined): boolean {
+  return (
+    name !== undefined && CONTROL_SIZE.some((pattern) => pattern.test(name))
+  )
+}
+
+/**
+ * Legacy numbers with no EDS Beta token, normalised to how the Beta
+ * components work (decided 2026-11-12). They are check items, since the
+ * layout can shift: an icon has no container padding, text is not trimmed,
+ * and no component sets a minimum height.
+ */
+function normalised(name: string, via: string): Resolution | undefined {
+  if (ICON_CONTAINER.test(name)) {
+    return check(
+      [literalTarget(0)],
+      `${name}${via}: the EDS Beta has no icon container. An icon is sized with a spacing token and has no padding around it, as in Button, so the padding is removed`,
+      'number/icon-container',
+    )
+  }
+  if (BASELINE_TRIM.some((pattern) => pattern.test(name))) {
+    return check(
+      [literalTarget(0)],
+      `${name}${via}: the EDS Beta does not trim text (ADR-0029); height comes from padding and line height, so the trim is removed`,
+      'number/baseline-trim',
+    )
+  }
+  if (MIN_HEIGHT.test(name)) {
+    return check(
+      [CLEAR_VALUE],
+      `${name}${via}: no EDS Beta component sets a minimum height; height comes from padding and line height, so the minimum is removed`,
+      'number/min-height',
+    )
+  }
+  return undefined
 }
 
 function noEquivalent(name: string): string | undefined {
@@ -722,11 +840,16 @@ function resolveDensityName(
   if (match) {
     return sure(`corner-radius/${match[1]}`, `${name}${via}`, 'radius/step')
   }
+  const normal = normalised(name, via)
+  if (normal) return normal
   const reason = noEquivalent(name)
   if (reason) return none(`${name}${via}: ${reason}`, 'spacing/no-equivalent')
-  if (/^spacing\/icon\//.test(name)) {
-    return none(
-      `${name}${via}: no rule for the gap between an icon and its text`,
+  // spacing.mdx: the icon gaps become spacing-xs at every icon size; no
+  // current token grows with the icon the way these did.
+  if (/^spacing\/icon\/[a-z0-9]+\/gap-/.test(name)) {
+    return sure(
+      'spacing/xs',
+      `${name}${via}: the gap between an icon and its text is xs at every icon size in EDS`,
       'spacing/icon-gap',
     )
   }
@@ -865,6 +988,43 @@ function resolveGeneric(
   )
 }
 
+/**
+ * The old container gap put one step between any two children; the Beta
+ * scale separates groups with lg and sections with xl (spacing.mdx). The
+ * plugin cannot tell which a container holds, so the row says it.
+ */
+function containerGapNote(
+  variable: OldVariable,
+  resolution: Resolution,
+): Resolution {
+  if (!/^(Container\/Gap|container-gap)/.test(variable.name)) return resolution
+  if (resolution.outcome === 'none') return resolution
+  return {
+    ...resolution,
+    reason: `${resolution.reason}. If the children are separate groups or sections, spacing/lg separates groups and spacing/xl sections`,
+  }
+}
+
+/**
+ * A spacing of 0 needs no token: in CSS it is `gap: 0` or no gap at all, so
+ * nobody binds `spacing/none`. A proposal of `spacing/none` becomes the
+ * number 0 without a variable, which Apply sets in place of the legacy one.
+ */
+function zeroWithoutToken(resolution: Resolution): Resolution {
+  if (!resolution.candidates.includes('spacing/none')) return resolution
+  return {
+    ...resolution,
+    candidates: [
+      ...new Set(
+        resolution.candidates.map((name) =>
+          name === 'spacing/none' ? literalTarget(0) : name,
+        ),
+      ),
+    ],
+    reason: `${resolution.reason}. A 0 needs no token, so the plugin sets 0 and removes the variable`,
+  }
+}
+
 /** Corner radius from a resolved value: 0 is none, up to 8 is rounded, 999 and above is pill. */
 function radiusFromValue(variable: OldVariable): Resolution | undefined {
   const value = variable.resolvedValue
@@ -901,12 +1061,25 @@ function resolveNumber(
     )
   }
   if (kind === 'opacity') {
-    return none(
-      `${variable.name}: there is no opacity variable`,
+    // No opacity variable in the Beta; disabled controls use the disabled
+    // colour tokens. The opacity becomes a number, for a designer to check.
+    const value = variable.value ?? variable.resolvedValue
+    if (typeof value !== 'number') {
+      return none(
+        `${variable.name}: there is no opacity variable, and the opacity could not be read`,
+        'number/opacity',
+      )
+    }
+    const opacity = value > 1 ? value / 100 : value
+    return check(
+      [opacityTarget(opacity)],
+      `${variable.name} is ${Math.round(opacity * 100)}%. The EDS Beta has no opacity variable, and disabled controls use the disabled colour tokens instead, so the opacity is set as a number`,
       'number/opacity',
     )
   }
 
+  const ownNormal = normalised(variable.name, '')
+  if (ownNormal) return ownNormal
   const ownReason = noEquivalent(variable.name)
   if (ownReason)
     return none(`${variable.name}: ${ownReason}`, 'spacing/no-equivalent')
@@ -914,6 +1087,9 @@ function resolveNumber(
   const density = densityName(variable)
   if (isIconSize(variable.name) || isIconSize(density)) {
     return resolveIconSize(variable, context)
+  }
+  if (isControlSize(variable.name) || isControlSize(density)) {
+    return resolveIconSize(variable, context, 'control')
   }
   const via =
     density && density !== variable.name
@@ -954,7 +1130,10 @@ export function resolveVariable(input: VariableInput): Resolution {
   if (variable.type === 'COLOR') {
     resolution = resolveColour(kind, variable, context)
   } else if (variable.type === 'FLOAT') {
-    resolution = resolveNumber(kind, variable, context)
+    resolution = containerGapNote(
+      variable,
+      zeroWithoutToken(resolveNumber(kind, variable, context)),
+    )
   } else {
     resolution = none(
       `No rule for ${variable.type.toLowerCase()} variables such as ${variable.name}`,
@@ -1209,6 +1388,8 @@ export function resolveTypography(input: TypographyInput): Resolution {
   const { fields, font, fontSize, context } = input
   const info: TypeInfo = {}
   const notes: string[] = []
+  // Said in the reason without making the style a check item
+  const remarks: string[] = []
   // The size variable decides the step, so it is read first.
   const ordered = Object.entries(fields).sort(
     ([a], [b]) => Number(b === 'fontSize') - Number(a === 'fontSize'),
@@ -1232,8 +1413,12 @@ export function resolveTypography(input: TypographyInput): Resolution {
     role = 'label'
   } else if (info.lineHeight === 'default') {
     if (context.singleLine && nearNamesMatch(context, 'labelControls')) {
+      // ADR-0027: label is for single-line functional text (decided
+      // 2026-11-12 to apply it without asking).
       role = 'label'
-      notes.push('single-line text inside a control takes label, not body')
+      remarks.push(
+        'single-line text inside a control takes label, not body (ADR-0027)',
+      )
     } else {
       role = 'body'
     }
@@ -1323,12 +1508,13 @@ export function resolveTypography(input: TypographyInput): Resolution {
   ]
     .filter(Boolean)
     .join(', ')
+  const said = [described, ...remarks].join('; ')
   const resolution: Resolution =
     notes.length === 0
-      ? sure(proposal, described, 'type/style')
+      ? sure(proposal, said, 'type/style')
       : check(
           [proposal, ...alternatives],
-          `${described}; ${notes.join('; ')}`,
+          `${said}; ${notes.join('; ')}`,
           'type/style',
         )
   return finalise(resolution, (name) => getNewTextStyle(name) !== undefined)

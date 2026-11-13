@@ -44,7 +44,7 @@ type PackedUnit = {
       fontSize: number
       textStyle?: RawTextStyle
     }
-  | { unit: 'value'; value: number }
+  | { unit: 'value'; value: number | null }
   | {
       unit: 'mode'
       collectionId: string

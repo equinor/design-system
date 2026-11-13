@@ -2,10 +2,12 @@
  * Turns the raw units of a scan into records: which category each one is in,
  * and for old variables outside instances, what the rules propose.
  */
+import { nearNamesMatch } from '../mapping/role'
 import { targetDensity } from '../mapping/density'
 import { targetScheme } from '../mapping/scheme'
 import {
   collectionOrigin,
+  getNewTextStyle,
   isNewTextStyleKey,
   libraryCollectionKeys,
   OLD,
@@ -151,7 +153,10 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     return {
       ...base,
       category: 'migrated',
-      current: `${unit.value}px, set as a number by the plugin`,
+      current:
+        unit.value === null
+          ? 'No value, removed by the plugin'
+          : `${unit.value}, set without a variable by the plugin`,
     }
   }
 
@@ -245,11 +250,40 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     if (unit.textStyle && isNewTextStyleKey(unit.textStyle.key)) {
       return { ...base, category: 'migrated', current: unit.textStyle.name }
     }
-    const newField = entries.find(
+    const newFields = entries.filter(
       ([, variable]) => collectionOrigin(variable.collectionKey) === 'new',
     )
-    if (newField) {
-      return { ...base, category: 'migrated', current: newField[1].name }
+    if (newFields.length > 0) {
+      // EDS Beta typography variables without the text style, for example
+      // after a style was detached: the matching text style is applied.
+      const style = labelInControl(
+        styleForVariables(unit.fields),
+        toRoleContext(unit.context),
+      )
+      if (style && !unit.instanceId) {
+        const names = newFields
+          .map(([, variable]) => variable.name)
+          .sort((a, b) => a.localeCompare(b, 'en'))
+        return {
+          ...base,
+          category: 'sure',
+          outcome: 'sure',
+          oldKey: `typography:${names.join('|')}`,
+          old: names.join(', '),
+          oldCollection: 'EDS Beta variables without a text style',
+          oldFont: unit.font,
+          oldFields: Object.fromEntries(
+            newFields.map(([field, variable]) => [
+              field,
+              { key: variable.key, name: variable.name },
+            ]),
+          ),
+          candidates: [style],
+          reason: `Bound to EDS Beta typography variables without a text style; the matching style, ${style}, is applied instead`,
+          rule: 'type/variables-to-style',
+        }
+      }
+      return { ...base, category: 'migrated', current: newFields[0][1].name }
     }
     if (entries.length > 0) {
       return {
@@ -294,6 +328,46 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     reason: resolution.reason,
     rule: resolution.rule,
   }
+}
+
+/**
+ * The EDS Beta text style that a set of EDS Beta typography variables
+ * describes: `typography/header/xl/font-size` and `font-weight/medium` give
+ * `header/xl`, `typography/label/md/font-size` and `font-weight/bold` give
+ * `label/md/bold`. Undefined when no style matches.
+ */
+export function styleForVariables(
+  fields: Partial<Record<TypographyField, RawVariable>>,
+): string | undefined {
+  const size =
+    /^typography\/(header|label|body|mono)\/([a-z0-9]+)\/font-size$/.exec(
+      fields.fontSize?.name ?? '',
+    )
+  if (!size) return undefined
+  const [, role, step] = size
+  const weightName = /^font-weight\/(normal|medium|bold)$/.exec(
+    fields.fontWeight?.name ?? '',
+  )?.[1]
+  const weight = weightName === 'normal' || !weightName ? 'default' : weightName
+  const name =
+    role === 'header' ? `header/${step}` : `${role}/${step}/${weight}`
+  return getNewTextStyle(name) ? name : undefined
+}
+
+/**
+ * ADR-0027: single-line text inside a control takes label, not body, so a
+ * body style found from the variables becomes the label style of the same
+ * step there (decided 2026-11-12).
+ */
+function labelInControl(
+  style: string | undefined,
+  context: RoleContext,
+): string | undefined {
+  const body = style && /^body\/([a-z0-9]+)\/(default|bold)$/.exec(style)
+  if (!body || !context.singleLine) return style
+  if (!nearNamesMatch(context, 'labelControls')) return style
+  const label = `label/${body[1]}/${body[2]}`
+  return getNewTextStyle(label) ? label : style
 }
 
 /** Colour modes only matter to colour variables, and spacing and typography modes to the rest. */

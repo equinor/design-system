@@ -2,6 +2,7 @@
  * The options an override picker offers: the rule's candidates first, then
  * every other variable or text style that fits the property.
  */
+import { literalTarget } from './literal'
 import type { ColorScheme } from './scheme'
 import { NEW_TEXT_STYLES, NEW_VARIABLES } from './inventory'
 import { FORBIDDEN_TARGETS } from './rules'
@@ -135,6 +136,9 @@ export function pickerOptions(subject: PickerSubject): PickerOptions {
       (!scopes || variable.scopes.some((scope) => scopes.includes(scope))),
   )
     .map((variable) => variable.name)
+    // A 0 needs no token, so spacing/none is offered as 0 without a variable
+    // (decided 2026-11-12), as the rules propose it.
+    .map((name) => (name === 'spacing/none' ? literalTarget(0) : name))
     .sort(compareNames)
   // Data visualisation colours fit every colour property; they go last.
   const isDataViz = (name: string) => name.startsWith('data-visualization/')

@@ -95,7 +95,7 @@ export type RawUnit = {
    * A number the plugin set in place of a legacy variable, such as a border
    * width, read from the change log while the layer still has that number
    */
-  | { unit: 'value'; value: number }
+  | { unit: 'value'; value: number | null }
   | {
       unit: 'mode'
       collectionId: string

@@ -180,3 +180,107 @@ describe('display settings kept per person', () => {
     expect(readSettings({ theme: 'purple' }).theme).toBe('figma')
   })
 })
+
+describe('EDS Beta typography variables without a text style', () => {
+  const variable = (name: string) => ({
+    id: name,
+    key: name,
+    name,
+    type: 'FLOAT' as const,
+    collectionKey: 'new',
+    collectionName: 'typography',
+  })
+
+  it('names the text style the variables describe', async () => {
+    const { styleForVariables } = await import('../src/scan/classify')
+    expect(
+      styleForVariables({
+        fontSize: variable('typography/header/xl/font-size'),
+        fontWeight: variable('font-weight/medium'),
+      }),
+    ).toBe('header/xl')
+    expect(
+      styleForVariables({
+        fontSize: variable('typography/label/md/font-size'),
+        fontWeight: variable('font-weight/bold'),
+      }),
+    ).toBe('label/md/bold')
+    expect(
+      styleForVariables({
+        fontSize: variable('typography/body/sm/font-size'),
+        fontWeight: variable('font-weight/normal'),
+      }),
+    ).toBe('body/sm/default')
+    expect(
+      styleForVariables({ fontSize: variable('spacing/md') }),
+    ).toBeUndefined()
+  })
+})
+
+describe('the picker and zero spacing', () => {
+  it('offers 0 without a variable instead of spacing/none', async () => {
+    const { pickerOptions } = await import('../src/mapping/picker')
+    const options = pickerOptions({
+      kinds: ['spacing'],
+      group: 'spacing',
+      candidates: [],
+    })
+    expect(options.others).toContain('value:0')
+    expect(options.others).not.toContain('spacing/none')
+  })
+})
+
+describe('repairing a text from EDS Beta variables', () => {
+  it('takes label for single-line text in a control, and body elsewhere', async () => {
+    const { NEW } = await import('../src/mapping/inventory')
+    const beta = (name: string) => ({
+      id: name,
+      key: name,
+      name,
+      type: 'FLOAT' as const,
+      collectionKey: NEW.density,
+      collectionName: 'density',
+    })
+    const unit = (names: string[], singleLine: boolean): RawUnit => ({
+      nodeId: 'text',
+      nodeName: 'Label',
+      nodeType: 'TEXT',
+      entryId: 'frame',
+      path: [],
+      property: { type: 'typography' },
+      context: { nodeType: 'TEXT', names, modes: {}, singleLine },
+      unit: 'typography',
+      fields: {
+        fontSize: beta('typography/body/md/font-size'),
+        fontWeight: beta('font-weight/normal'),
+      },
+      font: { family: 'Inter', style: 'Regular' },
+      fontSize: 16,
+    })
+    expect(
+      classifyUnit(unit(['Label', 'Button / Primary'], true))?.candidates,
+    ).toEqual(['label/md/default'])
+    expect(
+      classifyUnit(unit(['Description', 'Card'], false))?.candidates,
+    ).toEqual(['body/md/default'])
+  })
+})
+
+describe('how different two colours look', () => {
+  it('is near 0 for the same colour and clearly visible for a paler grey', async () => {
+    const { colourDistance, VISIBLE_CHANGE } =
+      await import('../src/mapping/colour-distance')
+    expect(colourDistance('#e0e0e0', '#e0e0e0')).toBeCloseTo(0)
+    expect(colourDistance('#e0e0e0', '#f8f8f8')!).toBeGreaterThan(
+      VISIBLE_CHANGE,
+    )
+    expect(colourDistance('#ffffff', '#fdfdfd')!).toBeLessThan(VISIBLE_CHANGE)
+    expect(colourDistance('nope', '#ffffff')).toBeUndefined()
+  })
+
+  it('lays a colour with alpha over the surface of its scheme', async () => {
+    const { colourDistance } = await import('../src/mapping/colour-distance')
+    expect(colourDistance('#00000000', '#ffffff', 'light')).toBeCloseTo(0)
+    expect(colourDistance('#ffffff00', '#030303', 'dark')).toBeCloseTo(0)
+  })
+})

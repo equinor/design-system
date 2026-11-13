@@ -5,6 +5,7 @@
  * variable in the deprecated libraries, in a set of contexts that covers the
  * roles the rules tell apart.
  */
+import { literalValue } from '../src/mapping/literal'
 import { describe, expect, it } from 'vitest'
 import {
   getNewTextStyle,
@@ -129,6 +130,8 @@ describe('targets', () => {
   it('exist in EDS Foundation with the type of the old variable', () => {
     const problems = runs.flatMap((run) =>
       run.resolution.candidates
+        // A value without a variable is not in the library by design.
+        .filter((name) => literalValue(name) === undefined)
         .filter((name) => getNewVariable(name)?.type !== run.variable.type)
         .map((name) => `${run.variable.name} → ${name}`),
     )
@@ -170,7 +173,7 @@ describe('targets', () => {
     expect([...new Set(problems)]).toEqual([])
   })
 
-  it('give every old colour at least one context with a target, except the backdrop', () => {
+  it('give every old colour at least one context with a target', () => {
     const withTarget = new Set(
       colourRuns
         .filter((run) => run.resolution.candidates.length > 0)
@@ -180,7 +183,7 @@ describe('targets', () => {
       (variable) =>
         !withTarget.has(`${variable.collectionKey}/${variable.name}`),
     ).map((variable) => variable.name)
-    expect([...new Set(without)]).toEqual(['Bg/Backdrop'])
+    expect([...new Set(without)]).toEqual([])
   })
 })
 

@@ -84,8 +84,8 @@ export type LoggedNewMode = {
   previousModeId: string | null
 }
 
-/** A number set without a variable, such as a border width */
-export type LoggedValue = { type: 'value'; value: number }
+/** A value set without a variable, such as a border width; null when the property was cleared */
+export type LoggedValue = { type: 'value'; value: number | null }
 
 export type LogEntry = {
   property: PropertyRef
