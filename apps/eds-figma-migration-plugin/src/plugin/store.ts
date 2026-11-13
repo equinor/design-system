@@ -5,6 +5,7 @@
  * another day.
  */
 import type { Overrides } from '../scan/mapping'
+import { emptyCounts } from '../scan/summary'
 import type { ScanSummary } from '../scan/types'
 import { NAMESPACE } from '../shared/changelog'
 import type { SavedHealth } from '../shared/messages'
@@ -60,7 +61,9 @@ export function saveHealth(summary: ScanSummary): void {
 }
 
 export function loadHealth(): SavedHealth | undefined {
-  return read<SavedHealth>(HEALTH_KEY)
+  const saved = read<SavedHealth>(HEALTH_KEY)
+  // Saved before Excluded was counted on its own
+  return saved && { ...saved, totals: { ...emptyCounts(), ...saved.totals } }
 }
 
 /** Saves the choices; false when there are too many to keep in the file. */

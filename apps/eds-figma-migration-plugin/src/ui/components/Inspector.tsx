@@ -179,7 +179,7 @@ function groupSummary(
   categoryOf: (record: BindingRecord) => Category,
 ): string {
   const parts = [values(records.length)]
-  for (const category of ['check', 'none'] as const) {
+  for (const category of ['check', 'none', 'excluded'] as const) {
     const count = records.filter(
       (record) => categoryOf(record) === category,
     ).length
@@ -227,8 +227,8 @@ export function Inspector({
     ...SCORED_CATEGORIES,
     ...(entry.counts.other > 0 ? (['other'] as const) : []),
   ]
-  // After a designer's choice a binding counts as Ready or No equivalent,
-  // the same as in the health bar.
+  // After a designer's choice a binding counts as Ready or Excluded, the
+  // same as in the health bar.
   const categoryOf = (record: BindingRecord) =>
     effectiveCategory(record, overrides)
   const byStatus = (records ?? []).filter(

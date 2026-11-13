@@ -4,6 +4,8 @@
  */
 import { useCallback, useState } from 'react'
 import type { PickerItem } from '../mapping/picker'
+import { bindingOutcome } from '../scan/mapping'
+import type { MappingGroup, Overrides } from '../scan/mapping'
 
 export type SelectedBinding = PickerItem & { id: string }
 
@@ -29,6 +31,34 @@ export function useSelection(): Selection {
   }, [])
   const clear = useCallback(() => setItems(new Map()), [])
   return { items, has: (id) => items.has(id), set, clear }
+}
+
+/**
+ * What the bulk bar says about the selected bindings: how many are Ready
+ * after the choices, which Apply changes, how many have a choice of their
+ * own, which Reset choices removes, and the frames they are in.
+ */
+export function selectionStatus(
+  ids: Iterable<string>,
+  groups: MappingGroup[],
+  overrides: Overrides,
+): { ready: number; chosen: number; entryIds: string[] } {
+  const wanted = new Set(ids)
+  const entryIds = new Set<string>()
+  let ready = 0
+  for (const group of groups) {
+    for (const row of group.rows) {
+      for (const binding of row.bindings) {
+        if (!wanted.has(binding.id)) continue
+        entryIds.add(binding.entryId)
+        if (bindingOutcome(row, binding, overrides).category === 'sure') {
+          ready += 1
+        }
+      }
+    }
+  }
+  const chosen = [...wanted].filter((id) => id in overrides.records).length
+  return { ready, chosen, entryIds: [...entryIds] }
 }
 
 /** The state of a checkbox that ticks a group of bindings. */

@@ -15,6 +15,7 @@ import {
   targetCounts,
 } from '../src/scan/mapping'
 import { recount } from '../src/scan/summary'
+import { selectionStatus } from '../src/ui/selection'
 import type { BindingRecord, ScanSummary } from '../src/scan/types'
 
 const record = (
@@ -217,15 +218,47 @@ describe('effectiveCategory', () => {
     expect(effectiveCategory(icon, chosen)).toBe('sure')
   })
 
-  it('makes a choice to leave the binding No equivalent', () => {
+  it('makes a choice to keep the legacy variable Excluded, not No equivalent', () => {
     const left = { records: {}, rows: { [rowKey(records[0])]: null } }
-    expect(effectiveCategory(records[0], left)).toBe('none')
+    expect(effectiveCategory(records[0], left)).toBe('excluded')
   })
 
   it('leaves migrated bindings and bindings in instances alone', () => {
     expect(effectiveCategory(done, { records: { done: null }, rows: {} })).toBe(
       'migrated',
     )
+  })
+})
+
+describe('selectionStatus', () => {
+  const groups = buildMappingGroups(records)
+
+  it('counts the selected values Apply changes and the choices Reset removes', () => {
+    const overrides = { records: { 'card-1': null }, rows: {} }
+    expect(
+      selectionStatus(
+        ['card-1', 'card-2', 'button', 'icon'],
+        groups,
+        overrides,
+      ),
+    ).toEqual({ ready: 1, chosen: 1, entryIds: ['frame'] })
+  })
+
+  it('counts a Needs check value as Ready once a target is chosen for it', () => {
+    const overrides = {
+      records: { button: 'border/interactive/neutral/muted/default' },
+      rows: {},
+    }
+    expect(selectionStatus(['button'], groups, overrides)).toMatchObject({
+      ready: 1,
+      chosen: 1,
+    })
+  })
+
+  it('has nothing to reset when the values are only selected', () => {
+    expect(
+      selectionStatus(['card-1', 'card-2'], groups, NO_OVERRIDES),
+    ).toMatchObject({ ready: 2, chosen: 0 })
   })
 })
 
@@ -251,7 +284,7 @@ describe('targetCounts', () => {
     expect(bindingOutcome(row, row.bindings[0], overrides)).toEqual({
       target: null,
       source: 'record',
-      category: 'none',
+      category: 'excluded',
     })
   })
 
@@ -278,6 +311,7 @@ describe('recount', () => {
         sure: 2,
         check: 1,
         none: 1,
+        excluded: 0,
         inInstance: 1,
         other: 0,
       },
@@ -296,6 +330,7 @@ describe('recount', () => {
             sure: 2,
             check: 1,
             none: 1,
+            excluded: 0,
             inInstance: 1,
             other: 0,
           },
@@ -316,6 +351,7 @@ describe('recount', () => {
       sure: 3,
       check: 0,
       none: 1,
+      excluded: 0,
       inInstance: 1,
       other: 0,
     })

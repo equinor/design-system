@@ -1,12 +1,14 @@
 /** How targets are written in the window. */
-import { literalValue } from '../mapping/literal'
+import { CLEAR_VALUE, literalText } from '../mapping/literal'
 import { CLEAR_MODE } from '../scan/classify'
 import type { EffectiveTarget } from '../scan/mapping'
 
 export function targetLabel(target: string | null): string {
-  if (target === null) return 'Leave as it is'
-  const literal = literalValue(target)
-  if (literal !== undefined) return `${literal}px, without a variable`
+  if (target === null) return 'Keeps the legacy variable'
+  const literal = literalText(target)
+  if (literal !== undefined) {
+    return target === CLEAR_VALUE ? literal : `${literal}, without a variable`
+  }
   if (target === CLEAR_MODE) {
     return 'Clear the mode once nothing below uses legacy variables'
   }

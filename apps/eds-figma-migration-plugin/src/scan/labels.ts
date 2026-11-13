@@ -61,6 +61,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   sure: 'Ready',
   check: 'Needs check',
   none: 'No equivalent',
+  excluded: 'Excluded',
   inInstance: 'In instance',
   other: 'Other libraries',
 }
@@ -82,6 +83,8 @@ export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
   check:
     'A legacy variable whose target depends on what the layer is: interactive or not, selected, the kind of border, or the fill under a text. The plugin proposes a target, and you confirm, change or skip it.',
   none: 'A legacy variable with nothing to swap to, such as an icon size or Bg/Backdrop. It stays as it is and is listed in the report.',
+  excluded:
+    'A legacy variable you chose to keep. Apply leaves it out, and the report lists it. Select it and choose Reset choices to get the proposal back.',
   inInstance:
     'A legacy variable inside an instance, or on one. The plugin never changes instances, because a change there becomes an override. Update the component in its library, then swap the instance.',
   other:

@@ -43,6 +43,7 @@ const SAMPLE_COUNTS = {
   sure: 24,
   check: 8,
   none: 4,
+  excluded: 0,
   inInstance: 12,
   other: 0,
 }

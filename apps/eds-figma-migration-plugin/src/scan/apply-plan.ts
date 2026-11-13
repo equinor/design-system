@@ -35,16 +35,19 @@ export function changeOutcome(
  * Every binding in the entries that is Ready, after the designer's choices,
  * and has a target. Bindings and typography come first, and modes last,
  * because a legacy mode is only cleared once the bindings below it have
- * changed.
+ * changed. With `recordIds`, only those bindings: Apply on the values a
+ * designer has selected.
  */
 export function planChanges(
   records: BindingRecord[],
   overrides: Overrides,
   entryIds: Set<string>,
+  recordIds?: Set<string>,
 ): PlannedChange[] {
   const changes: PlannedChange[] = []
   for (const record of records) {
     if (!entryIds.has(record.entryId) || !isMappable(record)) continue
+    if (recordIds && !recordIds.has(record.id)) continue
     if (effectiveCategory(record, overrides) !== 'sure') continue
     const { target } = effectiveTarget(record, overrides)
     if (target === null) continue

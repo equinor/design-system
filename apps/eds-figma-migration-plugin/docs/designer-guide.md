@@ -35,13 +35,14 @@ Choose a scope and press **Scan**:
 The health bar counts every property bound to a variable, every text's typography
 and every mode set on a frame:
 
-| Status           | What it means                                                                           |
-| ---------------- | --------------------------------------------------------------------------------------- |
-| Migrated         | Already uses the EDS Beta tokens. Green, because it is done.                            |
-| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.            |
-| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.         |
-| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays. |
-| Inside instances | Inside an instance. The plugin leaves it; its main component has to be migrated.        |
+| Status           | What it means                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| Migrated         | Already uses the EDS Beta tokens. Green, because it is done.                                |
+| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.                |
+| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.             |
+| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays.     |
+| Excluded         | You chose to keep the legacy variable. Apply leaves it out. Shown only when there are some. |
+| Inside instances | Inside an instance. The plugin leaves it; its main component has to be migrated.            |
 
 Health is the share that is migrated. The **i** button next to the legend
 explains the statuses again. When values sit inside instances, a line under
@@ -69,8 +70,23 @@ In a frame, the **Layers** view shows each instance as one row, marked
 Instance: the plugin changes nothing inside it.
 
 To change a target, press **Change** on one value or the target of a row, or
-tick several values and use the bar at the bottom of the window. You can also
-choose **Leave as it is**.
+tick several values and use the bar at the bottom of the window. In the
+picker, **Exclude: keep the legacy variable** keeps the legacy variable, and
+the value counts as Excluded. The row's target then says what its values get,
+so a row whose values are all excluded says **Keeps the legacy variable**.
+
+The bar at the bottom has these actions for the ticked values:
+
+- **Apply** makes the Ready changes among them, and nothing else in the
+  scope. When some of them need a check, have no equivalent or are excluded,
+  the button says how many it applies, and the rest stay as they are.
+- **Change target** sets one target on all of them, when they are the same
+  kind of value.
+- **Exclude** keeps the legacy variable on all of them.
+- **Reset choices** removes your choice on them, so they get the proposal or
+  the change on their row again. It is only there when some of them have a
+  choice.
+- **Clear selection** unticks them.
 
 The window is too narrow? Drag the grip in its bottom right corner. The
 plugin remembers the size.
@@ -80,8 +96,8 @@ plugin remembers the size.
 **Review**, in the footer, shows the values that need a check one at a time. The plugin
 selects the layer, tells you why it was unsure, and shows its proposal and
 the other targets that fit. Confirm the proposal, choose another target,
-leave the value, or skip it for later. Whatever you choose then counts as
-Ready, or as No equivalent when you leave it.
+exclude the value, or skip it for later. Whatever you choose then counts as
+Ready, or as Excluded when you exclude it.
 
 ## 5. Apply
 

@@ -10,7 +10,7 @@ import type { ReviewItem } from '../review'
 import { targetLabel } from '../targets'
 import { VariableList } from './VariableList'
 
-type Decision = 'confirmed' | 'changed' | 'left' | 'skipped'
+type Decision = 'confirmed' | 'changed' | 'excluded' | 'skipped'
 
 type ReviewViewProps = {
   /** The items, fixed when the review starts, so a decision does not move the list */
@@ -18,7 +18,7 @@ type ReviewViewProps = {
   /** Entry id → name, to say which frame a binding is in */
   entryNames: Map<string, string>
   onSelect: (nodeIds: string[]) => void
-  /** Stores a choice for one binding; null leaves it as it is */
+  /** Stores a choice for one binding; null excludes it and keeps the legacy variable */
   onDecide: (item: ReviewItem, value: OverrideValue) => void
   onDone: () => void
 }
@@ -26,8 +26,8 @@ type ReviewViewProps = {
 /**
  * Steps through the bindings that need a check, one at a time: selects the
  * layer in Figma, shows why the rule was unsure, the proposal and the other
- * candidates, and lets the designer confirm, choose another target, leave
- * the binding or skip it.
+ * candidates, and lets the designer confirm, choose another target,
+ * exclude the binding or skip it for now.
  */
 export function ReviewView({
   items,
@@ -93,7 +93,8 @@ export function ReviewView({
             <strong>{count('changed')}</strong> given another target
           </li>
           <li>
-            <strong>{count('left')}</strong> left as they are
+            <strong>{count('excluded')}</strong> excluded, keep the legacy
+            variable
           </li>
           <li>
             <strong>{count('skipped')}</strong> skipped, still need a check
@@ -192,11 +193,17 @@ export function ReviewView({
           onClick={() => {
             if (value === undefined) return
             onDecide(item, value)
-            next(value === null ? 'left' : isProposal ? 'confirmed' : 'changed')
+            next(
+              value === null
+                ? 'excluded'
+                : isProposal
+                  ? 'confirmed'
+                  : 'changed',
+            )
           }}
         >
           {value === null
-            ? 'Leave as it is'
+            ? 'Exclude'
             : isProposal
               ? 'Confirm proposal'
               : 'Use this target'}

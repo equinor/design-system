@@ -77,7 +77,7 @@ let overrides: Overrides = loadChoices()
 let busy = false
 let cancelRequested = false
 
-/** The scan counted with the designer's choices: a chosen target is Ready, a choice to leave a binding No equivalent. */
+/** The scan counted with the designer's choices: a chosen target is Ready, a choice to keep the legacy variable Excluded. */
 function withChoices(state: ScanState): ScanState {
   const current = overrides
   return {
@@ -166,8 +166,11 @@ async function scan(target: ScanTarget) {
   }
 }
 
-/** Applies the Ready changes in the entries, then scans the same layers again. */
-async function apply(entryIds: string[]) {
+/**
+ * Applies the Ready changes in the entries, then scans the same layers
+ * again. With `recordIds`, only the Ready changes among those bindings.
+ */
+async function apply(entryIds: string[], recordIds?: Set<string>) {
   if (!lastScan || !lastTarget || busy) return
   busy = true
   try {
@@ -176,6 +179,7 @@ async function apply(entryIds: string[]) {
       overrides,
       new Set(entryIds),
       (done, total) => post({ type: 'apply-progress', done, total }),
+      recordIds,
     )
     post({ type: 'apply-done', result })
   } finally {
@@ -422,6 +426,16 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
       case 'apply':
         await apply(message.entryIds)
         break
+      case 'apply-selected': {
+        const ids = new Set(message.recordIds)
+        const entryIds = new Set(
+          (lastScan?.records ?? [])
+            .filter((record) => ids.has(record.id))
+            .map((record) => record.entryId),
+        )
+        await apply([...entryIds], ids)
+        break
+      }
       case 'revert':
         await revert(message.entryId)
         break

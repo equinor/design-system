@@ -66,7 +66,7 @@ import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
 import { reviewItems } from './review'
 import type { ReviewItem } from './review'
-import { useSelection } from './selection'
+import { selectionStatus, useSelection } from './selection'
 import type { Selection } from './selection'
 
 type EntryDetail = {
@@ -736,6 +736,15 @@ export function App() {
     )
     bulk.clear()
   }
+  const selectedStatus = selectionStatus(bulk.items.keys(), mapping, overrides)
+  /** Applies the Ready changes among the selected values only */
+  const applySelected = () => {
+    setLastApplied(selectedStatus.entryIds)
+    setError(undefined)
+    setRun(undefined)
+    setApplying({ done: 0, total: 0 })
+    send({ type: 'apply-selected', recordIds: selected.map((item) => item.id) })
+  }
   const openEntry = summary?.entries.find((entry) => entry.id === openEntryId)
 
   const isDevCommand =
@@ -944,10 +953,14 @@ export function App() {
       {command === 'open' && (
         <BulkBar
           count={selected.length}
+          ready={selectedStatus.ready}
+          chosen={selectedStatus.chosen}
           canChange={shared !== undefined}
+          busy={locked}
+          onApply={applySelected}
           onChange={changeSelected}
-          onLeave={() => setSelected(null)}
-          onUndo={() => setSelected(undefined)}
+          onExclude={() => setSelected(null)}
+          onReset={() => setSelected(undefined)}
           onClear={bulk.clear}
         />
       )}

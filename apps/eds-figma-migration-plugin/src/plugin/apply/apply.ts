@@ -267,8 +267,9 @@ export async function applyChanges(
   overrides: Overrides,
   entryIds: Set<string>,
   onProgress: (done: number, total: number) => void,
+  recordIds?: Set<string>,
 ): Promise<ApplyResult> {
-  const plan = planChanges(records, overrides, entryIds)
+  const plan = planChanges(records, overrides, entryIds, recordIds)
   const targets = new Targets()
   const fonts = new Fonts()
   const nodes = new Map<string, Promise<BaseNode | null>>()

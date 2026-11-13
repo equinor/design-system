@@ -161,6 +161,8 @@ export type UiToPlugin =
   | { type: 'set-overrides'; changes: OverrideChange[] }
   /** Applies every Ready change in the entries */
   | { type: 'apply'; entryIds: string[] }
+  /** Applies the Ready changes among the bindings a designer has selected */
+  | { type: 'apply-selected'; recordIds: string[] }
   /** Puts back what the plugin changed in an entry, from the change log */
   | { type: 'revert'; entryId: string }
   /** Builds the report of the latest scan */

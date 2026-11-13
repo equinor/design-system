@@ -2,7 +2,7 @@
  * The report of a scan, as Markdown for people and CSV for a spreadsheet.
  * Pure, so it is tested without Figma.
  */
-import { literalValue } from '../mapping/literal'
+import { CLEAR_VALUE, literalText } from '../mapping/literal'
 import { CLEAR_MODE } from './classify'
 import { CATEGORY_LABELS, propertyLabel } from './labels'
 import { effectiveCategory, effectiveTarget, isMappable } from './mapping'
@@ -21,9 +21,11 @@ export type ReportInput = {
 export type Report = { markdown: string; csv: string; baseName: string }
 
 function targetText(target: string | null): string {
-  if (target === null) return 'Leave as it is'
-  const literal = literalValue(target)
-  if (literal !== undefined) return `${literal}px, without a variable`
+  if (target === null) return 'Keeps the legacy variable'
+  const literal = literalText(target)
+  if (literal !== undefined) {
+    return target === CLEAR_VALUE ? literal : `${literal}, without a variable`
+  }
   if (target === CLEAR_MODE) return 'Clear the legacy mode'
   return target
 }
@@ -83,6 +85,7 @@ export function buildReport(input: ReportInput): Report {
   )
   const check = records.filter((record) => category(record) === 'check')
   const none = records.filter((record) => category(record) === 'none')
+  const excluded = records.filter((record) => category(record) === 'excluded')
 
   const instanceGroups = new Map<
     string,
@@ -116,13 +119,24 @@ export function buildReport(input: ReportInput): Report {
         'Ready',
         'Needs check',
         'No equivalent',
+        'Excluded',
         'In instance',
         'Other libraries',
       ],
-      [[t.migrated, t.sure, t.check, t.none, t.inInstance, t.other]],
+      [
+        [
+          t.migrated,
+          t.sure,
+          t.check,
+          t.none,
+          t.excluded,
+          t.inInstance,
+          t.other,
+        ],
+      ],
     ),
     '',
-    'Health is migrated ÷ (migrated + ready + needs check + no equivalent + in instance).',
+    'Health is migrated ÷ (migrated + ready + needs check + no equivalent + excluded + in instance).',
     '',
     `## Frames (${frames.length})`,
     '',
@@ -212,6 +226,21 @@ export function buildReport(input: ReportInput): Report {
           ]),
         )
       : 'Every legacy binding has an equivalent.',
+    '',
+    `## Excluded (${excluded.length})`,
+    '',
+    excluded.length > 0
+      ? table(
+          ['Frame', 'Layer', 'Property', 'Legacy', 'Proposal'],
+          excluded.map((record) => [
+            entries.get(record.entryId)?.name,
+            layerPath(record),
+            propertyLabel(record.property),
+            record.old,
+            record.candidates?.[0] ? targetText(record.candidates[0]) : '',
+          ]),
+        )
+      : 'Nobody has excluded a value from the migration.',
     '',
     `## Instances with legacy variables (${oldInstances.length})`,
     '',

@@ -73,15 +73,17 @@ export function effectiveTarget(
 
 /**
  * The category once a designer has decided: a target they chose is Ready,
- * whatever the rule said, and a choice to leave the binding is No
- * equivalent. Without a choice, the rule's category stands.
+ * whatever the rule said, and a choice to keep the legacy variable is
+ * Excluded. No equivalent stays for values the rules have nothing for, so a
+ * designer's choice is never shown as a gap in the EDS Beta. Without a
+ * choice, the rule's category stands.
  */
 export function categoryAfter(
   category: Category,
   target: EffectiveTarget,
 ): Category {
   if (target.source === 'proposal') return category
-  return target.target === null ? 'none' : 'sure'
+  return target.target === null ? 'excluded' : 'sure'
 }
 
 export function effectiveCategory(

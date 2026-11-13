@@ -10,6 +10,7 @@ export const BADGES: Record<
   sure: { tone: 'info', emphasis: 'low' },
   check: { tone: 'warning', emphasis: 'medium' },
   none: { tone: 'danger', emphasis: 'low' },
+  excluded: { tone: 'neutral', emphasis: 'low' },
   inInstance: { tone: 'neutral', emphasis: 'low' },
   other: { tone: 'neutral', emphasis: 'low' },
 }

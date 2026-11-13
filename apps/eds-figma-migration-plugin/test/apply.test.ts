@@ -87,10 +87,24 @@ describe('planChanges', () => {
     expect(confirmed?.outcome).toBe('confirmed')
   })
 
-  it('leaves out a binding the designer chose to leave', () => {
+  it('leaves out a binding the designer excluded', () => {
     const overrides = { records: { ready: null }, rows: {} }
     const plan = planChanges(records, overrides, new Set(['frame']))
     expect(plan.map((change) => change.record.id)).not.toContain('ready')
+  })
+
+  it('applies only the Ready bindings among the selected ones', () => {
+    const plan = planChanges(
+      records,
+      NO_OVERRIDES,
+      new Set(['frame', 'other']),
+      new Set(['ready', 'check', 'elsewhere']),
+    )
+    // Needs check stays out, and so does the mode, which was not selected
+    expect(plan.map((change) => change.record.id)).toEqual([
+      'ready',
+      'elsewhere',
+    ])
   })
 
   it('calls a different target an override', () => {

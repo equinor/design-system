@@ -135,8 +135,14 @@ of a page or the file it opens on **Frames**, where the work is.
 
 Targets can be changed for one value, one row or many values at a time:
 **Change** on a value wins over its row, the target of a row changes every
-value in it, and ticking values opens a bar with **Change target**, **Leave
-as they are** and **Undo my changes**.
+value in it, and ticking values opens a bar with **Apply**, **Change
+target**, **Exclude**, **Reset choices** and **Clear selection**. Apply there
+makes only the Ready changes among the ticked values (the `apply-selected`
+message), behind the same kind of confirmation as Apply in the footer.
+Reset choices removes the choices on the ticked values, and is only shown
+when some of them have one. The target of a row follows every choice in it,
+so a row whose values are all excluded says "Keeps the legacy variable"
+instead of the proposal.
 
 The picker follows Figma's variable picker: a search field, the proposed
 targets with a line that says what each is for, then every variable or text
@@ -144,14 +150,16 @@ style that fits the property, grouped by path, with colour swatches in the
 current theme and the comfortable value of numbers. On a Ready value,
 choosing the proposal again removes the change. On a value that needs a check
 or has no equivalent, any choice settles it: the value then counts as Ready,
-or as No equivalent when it is left as it is, and the health bars follow.
+or as Excluded when it keeps the legacy variable, and the health bars follow.
+Excluded is never set by the rules, so No equivalent only means that the EDS
+Beta has nothing for the value.
 Choices are kept across scans and in the file.
 
 The window counts **values**: a value is a property bound to a variable, the
 typography of a text or a range, or a mode. The categories are Migrated,
-Ready, Needs check, No equivalent and Inside instances.
+Ready, Needs check, No equivalent, Excluded and Inside instances.
 
-Health is migrated ÷ (migrated + ready + needs check + no equivalent + in instance). Variables
+Health is migrated ÷ (migrated + ready + needs check + no equivalent + excluded + in instance). Variables
 from other libraries and local variables are counted apart and left out.
 The plugin API gives no library name for a main component, so the window says
 whether it comes from a library or from this file.
@@ -207,9 +215,9 @@ and that nobody has decided on, one at a time, in the order of the Changes
 tab. Each step selects the layer in Figma and says where it is ("Label in
 Button / Outlined"), why the rule was unsure in plain words (with the rule's
 own words under Details), the proposal and every other target that fits. **Confirm
-proposal**, **Use this target** and **Leave as it is** store the choice, so
-the binding counts as Ready or No equivalent; **Skip** leaves it for later.
-The review ends with what was confirmed, changed, left and skipped. From a
+proposal**, **Use this target** and **Exclude** store the choice, so
+the binding counts as Ready or Excluded; **Skip** leaves it for later.
+The review ends with what was confirmed, changed, excluded and skipped. From a
 frame, the review covers that frame only.
 
 **Typography components.** The legacy Typography component is a text in a

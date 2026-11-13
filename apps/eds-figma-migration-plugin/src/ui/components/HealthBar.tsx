@@ -11,6 +11,16 @@ type HealthBarProps = {
 }
 
 /**
+ * The categories to list: Excluded only once a designer has excluded
+ * something, since the scan itself never puts a value there.
+ */
+function listed(counts: Counts) {
+  return SCORED_CATEGORIES.filter(
+    (category) => category !== 'excluded' || counts.excluded > 0,
+  )
+}
+
+/**
  * A bar with one segment per category, migrated first. The Beta has no
  * progress bar or meter, so it is built from tokens here (BETA-GAPS.md).
  */
@@ -20,9 +30,9 @@ export function HealthBar({ counts, size = 'large' }: HealthBarProps) {
   const description =
     total === 0
       ? 'No EDS variables'
-      : `${formatHealth(health)} migrated: ${SCORED_CATEGORIES.map(
-          (category) => `${CATEGORY_LABELS[category]} ${counts[category]}`,
-        ).join(', ')}`
+      : `${formatHealth(health)} migrated: ${listed(counts)
+          .map((category) => `${CATEGORY_LABELS[category]} ${counts[category]}`)
+          .join(', ')}`
   return (
     <div
       className="health-bar"
@@ -50,7 +60,7 @@ export function HealthLegend({ counts }: { counts: Counts }) {
   return (
     <div className="health-legend-row">
       <ul className="health-legend">
-        {SCORED_CATEGORIES.map((category) => (
+        {listed(counts).map((category) => (
           <li key={category}>
             <span
               className="health-swatch"

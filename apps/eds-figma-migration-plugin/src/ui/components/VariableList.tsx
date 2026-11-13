@@ -3,6 +3,7 @@ import type { KeyboardEvent } from 'react'
 import { Search } from '@equinor/eds-core-react/next'
 import { getNewTextStyle, getNewVariable } from '../../mapping/inventory'
 import type { PickerOptions } from '../../mapping/picker'
+import { literalValue } from '../../mapping/literal'
 import type { ColorScheme } from '../../mapping/scheme'
 import type { Density } from '../../scan/types'
 import { targetLabel } from '../targets'
@@ -28,10 +29,11 @@ type Item = {
 
 type Section = { title: string; items: Item[] }
 
-const LEAVE: Item = {
+/** Keeps the legacy variable: the value counts as Excluded, and Apply leaves it out. */
+const EXCLUDE: Item = {
   value: null,
-  label: 'Leave as it is',
-  name: 'Leave as it is',
+  label: 'Exclude: keep the legacy variable',
+  name: 'Exclude: keep the legacy variable',
 }
 
 function splitName(name: string): [string, string] {
@@ -55,16 +57,24 @@ function sections(options: PickerOptions): Section[] {
     })
   }
   const byPath = new Map<string, Item[]>()
+  const plain: Item[] = []
   for (const name of options.others) {
+    // A value without a variable, such as 0: its own group, in words
+    if (literalValue(name) !== undefined) {
+      plain.push({ value: name, label: targetLabel(name), name })
+      continue
+    }
     const [path, leaf] = splitName(name)
     const items = byPath.get(path) ?? []
     items.push({ value: name, label: leaf, name })
     byPath.set(path, items)
   }
+  if (plain.length > 0)
+    result.push({ title: 'Without a variable', items: plain })
   for (const [path, items] of byPath) {
     result.push({ title: path || 'Other', items })
   }
-  result.push({ title: 'Keep', items: [LEAVE] })
+  result.push({ title: 'Keep', items: [EXCLUDE] })
   return result
 }
 

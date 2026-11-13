@@ -234,6 +234,15 @@ code {
     --_color: var(--eds-background-non-interactive-danger-emphasis);
   }
 
+  /* Kept on purpose, so drawn as an outline rather than a fill, and told
+     apart from In instance, which has the same neutral colour. */
+  &[data-category='excluded'] {
+    --_color: transparent;
+
+    box-shadow: inset 0 0 0 1.5px
+      var(--eds-border-non-interactive-neutral-emphasis);
+  }
+
   &[data-category='inInstance'] {
     --_color: var(--eds-background-non-interactive-neutral-emphasis);
   }
