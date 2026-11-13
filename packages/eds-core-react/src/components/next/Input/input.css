@@ -1,199 +1,207 @@
 @layer eds-components {
   /* Container */
   .eds-input {
-    /* Temporary alias until proper input background token is available */
-    --_bg-input: var(--eds-color-bg-canvas);
+    /* Tone slots, neutral by default; danger when invalid. Slot names match
+     * Button and Chip (#5711). */
+    --_border-muted: var(--eds-border-interactive-neutral-muted-default);
+    --_border-muted-hover: var(--eds-border-interactive-neutral-muted-hover);
+    --_border-muted-pressed: var(
+      --eds-border-interactive-neutral-muted-pressed
+    );
+    --_bg-field: var(--eds-background-input);
 
-    /* Temporary alias until proper readonly text token is available */
-    --_readonly-text-color: var(--eds-color-border-strong);
+    /* Set by the states below */
+    --_bg-color: var(--_bg-field);
+    --_border-color: var(--_border-muted);
+    --_text-color: var(--eds-text-primary);
+    --_placeholder-color: var(--eds-text-secondary);
+    --_adornment-text-color: var(--eds-text-secondary);
+    --_adornment-icon-color: var(--eds-icon-secondary);
+    --_focus-ring: none;
+    --_cursor: auto;
+    --_control-cursor: text;
+
+    /* No width token: the design uses 1px for every stroke (#5692) */
+    --_stroke-width: 1px;
+
+    /* TODO: replace 150ms with a motion token once one exists. Same duration
+     * as Button for now. */
+    --_transition-duration: 150ms;
+
+    cursor: var(--_cursor);
 
     isolation: isolate;
 
     display: flex;
     flex-direction: row;
-    gap: var(--eds-typography-gap-horizontal);
+    gap: var(--eds-spacing-3xs);
     align-items: center;
 
     box-sizing: border-box;
     inline-size: 100%;
-    padding-block: var(--eds-selectable-space-vertical);
-    padding-inline: var(--eds-selectable-space-horizontal);
-    border-radius: var(--eds-spacing-border-radius-rounded, 4px);
 
-    background: var(--_bg-input);
+    /* 8px + 20px line height + 8px gives 36px at comfortable */
+    padding-block: var(--eds-spacing-xs);
+    padding-inline: var(--eds-spacing-xs);
+    border-radius: var(--eds-corner-radius-rounded);
 
-    /* Outline instead of border to not affect height calculation */
-    outline: var(--eds-sizing-stroke-thin) solid var(--eds-color-border-subtle);
-    outline-offset: calc(-1 * var(--eds-sizing-stroke-thin));
+    font-family: var(--eds-font-family-ui);
+    font-size: var(--eds-typography-label-md-font-size);
+    font-weight: var(--eds-font-weight-normal);
+    line-height: var(--eds-typography-label-md-line-height);
+
+    background: var(--_bg-color);
+
+    /* Outline instead of border, so the border does not add to the height.
+     * TextArea, Search and Autocomplete build on this. */
+    outline: var(--_stroke-width) solid var(--_border-color);
+    outline-offset: calc(-1 * var(--_stroke-width));
+    box-shadow: var(--_focus-ring);
 
     transition:
-      background-color 150ms,
-      outline-color 150ms;
+      background-color var(--_transition-duration),
+      outline-color var(--_transition-duration);
 
-    [data-density='comfortable'] & {
-      padding-block: var(--eds-spacing-proportions-xs-vertical);
+    &[data-tone='danger'] {
+      --_border-muted: var(--eds-border-interactive-danger-muted-default);
+      --_border-muted-hover: var(--eds-border-interactive-danger-muted-hover);
+      --_border-muted-pressed: var(
+        --eds-border-interactive-danger-muted-pressed
+      );
+      --_bg-field: var(--eds-background-non-interactive-danger-muted);
     }
 
-    &:hover:not([data-disabled], [data-readonly]) {
-      outline-color: var(--eds-color-border-strong);
-
-      & > .control {
-        color: var(--eds-color-text-strong);
-
-        /* Safari autofill override */
-        -webkit-text-fill-color: var(--eds-color-text-strong);
-
-        &::placeholder {
-          color: var(--eds-color-text-strong);
-
-          /* Safari autofill override */
-          -webkit-text-fill-color: var(--eds-color-text-strong);
-        }
-      }
+    &:hover {
+      --_border-color: var(--_border-muted-hover);
     }
 
-    /* Focus ring with gap (box-shadow since outline is used for border) */
+    &:active {
+      --_border-color: var(--_border-muted-pressed);
+    }
+
+    /* A 1px ring with a 1px gap, as in Figma and Button. The outline draws
+     * the border, so the ring is a box-shadow. Focus also takes the hover
+     * border, as in Figma. */
     &:focus-within {
-      outline-color: var(--eds-color-border-strong);
-      box-shadow:
-        0 0 0 var(--eds-sizing-stroke-thin) var(--_bg-input),
-        0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
+      --_border-color: var(--_border-muted-hover);
+      --_focus-ring:
+        0 0 0 var(--_stroke-width) var(--eds-background-surface),
+        0 0 0 calc(var(--_stroke-width) * 2) var(--eds-border-interactive-focus);
     }
 
-    /* Invalid state */
-    &[data-invalid] {
-      outline-color: var(--eds-color-border-medium);
-
-      &:focus-within {
-        outline-color: var(--eds-color-border-strong);
-        box-shadow:
-          0 0 0 var(--eds-sizing-stroke-thin) var(--_bg-input),
-          0 0 0 calc(var(--eds-sizing-stroke-thin) * 2) var(--eds-color-border-focus);
-      }
+    /* Read-only and disabled have no border in Figma. :has() makes these
+     * selectors more specific than :hover, :active and :focus-within. */
+    &:has(> .control:read-only) {
+      --_border-color: transparent;
     }
 
-    /* Disabled state */
-    &[data-disabled] {
-      cursor: not-allowed;
-      outline-color: transparent;
-
-      & > .control {
-        cursor: not-allowed;
-        color: var(--eds-color-text-disabled);
-        opacity: 1;
-
-        /* Safari autofill override */
-        -webkit-text-fill-color: var(--eds-color-text-disabled);
-
-        &::placeholder {
-          color: var(--eds-color-text-disabled);
-
-          /* Safari autofill override */
-          -webkit-text-fill-color: var(--eds-color-text-disabled);
-        }
-      }
-
-      & > .adornment > .text,
-      & > .adornment > .item,
-      & > .error-icon {
-        color: var(--eds-color-text-disabled);
-      }
-    }
-
-    /* Readonly state */
-    &[data-readonly] {
-      outline-color: transparent;
-
-      & > .control {
-        color: var(--_readonly-text-color);
-
-        /* Safari autofill override */
-        -webkit-text-fill-color: var(--_readonly-text-color);
-      }
-
-      & > .adornment > .text,
-      & > .adornment > .item {
-        color: var(--_readonly-text-color);
-      }
+    /* :has(.control:disabled) instead of a prop-set attribute, so the
+     * styling also covers disabling inherited from an ancestor, e.g.
+     * fieldset[disabled] (#5412) */
+    &:has(> .control:disabled) {
+      --_border-color: transparent;
+      --_text-color: var(--eds-text-interactive-disabled);
+      --_placeholder-color: var(--eds-text-interactive-disabled);
+      --_adornment-text-color: var(--eds-text-interactive-disabled);
+      --_adornment-icon-color: var(--eds-icon-interactive-disabled);
+      --_cursor: not-allowed;
+      --_control-cursor: not-allowed;
     }
 
     /* Input/Textarea element */
     & > .control {
-      --_placeholder-text-color: var(--eds-color-text-subtle);
-
+      cursor: var(--_control-cursor);
       resize: none;
 
       overflow: hidden;
       flex: 1;
 
       min-inline-size: 0;
+      margin: 0;
       padding: 0;
-      border: var(--eds-sizing-stroke-none);
+      border: none;
 
-      color: var(--eds-color-text-strong);
+      font: inherit;
+      color: var(--_text-color);
       text-overflow: ellipsis;
       white-space: nowrap;
 
+      opacity: 1;
       background: transparent;
       outline: none;
 
+      /* Safari autofill override */
+      -webkit-text-fill-color: var(--_text-color);
+
       &::placeholder {
-        color: var(--_placeholder-text-color);
+        color: var(--_placeholder-color);
+        opacity: 1;
 
         /* Safari autofill override */
-        -webkit-text-fill-color: var(--_placeholder-text-color);
+        -webkit-text-fill-color: var(--_placeholder-color);
       }
     }
 
     /* Error icon */
     & > .error-icon {
+      display: flex;
       flex-shrink: 0;
-      color: var(--eds-color-text-subtle);
+      color: var(--eds-icon-on-default-danger);
     }
 
     /* Adornments container */
     & > .adornment {
       display: flex;
       flex-shrink: 0;
-      gap: var(--eds-typography-gap-horizontal);
+      gap: var(--eds-spacing-3xs);
       align-items: center;
 
-      color: var(--eds-color-text-subtle);
+      color: var(--_adornment-icon-color);
+
+      & > .text {
+        font-size: var(--eds-typography-label-xs-font-size);
+        line-height: var(--eds-typography-label-xs-line-height);
+        color: var(--_adornment-text-color);
+      }
 
       /* Adornment icons and buttons */
       & > .item {
         display: flex;
         align-items: center;
 
-        /* Prevent button from expanding Input (Button size="small" is 24px, Input needs 20px) */
+        /* Keep a small Button from making the Input taller than its line
+         * height */
         &:has(button) {
-          block-size: var(--eds-typography-ui-body-md-line-height-default);
+          block-size: var(--eds-typography-label-md-line-height);
         }
 
-        /* Make button fit the 20px space to match Input content height */
         & button {
-          inline-size: var(--eds-typography-ui-body-md-line-height-default);
-          block-size: var(--eds-typography-ui-body-md-line-height-default);
+          inline-size: var(--eds-typography-label-md-line-height);
+          block-size: var(--eds-typography-label-md-line-height);
           padding: 0;
         }
       }
     }
 
-    /* Negative margin aligns buttons with icon adornments
-       Applied to wrapper to avoid [data-font-family] margin override */
-
-    /* End adornment */
+    /* A button is as wide as the line height, an icon as wide as
+     * --eds-spacing-md. The negative margin lines up a button's icon with
+     * icon adornments. */
     & > .control ~ .adornment > .item:has(button) {
       margin-inline-end: calc(
-        (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
+        (var(--eds-spacing-md) - var(--eds-typography-label-md-line-height)) / 2
       );
     }
 
-    /* Start adornment */
     & > .adornment:has(~ .control) > .item:has(button) {
       margin-inline-start: calc(
-        (var(--eds-sizing-icon-xs) - var(--eds-typography-ui-body-md-line-height-default)) / 2
+        (var(--eds-spacing-md) - var(--eds-typography-label-md-line-height)) / 2
       );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eds-input {
+      --_transition-duration: 0ms;
     }
   }
 }

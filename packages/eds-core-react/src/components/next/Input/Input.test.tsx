@@ -85,6 +85,15 @@ describe('Input (Next EDS 2.0)', () => {
       expect(input).toBeDisabled()
     })
 
+    it('Is disabled when inherited from a disabled fieldset', () => {
+      render(
+        <fieldset disabled>
+          <Input aria-label="In fieldset" />
+        </fieldset>,
+      )
+      expect(screen.getByLabelText('In fieldset')).toBeDisabled()
+    })
+
     it('Has readonly attribute when readOnly', () => {
       const label = 'readonly input'
       render(
@@ -190,51 +199,45 @@ describe('Input (Next EDS 2.0)', () => {
   })
 
   describe('EDS 2.0 Token System', () => {
-    describe('Color appearance', () => {
-      it('Sets neutral appearance by default', () => {
+    describe('Tone', () => {
+      it('Sets the neutral tone by default', () => {
         render(<Input />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
+        expect(wrapper).toHaveAttribute('data-tone', 'neutral')
       })
 
-      it('Sets danger appearance when invalid', () => {
+      it('Sets the danger tone when invalid', () => {
         render(<Input invalid />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-color-appearance', 'danger')
+        expect(wrapper).toHaveAttribute('data-tone', 'danger')
       })
 
-      it('Sets neutral appearance when disabled regardless of invalid state', () => {
+      it('Sets the neutral tone when disabled regardless of invalid state', () => {
         render(<Input invalid disabled />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
+        expect(wrapper).toHaveAttribute('data-tone', 'neutral')
       })
 
-      it('Sets neutral appearance when readOnly regardless of invalid state', () => {
+      it('Sets the neutral tone when readOnly regardless of invalid state', () => {
         render(<Input invalid readOnly />)
         const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-color-appearance', 'neutral')
+        expect(wrapper).toHaveAttribute('data-tone', 'neutral')
       })
 
-      it('Input element has correct font styling attributes', () => {
-        render(<Input invalid value="test" readOnly />)
+      it('Does not set the legacy foundation attributes', () => {
+        render(<Input invalid value="test" readOnly startText="NOK" />)
         const input = screen.getByDisplayValue('test')
-        expect(input).toHaveAttribute('data-font-family', 'ui')
-        expect(input).toHaveAttribute('data-font-size', 'md')
-        expect(input).toHaveAttribute('data-line-height', 'default')
-      })
-    })
-
-    describe('Spacing attributes', () => {
-      it('Sets data-selectable-space to sm', () => {
-        render(<Input />)
-        const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-selectable-space', 'sm')
-      })
-
-      it('Sets data-space-proportions to squished', () => {
-        render(<Input />)
-        const wrapper = getInputWrapper()
-        expect(wrapper).toHaveAttribute('data-space-proportions', 'squished')
+        // eslint-disable-next-line testing-library/no-node-access
+        const wrapper = input.parentElement
+        expect(wrapper).not.toHaveAttribute('data-color-appearance')
+        expect(wrapper).not.toHaveAttribute('data-selectable-space')
+        expect(wrapper).not.toHaveAttribute('data-space-proportions')
+        expect(wrapper).not.toHaveAttribute('data-font-size')
+        expect(input).not.toHaveAttribute('data-font-family')
+        expect(input).not.toHaveAttribute('data-font-size')
+        expect(input).not.toHaveAttribute('data-line-height')
+        // eslint-disable-next-line testing-library/no-node-access
+        expect(wrapper?.querySelector('[data-baseline]')).toBeNull()
       })
     })
 
