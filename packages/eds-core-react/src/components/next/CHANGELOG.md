@@ -4,6 +4,26 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.6...eds-core-react-next@v3.0.0-beta.7) (2026-11-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Checkbox (next) sets `data-tone="accent"` instead of `data-color-appearance`, and no longer sets `data-selectable-space` or `data-space-proportions`. Checkbox needs the beta token bundle.
+* Radio (next) sets `data-tone="accent"` instead of `data-color-appearance`, and no longer sets `data-selectable-space` or `data-space-proportions`. A Radio without a label is a rounded square with the same padding and hover fill as a labelled Radio, instead of a circle. Radio needs the beta token bundle.
+* Field.Label, Field.Description and Field.HelperMessage no longer set `data-baseline`, so their text is not trimmed and Field-based components get taller labels. Field needs the beta token bundle.
+
+### 🐛 Fixed
+
+* default beta colour tokens to light when no data-color-scheme is set ([#5835](https://github.com/equinor/design-system/issues/5835)) ([b26fde5](https://github.com/equinor/design-system/commit/b26fde564e142708977665d42bfd9c2cb45445bb))
+
+
+### ♻️ Refactoring
+
+* migrate Checkbox (next) to beta tokens ([#5796](https://github.com/equinor/design-system/issues/5796)) ([11aedac](https://github.com/equinor/design-system/commit/11aedace921ac02cbbf28d9d62802304c321e089))
+* migrate Field (next) to beta tokens ([#5794](https://github.com/equinor/design-system/issues/5794)) ([e5710cd](https://github.com/equinor/design-system/commit/e5710cd03cf4316930f2a75befeb6a6b2205de64))
+* migrate Radio (next) to beta tokens ([#5803](https://github.com/equinor/design-system/issues/5803)) ([22b8515](https://github.com/equinor/design-system/commit/22b851558a36152eb0bf0adab567dcbb66e68548))
+
 ## [3.0.0-beta.6](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.5...eds-core-react-next@v3.0.0-beta.6) (2026-11-04)
 
 
