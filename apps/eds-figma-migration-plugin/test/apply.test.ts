@@ -1,4 +1,5 @@
 /** Apply: what a run changes, in what order, and which legacy modes stay. */
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { OLD } from '../src/mapping/inventory'
 import {
@@ -7,7 +8,9 @@ import {
   parseModeTarget,
   planChanges,
 } from '../src/scan/apply-plan'
-import { CLEAR_MODE, holdModes } from '../src/scan/classify'
+import { CLEAR_MODE, classifyUnits, holdModes } from '../src/scan/classify'
+import { unpackFixture } from '../src/scan/fixture'
+import type { PackedFixture } from '../src/scan/fixture'
 import { NO_OVERRIDES } from '../src/scan/mapping'
 import type { BindingRecord } from '../src/scan/types'
 
@@ -200,6 +203,85 @@ describe('instance overrides', () => {
       new Set(['frame']),
     )
     expect(plan.map((change) => change.record.id)).toEqual(['override'])
+  })
+})
+
+describe('legacy modes an instance overrides', () => {
+  const overridden = mode('icon-item', OLD.appearance, CLEAR_MODE, {
+    instanceId: 'adornment',
+    override: true,
+  })
+
+  it('clears the mode when nothing below it uses legacy variables', () => {
+    const records = holdModes([
+      overridden,
+      binding('icon', 'migrated', {
+        modeHolders: ['icon-item'],
+        instanceId: 'adornment',
+      }),
+    ])
+    expect(records[0].category).toBe('sure')
+    const plan = planChanges(records, NO_OVERRIDES, new Set(['frame']))
+    expect(plan.map((change) => change.record.id)).toEqual([overridden.id])
+  })
+
+  it('waits in Inside instances while values from the main component read it', () => {
+    const [held] = holdModes([
+      overridden,
+      binding('icon', 'inInstance', {
+        oldKey: `${OLD.appearance}/Icon/Default`,
+        modeHolders: ['icon-item'],
+        instanceId: 'adornment',
+        reads: [OLD.appearance],
+      }),
+    ])
+    expect(held).toMatchObject({
+      category: 'inInstance',
+      rule: 'mode/from-main',
+      override: true,
+    })
+    expect(held.candidates).toBeUndefined()
+    expect(planChanges([held], NO_OVERRIDES, new Set(['frame']))).toEqual([])
+  })
+
+  it('is kept as No equivalent while values the instance overrides read it', () => {
+    const [held] = holdModes([
+      overridden,
+      binding('icon', 'none', {
+        oldKey: `${OLD.appearance}/Icon/Default`,
+        modeHolders: ['icon-item'],
+        instanceId: 'adornment',
+        override: true,
+        reads: [OLD.appearance],
+      }),
+    ])
+    expect(held).toMatchObject({ category: 'none', rule: 'mode/kept' })
+  })
+})
+
+describe('a legacy mode an instance overrides (Core Components, Text Field)', () => {
+  // Scanned 2026-11-16: ↳ ↳ Leading Icon Item in ↳ Right Adornment sets
+  // 🎨 Appearance: Neutral, which its main component does not, and every
+  // value below it is EDS Beta.
+  const fixture = JSON.parse(
+    readFileSync(
+      new URL('./fixtures/text-field-instance-mode.json', import.meta.url),
+      'utf8',
+    ),
+  ) as PackedFixture
+
+  it('is Ready and cleared by Apply', () => {
+    const records = classifyUnits(unpackFixture(fixture))
+    const mode = records.find((record) => record.property.type === 'mode')
+    expect(mode).toMatchObject({
+      nodeName: '↳ ↳ Leading Icon Item',
+      category: 'sure',
+      override: true,
+      candidates: [CLEAR_MODE],
+      rule: 'mode/clear',
+    })
+    const plan = planChanges(records, NO_OVERRIDES, new Set(['113:420']))
+    expect(plan.map((change) => change.record.id)).toEqual([mode?.id])
   })
 })
 

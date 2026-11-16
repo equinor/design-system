@@ -297,6 +297,16 @@ every change on the layer and the layers below it, the row lists the
 variables the instance sets there, each with its EDS Beta value to set again.
 A size on the instance itself is not affected: a plugin can bind that.
 
+An explicit mode works the same way: a legacy mode the instance sets itself,
+on the instance or on a layer inside it, goes through the modes in section 3,
+and a mode it takes from its main component is Inside instances (decided
+2026-11-16). Core Components has Text Field instances whose
+`↳ ↳ Leading Icon Item` sets the legacy `🎨 Appearance` mode Neutral, while
+nothing below it uses legacy variables any more: the mode is Ready and Apply
+clears it. A mode the instance sets itself that values from the main
+component still read stays in Inside instances (rule `mode/from-main`),
+because it can only be cleared after the main component is migrated.
+
 When the layer is an instance and the reset would give an EDS Beta variable
 or a number, the plugin can make the fix itself (target `reset:<variable>`).
 It is never applied as the rule's outcome: a designer accepts it in Review,

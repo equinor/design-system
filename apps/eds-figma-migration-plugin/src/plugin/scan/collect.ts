@@ -19,6 +19,7 @@ import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
 import { readLog } from '../apply/log'
 import {
   effectVariableId,
+  explicitModeId,
   fieldVariableId,
   InstanceOverrides,
   paintVariableId,
@@ -564,10 +565,16 @@ export class Collector {
     // Explicit modes
     for (const [collectionId, modeId] of Object.entries(explicit)) {
       const collection = await this.collection(collectionId)
+      const property: PropertyRef = { type: 'mode', collectionId }
+      const override = await owns(
+        property,
+        (counterpart) => explicitModeId(counterpart, collectionId) === modeId,
+      )
       push({
         ...base,
+        ...(override ? { override: true } : {}),
         unit: 'mode',
-        property: { type: 'mode', collectionId },
+        property,
         collectionId,
         collectionKey: await this.collectionKey(collectionId),
         collectionName: collection?.name ?? collectionId,

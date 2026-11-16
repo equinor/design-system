@@ -61,7 +61,9 @@ plugin can change in the scope.
 
 A value an instance overrides itself, such as an icon you swapped and gave
 another size, gets a status like any other layer, because changing the main
-component does not change it. Figma lets nobody change the width or height
+component does not change it. So does a legacy mode set on a layer inside an
+instance, such as an Appearance mode left on an icon after its colours were
+migrated: Apply clears it once nothing below it uses legacy variables. Figma lets nobody change the width or height
 of a layer inside an instance, in the editor or from a plugin, so a legacy
 size there is marked **Manual fix**. This happens when an icon was swapped
 while its slot still used a legacy size: the swap copied the size onto the

@@ -35,8 +35,18 @@ designer accepts it in Review; `src/plugin/apply/reset.ts` reads the layer's
 overrides, calls `removeOverrides()`, swaps it back, sets the overrides
 again and reads them back, and refuses a layer with an override it cannot
 copy. Apply reads every binding back to report the ones Figma did not
-take. Explicit modes inside instances are not checked for
-overrides yet.
+take. An explicit mode on a layer inside an instance is the instance's own
+when `overrides` lists `explicitVariableModes` for that layer and the layer
+at the same place in the main component sets another mode, or none, for the
+collection. Such a mode goes through the mode rules and is cleared once
+nothing below it uses legacy variables (Core Components, Text Field:
+`↳ ↳ Leading Icon Item` in `↳ Right Adornment` sets the legacy Appearance
+mode Neutral, and its main component sets none). While values the instance
+takes from its main component read the mode, it stays in Inside instances
+(rule `mode/from-main`). Clearing a mode on a layer inside an instance and
+setting it again both work from a plugin, also when the main component's
+layer sets another mode; the layer then has no mode, not the main
+component's (tested on FRIOD 2026-11-16).
 
 The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md),
 and the guide for designers in [`docs/designer-guide.md`](./docs/designer-guide.md).

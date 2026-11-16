@@ -467,7 +467,11 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
       modeName: unit.modeName,
     },
   }
-  if (unit.instanceId) return { ...base, ...old, category: 'inInstance' }
+  // A mode the instance takes from its main component changes there; a
+  // mode the instance sets itself goes through the rules like any override.
+  if (unit.instanceId && !unit.override) {
+    return { ...base, ...old, category: 'inInstance' }
+  }
   const resolution = resolveMode({
     collectionKey: unit.collectionKey,
     modeName: unit.modeName,
@@ -601,6 +605,12 @@ function staysAsItIs(record: BindingRecord): boolean {
  */
 export function holdModes(records: BindingRecord[]): BindingRecord[] {
   const forGood = blockedModes(records, staysAsItIs)
+  // For a mode an instance overrides: the values below that stay because
+  // the instance has them as its own, not from its main component.
+  const ownForGood = blockedModes(
+    records,
+    (record) => staysAsItIs(record) && record.category !== 'inInstance',
+  )
   const untilReview = blockedModes(
     records,
     (record) => record.category === 'check',
@@ -634,6 +644,21 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
       setsMode && newModes.has(`${record.nodeId}|${target.split(':')[0]}`)
     if (setsMode && !alreadySet) {
       return { ...record, reason: `${record.reason ?? ''}. ${stays}` }
+    }
+    // A mode an instance sets itself, held only by values the instance
+    // takes from its main component, waits for the main component like
+    // those values do, so it is counted with them.
+    if (record.override && forGood.has(key) && !ownForGood.has(key)) {
+      const { outcome, candidates, ...rest } = record
+      void outcome
+      void candidates
+      return {
+        ...rest,
+        category: 'inInstance',
+        reason:
+          'The instance sets this legacy mode itself, and layers below it take legacy values from the main component through it. Update the main component first. The plugin clears the mode once nothing below it uses legacy variables.',
+        rule: 'mode/from-main',
+      }
     }
     return {
       ...record,

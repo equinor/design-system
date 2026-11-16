@@ -11,6 +11,11 @@
  * place in the main component settles that: the value is an override when
  * that layer binds another variable, or when there is no such layer, as
  * below a swapped instance. Checked in EDS Core Components on 2026-11-13.
+ *
+ * A mode the instance sets on a layer is listed as `explicitVariableModes`,
+ * and a mode it takes from the main component is not. Core Components has
+ * Text Field instances whose `↳ ↳ Leading Icon Item` sets the legacy
+ * Appearance mode while the main component's layer sets none (2026-11-16).
  */
 import type { PropertyRef } from '../../scan/types'
 
@@ -45,7 +50,7 @@ function overrideFields(property: PropertyRef): string[] {
         'styledTextSegments',
       ]
     case 'mode':
-      return []
+      return ['explicitVariableModes']
   }
 }
 
@@ -124,6 +129,16 @@ function aliasId(value: unknown): string | undefined {
     value !== null &&
     (value as { type?: unknown }).type === 'VARIABLE_ALIAS'
     ? (value as VariableAlias).id
+    : undefined
+}
+
+/** The mode a layer sets for a collection, or undefined when it sets none. */
+export function explicitModeId(
+  node: SceneNode,
+  collectionId: string,
+): string | undefined {
+  return 'explicitVariableModes' in node
+    ? (node.explicitVariableModes as Record<string, string>)[collectionId]
     : undefined
 }
 

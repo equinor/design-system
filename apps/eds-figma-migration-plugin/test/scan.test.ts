@@ -300,6 +300,35 @@ describe('classifyUnit', () => {
       category: 'migrated',
     })
   })
+
+  it('maps a legacy mode an instance overrides, and leaves one it inherits', () => {
+    // Core Components, Text Field: ↳ ↳ Leading Icon Item in ↳ Right
+    // Adornment sets Appearance: Neutral, which its main component does not.
+    const mode = (override: boolean): RawUnit => ({
+      ...base,
+      instanceId: 'I113:436',
+      ...(override ? { override: true as const } : {}),
+      unit: 'mode',
+      property: {
+        type: 'mode',
+        collectionId: `VariableCollectionId:${OLD.appearance}/7002:1353`,
+      },
+      collectionId: `VariableCollectionId:${OLD.appearance}/7002:1353`,
+      collectionKey: OLD.appearance,
+      collectionName: '🎨 Appearance',
+      modeId: '3:3',
+      modeName: 'Neutral',
+      context: context(['↳ ↳ Leading Icon Item']),
+    })
+    expect(classifyUnit(mode(true))).toMatchObject({
+      category: 'sure',
+      override: true,
+      rule: 'mode/clear',
+    })
+    expect(classifyUnit(mode(false))).toMatchObject({
+      category: 'inInstance',
+    })
+  })
 })
 
 describe('property groups', () => {
