@@ -185,7 +185,9 @@ of a page or the file it opens on **Frames**, where the work is.
 
 Targets can be changed for one value, one row or many values at a time:
 **Change** on a value wins over its row, the target of a row changes every
-value in it, and ticking values opens a bar with **Apply**, **Change
+value in it and replaces the choices made on single values there, such as the
+ones Review saves (otherwise a row change on a reviewed value showed nowhere;
+`rowChoiceChanges` in `src/scan/mapping.ts`), and ticking values opens a bar with **Apply**, **Change
 target**, **Exclude**, **Reset choices** and **Clear selection**. Apply there
 makes only the Ready changes among the ticked values (the `apply-selected`
 message), behind the same kind of confirmation as Apply in the footer.

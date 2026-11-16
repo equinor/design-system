@@ -12,6 +12,7 @@
 import type { BindingKind, Outcome } from '../mapping/types'
 import type { ColorScheme } from '../mapping/scheme'
 import type { BindingRecord, Category, Density, PropertyGroup } from './types'
+import type { OverrideChange } from '../shared/messages'
 
 /** A chosen target, or null to leave the legacy binding as it is. */
 export type OverrideValue = string | null
@@ -230,6 +231,52 @@ export function bindingOutcome(
 ): BindingOutcome {
   const target = resolveTarget(binding.id, row.key, row.proposal, overrides)
   return { ...target, category: categoryAfter(row.outcome, target) }
+}
+
+/** The values in a row with a choice of their own, which wins over the row's. */
+export function ownChoices(row: MappingRow, overrides: Overrides): number {
+  return row.bindings.filter((binding) => binding.id in overrides.records)
+    .length
+}
+
+/** The target every value in the row gets, or undefined when they differ. */
+export function rowCurrent(
+  row: MappingRow,
+  overrides: Overrides,
+): OverrideValue | undefined {
+  const targets = new Set(
+    row.bindings.map(
+      (binding) => bindingOutcome(row, binding, overrides).target,
+    ),
+  )
+  return targets.size === 1 ? [...targets][0] : undefined
+}
+
+/**
+ * The changes a choice on a row makes. It reaches every value in the row, so
+ * it also removes the choices made on single values there, such as the ones
+ * Review saves: otherwise those win, and the row's change shows nowhere.
+ * Undefined undoes the row's change and those choices.
+ */
+export function rowChoiceChanges(
+  row: MappingRow,
+  value: OverrideValue | undefined,
+  overrides: Overrides,
+): OverrideChange[] {
+  return [
+    {
+      target: { type: 'row', key: row.key },
+      // Choosing the proposal again on a Ready row is no change; on a row
+      // that needs a check, it settles the row.
+      value:
+        value === row.proposal && row.outcome === 'sure' ? undefined : value,
+    },
+    ...row.bindings
+      .filter((binding) => binding.id in overrides.records)
+      .map((binding): OverrideChange => ({
+        target: { type: 'record', id: binding.id },
+      })),
+  ]
 }
 
 /** How many bindings get each target, most first. */

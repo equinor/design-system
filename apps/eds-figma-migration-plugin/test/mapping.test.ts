@@ -11,9 +11,13 @@ import {
   effectiveCategory,
   effectiveTarget,
   NO_OVERRIDES,
+  rowChoiceChanges,
+  rowCurrent,
   rowKey,
   targetCounts,
 } from '../src/scan/mapping'
+import type { Overrides } from '../src/scan/mapping'
+import type { OverrideChange } from '../src/shared/messages'
 import { recount } from '../src/scan/summary'
 import { reviewItems } from '../src/ui/review'
 import { selectionStatus } from '../src/ui/selection'
@@ -345,6 +349,71 @@ describe('targetCounts', () => {
     expect(targetCounts(none?.rows ?? [], NO_OVERRIDES)).toEqual([
       { target: null, noEquivalent: true, count: 1 },
     ])
+  })
+})
+
+describe('a change on a row', () => {
+  /** What the plugin does with the changes (code.ts, setOverrides). */
+  const store = (overrides: Overrides, changes: OverrideChange[]) => {
+    const records = { ...overrides.records }
+    const rows = { ...overrides.rows }
+    for (const { target, value } of changes) {
+      const map = target.type === 'record' ? records : rows
+      const key = target.type === 'record' ? target.id : target.key
+      if (value === undefined) delete map[key]
+      else map[key] = value
+    }
+    return { records, rows }
+  }
+
+  // A text colour that needed a check, accepted in Review, then changed on
+  // its row (Internal Components, 2026-11-16).
+  const [group] = buildMappingGroups([
+    {
+      ...record(
+        'title',
+        'Bg/Accent/Fill Emphasis/Default',
+        'check',
+        'background/non-interactive/accent/emphasis',
+      ),
+      kind: 'textFill',
+    },
+  ])
+  const row = group.rows[0]
+  const reviewed = {
+    records: { title: 'background/non-interactive/accent/emphasis' },
+    rows: {},
+  }
+
+  it('reaches values that have a choice of their own', () => {
+    const after = store(
+      reviewed,
+      rowChoiceChanges(row, 'text/on-muted/accent', reviewed),
+    )
+    expect(rowCurrent(row, after)).toBe('text/on-muted/accent')
+    expect(bindingOutcome(row, row.bindings[0], after)).toEqual({
+      target: 'text/on-muted/accent',
+      source: 'row',
+      category: 'sure',
+    })
+  })
+
+  it('undoes the row and the choices on its values', () => {
+    const after = store(reviewed, rowChoiceChanges(row, undefined, reviewed))
+    expect(after).toEqual({ records: {}, rows: {} })
+    expect(bindingOutcome(row, row.bindings[0], after).category).toBe('check')
+  })
+
+  it('says nothing is in force when the values differ', () => {
+    const [ready] = buildMappingGroups(records)
+    const split = {
+      records: { 'card-1': 'border/non-interactive/neutral/default' },
+      rows: {},
+    }
+    expect(rowCurrent(ready.rows[0], split)).toBeUndefined()
+    expect(rowCurrent(ready.rows[0], NO_OVERRIDES)).toBe(
+      'border/non-interactive/neutral/muted',
+    )
   })
 })
 

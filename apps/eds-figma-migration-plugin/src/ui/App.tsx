@@ -4,7 +4,14 @@ import { tune } from '@equinor/eds-icons'
 import { schemesOf } from '../mapping/scheme'
 import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
-import { NO_OVERRIDES, effectiveTarget, rowKey } from '../scan/mapping'
+import {
+  NO_OVERRIDES,
+  effectiveTarget,
+  ownChoices,
+  rowChoiceChanges,
+  rowCurrent,
+  rowKey,
+} from '../scan/mapping'
 import type {
   MappingBinding,
   MappingGroup,
@@ -824,7 +831,7 @@ export function App() {
   }
 
   const changeRow = (group: MappingGroup, row: MappingRow) => {
-    const changed = row.key in overrides.rows
+    const own = ownChoices(row, overrides)
     const kinds = [
       ...new Set(
         row.bindings
@@ -832,23 +839,23 @@ export function App() {
           .filter((kind): kind is BindingKind => kind !== undefined),
       ),
     ]
+    const all = row.count === 1 ? 'the value' : `all ${row.count} values`
+    const replaced =
+      own === 0
+        ? ''
+        : own === row.count
+          ? row.count === 1
+            ? ' The value has a choice of its own, which this replaces.'
+            : ' Each of them has a choice of its own, which this replaces.'
+          : ` ${own} of them have a choice of their own, which this replaces.`
     setPicker({
       title: group.old,
-      description: `Changes all ${row.count} value${row.count === 1 ? '' : 's'} in this row. A change on a single value wins over it.`,
+      description: `Changes ${all} in this row.${replaced}`,
       schemes: schemesOf(row.bindings),
       subject: { kinds, group: group.group, candidates: row.candidates },
-      current: changed ? overrides.rows[row.key] : (row.proposal ?? null),
-      changed,
-      onSave: (value) =>
-        sendOverrides([
-          {
-            target: { type: 'row', key: row.key },
-            value:
-              value === row.proposal && row.outcome === 'sure'
-                ? undefined
-                : value,
-          },
-        ]),
+      current: rowCurrent(row, overrides),
+      changed: row.key in overrides.rows || own > 0,
+      onSave: (value) => sendOverrides(rowChoiceChanges(row, value, overrides)),
     })
   }
 
