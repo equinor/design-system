@@ -8,7 +8,12 @@ import type { OverrideValue } from '../../scan/mapping'
 import { pathBelow } from '../paths'
 import { plainReason, targetMeaning } from '../plain'
 import type { ReviewItem } from '../review'
-import { DECIDE_LATER_LABEL, targetLabel } from '../targets'
+import { REMOVE_ANYWAY } from '../../scan/classify'
+import {
+  DECIDE_LATER_LABEL,
+  REMOVE_ANYWAY_OPTION,
+  targetLabel,
+} from '../targets'
 import { ResetEffects } from './ResetEffects'
 import { VariableList } from './VariableList'
 
@@ -19,6 +24,11 @@ type ReviewViewProps = {
   items: ReviewItem[]
   /** Entry id → name, to say which frame a binding is in */
   entryNames: Map<string, string>
+  /**
+   * Legacy modes that values below read and the next Apply leaves, with
+   * what clearing each waits for, from the plugin (apply-plan.ts, modeWaits)
+   */
+  blocked?: Record<string, string>
   onSelect: (nodeIds: string[]) => void
   /** Stores a choice for one binding: a target, or DECIDE_LATER */
   onDecide: (item: ReviewItem, value: OverrideValue) => void
@@ -41,6 +51,7 @@ type ReviewViewProps = {
 export function ReviewView({
   items,
   entryNames,
+  blocked = {},
   onSelect,
   onDecide,
   run = 'Apply',
@@ -50,6 +61,9 @@ export function ReviewView({
   const [decisions, setDecisions] = useState<Decision[]>([])
   const item = items[index] as ReviewItem | undefined
   const [value, setValue] = useState<string | undefined>(item?.row.proposal)
+  // A legacy mode that values below read: confirming its proposal clears it
+  // once nothing below reads it, and removing it anyway is its own choice.
+  const waitsFor = item ? blocked[item.binding.id] : undefined
   const options = useMemo(
     () =>
       item
@@ -57,9 +71,10 @@ export function ReviewView({
             kinds: item.binding.kind ? [item.binding.kind] : [],
             group: item.group.group,
             candidates: item.row.candidates,
+            ...(waitsFor ? { extra: REMOVE_ANYWAY_OPTION } : {}),
           })
         : { proposed: [], others: [] },
-    [item],
+    [item, waitsFor],
   )
 
   // Show the layer on the canvas at every step.
@@ -189,6 +204,14 @@ export function ReviewView({
             <ResetEffects effects={binding.resetEffects} />
           </div>
         )}
+        {waitsFor && (
+          <div className="review-reason">
+            <strong>Waits for the values below: </strong>
+            clearing it waits until {waitsFor}. Confirming keeps the legacy mode
+            until then, and it counts as Waiting. Removing it anyway removes it
+            in the next run, and the legacy values below that read it change.
+          </div>
+        )}
         {!isManualFix && reason && (
           <div className="review-reason">
             <strong>
@@ -272,11 +295,15 @@ export function ReviewView({
             >
               {value === DECIDE_LATER
                 ? DECIDE_LATER_LABEL
-                : isProposal
-                  ? isStandIn
-                    ? 'Use the stand-in'
-                    : 'Confirm proposal'
-                  : 'Use this target'}
+                : value === REMOVE_ANYWAY
+                  ? 'Remove anyway'
+                  : isProposal
+                    ? waitsFor
+                      ? 'Clear it once nothing below reads it'
+                      : isStandIn
+                        ? 'Use the stand-in'
+                        : 'Confirm proposal'
+                    : 'Use this target'}
             </Button>
             <Button variant="secondary" onClick={() => next('skipped')}>
               Skip

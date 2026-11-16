@@ -2,8 +2,14 @@ import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { Button, Chip } from '@equinor/eds-core-react/next'
 import { resetEffectsText } from '../../scan/classify'
-import { bindingOutcome, isUndecided } from '../../scan/mapping'
+import {
+  bindingOutcome,
+  isUndecided,
+  keptModeText,
+  NO_KEPT_MODES,
+} from '../../scan/mapping'
 import type {
+  KeptModes,
   MappingBinding,
   MappingGroup,
   MappingRow,
@@ -11,7 +17,7 @@ import type {
 } from '../../scan/mapping'
 import { PROPERTY_GROUPS } from '../../scan/types'
 import type { PropertyGroup } from '../../scan/types'
-import { CATEGORY_LABELS, isHeld, propertyLabel, values } from '../labels'
+import { CATEGORY_LABELS, propertyLabel, values } from '../labels'
 import { pathBelow } from '../paths'
 import type { Selection } from '../selection'
 import { BindingRow } from './BindingRow'
@@ -31,6 +37,11 @@ export type ChangesTab = PropertyGroup | 'typography-component'
 type MappingViewProps = {
   groups: MappingGroup[]
   overrides: Overrides
+  /**
+   * The legacy modes the next Apply keeps, from the plugin: one that is
+   * only cleared shows as Waiting, with what it waits for
+   */
+  kept?: KeptModes
   /** Entry id → name, to say which frame a binding is in */
   entryNames: Map<string, string>
   selection: Selection
@@ -108,6 +119,7 @@ function sectionOf(item: Item): string {
 export function MappingView({
   groups,
   overrides,
+  kept = NO_KEPT_MODES,
   entryNames,
   selection,
   showCounts = true,
@@ -166,7 +178,7 @@ export function MappingView({
 
   const matches = (row: MappingRow, binding: MappingBinding) =>
     status === 'all' ||
-    bindingOutcome(row, binding, overrides).category === status
+    bindingOutcome(row, binding, overrides, kept).category === status
   // Every value Apply can change is listed, Manual fixes included: an
   // accepted fix is Ready and counted in Apply, so it has to show here too.
   const items: Item[] = groups.flatMap((group) =>
@@ -264,7 +276,7 @@ export function MappingView({
                   const count = countIn(
                     inTab,
                     (row, binding) =>
-                      bindingOutcome(row, binding, overrides).category ===
+                      bindingOutcome(row, binding, overrides, kept).category ===
                       outcome,
                   )
                   return count > 0 ? (
@@ -324,6 +336,7 @@ export function MappingView({
                           key={row.key}
                           item={item}
                           overrides={overrides}
+                          kept={kept}
                           showCounts={showCounts}
                           selection={selection}
                           open={open.has(row.key)}
@@ -338,7 +351,13 @@ export function MappingView({
                                 .filter((binding) => matches(row, binding))
                                 .map((binding) => {
                                   const { outcome, target, note } =
-                                    bindingTarget(row, binding, overrides)
+                                    bindingTarget(
+                                      row,
+                                      binding,
+                                      overrides,
+                                      'Apply',
+                                      kept,
+                                    )
                                   // Changes lists a Manual fix only when the
                                   // plugin can make it.
                                   const effects = manual
@@ -347,6 +366,12 @@ export function MappingView({
                                         true,
                                       )
                                     : undefined
+                                  // A legacy mode the next Apply keeps says
+                                  // what it waits for: as its reason while it
+                                  // waits, beside the new mode once it sets
+                                  // one.
+                                  const keptText =
+                                    outcome.kept && keptModeText(outcome.kept)
                                   return (
                                     <BindingRow
                                       key={binding.id}
@@ -363,9 +388,17 @@ export function MappingView({
                                       binding.reason
                                         ? { reason: binding.reason }
                                         : {})}
-                                      effects={effects ? [effects] : []}
+                                      {...(keptText && outcome.held
+                                        ? { reason: keptText }
+                                        : {})}
+                                      effects={[
+                                        ...(effects ? [effects] : []),
+                                        ...(keptText && !outcome.held
+                                          ? [keptText]
+                                          : []),
+                                      ]}
                                       category={outcome.category}
-                                      held={isHeld(outcome.category, row.rule)}
+                                      held={outcome.held}
                                       {...(binding.override
                                         ? { origin: 'override' as const }
                                         : {})}
@@ -415,6 +448,7 @@ export function MappingView({
       <WhyDialog
         item={why}
         overrides={overrides}
+        kept={kept}
         onClose={() => setWhy(undefined)}
         onChangeRow={onChangeRow}
       />

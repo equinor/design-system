@@ -35,8 +35,22 @@ import type {
   RawVariable,
 } from './types'
 
-/** The target of a legacy mode that is only cleared, with no new mode set. */
+/**
+ * The target of a legacy mode that is only cleared, with no new mode set.
+ * Apply clears the mode once no value below it reads it; while one does,
+ * the run keeps the mode (apply-plan.ts, keptModeChanges). The proposal and
+ * a designer's choice of it mean the same.
+ */
 export const CLEAR_MODE = 'clear'
+
+/**
+ * A designer's choice to remove a legacy mode in the next run although
+ * values below it read it, so those values change. Never a proposal: the
+ * picker offers it only on a legacy mode that waits (Waiting), with a label
+ * that says what changes. Apply clears the mode as for CLEAR_MODE, without
+ * keeping it, and logs the change as confirmed.
+ */
+export const REMOVE_ANYWAY = 'remove-anyway'
 
 export function propertyKey(property: PropertyRef): string {
   switch (property.type) {
@@ -616,6 +630,19 @@ export function blockedModes(
   records: BindingRecord[],
   stays: (record: BindingRecord) => boolean,
 ): Set<string> {
+  return new Set(modeBlockers(records, stays).keys())
+}
+
+/**
+ * The same as blockedModes, with the bindings that keep each mode: for
+ * every `nodeId|collectionKey`, the bindings below it that stay and read
+ * it, in the order of the records. What a kept mode waits for is named
+ * from them (apply-plan.ts, keptModes).
+ */
+export function modeBlockers(
+  records: BindingRecord[],
+  stays: (record: BindingRecord) => boolean,
+): Map<string, BindingRecord[]> {
   const held = new Map<string, string[]>()
   for (const record of records) {
     if (record.property.type !== 'mode' || !record.oldMode) continue
@@ -623,7 +650,7 @@ export function blockedModes(
     list.push(record.oldMode.collectionKey)
     held.set(record.nodeId, list)
   }
-  const blocked = new Set<string>()
+  const blocked = new Map<string, BindingRecord[]>()
   for (const record of records) {
     if (record.property.type === 'mode' || !stays(record)) continue
     const key = bindingCollectionKey(record)
@@ -642,7 +669,8 @@ export function blockedModes(
           continue
         }
         claimed.add(collection)
-        blocked.add(`${holder}|${collection}`)
+        const key = `${holder}|${collection}`
+        blocked.set(key, [...(blocked.get(key) ?? []), record])
       }
     }
   }
@@ -733,8 +761,9 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
       ...record,
       category: 'none',
       outcome: 'none',
-      // Removing the mode is still offered, for a designer who accepts that
-      // the legacy values below change.
+      // Clearing stays the proposal: Apply makes it once nothing below reads
+      // the mode. A designer who accepts that the legacy values below change
+      // can choose REMOVE_ANYWAY in the picker instead.
       candidates: [CLEAR_MODE],
       reason: stays,
       rule: forGood.has(key) ? 'mode/kept' : 'mode/after-review',

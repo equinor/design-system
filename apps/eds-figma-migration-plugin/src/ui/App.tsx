@@ -6,6 +6,7 @@ import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
 import {
   DECIDE_LATER,
+  NO_KEPT_MODES,
   NO_OVERRIDES,
   effectiveTarget,
   ownChoices,
@@ -14,6 +15,7 @@ import {
   rowKey,
 } from '../scan/mapping'
 import type {
+  KeptModes,
   MappingBinding,
   MappingGroup,
   MappingRow,
@@ -83,6 +85,7 @@ import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
 import { reviewItems } from './review'
 import type { ReviewItem } from './review'
+import { modePickerExtra, modePickerNote } from './targets'
 import { selectionStatus, useSelection } from './selection'
 import type { Selection } from './selection'
 
@@ -109,6 +112,7 @@ function Overview({
   onView,
   mapping,
   overrides,
+  kept,
   onOpen,
   onGoTo,
   onSelectOld,
@@ -139,6 +143,8 @@ function Overview({
   onView: (view: View) => void
   mapping: MappingGroup[]
   overrides: Overrides
+  /** The legacy modes the next Apply keeps, from the plugin */
+  kept: KeptModes
   onOpen: (entry: EntrySummary) => void
   onGoTo: (entry: EntrySummary) => void
   onSelectOld: (oldKey: string) => void
@@ -237,6 +243,7 @@ function Overview({
       mapping,
       overrides,
       new Set(components.map((entry) => entry.id)),
+      kept,
     ).length,
     where:
       componentsReady.length === 0
@@ -359,6 +366,7 @@ function Overview({
           <MappingView
             groups={changes}
             overrides={overrides}
+            kept={kept}
             entryNames={entryNames}
             showCounts={showCounts}
             inInstances={totals.inInstance}
@@ -458,6 +466,7 @@ function Overview({
             mainComponents={componentFooter.mainComponents}
             done={componentFooter.done}
             busy={busy}
+            preview={{ entryIds: componentFooter.entryIds }}
             onReview={() => onReview(componentFooter.entryIds)}
             onApply={() => onApply(componentFooter.entryIds)}
           />
@@ -465,11 +474,12 @@ function Overview({
           <ApplyActions
             key="scope"
             ready={totals.sure}
-            toReview={reviewItems(mapping, overrides).length}
+            toReview={reviewItems(mapping, overrides, undefined, kept).length}
             where={reach ?? 'in the scope'}
             mainComponents={mainComponents}
             done={healthOf(totals) === 1}
             busy={busy}
+            preview={{ entryIds: applied.map((entry) => entry.id) }}
             onReview={() => onReview()}
             onApply={() => onApply(applied.map((entry) => entry.id))}
           />
@@ -531,6 +541,12 @@ export function App() {
   const [report, setReport] = useState<Report>()
   const [choicesNotSaved, setChoicesNotSaved] = useState(false)
   const [overrides, setOverrides] = useState<Overrides>(NO_OVERRIDES)
+  // The legacy modes the next Apply keeps, which the plugin works out with
+  // every count, so the window counts them as the health bar does.
+  const [kept, setKept] = useState<KeptModes>(NO_KEPT_MODES)
+  // Every legacy mode that values below read and the next Apply leaves,
+  // with what clearing it waits for, for the pickers and Review.
+  const [blocked, setBlocked] = useState<Record<string, string>>({})
   const [picker, setPicker] = useState<PickerRequest>()
   const [devExport, setDevExport] = useState<{
     files: DevExportFile[]
@@ -666,6 +682,10 @@ export function App() {
         case 'summary':
           setSummary(message.summary)
           break
+        case 'kept-modes':
+          setKept(message.kept)
+          setBlocked(message.blocked)
+          break
         case 'stale':
           setStale(true)
           break
@@ -795,27 +815,33 @@ export function App() {
    * the binding's own change, unless its row has a change that would then
    * apply instead. On a binding that needs a check or has no equivalent,
    * choosing the proposal is kept: it settles the binding, which then counts
-   * as Ready. Decide later is always kept, since it is never the proposal.
+   * as Ready. Saving the choice the binding has already keeps it. Decide
+   * later is always kept, since it is never the proposal.
    */
   const recordValue = (
     value: OverrideValue | undefined,
     proposal: string | undefined,
     rowChanged: boolean,
     settles: boolean,
+    stored: OverrideValue | undefined,
   ) =>
-    value === undefined || (value === proposal && !rowChanged && !settles)
+    value === undefined ||
+    (value === proposal && !rowChanged && !settles && stored !== value)
       ? undefined
       : value
 
   const changeRecord = (record: BindingRecord) => {
     const current = effectiveTarget(record, overrides)
     const rowChanged = rowKey(record) in overrides.rows
+    // A legacy mode that waits for values below it offers removing it anyway.
+    const waits = modePickerNote([record.id], blocked)
+    const extra = modePickerExtra([record.id], blocked)
     setPicker({
       title: record.old ?? record.nodeName,
       description:
         record.category === 'byHand'
           ? `${record.nodeName}, ${propertyLabel(record.property)}. ${MANUAL_FIX_PICKER}`
-          : `${record.nodeName}, ${propertyLabel(record.property)}. Changes this value only, and wins over a change on its row.`,
+          : `${record.nodeName}, ${propertyLabel(record.property)}. Changes this value only, and wins over a change on its row.${waits ? ` ${waits}` : ''}`,
       schemes: [record.scheme ?? 'light'],
       subject: {
         // A Manual fix offers the plugin's fix or Decide later, never
@@ -823,6 +849,7 @@ export function App() {
         kinds: record.kind && record.category !== 'byHand' ? [record.kind] : [],
         group: record.group,
         candidates: record.candidates ?? [],
+        ...(extra ? { extra } : {}),
       },
       current: current.target,
       changed: current.source === 'record',
@@ -835,6 +862,7 @@ export function App() {
               record.candidates?.[0],
               rowChanged,
               record.category !== 'sure',
+              overrides.records[record.id],
             ),
           },
         ]),
@@ -849,16 +877,19 @@ export function App() {
     const own = binding.id in overrides.records
     const rowChanged = row.key in overrides.rows
     const manual = row.outcome === 'byHand'
+    const waits = modePickerNote([binding.id], blocked)
+    const extra = modePickerExtra([binding.id], blocked)
     setPicker({
       title: group.old,
       description: manual
         ? `${binding.nodeName}, ${propertyLabel(binding.property)}. ${MANUAL_FIX_PICKER}`
-        : `${binding.nodeName}, ${propertyLabel(binding.property)}. Changes this value only, and wins over a change on its row.`,
+        : `${binding.nodeName}, ${propertyLabel(binding.property)}. Changes this value only, and wins over a change on its row.${waits ? ` ${waits}` : ''}`,
       schemes: [binding.scheme ?? 'light'],
       subject: {
         kinds: binding.kind && !manual ? [binding.kind] : [],
         group: group.group,
         candidates: row.candidates,
+        ...(extra ? { extra } : {}),
       },
       current: own
         ? overrides.records[binding.id]
@@ -875,6 +906,7 @@ export function App() {
               row.proposal,
               rowChanged,
               row.outcome !== 'sure',
+              overrides.records[binding.id],
             ),
           },
         ]),
@@ -883,6 +915,12 @@ export function App() {
 
   const changeRow = (group: MappingGroup, row: MappingRow) => {
     const own = ownChoices(row, overrides)
+    // Legacy modes in the row that wait for values below them: the picker
+    // says what they wait for, and offers removing them anyway.
+    const ids = row.bindings.map((binding) => binding.id)
+    const waitNote = modePickerNote(ids, blocked)
+    const waits = waitNote ? ` ${waitNote}` : ''
+    const extra = modePickerExtra(ids, blocked)
     // A Manual fix offers the plugin's fix or Decide later, never another
     // variable: Figma would not take it there.
     const manual = row.outcome === 'byHand'
@@ -906,9 +944,14 @@ export function App() {
           : ` ${own} of them have a choice of their own, which this replaces.`
     setPicker({
       title: group.old,
-      description: `${manual ? `${MANUAL_FIX_PICKER} ` : ''}Changes ${all} in this row.${replaced}`,
+      description: `${manual ? `${MANUAL_FIX_PICKER} ` : ''}Changes ${all} in this row.${replaced}${waits}`,
       schemes: schemesOf(row.bindings),
-      subject: { kinds, group: group.group, candidates: row.candidates },
+      subject: {
+        kinds,
+        group: group.group,
+        candidates: row.candidates,
+        ...(extra ? { extra } : {}),
+      },
       current: rowCurrent(row, overrides),
       changed: row.key in overrides.rows || own > 0,
       onSave: (value) => sendOverrides(rowChoiceChanges(row, value, overrides)),
@@ -945,7 +988,12 @@ export function App() {
     )
     bulk.clear()
   }
-  const selectedStatus = selectionStatus(bulk.items.keys(), mapping, overrides)
+  const selectedStatus = selectionStatus(
+    bulk.items.keys(),
+    mapping,
+    overrides,
+    kept,
+  )
   /** Applies the Ready changes among the selected values only */
   const applySelected = () => {
     setLastApplied(selectedStatus.entryIds)
@@ -1106,6 +1154,7 @@ export function App() {
             {summary && !scanning && review && (
               <ReviewView
                 items={review}
+                blocked={blocked}
                 entryNames={
                   new Map(
                     summary.entries.map((entry) => [entry.id, entry.name]),
@@ -1144,13 +1193,19 @@ export function App() {
                     : undefined
                 }
                 overrides={overrides}
+                kept={kept}
                 selection={bulk}
                 busy={locked}
                 onApply={() => applyEntries([openEntry.id])}
                 onReview={() => {
                   setReviewRun('Apply')
                   setReview(
-                    reviewItems(mapping, overrides, new Set([openEntry.id])),
+                    reviewItems(
+                      mapping,
+                      overrides,
+                      new Set([openEntry.id]),
+                      kept,
+                    ),
                   )
                 }}
                 onRevert={() => revertEntry(openEntry.id)}
@@ -1186,6 +1241,7 @@ export function App() {
                   onView={setView}
                   mapping={mapping}
                   overrides={overrides}
+                  kept={kept}
                   onSelectOld={(oldKey) => send({ type: 'select-old', oldKey })}
                   onChangeRow={changeRow}
                   onChangeBinding={changeBinding}
@@ -1203,6 +1259,7 @@ export function App() {
                         mapping,
                         overrides,
                         entryIds ? new Set(entryIds) : undefined,
+                        kept,
                       ),
                     )
                   }}
@@ -1233,6 +1290,7 @@ export function App() {
       {command === 'open' && (
         <BulkBar
           count={selected.length}
+          recordIds={selected.map((item) => item.id)}
           ready={selectedStatus.ready}
           chosen={selectedStatus.chosen}
           canChange={shared !== undefined}

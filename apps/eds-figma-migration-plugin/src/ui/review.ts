@@ -10,8 +10,10 @@ import {
   DECIDE_LATER,
   isHeldMode,
   isUndecided,
+  NO_KEPT_MODES,
 } from '../scan/mapping'
 import type {
+  KeptModes,
   MappingBinding,
   MappingGroup,
   MappingRow,
@@ -45,20 +47,22 @@ function needsDecision(row: MappingRow, deferred: boolean): boolean {
  * Bindings that wait for a designer and that nobody has decided on, or that
  * a designer set to Decide later, in the order of the Mapping view: the most
  * used legacy variables first. With entry ids, only the bindings in those
- * frames or main components.
+ * frames or main components. A legacy mode the next Apply keeps (`kept`)
+ * is Waiting, and waits for the values below it, which are reviewed instead.
  */
 export function reviewItems(
   groups: MappingGroup[],
   overrides: Overrides,
   entryIds?: ReadonlySet<string>,
+  kept: KeptModes = NO_KEPT_MODES,
 ): ReviewItem[] {
   const items: ReviewItem[] = []
   for (const group of groups) {
     for (const row of group.rows) {
       for (const binding of row.bindings) {
         if (entryIds && !entryIds.has(binding.entryId)) continue
-        const outcome = bindingOutcome(row, binding, overrides)
-        if (!isUndecided(outcome)) continue
+        const outcome = bindingOutcome(row, binding, overrides, kept)
+        if (!isUndecided(outcome) || outcome.held) continue
         if (!needsDecision(row, outcome.target === DECIDE_LATER)) continue
         items.push({ group, row, binding })
       }

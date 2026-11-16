@@ -293,6 +293,36 @@ as it does for a Needs check (rule `mode/after-review`). Apply writes the rule
 of each change into the change log on the layer, so a value migrated to a
 stand-in can be found later.
 
+### Legacy modes a run keeps
+
+The rules keep a legacy mode by the categories of the values below it
+(`mode/kept`, `mode/after-review`), before any designer has chosen. A choice
+can keep one too: a Ready value below a legacy mode, set to Decide later, is
+not changed by the next Apply, so Apply keeps the mode it reads. Apply on
+selected values does the same for a value below that is not selected. The
+plugin works these kept modes out from the plan of the run with every count
+(decided 2026-11-16, decision C):
+
+- A Ready legacy mode that is only cleared, and that the run would keep,
+  counts as No equivalent and shows as **Waiting**, with what it waits for:
+  the values below to be decided, fixed or selected, a main component in this
+  file to be migrated, a library instance to be swapped to an EDS Beta
+  component, or a Typography instance to be converted. Ready is then what the
+  run changes.
+- A Ready legacy mode that sets a new mode stays Ready: the run sets the new
+  mode and keeps the legacy one beside it, and the row says what the legacy
+  mode waits for. It is one row; a later run clears the legacy mode.
+- Clearing a legacy mode (`CLEAR_MODE`), as the proposal or as a designer's
+  choice, always waits for the values below: a choice of it on a mode the
+  rules keep, or a confirmation in Review, keeps the mode in the run while a
+  value below reads it. So does a designer's choice of another new mode,
+  which is set and keeps the legacy mode beside it.
+- Removing a legacy mode while values below read it is a choice of its own,
+  **Remove the legacy mode anyway** (`REMOVE_ANYWAY`), offered only on a mode
+  that values below read and that the next Apply leaves. Apply removes the
+  mode in the next run, logs the change as confirmed, and the confirmation
+  names the values below that change. It is never a proposal.
+
 ### Mode-driven variables are read through their aliases
 
 The variables in `🗣️ Semantic`, the `🪐` collections, `⭕️ Border radius`,

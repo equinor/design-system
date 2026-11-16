@@ -61,6 +61,18 @@ function sections(options: PickerOptions): Section[] {
       })),
     })
   }
+  // Targets that are no proposal, such as removing a legacy mode anyway,
+  // in words, so the search finds them by what they say.
+  if (options.extra) {
+    result.push({
+      title: options.extra.title,
+      items: options.extra.targets.map((name) => ({
+        value: name,
+        label: targetLabel(name),
+        name: targetLabel(name),
+      })),
+    })
+  }
   const byPath = new Map<string, Item[]>()
   const plain: Item[] = []
   for (const name of options.others) {

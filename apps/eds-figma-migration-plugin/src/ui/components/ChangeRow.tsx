@@ -29,11 +29,15 @@ import {
   DECIDE_LATER,
   isHeldMode,
   isUndecided,
+  keptModeText,
+  NO_KEPT_MODES,
   ownChoices,
   targetCounts,
 } from '../../scan/mapping'
 import type {
   BindingOutcome,
+  KeptMode,
+  KeptModes,
   MappingBinding,
   MappingGroup,
   MappingRow,
@@ -41,11 +45,16 @@ import type {
   TargetCount,
 } from '../../scan/mapping'
 import type { Category } from '../../scan/types'
-import { isHeld, statusLabel } from '../labels'
+import { isHeld, KEPT_TARGET_LABEL, statusLabel } from '../labels'
 import { plainReason } from '../plain'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
-import { sourceLabel, targetLabel, unchangedLabel } from '../targets'
+import {
+  REMOVE_ANYWAY_LABEL,
+  sourceLabel,
+  targetLabel,
+  unchangedLabel,
+} from '../targets'
 import { ResetEffects } from './ResetEffects'
 import { Preview, pxList, valueText } from './VariableList'
 
@@ -85,9 +94,11 @@ export function legacyText(group: MappingGroup): string {
 
 /**
  * What one target in a row is called: a mode that is only cleared says so,
- * and a No equivalent value nobody has decided on shows its stand-in.
+ * a No equivalent value nobody has decided on shows its stand-in, and a
+ * legacy mode the next Apply keeps says that it is kept.
  */
-function countLabel({ target, noEquivalent, rule }: TargetCount): string {
+function countLabel({ target, noEquivalent, rule, kept }: TargetCount): string {
+  if (kept) return KEPT_TARGET_LABEL
   if (noEquivalent) return unchangedLabel(rule, target)
   if (target === CLEAR_MODE) return 'Remove the legacy mode'
   return targetLabel(target)
@@ -102,8 +113,12 @@ function countText(count: TargetCount): string {
  * or each target with its number when they differ. A choice on each value
  * counts too, so the row never names a target its values do not get.
  */
-export function shortTarget(row: MappingRow, overrides: Overrides): string {
-  const counts = targetCounts([row], overrides)
+export function shortTarget(
+  row: MappingRow,
+  overrides: Overrides,
+  kept: KeptModes = NO_KEPT_MODES,
+): string {
+  const counts = targetCounts([row], overrides, kept)
   return counts.length === 1
     ? countLabel(counts[0])
     : counts.map(countText).join(', ')
@@ -114,10 +129,15 @@ export function shortTarget(row: MappingRow, overrides: Overrides): string {
  * beside it: for No equivalent, the stand-in. Null when nothing changes yet:
  * the values are set to Decide later, or a legacy mode is kept.
  */
-function mainTarget(row: MappingRow, overrides: Overrides): string | null {
-  const [first] = targetCounts([row], overrides)
+function mainTarget(
+  row: MappingRow,
+  overrides: Overrides,
+  kept: KeptModes,
+): string | null {
+  const [first] = targetCounts([row], overrides, kept)
   return !first ||
     first.target === DECIDE_LATER ||
+    first.kept ||
     (first.noEquivalent && isHeldMode(first.rule))
     ? null
     : first.target
@@ -131,20 +151,56 @@ function rowTargetText(row: MappingRow, overrides: Overrides): string {
     : targetLabel(row.proposal ?? null)
 }
 
-/** What one value in a row shows: its outcome, its target in words, and who chose it. */
+/**
+ * What one value in a row shows: its outcome, its target in words, and who
+ * chose it. A legacy mode the next Apply keeps says that it is kept.
+ */
 export function bindingTarget(
   row: MappingRow,
   binding: MappingBinding,
   overrides: Overrides,
   run: Run = 'Apply',
+  kept: KeptModes = NO_KEPT_MODES,
 ): { outcome: BindingOutcome; target: string; note?: string } {
-  const outcome = bindingOutcome(row, binding, overrides)
+  const outcome = bindingOutcome(row, binding, overrides, kept)
   const mine = outcome.source === 'record'
   return {
     outcome,
-    target: mine ? targetLabel(outcome.target) : rowTargetText(row, overrides),
+    target: mine
+      ? targetLabel(outcome.target)
+      : outcome.held && outcome.kept
+        ? KEPT_TARGET_LABEL
+        : rowTargetText(row, overrides),
     ...(mine ? { note: sourceLabel('record', outcome.target, run) } : {}),
   }
+}
+
+/** The values in a row that are legacy modes the next Apply keeps, with what each waits for. */
+export function keptInRow(
+  row: MappingRow,
+  overrides: Overrides,
+  kept: KeptModes,
+): { binding: MappingBinding; kept: KeptMode }[] {
+  return row.bindings.flatMap((binding) => {
+    const found = bindingOutcome(row, binding, overrides, kept).kept
+    return found ? [{ binding, kept: found }] : []
+  })
+}
+
+/**
+ * What the kept legacy modes in a row wait for, in one sentence: the text
+ * of the one mode, or of all of them when it is the same, and otherwise a
+ * pointer to the values, which say it each.
+ */
+function keptRowText(
+  entries: { binding: MappingBinding; kept: KeptMode }[],
+): string | undefined {
+  if (entries.length === 0) return undefined
+  const texts = [...new Set(entries.map((entry) => keptModeText(entry.kept)))]
+  if (texts.length === 1) return texts[0]
+  return entries[0].kept.setsMode
+    ? 'Each legacy mode stays beside the new one until the values below it change. Open the row to see what each waits for.'
+    : 'Each legacy mode is cleared once the values below it change. Open the row to see what each waits for.'
 }
 
 /**
@@ -183,10 +239,11 @@ export function selectableBinding(
 function rowCategories(
   row: MappingRow,
   overrides: Overrides,
+  kept: KeptModes,
 ): [Category, number][] {
   const counts = new Map<Category, number>()
   for (const binding of row.bindings) {
-    const { category } = bindingOutcome(row, binding, overrides)
+    const { category } = bindingOutcome(row, binding, overrides, kept)
     counts.set(category, (counts.get(category) ?? 0) + 1)
   }
   return [...counts.entries()].sort((a, b) => b[1] - a[1])
@@ -196,9 +253,16 @@ function rowCategories(
  * Why a row needs a check, has no equivalent or is a Manual fix, in plain
  * words, while any of its values is undecided or set to Decide later. A
  * Manual fix keeps its "How to fix it" once accepted, since the dialog lists
- * what the reset also removes and sets again.
+ * what the reset also removes and sets again. A row of legacy modes the next
+ * Apply keeps says what they wait for, also when the run sets a new mode.
  */
-function rowReason(row: MappingRow, overrides: Overrides): string | undefined {
+function rowReason(
+  row: MappingRow,
+  overrides: Overrides,
+  kept: KeptModes,
+): string | undefined {
+  const keptText = keptRowText(keptInRow(row, overrides, kept))
+  if (keptText) return keptText
   const undecided = row.bindings.some((binding) =>
     isUndecided(bindingOutcome(row, binding, overrides)),
   )
@@ -224,20 +288,23 @@ function rowReason(row: MappingRow, overrides: Overrides): string | undefined {
 function StatusCell({
   categories,
   rule,
+  kept = false,
   why,
   onWhy,
 }: {
   categories: [Category, number][]
   /** The row's rule; a held legacy mode shows as Waiting */
   rule?: string
+  /** The row has legacy modes the next Apply keeps, which show as Waiting */
+  kept?: boolean
   why?: string
   onWhy: () => void
 }) {
   const text = categories
     .map(([category, count]) =>
       categories.length === 1
-        ? statusLabel(category, rule)
-        : `${statusLabel(category, rule)} ${count}`,
+        ? statusLabel(category, rule, kept)
+        : `${statusLabel(category, rule, kept)} ${count}`,
     )
     .join(', ')
   const needsCheck = categories.some(([category]) => category === 'check')
@@ -245,7 +312,7 @@ function StatusCell({
     <span
       key={category}
       className="health-swatch"
-      data-category={isHeld(category, rule) ? 'held' : category}
+      data-category={isHeld(category, rule, kept) ? 'held' : category}
       aria-hidden="true"
     />
   ))
@@ -276,6 +343,8 @@ function StatusCell({
 type ChangeRowProps = {
   item: Item
   overrides: Overrides
+  /** The legacy modes the next Apply keeps, from the plugin */
+  kept?: KeptModes
   /** Show the number of values in the row, from the settings menu */
   showCounts: boolean
   /** What the row's values are on, in the button labels: layers, or instances */
@@ -308,6 +377,7 @@ type ChangeRowProps = {
 export function ChangeRow({
   item,
   overrides,
+  kept = NO_KEPT_MODES,
   showCounts,
   noun = 'layers',
   run = 'Apply',
@@ -320,8 +390,11 @@ export function ChangeRow({
   children,
 }: ChangeRowProps) {
   const { group, row } = item
-  const counts = targetCounts([row], overrides)
-  const target = mainTarget(row, overrides)
+  const counts = targetCounts([row], overrides, kept)
+  const target = mainTarget(row, overrides, kept)
+  const keptHere = keptInRow(row, overrides, kept).some(
+    (entry) => !entry.kept.setsMode,
+  )
   // The new number in the density each layer will have, and the legacy
   // number as it resolves on each layer, in px.
   const extra = valueText(target, [
@@ -398,13 +471,13 @@ export function ChangeRow({
         <button
           type="button"
           className="check-target"
-          aria-label={`Change the target of all ${row.count}: now ${shortTarget(row, overrides)}`}
+          aria-label={`Change the target of all ${row.count}: now ${shortTarget(row, overrides, kept)}`}
           onClick={onChangeRow}
         >
           <Preview name={target} schemes={schemesOf(row.bindings)} />
           <span className="check-target-text">
             <span className="check-target-name">
-              {shortTarget(row, overrides)}
+              {shortTarget(row, overrides, kept)}
             </span>
             {extra && counts.length === 1 && (
               <span className="option-value">{extra}</span>
@@ -443,9 +516,10 @@ export function ChangeRow({
             </Tooltip>
           )}
           <StatusCell
-            categories={rowCategories(row, overrides)}
+            categories={rowCategories(row, overrides, kept)}
             rule={row.rule}
-            why={rowReason(row, overrides)}
+            kept={keptHere}
+            why={rowReason(row, overrides, kept)}
             onWhy={onWhy}
           />
         </span>
@@ -497,14 +571,23 @@ function layerName(binding: MappingBinding): string {
 export function WhyDialog({
   item,
   overrides,
+  kept = NO_KEPT_MODES,
   onClose,
   onChangeRow,
 }: {
   item?: Item
   overrides: Overrides
+  /** The legacy modes the next Apply keeps, from the plugin */
+  kept?: KeptModes
   onClose: () => void
   onChangeRow: (group: MappingGroup, row: MappingRow) => void
 }) {
+  // A row of legacy modes the next Apply keeps says what each waits for.
+  const keptHere = item ? keptInRow(item.row, overrides, kept) : []
+  const waiting = keptHere.some((entry) => !entry.kept.setsMode)
+  const keptTexts = [
+    ...new Set(keptHere.map((entry) => keptModeText(entry.kept))),
+  ]
   return (
     <Dialog
       open={item !== undefined}
@@ -516,13 +599,17 @@ export function WhyDialog({
         <>
           <Dialog.Header>
             <Dialog.Title>
-              {item.row.outcome === 'check'
-                ? 'Why it needs a check'
-                : item.row.outcome === 'byHand'
-                  ? 'How to fix it'
-                  : isHeldMode(item.row.rule)
-                    ? unchangedLabel(item.row.rule)
-                    : 'No equivalent in the EDS Beta'}
+              {keptHere.length > 0
+                ? waiting
+                  ? 'Waiting for the values below'
+                  : 'The legacy mode stays beside the new one'
+                : item.row.outcome === 'check'
+                  ? 'Why it needs a check'
+                  : item.row.outcome === 'byHand'
+                    ? 'How to fix it'
+                    : isHeldMode(item.row.rule)
+                      ? unchangedLabel(item.row.rule)
+                      : 'No equivalent in the EDS Beta'}
             </Dialog.Title>
           </Dialog.Header>
           <Dialog.Content>
@@ -530,11 +617,32 @@ export function WhyDialog({
               <span className="binding-old">{legacyText(item.group)}</span>
               <span aria-hidden="true"> → </span>
               <span className="binding-new">
-                {shortTarget(item.row, overrides)}
+                {shortTarget(item.row, overrides, kept)}
               </span>
             </p>
-            <p>{plainReason(item.row.reason) ?? item.row.reason}</p>
-            {plainReason(item.row.reason) && (
+            {keptHere.length > 0 ? (
+              <>
+                {keptTexts.length === 1 ? (
+                  <p>{keptTexts[0]}</p>
+                ) : (
+                  <ul className="review-summary">
+                    {keptHere.map((entry) => (
+                      <li key={entry.binding.id}>
+                        {layerName(entry.binding)}: {keptModeText(entry.kept)}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p className="muted">
+                  {waiting
+                    ? `Apply keeps the legacy mode, because values below it read it and are not changed in the same run. To remove it in the next run anyway, choose ${REMOVE_ANYWAY_LABEL}: the legacy values below that read it then change.`
+                    : 'Apply sets the new mode, and keeps the legacy one beside it while values below read it. It clears the legacy mode in a later run, once they are changed.'}
+                </p>
+              </>
+            ) : (
+              <p>{plainReason(item.row.reason) ?? item.row.reason}</p>
+            )}
+            {keptHere.length === 0 && plainReason(item.row.reason) && (
               <details className="review-details">
                 <summary>Details</summary>
                 {item.row.reason}
@@ -560,6 +668,7 @@ export function WhyDialog({
               }}
             >
               {item.row.outcome === 'byHand' ||
+              waiting ||
               (item.row.outcome === 'none' && isHeldMode(item.row.rule))
                 ? 'Choose what to do'
                 : item.row.outcome === 'none'

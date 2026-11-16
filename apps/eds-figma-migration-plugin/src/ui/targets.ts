@@ -1,7 +1,8 @@
 /** How targets are written in the window. */
 import { CLEAR_VALUE, literalText } from '../mapping/literal'
 import { isResetTarget, resetText } from '../mapping/reset'
-import { CLEAR_MODE } from '../scan/classify'
+import type { PickerExtra } from '../mapping/picker'
+import { CLEAR_MODE, REMOVE_ANYWAY } from '../scan/classify'
 import { DECIDE_LATER } from '../scan/mapping'
 import type { EffectiveTarget } from '../scan/mapping'
 
@@ -17,10 +18,59 @@ export function targetLabel(target: string | null): string {
   if (literal !== undefined) {
     return target === CLEAR_VALUE ? literal : `${literal}, without a variable`
   }
-  if (target === CLEAR_MODE) {
-    return 'Clear the mode once nothing below uses legacy variables'
-  }
+  // Ready means the next Apply removes it: a legacy mode Apply would keep
+  // is Waiting instead (mapping.ts, isKeptWaiting).
+  if (target === CLEAR_MODE) return 'Remove the legacy mode'
+  if (target === REMOVE_ANYWAY) return REMOVE_ANYWAY_LABEL
   return target
+}
+
+/** What removing a legacy mode anyway is called, in the picker, the rows and Review. */
+export const REMOVE_ANYWAY_LABEL =
+  'Remove the legacy mode anyway (the values below that read it change)'
+
+/**
+ * The picker's section for a legacy mode that waits (Waiting): removing it
+ * in the next run anyway, which is never a proposal.
+ */
+export const REMOVE_ANYWAY_OPTION: PickerExtra = {
+  title: 'Not waiting',
+  targets: [REMOVE_ANYWAY],
+}
+
+/**
+ * The extra section of the picker for legacy modes: removing them anyway,
+ * offered while values below one of them read it and the next Apply leaves
+ * those values (`blocked`, from the plugin: apply-plan.ts, modeWaits). That
+ * covers a mode the rules keep, one the next Apply keeps, and one set to
+ * Decide later.
+ */
+export function modePickerExtra(
+  ids: string[],
+  blocked: Record<string, string>,
+): PickerExtra | undefined {
+  return ids.some((id) => id in blocked) ? REMOVE_ANYWAY_OPTION : undefined
+}
+
+/**
+ * What the picker says on legacy modes that wait for values below them:
+ * what clearing one waits for, or how many wait, and what removing them
+ * anyway does. Empty when none of them waits.
+ */
+export function modePickerNote(
+  ids: string[],
+  blocked: Record<string, string>,
+): string {
+  const waiting = ids.filter((id) => id in blocked)
+  if (waiting.length === 0) return ''
+  if (waiting.length === 1 && ids.length === 1) {
+    return `Clearing it waits until ${blocked[waiting[0]]}. To remove it in the next run anyway, choose ${REMOVE_ANYWAY_LABEL}: the legacy values below that read it then change.`
+  }
+  const which =
+    waiting.length === ids.length
+      ? 'Each of these legacy modes waits for values below it.'
+      : `${waiting.length} of these legacy modes wait for values below them.`
+  return `${which} To remove them in the next run anyway, choose ${REMOVE_ANYWAY_LABEL}: the legacy values below that read them then change.`
 }
 
 /**

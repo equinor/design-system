@@ -4,16 +4,24 @@
  */
 import { CLEAR_VALUE, literalText } from '../mapping/literal'
 import { isResetTarget, resetText } from '../mapping/reset'
-import { CLEAR_MODE, manualFixTarget, resetEffectsText } from './classify'
-import { CATEGORY_LABELS, propertyLabel } from './labels'
+import {
+  CLEAR_MODE,
+  manualFixTarget,
+  REMOVE_ANYWAY,
+  resetEffectsText,
+} from './classify'
+import { CATEGORY_LABELS, KEPT_TARGET_LABEL, propertyLabel } from './labels'
 import {
   DECIDE_LATER,
   effectiveCategory,
   effectiveTarget,
   isHeldMode,
+  isKeptWaiting,
   isMappable,
+  keptModeText,
+  NO_KEPT_MODES,
 } from './mapping'
-import type { Overrides } from './mapping'
+import type { KeptModes, Overrides } from './mapping'
 import { formatHealth, oldCount } from './summary'
 import type { BindingRecord, OldInstance, ScanSummary } from './types'
 
@@ -23,6 +31,8 @@ export type ReportInput = {
   records: BindingRecord[]
   oldInstances: OldInstance[]
   overrides: Overrides
+  /** The legacy modes the next Apply keeps, which the summary counts as Waiting when they are only cleared */
+  kept?: KeptModes
 }
 
 export type Report = { markdown: string; csv: string; baseName: string }
@@ -36,6 +46,9 @@ function targetText(target: string | null): string {
     return target === CLEAR_VALUE ? literal : `${literal}, without a variable`
   }
   if (target === CLEAR_MODE) return 'Clear the legacy mode'
+  if (target === REMOVE_ANYWAY) {
+    return 'Remove the legacy mode anyway (the values below that read it change)'
+  }
   return target
 }
 
@@ -80,7 +93,14 @@ function reasonText(record: BindingRecord): string {
 }
 
 export function buildReport(input: ReportInput): Report {
-  const { fileName, summary, records, oldInstances, overrides } = input
+  const {
+    fileName,
+    summary,
+    records,
+    oldInstances,
+    overrides,
+    kept = NO_KEPT_MODES,
+  } = input
   const entries = new Map(summary.entries.map((entry) => [entry.id, entry]))
   const components = summary.entries.filter(
     (entry) => entry.kind === 'component',
@@ -88,7 +108,7 @@ export function buildReport(input: ReportInput): Report {
   const totals = summary.totals
   const health = summary.health
   const category = (record: BindingRecord) =>
-    effectiveCategory(record, overrides)
+    effectiveCategory(record, overrides, kept)
   const date = summary.scannedAt.slice(0, 10)
   const scope =
     summary.scope === 'file'
@@ -109,8 +129,14 @@ export function buildReport(input: ReportInput): Report {
   const none = records.filter((record) => category(record) === 'none')
   // No equivalent is a gap in the EDS Beta tokens, except for a legacy mode
   // the plugin keeps while values below it read it (Waiting).
-  const waiting = none.filter((record) => isHeldMode(record.rule))
-  const gaps = none.filter((record) => !isHeldMode(record.rule))
+  const held = (record: BindingRecord) =>
+    isHeldMode(record.rule) || isKeptWaiting(record.id, kept)
+  const waiting = none.filter(held)
+  const gaps = none.filter((record) => !held(record))
+  const why = (record: BindingRecord) => {
+    const keep = kept[record.id]
+    return keep ? keptModeText(keep) : record.reason
+  }
   // Values a designer set to Decide later: not applied yet, and counted in
   // their category, a Ready value as Needs check.
   const later = records.filter(
@@ -288,7 +314,7 @@ export function buildReport(input: ReportInput): Report {
               entries.get(record.entryId)?.name,
               layerPath(record),
               `${record.oldCollection ?? ''}: ${record.old ?? ''}`,
-              record.reason,
+              why(record),
             ]),
           ),
         ]
@@ -364,12 +390,16 @@ export function buildReport(input: ReportInput): Report {
             target.target !== null &&
             !isHeldMode(record.rule)
             ? `Stand-in: ${targetText(target.target)}`
-            : targetText(target.target)
+            : isKeptWaiting(record.id, kept)
+              ? KEPT_TARGET_LABEL
+              : targetText(target.target)
           : record.category === 'byHand'
             ? manualFixTarget(record)
             : (record.current ?? ''),
         target ? (target.source === 'proposal' ? 'Rule' : 'Designer') : '',
-        reasonText(record),
+        [reasonText(record), kept[record.id] && keptModeText(kept[record.id])]
+          .filter(Boolean)
+          .join(' '),
         summary.mappingVersion,
       ]
     })

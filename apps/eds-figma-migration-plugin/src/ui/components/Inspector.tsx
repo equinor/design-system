@@ -13,6 +13,7 @@ import {
   GROUP_LABELS,
   HELD_LABEL,
   isHeld,
+  KEPT_TARGET_LABEL,
   propertyLabel,
   values,
 } from '../labels'
@@ -20,10 +21,14 @@ import {
   DECIDE_LATER,
   effectiveCategory,
   effectiveTarget,
+  isKeptWaiting,
   isMappable,
   isUndecided,
+  keptModeText,
+  NO_KEPT_MODES,
 } from '../../scan/mapping'
 import type {
+  KeptModes,
   MappingBinding,
   MappingGroup,
   MappingRow,
@@ -62,6 +67,8 @@ type InspectorProps = {
   /** For a main component, or a layer inside one: every instance in it */
   componentInstances?: ComponentInstance[]
   overrides: Overrides
+  /** The legacy modes the next Apply keeps, from the plugin */
+  kept?: KeptModes
   selection: Selection
   busy: boolean
   onApply: () => void
@@ -87,6 +94,7 @@ type Pivot = 'layers' | 'variables'
 export function targetText(
   record: BindingRecord,
   overrides: Overrides,
+  kept: KeptModes = NO_KEPT_MODES,
 ): string {
   switch (record.category) {
     case 'migrated':
@@ -105,6 +113,7 @@ export function targetText(
       if (record.category === 'none' && source === 'proposal') {
         return unchangedLabel(record.rule, target)
       }
+      if (isKeptWaiting(record.id, kept)) return KEPT_TARGET_LABEL
       return targetLabel(target)
     }
   }
@@ -207,10 +216,11 @@ function groupRecords(
 function groupSummary(
   records: BindingRecord[],
   categoryOf: (record: BindingRecord) => Category,
+  kept: KeptModes,
 ): string {
   const parts = [values(records.length)]
   const held = (record: BindingRecord) =>
-    isHeld(categoryOf(record), record.rule)
+    isHeld(categoryOf(record), record.rule, isKeptWaiting(record.id, kept))
   for (const category of ['check', 'byHand', 'none'] as const) {
     const count = records.filter(
       (record) => categoryOf(record) === category && !held(record),
@@ -269,6 +279,7 @@ export function Inspector({
   oldInstances,
   componentInstances,
   overrides,
+  kept = NO_KEPT_MODES,
   selection,
   busy,
   onApply,
@@ -304,9 +315,10 @@ export function Inspector({
     ...(entry.counts.other > 0 ? (['other'] as const) : []),
   ]
   // After a designer's choice a binding counts as Ready, or as Needs check
-  // when a Ready value is set to Decide later, the same as in the health bar.
+  // when a Ready value is set to Decide later, and a legacy mode the next
+  // Apply keeps counts as Waiting, the same as in the health bar.
   const categoryOf = (record: BindingRecord) =>
-    effectiveCategory(record, overrides)
+    effectiveCategory(record, overrides, kept)
   const byStatus = (records ?? []).filter(
     (record) => filter === 'all' || categoryOf(record) === filter,
   )
@@ -489,6 +501,7 @@ export function Inspector({
           <MappingView
             groups={frameGroups}
             overrides={overrides}
+            kept={kept}
             entryNames={new Map([[entry.id, entry.name]])}
             selection={selection}
             showCounts={showCounts}
@@ -545,7 +558,7 @@ export function Inspector({
                       <span className="binding-path">
                         {[
                           group.subtitle,
-                          groupSummary(group.records, categoryOf),
+                          groupSummary(group.records, categoryOf, kept),
                           group.instance &&
                             overridden > 0 &&
                             `${overridden} overridden`,
@@ -625,6 +638,12 @@ export function Inspector({
                                     isMappable(record),
                                   )
                                 : undefined
+                            // A legacy mode the next Apply keeps says what
+                            // it waits for: as its reason while it waits,
+                            // beside the new mode once it sets one.
+                            const keep = kept[record.id]
+                            const waits = isKeptWaiting(record.id, kept)
+                            const keptText = keep && keptModeText(keep)
                             return (
                               <BindingRow
                                 key={record.id}
@@ -635,16 +654,29 @@ export function Inspector({
                                     : propertyLabel(record.property)
                                 }
                                 old={record.old}
-                                target={targetText(record, overrides)}
+                                target={targetText(record, overrides, kept)}
                                 note={
                                   target
                                     ? sourceLabel(target.source, target.target)
                                     : undefined
                                 }
-                                reason={decided ? undefined : record.reason}
-                                effects={effects ? [effects] : []}
+                                reason={
+                                  waits && keptText
+                                    ? keptText
+                                    : decided
+                                      ? undefined
+                                      : record.reason
+                                }
+                                effects={[
+                                  ...(effects ? [effects] : []),
+                                  ...(keptText && !waits ? [keptText] : []),
+                                ]}
                                 category={categoryOf(record)}
-                                held={isHeld(categoryOf(record), record.rule)}
+                                held={isHeld(
+                                  categoryOf(record),
+                                  record.rule,
+                                  waits,
+                                )}
                                 {...(group.instance
                                   ? {
                                       origin: record.override
@@ -728,7 +760,10 @@ export function Inspector({
       {selection.items.size === 0 && (
         <ApplyActions
           ready={entry.counts.sure}
-          toReview={reviewItems(mapping, overrides, new Set([entry.id])).length}
+          toReview={
+            reviewItems(mapping, overrides, new Set([entry.id]), kept).length
+          }
+          preview={{ entryIds: [entry.id] }}
           where={isMain ? 'in this main component' : 'in this frame'}
           kind={isMain ? 'component' : 'frame'}
           inComponent={inside !== undefined}

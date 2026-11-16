@@ -5,6 +5,7 @@
  * Beta token names needs what that means for the layer, and what each
  * proposed target is for. The rule's own words stay available as Details.
  */
+import { CLEAR_MODE } from '../scan/classify'
 
 /** What a fill named in a reason is, in words. */
 function fillWords(text: string): string {
@@ -66,6 +67,9 @@ function stateWords(name: string): string {
 
 /** What a target is for, in a few words; undefined when the name says it. */
 export function targetMeaning(name: string): string | undefined {
+  if (name === CLEAR_MODE) {
+    return 'Apply removes it once no value below reads the legacy mode'
+  }
   const state = stateWords(name)
   if (/^(text|icon)\/on-default\//.test(name)) {
     return 'On the page, a card or another default surface'

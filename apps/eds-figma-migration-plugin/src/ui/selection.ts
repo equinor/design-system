@@ -4,8 +4,8 @@
  */
 import { useCallback, useState } from 'react'
 import type { PickerItem } from '../mapping/picker'
-import { bindingOutcome } from '../scan/mapping'
-import type { MappingGroup, Overrides } from '../scan/mapping'
+import { bindingOutcome, NO_KEPT_MODES } from '../scan/mapping'
+import type { KeptModes, MappingGroup, Overrides } from '../scan/mapping'
 
 export type SelectedBinding = PickerItem & { id: string }
 
@@ -36,12 +36,16 @@ export function useSelection(): Selection {
 /**
  * What the bulk bar says about the selected bindings: how many are Ready
  * after the choices, which Apply changes, how many have a choice of their
- * own, which Reset choices removes, and the frames they are in.
+ * own, which Reset choices removes, and the frames they are in. A legacy
+ * mode the next Apply keeps (`kept`) is Waiting, not Ready. A mode Apply on
+ * the selected values keeps because a value below it is not selected is
+ * counted in the confirmation, from the plugin's preview.
  */
 export function selectionStatus(
   ids: Iterable<string>,
   groups: MappingGroup[],
   overrides: Overrides,
+  kept: KeptModes = NO_KEPT_MODES,
 ): { ready: number; chosen: number; entryIds: string[] } {
   const wanted = new Set(ids)
   const entryIds = new Set<string>()
@@ -51,7 +55,7 @@ export function selectionStatus(
       for (const binding of row.bindings) {
         if (!wanted.has(binding.id)) continue
         entryIds.add(binding.entryId)
-        if (bindingOutcome(row, binding, overrides).category === 'sure') {
+        if (bindingOutcome(row, binding, overrides, kept).category === 'sure') {
           ready += 1
         }
       }

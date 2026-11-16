@@ -10,7 +10,7 @@ import {
 import { isHeldMode } from '../scan/mapping'
 import type { Category } from '../scan/types'
 
-export { GROUP_LABELS, propertyLabel } from '../scan/labels'
+export { GROUP_LABELS, KEPT_TARGET_LABEL, propertyLabel } from '../scan/labels'
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   ...PLUGIN_LABELS,
@@ -19,7 +19,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
 
 export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
   ...PLUGIN_DESCRIPTIONS,
-  none: 'A legacy variable the EDS Beta has no token for, such as a stroke width on a padding or a palette colour. It shows a gap in the tokens, and the report lists it. The plugin proposes a stand-in, such as the spacing token with the same px or the nearest colour for the layer, and Apply changes the value only once you choose the stand-in or another target, in Changes or in Review. A legacy mode marked Waiting counts here too: Apply clears it once no layer below it uses legacy variables.',
+  none: 'A legacy variable the EDS Beta has no token for, such as a stroke width on a padding or a palette colour. It shows a gap in the tokens, and the report lists it. The plugin proposes a stand-in, such as the spacing token with the same px or the nearest colour for the layer, and Apply changes the value only once you choose the stand-in or another target, in Changes or in Review. A legacy mode marked Waiting counts here too: Apply clears it once no layer below it uses legacy variables, and its row says what it waits for, such as a value below set to Decide later.',
   inInstance:
     'A legacy variable an instance takes from its main component. The plugin does not change it in the instance, because a change there becomes an override. A component in this file changes every instance once its main component is migrated. The plugin migrates variables, not components: swap an instance of a library component to an EDS Beta component in Figma, and its legacy values go with it. A value the instance overrides itself is listed with the other changes.',
 }
@@ -38,22 +38,30 @@ export const ORIGIN_LABELS: Record<ValueOrigin, string> = {
 
 /**
  * A legacy mode the plugin keeps for now, because layers below still read
- * legacy values (mapping.ts, isHeldMode). It counts as No equivalent, but it
- * has a change, clearing the mode, that waits for the layers below, so its
- * badge says Waiting.
+ * legacy values: one the rules keep (mapping.ts, isHeldMode), or a Ready
+ * one that the next Apply keeps because values below it are not changed in
+ * that run (isKeptWaiting). It counts as No equivalent, but it has a change,
+ * clearing the mode, that waits for the layers below, so its badge says
+ * Waiting.
  */
 export const HELD_LABEL = 'Waiting'
 
-export function isHeld(category: Category, rule: string | undefined): boolean {
-  return category === 'none' && isHeldMode(rule)
+/** `kept` is true for a legacy mode the next Apply keeps (isKeptWaiting). */
+export function isHeld(
+  category: Category,
+  rule: string | undefined,
+  kept = false,
+): boolean {
+  return category === 'none' && (kept || isHeldMode(rule))
 }
 
-/** The status shown on one binding or row: its category, or Waiting for a held mode. */
+/** The status shown on one binding or row: its category, or Waiting for a held or kept mode. */
 export function statusLabel(
   category: Category,
   rule: string | undefined,
+  kept = false,
 ): string {
-  return isHeld(category, rule) ? HELD_LABEL : CATEGORY_LABELS[category]
+  return isHeld(category, rule, kept) ? HELD_LABEL : CATEGORY_LABELS[category]
 }
 
 /** “1 value”, “14 values” */

@@ -200,7 +200,10 @@ ones Review saves (otherwise a row change on a reviewed value showed nowhere;
 `rowChoiceChanges` in `src/scan/mapping.ts`), and ticking values opens a bar with **Apply**, **Change
 target**, **Decide later**, **Reset choices** and **Clear selection**. Apply there
 makes only the Ready changes among the ticked values (the `apply-selected`
-message), behind the same kind of confirmation as Apply in the footer.
+message), behind the same kind of confirmation as Apply in the footer. Its
+counts come from a preview of that run, so it names the legacy modes that
+stay because a value below them is not ticked ("Density: Spacious on Card
+stays, and is cleared once Icon, width is selected and applied").
 Reset choices removes the choices on the ticked values, and is only shown
 when some of them have one. The target of a row follows every choice in it,
 so a row whose values are all set to Decide later says "Decide later"
@@ -212,7 +215,15 @@ style that fits the property, grouped by path, with colour swatches in the
 current theme and the comfortable value of numbers. On a Ready value,
 choosing the proposal again removes the change. On a value that needs a check
 or has no equivalent, choosing a target settles it: the value then counts as
-Ready, and the health bars follow.
+Ready, and the health bars follow. Saving the choice a value or row already
+has keeps it. On a legacy mode, **Remove the legacy mode** (`CLEAR_MODE`)
+always means clearing it once no value below reads it: chosen or confirmed in
+Review, Apply keeps the mode while a value below waits. The picker of a
+legacy mode that values below read, and that the next Apply leaves, has one
+more option of its own, **Remove the legacy mode anyway (the values below
+that read it change)** (`REMOVE_ANYWAY` in `src/scan/classify.ts`). It is
+never a proposal, and it is the only choice that removes such a mode in the
+next run; the change is logged as `confirmed`.
 
 The picker never offers to keep a legacy variable, since the goal is a file
 with no legacy variable left (decided 2026-11-16). Its last option, **Decide
@@ -242,8 +253,17 @@ whether it comes from a library or from this file.
 
 ## Apply and revert
 
-**Apply**, in the footer of the scope or of a frame, makes every Ready
-change, after a confirmation that says what stays:
+**Apply**, in the footer of the scope, of a frame or of the Main components
+tab, makes every Ready change, after a confirmation that says what stays.
+Ready is short for ready to change: the Ready count is the number of changes
+the next run makes. As the confirmation opens, the window sends a `preview`
+message, and the plugin answers with the counts of the run it would make
+(`previewRun` in `src/scan/apply-plan.ts`, from the same `planChanges` as the
+run): values bound to EDS Beta variables, numbers set without a variable,
+text styles applied, new modes set, legacy modes removed, layers reset for a
+Manual fix, how many of the changes are values an instance overrides, the
+legacy modes a designer removes anyway, with the values below that change,
+and the legacy modes that stay, each with what it waits for. The run:
 
 - binds the EDS Foundation variable on the same field, paint or effect, and
   keeps the other bindings on the layer;
@@ -255,7 +275,8 @@ change, after a confirmation that says what stays:
 - clears a legacy mode only when no layer below it uses a legacy variable
   through it any more, including inside instances. A binding only depends on
   the nearest legacy mode above it of a collection in its own library, colour
-  or spacing and typography.
+  or spacing and typography. The window knows before the run which legacy
+  modes stay (see the kept modes below).
 
 An icon size (`sizing/icon/*` and the like) is proposed as the spacing token with the same px in the layer's density (`sizing/icon/lg`, 24px → `spacing/xl`), Ready on an exact match and a Needs check otherwise, since EDS sizes icons with spacing tokens. A variable on a stroke weight becomes the number it resolves to, without a variable, since EDS has no stroke width variable yet; Revert frame binds the legacy variable again.
 
@@ -290,10 +311,47 @@ development copy could not keep a log.
 A legacy mode is kept while a value below still reads its collection: its own
 collection or one in its alias chain (a colour reads its whole library and the
 colour scheme). The row then says "Kept: legacy values below read it" or "Kept
-until the values below are reviewed", the status icon explains why, and
-removing the mode is still offered, for a designer who accepts that the
+until the values below are reviewed", the status icon explains why, and the
+picker offers removing the mode anyway, for a designer who accepts that the
 legacy values below change. A ⚠ or ⓘ at the end of a row has a tooltip with
 the reason, and a click opens it in full.
+
+The scan keeps those modes by the rules' categories, and does not know the
+designer's choices. A Ready value below a legacy mode that a designer sets to
+Decide later would keep the mode at run time, while the window still said
+Ready. So the plugin works out the kept modes again with every count
+(`keptModes` in `src/scan/apply-plan.ts`): it plans the run, takes the
+bindings it changes, and finds the mode changes above a legacy binding that
+the run leaves (`keptModeChanges`, with the bindings that keep each mode in place, from
+`modeBlockers` in `src/scan/classify.ts`). `applyChanges` keeps the modes
+with the same `keptModeChanges`, from the bindings it did change, so the two
+differ only where a binding fails. The plugin sends the kept modes, each
+with what it waits for, in a `kept-modes` message before every summary, and:
+
+- a kept legacy mode that is only cleared counts as No equivalent in the
+  health bar and is marked **Waiting** in Changes, the frame and the report,
+  with the target "Kept while values below wait" and what it waits for:
+  "Cleared once Icon, width is decided", or "once the main component Button
+  is migrated" for values inside instances;
+- a kept mode that sets a new mode stays Ready, since the run sets the new
+  mode, with the note "The legacy mode stays beside it until …".
+
+Review leaves a kept mode out, as it does the held ones. A Ready mode set to
+Decide later comes back in Review; when values below read it, the step says
+what clearing it waits for, **Clear it once nothing below reads it** stores
+the proposal (the mode is then Waiting), and the picker there offers removing
+it anyway too. The plugin sends, with the kept modes, every legacy mode that
+values below read and the next Apply leaves (`blocked`, from `modeWaits`),
+which the pickers and Review use. The Apply confirmation names each mode a
+designer removes anyway, with the values below that change.
+
+Saved choices from earlier versions can contain clearing on a mode the rules
+kept, which then removed it whatever read it below. They are read as they
+are, since the stored choices do not say whether the mode was held, and now
+clear the mode once nothing below reads it.
+
+A legacy mode stays beside another new mode a designer chooses, too, while
+values below read it: only removing it anyway removes it before that.
 
 ## Review, instances and local components
 

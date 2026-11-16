@@ -53,6 +53,13 @@ export function propertyLabel(property: PropertyRef): string {
 }
 
 /**
+ * The target of a Ready legacy mode that is only cleared and that the next
+ * Apply keeps, because values below it are not changed in that run
+ * (mapping.ts, isKeptWaiting). Its status is Waiting.
+ */
+export const KEPT_TARGET_LABEL = 'Kept while values below wait'
+
+/**
  * The names designers see. The outcome `sure` is shown as Ready: one target,
  * applied without asking.
  */

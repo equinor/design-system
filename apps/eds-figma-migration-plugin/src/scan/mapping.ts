@@ -39,6 +39,12 @@ export const NO_OVERRIDES: Overrides = { records: {}, rows: {} }
  * value whose legacy variable was kept (Excluded); that choice is gone, so
  * such a value is read as Decide later. Anything that is not a string is
  * left out.
+ *
+ * Earlier versions also removed a legacy mode the rules keep (Waiting) when
+ * a designer chose clearing it, whatever read it below. That choice is now
+ * REMOVE_ANYWAY (scan/classify.ts). A stored clearing is kept as it is,
+ * since the stored choices do not say whether the mode was held, and it now
+ * clears the mode once nothing below reads it.
  */
 export function savedChoices(saved: unknown): Overrides {
   const read = (map: unknown): Record<string, OverrideValue> => {
@@ -135,13 +141,65 @@ export function categoryAfter(
   return 'sure'
 }
 
+/**
+ * A legacy mode the next Apply keeps, because values below it that read it
+ * are not changed in that run (apply-plan.ts, keptModes). It depends on the
+ * designer's choices, such as a value below set to Decide later, so the
+ * plugin works the kept modes out again with every count and sends them to
+ * the window with it.
+ */
+export type KeptMode = {
+  /**
+   * True when the run sets a new mode and the legacy mode stays beside it,
+   * which keeps the mode Ready. False for a legacy mode that is only
+   * cleared: the run changes nothing there, so it waits (Waiting).
+   */
+  setsMode: boolean
+  /**
+   * What the legacy mode waits for, written to follow "once" or "until",
+   * such as "Icon, width is decided" or "the main component Button is
+   * migrated"
+   */
+  waitsFor: string
+}
+
+/** The legacy modes the next Apply keeps, by record id. */
+export type KeptModes = Record<string, KeptMode>
+
+export const NO_KEPT_MODES: KeptModes = {}
+
+/**
+ * True for a legacy mode that is only cleared and that the next Apply
+ * keeps. It waits for the values below it, and counts as No equivalent
+ * (Waiting) instead of Ready, so the Ready count is what the run changes.
+ */
+export function isKeptWaiting(id: string, kept: KeptModes): boolean {
+  return kept[id] !== undefined && !kept[id].setsMode
+}
+
+/** What a kept legacy mode says on its row: when it is cleared, or what stays beside the new mode. */
+export function keptModeText(kept: KeptMode): string {
+  return kept.setsMode
+    ? `The legacy mode stays beside it until ${kept.waitsFor}.`
+    : `Cleared once ${kept.waitsFor}.`
+}
+
+/**
+ * The category once a designer has decided (categoryAfter). With the kept
+ * modes, a Ready legacy mode that the next Apply only keeps counts as No
+ * equivalent, shown as Waiting.
+ */
 export function effectiveCategory(
   record: BindingRecord,
   overrides: Overrides,
+  kept: KeptModes = NO_KEPT_MODES,
 ): Category {
-  return isMappable(record)
+  const category = isMappable(record)
     ? categoryAfter(record.category, effectiveTarget(record, overrides))
     : record.category
+  return category === 'sure' && isKeptWaiting(record.id, kept)
+    ? 'none'
+    : category
 }
 
 /** One binding in a mapping row, enough to list and select it. */
@@ -283,15 +341,35 @@ export function isHeldMode(rule: string | undefined): boolean {
 }
 
 /** What one binding in a row gets, after the designer's choices. */
-export type BindingOutcome = EffectiveTarget & { category: Category }
+export type BindingOutcome = EffectiveTarget & {
+  category: Category
+  /**
+   * A legacy mode that waits for the values below it, shown as Waiting: one
+   * the rules keep (isHeldMode), or a Ready one the next Apply keeps
+   */
+  held?: true
+  /** For a legacy mode the next Apply keeps: what it waits for */
+  kept?: KeptMode
+}
 
 export function bindingOutcome(
   row: MappingRow,
   binding: MappingBinding,
   overrides: Overrides,
+  kept: KeptModes = NO_KEPT_MODES,
 ): BindingOutcome {
   const target = resolveTarget(binding.id, row.key, row.proposal, overrides)
-  return { ...target, category: categoryAfter(row.outcome, target) }
+  const after = categoryAfter(row.outcome, target)
+  const keep = kept[binding.id]
+  const waiting = after === 'sure' && isKeptWaiting(binding.id, kept)
+  const category = waiting ? 'none' : after
+  const held = waiting || (category === 'none' && isHeldMode(row.rule))
+  return {
+    ...target,
+    category,
+    ...(held ? { held: true as const } : {}),
+    ...(keep ? { kept: keep } : {}),
+  }
 }
 
 /** The values in a row with a choice of their own, which wins over the row's. */
@@ -324,13 +402,17 @@ export function rowChoiceChanges(
   value: OverrideValue | undefined,
   overrides: Overrides,
 ): OverrideChange[] {
+  // Choosing the proposal again on a Ready row is no change; on a row that
+  // needs a check, it settles the row. Saving the choice the row has
+  // already keeps it.
+  const noChange =
+    value === row.proposal &&
+    row.outcome === 'sure' &&
+    overrides.rows[row.key] !== value
   return [
     {
       target: { type: 'row', key: row.key },
-      // Choosing the proposal again on a Ready row is no change; on a row
-      // that needs a check, it settles the row.
-      value:
-        value === row.proposal && row.outcome === 'sure' ? undefined : value,
+      value: noChange ? undefined : value,
     },
     ...row.bindings
       .filter((binding) => binding.id in overrides.records)
@@ -347,24 +429,29 @@ export type TargetCount = {
   noEquivalent: boolean
   /** Why nothing changes, such as mode/kept */
   rule?: string
+  /** A Ready legacy mode the next Apply keeps, because values below it wait (isKeptWaiting) */
+  kept?: true
   count: number
 }
 
 export function targetCounts(
   rows: MappingRow[],
   overrides: Overrides,
+  kept: KeptModes = NO_KEPT_MODES,
 ): TargetCount[] {
   const counts = new Map<string, TargetCount>()
   for (const row of rows) {
     for (const binding of row.bindings) {
-      const outcome = bindingOutcome(row, binding, overrides)
+      const outcome = bindingOutcome(row, binding, overrides, kept)
       const noEquivalent =
         row.outcome === 'none' && outcome.source === 'proposal'
-      const key = `${outcome.target}|${noEquivalent}`
+      const waits = outcome.held === true && outcome.kept?.setsMode === false
+      const key = `${outcome.target}|${noEquivalent}|${waits}`
       const entry = counts.get(key) ?? {
         target: outcome.target,
         noEquivalent,
         ...(noEquivalent && row.rule ? { rule: row.rule } : {}),
+        ...(waits ? { kept: true as const } : {}),
         count: 0,
       }
       entry.count += 1

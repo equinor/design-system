@@ -5,7 +5,13 @@
  */
 import type { DisplaySettings } from './window'
 import type { FilePage } from './pages'
-import type { MappingGroup, OverrideValue, Overrides } from '../scan/mapping'
+import type { RunPreview } from '../scan/apply-plan'
+import type {
+  KeptModes,
+  MappingGroup,
+  OverrideValue,
+  Overrides,
+} from '../scan/mapping'
 import type { Report } from '../scan/report'
 import type {
   BindingRecord,
@@ -185,6 +191,17 @@ export type PluginToUi =
   | { type: 'scan-done'; summary: ScanSummary }
   /** The same scan counted again after targets were changed */
   | { type: 'summary'; summary: ScanSummary }
+  /**
+   * The legacy modes the next Apply keeps, by record id, with what each
+   * waits for, and every legacy mode that values below read and the run
+   * leaves (`blocked`, apply-plan.ts, modeWaits). Sent before every
+   * `scan-done` and `summary`, since they follow the designer's choices:
+   * the summary counts a kept mode that is only cleared as No equivalent
+   * (Waiting), and the window does the same.
+   */
+  | { type: 'kept-modes'; kept: KeptModes; blocked: Record<string, string> }
+  /** The answer to a `preview` request: what the run would do */
+  | { type: 'preview'; id: number; preview: RunPreview }
   | { type: 'apply-progress'; done: number; total: number }
   | { type: 'apply-done'; result: ApplyResult }
   | { type: 'revert-done'; result: RevertResult }
@@ -252,6 +269,12 @@ export type UiToPlugin =
   | { type: 'apply'; entryIds: string[] }
   /** Applies the Ready changes among the bindings a designer has selected */
   | { type: 'apply-selected'; recordIds: string[] }
+  /**
+   * Asks what a run would do, as an Apply confirmation opens: Apply in the
+   * entries, or with `recordIds`, Apply on the selected values. The plugin
+   * answers with a `preview` of the same id.
+   */
+  | { type: 'preview'; id: number; entryIds?: string[]; recordIds?: string[] }
   /** Puts back what the plugin changed in an entry, from the change log */
   | { type: 'revert'; entryId: string }
   /** Builds the report of the latest scan */

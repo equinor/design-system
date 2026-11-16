@@ -3,14 +3,15 @@
  * document, and talks to the plugin window (src/ui) through messages.
  */
 import { MAPPING_VERSION } from '../mapping/version'
-import { planConversions } from '../scan/apply-plan'
+import { modeWaits, planConversions, previewRun } from '../scan/apply-plan'
 import {
   buildMappingGroups,
   effectiveCategory,
   isMappable,
+  NO_KEPT_MODES,
 } from '../scan/mapping'
 import { recount } from '../scan/summary'
-import type { Overrides } from '../scan/mapping'
+import type { KeptModes, Overrides } from '../scan/mapping'
 import type {
   Command,
   OverrideChange,
@@ -92,6 +93,14 @@ let lastTarget: ScanTarget | undefined
 let componentCounts: Record<string, number> | undefined
 let overrides: Overrides = loadChoices()
 /**
+ * The legacy modes the next Apply keeps in the last scan, with the current
+ * choices (scan/apply-plan.ts, keptModesByRecord). Worked out again with
+ * every count, and sent to the window before it.
+ */
+let kept: KeptModes = NO_KEPT_MODES
+/** Every legacy mode that values below read and the next Apply leaves, with what clearing it waits for */
+let blocked: Record<string, string> = {}
+/**
  * The pages a scan of the file leaves out. Kept here as well as in the file,
  * so a file that cannot store the choice still uses it until the plugin
  * closes.
@@ -101,16 +110,31 @@ let leftOutPages: string[] = loadLeftOutPages()
 let busy = false
 let cancelRequested = false
 
-/** The scan counted with the designer's choices: a chosen target is Ready, and Decide later makes a Ready value Needs check. */
+/**
+ * The scan counted with the designer's choices: a chosen target is Ready,
+ * and Decide later makes a Ready value Needs check. A legacy mode that is
+ * only cleared and that the next Apply keeps, because values below it are
+ * not changed in that run, counts as No equivalent (Waiting), so Ready is
+ * what Apply changes. Sets `kept` and `blocked` for the window.
+ */
 function withChoices(state: ScanState): ScanState {
   const current = overrides
+  const waits = modeWaits(
+    state.records,
+    current,
+    new Set(state.records.map((record) => record.entryId)),
+    state.oldInstances,
+  )
+  const keptNow = waits.kept
+  kept = keptNow
+  blocked = waits.blocked
   return {
     ...state,
     summary: recount(
       state.summary,
       state.records,
       state.oldInstances,
-      (record) => effectiveCategory(record, current),
+      (record) => effectiveCategory(record, current, keptNow),
     ),
   }
 }
@@ -225,6 +249,7 @@ async function scan(target: ScanTarget) {
     componentCounts = undefined
     staleSent = false
     saveHealth(lastScan.summary)
+    post({ type: 'kept-modes', kept, blocked })
     post({ type: 'scan-done', summary: lastScan.summary })
     post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
     post({
@@ -358,6 +383,15 @@ async function select(nodeIds: string[]) {
   }
 }
 
+/** The entries the bindings are in, for Apply on the selected values. */
+function entriesOf(recordIds: ReadonlySet<string>): Set<string> {
+  return new Set(
+    (lastScan?.records ?? [])
+      .filter((record) => recordIds.has(record.id))
+      .map((record) => record.entryId),
+  )
+}
+
 async function selectOld(oldKey: string) {
   if (!lastScan) return
   const nodeIds = [
@@ -385,6 +419,7 @@ function setOverrides(changes: OverrideChange[]) {
   if (lastScan) {
     // The health bars, the legend and the filters follow every change.
     lastScan = withChoices(lastScan)
+    post({ type: 'kept-modes', kept, blocked })
     post({ type: 'summary', summary: lastScan.summary })
   }
 }
@@ -541,14 +576,27 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'apply-selected': {
         const ids = new Set(message.recordIds)
-        const entryIds = new Set(
-          (lastScan?.records ?? [])
-            .filter((record) => ids.has(record.id))
-            .map((record) => record.entryId),
-        )
-        await apply([...entryIds], ids)
+        await apply([...entriesOf(ids)], ids)
         break
       }
+      case 'preview':
+        if (lastScan) {
+          const recordIds = message.recordIds && new Set(message.recordIds)
+          post({
+            type: 'preview',
+            id: message.id,
+            preview: previewRun(
+              lastScan.records,
+              overrides,
+              recordIds
+                ? entriesOf(recordIds)
+                : new Set(message.entryIds ?? []),
+              recordIds,
+              lastScan.oldInstances,
+            ),
+          })
+        }
+        break
       case 'revert':
         await revert(message.entryId)
         break
@@ -588,6 +636,7 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
               records: lastScan.records,
               oldInstances: lastScan.oldInstances,
               overrides,
+              kept,
             }),
           })
         }

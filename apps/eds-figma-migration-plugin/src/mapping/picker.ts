@@ -14,11 +14,22 @@ export type PickerSubject = {
   group:
     'colour' | 'typography' | 'spacing' | 'size' | 'radius' | 'modes' | 'other'
   candidates: string[]
+  /**
+   * Targets that are no proposal and are offered in a section of their
+   * own, after the proposed ones, such as removing a legacy mode that waits
+   * anyway (scan/classify.ts, REMOVE_ANYWAY)
+   */
+  extra?: PickerExtra
 }
+
+/** A section of targets in the picker that are not proposals, with its title. */
+export type PickerExtra = { title: string; targets: string[] }
 
 export type PickerOptions = {
   /** The rule's candidates, the proposal first */
   proposed: string[]
+  /** The subject's extra section, when it has one */
+  extra?: PickerExtra
   /** Everything else that fits, in the order of compareNames */
   others: string[]
 }
@@ -102,6 +113,13 @@ const MODE_OPTIONS: Record<string, string[]> = {
 }
 
 export function pickerOptions(subject: PickerSubject): PickerOptions {
+  const options = fittingOptions(subject)
+  return subject.extra && subject.extra.targets.length > 0
+    ? { ...options, extra: subject.extra }
+    : options
+}
+
+function fittingOptions(subject: PickerSubject): PickerOptions {
   const proposed = subject.candidates.filter(
     (name) => !FORBIDDEN_TARGETS.includes(name),
   )

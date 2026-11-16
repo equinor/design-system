@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
+import { useRunPreview } from '../preview'
+import { PreviewCounts } from './PreviewCounts'
 
 type BulkBarProps = {
   count: number
+  /** The selected values, for the plugin's preview of the run in the confirmation */
+  recordIds: string[]
   /** The selected values that are Ready after the choices, which Apply changes */
   ready: number
   /** The selected values with a choice of their own, which Reset choices removes */
@@ -22,10 +26,13 @@ type BulkBarProps = {
 /**
  * The actions on the ticked bindings, kept at the bottom of the window.
  * Apply changes only the Ready values among them, behind the same kind of
- * confirmation as Apply in the footer.
+ * confirmation as Apply in the footer, with the plugin's preview of the run.
+ * The preview names the legacy modes that stay because values below them
+ * are not selected.
  */
 export function BulkBar({
   count,
+  recordIds,
   ready,
   chosen,
   canChange,
@@ -37,8 +44,11 @@ export function BulkBar({
   onClear,
 }: BulkBarProps) {
   const [confirm, setConfirm] = useState(false)
+  const { preview, request } = useRunPreview()
   if (count === 0) return null
   const left = count - ready
+  // The preview counts the run itself; until it answers, the Ready count.
+  const changes = preview?.changes ?? ready
   return (
     <div className="bulk-bar" role="region" aria-label="Selected bindings">
       <span className="bulk-count" role="status">
@@ -47,7 +57,10 @@ export function BulkBar({
       <div className="bulk-actions">
         <Button
           size="small"
-          onClick={() => setConfirm(true)}
+          onClick={() => {
+            request({ recordIds })
+            setConfirm(true)
+          }}
           disabled={busy || ready === 0}
           title={
             ready === 0
@@ -102,7 +115,8 @@ export function BulkBar({
       >
         <Dialog.Header>
           <Dialog.Title>
-            Apply {ready} change{ready === 1 ? '' : 's'} to the selected values?
+            Apply {changes} change{changes === 1 ? '' : 's'} to the selected
+            values?
           </Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
@@ -111,6 +125,7 @@ export function BulkBar({
             selected values that are Ready. Nothing else in the scope changes in
             this run.
           </p>
+          <PreviewCounts preview={preview} />
           <p className="muted">
             {left > 0
               ? `${left} of the selected value${left === 1 ? '' : 's'} wait${left === 1 ? 's' : ''} for you to choose a target, and ${left === 1 ? 'is' : 'are'} left for a later run. `
@@ -123,6 +138,7 @@ export function BulkBar({
             Cancel
           </Button>
           <Button
+            disabled={preview?.changes === 0}
             onClick={() => {
               setConfirm(false)
               onApply()

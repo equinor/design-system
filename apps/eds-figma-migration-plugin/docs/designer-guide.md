@@ -158,7 +158,10 @@ The bar at the bottom has these actions for the ticked values:
 - **Apply** makes the Ready changes among them, and nothing else in the
   scope. When some of them need a check, have no equivalent or are set to
   Decide later, the button says how many it applies, and the rest are left
-  for a later run.
+  for a later run. The confirmation counts what the run changes, and names
+  each legacy mode that stays because a value below it is not ticked, such as
+  "Density: Spacious on Card stays, and is cleared once Icon, width is
+  selected and applied".
 - **Change target** sets one target on all of them, when they are the same
   kind of value.
 - **Decide later** leaves all of them for a later run.
@@ -220,6 +223,28 @@ any more. While an instance or an icon size below still needs it, it stays,
 and the plugin says why. Such a mode is marked **Waiting**: the change is to
 clear it, and Apply makes that change once the layers below are migrated. In
 the health bar it counts as No equivalent.
+
+Ready means ready to change: the Ready count is what the next Apply changes.
+So a legacy mode that would be cleared becomes Waiting as soon as you set a
+value below it to Decide later, since Apply would keep the mode for that
+value. Its row says what it waits for, such as "Cleared once Icon, width is
+decided", or "once the main component Button is migrated" for values inside
+instances. **Remove the legacy mode** on such a mode, chosen or confirmed in
+Review, clears it once nothing below reads it. To remove it in the next run
+anyway, choose **Remove the legacy mode anyway (the values below that read it
+change)**: the picker offers it on every legacy mode that values below read,
+and the Apply confirmation names each mode removed that way, with the values
+below that change. A legacy mode
+that sets a new mode, such as Spacious to `density: comfortable`, stays
+Ready, since Apply sets the new mode. Its row notes that the legacy mode
+stays beside it until the values below are changed, and a later Apply clears
+it.
+
+The Apply confirmation counts what the run does: values bound to EDS Beta
+variables, numbers set without a variable, text styles applied, new modes
+set, legacy modes removed, layers reset for a Manual fix, and how many of
+the changes are values an instance overrides. It also names the legacy
+modes that stay, and what each waits for.
 
 Check the frame afterwards. Small differences in colour and spacing come from
 the new token values, not from the plugin.
@@ -291,7 +316,8 @@ component in Figma; its legacy values go with it.
 
 **Why is a legacy mode still on my frame?** Something below it still uses a
 legacy variable through it: an instance, an icon size, or a value you have
-not reviewed yet or set to Decide later.
+not reviewed yet or set to Decide later. The mode's row in Changes says
+which, and the Apply confirmation lists the modes a run leaves.
 
 **Ready and Migrated sound the same.** Ready means the plugin knows the
 replacement and can apply it; Migrated means it has been applied.

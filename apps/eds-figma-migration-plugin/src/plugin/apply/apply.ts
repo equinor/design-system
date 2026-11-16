@@ -9,7 +9,8 @@ import { literalValue } from '../../mapping/literal'
 import { isResetTarget, resetVariable } from '../../mapping/reset'
 import { MAPPING_VERSION } from '../../mapping/version'
 import {
-  modesToKeep,
+  isModeChange,
+  keptModeChanges,
   parseModeTarget,
   planChanges,
 } from '../../scan/apply-plan'
@@ -389,10 +390,8 @@ export async function applyChanges(
     }
   }
 
-  const bindings = plan.filter(
-    (change) => change.record.property.type !== 'mode',
-  )
-  const modes = plan.filter((change) => change.record.property.type === 'mode')
+  const bindings = plan.filter((change) => !isModeChange(change))
+  const modes = plan.filter(isModeChange)
 
   // Layers reset in this run, and the ones whose reset failed: a layer is
   // reset once, for its width and height together.
@@ -453,15 +452,14 @@ export async function applyChanges(
     await step()
   }
 
-  const keep = modesToKeep(records, changed)
+  // A legacy mode stays while values below read it, unless a designer has
+  // chosen to remove it anyway (REMOVE_ANYWAY). The window and the preview
+  // work the kept modes out the same way (scan/apply-plan.ts, keptModes),
+  // from the plan instead of what changed, so they differ only where a
+  // binding failed.
+  const keep = keptModeChanges(records, modes, changed)
   for (const change of modes) {
-    const old = change.record.oldMode
-    // A legacy mode stays while values below read it, unless a designer has
-    // chosen to remove it anyway.
-    const mustKeep =
-      old !== undefined &&
-      change.outcome === 'sure' &&
-      keep.has(`${change.record.nodeId}|${old.collectionKey}`)
+    const mustKeep = keep.has(change.record.id)
     try {
       const found = await node(change.record.nodeId)
       if (!found || found.removed || !('explicitVariableModes' in found)) {

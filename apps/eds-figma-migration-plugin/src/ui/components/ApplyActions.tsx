@@ -1,5 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
+import { useRunPreview } from '../preview'
+import type { PreviewScope } from '../preview'
+import { PreviewCounts } from './PreviewCounts'
 
 type ApplyActionsProps = {
   /** Ready changes the run would make */
@@ -26,6 +29,8 @@ type ApplyActionsProps = {
    */
   done?: boolean
   busy: boolean
+  /** What Apply applies to, for the plugin's preview of the run in the confirmation */
+  preview: PreviewScope
   onApply: () => void
   onReview?: () => void
   onRevert?: () => void
@@ -35,7 +40,9 @@ type Confirm = 'apply' | 'revert' | undefined
 
 /**
  * Apply, Review and Revert, each behind a short confirmation that says what
- * will change and how to undo it.
+ * will change and how to undo it. The Apply confirmation asks the plugin
+ * for a preview of the run as it opens, and counts what the run changes and
+ * which legacy modes stay.
  */
 export function ApplyActions({
   ready,
@@ -47,12 +54,20 @@ export function ApplyActions({
   changed = 0,
   done = false,
   busy,
+  preview: scope,
   onApply,
   onReview,
   onRevert,
 }: ApplyActionsProps) {
   const [confirm, setConfirm] = useState<Confirm>()
   const close = () => setConfirm(undefined)
+  const { preview, request } = useRunPreview()
+  const openApply = () => {
+    request(scope)
+    setConfirm('apply')
+  }
+  // The preview counts the run itself; until it answers, the Ready count.
+  const changes = preview?.changes ?? ready
   const revertLabel =
     kind === 'component' ? 'Revert main component' : 'Revert frame'
   // The footer is fixed to the bottom of the window; the content keeps its
@@ -116,10 +131,7 @@ export function ApplyActions({
           </Button>
         )}
         {!done && (
-          <Button
-            disabled={busy || ready === 0}
-            onClick={() => setConfirm('apply')}
-          >
+          <Button disabled={busy || ready === 0} onClick={openApply}>
             Apply {ready}
           </Button>
         )}
@@ -134,7 +146,7 @@ export function ApplyActions({
           <>
             <Dialog.Header>
               <Dialog.Title>
-                Apply {ready} change{ready === 1 ? '' : 's'} {where}?
+                Apply {changes} change{changes === 1 ? '' : 's'} {where}?
               </Dialog.Title>
             </Dialog.Header>
             <Dialog.Content>
@@ -143,6 +155,7 @@ export function ApplyActions({
                 sets the new modes. A legacy mode is cleared only when no layer
                 below it uses a legacy variable any more.
               </p>
+              <PreviewCounts preview={preview} />
               {mainComponents && (
                 <p>
                   {mainComponents.count === 1
@@ -156,9 +169,13 @@ export function ApplyActions({
                 </p>
               )}
               <p className="muted">
-                {mainComponents
-                  ? 'The plugin changes nothing in an instance directly.'
-                  : 'Nothing inside an instance changes.'}
+                {/* The preview counts the values an instance overrides,
+                    which change in the instance. */}
+                {preview && preview.inInstances > 0
+                  ? ''
+                  : mainComponents
+                    ? 'The plugin changes nothing in an instance directly.'
+                    : 'Nothing inside an instance changes.'}
                 {toReview > 0
                   ? ` ${toReview} value${toReview === 1 ? '' : 's'} to review ${toReview === 1 ? 'is' : 'are'} left for a later run: review ${toReview === 1 ? 'it' : 'them'}, then apply again.`
                   : ''}{' '}
@@ -170,6 +187,7 @@ export function ApplyActions({
                 Cancel
               </Button>
               <Button
+                disabled={preview?.changes === 0}
                 onClick={() => {
                   close()
                   onApply()
