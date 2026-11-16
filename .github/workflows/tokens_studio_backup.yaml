@@ -103,7 +103,7 @@ jobs:
       # shape the backup must go red, not stay green copying nothing
       - name: Sync pulled sources into the backup branch
         run: |
-          sources=$(jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output // error("configuration \(.key) has no output"))"' packages/eds-tokens/.studio.json)
+          sources=$(jq -r '(.configurations // error("no configurations in .studio.json, is it a v2 file?")) | to_entries[] | "\(.key)\t\(.value.output // error("configuration \(.key) has no output"))"' packages/eds-tokens/.studio.json)
           if [ -z "$sources" ]; then
             echo "::error::No configurations found in packages/eds-tokens/.studio.json, nothing to back up"
             exit 1
@@ -133,6 +133,9 @@ jobs:
       # branch (the login only works from main)
       - name: Rehearse studio pull on a v2 config (dry run)
         continue-on-error: true
+        # continue-on-error covers a failure, not a hang that would run
+        # into the 15 minute job limit. A backup run takes about 15 seconds
+        timeout-minutes: 5
         run: |
           rehearsal=$(mktemp -d)
           cp packages/eds-tokens/.studio.json "$rehearsal/"
