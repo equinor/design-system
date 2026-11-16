@@ -73,9 +73,9 @@
     "rollup-plugin-delete": "^3.0.2",
     "styled-components": "6.6.0",
     "typescript": "^5.9.3",
-    "vite": "^8.3.6",
+    "vite": "^8.3.8",
     "vitest": "^4.1.12",
-    "@vitejs/plugin-react": "^6.2.1"
+    "@vitejs/plugin-react": "^6.3.0"
   },
   "peerDependencies": {
     "react": "^18 || ^19",

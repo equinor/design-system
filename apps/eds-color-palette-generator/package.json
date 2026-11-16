@@ -23,7 +23,7 @@
   "dependencies": {
     "@equinor/eds-tokens": "workspace:^",
     "colorjs.io": "^0.7.1",
-    "next": "16.4.5",
+    "next": "16.4.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
@@ -45,7 +45,7 @@
     "tailwindcss": "^4.3.5",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
-    "vite": "^8.3.6",
+    "vite": "^8.3.8",
     "vite-plugin-dts": "^5.1.2",
     "vitest": "^4.1.12"
   }
