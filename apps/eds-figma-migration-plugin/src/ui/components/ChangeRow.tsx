@@ -46,6 +46,7 @@ import { plainReason } from '../plain'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
 import { sourceLabel, targetLabel, unchangedLabel } from '../targets'
+import { ResetEffects } from './ResetEffects'
 import { Preview, pxList, valueText } from './VariableList'
 
 export type Item = { group: MappingGroup; row: MappingRow }
@@ -193,12 +194,17 @@ function rowCategories(
 
 /**
  * Why a row needs a check, has no equivalent or is a Manual fix, in plain
- * words, while any of its values is undecided or set to Decide later.
+ * words, while any of its values is undecided or set to Decide later. A
+ * Manual fix keeps its "How to fix it" once accepted, since the dialog lists
+ * what the reset also removes and sets again.
  */
 function rowReason(row: MappingRow, overrides: Overrides): string | undefined {
   const undecided = row.bindings.some((binding) =>
     isUndecided(bindingOutcome(row, binding, overrides)),
   )
+  if (row.outcome === 'byHand' && !undecided) {
+    return 'Apply resets the layer, and sets again the other changes the reset removes.'
+  }
   return (row.outcome === 'check' ||
     row.outcome === 'none' ||
     row.outcome === 'byHand') &&
@@ -463,7 +469,31 @@ export function ChangeRow({
   )
 }
 
-/** The whole reason a row needs a check, has no equivalent or is a Manual fix, with the way to change it. */
+/**
+ * One value per layer: the width and the height of a layer are two values
+ * in a Manual fix row, but one reset with the same effects.
+ */
+function layersOf(row: MappingRow): MappingBinding[] {
+  const layers = new Map<string, MappingBinding>()
+  for (const binding of row.bindings) {
+    if (!layers.has(binding.nodeId)) layers.set(binding.nodeId, binding)
+  }
+  return [...layers.values()]
+}
+
+/** A layer's name with its parent's, since many layers share a name, such as an icon in each field. */
+function layerName(binding: MappingBinding): string {
+  const parent = binding.path[binding.path.length - 1]
+  return parent && parent !== binding.nodeName
+    ? `${binding.nodeName} in ${parent}`
+    : binding.nodeName
+}
+
+/**
+ * The whole reason a row needs a check, has no equivalent or is a Manual
+ * fix, with the way to change it. A Manual fix also lists, per layer, what
+ * the reset removes and the plugin sets again, whatever its status.
+ */
 export function WhyDialog({
   item,
   overrides,
@@ -510,6 +540,14 @@ export function WhyDialog({
                 {item.row.reason}
               </details>
             )}
+            {item.row.outcome === 'byHand' &&
+              layersOf(item.row).map((binding, _, layers) => (
+                <ResetEffects
+                  key={binding.nodeId}
+                  effects={binding.resetEffects}
+                  {...(layers.length > 1 ? { layer: layerName(binding) } : {})}
+                />
+              ))}
           </Dialog.Content>
           <Dialog.Actions>
             <Button variant="ghost" onClick={onClose}>

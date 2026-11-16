@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { Button, Chip } from '@equinor/eds-core-react/next'
+import { resetEffectsText } from '../../scan/classify'
 import { bindingOutcome, isUndecided } from '../../scan/mapping'
 import type {
   MappingBinding,
@@ -338,6 +339,14 @@ export function MappingView({
                                 .map((binding) => {
                                   const { outcome, target, note } =
                                     bindingTarget(row, binding, overrides)
+                                  // Changes lists a Manual fix only when the
+                                  // plugin can make it.
+                                  const effects = manual
+                                    ? resetEffectsText(
+                                        binding.resetEffects,
+                                        true,
+                                      )
+                                    : undefined
                                   return (
                                     <BindingRow
                                       key={binding.id}
@@ -345,13 +354,16 @@ export function MappingView({
                                       subtitle={bindingPath(binding)}
                                       target={target}
                                       note={note}
-                                      // A Manual fix says how to make it, and
-                                      // what to set again, until it is decided.
+                                      // A Manual fix says how to make it by
+                                      // hand until it is decided, and what
+                                      // the reset also removes and sets
+                                      // again whatever its status.
                                       {...(manual &&
                                       isUndecided(outcome) &&
                                       binding.reason
                                         ? { reason: binding.reason }
                                         : {})}
+                                      effects={effects ? [effects] : []}
                                       category={outcome.category}
                                       held={isHeld(outcome.category, row.rule)}
                                       {...(binding.override

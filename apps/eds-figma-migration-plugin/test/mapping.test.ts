@@ -236,6 +236,31 @@ describe('Manual fix', () => {
     ).toEqual(['icon'])
   })
 
+  it('carries what the reset also removes and sets again to its value in Changes', () => {
+    const resetEffects = [
+      'the swap to error filled (the layer turns back into Placeholder Icon, as in the main component, and is swapped to error filled again, which keeps spacing/md)',
+      'icon, fill: background/surface (now Bg/Neutral/Surface)',
+    ]
+    const groups = buildMappingGroups([
+      {
+        ...record('icon', 'Selectable/Icon size', 'byHand', 'reset:spacing/md'),
+        resetEffects,
+      },
+      {
+        ...record('card', 'Border/Neutral/Subtle', 'sure', 'border/default'),
+        // Only a Manual fix resets a layer.
+        resetEffects: ['not a reset'],
+      },
+    ])
+    const binding = (id: string) =>
+      groups
+        .flatMap((group) => group.rows)
+        .flatMap((row) => row.bindings)
+        .find((one) => one.id === id)
+    expect(binding('icon')?.resetEffects).toEqual(resetEffects)
+    expect(binding('card')?.resetEffects).toBeUndefined()
+  })
+
   it('stays out of Review when only a designer can fix it', () => {
     const groups = buildMappingGroups([
       record('icon', 'Selectable/Icon size', 'byHand'),

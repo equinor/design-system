@@ -27,17 +27,25 @@ width or height of a layer inside an instance, and ignores `resize()` there
 too, so a legacy size override there is flagged as **Manual fix** (category
 `byHand`, rule `instance/size-override`). The row says how to fix it in
 Figma: reset the layer, swap it again if it was a swapped icon (a swap keeps
-the slot's size), and set its other changes again, which the row lists with
-their EDS Beta values. The target is the EDS Beta variable the main
-component uses at that place. Such a legacy size comes from a swap made while
-the slot used a legacy size: the swap copies the size onto the icon as an
-override (tested on FRIOD 2026-11-13). The plugin can make the fix itself
-(target `reset:<variable>`, `src/mapping/reset.ts`), but only after a
-designer accepts it in Review; `src/plugin/apply/reset.ts` reads the layer's
-overrides, calls `removeOverrides()`, swaps it back, sets the overrides
-again and reads them back, and refuses a layer with an override it cannot
-copy. Apply reads every binding back to report the ones Figma did not
-take. An explicit mode on a layer inside an instance is the instance's own
+the slot's size), and set its other changes again. What the reset also
+removes and sets again is kept apart from those steps, in `resetEffects` on
+the record and on its value in Changes (`src/scan/classify.ts`): the swap
+back to the main component's layer and the swap again, or the instance-swap
+property set to its default and back; each change with a variable on the
+layer and the layers below it, with its EDS Beta value; and the changes
+without a variable, such as a hidden layer. The window shows that list
+whatever the status, so it stays in view once the fix is accepted and
+Ready, and the report prints it after the steps. The target is the EDS
+Beta variable the main component uses at that place. Such a legacy size
+comes from a swap made while the slot used a legacy size: the swap copies
+the size onto the icon as an override (tested on FRIOD 2026-11-13). The
+plugin can make the fix itself (target `reset:<variable>`,
+`src/mapping/reset.ts`), but only after a designer accepts it in Review;
+`src/plugin/apply/reset.ts` reads the layer's overrides, calls
+`removeOverrides()`, swaps it back, sets the overrides again and reads them
+back, and refuses a layer with an override it cannot copy. Apply reads
+every binding back to report the ones Figma did not take. An explicit
+mode on a layer inside an instance is the instance's own
 when `overrides` lists `explicitVariableModes` for that layer and the layer
 at the same place in the main component sets another mode, or none, for the
 collection. Such a mode goes through the mode rules and is cleared once
@@ -308,7 +316,10 @@ review covers that frame only.
 Changes lists Manual fixes too, so every value Apply counts is on a tab: an
 accepted fix is Ready and made by Apply. Their rows have no checkbox, since a
 fix is decided one at a time, and their pickers offer only the fix or Decide
-later.
+later. Each value says what resetting its layer also removes and the plugin
+sets again, for every status, and so do the value in the frame and the
+Review step. The row's status opens How to fix it, also once the fix is
+accepted, with the steps and that list for each layer in the row.
 
 **Typography components.** The legacy Typography component is a text in a
 component. When the scan finds instances of it (outside other instances),

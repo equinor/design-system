@@ -4,7 +4,7 @@
  */
 import { CLEAR_VALUE, literalText } from '../mapping/literal'
 import { isResetTarget, resetText } from '../mapping/reset'
-import { CLEAR_MODE, manualFixTarget } from './classify'
+import { CLEAR_MODE, manualFixTarget, resetEffectsText } from './classify'
 import { CATEGORY_LABELS, propertyLabel } from './labels'
 import {
   DECIDE_LATER,
@@ -65,6 +65,18 @@ function csvField(text: string | number | undefined): string {
 
 function layerPath(record: BindingRecord): string {
   return [...record.path, record.nodeName].join(' / ')
+}
+
+/**
+ * The reason, and for a Manual fix what the reset also removes and sets
+ * again, as the window shows them.
+ */
+function reasonText(record: BindingRecord): string {
+  const effects =
+    record.category === 'byHand'
+      ? resetEffectsText(record.resetEffects, isMappable(record))
+      : undefined
+  return [record.reason, effects].filter(Boolean).join(' ')
 }
 
 export function buildReport(input: ReportInput): Report {
@@ -226,7 +238,7 @@ export function buildReport(input: ReportInput): Report {
     '',
     byHand.length > 0
       ? [
-          'Legacy values that Figma lets nobody change where they are, in the editor or from a plugin. Each row says how to fix it in Figma.',
+          'Legacy values that Figma lets nobody change where they are, in the editor or from a plugin. Each row says how to fix it in Figma, and what resetting the layer also removes and sets again.',
           '',
           table(
             ['Frame', 'Layer', 'Property', 'Legacy', 'After the fix', 'How'],
@@ -236,7 +248,7 @@ export function buildReport(input: ReportInput): Report {
               propertyLabel(record.property),
               record.old,
               manualFixTarget(record),
-              record.reason,
+              reasonText(record),
             ]),
           ),
         ].join('\n')
@@ -357,7 +369,7 @@ export function buildReport(input: ReportInput): Report {
             ? manualFixTarget(record)
             : (record.current ?? ''),
         target ? (target.source === 'proposal' ? 'Rule' : 'Designer') : '',
-        record.reason ?? '',
+        reasonText(record),
         summary.mappingVersion,
       ]
     })

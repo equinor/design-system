@@ -170,6 +170,8 @@ export type MappingBinding = {
    * row's, such as a text case a Typography conversion drops.
    */
   reason?: string
+  /** For a Manual fix: what resetting this layer also removes and sets again (BindingRecord.resetEffects) */
+  resetEffects?: string[]
 }
 
 export type MappingRow = {
@@ -261,6 +263,9 @@ export function buildMappingGroups(
         (ownReasons && record.reason !== row.reason)) &&
       record.reason
         ? { reason: record.reason }
+        : {}),
+      ...(record.category === 'byHand' && record.resetEffects
+        ? { resetEffects: record.resetEffects }
         : {}),
     })
   }

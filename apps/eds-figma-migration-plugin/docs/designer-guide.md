@@ -74,8 +74,12 @@ main component has there, with its EDS Beta size; swap it to your icon again,
 and the size stays. When the icon was picked with a property of the instance
 above it, such as Icon on Error icon in Text Field, the reset keeps the icon
 but not the size: set the property to the default icon and back instead, as
-the row says. The reset also removes the layer's other changes, such as
-its colour, so the row lists them with the EDS Beta value to set again.
+the row says. The reset also removes the other changes on the layer and the
+layers below it, such as its colour, so the row lists them with the EDS Beta
+value to set again. The list also names the swap back and the swap again,
+or the property set to the default icon and back, and reminds you of
+changes without a variable, such as a hidden layer, which are not listed one
+by one but are set again too.
 
 The plugin can make this fix for you, but only after you accept it, since it
 is more than a swap of one variable for another. Manual fixes are part of
@@ -84,10 +88,17 @@ is more than a swap of one variable for another. Manual fixes are part of
 Apply makes them: the step explains the fix, and **Accept the fix** lets the plugin
 read every change on the layer, reset it, swap it back and set the changes
 again on the next Apply. It checks each change afterwards; if one cannot be
-copied, it leaves the layer as it was and says why. **Decide later** leaves
-the value for a later run. When the main component itself still uses a
-legacy size, or the layer is not an instance, the plugin cannot make the fix,
-and the row only gives the steps.
+copied, it leaves the layer as it was and says why. The list of what the
+reset removes and the plugin sets again stays in the window after you accept
+the fix: on the value in Changes and in the frame, and in **How to fix it**,
+which the row's status opens. The plugin puts each of those changes back as it
+is now, and the same Apply then changes the Ready ones to the EDS Beta value
+the list shows; one that still needs a check stays on its legacy variable
+until you decide. So you see everything the next Apply changes on
+that layer before you run it. **Decide later** leaves the value for a later
+run. When the main component itself still uses a legacy size, or the layer
+is not an instance, the plugin cannot make the fix, and the row only gives
+the steps.
 
 ## 3. Look at what will change
 

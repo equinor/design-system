@@ -213,7 +213,17 @@ export type BindingRecord = {
   outcome?: Outcome
   /** The proposal first */
   candidates?: string[]
+  /** Why the rules decided as they did; for a Manual fix, the steps to make it by hand */
   reason?: string
+  /**
+   * For every Manual fix: what resetting the layer does besides the fix, as
+   * items for a list. The swap back and again, or the instance-swap
+   * property set to its default and back; each change with a variable on
+   * the layer and the layers below it, with its EDS Beta value; and the
+   * changes without a variable. The window shows them whatever the status,
+   * so they stay in view once the fix is accepted.
+   */
+  resetEffects?: string[]
   rule?: string
   instanceId?: string
   /** Inside an instance: a value the instance overrides, which the plugin can change there */

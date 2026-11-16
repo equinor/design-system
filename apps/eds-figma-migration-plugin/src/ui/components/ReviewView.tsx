@@ -9,6 +9,7 @@ import { pathBelow } from '../paths'
 import { plainReason, targetMeaning } from '../plain'
 import type { ReviewItem } from '../review'
 import { DECIDE_LATER_LABEL, targetLabel } from '../targets'
+import { ResetEffects } from './ResetEffects'
 import { VariableList } from './VariableList'
 
 type Decision = 'confirmed' | 'changed' | 'later' | 'skipped'
@@ -185,6 +186,7 @@ export function ReviewView({
               change afterwards. If a change cannot be copied, the plugin leaves
               this layer as it is and says why.
             </p>
+            <ResetEffects effects={binding.resetEffects} />
           </div>
         )}
         {!isManualFix && reason && (

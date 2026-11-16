@@ -5,9 +5,11 @@
 import { describe, expect, it } from 'vitest'
 import { NEW, NEW_TEXT_STYLES, OLD } from '../src/mapping/inventory'
 import {
+  CHANGES_WITHOUT_A_VARIABLE,
   classifyUnit,
   classifyUnits,
   manualFixTarget,
+  resetEffectsText,
 } from '../src/scan/classify'
 import { packFixture, unpackFixture } from '../src/scan/fixture'
 import {
@@ -206,13 +208,16 @@ describe('classifyUnit', () => {
     expect(record).toMatchObject({ category: 'byHand', candidates: [] })
   })
 
-  it('lists the changes a reset removes, with the values to set again', () => {
-    const icon = iconSize({
-      mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
-    } as Partial<RawUnit>)
+  describe('reset effects', () => {
     const colour = fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface'), {
       nodeId: 'I385:1962;66:4158;72:4046',
       nodeName: 'icon',
+      instanceId: '385:1962',
+      override: true,
+    })
+    const ownColour = fill(raw(NEW.semantic, 'icon/primary'), {
+      nodeId: 'I385:1962;66:4158',
+      nodeName: 'error filled',
       instanceId: '385:1962',
       override: true,
     })
@@ -222,12 +227,114 @@ describe('classifyUnit', () => {
       instanceId: '385:1962',
       override: true,
     })
-    const records = classifyUnits([icon, colour, elsewhere])
-    const fix = records.find((record) => record.category === 'byHand')
-    expect(fix?.reason).toContain(
-      'icon, fill: background/surface (now Bg/Neutral/Surface)',
-    )
-    expect(fix?.reason).not.toContain('label')
+    const fixOf = (units: RawUnit[]) =>
+      classifyUnits(units).find((record) => record.category === 'byHand')
+
+    it('lists the changes on the layer and the layers below it, with their EDS Beta values', () => {
+      const fix = fixOf([
+        iconSize({
+          mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+        } as Partial<RawUnit>),
+        ownColour,
+        colour,
+        elsewhere,
+      ])
+      expect(fix?.resetEffects).toEqual([
+        'error filled, fill: icon/primary',
+        'icon, fill: background/surface (now Bg/Neutral/Surface)',
+        CHANGES_WITHOUT_A_VARIABLE,
+      ])
+    })
+
+    it('keeps the list out of the reason, which gives the steps by hand', () => {
+      const fix = fixOf([
+        iconSize({
+          mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+        } as Partial<RawUnit>),
+        colour,
+      ])
+      expect(fix?.reason).not.toContain('background/surface')
+      expect(fix?.reason).not.toContain('Bg/Neutral/Surface')
+      expect(fix?.reason).toContain('Reset all changes')
+      expect(fix?.reason).toContain(
+        'The reset also removes the other changes on the layer and the layers below it, so set them again afterwards',
+      )
+    })
+
+    it('lists the swap back to the main component’s layer and the swap again', () => {
+      const fix = fixOf([
+        iconSize({
+          mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+          swap: { from: 'Placeholder Icon', to: 'error filled' },
+        } as Partial<RawUnit>),
+        colour,
+      ])
+      expect(fix?.resetEffects).toEqual([
+        'the swap to error filled (the layer turns back into Placeholder Icon, as in the main component, and is swapped to error filled again, which keeps spacing/md)',
+        'icon, fill: background/surface (now Bg/Neutral/Surface)',
+        CHANGES_WITHOUT_A_VARIABLE,
+      ])
+    })
+
+    it('lists the instance-swap property set to its default and back when the swap went through one', () => {
+      const fix = fixOf([
+        iconSize({
+          mainVariable: raw(NEW.semantic, 'spacing/md', { type: 'FLOAT' }),
+          swap: {
+            from: 'Placeholder Icon',
+            to: 'error filled',
+            property: { name: 'Icon', on: 'Error icon' },
+          },
+        } as Partial<RawUnit>),
+      ])
+      expect(fix?.resetEffects).toEqual([
+        'the Icon property of Error icon, set to Placeholder Icon and back to error filled, which brings spacing/md from the main component',
+        CHANGES_WITHOUT_A_VARIABLE,
+      ])
+      expect(fix?.resetEffects?.join(' ')).not.toContain('turns back into')
+    })
+
+    it('names the changes without a variable when the scan found no other change', () => {
+      expect(classifyUnit(iconSize())?.resetEffects).toEqual([
+        CHANGES_WITHOUT_A_VARIABLE,
+      ])
+    })
+
+    it('gives the property steps, not a swap, when the main component has to be migrated first', () => {
+      const record = classifyUnit(
+        iconSize({
+          mainVariable: raw(OLD.spacingSemantic, 'Selectable/Icon size', {
+            type: 'FLOAT',
+          }),
+          swap: {
+            from: 'Placeholder Icon',
+            to: 'error filled',
+            property: { name: 'Icon', on: 'Error icon' },
+          },
+        } as Partial<RawUnit>),
+      )
+      expect(record?.reason).toContain(
+        'set the Icon property of Error icon to Placeholder Icon and back to error filled',
+      )
+      expect(record?.reason).not.toContain('swap it to error filled again')
+    })
+
+    it('says who sets them again: the plugin when it makes the fix, the designer when it cannot', () => {
+      const effects = ['icon, fill: background/surface']
+      expect(resetEffectsText(effects, true)).toBe(
+        'Resetting the layer also removes these. The plugin puts each one back as it is now, and the same Apply changes the Ready ones to the EDS Beta value shown: icon, fill: background/surface.',
+      )
+      expect(resetEffectsText(effects, false)).toBe(
+        'Resetting the layer also removes these, so set them again afterwards: icon, fill: background/surface.',
+      )
+      expect(resetEffectsText(undefined, true)).toBeUndefined()
+    })
+
+    it('leaves other records without reset effects', () => {
+      const records = classifyUnits([iconSize(), colour])
+      const other = records.find((record) => record.category !== 'byHand')
+      expect(other?.resetEffects).toBeUndefined()
+    })
   })
 
   it('keeps the rules for a size overridden on the instance itself', () => {

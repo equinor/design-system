@@ -146,10 +146,15 @@ type VariableUnit = Extract<RawUnit, { unit: 'variable' }>
  * is the EDS Beta variable the main component uses there, or else the rules'
  * proposal. Null for a layer outside these rules, such as the instance
  * itself, which a plugin can bind.
+ *
+ * The reason gives the steps to make the fix by hand. The effects say what
+ * the reset does to the swap: the swap back and again, or the instance-swap
+ * property set to its default and back. `classifyUnits` adds the changes on
+ * the layer and the layers below it (`withResetEffects`).
  */
 export function manualFix(
   unit: VariableUnit,
-): { target?: string; reason: string } | null {
+): { target?: string; reason: string; effects: string[] } | null {
   if (
     !unit.override ||
     unit.property.type !== 'field' ||
@@ -175,7 +180,14 @@ export function manualFix(
     'click the row to select the layer, then right-click it in Figma and choose Reset all changes'
   let steps: string
   if (main && !mainIsBeta) {
-    steps = `The main component uses the legacy ${main.name} here too, so migrate the main component first. Then ${reset}${swap ? `, and swap it to ${swap.to} again` : ''}.`
+    // A swap made through a property stays after the reset, so the
+    // property is set to its default and back instead of a swap.
+    const again = swap?.property
+      ? `, and set the ${swap.property.name} property of ${swap.property.on} to ${swap.from} and back to ${swap.to}`
+      : swap
+        ? `, and swap it to ${swap.to} again`
+        : ''
+    steps = `The main component uses the legacy ${main.name} here too, so migrate the main component first. Then ${reset}${again}.`
   } else if (swap?.property) {
     steps = `To fix it, ${reset}: it stays ${swap.to}, but without a size variable. Then select ${swap.property.on}, set its ${swap.property.name} property to ${swap.from} and back to ${swap.to}, which brings ${mainIsBeta ? main.name : 'the size'} from the main component.`
   } else if (swap) {
@@ -183,12 +195,25 @@ export function manualFix(
   } else {
     steps = `To fix it, ${reset}. It takes ${mainIsBeta ? main.name : 'its size'} from the main component again.`
   }
+  const others =
+    ' The reset also removes the other changes on the layer and the layers below it, so set them again afterwards, with their EDS Beta values.'
   const offer = target
     ? ' The plugin can make this fix for you once you accept it in Review.'
     : ''
+  const size = mainIsBeta ? main.name : 'the size'
+  const effects = swap?.property
+    ? [
+        `the ${swap.property.name} property of ${swap.property.on}, set to ${swap.from} and back to ${swap.to}, which brings ${size} from the main component`,
+      ]
+    : swap
+      ? [
+          `the swap to ${swap.to} (the layer turns back into ${swap.from}, as in the main component, and is swapped to ${swap.to} again, which keeps ${size})`,
+        ]
+      : []
   return {
     ...(target ? { target } : {}),
-    reason: `${why} ${steps}${offer}`,
+    reason: `${why} ${steps}${others}${offer}`,
+    effects,
   }
 }
 
@@ -223,12 +248,20 @@ function valueAfterReset(record: BindingRecord): string {
 }
 
 /**
- * A reset removes every change on the layer and the layers below it, so a
- * Manual fix lists the variables the instance sets there, each with the EDS
- * Beta value to set again after the reset. Layers below an instance layer
- * have ids that start with its id and a semicolon.
+ * The last of a Manual fix's reset effects: the scan only reads variables,
+ * so the changes without one are named by kind.
  */
-function withResetList(records: BindingRecord[]): BindingRecord[] {
+export const CHANGES_WITHOUT_A_VARIABLE =
+  'changes without a variable, such as a hidden layer or a colour style'
+
+/**
+ * A reset removes every change on the layer and the layers below it, so a
+ * Manual fix lists the variables the instance sets there among its reset
+ * effects, each with the EDS Beta value to set again after the reset, after
+ * the swap and before the changes without a variable. Layers below an
+ * instance layer have ids that start with its id and a semicolon.
+ */
+function withResetEffects(records: BindingRecord[]): BindingRecord[] {
   return records.map((record) => {
     if (record.category !== 'byHand') return record
     const lost = records.filter(
@@ -238,20 +271,41 @@ function withResetList(records: BindingRecord[]): BindingRecord[] {
         (other.nodeId === record.nodeId ||
           other.nodeId.startsWith(`${record.nodeId};`)),
     )
-    const items = [
-      ...new Set(
-        lost.map(
-          (other) =>
-            `${other.nodeName}, ${propertyLabel(other.property).toLowerCase()}: ${valueAfterReset(other)}${other.old ? ` (now ${other.old})` : ''}`,
-        ),
-      ),
-    ]
-    const list =
-      items.length > 0
-        ? ` The reset also removes the other changes on the layer. Set these again afterwards, with the EDS Beta values: ${items.join('; ')}. Changes without a variable, such as a hidden layer, have to be set again too.`
-        : ' The reset also removes any other change on the layer, such as its colour, so set those again afterwards.'
-    return { ...record, reason: `${record.reason ?? ''}${list}` }
+    const items = lost.map(
+      (other) =>
+        `${other.nodeName}, ${propertyLabel(other.property).toLowerCase()}: ${valueAfterReset(other)}${other.old ? ` (now ${other.old})` : ''}`,
+    )
+    const swap = (record.resetEffects ?? []).filter(
+      (effect) => effect !== CHANGES_WITHOUT_A_VARIABLE,
+    )
+    return {
+      ...record,
+      resetEffects: [
+        ...new Set([...swap, ...items, CHANGES_WITHOUT_A_VARIABLE]),
+      ],
+    }
   })
+}
+
+/**
+ * What the window and the report say before a Manual fix's reset effects:
+ * when the plugin makes the fix, it puts each change back as it is and the
+ * same Apply migrates the Ready ones; when it cannot, a designer sets them
+ * again after a reset in Figma.
+ */
+export function resetEffectsLead(byPlugin: boolean): string {
+  return byPlugin
+    ? 'Resetting the layer also removes these. The plugin puts each one back as it is now, and the same Apply changes the Ready ones to the EDS Beta value shown:'
+    : 'Resetting the layer also removes these, so set them again afterwards:'
+}
+
+/** A Manual fix's reset effects in one sentence, or undefined when it has none. */
+export function resetEffectsText(
+  effects: string[] | undefined,
+  byPlugin: boolean,
+): string | undefined {
+  if (!effects || effects.length === 0) return undefined
+  return `${resetEffectsLead(byPlugin)} ${effects.join('; ')}.`
 }
 
 export function groupOf(unit: RawUnit): PropertyGroup {
@@ -343,6 +397,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
         category: 'byHand',
         candidates: fix.target ? [fix.target] : [],
         reason: fix.reason,
+        resetEffects: [...fix.effects, CHANGES_WITHOUT_A_VARIABLE],
         rule: 'instance/size-override',
       }
     }
@@ -688,7 +743,7 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
 }
 
 export function classifyUnits(units: RawUnit[]): BindingRecord[] {
-  return withResetList(
+  return withResetEffects(
     holdModes(
       units
         .map(classifyUnit)

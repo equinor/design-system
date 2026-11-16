@@ -15,7 +15,11 @@ type BindingRowProps = {
   /** Says when the target is a change someone made */
   note?: string
   reason?: string
-  /** What else the change does, such as text carried across to instances, shown whatever the status */
+  /**
+   * What else the change does, shown whatever the status: text carried
+   * across to instances, or the changes a Manual fix's reset removes and
+   * sets again
+   */
   effects?: string[]
   category: Category
   /** A legacy mode kept until the layers below it are migrated, badged Waiting */

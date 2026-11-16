@@ -404,8 +404,12 @@ swapped again afterwards, which keeps the size. When that layer in the main
 component uses a legacy variable too, the main component is migrated first.
 The target is the EDS Beta variable the main component's layer binds, when it
 has one, otherwise the variable the rules propose. Since the reset removes
-every change on the layer and the layers below it, the row lists the
-variables the instance sets there, each with its EDS Beta value to set again.
+every change on the layer and the layers below it, the record lists them in
+`resetEffects`, apart from the steps in its reason: the swap back and the
+swap again, or the instance-swap property set to its default and back; the
+variables the instance sets there, each with its EDS Beta value to set again;
+and the changes without a variable. The window shows the list whatever the
+status, also once the fix is accepted.
 A size on the instance itself is not affected: a plugin can bind that.
 
 An explicit mode works the same way: a legacy mode the instance sets itself,

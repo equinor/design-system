@@ -1418,6 +1418,23 @@ code {
   padding-inline-start: var(--eds-spacing-md);
 }
 
+/* What a Manual fix's reset also removes and sets again. */
+.reset-effects {
+  margin-block-start: var(--eds-spacing-2xs);
+
+  & p {
+    margin: 0;
+  }
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-4xs);
+    margin: var(--eds-spacing-3xs) 0 0;
+    padding-inline-start: var(--eds-spacing-md);
+  }
+}
+
 /* The scope line under the health bar, with Export report beside it. */
 .scope-line {
   display: flex;

@@ -44,7 +44,7 @@ import { pathBelow } from '../paths'
 import { reviewItems } from '../review'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
-import { manualFixTarget } from '../../scan/classify'
+import { manualFixTarget, resetEffectsText } from '../../scan/classify'
 import { sourceLabel, targetLabel, unchangedLabel } from '../targets'
 import { filterGroups } from '../groups'
 import { ApplyActions } from './ApplyActions'
@@ -616,6 +616,15 @@ export function Inspector({
                               : undefined
                             const decided =
                               target !== undefined && !isUndecided(target)
+                            // What a Manual fix's reset also removes and
+                            // sets again, whatever its status.
+                            const effects =
+                              record.category === 'byHand'
+                                ? resetEffectsText(
+                                    record.resetEffects,
+                                    isMappable(record),
+                                  )
+                                : undefined
                             return (
                               <BindingRow
                                 key={record.id}
@@ -633,6 +642,7 @@ export function Inspector({
                                     : undefined
                                 }
                                 reason={decided ? undefined : record.reason}
+                                effects={effects ? [effects] : []}
                                 category={categoryOf(record)}
                                 held={isHeld(categoryOf(record), record.rule)}
                                 {...(group.instance
