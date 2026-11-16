@@ -1023,11 +1023,10 @@ describe('rules added on 2026-11-11', () => {
     expect(result).toMatchObject({ outcome: 'sure', candidates: ['value:1'] })
   })
 
-  it('reports a border width it cannot read', () => {
+  it('reports a border width it cannot read, with no stand-in since it has no px', () => {
     expect(
-      resolve('strokeWeight', density('sizing/stroke/thin'), ctx(['Card']))
-        .outcome,
-    ).toBe('none')
+      resolve('strokeWeight', density('sizing/stroke/thin'), ctx(['Card'])),
+    ).toMatchObject({ outcome: 'none', candidates: [] })
   })
 })
 

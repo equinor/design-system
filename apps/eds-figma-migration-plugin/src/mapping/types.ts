@@ -31,6 +31,12 @@ export type OldVariable = {
   value?: number
   /** The value the variable resolves to on the node, when it was read. */
   resolvedValue?: number | string | boolean | null
+  /**
+   * The colour a colour variable resolves to on the node, as #rrggbb or
+   * #rrggbbaa, when it was read. The stand-in for a colour without a rule is
+   * the EDS Beta colour nearest to it.
+   */
+  colour?: string
 }
 
 /** What a binding sits on. */
@@ -94,8 +100,10 @@ export type Outcome = 'sure' | 'check' | 'none'
 export type Resolution = {
   outcome: Outcome
   /**
-   * New variable or text style names, the proposal first. Empty when the
-   * outcome is `none`.
+   * New variable or text style names, the proposal first. For the outcome
+   * `none`, the first is the stand-in, which is applied only once a designer
+   * chooses it; empty when no stand-in is possible, such as for a string
+   * variable.
    */
   candidates: string[]
   /** Why the rule chose this, in a sentence a designer can read */
@@ -135,7 +143,10 @@ export type ModeTarget = {
 
 export type ModeResolution = {
   outcome: Outcome
-  /** The new mode to set, or null when the old mode is only cleared */
+  /**
+   * The new mode to set, or null when the old mode is only cleared. For the
+   * outcome none, clearing the old mode is the stand-in.
+   */
   target: ModeTarget | null
   reason: string
   rule: string

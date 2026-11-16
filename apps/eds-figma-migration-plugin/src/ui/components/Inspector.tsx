@@ -97,7 +97,7 @@ export function targetText(
     default: {
       const { target, source } = effectiveTarget(record, overrides)
       if (record.category === 'none' && source === 'proposal') {
-        return unchangedLabel(record.rule)
+        return unchangedLabel(record.rule, target)
       }
       return targetLabel(target)
     }

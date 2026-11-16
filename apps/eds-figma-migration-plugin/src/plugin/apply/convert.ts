@@ -228,6 +228,7 @@ export async function convertTypography(
         },
         new: { type: 'textStyle', key: style.key, name: style.name },
         outcome: record.category === 'sure' ? 'sure' : 'confirmed',
+        ...(record.rule ? { rule: record.rule } : {}),
         mappingVersion: MAPPING_VERSION,
         at,
       }

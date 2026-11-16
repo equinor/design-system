@@ -17,12 +17,22 @@ export function targetLabel(target: string | null): string {
   return target
 }
 
-/** What a row without a change says: no equivalent, or why a legacy mode is kept. */
-export function unchangedLabel(rule: string | undefined): string {
+/**
+ * What a No equivalent value says before anybody has chosen a target: the
+ * stand-in the plugin proposes for the gap in the EDS Beta, or why a legacy
+ * mode is kept. A string or boolean variable has no stand-in.
+ */
+export function unchangedLabel(
+  rule: string | undefined,
+  standIn?: string | null,
+): string {
   if (rule === 'mode/kept') return 'Kept: legacy values below read it'
   if (rule === 'mode/after-review')
     return 'Kept until the values below are reviewed'
-  return 'No equivalent; stays as it is'
+  if (standIn) {
+    return `Stand-in: ${standIn === CLEAR_MODE ? 'Remove the legacy mode' : targetLabel(standIn)}`
+  }
+  return 'No equivalent and no stand-in'
 }
 
 export function sourceLabel(

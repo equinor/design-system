@@ -204,7 +204,10 @@ choosing the proposal again removes the change. On a value that needs a check
 or has no equivalent, any choice settles it: the value then counts as Ready,
 or as Excluded when it keeps the legacy variable, and the health bars follow.
 Excluded is never set by the rules, so No equivalent only means that the EDS
-Beta has nothing for the value.
+Beta has no token for the value, which is a gap in the tokens. Such a value
+gets a stand-in where one is possible: its row says "Stand-in:" and the
+target while its status stays No equivalent, and Apply leaves it until a
+designer chooses the stand-in or another target.
 Choices are kept across scans and in the file.
 
 The window counts **values**: a value is a property bound to a variable, the
@@ -234,7 +237,17 @@ change, after a confirmation that says what stays:
   the nearest legacy mode above it of a collection in its own library, colour
   or spacing and typography.
 
-An icon size (`sizing/icon/*` and the like) is proposed as the spacing token with the same px in the layer's density (`sizing/icon/lg`, 24px → `spacing/xl`), as a Needs check, since EDS sizes icons with spacing tokens. A variable on a stroke weight becomes the number it resolves to, without a variable, since EDS has no stroke width variable yet; Revert frame binds the legacy variable again.
+An icon size (`sizing/icon/*` and the like) is proposed as the spacing token with the same px in the layer's density (`sizing/icon/lg`, 24px → `spacing/xl`), Ready on an exact match and a Needs check otherwise, since EDS sizes icons with spacing tokens. A variable on a stroke weight becomes the number it resolves to, without a variable, since EDS has no stroke width variable yet; Revert frame binds the legacy variable again.
+
+Where the EDS Beta has no token for a legacy variable, the value is No
+equivalent with a stand-in (decided 2026-11-16, `docs/mapping-rules.md`
+section 7): a number gets the EDS Beta variable with the same px in the
+layer's density, or the px without a variable (rules `number/same-px` and
+`number/as-px`); a colour gets the EDS Beta colour for the layer's role that
+looks nearest to the legacy colour (`colour/nearest-by-role`); a type size
+gets the nearest step (`type/nearest-step`); an unknown legacy mode gets
+removing it. Only a string or boolean variable, or a number whose px could
+not be read, has no stand-in.
 
 Bindings that need a check are not applied until a designer has chosen a
 target for them. Inside an instance only its own overrides change. Before each change the
@@ -246,7 +259,8 @@ layers again.
 Every change is logged on its layer in shared plugin data (namespace
 `eds_migration`, key `log`): the property, the legacy variable, typography or
 mode, what replaced it, whether it was sure, confirmed or an override, the
-rules version and the time. **Revert frame**, in a frame that has changes,
+rule that proposed the target (from 2026-11-16, so a value migrated to a
+stand-in can be found), the rules version and the time. **Revert frame**, in a frame that has changes,
 puts the legacy bindings, typography and modes back from that log, newest
 first, as long as the legacy libraries are still published. A binding someone
 has changed since the apply is left alone and reported. Shared plugin data is
@@ -263,13 +277,16 @@ the reason, and a click opens it in full.
 
 ## Review, instances and local components
 
-**Review N ⚠**, next to Apply, steps through the values that need a check
-and that nobody has decided on, one at a time, in the order of the Changes
-tab. Each step selects the layer in Figma and says where it is ("Label in
-Button / Outlined"), why the rule was unsure in plain words (with the rule's
-own words under Details), the proposal and every other target that fits. **Confirm
-proposal**, **Use this target** and **Exclude** store the choice, so
-the binding counts as Ready or Excluded; **Skip** leaves it for later.
+**Review N ⚠**, next to Apply, steps through the values that need a check,
+and the No equivalent values with a stand-in, that nobody has decided on, one
+at a time, in the order of the Changes tab. A legacy mode marked Waiting is
+left out, since it waits for the values below it. Each step selects the layer
+in Figma and says where it is ("Label in Button / Outlined"), why the rule was
+unsure or what the EDS Beta lacks, in plain words where there are some (with
+the rule's own words under Details), the proposal and every other target that
+fits. **Confirm proposal** (**Use the stand-in** for No equivalent), **Use
+this target** and **Exclude** store the choice, so the binding counts as Ready
+or Excluded; **Skip** leaves it for later.
 The review ends with what was confirmed, changed, excluded and skipped. From a
 frame, the review covers that frame only.
 
@@ -324,9 +341,11 @@ colour, which would measure 3.3:1 on the dark canvas.
 
 **Export report**, beside the scope line and in Settings, makes a Markdown report (health,
 every frame with its health and the layers the plugin changed, the bindings
-that need a check or have no equivalent, the instances with legacy variables
-grouped by component, and the rules version) and a CSV with one row per
-binding. Both can be downloaded; the Markdown can also be copied, for where a
+that need a check, the gaps in the tokens (No equivalent) with each value's
+stand-in, the legacy modes that wait for the values below them, the instances
+with legacy variables grouped by component, and the rules version) and a CSV
+with one row per binding, where a stand-in nobody has chosen yet reads
+"Stand-in:" and the target. Both can be downloaded; the Markdown can also be copied, for where a
 download from the plugin window is blocked.
 
 The plugin keeps two things in the shared plugin data of the document

@@ -61,6 +61,7 @@ export function toOldVariable(variable: RawVariable): OldVariable {
     chain: variable.chain,
     resolvedValue: variable.resolvedValue,
     value: variable.value,
+    ...(variable.colour !== undefined ? { colour: variable.colour } : {}),
   }
 }
 
@@ -211,8 +212,13 @@ function valueAfterReset(record: BindingRecord): string {
       if (!target) return record.old ?? ''
       return literalText(target) ?? target
     }
-    default:
-      return `${record.old ?? ''}, which has no EDS Beta equivalent yet`
+    default: {
+      const standIn =
+        record.category === 'none' ? record.candidates?.[0] : undefined
+      return standIn
+        ? `${record.old ?? ''}, which has no EDS Beta equivalent; its stand-in is ${literalText(standIn) ?? standIn}`
+        : `${record.old ?? ''}, which has no EDS Beta equivalent yet`
+    }
   }
 }
 
@@ -481,11 +487,11 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     ...old,
     category: resolution.outcome,
     outcome: resolution.outcome,
+    // A mode without a new one to set is cleared; for an unknown legacy
+    // mode, which is No equivalent, clearing it is the stand-in.
     candidates: resolution.target
       ? [`${resolution.target.collection}: ${resolution.target.mode}`]
-      : resolution.outcome === 'sure'
-        ? [CLEAR_MODE]
-        : [],
+      : [CLEAR_MODE],
     reason: resolution.reason,
     rule: resolution.rule,
   }
@@ -588,9 +594,19 @@ export function blockedModes(
   return blocked
 }
 
-/** Bindings that will not change: inside instances, with no equivalent, or to change by hand. */
+/**
+ * Bindings that wait for a designer: a Needs check, or a No equivalent with
+ * a stand-in, which is applied once a designer chooses it or another target.
+ */
+function waitsForDecision(record: BindingRecord): boolean {
+  if (record.category === 'check') return true
+  return record.category === 'none' && (record.candidates?.length ?? 0) > 0
+}
+
+/** Bindings that will not change: inside instances, with no equivalent and no stand-in, or to change by hand. */
 function staysAsItIs(record: BindingRecord): boolean {
-  return ['inInstance', 'none', 'byHand'].includes(record.category)
+  if (record.category === 'none') return !waitsForDecision(record)
+  return ['inInstance', 'byHand'].includes(record.category)
 }
 
 /**
@@ -598,7 +614,8 @@ function staysAsItIs(record: BindingRecord): boolean {
  * variable through it, including inside instances: an instance still
  * resolves its legacy variables through the mode. A mode above a binding
  * that will not change stays for good; a mode above a binding that needs a
- * check stays until the binding is reviewed and applied. A mode that sets a
+ * check, or has no equivalent and a stand-in, stays until the binding is
+ * reviewed and applied. A mode that sets a
  * new one is still applied, and keeps the legacy mode beside it. A mode
  * with nothing to do now counts as No equivalent, with the reason, so Apply
  * never offers a change that changes nothing.
@@ -611,10 +628,7 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
     records,
     (record) => staysAsItIs(record) && record.category !== 'inInstance',
   )
-  const untilReview = blockedModes(
-    records,
-    (record) => record.category === 'check',
-  )
+  const untilReview = blockedModes(records, waitsForDecision)
   const newModes = new Set(
     records
       .filter(
@@ -633,9 +647,9 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
     }
     const key = `${record.nodeId}|${record.oldMode.collectionKey}`
     const stays = forGood.has(key)
-      ? 'The legacy mode stays while layers below use legacy variables that are not changed: inside instances, with no equivalent, or to change by hand.'
+      ? 'The legacy mode stays while layers below use legacy variables that are not changed: inside instances, with no equivalent and no stand-in, or to change by hand.'
       : untilReview.has(key)
-        ? 'The legacy mode is cleared once the bindings below that need a check are reviewed and applied.'
+        ? 'The legacy mode is cleared once the bindings below that need a check, or wait for a stand-in to be chosen, are reviewed and applied.'
         : undefined
     if (!stays) return record
     const target = record.candidates?.[0]

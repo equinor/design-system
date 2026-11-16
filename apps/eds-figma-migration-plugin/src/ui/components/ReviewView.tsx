@@ -24,10 +24,11 @@ type ReviewViewProps = {
 }
 
 /**
- * Steps through the bindings that need a check, one at a time: selects the
- * layer in Figma, shows why the rule was unsure, the proposal and the other
- * candidates, and lets the designer confirm, choose another target,
- * exclude the binding or skip it for now.
+ * Steps through the bindings that need a check or have a stand-in, one at a
+ * time: selects the layer in Figma, shows why the rule was unsure or what
+ * the EDS Beta lacks, the proposal and the other candidates, and lets the
+ * designer confirm, choose another target, exclude the binding or skip it
+ * for now.
  */
 export function ReviewView({
   items,
@@ -97,7 +98,7 @@ export function ReviewView({
             variable
           </li>
           <li>
-            <strong>{count('skipped')}</strong> skipped, still need a check
+            <strong>{count('skipped')}</strong> skipped, still to decide on
           </li>
         </ul>
         <p className="muted">
@@ -113,6 +114,8 @@ export function ReviewView({
 
   const { group, row, binding } = item
   const isManualFix = row.outcome === 'byHand'
+  // No equivalent: the proposal is a stand-in for a token the EDS Beta lacks.
+  const isStandIn = row.outcome === 'none'
   const isProposal = value === row.proposal
   const entryName = entryNames.get(binding.entryId)
   const path = pathBelow(binding.path, entryName)
@@ -176,7 +179,11 @@ export function ReviewView({
         )}
         {!isManualFix && row.reason && (
           <div className="review-reason">
-            <strong>Why it needs a check: </strong>
+            <strong>
+              {isStandIn
+                ? 'No equivalent in the EDS Beta: '
+                : 'Why it needs a check: '}
+            </strong>
             {plain ?? row.reason}
             {plain && (
               <details className="review-details">
@@ -252,7 +259,9 @@ export function ReviewView({
               {value === null
                 ? 'Exclude'
                 : isProposal
-                  ? 'Confirm proposal'
+                  ? isStandIn
+                    ? 'Use the stand-in'
+                    : 'Confirm proposal'
                   : 'Use this target'}
             </Button>
             <Button variant="secondary" onClick={() => next('skipped')}>

@@ -98,6 +98,12 @@ export type LogEntry = {
     | LoggedValue
     | { type: 'none' }
   outcome: ChangeOutcome
+  /**
+   * The rule that proposed the target, such as number/same-px for a stand-in
+   * where the EDS Beta has no token. Missing in entries written before
+   * 2026-11-16.
+   */
+  rule?: string
   mappingVersion: string
   /** ISO time */
   at: string

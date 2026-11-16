@@ -6,7 +6,12 @@ import { CLEAR_VALUE, literalText } from '../mapping/literal'
 import { isResetTarget, resetText } from '../mapping/reset'
 import { CLEAR_MODE, manualFixTarget } from './classify'
 import { CATEGORY_LABELS, propertyLabel } from './labels'
-import { effectiveCategory, effectiveTarget, isMappable } from './mapping'
+import {
+  effectiveCategory,
+  effectiveTarget,
+  isHeldMode,
+  isMappable,
+} from './mapping'
 import type { Overrides } from './mapping'
 import { formatHealth, oldCount } from './summary'
 import type { BindingRecord, OldInstance, ScanSummary } from './types'
@@ -88,6 +93,10 @@ export function buildReport(input: ReportInput): Report {
   const check = records.filter((record) => category(record) === 'check')
   const byHand = records.filter((record) => category(record) === 'byHand')
   const none = records.filter((record) => category(record) === 'none')
+  // No equivalent is a gap in the EDS Beta tokens, except for a legacy mode
+  // the plugin keeps while values below it read it (Waiting).
+  const waiting = none.filter((record) => isHeldMode(record.rule))
+  const gaps = none.filter((record) => !isHeldMode(record.rule))
   const excluded = records.filter((record) => category(record) === 'excluded')
 
   const instanceGroups = new Map<
@@ -239,18 +248,43 @@ export function buildReport(input: ReportInput): Report {
     '',
     `## No equivalent (${none.length})`,
     '',
-    none.length > 0
-      ? table(
-          ['Frame', 'Layer', 'Property', 'Legacy', 'Why'],
-          none.map((record) => [
-            entries.get(record.entryId)?.name,
-            layerPath(record),
-            propertyLabel(record.property),
-            record.old,
-            record.reason,
-          ]),
-        )
-      : 'Every legacy binding has an equivalent.',
+    gaps.length > 0
+      ? [
+          'Legacy values the EDS Beta has no token for: each is a gap in the tokens. The plugin proposes a stand-in, and changes the value only once a designer chooses the stand-in or another target.',
+          '',
+          table(
+            ['Frame', 'Layer', 'Property', 'Legacy', 'Stand-in', 'The gap'],
+            gaps.map((record) => [
+              entries.get(record.entryId)?.name,
+              layerPath(record),
+              propertyLabel(record.property),
+              record.old,
+              record.candidates?.[0]
+                ? targetText(record.candidates[0])
+                : 'None possible',
+              record.reason,
+            ]),
+          ),
+        ].join('\n')
+      : 'The EDS Beta has a token for every legacy value in the scope.',
+    ...(waiting.length > 0
+      ? [
+          '',
+          `### Legacy modes waiting (${waiting.length})`,
+          '',
+          'Legacy modes the plugin keeps while values below them read them. They count as No equivalent until Apply can remove them.',
+          '',
+          table(
+            ['Frame', 'Layer', 'Legacy mode', 'Why'],
+            waiting.map((record) => [
+              entries.get(record.entryId)?.name,
+              layerPath(record),
+              `${record.oldCollection ?? ''}: ${record.old ?? ''}`,
+              record.reason,
+            ]),
+          ),
+        ]
+      : []),
     '',
     `## Excluded (${excluded.length})`,
     '',
@@ -311,7 +345,13 @@ export function buildReport(input: ReportInput): Report {
         CATEGORY_LABELS[category(record)],
         record.old ?? '',
         target
-          ? targetText(target.target)
+          ? // A stand-in is only proposed until a designer chooses it.
+            record.category === 'none' &&
+            target.source === 'proposal' &&
+            target.target !== null &&
+            !isHeldMode(record.rule)
+            ? `Stand-in: ${targetText(target.target)}`
+            : targetText(target.target)
           : record.category === 'byHand'
             ? manualFixTarget(record)
             : (record.current ?? ''),

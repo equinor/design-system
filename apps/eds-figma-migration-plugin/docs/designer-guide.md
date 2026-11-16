@@ -44,15 +44,15 @@ dots show where it found legacy and migrated values.
 The health bar counts every property bound to a variable, every text's typography
 and every mode set on a frame:
 
-| Status           | What it means                                                                                                                                                      |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Migrated         | Already uses the EDS Beta tokens. Green, because it is done.                                                                                                       |
-| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.                                                                                       |
-| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.                                                                                    |
-| Manual fix       | A legacy value Figma lets nobody change where it is, such as an icon size inside an instance. The row says how to fix it in Figma. Shown only when there are some. |
-| No equivalent    | There is nothing to replace it with yet, such as icon sizes. The legacy variable stays.                                                                            |
-| Excluded         | You chose to keep the legacy variable. Apply leaves it out. Shown only when there are some.                                                                        |
-| Inside instances | Comes from an instance's main component. The plugin leaves it; migrate the main component.                                                                         |
+| Status           | What it means                                                                                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Migrated         | Already uses the EDS Beta tokens. Green, because it is done.                                                                                                                 |
+| Ready            | A legacy variable with one clear replacement. Blue: the plugin can apply it.                                                                                                 |
+| Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.                                                                                              |
+| Manual fix       | A legacy value Figma lets nobody change where it is, such as an icon size inside an instance. The row says how to fix it in Figma. Shown only when there are some.           |
+| No equivalent    | The EDS Beta has no token for it, such as a stroke width on a padding or a palette colour: a gap in the tokens. The plugin proposes a stand-in for you to choose or replace. |
+| Excluded         | You chose to keep the legacy variable. Apply leaves it out. Shown only when there are some.                                                                                  |
+| Inside instances | Comes from an instance's main component. The plugin leaves it; migrate the main component.                                                                                   |
 
 Health is the share that is migrated. The **i** button next to the legend
 explains the statuses again. When values sit inside instances, a line under
@@ -140,7 +140,7 @@ The bar at the bottom has these actions for the ticked values:
 
 - **Apply** makes the Ready changes among them, and nothing else in the
   scope. When some of them need a check, have no equivalent or are excluded,
-  the button says how many it applies, and the rest stay as they are.
+  the button says how many it applies, and the rest wait for your choice.
 - **Change target** sets one target on all of them, when they are the same
   kind of value.
 - **Exclude** keeps the legacy variable on all of them.
@@ -154,11 +154,35 @@ plugin remembers the size.
 
 ## 4. Review the ⚠ values
 
-**Review**, in the footer, shows the values that need a check one at a time. The plugin
-selects the layer, tells you why it was unsure, and shows its proposal and
-the other targets that fit. Confirm the proposal, choose another target,
-exclude the value, or skip it for later. Whatever you choose then counts as
-Ready, or as Excluded when you exclude it.
+**Review**, in the footer, shows the values that need a check one at a time,
+and the No equivalent values with a stand-in. The plugin selects the layer,
+tells you why it was unsure or what the EDS Beta lacks, and shows its proposal
+and the other targets that fit. Confirm the proposal or use the stand-in,
+choose another target, exclude the value, or skip it for later. Whatever you
+choose then counts as Ready, or as Excluded when you exclude it.
+
+### No equivalent and stand-ins
+
+Some legacy values have no token in the EDS Beta, such as a stroke width
+variable used as a padding, a palette colour, or a colour on a shadow. They
+are gaps in the tokens, and the plugin marks them **No equivalent** so the
+gaps show in the health bar and the report. Each gets a stand-in, which the
+row shows as **Stand-in:** and the target:
+
+- A number gets the EDS Beta variable with the same px in the density the
+  layer will have, such as `spacing/xl` for a 24px gap in comfortable. When no
+  variable has that px, it gets the px without a variable.
+- A colour gets the EDS Beta colour for what the layer is (text, icon, border
+  or background, interactive or not) that looks nearest to the legacy colour.
+  A colour on a shadow is offered `overlay/scrim` too, the one see-through
+  colour.
+- A type size gets the nearest text style step.
+- For a legacy mode the plugin does not know, the stand-in is to remove the
+  mode, so the layer takes the mode set above it.
+
+Apply leaves a stand-in until you choose it, in Changes or in Review, or
+choose another target. Only a string or boolean variable, or a number the
+plugin could not read, has no stand-in.
 
 ## 5. Apply
 
@@ -208,8 +232,8 @@ tabular figures; the result has a button that selects those texts.
 ## Share the result
 
 **Export report**, beside the scope line, makes a Markdown report and a CSV for a spreadsheet, with
-the health, the frames, what needs a check, what has no equivalent and the
-instances. It counts what the window counts, main components in the scope included. The plugin also keeps the latest scan and your choices in the
+the health, the frames, what needs a check, the gaps in the tokens with the
+stand-in for each, and the instances. It counts what the window counts, main components in the scope included. The plugin also keeps the latest scan and your choices in the
 file, so the next time you open it, you see where you left off.
 
 ## Questions

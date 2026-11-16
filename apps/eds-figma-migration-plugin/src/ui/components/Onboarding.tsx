@@ -150,8 +150,9 @@ const STEPS: Step[] = [
           review.
         </li>
         <li>
-          It leaves values that have no EDS Beta equivalent yet, and reports
-          them.
+          For a value the EDS Beta has no token for, it proposes a stand-in, and
+          changes the value only once you choose the stand-in or another target.
+          The report lists these values as gaps in the tokens.
         </li>
         <li>It does not publish libraries or change other files.</li>
         <li>

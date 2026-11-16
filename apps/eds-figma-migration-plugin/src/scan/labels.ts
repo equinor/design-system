@@ -85,7 +85,7 @@ export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
     'A legacy variable whose target depends on what the layer is: interactive or not, selected, the kind of border, or the fill under a text. The plugin proposes a target, and you confirm, change or skip it.',
   byHand:
     'A legacy variable an instance overrides where Figma lets nobody change it, in the editor or from a plugin, such as the width or height of an icon inside an instance. The row says how to fix it in Figma, usually by resetting the layer so it takes the variable from its main component again. Apply leaves it, and the report lists it.',
-  none: 'A legacy variable with nothing to swap to, such as an icon size or Bg/Backdrop. It stays as it is and is listed in the report.',
+  none: 'A legacy variable the EDS Beta has no token for, such as a stroke width on a padding or a palette colour. It shows a gap in the tokens, and the report lists it. The plugin proposes a stand-in, such as the spacing token with the same px or the nearest colour for the layer, and Apply changes the value only once you choose the stand-in or another target.',
   excluded:
     'A legacy variable you chose to keep. Apply leaves it out, and the report lists it. Select it and choose Reset choices to get the proposal back.',
   inInstance:

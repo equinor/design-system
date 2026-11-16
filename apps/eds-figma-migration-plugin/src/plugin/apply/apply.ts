@@ -133,7 +133,13 @@ async function applyBinding(
 ): Promise<LogEntry> {
   const { record, target, outcome } = change
   const { property } = record
-  const entry = { property, outcome, mappingVersion: MAPPING_VERSION, at }
+  const entry = {
+    property,
+    outcome,
+    ...(record.rule ? { rule: record.rule } : {}),
+    mappingVersion: MAPPING_VERSION,
+    at,
+  }
 
   // A Manual fix a designer accepted: the layer has been reset already
   // (resetLayer, once per layer), so this checks the size it now has.
@@ -329,6 +335,7 @@ async function applyMode(
     old: { type: 'mode', ...old, cleared: !keep },
     new: newLog,
     outcome,
+    ...(record.rule ? { rule: record.rule } : {}),
     mappingVersion: MAPPING_VERSION,
     at,
   }

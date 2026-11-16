@@ -18,7 +18,7 @@ import {
 } from '@equinor/eds-icons'
 import { colourDistance, VISIBLE_CHANGE } from '../../mapping/colour-distance'
 import { getNewVariable } from '../../mapping/inventory'
-import { bindingOutcome, targetCounts } from '../../scan/mapping'
+import { bindingOutcome, isHeldMode, targetCounts } from '../../scan/mapping'
 import type {
   MappingBinding,
   MappingGroup,
@@ -146,9 +146,12 @@ function legacyText(group: MappingGroup): string {
   return group.old
 }
 
-/** What one target in a row is called; a mode that is only cleared says so. */
+/**
+ * What one target in a row is called: a mode that is only cleared says so,
+ * and a No equivalent value nobody has decided on shows its stand-in.
+ */
 function countLabel({ target, noEquivalent, rule }: TargetCount): string {
-  if (noEquivalent) return unchangedLabel(rule)
+  if (noEquivalent) return unchangedLabel(rule, target)
   if (target === CLEAR_MODE) return 'Remove the legacy mode'
   return targetLabel(target)
 }
@@ -171,12 +174,14 @@ function shortTarget(row: MappingRow, overrides: Overrides): string {
 
 /**
  * The target most of the row's values get, for the swatch and the value
- * beside it. Null when they keep the legacy variable: excluded, or with no
- * equivalent, where a proposal is not applied.
+ * beside it: for No equivalent, the stand-in. Null when they keep the
+ * legacy variable: excluded, or a legacy mode that is kept.
  */
 function mainTarget(row: MappingRow, overrides: Overrides): string | null {
   const [first] = targetCounts([row], overrides)
-  return !first || first.noEquivalent ? null : first.target
+  return !first || (first.noEquivalent && isHeldMode(first.rule))
+    ? null
+    : first.target
 }
 
 type Item = { group: MappingGroup; row: MappingRow }
@@ -187,11 +192,11 @@ function sectionOf(item: Item): string {
   return item.row.kind ?? 'other'
 }
 
-/** The row's own target: its change if it has one, otherwise the proposal. */
+/** The row's own target: its change if it has one, otherwise the proposal or the stand-in. */
 function rowTargetText(row: MappingRow, overrides: Overrides): string {
   if (row.key in overrides.rows) return targetLabel(overrides.rows[row.key])
   return row.outcome === 'none'
-    ? unchangedLabel(row.rule)
+    ? unchangedLabel(row.rule, row.proposal)
     : targetLabel(row.proposal ?? null)
 }
 
@@ -199,12 +204,13 @@ function rowTargetText(row: MappingRow, overrides: Overrides): string {
  * True when the new colour looks clearly different from the legacy colour
  * on at least one of the row's layers, each with its own target and in its
  * own colour scheme: the mapping is right by role, but the look moves
- * (decided 2026-11-12). A value that keeps the legacy variable never counts.
+ * (decided 2026-11-12). A stand-in counts as the target. A value that keeps
+ * the legacy variable never counts.
  */
 function looksDifferent(row: MappingRow, overrides: Overrides): boolean {
   return row.bindings.some((binding) => {
-    const { target, category } = bindingOutcome(row, binding, overrides)
-    if (!target || !binding.oldColour || category === 'none') return false
+    const { target } = bindingOutcome(row, binding, overrides)
+    if (!target || !binding.oldColour) return false
     const scheme = binding.scheme ?? 'light'
     const next = getNewVariable(target)?.values?.[scheme]
     if (typeof next !== 'string') return false
@@ -816,7 +822,9 @@ export function MappingView({
                   ? 'Why it needs a check'
                   : why.row.outcome === 'byHand'
                     ? 'How to fix it'
-                    : unchangedLabel(why.row.rule)}
+                    : isHeldMode(why.row.rule)
+                      ? unchangedLabel(why.row.rule)
+                      : 'No equivalent in the EDS Beta'}
               </Dialog.Title>
             </Dialog.Header>
             <Dialog.Content>
@@ -846,10 +854,12 @@ export function MappingView({
                   onChangeRow(item.group, item.row)
                 }}
               >
-                {(why.row.outcome === 'none' || why.row.outcome === 'byHand') &&
-                why.row.candidates.length > 0
+                {why.row.outcome === 'byHand' ||
+                (why.row.outcome === 'none' && isHeldMode(why.row.rule))
                   ? 'Choose what to do'
-                  : 'Change target'}
+                  : why.row.outcome === 'none'
+                    ? 'Choose a target'
+                    : 'Change target'}
               </Button>
             </Dialog.Actions>
           </>

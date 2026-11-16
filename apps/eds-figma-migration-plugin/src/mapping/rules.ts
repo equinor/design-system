@@ -7,9 +7,13 @@
  * - sure: one target, from the name alone
  * - check: the target depends on the role of the layer; the first candidate
  *   is the proposal, and a designer confirms it before it is applied
- * - none: no equivalent; the old binding stays and is listed
+ * - none: no equivalent, since the EDS Beta has no token for it, which is a
+ *   gap in the tokens. The first candidate is a stand-in (see Stand-ins
+ *   below), applied only once a designer chooses it or another target
  */
+import { colourDistance } from './colour-distance'
 import { targetDensity } from './density'
+import type { Density } from './density'
 import {
   getNewTextStyle,
   getNewVariable,
@@ -26,6 +30,7 @@ import {
 } from './literal'
 import { guessRole, isDivider, nearNamesMatch, roleNameMatches } from './role'
 import type { RoleGuess } from './role'
+import { targetScheme } from './scheme'
 import type {
   BindingKind,
   FillUnder,
@@ -131,13 +136,14 @@ function byRole(
 /**
  * Drops candidates that do not exist in EDS Foundation, and the forbidden
  * ones. A rule that names a missing target is a bug, so the reason says so;
- * the tests fail on that note.
+ * the tests fail on that note. When no candidate is left, the outcome is
+ * none, and resolveVariable and resolveTypography propose a stand-in
+ * instead.
  */
 function finalise(
   resolution: Resolution,
   exists: (name: string) => boolean,
 ): Resolution {
-  if (resolution.outcome === 'none') return resolution
   const missing = resolution.candidates.filter(
     (name) => !exists(name) || FORBIDDEN_TARGETS.includes(name),
   )
@@ -151,9 +157,11 @@ function finalise(
   }
   return {
     ...resolution,
-    outcome: missing.includes(resolution.candidates[0])
-      ? 'check'
-      : resolution.outcome,
+    outcome:
+      resolution.outcome === 'sure' &&
+      missing.includes(resolution.candidates[0])
+        ? 'check'
+        : resolution.outcome,
     candidates,
     reason: `${resolution.reason}; ${note}`,
   }
@@ -224,6 +232,14 @@ function stateSuffix(guess: RoleGuess): 'default' | 'hover' | 'pressed' {
     : 'default'
 }
 
+/** A colour name no rule recognises. */
+function noColourRule(name: string): Resolution {
+  return none(
+    `No rule for ${name}: the plugin knows no EDS Beta token for it`,
+    'colour/unknown',
+  )
+}
+
 function resolveBackground(
   parsed: ParsedColour,
   context: RoleContext,
@@ -254,7 +270,7 @@ function resolveBackground(
   }
 
   const tone = parsed.tone
-  if (!tone) return none(`No rule for Bg/${slot}`, 'colour/unknown')
+  if (!tone) return noColourRule(`Bg/${slot}`)
   const guess = guessRole(context)
 
   if (slot === 'Canvas' || slot === 'Surface') {
@@ -294,7 +310,7 @@ function resolveBackground(
   }
 
   const fill = /^Fill\/(Emphasis|Muted)\/(Default|Hover|Active)$/.exec(slot)
-  if (!fill) return none(`No rule for Bg/${slot}`, 'colour/unknown')
+  if (!fill) return noColourRule(`Bg/${slot}`)
   const level = fill[1].toLowerCase()
   const oldState = fill[2]
   const interactive = (state: string) =>
@@ -394,9 +410,7 @@ function resolveBorder(parsed: ParsedColour, context: RoleContext): Resolution {
     Medium: 'default',
     Strong: 'emphasis',
   }
-  if (!tone || !(slot in levels)) {
-    return none(`No rule for Border/${slot}`, 'colour/unknown')
-  }
+  if (!tone || !(slot in levels)) return noColourRule(`Border/${slot}`)
   const nonInteractive = `border/non-interactive/${tone}/${levels[slot]}`
 
   if (isDivider(context)) {
@@ -470,7 +484,8 @@ function classifyFillUnder(fillUnder: FillUnder | undefined): {
       variable: fillUnder.oldVariable,
       context: fillUnder.context,
     })
-    target = resolution.candidates[0]
+    // A stand-in waits for a designer, so it does not decide the text.
+    if (resolution.outcome !== 'none') target = resolution.candidates[0]
   }
   const owner = fillUnder.context.names[0] ?? 'the layer'
   const on = target ? `${target} on “${owner}”` : `the fill of “${owner}”`
@@ -524,7 +539,7 @@ function resolveTextColour(
   if (slot === 'Disabled') {
     return sure('text/interactive/disabled', 'Text/Disabled', 'colour/plane')
   }
-  if (!tone) return none(`No rule for Text/${slot}`, 'colour/unknown')
+  if (!tone) return noColourRule(`Text/${slot}`)
 
   if (slot === 'Strong on emphasis') {
     return sure(
@@ -543,7 +558,7 @@ function resolveTextColour(
     )
   }
   if (slot !== 'Strong' && slot !== 'Subtle') {
-    return none(`No rule for Text/${slot}`, 'colour/unknown')
+    return noColourRule(`Text/${slot}`)
   }
   if (tone === 'neutral') {
     return sure(
@@ -598,15 +613,18 @@ function resolveColour(
     info?.libraryId === 'colours-shared'
   ) {
     return none(
-      `${variable.name} is a palette colour; choose a semantic variable by role`,
+      `${variable.name} is a palette colour, and the EDS Beta has no palette colours, only colours named for their role`,
       'colour/palette',
     )
   }
   if (kind === 'effect') {
-    return none(`No rule for colours on effects`, 'colour/effect')
+    return none(
+      'The EDS Beta has no colour token for effects, such as shadows',
+      'colour/effect',
+    )
   }
   const parsed = parseColour(variable, context)
-  if (!parsed) return none(`No rule for ${variable.name}`, 'colour/unknown')
+  if (!parsed) return noColourRule(variable.name)
 
   if (parsed.group === 'Bg') return resolveBackground(parsed, context)
   if (parsed.group === 'Border') return resolveBorder(parsed, context)
@@ -619,7 +637,7 @@ function resolveColour(
     .filter((name): name is string => name !== undefined)
   if (twins.length === 0) {
     return none(
-      `${text.candidates[0]} has no icon variable to use on a ${context.nodeType.toLowerCase()}`,
+      `The EDS Beta has no icon variable to match ${text.candidates[0]} on a ${context.nodeType.toLowerCase()}`,
       'colour/icon',
     )
   }
@@ -652,27 +670,17 @@ function densityName(variable: OldVariable): string | undefined {
     ?.name
 }
 
+/**
+ * Legacy numbers the EDS Beta has no token for, with what it lacks. They are
+ * No equivalent, with a stand-in by px (numberStandIn). Icon container
+ * padding, baseline trims and the minimum height are normalised before this
+ * list is read (normalised), and selectable control sizes are sized like
+ * icons (resolveIconSize).
+ */
 const NO_EQUIVALENT: [RegExp, string][] = [
   [
-    /container-padding|container padding/i,
-    'There is no icon container padding',
-  ],
-  [/^Typography\/Baseline adjust/, 'The Beta has no baseline trim'],
-  [/^baseline\//, 'The Beta has no baseline trim'],
-  [/(^|\/)padding-(centred|baselined)$/, 'The Beta has no baseline trim'],
-  [/(^|\/)cap-(rounded|height-rounded)$/, 'The Beta has no baseline trim'],
-  [/^Min height$/, 'There is no minimum height variable'],
-  [
-    /^sizing\/selectable\//,
-    'There is no size variable for selectable controls',
-  ],
-  [
-    /^(Selectable\/Size|Size\/Selectables\/Size)$/,
-    'There is no size variable for selectable controls',
-  ],
-  [
     /^sizing\/stroke\/|^Stroke\/thickness$|^Generic\/Stroke width$|^Stroke$/,
-    'There is no stroke width variable',
+    'the EDS Beta has no stroke width token',
   ],
 ]
 
@@ -691,6 +699,25 @@ function isIconSize(name: string | undefined): boolean {
 }
 
 const SPACING_STEP = /^spacing\/[a-z0-9]+$/
+const RADIUS_STEP = /^corner-radius\/[a-z0-9-]+$/
+
+/** The number a variable resolves to on the layer, in px, when it was read. */
+function readPx(variable: OldVariable): number | undefined {
+  const value = variable.value ?? variable.resolvedValue
+  return typeof value === 'number' ? value : undefined
+}
+
+type NumberStep = { name: string; size: number }
+
+/** The EDS Beta variables whose names match, with the px each has in a density. */
+function numberSteps(pattern: RegExp, density: Density): NumberStep[] {
+  return NEW_VARIABLES.filter((candidate) => pattern.test(candidate.name))
+    .map((candidate) => ({
+      name: candidate.name,
+      size: candidate.values?.[density],
+    }))
+    .filter((step): step is NumberStep => typeof step.size === 'number')
+}
 
 /**
  * An icon size becomes the spacing token with the same number in the density
@@ -706,25 +733,15 @@ function resolveIconSize(
   sized: 'icon' | 'control' = 'icon',
 ): Resolution {
   const rule = sized === 'icon' ? 'size/icon' : 'size/control'
-  const value = variable.value ?? variable.resolvedValue
-  if (typeof value !== 'number') {
+  const value = readPx(variable)
+  if (value === undefined) {
     return none(
       `${variable.name}: the size could not be read, so no spacing token can be matched to it`,
       rule,
     )
   }
   const density = targetDensity(context.modes)
-  const steps = NEW_VARIABLES.filter((candidate) =>
-    SPACING_STEP.test(candidate.name),
-  )
-    .map((candidate) => ({
-      name: candidate.name,
-      size: candidate.values?.[density],
-    }))
-    .filter(
-      (step): step is { name: string; size: number } =>
-        typeof step.size === 'number',
-    )
+  const steps = numberSteps(SPACING_STEP, density)
   const exact = steps.find((step) => step.size === value)
   const why =
     sized === 'icon'
@@ -832,7 +849,7 @@ function resolveDensityName(
           'spacing/inset-proportion',
         )
       : none(
-          `${name}${via}: no step beyond ${match[1]}`,
+          `${name}${via}: the EDS Beta has no spacing step beyond ${match[1]}`,
           'spacing/inset-proportion',
         )
   }
@@ -855,7 +872,7 @@ function resolveDensityName(
   }
   if (/^typography\//.test(name)) {
     return none(
-      `${name}${via} is a typography variable on ${kind}; text styles replace typography variables`,
+      `${name}${via} is a typography variable on a ${PROPERTY_NAMES[kind]}; text styles replace typography variables, and the EDS Beta has no typography token for a ${PROPERTY_NAMES[kind]}`,
       'spacing/typography-elsewhere',
     )
   }
@@ -1081,8 +1098,9 @@ function resolveNumber(
   const ownNormal = normalised(variable.name, '')
   if (ownNormal) return ownNormal
   const ownReason = noEquivalent(variable.name)
-  if (ownReason)
+  if (ownReason) {
     return none(`${variable.name}: ${ownReason}`, 'spacing/no-equivalent')
+  }
 
   const density = densityName(variable)
   if (isIconSize(variable.name) || isIconSize(density)) {
@@ -1098,7 +1116,7 @@ function resolveNumber(
   if (density) {
     const resolved = resolveDensityName(density, kind, via)
     if (resolved) return resolved
-    return none(`No rule for ${density}${via}`, 'spacing/unknown')
+    return noNumberRule(`${density}${via}`)
   }
 
   const generic = resolveGeneric(variable, context)
@@ -1111,7 +1129,286 @@ function resolveNumber(
     const fromValue = radiusFromValue(variable)
     if (fromValue) return fromValue
   }
-  return none(`No rule for ${variable.name}`, 'spacing/unknown')
+  return noNumberRule(variable.name)
+}
+
+/** A number variable no rule recognises. */
+function noNumberRule(name: string): Resolution {
+  return none(
+    `No rule for ${name}: the plugin knows no EDS Beta token for it`,
+    'spacing/unknown',
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Stand-ins (decision D, 2026-11-16)
+//
+// Where the EDS Beta has no token for a legacy variable, the value stays No
+// equivalent, since it shows a gap in the tokens, and the plugin proposes a
+// stand-in as its first candidate. Apply leaves the value until a designer
+// chooses the stand-in or another target (categoryAfter in scan/mapping.ts).
+// A value gets no stand-in only where none is possible: a string or boolean
+// variable, or a number whose px could not be read.
+
+/** A No equivalent with a stand-in: the reason names the gap, then the stand-in. */
+function standIn(
+  gap: Resolution,
+  candidates: string[],
+  says: string,
+  rule: string,
+): Resolution {
+  return {
+    outcome: 'none',
+    candidates: [...new Set(candidates)],
+    reason: `${gap.reason}; ${says}`,
+    rule,
+  }
+}
+
+/**
+ * Numbers by px: the EDS Beta variable of the same kind with the same px in
+ * the density the layer will have, as for icon sizes, so spacing for spacing
+ * and sizes, and corner radius for radius. Without one, the px without a
+ * variable, as for stroke widths. A number on an effect, such as the blur of
+ * a shadow, only takes a variable: the plugin cannot set a number there
+ * without one, so it gets a stand-in only when a spacing token has its px.
+ */
+function numberStandIn(
+  gap: Resolution,
+  kind: BindingKind,
+  variable: OldVariable,
+  context: RoleContext,
+): Resolution {
+  const px = readPx(variable)
+  // An opacity is a fraction or a percent, not px; its rule reads it.
+  if (px === undefined || kind === 'opacity') return gap
+  const density = targetDensity(context.modes)
+  const family =
+    kind === 'radius'
+      ? { pattern: RADIUS_STEP, words: 'corner radius' }
+      : kind === 'strokeWeight'
+        ? undefined
+        : { pattern: SPACING_STEP, words: 'spacing' }
+  const takesNumber = kind !== 'other'
+  // A 0 needs no token (zeroWithoutToken), so spacing/none is not proposed.
+  if (px === 0 && takesNumber && kind !== 'radius') {
+    return standIn(
+      gap,
+      [literalTarget(0)],
+      'the stand-in is 0 without a variable, since a 0 needs no token',
+      'number/as-px',
+    )
+  }
+  const same =
+    family &&
+    numberSteps(family.pattern, density).find((step) => step.size === px)
+  if (same) {
+    return standIn(
+      gap,
+      [same.name],
+      `the stand-in is ${same.name}, which is ${px}px in ${density}, the same as the legacy value`,
+      'number/same-px',
+    )
+  }
+  if (!takesNumber) return gap
+  return standIn(
+    gap,
+    [literalTarget(px)],
+    `${family ? `no EDS Beta ${family.words} token is ${px}px in ${density}, so ` : ''}the stand-in is ${px}px without a variable`,
+    'number/as-px',
+  )
+}
+
+type ColourRole = 'background' | 'border' | 'text' | 'icon'
+
+/** The one see-through colour in the EDS Beta, offered for shadows. */
+const SCRIM = 'overlay/scrim'
+
+/** Shapes that draw an icon: a fill on one is an icon colour. */
+const ICON_SHAPES = ['VECTOR', 'BOOLEAN_OPERATION', 'STAR', 'POLYGON']
+
+/**
+ * The role a colour has on the layer, decided as resolveColour does: a text
+ * fill is text and a stroke is a border. On a fill or an effect, the legacy
+ * family decides where the name has one (a Text colour on a shape draws an
+ * icon, a Border colour on a fill draws a line), and otherwise the layer
+ * does: text on a text layer, an icon on a vector, a border on a line drawn
+ * as a shape, and a background on anything else. An effect takes the role of
+ * the layer's fill.
+ */
+function colourRole(
+  kind: BindingKind,
+  variable: OldVariable,
+  context: RoleContext,
+): ColourRole {
+  if (kind === 'textFill') return 'text'
+  if (kind === 'stroke') return 'border'
+  const family = variable.name.split('/')[0]
+  if (family === 'Text') return context.nodeType === 'TEXT' ? 'text' : 'icon'
+  if (family === 'Border') return 'border'
+  if (family === 'Bg') return 'background'
+  if (context.nodeType === 'TEXT') return 'text'
+  if (ICON_SHAPES.includes(context.nodeType)) return 'icon'
+  if (isLineShape(context)) return 'border'
+  return 'background'
+}
+
+/**
+ * The EDS Beta colours that fit the role on the layer. Interactive colours
+ * only go on an interactive element (guessRole), in the state the layer is
+ * in; fills and borders on an interactive element take only interactive
+ * ones, and a divider is never interactive. Selected fills only go on a
+ * selected element, the disabled colour only on a disabled one, and the
+ * focus border only on a focused one. Tertiary text and icons are left out,
+ * since they fall below the contrast minimum on text people read. An effect
+ * also gets overlay/scrim, the one see-through colour, which suits a shadow.
+ */
+function colourPool(
+  role: ColourRole,
+  context: RoleContext,
+  effect: boolean,
+): string[] {
+  const guess = guessRole(context)
+  const disabled = `${role}/interactive/disabled`
+  if (guess.state === 'disabled' && getNewVariable(disabled)) return [disabled]
+  const state = stateSuffix(guess)
+  const interactive =
+    guess.role === 'interactive' && !(role === 'border' && isDivider(context))
+  const fits = NEW_VARIABLES.filter(
+    (variable) =>
+      variable.type === 'COLOR' &&
+      variable.name.startsWith(`${role}/`) &&
+      !FORBIDDEN_TARGETS.includes(variable.name),
+  )
+    .map((variable) => variable.name)
+    .filter((name) => {
+      if (name === disabled || name.endsWith('/tertiary')) return false
+      if (name.endsWith('/focus')) return guess.state === 'focus'
+      if (name.includes('/selected/') && !guess.selected) return false
+      const last = name.split('/').pop()
+      if (
+        name.includes('/interactive/') &&
+        (last === 'default' || last === 'hover' || last === 'pressed')
+      ) {
+        return last === state
+      }
+      return true
+    })
+  const isInteractive = (name: string) =>
+    name.startsWith(`${role}/interactive/`)
+  // Text and icons on a control keep the names for what they sit on, such
+  // as text/on-emphasis, so only fills and borders are limited to the
+  // interactive colours there.
+  const byRole = fits.filter((name) =>
+    interactive
+      ? role === 'text' || role === 'icon' || isInteractive(name)
+      : !isInteractive(name),
+  )
+  const pool = byRole.length > 0 ? byRole : fits
+  return effect ? [...pool, SCRIM] : pool
+}
+
+/** The stand-in when the legacy colour could not be read: the usual colour for the role. */
+function usualColour(
+  role: ColourRole,
+  context: RoleContext,
+  effect: boolean,
+  pool: string[],
+): string {
+  const guess = guessRole(context)
+  const state = stateSuffix(guess)
+  const interactive = guess.role === 'interactive'
+  const preferred = effect
+    ? [SCRIM]
+    : role === 'text'
+      ? ['text/primary']
+      : role === 'icon'
+        ? ['icon/primary']
+        : role === 'border'
+          ? [
+              interactive
+                ? `border/interactive/neutral/muted/${state}`
+                : 'border/non-interactive/neutral/default',
+            ]
+          : [
+              interactive
+                ? `background/interactive/neutral/muted/${state}`
+                : 'background/surface',
+            ]
+  return preferred.find((name) => pool.includes(name)) ?? pool[0]
+}
+
+/**
+ * Colours by role: the EDS Beta colour for the role of the layer that is
+ * nearest to the legacy colour as it resolves on the layer, in the colour
+ * scheme the layer will have (colour-distance.ts). The next two nearest are
+ * offered after it. On an effect, overlay/scrim is always offered too, since
+ * a shadow is usually see-through and the distance is measured on the
+ * surface, where a light opaque grey can be nearer.
+ */
+function colourStandIn(
+  gap: Resolution,
+  kind: BindingKind,
+  variable: OldVariable,
+  context: RoleContext,
+): Resolution {
+  const role = colourRole(kind, variable, context)
+  const effect = kind === 'effect'
+  const pool = colourPool(role, context, effect)
+  if (pool.length === 0) return gap
+  const scheme = targetScheme(context.modes)
+  const legacy = variable.colour
+  const measured = legacy
+    ? pool
+        .map((name) => {
+          const value = getNewVariable(name)?.values?.[scheme]
+          return {
+            name,
+            distance:
+              typeof value === 'string'
+                ? colourDistance(legacy, value, scheme)
+                : undefined,
+          }
+        })
+        .filter(
+          (entry): entry is { name: string; distance: number } =>
+            entry.distance !== undefined,
+        )
+        .sort((a, b) => a.distance - b.distance)
+    : []
+  const scrim = effect ? [SCRIM] : []
+  if (legacy && measured.length > 0) {
+    return standIn(
+      gap,
+      [...measured.slice(0, 3).map((entry) => entry.name), ...scrim],
+      `the stand-in is ${measured[0].name}, the ${measured[0].name === SCRIM ? 'see-through' : role} colour nearest to the legacy ${legacy} in ${scheme}`,
+      'colour/nearest-by-role',
+    )
+  }
+  const usual = usualColour(role, context, effect, pool)
+  return standIn(
+    gap,
+    [usual, ...scrim],
+    usual === SCRIM
+      ? `the legacy colour could not be read, so the stand-in is ${SCRIM}, the one see-through colour in the EDS Beta, which suits a shadow`
+      : `the legacy colour could not be read, so the stand-in is ${usual}, the usual ${role} colour`,
+    'colour/nearest-by-role',
+  )
+}
+
+/** The stand-in for a variable the rules have no target for, when one is possible. */
+function withStandIn(resolution: Resolution, input: VariableInput): Resolution {
+  if (resolution.outcome !== 'none' || resolution.candidates.length > 0) {
+    return resolution
+  }
+  const { kind, variable, context } = input
+  if (variable.type === 'COLOR') {
+    return colourStandIn(resolution, kind, variable, context)
+  }
+  if (variable.type === 'FLOAT') {
+    return numberStandIn(resolution, kind, variable, context)
+  }
+  return resolution
 }
 
 // ---------------------------------------------------------------------------
@@ -1123,7 +1420,11 @@ export type VariableInput = {
   context: RoleContext
 }
 
-/** Resolves one bound old variable to its outcome and candidates. */
+/**
+ * Resolves one bound old variable to its outcome and candidates. A variable
+ * the rules have no target for, or whose target is missing from the EDS
+ * Beta, gets a stand-in where one is possible.
+ */
 export function resolveVariable(input: VariableInput): Resolution {
   const { kind, variable, context } = input
   let resolution: Resolution
@@ -1135,20 +1436,18 @@ export function resolveVariable(input: VariableInput): Resolution {
       zeroWithoutToken(resolveNumber(kind, variable, context)),
     )
   } else {
+    const type = variable.type.toLowerCase()
     resolution = none(
-      `No rule for ${variable.type.toLowerCase()} variables such as ${variable.name}`,
+      `No rule for ${type} variables such as ${variable.name}, and a ${type} has no stand-in by px or by colour`,
       'other/type',
     )
   }
-  return fitScope(
-    finalise(
-      resolution,
-      (name) =>
-        getNewVariable(name) !== undefined || literalValue(name) !== undefined,
-    ),
-    kind,
-    context,
+  const final = finalise(
+    resolution,
+    (name) =>
+      getNewVariable(name) !== undefined || literalValue(name) !== undefined,
   )
+  return fitScope(withStandIn(final, input), kind, context)
 }
 
 const PROPERTY_NAMES: Record<BindingKind, string> = {
@@ -1277,10 +1576,12 @@ export function resolveMode(input: ModeInput): ModeResolution {
       rule: 'mode/clear',
     }
   }
+  // No equivalent, with clearing the legacy mode as the stand-in: the layer
+  // then takes the mode from above it (decision D, 2026-11-16).
   return {
     outcome: 'none',
     target: null,
-    reason: `No rule for the mode ${label}`,
+    reason: `No rule for the mode ${label}: the EDS Beta has no mode that matches it; the stand-in is to remove the legacy mode, so the layer takes the mode set above it`,
     rule: 'mode/unknown',
   }
 }
@@ -1429,7 +1730,10 @@ export function resolveTypography(input: TypographyInput): Resolution {
     )
   }
 
-  // Step
+  // Step. Where no EDS Beta step fits, the text is No equivalent with a
+  // stand-in: the step nearest to the font size, or md of the role when the
+  // size cannot be read (decision D, 2026-11-16).
+  let gap: { what: string; why: string } | undefined
   let step = info.step
   if (!step && fontSize !== undefined) {
     step = stepFromSize(role, fontSize)
@@ -1439,7 +1743,11 @@ export function resolveTypography(input: TypographyInput): Resolution {
       )
   }
   if (!step) {
-    return none('The type size could not be read', 'type/no-step')
+    gap = {
+      what: 'The type size could not be read, so no EDS Beta text style can be matched to it',
+      why: `the md step of ${role}`,
+    }
+    step = 'md'
   }
   if (role === 'mono') {
     const monoStep = step === 'lg' || TYPE_STEPS.indexOf(step) > 3 ? 'lg' : 'md'
@@ -1447,9 +1755,22 @@ export function resolveTypography(input: TypographyInput): Resolution {
       notes.push(`mono has md and lg only, so ${step} becomes ${monoStep}`)
     step = monoStep
   } else {
-    const nearest = nearestStep(role, step)
-    if (!nearest) return none(`No ${role} step near ${step}`, 'type/no-step')
-    if (nearest !== step)
+    let nearest = nearestStep(role, step)
+    if (!nearest) {
+      const bySize =
+        fontSize !== undefined ? stepFromSize(role, fontSize) : undefined
+      gap = bySize
+        ? {
+            what: `The EDS Beta has no ${role} step near ${step}`,
+            why: `the step nearest to ${fontSize}px`,
+          }
+        : {
+            what: `The EDS Beta has no ${role} step near ${step}, and the size could not be read`,
+            why: `the md step of ${role}`,
+          }
+      nearest = bySize ?? 'md'
+    }
+    if (nearest !== step && !gap)
       notes.push(
         `${role} has no ${step}, so the nearest step, ${nearest}, is used`,
       )
@@ -1509,13 +1830,39 @@ export function resolveTypography(input: TypographyInput): Resolution {
     .filter(Boolean)
     .join(', ')
   const said = [described, ...remarks].join('; ')
-  const resolution: Resolution =
-    notes.length === 0
+  const resolution: Resolution = gap
+    ? {
+        outcome: 'none',
+        candidates: [...new Set([proposal, ...alternatives])],
+        reason: [
+          `${gap.what}; the stand-in is ${proposal}, ${gap.why}`,
+          said,
+          ...notes,
+        ].join('; '),
+        rule: 'type/nearest-step',
+      }
+    : notes.length === 0
       ? sure(proposal, said, 'type/style')
       : check(
           [proposal, ...alternatives],
           `${said}; ${notes.join('; ')}`,
           'type/style',
         )
-  return finalise(resolution, (name) => getNewTextStyle(name) !== undefined)
+  const final = finalise(
+    resolution,
+    (name) => getNewTextStyle(name) !== undefined,
+  )
+  // A style the rules name that is missing from the EDS Beta: body/md is
+  // the stand-in.
+  if (final.outcome === 'none' && final.candidates.length === 0) {
+    const fallback = 'body/md/default'
+    if (!getNewTextStyle(fallback)) return final
+    return {
+      ...final,
+      candidates: [fallback],
+      reason: `${final.reason}; the stand-in is ${fallback}`,
+      rule: 'type/nearest-step',
+    }
+  }
+  return final
 }
