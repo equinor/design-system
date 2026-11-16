@@ -335,6 +335,83 @@ export function buildMappingGroups(
   )
 }
 
+/**
+ * The rows of Changes narrowed to the values in some entries, such as the
+ * main components on the Main components tab or one open frame. Rows and
+ * groups left without a value are dropped, and their counts are those of
+ * the values kept. Everything else on a row stays as it is, its key above
+ * all, so the choices stored by row key apply to the narrowed rows too. The
+ * order is that of Changes, which Review follows as well.
+ */
+export function filterGroups(
+  groups: MappingGroup[],
+  entryIds: ReadonlySet<string>,
+): MappingGroup[] {
+  return groups
+    .map((group) => {
+      const rows = group.rows
+        .map((row) => {
+          const bindings = row.bindings.filter((binding) =>
+            entryIds.has(binding.entryId),
+          )
+          return { ...row, bindings, count: bindings.length }
+        })
+        .filter((row) => row.count > 0)
+      return {
+        ...group,
+        rows,
+        count: rows.reduce((sum, row) => sum + row.count, 0),
+      }
+    })
+    .filter((group) => group.count > 0)
+}
+
+/**
+ * The row as Changes lists it, with every value in it, for a row that
+ * filterGroups has narrowed: the row in `groups` with the same key and its
+ * first value. A choice on a row is stored by its key, so it reaches every
+ * value in the row, also those the narrowed row leaves out. A row that is
+ * not in `groups`, such as a Typography conversion, is returned as it is.
+ */
+export function wholeRow(groups: MappingGroup[], row: MappingRow): MappingRow {
+  const first = row.bindings[0]?.id
+  for (const group of groups) {
+    for (const candidate of group.rows) {
+      if (
+        candidate.key === row.key &&
+        candidate.bindings.some((binding) => binding.id === first)
+      ) {
+        return candidate
+      }
+    }
+  }
+  return row
+}
+
+/**
+ * The values in the groups that are Ready after the designer's choices,
+ * with a legacy mode the next Apply keeps counted as Waiting: the changes
+ * an Apply on the entries of these values makes. On the Main components
+ * tab, the count in the footer.
+ */
+export function readyCount(
+  groups: MappingGroup[],
+  overrides: Overrides,
+  kept: KeptModes = NO_KEPT_MODES,
+): number {
+  let ready = 0
+  for (const group of groups) {
+    for (const row of group.rows) {
+      for (const binding of row.bindings) {
+        if (bindingOutcome(row, binding, overrides, kept).category === 'sure') {
+          ready += 1
+        }
+      }
+    }
+  }
+  return ready
+}
+
 /** A legacy mode kept because values below still read it. */
 export function isHeldMode(rule: string | undefined): boolean {
   return rule === 'mode/kept' || rule === 'mode/after-review'

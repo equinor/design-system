@@ -197,7 +197,12 @@ Targets can be changed for one value, one row or many values at a time:
 **Change** on a value wins over its row, the target of a row changes every
 value in it and replaces the choices made on single values there, such as the
 ones Review saves (otherwise a row change on a reviewed value showed nowhere;
-`rowChoiceChanges` in `src/scan/mapping.ts`), and ticking values opens a bar with **Apply**, **Change
+`rowChoiceChanges` in `src/scan/mapping.ts`). A row in an open frame or on
+the Main components tab lists only its values there, but its target is
+stored by the row's key and reaches every value in the row, so the picker
+works on the whole row of Changes (`wholeRow`): it counts all its values,
+replaces the choices on all of them, and says how many are elsewhere in the
+scope and not listed. Ticking values opens a bar with **Apply**, **Change
 target**, **Decide later**, **Reset choices** and **Clear selection**. Apply there
 makes only the Ready changes among the ticked values (the `apply-selected`
 message), behind the same kind of confirmation as Apply in the footer. Its
@@ -454,9 +459,23 @@ never reverted through one of its instances.
 **Main components** lists the main components in the scope, which count in
 the health bar, each with how many times it is used in the file. On this tab
 the Apply footer changes the main components only, all in one run; on
-Changes and Frames it changes them with the frames. The tab also lists the
-main components on other pages that instances in the scope use, with Go to
-and Scan its page, and Scan the whole file to bring them all into the scope.
+Changes and Frames it changes them with the frames. Under them,
+**What Apply changes** lists the rows of Changes for the values in those main
+components, so every value that Apply changes is shown with its target,
+status and picker before the run. `filterGroups` in `src/scan/mapping.ts`
+narrows the rows to the entries of the main components, recounts the rows
+and groups, and keeps each row's key, outcome, proposal, candidates, reason
+and rule, so the choices stored by row key apply there too; an open frame's
+Variables view is narrowed the same way. The list is `MappingView`, with the
+same choices, kept modes, status filters, pickers, ticking for the bulk bar,
+and Review in the footer, limited to those main components. The footer's
+Ready count is `readyCount` of that list, with the choices and the legacy
+modes the run keeps, which is the Ready count of the main components in the
+health bar and the number of changes in the preview of the run
+(`test/main-components.test.ts`). The conversions on the Typography tab are
+not part of this Apply. The tab also lists the main components on other
+pages that instances in the scope use, with Go to and Scan its page, and Scan
+the whole file to bring them all into the scope.
 In a frame, the Layers view shows each instance as one row.
 
 Main components, and layers selected inside one, are marked in Figma's

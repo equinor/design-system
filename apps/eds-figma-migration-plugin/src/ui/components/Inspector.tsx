@@ -21,6 +21,7 @@ import {
   DECIDE_LATER,
   effectiveCategory,
   effectiveTarget,
+  filterGroups,
   isKeptWaiting,
   isMappable,
   isUndecided,
@@ -51,7 +52,6 @@ import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
 import { manualFixTarget, resetEffectsText } from '../../scan/classify'
 import { sourceLabel, targetLabel, unchangedLabel } from '../targets'
-import { filterGroups } from '../groups'
 import { ApplyActions } from './ApplyActions'
 import { ComponentInstances } from './ComponentInstances'
 import { MappingView } from './MappingView'
@@ -293,10 +293,7 @@ export function Inspector({
   onChangeRow,
   onChangeBinding,
 }: InspectorProps) {
-  const frameGroups = filterGroups(
-    mapping,
-    (binding) => binding.entryId === entry.id,
-  )
+  const frameGroups = filterGroups(mapping, new Set([entry.id]))
   const [chosenFilter, setFilter] = useState<Filter>('all')
   // The frame stays open through the scan after an apply. When the apply
   // empties the status that was chosen, such as Ready, its chip is no longer

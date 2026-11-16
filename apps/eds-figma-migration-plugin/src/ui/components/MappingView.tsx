@@ -49,6 +49,8 @@ type MappingViewProps = {
   showCounts?: boolean
   /** Legacy values inside instances in the scope, which Changes leaves out */
   inInstances?: number
+  /** Where the values listed are, for the count at the end: “in the scope” by default */
+  where?: string
   /**
    * The selected tab, when the overview keeps it so the Instances tab can
    * open one. Without it, the view keeps its own (in a frame).
@@ -124,6 +126,7 @@ export function MappingView({
   selection,
   showCounts = true,
   inInstances = 0,
+  where = 'in the scope',
   tab: tabProp,
   onTab,
   typography,
@@ -440,8 +443,8 @@ export function MappingView({
               () => true,
             ),
           )}{' '}
-          still to migrate in the scope. A click on a legacy variable selects
-          its layers; the target opens the picker and changes every value in the
+          still to migrate {where}. A click on a legacy variable selects its
+          layers; the target opens the picker and changes every value in the
           row.
         </p>
       )}

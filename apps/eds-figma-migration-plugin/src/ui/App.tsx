@@ -9,10 +9,13 @@ import {
   NO_KEPT_MODES,
   NO_OVERRIDES,
   effectiveTarget,
+  filterGroups,
   ownChoices,
+  readyCount,
   rowChoiceChanges,
   rowCurrent,
   rowKey,
+  wholeRow,
 } from '../scan/mapping'
 import type {
   KeptModes,
@@ -191,10 +194,18 @@ function Overview({
   // Kept here rather than in Changes, so the Instances tab can open a tab
   // in Changes, and Changes opens on the tab it was left on.
   const [changesTab, setChangesTab] = useState<ChangesTab>('colour')
+  // The tab in What Apply changes on the Main components tab, kept the same
+  // way, so the Main components tab opens on the tab it was left on.
+  const [componentsTab, setComponentsTab] = useState<ChangesTab>('colour')
   const frames = summary.entries.filter((entry) => entry.kind !== 'component')
   const components = summary.entries.filter(
     (entry) => entry.kind === 'component',
   )
+  const componentIds = components.map((entry) => entry.id)
+  // The values the Apply on the Main components tab can change: the rows
+  // of Changes narrowed to the main components, with their row keys, so the
+  // choices made in Changes apply to them as well.
+  const componentGroups = filterGroups(mapping, new Set(componentIds))
   // Main components in the scope count like the frames, and Apply changes
   // them too; the Main components tab lists them with those used elsewhere.
   const totals = summary.totals
@@ -238,13 +249,11 @@ function Overview({
   const componentPages = new Set(componentsReady.map((entry) => entry.pageId))
     .size
   const componentFooter = {
-    ready: components.reduce((sum, entry) => sum + entry.counts.sure, 0),
-    toReview: reviewItems(
-      mapping,
-      overrides,
-      new Set(components.map((entry) => entry.id)),
-      kept,
-    ).length,
+    // The Ready values What Apply changes lists, so the footer counts what
+    // the tab shows. It is the same as the Ready count of the main
+    // components in the health bar (test/main-components.test.ts).
+    ready: readyCount(componentGroups, overrides, kept),
+    toReview: reviewItems(componentGroups, overrides, undefined, kept).length,
     where:
       componentsReady.length === 0
         ? 'in the main components'
@@ -261,7 +270,7 @@ function Overview({
             ),
           }
         : undefined,
-    entryIds: components.map((entry) => entry.id),
+    entryIds: componentIds,
     done: healthOf(sumCounts(components.map((entry) => entry.counts))) === 1,
   }
   const outside = healthOutsideInstances(totals)
@@ -361,6 +370,16 @@ function Overview({
             onScanFile={onScanFile}
             partialFile={partialFile}
             busy={busy}
+            groups={componentGroups}
+            overrides={overrides}
+            kept={kept}
+            entryNames={entryNames}
+            selection={selection}
+            showCounts={showCounts}
+            tab={componentsTab}
+            onTab={setComponentsTab}
+            onChangeRow={onChangeRow}
+            onChangeBinding={onChangeBinding}
           />
         ) : view === 'mapping' ? (
           <MappingView
@@ -913,7 +932,13 @@ export function App() {
     })
   }
 
-  const changeRow = (group: MappingGroup, row: MappingRow) => {
+  const changeRow = (group: MappingGroup, shown: MappingRow) => {
+    // A frame and the Main components tab list only their own values of a
+    // row. A choice on the row is stored by its key and reaches every value
+    // in it, as in Changes, so the picker counts, and the change replaces
+    // the choices on, all of them, and says how many are not listed.
+    const row = wholeRow(mapping, shown)
+    const notListed = row.count - shown.count
     const own = ownChoices(row, overrides)
     // Legacy modes in the row that wait for values below them: the picker
     // says what they wait for, and offers removing them anyway.
@@ -942,9 +967,13 @@ export function App() {
             ? ' The value has a choice of its own, which this replaces.'
             : ' Each of them has a choice of its own, which this replaces.'
           : ` ${own} of them have a choice of their own, which this replaces.`
+    const elsewhere =
+      notListed === 0
+        ? ''
+        : ` ${notListed} of them ${notListed === 1 ? 'is' : 'are'} elsewhere in the scope, not listed here.`
     setPicker({
       title: group.old,
-      description: `${manual ? `${MANUAL_FIX_PICKER} ` : ''}Changes ${all} in this row.${replaced}${waits}`,
+      description: `${manual ? `${MANUAL_FIX_PICKER} ` : ''}Changes ${all} in this row.${elsewhere}${replaced}${waits}`,
       schemes: schemesOf(row.bindings),
       subject: {
         kinds,

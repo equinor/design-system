@@ -128,9 +128,17 @@ the steps.
 - **Main components** lists the main components in the scope. On this tab,
   Apply in the footer changes all of them in one run and leaves the frames
   as they are; Apply on Changes or Frames changes the main components and
-  the frames together. The tab also lists the main components on other pages
-  that instances in the scope use, with **Go to** and **Scan its page** for
-  one, and **Scan the whole file** to have them all on the tab.
+  the frames together. Under the list, **What Apply changes** shows the
+  legacy values in those main components the way Changes shows them, with
+  the same tabs, status, targets and pickers, so you see every value the
+  Apply on this tab changes, and can change it, before you run it. The
+  number on Apply is the number of Ready values there, and **Review** in the
+  footer goes through the values in those main components that wait for a
+  decision. The Typography instances in them are converted on the
+  Typography tab, not by this Apply. The tab also lists the main components
+  on other pages that instances in the scope use, with **Go to** and
+  **Scan its page** for one, and **Scan the whole file** to have them all on
+  the tab.
   A scan of one selected main component or component set opens it
   directly. In a main component, **Instances in this component** lists
   every instance in it, grouped by its own main component, with how many
@@ -152,6 +160,12 @@ Apply does not change it, it still counts as not migrated, and Review shows it
 again. A Ready value you set to Decide later counts as Needs check until you
 choose a target. The row's target then says what its values get, so a row
 whose values are all set to it says **Decide later**.
+
+An open frame and the Main components tab list only their own values of a
+row, but the target of a row is the same everywhere: changing it there
+changes every value in the row in the scope, as in Changes. The picker
+counts all of them, and says how many are elsewhere in the scope and not
+listed.
 
 The bar at the bottom has these actions for the ticked values:
 
