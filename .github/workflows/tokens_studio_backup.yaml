@@ -91,20 +91,36 @@ jobs:
       # Actions log is the only place to diagnose a bad pull
       - name: Pull tokens from Tokens Studio
         working-directory: packages/eds-tokens
-        run: ~/studio-cli/node_modules/.bin/studio tokens pull --ci --verbose
+        run: |
+          ~/studio-cli/node_modules/.bin/studio --version
+          ~/studio-cli/node_modules/.bin/studio tokens pull --ci --verbose
+      # Rehearsal only, remove once the release pipeline uses `studio
+      # pull`. It writes nothing and may fail without failing the
+      # backup. It shows in the log whether `studio pull` accepts the
+      # same CI login as `studio tokens pull`, which cannot be tested
+      # from a branch (the login only works from main)
+      - name: Rehearse studio pull (dry run)
+        continue-on-error: true
+        working-directory: packages/eds-tokens
+        run: ~/studio-cli/node_modules/.bin/studio pull --dry-run --ci --verbose
       # Aliases and output dirs are read from .studio.json so a config
       # rename (e.g. eds-test-3 → eds) never requires a workflow
       # change — but removed aliases are never cleaned up; delete
       # backup/<old-alias>/ on the backup branch manually. Each source
       # lands at backup/<alias>/; --delete keeps removals visible in
-      # the diff
+      # the diff. An empty list fails the step: if .studio.json changes
+      # shape the backup must go red, not stay green copying nothing
       - name: Sync pulled sources into the backup branch
         run: |
-          jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output)"' packages/eds-tokens/.studio.json |
+          sources=$(jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output)"' packages/eds-tokens/.studio.json)
+          if [ -z "$sources" ]; then
+            echo "::error::No configurations found in packages/eds-tokens/.studio.json, nothing to back up"
+            exit 1
+          fi
           while IFS=$'\t' read -r alias output; do
             echo "Syncing $alias (packages/eds-tokens/$output → backup/$alias)"
             rsync -a --delete "packages/eds-tokens/$output/" "backup/$alias/"
-          done
+          done <<< "$sources"
       - name: Commit and push backup
         working-directory: backup
         run: |
