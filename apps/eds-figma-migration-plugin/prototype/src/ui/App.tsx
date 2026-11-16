@@ -3,6 +3,7 @@ import { Badge, Banner, Button } from '@equinor/eds-core-react/next'
 import { sharedSubject } from '../../../src/mapping/picker'
 import type { BindingKind } from '../../../src/mapping/types'
 import {
+  DECIDE_LATER,
   NO_OVERRIDES,
   effectiveTarget,
   rowKey,
@@ -925,7 +926,7 @@ export function App() {
           count={selected.length}
           canChange={shared !== undefined}
           onChange={changeSelected}
-          onLeave={() => setSelected(null)}
+          onLeave={() => setSelected(DECIDE_LATER)}
           onUndo={() => setSelected(undefined)}
           onClear={bulk.clear}
         />

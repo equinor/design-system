@@ -9,7 +9,9 @@ The plugin works on layout: the frames, text and shapes a designer built in
 their own file. It does not change a value an instance takes from its main
 component, because a change there becomes an instance override. An instance
 that still uses old variables that way comes from a component that has not
-been updated in its library; the plugin reports it and leaves it alone.
+been updated in its library; the plugin reports it and leaves it alone. The
+plugin migrates variables, not components, so a designer swaps such an
+instance to an EDS Beta component in Figma, and its legacy values go with it.
 
 A value the instance overrides itself is different: it is already an
 override, stored on the instance, and updating the main component does not
@@ -126,7 +128,7 @@ Always try the plugin on a duplicate of a frame. The test frame is
   binding selects that layer.
 - The categories are Migrated, Ready (one target, applied without asking;
   `sure` in the code), Needs check, Manual fix (`byHand`), No
-  equivalent, Excluded and Inside instances. Ready is
+  equivalent and Inside instances. Ready is
   blue, since it still has to be applied; only Migrated is green. The info
   button next to the legend explains each category in a dialog.
 - The bindings in a row can be filtered by status, with the same names as the
@@ -188,12 +190,12 @@ Targets can be changed for one value, one row or many values at a time:
 value in it and replaces the choices made on single values there, such as the
 ones Review saves (otherwise a row change on a reviewed value showed nowhere;
 `rowChoiceChanges` in `src/scan/mapping.ts`), and ticking values opens a bar with **Apply**, **Change
-target**, **Exclude**, **Reset choices** and **Clear selection**. Apply there
+target**, **Decide later**, **Reset choices** and **Clear selection**. Apply there
 makes only the Ready changes among the ticked values (the `apply-selected`
 message), behind the same kind of confirmation as Apply in the footer.
 Reset choices removes the choices on the ticked values, and is only shown
 when some of them have one. The target of a row follows every choice in it,
-so a row whose values are all excluded says "Keeps the legacy variable"
+so a row whose values are all set to Decide later says "Decide later"
 instead of the proposal.
 
 The picker follows Figma's variable picker: a search field, the proposed
@@ -201,21 +203,31 @@ targets with a line that says what each is for, then every variable or text
 style that fits the property, grouped by path, with colour swatches in the
 current theme and the comfortable value of numbers. On a Ready value,
 choosing the proposal again removes the change. On a value that needs a check
-or has no equivalent, any choice settles it: the value then counts as Ready,
-or as Excluded when it keeps the legacy variable, and the health bars follow.
-Excluded is never set by the rules, so No equivalent only means that the EDS
-Beta has no token for the value, which is a gap in the tokens. Such a value
-gets a stand-in where one is possible: its row says "Stand-in:" and the
-target while its status stays No equivalent, and Apply leaves it until a
-designer chooses the stand-in or another target.
-Choices are kept across scans and in the file.
+or has no equivalent, choosing a target settles it: the value then counts as
+Ready, and the health bars follow.
+
+The picker never offers to keep a legacy variable, since the goal is a file
+with no legacy variable left (decided 2026-11-16). Its last option, **Decide
+later** (`DECIDE_LATER` in `src/scan/mapping.ts`), leaves the value for a
+later run: Apply does not change it, and it keeps counting as not migrated,
+so health reaches 100% only when no legacy variable is left. A Ready value
+set to Decide later becomes Needs check, since it waits for a designer; a
+Needs check, No equivalent or Manual fix value keeps its status. Review lists
+it again, and its row says "Decide later" as the target, marked as the
+designer's choice. The bulk bar, Review and the Manual fix picker offer the
+same choice.
+
+No equivalent means that the EDS Beta has no token for the value, which is a
+gap in the tokens. Such a value gets a stand-in where one is possible: its
+row says "Stand-in:" and the target while its status stays No equivalent,
+and Apply changes the value once a designer chooses the stand-in or another
+target. Choices are kept across scans and in the file.
 
 The window counts **values**: a value is a property bound to a variable, the
 typography of a text or a range, or a mode. The categories are Migrated,
-Ready, Needs check, Manual fix, No equivalent, Excluded and Inside
-instances.
+Ready, Needs check, Manual fix, No equivalent and Inside instances.
 
-Health is migrated ÷ (migrated + ready + needs check + manual fix + no equivalent + excluded + in instance). Variables
+Health is migrated ÷ (migrated + ready + needs check + manual fix + no equivalent + in instance). Variables
 from other libraries and local variables are counted apart and left out.
 The plugin API gives no library name for a main component, so the window says
 whether it comes from a library or from this file.
@@ -278,22 +290,25 @@ the reason, and a click opens it in full.
 ## Review, instances and local components
 
 **Review N ⚠**, next to Apply, steps through the values that need a check,
-and the No equivalent values with a stand-in, that nobody has decided on, one
+and the No equivalent values with a stand-in, that nobody has decided on or
+that are set to Decide later (a Ready value set to Decide later included), one
 at a time, in the order of the Changes tab. A legacy mode marked Waiting is
 left out, since it waits for the values below it. Each step selects the layer
 in Figma and says where it is ("Label in Button / Outlined"), why the rule was
 unsure or what the EDS Beta lacks, in plain words where there are some (with
 the rule's own words under Details), the proposal and every other target that
-fits. **Confirm proposal** (**Use the stand-in** for No equivalent), **Use
-this target** and **Exclude** store the choice, so the binding counts as Ready
-or Excluded; **Skip** leaves it for later.
-The review ends with what was confirmed, changed, excluded and skipped. From a
-frame, the review covers that frame only.
+fits. **Confirm proposal** (**Use the stand-in** for No equivalent) and **Use
+this target** store the choice, so the value counts as Ready. **Decide later**
+stores that choice instead, so Changes shows it, and the value comes back in
+the next review; **Skip** moves on without a choice. A Manual fix has
+**Accept the fix**, **Decide later** and **Skip**. The review ends with what
+was confirmed, changed, set to Decide later and skipped. From a frame, the
+review covers that frame only.
 
 Changes lists Manual fixes too, so every value Apply counts is on a tab: an
 accepted fix is Ready and made by Apply. Their rows have no checkbox, since a
-fix is decided one at a time, and their pickers offer only the fix or keeping
-the legacy variable.
+fix is decided one at a time, and their pickers offer only the fix or Decide
+later.
 
 **Typography components.** The legacy Typography component is a text in a
 component. When the scan finds instances of it (outside other instances),
@@ -313,9 +328,12 @@ components stay until those components are updated.
 legacy variables, grouped by main component, with the number of instances,
 whether the component is in this file or in a library, and Go to for one
 instance or all of them. The plugin does not change what an instance takes
-from its main component; a library component is updated in its library, and
-a component in this file changes with its main component. Overrides of an
-instance are listed with the other changes instead.
+from its main component, and it never swaps a component (decided
+2026-11-16). For instances of a library component the tab says: "The plugin
+migrates variables, not components. Swap these to EDS Beta components in
+Figma; their legacy values go with them." A component in this file changes
+with its main component, which **Go to main component** opens. Overrides of
+an instance are listed with the other changes instead.
 
 A layer inside an instance reads the change log of the main component's
 layer until the instance has plugin data of its own on it (`pluginData` in
@@ -342,8 +360,9 @@ colour, which would measure 3.3:1 on the dark canvas.
 **Export report**, beside the scope line and in Settings, makes a Markdown report (health,
 every frame with its health and the layers the plugin changed, the bindings
 that need a check, the gaps in the tokens (No equivalent) with each value's
-stand-in, the legacy modes that wait for the values below them, the instances
-with legacy variables grouped by component, and the rules version) and a CSV
+stand-in, the legacy modes that wait for the values below them, the values
+set to Decide later, the instances with legacy variables grouped by component,
+and the rules version) and a CSV
 with one row per binding, where a stand-in nobody has chosen yet reads
 "Stand-in:" and the target. Both can be downloaded; the Markdown can also be copied, for where a
 download from the plugin window is blocked.
@@ -355,7 +374,11 @@ The plugin keeps two things in the shared plugin data of the document
   with the lowest health). It is shown as **Last scan** when the plugin opens,
   before the designer scans again.
 - `choices`: the targets the designer chose, so a review can continue another
-  day. When they are too many to keep, the window says so.
+  day. When they are too many to keep, the window says so. Earlier versions
+  stored `null` for a value whose legacy variable was kept (Excluded);
+  `savedChoices` in `src/scan/mapping.ts` reads it as Decide later.
+  The saved `health` totals of such a version can have an `excluded` count,
+  which `savedCounts` in `src/scan/summary.ts` adds to Needs check.
 
 The window follows Figma's light or dark theme. A scope without EDS
 variables, a scope with nothing left to migrate, an empty Changes or

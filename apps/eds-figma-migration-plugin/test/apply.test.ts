@@ -11,7 +11,7 @@ import {
 import { CLEAR_MODE, classifyUnits, holdModes } from '../src/scan/classify'
 import { unpackFixture } from '../src/scan/fixture'
 import type { PackedFixture } from '../src/scan/fixture'
-import { NO_OVERRIDES } from '../src/scan/mapping'
+import { DECIDE_LATER, NO_OVERRIDES } from '../src/scan/mapping'
 import type { BindingRecord } from '../src/scan/types'
 
 const binding = (
@@ -90,8 +90,8 @@ describe('planChanges', () => {
     expect(confirmed?.outcome).toBe('confirmed')
   })
 
-  it('leaves out a binding the designer excluded', () => {
-    const overrides = { records: { ready: null }, rows: {} }
+  it('leaves out a binding the designer set to Decide later', () => {
+    const overrides = { records: { ready: DECIDE_LATER }, rows: {} }
     const plan = planChanges(records, overrides, new Set(['frame']))
     expect(plan.map((change) => change.record.id)).not.toContain('ready')
   })
@@ -363,9 +363,9 @@ describe('Manual fix', () => {
     })
   })
 
-  it('is left out when a designer keeps the legacy variable', () => {
-    const kept = { records: { icon: null }, rows: {} }
-    const plan = planChanges([fix], kept, new Set(['frame']))
+  it('is left out when a designer decides later', () => {
+    const later = { records: { icon: DECIDE_LATER }, rows: {} }
+    const plan = planChanges([fix], later, new Set(['frame']))
     expect(plan).toEqual([])
   })
 })

@@ -21,7 +21,6 @@ export function emptyCounts(): Counts {
     check: 0,
     byHand: 0,
     none: 0,
-    excluded: 0,
     inInstance: 0,
     other: 0,
   }
@@ -61,12 +60,7 @@ export function sumCounts(all: Counts[]): Counts {
 export function healthOutsideInstances(counts: Counts): number | null {
   const migrated = counts.migrated - (counts.migratedInInstances ?? 0)
   const total =
-    migrated +
-    counts.sure +
-    counts.check +
-    counts.byHand +
-    counts.none +
-    counts.excluded
+    migrated + counts.sure + counts.check + counts.byHand + counts.none
   return total === 0 ? null : migrated / total
 }
 
@@ -75,22 +69,32 @@ export function scoredTotal(counts: Counts): number {
   return SCORED_CATEGORIES.reduce((sum, category) => sum + counts[category], 0)
 }
 
-/** migrated ÷ (migrated + sure + check + manual fix + none + excluded + in instance), or null when nothing is scored. */
+/** migrated ÷ (migrated + sure + check + manual fix + none + in instance), or null when nothing is scored. */
 export function healthOf(counts: Counts): number | null {
   const total = scoredTotal(counts)
   return total === 0 ? null : counts.migrated / total
 }
 
-/** Old variables that are not migrated yet: sure, check, manual fix, none, excluded and in instance. */
+/** Old variables that are not migrated yet: sure, check, manual fix, none and in instance. */
 export function oldCount(counts: Counts): number {
   return (
-    counts.sure +
-    counts.check +
-    counts.byHand +
-    counts.none +
-    counts.excluded +
-    counts.inInstance
+    counts.sure + counts.check + counts.byHand + counts.none + counts.inInstance
   )
+}
+
+/**
+ * Counts saved by an earlier version, such as the totals of the last scan:
+ * a category added since counts 0, and Excluded, which is gone, counts as
+ * Needs check. Such a value is now read as Decide later, and waits for a
+ * designer (mapping.ts, savedChoices).
+ */
+export function savedCounts(
+  saved: Partial<Counts> & { excluded?: number } = {},
+): Counts {
+  const { excluded = 0, ...rest } = saved
+  const counts: Counts = { ...emptyCounts(), ...rest }
+  counts.check += excluded
+  return counts
 }
 
 export type EntryMeta = Omit<EntrySummary, 'counts' | 'health' | 'oldInstances'>

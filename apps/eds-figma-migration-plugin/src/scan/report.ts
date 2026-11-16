@@ -7,6 +7,7 @@ import { isResetTarget, resetText } from '../mapping/reset'
 import { CLEAR_MODE, manualFixTarget } from './classify'
 import { CATEGORY_LABELS, propertyLabel } from './labels'
 import {
+  DECIDE_LATER,
   effectiveCategory,
   effectiveTarget,
   isHeldMode,
@@ -27,7 +28,8 @@ export type ReportInput = {
 export type Report = { markdown: string; csv: string; baseName: string }
 
 function targetText(target: string | null): string {
-  if (target === null) return 'Keeps the legacy variable'
+  if (target === null) return 'No target'
+  if (target === DECIDE_LATER) return 'Decide later'
   if (isResetTarget(target)) return resetText(target)
   const literal = literalText(target)
   if (literal !== undefined) {
@@ -97,7 +99,13 @@ export function buildReport(input: ReportInput): Report {
   // the plugin keeps while values below it read it (Waiting).
   const waiting = none.filter((record) => isHeldMode(record.rule))
   const gaps = none.filter((record) => !isHeldMode(record.rule))
-  const excluded = records.filter((record) => category(record) === 'excluded')
+  // Values a designer set to Decide later: not applied yet, and counted in
+  // their category, a Ready value as Needs check.
+  const later = records.filter(
+    (record) =>
+      isMappable(record) &&
+      effectiveTarget(record, overrides).target === DECIDE_LATER,
+  )
 
   const instanceGroups = new Map<
     string,
@@ -132,25 +140,13 @@ export function buildReport(input: ReportInput): Report {
         'Needs check',
         'Manual fix',
         'No equivalent',
-        'Excluded',
         'In instance',
         'Other libraries',
       ],
-      [
-        [
-          t.migrated,
-          t.sure,
-          t.check,
-          t.byHand,
-          t.none,
-          t.excluded,
-          t.inInstance,
-          t.other,
-        ],
-      ],
+      [[t.migrated, t.sure, t.check, t.byHand, t.none, t.inInstance, t.other]],
     ),
     '',
-    'Health is migrated ÷ (migrated + ready + needs check + manual fix + no equivalent + excluded + in instance).',
+    'Health is migrated ÷ (migrated + ready + needs check + manual fix + no equivalent + in instance). A value set to Decide later counts as not migrated.',
     '',
     `## Frames (${frames.length})`,
     '',
@@ -286,20 +282,25 @@ export function buildReport(input: ReportInput): Report {
         ]
       : []),
     '',
-    `## Excluded (${excluded.length})`,
+    `## Decide later (${later.length})`,
     '',
-    excluded.length > 0
-      ? table(
-          ['Frame', 'Layer', 'Property', 'Legacy', 'Proposal'],
-          excluded.map((record) => [
-            entries.get(record.entryId)?.name,
-            layerPath(record),
-            propertyLabel(record.property),
-            record.old,
-            record.candidates?.[0] ? targetText(record.candidates[0]) : '',
-          ]),
-        )
-      : 'Nobody has excluded a value from the migration.',
+    later.length > 0
+      ? [
+          'Values a designer chose to decide on later. Apply leaves them, and they count as not migrated until a designer chooses a target.',
+          '',
+          table(
+            ['Frame', 'Layer', 'Property', 'Status', 'Legacy', 'Proposal'],
+            later.map((record) => [
+              entries.get(record.entryId)?.name,
+              layerPath(record),
+              propertyLabel(record.property),
+              CATEGORY_LABELS[category(record)],
+              record.old,
+              record.candidates?.[0] ? targetText(record.candidates[0]) : '',
+            ]),
+          ),
+        ].join('\n')
+      : 'No value is set to Decide later.',
     '',
     `## Instances with legacy variables (${oldInstances.length})`,
     '',

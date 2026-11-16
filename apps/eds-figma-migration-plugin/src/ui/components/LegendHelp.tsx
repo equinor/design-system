@@ -41,9 +41,11 @@ export function LegendHelp() {
             ))}
           </dl>
           <p>
-            Health is the share of migrated bindings among all EDS bindings in
-            the scope: migrated ÷ (migrated + ready + needs check + no
-            equivalent + in instance). Other libraries are left out.
+            Health is the share of migrated values among all EDS values in the
+            scope: migrated ÷ (migrated + ready + needs check + manual fix + no
+            equivalent + inside instances). Other libraries are left out. A
+            value set to Decide later keeps counting as not migrated, so health
+            reaches 100% only when no legacy variable is left.
           </p>
         </Dialog.Content>
         <Dialog.Actions>

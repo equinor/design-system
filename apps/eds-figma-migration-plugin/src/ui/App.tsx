@@ -5,6 +5,7 @@ import { schemesOf } from '../mapping/scheme'
 import { sharedSubject } from '../mapping/picker'
 import type { BindingKind } from '../mapping/types'
 import {
+  DECIDE_LATER,
   NO_OVERRIDES,
   effectiveTarget,
   ownChoices,
@@ -86,7 +87,7 @@ import type { Selection } from './selection'
 
 /** What the picker says on a Manual fix: what the plugin does when the fix is accepted. */
 const MANUAL_FIX_PICKER =
-  'Figma lets nobody change this size inside the instance. Choose the fix to let the plugin reset the layer, swap it back if it was swapped, and set its other changes again, or keep the legacy variable.'
+  'Figma lets nobody change this size inside the instance. Choose the fix to let the plugin reset the layer, swap it back if it was swapped, and set its other changes again, or decide later.'
 
 type EntryDetail = {
   entryId: string
@@ -747,7 +748,7 @@ export function App() {
    * the binding's own change, unless its row has a change that would then
    * apply instead. On a binding that needs a check or has no equivalent,
    * choosing the proposal is kept: it settles the binding, which then counts
-   * as Ready.
+   * as Ready. Decide later is always kept, since it is never the proposal.
    */
   const recordValue = (
     value: OverrideValue | undefined,
@@ -770,8 +771,8 @@ export function App() {
           : `${record.nodeName}, ${propertyLabel(record.property)}. Changes this value only, and wins over a change on its row.`,
       schemes: [record.scheme ?? 'light'],
       subject: {
-        // A Manual fix offers the plugin's fix or keeping the legacy
-        // variable, never another variable: Figma would not take it there.
+        // A Manual fix offers the plugin's fix or Decide later, never
+        // another variable: Figma would not take it there.
         kinds: record.kind && record.category !== 'byHand' ? [record.kind] : [],
         group: record.group,
         candidates: record.candidates ?? [],
@@ -835,8 +836,8 @@ export function App() {
 
   const changeRow = (group: MappingGroup, row: MappingRow) => {
     const own = ownChoices(row, overrides)
-    // A Manual fix offers the plugin's fix or keeping the legacy variable,
-    // never another variable: Figma would not take it there.
+    // A Manual fix offers the plugin's fix or Decide later, never another
+    // variable: Figma would not take it there.
     const manual = row.outcome === 'byHand'
     const kinds = manual
       ? []
@@ -1179,7 +1180,7 @@ export function App() {
           busy={locked}
           onApply={applySelected}
           onChange={changeSelected}
-          onExclude={() => setSelected(null)}
+          onDecideLater={() => setSelected(DECIDE_LATER)}
           onReset={() => setSelected(undefined)}
           onClear={bulk.clear}
         />

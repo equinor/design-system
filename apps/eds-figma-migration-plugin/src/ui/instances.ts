@@ -1,6 +1,13 @@
 /** Instances that still use legacy variables, grouped by main component. */
 import type { ComponentInstance, OldInstance } from '../scan/types'
 
+/**
+ * What the Instances tab says about the instances of a library component
+ * (decided 2026-11-16). The plugin never swaps a component.
+ */
+export const LIBRARY_INSTANCES_NOTE =
+  'The plugin migrates variables, not components. Swap these to EDS Beta components in Figma; their legacy values go with them.'
+
 export type InstanceGroup = {
   key: string
   name: string
@@ -8,6 +15,12 @@ export type InstanceGroup = {
   source: string
   /** The main component, when it is in this file */
   mainId?: string
+  /**
+   * The main component is in a library. The plugin migrates variables, not
+   * components, so these instances are swapped to EDS Beta components in
+   * Figma by a designer.
+   */
+  fromLibrary?: true
   instances: OldInstance[]
   /** Legacy variables in all of them */
   count: number
@@ -27,6 +40,7 @@ export function groupInstances(instances: OldInstance[]): InstanceGroup[] {
           : 'in this file'
         : 'main component not found',
       ...(main?.id && !main.remote ? { mainId: main.id } : {}),
+      ...(main?.remote ? { fromLibrary: true as const } : {}),
       instances: [],
       count: 0,
     }

@@ -15,11 +15,11 @@ export type PickerRequest = {
   subject: PickerSubject
   /** The colour schemes of the layers being changed, for the swatches */
   schemes: ColorScheme[]
-  /** The target in force now; undefined when the bindings differ */
+  /** The target in force now, null without a proposal, undefined when the bindings differ */
   current?: string | null
   /** True when the target in force is a change someone made, so it can be undone */
   changed?: boolean
-  /** A chosen target or null to leave the bindings; undefined undoes the change */
+  /** A chosen target or DECIDE_LATER; undefined undoes the change */
   onSave: (value: OverrideValue | undefined) => void
 }
 
@@ -66,9 +66,9 @@ function PickerBody({
           Cancel
         </Button>
         <Button
-          disabled={value === undefined}
+          disabled={value === undefined || value === null}
           onClick={() => {
-            if (value !== undefined) onSave(value)
+            if (value !== undefined && value !== null) onSave(value)
             onClose()
           }}
         >

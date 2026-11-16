@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
 import { pickerOptions } from '../../../../src/mapping/picker'
 import type { PickerSubject } from '../../../../src/mapping/picker'
+import { DECIDE_LATER } from '../../../../src/scan/mapping'
 import type { OverrideValue } from '../../../../src/scan/mapping'
 import { targetMeaning } from '../plain'
 import { VariableList } from './VariableList'
@@ -66,7 +67,7 @@ function PickerBody({
         <Button
           disabled={value === undefined}
           onClick={() => {
-            if (value !== undefined) onSave(value)
+            if (value !== undefined) onSave(value ?? DECIDE_LATER)
             onClose()
           }}
         >

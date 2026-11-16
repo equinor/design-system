@@ -4,7 +4,7 @@ import { Button, Dialog } from '@equinor/eds-core-react/next'
 type ApplyActionsProps = {
   /** Ready changes the run would make */
   ready: number
-  /** Needs check bindings and Manual fixes nobody has decided on, for the review */
+  /** Values that wait for a designer, for the review: Needs check, stand-ins, Manual fixes and Decide later */
   toReview: number
   /** “in the scope” or “in this frame” */
   where: string
@@ -160,7 +160,7 @@ export function ApplyActions({
                   ? 'The plugin changes nothing in an instance directly.'
                   : 'Nothing inside an instance changes.'}
                 {toReview > 0
-                  ? ` ${toReview} value${toReview === 1 ? '' : 's'} to review stay as they are until you review them.`
+                  ? ` ${toReview} value${toReview === 1 ? '' : 's'} to review ${toReview === 1 ? 'is' : 'are'} left for a later run: review ${toReview === 1 ? 'it' : 'them'}, then apply again.`
                   : ''}{' '}
                 Undo with Ctrl or Cmd+Z, or later with {revertLabel}.
               </p>

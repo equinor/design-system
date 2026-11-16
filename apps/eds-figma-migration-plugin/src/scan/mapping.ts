@@ -14,8 +14,16 @@ import type { ColorScheme } from '../mapping/scheme'
 import type { BindingRecord, Category, Density, PropertyGroup } from './types'
 import type { OverrideChange } from '../shared/messages'
 
-/** A chosen target, or null to leave the legacy binding as it is. */
-export type OverrideValue = string | null
+/**
+ * The choice that leaves a value for a later run: Apply does not change it,
+ * and it keeps counting as not migrated, so health reaches 100% only once no
+ * legacy variable is left. There is no choice that keeps a legacy variable
+ * for good (decided 2026-11-16).
+ */
+export const DECIDE_LATER = 'decide-later'
+
+/** A chosen target: a variable, text style, mode, literal or reset, or DECIDE_LATER. */
+export type OverrideValue = string
 
 export type Overrides = {
   /** By record id, from the inspector */
@@ -25,6 +33,28 @@ export type Overrides = {
 }
 
 export const NO_OVERRIDES: Overrides = { records: {}, rows: {} }
+
+/**
+ * The choices as the file stores them. Earlier versions stored null for a
+ * value whose legacy variable was kept (Excluded); that choice is gone, so
+ * such a value is read as Decide later. Anything that is not a string is
+ * left out.
+ */
+export function savedChoices(saved: unknown): Overrides {
+  const read = (map: unknown): Record<string, OverrideValue> => {
+    const result: Record<string, OverrideValue> = {}
+    if (!map || typeof map !== 'object') return result
+    for (const [key, value] of Object.entries(map)) {
+      if (typeof value === 'string') result[key] = value
+      else if (value === null) result[key] = DECIDE_LATER
+    }
+    return result
+  }
+  if (!saved || typeof saved !== 'object') return { records: {}, rows: {} }
+  const { records, rows } = saved as { records?: unknown; rows?: unknown }
+  if (!records || !rows) return { records: {}, rows: {} }
+  return { records: read(records), rows: read(rows) }
+}
 
 /** Categories the Mapping view lists: the ones a designer can still decide on. */
 const MAPPED: BindingRecord['category'][] = ['sure', 'check', 'none']
@@ -45,9 +75,17 @@ export function rowKey(record: BindingRecord): string {
 }
 
 export type EffectiveTarget = {
-  /** The target name, or null to leave the binding */
+  /** The target name, DECIDE_LATER, or null when the rule has no proposal */
   target: string | null
   source: 'proposal' | 'row' | 'record'
+}
+
+/**
+ * True while a value waits for a designer: nobody has chosen a target, or
+ * they chose Decide later. Review lists it, and its reason stays in view.
+ */
+export function isUndecided(target: EffectiveTarget): boolean {
+  return target.source === 'proposal' || target.target === DECIDE_LATER
 }
 
 /** The target that will be applied: the binding's own override, then its row's, then the proposal. */
@@ -80,17 +118,21 @@ export function effectiveTarget(
 
 /**
  * The category once a designer has decided: a target they chose is Ready,
- * whatever the rule said, and a choice to keep the legacy variable is
- * Excluded. No equivalent stays for values the rules have nothing for, so a
- * designer's choice is never shown as a gap in the EDS Beta. Without a
- * choice, the rule's category stands.
+ * whatever the rule said. No equivalent stays for values the rules have
+ * nothing for, so a designer's choice is never shown as a gap in the EDS
+ * Beta. Without a choice, the rule's category stands, and so it does with
+ * Decide later, except that a Ready value becomes Needs check: it waits for
+ * a designer, and Apply leaves it.
  */
 export function categoryAfter(
   category: Category,
   target: EffectiveTarget,
 ): Category {
   if (target.source === 'proposal') return category
-  return target.target === null ? 'excluded' : 'sure'
+  if (target.target === DECIDE_LATER) {
+    return category === 'sure' ? 'check' : category
+  }
+  return 'sure'
 }
 
 export function effectiveCategory(
@@ -243,7 +285,7 @@ export function ownChoices(row: MappingRow, overrides: Overrides): number {
 export function rowCurrent(
   row: MappingRow,
   overrides: Overrides,
-): OverrideValue | undefined {
+): EffectiveTarget['target'] | undefined {
   const targets = new Set(
     row.bindings.map(
       (binding) => bindingOutcome(row, binding, overrides).target,

@@ -17,9 +17,11 @@ import {
   values,
 } from '../labels'
 import {
+  DECIDE_LATER,
   effectiveCategory,
   effectiveTarget,
   isMappable,
+  isUndecided,
 } from '../../scan/mapping'
 import type {
   MappingBinding,
@@ -93,7 +95,11 @@ export function targetText(
     case 'inInstance':
       return 'Not changed inside an instance'
     case 'byHand':
-      return manualFixTarget(record)
+      // A Manual fix set to Decide later says so, as it does in Changes.
+      return isMappable(record) &&
+        effectiveTarget(record, overrides).target === DECIDE_LATER
+        ? targetLabel(DECIDE_LATER)
+        : manualFixTarget(record)
     default: {
       const { target, source } = effectiveTarget(record, overrides)
       if (record.category === 'none' && source === 'proposal') {
@@ -205,7 +211,7 @@ function groupSummary(
   const parts = [values(records.length)]
   const held = (record: BindingRecord) =>
     isHeld(categoryOf(record), record.rule)
-  for (const category of ['check', 'byHand', 'none', 'excluded'] as const) {
+  for (const category of ['check', 'byHand', 'none'] as const) {
     const count = records.filter(
       (record) => categoryOf(record) === category && !held(record),
     ).length
@@ -297,8 +303,8 @@ export function Inspector({
     ...SCORED_CATEGORIES,
     ...(entry.counts.other > 0 ? (['other'] as const) : []),
   ]
-  // After a designer's choice a binding counts as Ready or Excluded, the
-  // same as in the health bar.
+  // After a designer's choice a binding counts as Ready, or as Needs check
+  // when a Ready value is set to Decide later, the same as in the health bar.
   const categoryOf = (record: BindingRecord) =>
     effectiveCategory(record, overrides)
   const byStatus = (records ?? []).filter(
@@ -605,10 +611,11 @@ export function Inspector({
                         </div>
                         <ul className="binding-list">
                           {group.records.map((record) => {
+                            const target = isMappable(record)
+                              ? effectiveTarget(record, overrides)
+                              : undefined
                             const decided =
-                              isMappable(record) &&
-                              effectiveTarget(record, overrides).source !==
-                                'proposal'
+                              target !== undefined && !isUndecided(target)
                             return (
                               <BindingRow
                                 key={record.id}
@@ -621,11 +628,8 @@ export function Inspector({
                                 old={record.old}
                                 target={targetText(record, overrides)}
                                 note={
-                                  isMappable(record)
-                                    ? sourceLabel(
-                                        effectiveTarget(record, overrides)
-                                          .source,
-                                      )
+                                  target
+                                    ? sourceLabel(target.source, target.target)
                                     : undefined
                                 }
                                 reason={decided ? undefined : record.reason}
@@ -676,9 +680,11 @@ export function Inspector({
             Instances with legacy variables
           </h3>
           <p className="muted">
-            Update the component in its library, then swap these instances by
-            hand. The plugin does not change a value an instance takes from its
-            main component. A value an instance overrides is listed above,
+            The plugin does not change a value an instance takes from its main
+            component. A component in this file changes with its main component.
+            The plugin migrates variables, not components: swap an instance of a
+            library component to an EDS Beta component in Figma, and its legacy
+            values go with it. A value an instance overrides is listed above,
             marked Overridden in the instance, and changes here.
           </p>
           <ul className="binding-list">

@@ -5,14 +5,15 @@ import { getNewTextStyle, getNewVariable } from '../../mapping/inventory'
 import type { PickerOptions } from '../../mapping/picker'
 import { literalValue } from '../../mapping/literal'
 import type { ColorScheme } from '../../mapping/scheme'
+import { DECIDE_LATER } from '../../scan/mapping'
 import type { Density } from '../../scan/types'
-import { targetLabel } from '../targets'
+import { DECIDE_LATER_LABEL, targetLabel } from '../targets'
 
 type VariableListProps = {
   options: PickerOptions
-  /** The chosen target; null leaves the legacy binding; undefined is nothing chosen yet */
+  /** The chosen target, DECIDE_LATER, or null or undefined when nothing is chosen */
   value: string | null | undefined
-  onChange: (value: string | null) => void
+  onChange: (value: string) => void
   /** The colour schemes of the layers being changed, for the swatches */
   schemes: ColorScheme[]
   /** A line under each proposed target that says what it is for */
@@ -20,7 +21,7 @@ type VariableListProps = {
 }
 
 type Item = {
-  value: string | null
+  value: string
   /** The name shown in the list: the last part of the path, or the full name in Proposed */
   label: string
   /** The full name, for search */
@@ -29,11 +30,15 @@ type Item = {
 
 type Section = { title: string; items: Item[] }
 
-/** Keeps the legacy variable: the value counts as Excluded, and Apply leaves it out. */
-const EXCLUDE: Item = {
-  value: null,
-  label: 'Exclude: keep the legacy variable',
-  name: 'Exclude: keep the legacy variable',
+/**
+ * Leaves the value for a later run: Apply does not change it, and it counts
+ * as not migrated until a target is chosen (mapping.ts, DECIDE_LATER). The
+ * picker never offers to keep a legacy variable.
+ */
+const LATER: Item = {
+  value: DECIDE_LATER,
+  label: DECIDE_LATER_LABEL,
+  name: DECIDE_LATER_LABEL,
 }
 
 function splitName(name: string): [string, string] {
@@ -74,7 +79,7 @@ function sections(options: PickerOptions): Section[] {
   for (const [path, items] of byPath) {
     result.push({ title: path || 'Other', items })
   }
-  result.push({ title: 'Keep', items: [EXCLUDE] })
+  result.push({ title: 'Not now', items: [LATER] })
   return result
 }
 
@@ -247,7 +252,6 @@ export function VariableList({
                     <span className="option-label">{item.label}</span>
                     {describe &&
                       section.title === 'Proposed' &&
-                      item.value !== null &&
                       describe(item.value) && (
                         <span className="option-meaning">
                           {describe(item.value)}

@@ -62,7 +62,6 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   check: 'Needs check',
   byHand: 'Manual fix',
   none: 'No equivalent',
-  excluded: 'Excluded',
   inInstance: 'In instance',
   other: 'Other libraries',
 }
@@ -82,14 +81,12 @@ export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
   migrated: 'Bound to an EDS Beta variable or text style. Nothing left to do.',
   sure: 'A legacy variable with one target in the EDS Beta. The plugin swaps it without asking when you apply.',
   check:
-    'A legacy variable whose target depends on what the layer is: interactive or not, selected, the kind of border, or the fill under a text. The plugin proposes a target, and you confirm, change or skip it.',
+    'A legacy variable whose target depends on what the layer is: interactive or not, selected, the kind of border, or the fill under a text. The plugin proposes a target, and you confirm or change it, or decide later. A Ready value you set to Decide later counts here too, until you choose a target.',
   byHand:
     'A legacy variable an instance overrides where Figma lets nobody change it, in the editor or from a plugin, such as the width or height of an icon inside an instance. The row says how to fix it in Figma, usually by resetting the layer so it takes the variable from its main component again. Apply leaves it, and the report lists it.',
   none: 'A legacy variable the EDS Beta has no token for, such as a stroke width on a padding or a palette colour. It shows a gap in the tokens, and the report lists it. The plugin proposes a stand-in, such as the spacing token with the same px or the nearest colour for the layer, and Apply changes the value only once you choose the stand-in or another target.',
-  excluded:
-    'A legacy variable you chose to keep. Apply leaves it out, and the report lists it. Select it and choose Reset choices to get the proposal back.',
   inInstance:
-    'A legacy variable an instance takes from its main component. The plugin does not change it in the instance, because a change there becomes an override. Update the component in its library, then swap the instance. A value the instance overrides itself is listed with the other changes.',
+    'A legacy variable an instance takes from its main component. The plugin does not change it in the instance, because a change there becomes an override. The plugin migrates variables, not components: swap an instance of a library component to an EDS Beta component in Figma, and its legacy values go with it. A value the instance overrides itself is listed with the other changes.',
   other:
     'A variable from another library, or a local one. Not counted in the health.',
 }

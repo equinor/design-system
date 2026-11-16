@@ -4,8 +4,9 @@
  * plugin opens, the designer's choices, so a review can continue another
  * day, and the pages a scan of the file leaves out.
  */
+import { savedChoices } from '../scan/mapping'
 import type { Overrides } from '../scan/mapping'
-import { emptyCounts } from '../scan/summary'
+import { savedCounts } from '../scan/summary'
 import type { ScanSummary } from '../scan/types'
 import { NAMESPACE } from '../shared/changelog'
 import type { SavedHealth } from '../shared/messages'
@@ -68,8 +69,9 @@ export function saveHealth(summary: ScanSummary): void {
 
 export function loadHealth(): SavedHealth | undefined {
   const saved = read<SavedHealth>(HEALTH_KEY)
-  // Saved before Excluded was counted on its own
-  return saved && { ...saved, totals: { ...emptyCounts(), ...saved.totals } }
+  // Saved by an earlier version: without a category added since, or with
+  // Excluded, which is gone
+  return saved && { ...saved, totals: savedCounts(saved.totals) }
 }
 
 /** Saves the choices; false when there are too many to keep in the file. */
@@ -92,9 +94,7 @@ export function loadLeftOutPages(): string[] {
     : []
 }
 
+/** The saved choices; one saved by an earlier version to keep a legacy variable is read as Decide later. */
 export function loadChoices(): Overrides {
-  const saved = read<Overrides>(CHOICES_KEY)
-  return saved && typeof saved === 'object' && saved.records && saved.rows
-    ? saved
-    : { records: {}, rows: {} }
+  return savedChoices(read<unknown>(CHOICES_KEY))
 }

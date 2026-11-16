@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Accordion, Badge, Button } from '@equinor/eds-core-react/next'
 import type { OldInstance } from '../../scan/types'
-import { groupInstances } from '../instances'
+import { groupInstances, LIBRARY_INSTANCES_NOTE } from '../instances'
 
 type InstancesViewProps = {
   instances: OldInstance[]
@@ -18,11 +18,12 @@ type InstancesViewProps = {
  * Every instance in the scope that still takes legacy variables from its
  * main component, grouped by main component. The plugin does not change
  * those inside an instance; the values an instance overrides are in
- * Changes. A library
- * component is updated in its library; a component in this file changes
- * every instance when its main component is migrated. The legacy Typography
- * component is the exception: its instances are converted on their own tab
- * in Changes, and this tab links there.
+ * Changes. An instance of a library component is swapped to an EDS Beta
+ * component in Figma, since the plugin migrates variables, not components;
+ * a component in this file changes every instance when its main component
+ * is migrated. The legacy Typography component is the exception: its
+ * instances are converted on their own tab in Changes, and this tab links
+ * there.
  */
 export function InstancesView({
   instances,
@@ -66,10 +67,11 @@ export function InstancesView({
         These are the legacy values instances take from their main component,
         which the plugin does not change in the instance. A component in this
         file changes every instance of it once its main component is migrated:
-        go to the main component and migrate its page first. A component from a
-        library is updated in its library and published, then the instances take
-        the update. A value an instance overrides itself is listed in Changes,
-        marked Overridden in the instance.
+        go to the main component and migrate its page first. The plugin migrates
+        variables, not components, so an instance of a library component is
+        swapped to an EDS Beta component in Figma, and its legacy values go with
+        it. A value an instance overrides itself is listed in Changes, marked
+        Overridden in the instance.
       </p>
       <Accordion className="binding-groups">
         {groups.map((group) => {
@@ -107,6 +109,9 @@ export function InstancesView({
                         {group.name} is a component in this file. Migrate its
                         main component, and every instance follows.
                       </p>
+                    )}
+                    {group.fromLibrary && (
+                      <p className="muted">{LIBRARY_INSTANCES_NOTE}</p>
                     )}
                     <div className="panel-actions">
                       {group.mainId ? (

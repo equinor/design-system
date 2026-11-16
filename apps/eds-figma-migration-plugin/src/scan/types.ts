@@ -143,11 +143,6 @@ export type Category =
    */
   | 'byHand'
   | 'none'
-  /**
-   * A designer chose to keep the legacy variable, so Apply leaves the value
-   * out. Never set by the scan, only by a choice (mapping.ts, categoryAfter).
-   */
-  | 'excluded'
   /** A legacy variable an instance takes from its main component */
   | 'inInstance'
   /** Bound to another library or to a local variable; left out of the score */
@@ -159,7 +154,6 @@ export const SCORED_CATEGORIES = [
   'check',
   'byHand',
   'none',
-  'excluded',
   'inInstance',
 ] as const
 

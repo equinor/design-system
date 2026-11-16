@@ -3,6 +3,7 @@ import { Button, Icon } from '@equinor/eds-core-react/next'
 import { arrow_back } from '@equinor/eds-icons'
 import { pickerOptions } from '../../../../src/mapping/picker'
 import { propertyLabel } from '../labels'
+import { DECIDE_LATER } from '../../../../src/scan/mapping'
 import type { OverrideValue } from '../../../../src/scan/mapping'
 import { pathBelow } from '../paths'
 import { plainReason, targetMeaning } from '../plain'
@@ -193,7 +194,7 @@ export function ReviewView({
           disabled={value === undefined}
           onClick={() => {
             if (value === undefined) return
-            onDecide(item, value)
+            onDecide(item, value ?? DECIDE_LATER)
             next(value === null ? 'left' : isProposal ? 'confirmed' : 'changed')
           }}
         >

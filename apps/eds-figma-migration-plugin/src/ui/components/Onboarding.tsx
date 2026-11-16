@@ -44,7 +44,6 @@ const SAMPLE_COUNTS = {
   check: 8,
   byHand: 0,
   none: 4,
-  excluded: 0,
   inInstance: 12,
   other: 0,
 }

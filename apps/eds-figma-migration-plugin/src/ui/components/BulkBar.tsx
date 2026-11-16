@@ -13,7 +13,8 @@ type BulkBarProps = {
   busy: boolean
   onApply: () => void
   onChange: () => void
-  onExclude: () => void
+  /** Sets the selected values to Decide later */
+  onDecideLater: () => void
   onReset: () => void
   onClear: () => void
 }
@@ -31,7 +32,7 @@ export function BulkBar({
   busy,
   onApply,
   onChange,
-  onExclude,
+  onDecideLater,
   onReset,
   onClear,
 }: BulkBarProps) {
@@ -52,7 +53,7 @@ export function BulkBar({
             ready === 0
               ? 'None of the selected values is Ready. Choose a target for them first.'
               : left > 0
-                ? `Applies the ${ready} Ready values. The other ${left} need a check, have no equivalent or are excluded, and stay as they are.`
+                ? `Applies the ${ready} Ready values. The other ${left} wait for you to choose a target, and are left for a later run.`
                 : undefined
           }
         >
@@ -74,10 +75,10 @@ export function BulkBar({
         <Button
           size="small"
           variant="secondary"
-          onClick={onExclude}
-          title="Keep the legacy variable on the selected values. Apply leaves them out."
+          onClick={onDecideLater}
+          title="Leaves the selected values for a later run. Apply does not change them, and they count as not migrated until you choose a target."
         >
-          Exclude
+          Decide later
         </Button>
         {chosen > 0 && (
           <Button
@@ -107,12 +108,12 @@ export function BulkBar({
         <Dialog.Content>
           <p>
             The plugin binds the EDS Beta variables and text styles on the
-            selected values that are Ready. Everything else in the scope stays
-            as it is.
+            selected values that are Ready. Nothing else in the scope changes in
+            this run.
           </p>
           <p className="muted">
             {left > 0
-              ? `${left} of the selected value${left === 1 ? '' : 's'} need${left === 1 ? 's' : ''} a check, ${left === 1 ? 'has' : 'have'} no equivalent or ${left === 1 ? 'is' : 'are'} excluded, and stay${left === 1 ? 's' : ''} as ${left === 1 ? 'it is' : 'they are'}. `
+              ? `${left} of the selected value${left === 1 ? '' : 's'} wait${left === 1 ? 's' : ''} for you to choose a target, and ${left === 1 ? 'is' : 'are'} left for a later run. `
               : ''}
             Undo with Ctrl or Cmd+Z, or later with Revert frame.
           </p>

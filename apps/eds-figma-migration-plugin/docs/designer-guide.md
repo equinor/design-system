@@ -51,11 +51,11 @@ and every mode set on a frame:
 | Needs check ⚠    | The replacement depends on what the layer does, for example interactive or not.                                                                                              |
 | Manual fix       | A legacy value Figma lets nobody change where it is, such as an icon size inside an instance. The row says how to fix it in Figma. Shown only when there are some.           |
 | No equivalent    | The EDS Beta has no token for it, such as a stroke width on a padding or a palette colour: a gap in the tokens. The plugin proposes a stand-in for you to choose or replace. |
-| Excluded         | You chose to keep the legacy variable. Apply leaves it out. Shown only when there are some.                                                                                  |
-| Inside instances | Comes from an instance's main component. The plugin leaves it; migrate the main component.                                                                                   |
+| Inside instances | Comes from an instance's main component. The plugin leaves it: migrate a main component in this file, or swap an instance of a library component to an EDS Beta component.   |
 
-Health is the share that is migrated. The **i** button next to the legend
-explains the statuses again. When values sit inside instances, a line under
+Health is the share that is migrated. It reaches 100% only when no legacy
+variable is left: a value you set to **Decide later** still counts as not
+migrated. The **i** button next to the legend explains the statuses again. When values sit inside instances, a line under
 the legend gives the share migrated outside instances, which is what the
 plugin can change in the scope.
 
@@ -84,8 +84,8 @@ is more than a swap of one variable for another. Manual fixes are part of
 Apply makes them: the step explains the fix, and **Accept the fix** lets the plugin
 read every change on the layer, reset it, swap it back and set the changes
 again on the next Apply. It checks each change afterwards; if one cannot be
-copied, it leaves the layer as it was and says why. **Keep the legacy
-variable** excludes the value. When the main component itself still uses a
+copied, it leaves the layer as it was and says why. **Decide later** leaves
+the value for a later run. When the main component itself still uses a
 legacy size, or the layer is not an instance, the plugin cannot make the fix,
 and the row only gives the steps.
 
@@ -108,9 +108,11 @@ and the row only gives the steps.
   Typography component (see [Typography components](#typography-components)).
 - **Instances** lists the instances that still use legacy variables, grouped
   by component. For a component in this file, **Go to main component** takes
-  you to it: migrate its page, and every instance follows. Instances of the
-  legacy Typography component are not listed here; **Show** opens their tab
-  in Changes.
+  you to it: migrate its page, and every instance follows. The plugin
+  migrates variables, not components, so for a component from a library the
+  tab asks you to swap the instances to EDS Beta components in Figma; their
+  legacy values go with them. Instances of the legacy Typography component
+  are not listed here; **Show** opens their tab in Changes.
 - **Main components** lists the main components in the scope. On this tab,
   Apply in the footer changes all of them in one run and leaves the frames
   as they are; Apply on Changes or Frames changes the main components and
@@ -131,19 +133,23 @@ from the main component cannot: it changes with the main component or its
 library.
 
 To change a target, press **Change** on one value or the target of a row, or
-tick several values and use the bar at the bottom of the window. In the
-picker, **Exclude: keep the legacy variable** keeps the legacy variable, and
-the value counts as Excluded. The row's target then says what its values get,
-so a row whose values are all excluded says **Keeps the legacy variable**.
+tick several values and use the bar at the bottom of the window. The picker
+never offers to keep a legacy variable, since the goal is a file with none
+left. Its last option, **Decide later**, leaves the value for a later run:
+Apply does not change it, it still counts as not migrated, and Review shows it
+again. A Ready value you set to Decide later counts as Needs check until you
+choose a target. The row's target then says what its values get, so a row
+whose values are all set to it says **Decide later**.
 
 The bar at the bottom has these actions for the ticked values:
 
 - **Apply** makes the Ready changes among them, and nothing else in the
-  scope. When some of them need a check, have no equivalent or are excluded,
-  the button says how many it applies, and the rest wait for your choice.
+  scope. When some of them need a check, have no equivalent or are set to
+  Decide later, the button says how many it applies, and the rest are left
+  for a later run.
 - **Change target** sets one target on all of them, when they are the same
   kind of value.
-- **Exclude** keeps the legacy variable on all of them.
+- **Decide later** leaves all of them for a later run.
 - **Reset choices** removes your choice on them, so they get the proposal or
   the change on their row again. It is only there when some of them have a
   choice.
@@ -155,11 +161,13 @@ plugin remembers the size.
 ## 4. Review the ⚠ values
 
 **Review**, in the footer, shows the values that need a check one at a time,
-and the No equivalent values with a stand-in. The plugin selects the layer,
-tells you why it was unsure or what the EDS Beta lacks, and shows its proposal
-and the other targets that fit. Confirm the proposal or use the stand-in,
-choose another target, exclude the value, or skip it for later. Whatever you
-choose then counts as Ready, or as Excluded when you exclude it.
+the No equivalent values with a stand-in, and the values you set to Decide
+later. The plugin selects the layer, tells you why it was unsure or what the
+EDS Beta lacks, and shows its proposal and the other targets that fit. Confirm
+the proposal or use the stand-in, choose another target, decide later, or
+skip it. A target you choose then counts as Ready. **Decide later** is kept
+as your choice, so Changes shows it, and the value comes back in the next
+review; **Skip** moves on without a choice.
 
 ### No equivalent and stand-ins
 
@@ -180,9 +188,10 @@ row shows as **Stand-in:** and the target:
 - For a legacy mode the plugin does not know, the stand-in is to remove the
   mode, so the layer takes the mode set above it.
 
-Apply leaves a stand-in until you choose it, in Changes or in Review, or
-choose another target. Only a string or boolean variable, or a number the
-plugin could not read, has no stand-in.
+Apply changes the value once you choose the stand-in or another target, in
+Changes or in Review. Until then it counts as not migrated, so the file is
+done only when every gap has a target. Only a string or boolean variable, or
+a number the plugin could not read, has no stand-in.
 
 ## 5. Apply
 
@@ -233,7 +242,7 @@ tabular figures; the result has a button that selects those texts.
 
 **Export report**, beside the scope line, makes a Markdown report and a CSV for a spreadsheet, with
 the health, the frames, what needs a check, the gaps in the tokens with the
-stand-in for each, and the instances. It counts what the window counts, main components in the scope included. The plugin also keeps the latest scan and your choices in the
+stand-in for each, the values set to Decide later, and the instances. It counts what the window counts, main components in the scope included. The plugin also keeps the latest scan and your choices in the
 file, so the next time you open it, you see where you left off.
 
 ## Questions
@@ -242,12 +251,13 @@ file, so the next time you open it, you see where you left off.
 instance overrides itself, and leaves the values it takes from its main
 component. A change to one of those would become an override, which stops the
 instance from getting updates. For a component in this file, migrate its main
-component; for a library component,
-update it in its library and publish it. The instances follow.
+component, and the instances follow. The plugin migrates variables, not
+components, so swap an instance of a library component to an EDS Beta
+component in Figma; its legacy values go with it.
 
 **Why is a legacy mode still on my frame?** Something below it still uses a
 legacy variable through it: an instance, an icon size, or a value you have
-not reviewed yet.
+not reviewed yet or set to Decide later.
 
 **Ready and Migrated sound the same.** Ready means the plugin knows the
 replacement and can apply it; Migrated means it has been applied.

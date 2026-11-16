@@ -21,7 +21,7 @@ export const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
   ...PLUGIN_DESCRIPTIONS,
   none: 'A legacy variable the EDS Beta has no token for, such as a stroke width on a padding or a palette colour. It shows a gap in the tokens, and the report lists it. The plugin proposes a stand-in, such as the spacing token with the same px or the nearest colour for the layer, and Apply changes the value only once you choose the stand-in or another target, in Changes or in Review. A legacy mode marked Waiting counts here too: Apply clears it once no layer below it uses legacy variables.',
   inInstance:
-    'A legacy variable an instance takes from its main component. The plugin does not change it in the instance, because a change there becomes an override. Update the main component, in this file or in its library, and the instances follow. A value the instance overrides itself is listed with the other changes.',
+    'A legacy variable an instance takes from its main component. The plugin does not change it in the instance, because a change there becomes an override. A component in this file changes every instance once its main component is migrated. The plugin migrates variables, not components: swap an instance of a library component to an EDS Beta component in Figma, and its legacy values go with it. A value the instance overrides itself is listed with the other changes.',
 }
 
 /**

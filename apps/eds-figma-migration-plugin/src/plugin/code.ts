@@ -97,7 +97,7 @@ let leftOutPages: string[] = loadLeftOutPages()
 let busy = false
 let cancelRequested = false
 
-/** The scan counted with the designer's choices: a chosen target is Ready, a choice to keep the legacy variable Excluded. */
+/** The scan counted with the designer's choices: a chosen target is Ready, and Decide later makes a Ready value Needs check. */
 function withChoices(state: ScanState): ScanState {
   const current = overrides
   return {

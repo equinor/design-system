@@ -11,7 +11,6 @@ export const BADGES: Record<
   check: { tone: 'warning', emphasis: 'medium' },
   byHand: { tone: 'warning', emphasis: 'low' },
   none: { tone: 'danger', emphasis: 'low' },
-  excluded: { tone: 'neutral', emphasis: 'low' },
   inInstance: { tone: 'neutral', emphasis: 'low' },
   other: { tone: 'neutral', emphasis: 'low' },
 }

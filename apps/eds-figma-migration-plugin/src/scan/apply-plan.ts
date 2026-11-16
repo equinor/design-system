@@ -4,7 +4,12 @@
  */
 import { isResetTarget } from '../mapping/reset'
 import { blockedModes, CLEAR_MODE } from './classify'
-import { effectiveCategory, effectiveTarget, isMappable } from './mapping'
+import {
+  DECIDE_LATER,
+  effectiveCategory,
+  effectiveTarget,
+  isMappable,
+} from './mapping'
 import type { Overrides } from './mapping'
 import type { BindingRecord } from './types'
 
@@ -34,7 +39,8 @@ export function changeOutcome(
 
 /**
  * Every binding in the entries that is Ready, after the designer's choices,
- * and has a target. Bindings and typography come first, and modes last,
+ * and has a target. A value set to Decide later is never Ready, and is left
+ * out here as well. Bindings and typography come first, and modes last,
  * because a legacy mode is only cleared once the bindings below it have
  * changed. With `recordIds`, only those bindings: Apply on the values a
  * designer has selected.
@@ -51,7 +57,7 @@ export function planChanges(
     if (recordIds && !recordIds.has(record.id)) continue
     if (effectiveCategory(record, overrides) !== 'sure') continue
     const { target } = effectiveTarget(record, overrides)
-    if (target === null) continue
+    if (target === null || target === DECIDE_LATER) continue
     changes.push({ record, target, outcome: changeOutcome(record, target) })
   }
   const isMode = (change: PlannedChange) =>

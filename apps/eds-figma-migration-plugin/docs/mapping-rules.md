@@ -191,6 +191,15 @@ Every old variable resolves to one of three outcomes:
   and applies it only once a designer chooses it or another target, in
   Changes or in Review. Until then the value counts as not migrated.
 
+None of the outcomes keeps a legacy variable for good, and neither does a
+designer's choice: the window has no option to keep one (decided
+2026-11-16). A designer who is not ready to choose sets the value to
+**Decide later** instead. Apply leaves it, and it keeps counting as not
+migrated, so health reaches 100% only when no legacy variable is left. A
+**sure** value set to Decide later counts as Needs check, since it waits for
+a designer; a check, none or Manual fix value keeps its outcome. Review lists
+it again.
+
 ### Stand-ins where the EDS Beta has no token
 
 The goal is a file with no legacy variable left, so every value with no

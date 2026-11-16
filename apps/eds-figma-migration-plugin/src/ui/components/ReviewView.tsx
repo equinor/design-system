@@ -3,14 +3,15 @@ import { Button, Icon } from '@equinor/eds-core-react/next'
 import { arrow_back } from '@equinor/eds-icons'
 import { pickerOptions } from '../../mapping/picker'
 import { propertyLabel } from '../labels'
+import { DECIDE_LATER } from '../../scan/mapping'
 import type { OverrideValue } from '../../scan/mapping'
 import { pathBelow } from '../paths'
 import { plainReason, targetMeaning } from '../plain'
 import type { ReviewItem } from '../review'
-import { targetLabel } from '../targets'
+import { DECIDE_LATER_LABEL, targetLabel } from '../targets'
 import { VariableList } from './VariableList'
 
-type Decision = 'confirmed' | 'changed' | 'excluded' | 'skipped'
+type Decision = 'confirmed' | 'changed' | 'later' | 'skipped'
 
 type ReviewViewProps = {
   /** The items, fixed when the review starts, so a decision does not move the list */
@@ -18,7 +19,7 @@ type ReviewViewProps = {
   /** Entry id → name, to say which frame a binding is in */
   entryNames: Map<string, string>
   onSelect: (nodeIds: string[]) => void
-  /** Stores a choice for one binding; null excludes it and keeps the legacy variable */
+  /** Stores a choice for one binding: a target, or DECIDE_LATER */
   onDecide: (item: ReviewItem, value: OverrideValue) => void
   onDone: () => void
 }
@@ -27,8 +28,9 @@ type ReviewViewProps = {
  * Steps through the bindings that need a check or have a stand-in, one at a
  * time: selects the layer in Figma, shows why the rule was unsure or what
  * the EDS Beta lacks, the proposal and the other candidates, and lets the
- * designer confirm, choose another target, exclude the binding or skip it
- * for now.
+ * designer confirm, choose another target, decide later, or skip it for
+ * now. Decide later is stored, so the value says so in Changes; both come
+ * back in the next review.
  */
 export function ReviewView({
   items,
@@ -40,9 +42,7 @@ export function ReviewView({
   const [index, setIndex] = useState(0)
   const [decisions, setDecisions] = useState<Decision[]>([])
   const item = items[index] as ReviewItem | undefined
-  const [value, setValue] = useState<string | null | undefined>(
-    item?.row.proposal,
-  )
+  const [value, setValue] = useState<string | undefined>(item?.row.proposal)
   const options = useMemo(
     () =>
       item
@@ -94,8 +94,8 @@ export function ReviewView({
             <strong>{count('changed')}</strong> given another target
           </li>
           <li>
-            <strong>{count('excluded')}</strong> excluded, keep the legacy
-            variable
+            <strong>{count('later')}</strong> set to Decide later, left for a
+            later run
           </li>
           <li>
             <strong>{count('skipped')}</strong> skipped, still to decide on
@@ -182,7 +182,9 @@ export function ReviewView({
             <strong>
               {isStandIn
                 ? 'No equivalent in the EDS Beta: '
-                : 'Why it needs a check: '}
+                : row.outcome === 'sure'
+                  ? 'Ready before you chose Decide later: '
+                  : 'Why it needs a check: '}
             </strong>
             {plain ?? row.reason}
             {plain && (
@@ -219,11 +221,11 @@ export function ReviewView({
           <Button
             variant="secondary"
             onClick={() => {
-              onDecide(item, null)
-              next('excluded')
+              onDecide(item, DECIDE_LATER)
+              next('later')
             }}
           >
-            Keep the legacy variable
+            {DECIDE_LATER_LABEL}
           </Button>
           <Button variant="secondary" onClick={() => next('skipped')}>
             Skip
@@ -248,16 +250,16 @@ export function ReviewView({
                 if (value === undefined) return
                 onDecide(item, value)
                 next(
-                  value === null
-                    ? 'excluded'
+                  value === DECIDE_LATER
+                    ? 'later'
                     : isProposal
                       ? 'confirmed'
                       : 'changed',
                 )
               }}
             >
-              {value === null
-                ? 'Exclude'
+              {value === DECIDE_LATER
+                ? DECIDE_LATER_LABEL
                 : isProposal
                   ? isStandIn
                     ? 'Use the stand-in'

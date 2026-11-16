@@ -1,10 +1,11 @@
 /** How targets are written in the window. */
 import { literalValue } from '../../../src/mapping/literal'
 import { CLEAR_MODE } from '../../../src/scan/classify'
+import { DECIDE_LATER } from '../../../src/scan/mapping'
 import type { EffectiveTarget } from '../../../src/scan/mapping'
 
 export function targetLabel(target: string | null): string {
-  if (target === null) return 'Leave as it is'
+  if (target === null || target === DECIDE_LATER) return 'Leave as it is'
   const literal = literalValue(target)
   if (literal !== undefined) return `${literal}px, without a variable`
   if (target === CLEAR_MODE) {

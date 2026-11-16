@@ -8,6 +8,7 @@ import {
 import {
   bindingOutcome,
   buildMappingGroups,
+  DECIDE_LATER,
   effectiveCategory,
   effectiveTarget,
   NO_OVERRIDES,
@@ -130,11 +131,11 @@ describe('effectiveTarget', () => {
 
   it('lets an override on one binding win over its row', () => {
     const overrides = {
-      records: { [card.id]: null },
+      records: { [card.id]: DECIDE_LATER },
       rows: { [rowKey(card)]: 'border/non-interactive/neutral/default' },
     }
     expect(effectiveTarget(card, overrides)).toEqual({
-      target: null,
+      target: DECIDE_LATER,
       source: 'record',
     })
   })
@@ -242,14 +243,14 @@ describe('Manual fix', () => {
     expect(groups).toEqual([])
   })
 
-  it('counts as Ready once accepted, and Excluded when the legacy variable is kept', () => {
+  it('counts as Ready once accepted, and stays a Manual fix when set to Decide later', () => {
     const fix = record('icon', 'Selectable/Icon size', 'byHand', 'reset:')
     expect(
       effectiveCategory(fix, { records: { icon: 'reset:' }, rows: {} }),
     ).toBe('sure')
-    expect(effectiveCategory(fix, { records: { icon: null }, rows: {} })).toBe(
-      'excluded',
-    )
+    expect(
+      effectiveCategory(fix, { records: { icon: DECIDE_LATER }, rows: {} }),
+    ).toBe('byHand')
     expect(effectiveCategory(fix, NO_OVERRIDES)).toBe('byHand')
   })
 
@@ -299,15 +300,15 @@ describe('effectiveCategory', () => {
     expect(effectiveCategory(icon, chosen)).toBe('sure')
   })
 
-  it('makes a choice to keep the legacy variable Excluded, not No equivalent', () => {
-    const left = { records: {}, rows: { [rowKey(records[0])]: null } }
-    expect(effectiveCategory(records[0], left)).toBe('excluded')
+  it('makes a Ready value Needs check when its row is set to Decide later', () => {
+    const later = { records: {}, rows: { [rowKey(records[0])]: DECIDE_LATER } }
+    expect(effectiveCategory(records[0], later)).toBe('check')
   })
 
   it('leaves migrated bindings and bindings in instances alone', () => {
-    expect(effectiveCategory(done, { records: { done: null }, rows: {} })).toBe(
-      'migrated',
-    )
+    expect(
+      effectiveCategory(done, { records: { done: DECIDE_LATER }, rows: {} }),
+    ).toBe('migrated')
   })
 })
 
@@ -315,7 +316,7 @@ describe('selectionStatus', () => {
   const groups = buildMappingGroups(records)
 
   it('counts the selected values Apply changes and the choices Reset removes', () => {
-    const overrides = { records: { 'card-1': null }, rows: {} }
+    const overrides = { records: { 'card-1': DECIDE_LATER }, rows: {} }
     expect(
       selectionStatus(
         ['card-1', 'card-2', 'button', 'icon'],
@@ -358,14 +359,17 @@ describe('targetCounts', () => {
   })
 
   it('follows changes on single bindings, so the heading shows them', () => {
-    const overrides = { records: { 'card-1': null, 'card-2': null }, rows: {} }
+    const overrides = {
+      records: { 'card-1': DECIDE_LATER, 'card-2': DECIDE_LATER },
+      rows: {},
+    }
     expect(targetCounts([row], overrides)).toEqual([
-      { target: null, noEquivalent: false, count: 2 },
+      { target: DECIDE_LATER, noEquivalent: false, count: 2 },
     ])
     expect(bindingOutcome(row, row.bindings[0], overrides)).toEqual({
-      target: null,
+      target: DECIDE_LATER,
       source: 'record',
-      category: 'excluded',
+      category: 'check',
     })
   })
 
@@ -458,7 +462,6 @@ describe('recount', () => {
         check: 1,
         byHand: 0,
         none: 1,
-        excluded: 0,
         inInstance: 1,
         other: 0,
       },
@@ -478,7 +481,6 @@ describe('recount', () => {
             check: 1,
             byHand: 0,
             none: 1,
-            excluded: 0,
             inInstance: 1,
             other: 0,
           },
@@ -500,7 +502,6 @@ describe('recount', () => {
       check: 0,
       byHand: 0,
       none: 1,
-      excluded: 0,
       inInstance: 1,
       other: 0,
     })

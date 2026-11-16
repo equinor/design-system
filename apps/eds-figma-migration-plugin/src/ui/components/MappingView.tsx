@@ -18,7 +18,13 @@ import {
 } from '@equinor/eds-icons'
 import { colourDistance, VISIBLE_CHANGE } from '../../mapping/colour-distance'
 import { getNewVariable } from '../../mapping/inventory'
-import { bindingOutcome, isHeldMode, targetCounts } from '../../scan/mapping'
+import {
+  bindingOutcome,
+  DECIDE_LATER,
+  isHeldMode,
+  isUndecided,
+  targetCounts,
+} from '../../scan/mapping'
 import type {
   MappingBinding,
   MappingGroup,
@@ -80,15 +86,9 @@ type MappingViewProps = {
   ) => void
 }
 
-type Status = 'all' | 'sure' | 'check' | 'byHand' | 'none' | 'excluded'
+type Status = 'all' | 'sure' | 'check' | 'byHand' | 'none'
 
-const STATUSES: Exclude<Status, 'all'>[] = [
-  'sure',
-  'check',
-  'byHand',
-  'none',
-  'excluded',
-]
+const STATUSES: Exclude<Status, 'all'>[] = ['sure', 'check', 'byHand', 'none']
 
 /** Sections inside a tab, by what the values are on, as in Figma's Check designs. */
 const SECTION_LABELS: Record<string, string> = {
@@ -174,12 +174,14 @@ function shortTarget(row: MappingRow, overrides: Overrides): string {
 
 /**
  * The target most of the row's values get, for the swatch and the value
- * beside it: for No equivalent, the stand-in. Null when they keep the
- * legacy variable: excluded, or a legacy mode that is kept.
+ * beside it: for No equivalent, the stand-in. Null when nothing changes yet:
+ * the values are set to Decide later, or a legacy mode is kept.
  */
 function mainTarget(row: MappingRow, overrides: Overrides): string | null {
   const [first] = targetCounts([row], overrides)
-  return !first || (first.noEquivalent && isHeldMode(first.rule))
+  return !first ||
+    first.target === DECIDE_LATER ||
+    (first.noEquivalent && isHeldMode(first.rule))
     ? null
     : first.target
 }
@@ -204,13 +206,13 @@ function rowTargetText(row: MappingRow, overrides: Overrides): string {
  * True when the new colour looks clearly different from the legacy colour
  * on at least one of the row's layers, each with its own target and in its
  * own colour scheme: the mapping is right by role, but the look moves
- * (decided 2026-11-12). A stand-in counts as the target. A value that keeps
- * the legacy variable never counts.
+ * (decided 2026-11-12). A stand-in counts as the target. A value set to
+ * Decide later never counts.
  */
 function looksDifferent(row: MappingRow, overrides: Overrides): boolean {
   return row.bindings.some((binding) => {
     const { target } = bindingOutcome(row, binding, overrides)
-    if (!target || !binding.oldColour) return false
+    if (!target || target === DECIDE_LATER || !binding.oldColour) return false
     const scheme = binding.scheme ?? 'light'
     const next = getNewVariable(target)?.values?.[scheme]
     if (typeof next !== 'string') return false
@@ -570,11 +572,9 @@ export function MappingView({
                         ),
                       ].slice(0, 2)
                       // A Needs check row says why, in plain words, while any
-                      // of its values is undecided.
-                      const undecided = row.bindings.some(
-                        (binding) =>
-                          bindingOutcome(row, binding, overrides).source ===
-                          'proposal',
+                      // of its values is undecided or set to Decide later.
+                      const undecided = row.bindings.some((binding) =>
+                        isUndecided(bindingOutcome(row, binding, overrides)),
                       )
                       const reason =
                         (row.outcome === 'check' ||
@@ -677,7 +677,10 @@ export function MappingView({
                                   className="check-choice"
                                   title={
                                     row.key in overrides.rows
-                                      ? sourceLabel('row')
+                                      ? sourceLabel(
+                                          'row',
+                                          overrides.rows[row.key],
+                                        )
                                       : own === row.count
                                         ? 'Your choice for each value'
                                         : `Your choice for ${own} of ${row.count}`
@@ -751,12 +754,17 @@ export function MappingView({
                                           : rowTargetText(row, overrides)
                                       }
                                       note={
-                                        mine ? sourceLabel('record') : undefined
+                                        mine
+                                          ? sourceLabel(
+                                              'record',
+                                              outcome.target,
+                                            )
+                                          : undefined
                                       }
                                       // A Manual fix says how to make it, and
                                       // what to set again, until it is decided.
                                       {...(manual &&
-                                      outcome.source === 'proposal' &&
+                                      isUndecided(outcome) &&
                                       binding.reason
                                         ? { reason: binding.reason }
                                         : {})}
