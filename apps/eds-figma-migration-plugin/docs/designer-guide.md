@@ -105,7 +105,8 @@ and the row only gives the steps.
   those rows. A click on the legacy variable selects its
   layers; a click on the target changes it for every layer that uses it.
   The **Typography** tab in Changes lists the instances of the legacy
-  Typography component (see [Typography components](#typography-components)).
+  Typography component with the text style and colour each one gets (see
+  [Typography components](#typography-components)).
 - **Instances** lists the instances that still use legacy variables, grouped
   by component. For a component in this file, **Go to main component** takes
   you to it: migrate its page, and every instance follows. The plugin
@@ -223,11 +224,33 @@ there also reaches every instance.
 
 ## Typography components
 
-The legacy Typography component can become a text layer with the matching
-text style: **Convert to text** on the Typography tab in Changes. In a main component,
-each instance of that component keeps the text it showed. A Typography
-component with mono numbers loses them, since a text style cannot carry
-tabular figures; the result has a button that selects those texts.
+The legacy Typography component can become a text layer with an EDS Beta
+text style and colour: **Convert to text** on the Typography tab in Changes.
+The tab shows what each instance gets before you convert, with the same rows
+as Changes. The **Text style** section has a row for each legacy typography
+and text style, and the **Text colour** section a row for each legacy colour.
+A click on the target changes it for the row, **Change** on an instance
+changes it for that instance only, and **Review** steps through the ones that
+need a check. Choose **Decide later** to leave an instance for now.
+
+Convert changes the instances whose text style is Ready, so the number on the
+button can be smaller than the number of instances. An instance whose text
+style needs a check, has no equivalent, or is set to Decide later stays as it
+is until you decide; its Convert button is off, and the row says why. A
+colour that is not Ready stays on its legacy variable after converting, and
+Changes lists it then.
+
+Some instances need a check because of their text case. The legacy text can
+be in upper case, for example, and the EDS Beta text styles have no text
+case. Figma detaches the text style from a layer when a text case is set on
+it, so converting keeps the style and drops the case, and the text shows as
+typed. Confirm the style if that is right, or decide later.
+
+An instance in a main component carries the text of every instance of that
+component. Its row says how many instances there are; converting carries the
+text each of them shows across to the new text layer. A Typography component
+with mono numbers loses them, since a text style cannot carry tabular
+figures; the result has a button that selects those texts.
 
 ## Undo and revert
 

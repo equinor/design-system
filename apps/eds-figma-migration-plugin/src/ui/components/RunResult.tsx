@@ -48,7 +48,8 @@ function summary(run: Run): string {
     return parts.join(' ')
   }
   if (run.kind === 'convert') {
-    const { converted, monoNumbers, instanceTexts, caseIds } = run.result
+    const { converted, monoNumbers, instanceTexts, caseIds, skipped } =
+      run.result
     const parts = [
       `Converted ${plural(converted, 'Typography component')} to text.`,
     ]
@@ -65,6 +66,13 @@ function summary(run: Run): string {
     if (monoNumbers > 0) {
       parts.push(
         `${monoNumbers} used mono numbers, which a text style cannot carry and a plugin cannot set; set tabular figures on ${monoNumbers === 1 ? 'it' : 'them'} by hand where they matter.`,
+      )
+    }
+    // Convert leaves an instance whose text style is not Ready after the
+    // choices; the list below the message says why for each.
+    if (skipped.length > 0) {
+      parts.push(
+        `Left ${plural(skipped.length, 'instance')} as ${skipped.length === 1 ? 'it was' : 'they were'}; the list says why.`,
       )
     }
     return parts.join(' ')
@@ -110,6 +118,30 @@ export function RunResult({
           >
             Select the mono number texts
           </Button>
+        </Banner.Actions>
+      )}
+      {run.kind === 'convert' && run.result.skipped.length > 0 && (
+        <Banner.Actions placement="bottom">
+          <ul className="run-failures">
+            {run.result.skipped.slice(0, 8).map((skip) => (
+              <li key={skip.nodeId}>
+                <span>
+                  <strong>{skip.nodeName}</strong>: {skip.reason}
+                </span>
+                <Button
+                  size="small"
+                  variant="ghost"
+                  aria-label={`Go to ${skip.nodeName}`}
+                  onClick={() => onSelect([skip.nodeId])}
+                >
+                  Go to
+                </Button>
+              </li>
+            ))}
+            {run.result.skipped.length > 8 && (
+              <li>and {run.result.skipped.length - 8} more</li>
+            )}
+          </ul>
         </Banner.Actions>
       )}
       {failed.length > 0 && (

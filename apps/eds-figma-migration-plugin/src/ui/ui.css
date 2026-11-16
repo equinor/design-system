@@ -1042,6 +1042,13 @@ code {
   font-style: italic;
 }
 
+/* What else a change does, such as text carried across to instances. */
+.binding-effect {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-primary);
+}
+
 /* Tabs. The Beta has no tabs component (BETA-GAPS.md). */
 .tab-list {
   display: flex;
@@ -1204,7 +1211,9 @@ code {
   inline-size: var(--eds-spacing-xl);
 }
 
-.binding-list.nested {
+/* The values of an open row, with the Convert actions on the Typography tab. */
+.binding-list.nested,
+.stack-tight.nested {
   margin-inline-start: var(--eds-spacing-xl);
 }
 

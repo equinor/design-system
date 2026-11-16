@@ -312,17 +312,58 @@ later.
 
 **Typography components.** The legacy Typography component is a text in a
 component. When the scan finds instances of it (outside other instances),
-Changes gets a Typography tab after the kinds of value, which offers **Convert
-to text** for all of them or one at a time. The Instances tab leaves them out
-of its list and count, and links to that tab instead. Each instance becomes a
-text layer with the same text, the matching EDS Foundation text style, the
-same place and sizing, and
-its colour as an EDS Foundation variable when the rule is sure (otherwise the
-legacy colour stays, for the review). Mono numbers cannot be carried by a text
-style, so the result says how many used them. The text layer logs the
-component it replaced, its properties, modes, sizing and colour, so Revert
-frame puts the instance back as it was. Typography instances inside other
-components stay until those components are updated.
+Changes gets a Typography tab after the kinds of value. The Instances tab
+leaves them out of its list and count, and links to that tab instead. Each
+instance can become a text layer with the same text, an EDS Foundation text
+style and colour, and the same place and sizing.
+
+The text style and colour are decided at scan time, so the tab shows them
+before anything changes (decided 2026-11-16). For each instance, the scan
+classifies the typography and the text colour of the text layer in it as if
+the text were not in an instance (`src/scan/conversions.ts`), which gives the
+records `convert:<instanceId>|typography` and `convert:<instanceId>|fill`.
+They stand for the instance: a row selects it, and its text names it. They
+are kept in their own list, `conversions`, beside the scan's records, so
+health keeps counting the instance's values once, as Inside instances, until
+it is converted. Their legacy keys start with `convert:`, so a choice on a
+row in Changes and one on the Typography tab never reach each other's
+values. The plugin sends them grouped the way Changes groups its values.
+
+The tab lists them with the same rows as Changes (`ChangeRow`): a Text style
+section by legacy typography and text style, then a Text colour section, each
+row with its status, the target picker (text styles, or colours, and Decide
+later), the reason it needs a check, and its instances, each with Change,
+**Convert** and **Go to**. **Review N ⚠** on the tab steps through the text
+styles and colours that wait for a decision, and stores the choices the way
+Review does for Changes.
+
+**Convert N to text**, for all of them, for a row or for one instance, uses
+the targets after the designer's choices (`planConversions` in
+`src/scan/apply-plan.ts`). An instance is converted when its text style is Ready:
+the proposal of a Ready row, or a style a designer chose or confirmed. A text
+style that needs a check, has no equivalent and no choice, or is set to
+Decide later leaves the instance as it is: its Convert is disabled with the
+reason, the count leaves it out, and the result lists it. The colour is the
+Ready or chosen EDS Foundation variable; otherwise the legacy variable is
+copied to the text layer, and Changes lists it after converting, which the
+row says beforehand. The change log notes how the text style came about
+(`sure`, `confirmed` or `override`) and the rule.
+
+A text case is a text style property, and setting one on a text layer
+detaches its text style in Figma. The scan reads the case of the legacy text
+(`textCase` on the typography unit, MIXED for more than one), and when it
+differs from the case of the proposed style, the text style is Needs check,
+with a reason that says the conversion drops the case. The inventory of the
+EDS Beta text styles records no text case (export of 2026-11-11), so every
+style counts as having none, and any legacy text in upper case, for example,
+needs a check. In a main component, a Typography instance carries the text of
+every instance of that component; the instance's row says how many instances
+there are, counted when the tab opens, and that their text is carried across
+to the new text layer. Mono numbers cannot be carried by a text style, so the
+result says how many used them. The text layer logs the component it
+replaced, its properties, modes, sizing and colour, so Revert frame puts the
+instance back as it was. Typography instances inside other components stay
+until those components are updated.
 
 **The Instances tab** lists every other instance in the scope that still uses
 legacy variables, grouped by main component, with the number of instances,

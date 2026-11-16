@@ -43,21 +43,23 @@ export function unchangedLabel(
 
 /**
  * Who chose the target, under the target of a value. Decide later also says
- * what it means for the next run, since the value is not changed.
+ * what it means for the next run, since the value is not changed: Apply
+ * leaves it, or Convert on the Typography tab leaves the instance.
  */
 export function sourceLabel(
   source: EffectiveTarget['source'],
   target?: EffectiveTarget['target'],
+  run: 'Apply' | 'Convert' = 'Apply',
 ): string | undefined {
   const later = target === DECIDE_LATER
   switch (source) {
     case 'record':
       return later
-        ? 'Your choice for this value. Apply leaves it until you choose a target.'
+        ? `Your choice for this value. ${run} leaves it until you choose a target.`
         : 'Your choice for this value'
     case 'row':
       return later
-        ? 'Your choice for all of these. Apply leaves them until you choose a target.'
+        ? `Your choice for all of these. ${run} leaves them until you choose a target.`
         : 'Your choice for all of these'
     default:
       return undefined

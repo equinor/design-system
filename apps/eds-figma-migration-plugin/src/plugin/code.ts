@@ -3,6 +3,7 @@
  * document, and talks to the plugin window (src/ui) through messages.
  */
 import { MAPPING_VERSION } from '../mapping/version'
+import { planConversions } from '../scan/apply-plan'
 import {
   buildMappingGroups,
   effectiveCategory,
@@ -29,6 +30,7 @@ import {
   filePages,
   pagesOfFile,
   runScan,
+  typographyComponentCounts,
 } from './scan/scan'
 import {
   loadChoices,
@@ -86,6 +88,8 @@ function post(message: PluginToUi) {
 
 let lastScan: ScanState | undefined
 let lastTarget: ScanTarget | undefined
+/** The instances of the main components with a Typography instance in them, counted once per scan when the Typography tab asks */
+let componentCounts: Record<string, number> | undefined
 let overrides: Overrides = loadChoices()
 /**
  * The pages a scan of the file leaves out. Kept here as well as in the file,
@@ -218,10 +222,15 @@ async function scan(target: ScanTarget) {
     )
     lastTarget = target
     lastScan = withChoices(state)
+    componentCounts = undefined
     staleSent = false
     saveHealth(lastScan.summary)
     post({ type: 'scan-done', summary: lastScan.summary })
     post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
+    post({
+      type: 'conversions',
+      groups: buildMappingGroups(lastScan.conversions, { ownReasons: true }),
+    })
     post({ type: 'instances', instances: lastScan.oldInstances })
     post({ type: 'overrides', overrides })
   } catch (error) {
@@ -266,12 +275,18 @@ async function apply(entryIds: string[], recordIds?: Set<string>) {
   await scan(lastTarget)
 }
 
-/** Replaces Typography component instances with text layers, then scans again. */
+/**
+ * Replaces Typography component instances with text layers, with the text
+ * style and colour their rows on the Typography tab show, then scans again.
+ * An instance whose text style is not Ready is left, and the result says
+ * why.
+ */
 async function convert(instanceIds: string[]) {
   if (!lastScan || !lastTarget || busy) return
   busy = true
   try {
-    const result = await convertTypography(instanceIds, lastScan.units)
+    const plan = planConversions(lastScan.conversions, overrides, instanceIds)
+    const result = await convertTypography(plan)
     post({ type: 'convert-done', result })
   } finally {
     busy = false
@@ -539,6 +554,19 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'convert-typography':
         await convert(message.instanceIds)
+        break
+      case 'get-typography-components':
+        if (lastScan) {
+          const { conversions, oldInstances } = lastScan
+          const counts =
+            componentCounts ?? (await typographyComponentCounts(oldInstances))
+          // A scan that ended meanwhile counts its own when asked. A choice
+          // made meanwhile replaces lastScan, but keeps its lists.
+          if (conversions === lastScan?.conversions) {
+            componentCounts = counts
+            post({ type: 'typography-components', counts })
+          }
+        }
         break
       case 'resize': {
         const { width, height } = clampSize(message.width, message.height)

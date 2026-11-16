@@ -118,6 +118,9 @@ async function exportNewLibrary(): Promise<DevExportFile | string> {
     fontFamily: style.fontName.family,
     fontStyle: style.fontName.style,
     fontSize: style.fontSize,
+    // Typography conversion compares it with the text case of the legacy
+    // text (decision B, 2026-11-16).
+    ...(style.textCase !== 'ORIGINAL' ? { textCase: style.textCase } : {}),
   }))
 
   const inventory = {

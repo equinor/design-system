@@ -1,6 +1,6 @@
 import newLibrary from './inventory/new-library.json'
 import oldLibraries from './inventory/old-libraries.json'
-import type { VariableType } from './types'
+import type { TextCase, VariableType } from './types'
 
 export type NewVariable = {
   name: string
@@ -26,6 +26,12 @@ export type NewTextStyle = {
   fontFamily: string
   fontStyle: string
   fontSize: number
+  /**
+   * The text case the style sets, when it is not ORIGINAL. The export of
+   * 2026-11-11 has none, so every EDS Beta text style leaves the case as
+   * typed.
+   */
+  textCase?: TextCase
 }
 
 export type CollectionInfo = {

@@ -9,6 +9,7 @@ import type {
   ChainStep,
   Outcome,
   RoleContext,
+  TextCase,
   TypographyField,
   VariableType,
 } from '../mapping/types'
@@ -115,6 +116,12 @@ export type RawUnit = {
       font: { family: string; style: string }
       fontSize: number
       textStyle?: RawTextStyle
+      /**
+       * The text case of the text or range, when it is not ORIGINAL; MIXED
+       * when the range has more than one. Converting a Typography instance
+       * drops it, since setting a case detaches the text style.
+       */
+      textCase?: TextCase | 'MIXED'
     }
   /**
    * A number the plugin set in place of a legacy variable, such as a border
@@ -279,6 +286,14 @@ export type OldInstance = {
   typography?: boolean
   /** The text in a Typography instance, to tell them apart */
   text?: string
+  /** The text layer in a Typography instance, whose units give the conversion's text style and colour */
+  textId?: string
+  /**
+   * For a Typography instance directly in a main component: that component,
+   * named with its component set. Converting the instance carries the text
+   * each instance of the component shows across to the new text layer.
+   */
+  inComponent?: { id: string; name: string }
   /** Old variables inside the instance or on it */
   count: number
   mainComponent?: {

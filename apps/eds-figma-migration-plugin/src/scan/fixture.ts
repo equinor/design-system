@@ -45,6 +45,7 @@ type PackedUnit = {
       font: { family: string; style: string }
       fontSize: number
       textStyle?: RawTextStyle
+      textCase?: Extract<RawUnit, { unit: 'typography' }>['textCase']
     }
   | { unit: 'value'; value: number | null }
   | {
@@ -161,6 +162,7 @@ export function packFixture(
         font: unit.font,
         fontSize: unit.fontSize,
         ...(unit.textStyle ? { textStyle: unit.textStyle } : {}),
+        ...(unit.textCase ? { textCase: unit.textCase } : {}),
       }
     }
     if (unit.unit === 'value') {
@@ -239,6 +241,7 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
         font: unit.font,
         fontSize: unit.fontSize,
         textStyle: unit.textStyle,
+        ...(unit.textCase ? { textCase: unit.textCase } : {}),
       }
     }
     if (unit.unit === 'value') {

@@ -64,6 +64,7 @@ import {
 import type { PartialFile } from './components/MainComponentsView'
 import { MappingView } from './components/MappingView'
 import type { ChangesTab } from './components/MappingView'
+import { TypographyView } from './components/TypographyView'
 import { ReviewView } from './components/ReviewView'
 import { SavedHealth } from './components/SavedHealth'
 import { Onboarding } from './components/Onboarding'
@@ -128,6 +129,10 @@ function Overview({
   onScanFile,
   partialFile,
   onConvert,
+  conversions,
+  componentCounts,
+  onCountComponents,
+  onReviewConversions,
 }: {
   summary: ScanSummary
   view: View
@@ -160,6 +165,13 @@ function Overview({
   /** Set when the page picker leaves pages out of a scan of the file */
   partialFile?: PartialFile
   onConvert: (instanceIds: string[]) => void
+  /** The text style and colour of each Typography instance, for the Typography tab */
+  conversions: MappingGroup[]
+  /** Instances of the main components with a Typography instance in them, once counted */
+  componentCounts?: Record<string, number>
+  onCountComponents: () => void
+  /** Opens Review with the conversion values that wait for a decision */
+  onReviewConversions: (items: ReviewItem[]) => void
 }) {
   const entryNames = new Map(
     summary.entries.map((entry) => [entry.id, entry.name]),
@@ -352,9 +364,30 @@ function Overview({
             inInstances={totals.inInstance}
             tab={changesTab}
             onTab={setChangesTab}
-            typographyInstances={typographyInstances}
-            onConvert={onConvert}
-            busy={busy}
+            typography={
+              typographyInstances.length > 0
+                ? {
+                    count: typographyInstances.length,
+                    content: (
+                      <TypographyView
+                        instances={typographyInstances}
+                        groups={conversions}
+                        overrides={overrides}
+                        entryNames={entryNames}
+                        showCounts={showCounts}
+                        componentCounts={componentCounts}
+                        onCountComponents={onCountComponents}
+                        onSelect={onSelectLayer}
+                        onChangeRow={onChangeRow}
+                        onChangeBinding={onChangeBinding}
+                        onReview={onReviewConversions}
+                        onConvert={onConvert}
+                        busy={busy}
+                      />
+                    ),
+                  }
+                : undefined
+            }
             selection={selection}
             onSelectOld={onSelectOld}
             onSelectLayer={onSelectLayer}
@@ -485,8 +518,15 @@ export function App() {
   // The introduction opens by itself once per person, then from Settings.
   const [introOpen, setIntroOpen] = useState(false)
   const [mapping, setMapping] = useState<MappingGroup[]>([])
+  // The Typography tab: the text style and colour of each Typography
+  // instance, and the instances of the main components they are in.
+  const [conversions, setConversions] = useState<MappingGroup[]>([])
+  const [componentCounts, setComponentCounts] =
+    useState<Record<string, number>>()
   const [instances, setInstances] = useState<OldInstance[]>([])
   const [review, setReview] = useState<ReviewItem[]>()
+  // Review of the conversions ends on a note about Convert, not Apply.
+  const [reviewRun, setReviewRun] = useState<'Apply' | 'Convert'>('Apply')
   const [saved, setSaved] = useState<Saved>()
   const [report, setReport] = useState<Report>()
   const [choicesNotSaved, setChoicesNotSaved] = useState(false)
@@ -580,6 +620,7 @@ export function App() {
           }
           setSummary(message.summary)
           setReview(undefined)
+          setComponentCounts(undefined)
           clearBulk()
           // After an apply or a revert the plugin scans again; an open
           // frame stays open when it is still in the scan. Its layers stay
@@ -633,6 +674,12 @@ export function App() {
           break
         case 'mapping':
           setMapping(message.groups)
+          break
+        case 'conversions':
+          setConversions(message.groups)
+          break
+        case 'typography-components':
+          setComponentCounts(message.counts)
           break
         case 'instances':
           setInstances(message.instances)
@@ -1073,6 +1120,7 @@ export function App() {
                     },
                   ])
                 }
+                run={reviewRun}
                 onDone={() => setReview(undefined)}
               />
             )}
@@ -1099,11 +1147,12 @@ export function App() {
                 selection={bulk}
                 busy={locked}
                 onApply={() => applyEntries([openEntry.id])}
-                onReview={() =>
+                onReview={() => {
+                  setReviewRun('Apply')
                   setReview(
                     reviewItems(mapping, overrides, new Set([openEntry.id])),
                   )
-                }
+                }}
                 onRevert={() => revertEntry(openEntry.id)}
                 onBack={() => setOpenEntryId(undefined)}
                 onSelect={select}
@@ -1147,7 +1196,8 @@ export function App() {
                   busy={locked}
                   onApply={applyEntries}
                   instances={instances}
-                  onReview={(entryIds) =>
+                  onReview={(entryIds) => {
+                    setReviewRun('Apply')
                     setReview(
                       reviewItems(
                         mapping,
@@ -1155,7 +1205,7 @@ export function App() {
                         entryIds ? new Set(entryIds) : undefined,
                       ),
                     )
-                  }
+                  }}
                   report={report}
                   onReport={() => send({ type: 'get-report' })}
                   onCloseReport={() => setReport(undefined)}
@@ -1165,6 +1215,15 @@ export function App() {
                   onScanFile={scanFile}
                   partialFile={partialFile}
                   onConvert={convertTypography}
+                  conversions={conversions}
+                  componentCounts={componentCounts}
+                  onCountComponents={() =>
+                    send({ type: 'get-typography-components' })
+                  }
+                  onReviewConversions={(items) => {
+                    setReviewRun('Convert')
+                    setReview(items)
+                  }}
                 />
               </div>
             )}

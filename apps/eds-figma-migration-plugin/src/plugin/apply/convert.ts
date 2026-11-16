@@ -1,19 +1,20 @@
 /**
  * Replaces instances of the legacy Typography component with text layers
- * that have the matching EDS Foundation text style. The component is a text
- * in a component, so a plain text layer with a text style does the same job
- * without legacy variables. The colour becomes its EDS Foundation variable
- * when the rule is sure, and keeps the legacy variable otherwise, so it shows
- * up in the review. Each text layer logs the component it replaced, so
- * Revert frame can put the instance back.
+ * that have an EDS Foundation text style. The component is a text in a
+ * component, so a plain text layer with a text style does the same job
+ * without legacy variables. The text style and the colour come from the
+ * plan (scan/apply-plan.ts, planConversions): the targets the Typography tab
+ * shows, after the designer's choices. Without a Ready colour the legacy
+ * variable is copied, and Changes lists it after the conversion. Each text
+ * layer logs the component it replaced, so Revert frame can put the
+ * instance back.
  *
  * A Typography instance inside a main component also carries the text of
  * every instance of that component. That text is read before the
  * conversion and put on the new text layer in each instance afterwards.
  */
 import { MAPPING_VERSION } from '../../mapping/version'
-import { classifyUnit } from '../../scan/classify'
-import type { RawUnit } from '../../scan/types'
+import type { ConversionPlan } from '../../scan/apply-plan'
 import type { LogEntry } from '../../shared/changelog'
 import type { ChangeFailure, ConvertResult } from '../../shared/messages'
 import { Fonts } from './apply'
@@ -91,8 +92,7 @@ function properties(instance: InstanceNode): Record<string, string | boolean> {
 }
 
 export async function convertTypography(
-  instanceIds: string[],
-  units: RawUnit[],
+  plan: ConversionPlan,
 ): Promise<ConvertResult> {
   const targets = new Targets()
   const fonts = new Fonts()
@@ -103,9 +103,34 @@ export async function convertTypography(
   const monoNumberIds: string[] = []
   const caseIds: string[] = []
   const at = new Date().toISOString()
+  const skipped: ConvertResult['skipped'] = []
+  for (const skip of plan.skipped) {
+    let name = skip.name
+    if (!name) {
+      const node = await figma.getNodeByIdAsync(skip.instanceId)
+      name = node && 'name' in node ? node.name : skip.instanceId
+    }
+    skipped.push({
+      nodeId: skip.instanceId,
+      nodeName: name,
+      reason: skip.reason,
+    })
+  }
+  if (plan.convert.length === 0) {
+    return {
+      converted,
+      monoNumbers,
+      monoNumberIds,
+      caseIds,
+      instanceTexts,
+      skipped,
+      failed,
+    }
+  }
   await fonts.load({ family: 'Inter', style: 'Regular' })
 
-  for (const id of instanceIds) {
+  for (const conversion of plan.convert) {
+    const id = conversion.instanceId
     const node = await figma.getNodeByIdAsync(id)
     const fail = (message: string) =>
       failed.push({
@@ -124,24 +149,9 @@ export async function convertTypography(
         fail('The instance has no text.')
         continue
       }
-      // The scan read the text inside the instance; classified as if it
-      // were not in an instance, it gets the rules' text style and colour.
-      const own = units.filter(
-        (unit) => unit.instanceId === id && unit.nodeId === source.id,
-      )
-      const typography = own.find((unit) => unit.unit === 'typography')
-      const record = typography
-        ? classifyUnit({ ...typography, instanceId: undefined })
-        : null
-      const styleName = record?.candidates?.[0]
-      if (!record || !styleName || record.category === 'none') {
-        fail(
-          record?.reason ??
-            'No legacy typography was read, so no text style can be matched.',
-        )
-        continue
-      }
-      const style = await targets.textStyle(styleName)
+      // The text style the Typography tab shows for the instance: the
+      // rules' proposal or the designer's choice.
+      const style = await targets.textStyle(conversion.style.target)
       await fonts.load(style.fontName)
 
       // Read what each instance of the main component shows here before
@@ -157,22 +167,18 @@ export async function convertTypography(
         text.characters = source.characters
         // Setting any style property, such as the text case, detaches the
         // text style in Figma and leaves its variables bound to the layer.
-        // The style wins; a different case is reported instead.
+        // The style wins, and the case is dropped: the tab marks such an
+        // instance Needs check before it is converted (decision B), and the
+        // result counts them again.
         if (
-          source.textCase !== figma.mixed &&
+          source.textCase === figma.mixed ||
           source.textCase !== style.textCase
         ) {
           caseIds.push(text.id)
         }
 
-        const fill = own.find(
-          (unit) => unit.unit === 'variable' && unit.kind === 'textFill',
-        )
-        const fillRecord = fill
-          ? classifyUnit({ ...fill, instanceId: undefined })
-          : null
-        const colour = fillRecord?.candidates?.[0]
-        if (fillRecord?.category === 'sure' && colour) {
+        const colour = conversion.colour?.target
+        if (colour) {
           const variable = await targets.variable(colour)
           text.fills = [
             figma.variables.setBoundVariableForPaint(
@@ -182,7 +188,8 @@ export async function convertTypography(
             ),
           ]
         } else if (source.fills !== figma.mixed) {
-          // The legacy colour stays, so it shows up in the review.
+          // The legacy colour stays, and Changes lists it after the scan
+          // that follows.
           text.fills = source.fills
         }
         place(text, node, source)
@@ -227,8 +234,10 @@ export async function convertTypography(
           ...(texts.length > 0 ? { instances: texts } : {}),
         },
         new: { type: 'textStyle', key: style.key, name: style.name },
-        outcome: record.category === 'sure' ? 'sure' : 'confirmed',
-        ...(record.rule ? { rule: record.rule } : {}),
+        outcome: conversion.style.outcome,
+        ...(conversion.style.record.rule
+          ? { rule: conversion.style.record.rule }
+          : {}),
         mappingVersion: MAPPING_VERSION,
         at,
       }
@@ -247,6 +256,7 @@ export async function convertTypography(
     monoNumberIds,
     caseIds,
     instanceTexts,
+    skipped,
     failed,
   }
 }

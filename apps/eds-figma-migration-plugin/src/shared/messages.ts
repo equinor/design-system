@@ -79,6 +79,11 @@ export type ConvertResult = {
   caseIds: string[]
   /** Instances of main components whose own text was kept on the new text layer */
   instanceTexts: number
+  /**
+   * Instances Convert left as they are, because their text style is not
+   * Ready after the designer's choices, and why
+   */
+  skipped: { nodeId: string; nodeName: string; reason: string }[]
   failed: ChangeFailure[]
 }
 
@@ -188,6 +193,13 @@ export type PluginToUi =
   | { type: 'stale' }
   /** Every binding still to migrate, grouped by legacy variable, sent after a scan */
   | { type: 'mapping'; groups: MappingGroup[] }
+  /**
+   * The text style and colour of each Typography instance, grouped like
+   * `mapping`, for the Typography tab; sent after a scan
+   */
+  | { type: 'conversions'; groups: MappingGroup[] }
+  /** Instances of the main components that have a Typography instance in them, by component id */
+  | { type: 'typography-components'; counts: Record<string, number> }
   /** Every instance in the scan that still uses legacy variables */
   | { type: 'instances'; instances: OldInstance[] }
   /** The latest scan saved in the file, sent when the window opens */
@@ -251,8 +263,13 @@ export type UiToPlugin =
   | { type: 'save-settings'; settings: DisplaySettings }
   /** Puts the window back to its first size and forgets the saved one */
   | { type: 'reset-window-size' }
-  /** Replaces Typography component instances with text layers */
+  /**
+   * Replaces Typography component instances with text layers, each with the
+   * text style and colour its rows on the Typography tab show
+   */
   | { type: 'convert-typography'; instanceIds: string[] }
+  /** Counts the instances of the main components that have a Typography instance in them */
+  | { type: 'get-typography-components' }
   /** Resizes the window; done when the drag ends, so the size is kept */
   | { type: 'resize'; width: number; height: number; done: boolean }
   | { type: 'run-dev-export-inventory' }

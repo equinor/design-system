@@ -164,7 +164,11 @@ export type MappingBinding = {
   kind?: BindingKind
   /** Inside an instance, which overrides the value itself */
   override?: true
-  /** For a Manual fix: how to fix this layer, which differs per layer */
+  /**
+   * For a Manual fix: how to fix this layer, which differs per layer. With
+   * `ownReasons`, also the binding's own reason when it differs from the
+   * row's, such as a text case a Typography conversion drops.
+   */
   reason?: string
 }
 
@@ -193,8 +197,16 @@ export type MappingGroup = {
   rows: MappingRow[]
 }
 
-/** Groups the bindings still to migrate by legacy variable, most used first. */
-export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
+/**
+ * Groups the bindings still to migrate by legacy variable, most used first.
+ * The row's reason is its first binding's. With `ownReasons`, a binding
+ * whose reason differs keeps its own, for the Typography tab, where one
+ * instance in a row can have a text case the others do not.
+ */
+export function buildMappingGroups(
+  records: BindingRecord[],
+  { ownReasons = false }: { ownReasons?: boolean } = {},
+): MappingGroup[] {
   const groups = new Map<string, MappingGroup>()
   const rows = new Map<string, MappingRow>()
   for (const record of records) {
@@ -245,7 +257,9 @@ export function buildMappingGroups(records: BindingRecord[]): MappingGroup[] {
       property: record.property,
       kind: record.kind,
       ...(record.override ? { override: true as const } : {}),
-      ...(record.category === 'byHand' && record.reason
+      ...((record.category === 'byHand' ||
+        (ownReasons && record.reason !== row.reason)) &&
+      record.reason
         ? { reason: record.reason }
         : {}),
     })

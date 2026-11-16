@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { Badge, Button, Checkbox } from '@equinor/eds-core-react/next'
 import { CATEGORY_LABELS, HELD_LABEL, ORIGIN_LABELS } from '../labels'
 import type { ValueOrigin } from '../labels'
@@ -14,6 +15,8 @@ type BindingRowProps = {
   /** Says when the target is a change someone made */
   note?: string
   reason?: string
+  /** What else the change does, such as text carried across to instances, shown whatever the status */
+  effects?: string[]
   category: Category
   /** A legacy mode kept until the layers below it are migrated, badged Waiting */
   held?: boolean
@@ -27,6 +30,8 @@ type BindingRowProps = {
   onToggle: (selected: boolean) => void
   onSelectLayer: () => void
   onChange: () => void
+  /** More buttons after Change, such as Convert on the Typography tab */
+  actions?: ReactNode
 }
 
 /** One binding: what it is on, what it changes from and to, its status, and the actions on it. */
@@ -37,6 +42,7 @@ export function BindingRow({
   target,
   note,
   reason,
+  effects = [],
   category,
   held = false,
   origin,
@@ -46,6 +52,7 @@ export function BindingRow({
   onToggle,
   onSelectLayer,
   onChange,
+  actions,
 }: BindingRowProps) {
   const badge = held ? HELD_BADGE : BADGES[category]
   return (
@@ -77,6 +84,11 @@ export function BindingRow({
         {reason && category !== 'sure' && (
           <span className="binding-reason">{reason}</span>
         )}
+        {effects.map((effect) => (
+          <span key={effect} className="binding-effect">
+            {effect}
+          </span>
+        ))}
       </button>
       <div className="binding-actions">
         <Badge tone={badge.tone} emphasis={badge.emphasis}>
@@ -93,6 +105,7 @@ export function BindingRow({
             Change
           </Button>
         )}
+        {actions}
       </div>
     </li>
   )

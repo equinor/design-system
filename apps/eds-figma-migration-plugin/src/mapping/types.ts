@@ -120,6 +120,10 @@ export type TypographyField =
   | 'letterSpacing'
   | 'paragraphSpacing'
 
+/** A text case, as Figma names it on a text layer or a text style. */
+export type TextCase =
+  'ORIGINAL' | 'UPPER' | 'LOWER' | 'TITLE' | 'SMALL_CAPS' | 'SMALL_CAPS_FORCED'
+
 export type TypographyInput = {
   /** Old variables bound to the typography fields of the text or range */
   fields: Partial<Record<TypographyField, OldVariable>>

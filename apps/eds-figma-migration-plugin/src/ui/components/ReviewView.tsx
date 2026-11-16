@@ -21,6 +21,11 @@ type ReviewViewProps = {
   onSelect: (nodeIds: string[]) => void
   /** Stores a choice for one binding: a target, or DECIDE_LATER */
   onDecide: (item: ReviewItem, value: OverrideValue) => void
+  /**
+   * What makes the decided values: Apply for Changes, Convert for the text
+   * styles and colours on the Typography tab
+   */
+  run?: 'Apply' | 'Convert'
   onDone: () => void
 }
 
@@ -37,6 +42,7 @@ export function ReviewView({
   entryNames,
   onSelect,
   onDecide,
+  run = 'Apply',
   onDone,
 }: ReviewViewProps) {
   const [index, setIndex] = useState(0)
@@ -102,8 +108,9 @@ export function ReviewView({
           </li>
         </ul>
         <p className="muted">
-          Confirmed and changed bindings, and accepted fixes, now count as
-          Ready. Apply them from the overview or the frame.
+          {run === 'Convert'
+            ? 'Confirmed and changed text styles and colours now count as Ready. Convert the instances on the Typography tab.'
+            : 'Confirmed and changed bindings, and accepted fixes, now count as Ready. Apply them from the overview or the frame.'}
         </p>
         <div>
           <Button onClick={onDone}>Back</Button>
@@ -122,7 +129,10 @@ export function ReviewView({
   // Many layers share a name, such as Label or Cell, so the title says where
   // the layer is (UX review F10).
   const parent = binding.path[binding.path.length - 1]
-  const plain = plainReason(row.reason)
+  // A value with a reason of its own, such as a text case a conversion
+  // drops, shows that one instead of the row's.
+  const reason = binding.reason ?? row.reason
+  const plain = plainReason(reason)
 
   return (
     <section className="stack review" aria-labelledby="review-title">
@@ -177,7 +187,7 @@ export function ReviewView({
             </p>
           </div>
         )}
-        {!isManualFix && row.reason && (
+        {!isManualFix && reason && (
           <div className="review-reason">
             <strong>
               {isStandIn
@@ -186,11 +196,11 @@ export function ReviewView({
                   ? 'Ready before you chose Decide later: '
                   : 'Why it needs a check: '}
             </strong>
-            {plain ?? row.reason}
+            {plain ?? reason}
             {plain && (
               <details className="review-details">
                 <summary>Details</summary>
-                {row.reason}
+                {reason}
               </details>
             )}
           </div>

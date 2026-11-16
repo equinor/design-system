@@ -176,6 +176,28 @@ Choose the style in three steps:
 Read the weight from the font style as well as from bindings, because a text node can be set in
 Medium without any weight variable.
 
+### The legacy Typography component
+
+An instance of the legacy Typography component is a text in a component, and the plugin can
+replace it with a text layer (decided 2026-11-16). The text style and the colour of that layer
+come from these rules: the typography and the text colour of the text in the instance are
+classified as if the text were not in an instance, so they get the same style and colour as a text
+layer of its own. The results are listed on the Typography tab in Changes with their outcome, and
+a designer confirms or changes them there, as for any other value. They do not count in the
+health: the instance's values count as Inside instances until it is converted.
+
+An instance is converted when its text style is **sure**, or when a designer has chosen or
+confirmed one. A **check** or **none** text style without a choice, or one set to Decide later,
+leaves the instance as it is. The colour is the sure or chosen target; otherwise the legacy
+variable is kept on the new text layer, where Changes lists it after converting.
+
+The text case is a style property, and Figma detaches a text style from a layer once a text case
+is set on it. When the case of the legacy text differs from the case of the proposed style, the
+text style is **check**, with a reason that says the conversion drops the case. The EDS Beta text
+styles set no text case (inventory export of 2026-11-11), so legacy text in upper, lower or title
+case, small caps, or more than one case is check. A designer who confirms the style accepts that
+the text shows as typed.
+
 ## 7. How the plugin applies the rules
 
 Every old variable resolves to one of three outcomes:

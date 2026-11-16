@@ -820,6 +820,9 @@ export class Collector {
           segment.textStyleId || undefined,
         ),
       )
+      // Read per range rather than as a segment field, so a text in one
+      // style but two cases stays one unit.
+      const textCase = node.getRangeTextCase(segment.start, segment.end)
       push({
         ...base,
         ...(override ? { override: true } : {}),
@@ -832,6 +835,11 @@ export class Collector {
         },
         fontSize: segment.fontSize,
         textStyle,
+        ...(textCase === figma.mixed
+          ? { textCase: 'MIXED' as const }
+          : textCase !== 'ORIGINAL'
+            ? { textCase }
+            : {}),
       })
     }
   }

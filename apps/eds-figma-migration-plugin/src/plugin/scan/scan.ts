@@ -6,13 +6,14 @@
 import { OLD_COLLECTION_KEYS, OLD_DENSITY_KEY } from '../../mapping/old-keys'
 import { MAPPING_VERSION } from '../../mapping/version'
 import { classifyUnits } from '../../scan/classify'
+import { conversionRecords } from '../../scan/conversions'
+import type { ConversionSource } from '../../scan/conversions'
 import { healthOf, summariseEntries, totalsOf } from '../../scan/summary'
 import type { EntryMeta } from '../../scan/summary'
 import type {
   BindingRecord,
   ComponentInstance,
   OldInstance,
-  RawUnit,
   ScanSummary,
 } from '../../scan/types'
 import type { ScanMap, ScanProgress, Scope } from '../../shared/messages'
@@ -21,14 +22,21 @@ import type { FilePage } from '../../shared/pages'
 import { Collector, explicitModes } from './collect'
 import type { FoundInstance, Modes } from './collect'
 import { ScanTracer } from './trace'
+import { owningComponent } from '../apply/instance-texts'
 
 export type ScanState = {
   summary: ScanSummary
   records: BindingRecord[]
+  /**
+   * The text style and colour of each Typography instance, for Convert on
+   * the Typography tab (scan/conversions.ts). Kept apart from `records`, so
+   * the health counts the instance's values once, as Inside instances,
+   * until it is converted.
+   */
+  conversions: BindingRecord[]
   oldInstances: OldInstance[]
   /** Every outermost instance the scan read, for the instance list of a main component */
   instances: FoundInstance[]
-  units: RawUnit[]
 }
 
 const LOOSE_NAME = 'Loose layers'
@@ -291,6 +299,15 @@ export async function runScan(
 
   const records = classifyUnits(collector.units)
   const oldInstances = await findOldInstances(collector, records)
+  const conversions = conversionRecords(
+    oldInstances.flatMap((instance): ConversionSource[] => {
+      const found = collector.instances.get(instance.id)
+      return instance.typography && instance.textId && found
+        ? [{ ...instance, textId: instance.textId, path: found.path }]
+        : []
+    }),
+    collector.units,
+  )
   for (const entry of entries)
     entry.changed = collector.changed.get(entry.id) ?? 0
   await countInstances(entries, records)
@@ -309,9 +326,9 @@ export async function runScan(
       entries: summaries,
     },
     records,
+    conversions,
     oldInstances,
     instances: [...collector.instances.values()],
-    units: collector.units,
   }
 }
 
@@ -444,13 +461,51 @@ async function findOldInstances(
         instance.mainComponent = mainComponentInfo(main)
         if (isTypographyComponent(instance.mainComponent.name)) {
           instance.typography = true
+          // Convert replaces the first text in the instance, so its units
+          // give the conversion's text style and colour.
           const text = node.findOne((child) => child.type === 'TEXT')
-          if (text?.type === 'TEXT')
+          if (text?.type === 'TEXT') {
             instance.text = text.characters.slice(0, 60)
+            instance.textId = text.id
+          }
+          const component = owningComponent(node)
+          if (component) {
+            const set =
+              component.parent?.type === 'COMPONENT_SET'
+                ? component.parent
+                : null
+            instance.inComponent = {
+              id: component.id,
+              name: set ? `${set.name} (${component.name})` : component.name,
+            }
+          }
         }
       }
     }
     result.push(instance)
   }
   return result
+}
+
+/**
+ * How many instances each main component with a Typography instance in it
+ * has, by component id. Converting such a Typography instance carries the
+ * text of every one of them across, which the Typography tab says before
+ * converting. Counted when the tab asks, since finding instances can load
+ * every page.
+ */
+export async function typographyComponentCounts(
+  oldInstances: OldInstance[],
+): Promise<Record<string, number>> {
+  const counts: Record<string, number> = {}
+  for (const instance of oldInstances) {
+    const id = instance.inComponent?.id
+    if (!id || id in counts) continue
+    const node = await figma.getNodeByIdAsync(id)
+    counts[id] =
+      node?.type === 'COMPONENT'
+        ? (await node.getInstancesAsync().catch(() => [])).length
+        : 0
+  }
+  return counts
 }
