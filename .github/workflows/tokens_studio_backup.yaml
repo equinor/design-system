@@ -94,15 +94,6 @@ jobs:
         run: |
           ~/studio-cli/node_modules/.bin/studio --version
           ~/studio-cli/node_modules/.bin/studio tokens pull --ci --verbose
-      # Rehearsal only, remove once the release pipeline uses `studio
-      # pull`. It writes nothing and may fail without failing the
-      # backup. It shows in the log whether `studio pull` accepts the
-      # same CI login as `studio tokens pull`, which cannot be tested
-      # from a branch (the login only works from main)
-      - name: Rehearse studio pull (dry run)
-        continue-on-error: true
-        working-directory: packages/eds-tokens
-        run: ~/studio-cli/node_modules/.bin/studio pull --dry-run --ci --verbose
       # Aliases and output dirs are read from .studio.json so a config
       # rename (e.g. eds-test-3 → eds) never requires a workflow
       # change — but removed aliases are never cleaned up; delete
@@ -112,7 +103,7 @@ jobs:
       # shape the backup must go red, not stay green copying nothing
       - name: Sync pulled sources into the backup branch
         run: |
-          sources=$(jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output)"' packages/eds-tokens/.studio.json)
+          sources=$(jq -r '.configurations | to_entries[] | "\(.key)\t\(.value.output // error("configuration \(.key) has no output"))"' packages/eds-tokens/.studio.json)
           if [ -z "$sources" ]; then
             echo "::error::No configurations found in packages/eds-tokens/.studio.json, nothing to back up"
             exit 1
@@ -133,6 +124,21 @@ jobs:
             git commit -m "chore: tokens backup $(date -u +%Y-%m-%dT%H:%M:%SZ) (run ${GITHUB_RUN_ID})"
             git push origin tokens-studio-backup
           fi
+      # Rehearsal only, remove once the release pipeline uses `studio
+      # pull`. It runs after the backup is pushed, on a v2 copy of
+      # .studio.json in a temporary directory, so it cannot change what
+      # is backed up, and it writes nothing. It may fail without failing
+      # the run. The log shows whether `studio pull` accepts the CI
+      # login and renders from a v2 file. That cannot be tested from a
+      # branch (the login only works from main)
+      - name: Rehearse studio pull on a v2 config (dry run)
+        continue-on-error: true
+        run: |
+          rehearsal=$(mktemp -d)
+          cp packages/eds-tokens/.studio.json "$rehearsal/"
+          cd "$rehearsal"
+          ~/studio-cli/node_modules/.bin/studio config migrate --write --no-input
+          ~/studio-cli/node_modules/.bin/studio pull --dry-run --ci --verbose
       # The run is unattended and hourly — a broken backup must not be
       # silent, or the safety net quietly stops existing
       - name: log-errors-to-slack
