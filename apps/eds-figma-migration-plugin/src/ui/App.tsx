@@ -800,12 +800,15 @@ export function App() {
   ) => {
     const own = binding.id in overrides.records
     const rowChanged = row.key in overrides.rows
+    const manual = row.outcome === 'byHand'
     setPicker({
       title: group.old,
-      description: `${binding.nodeName}, ${propertyLabel(binding.property)}. Changes this value only, and wins over a change on its row.`,
+      description: manual
+        ? `${binding.nodeName}, ${propertyLabel(binding.property)}. ${MANUAL_FIX_PICKER}`
+        : `${binding.nodeName}, ${propertyLabel(binding.property)}. Changes this value only, and wins over a change on its row.`,
       schemes: [binding.scheme ?? 'light'],
       subject: {
-        kinds: binding.kind ? [binding.kind] : [],
+        kinds: binding.kind && !manual ? [binding.kind] : [],
         group: group.group,
         candidates: row.candidates,
       },
@@ -832,13 +835,18 @@ export function App() {
 
   const changeRow = (group: MappingGroup, row: MappingRow) => {
     const own = ownChoices(row, overrides)
-    const kinds = [
-      ...new Set(
-        row.bindings
-          .map((binding) => binding.kind)
-          .filter((kind): kind is BindingKind => kind !== undefined),
-      ),
-    ]
+    // A Manual fix offers the plugin's fix or keeping the legacy variable,
+    // never another variable: Figma would not take it there.
+    const manual = row.outcome === 'byHand'
+    const kinds = manual
+      ? []
+      : [
+          ...new Set(
+            row.bindings
+              .map((binding) => binding.kind)
+              .filter((kind): kind is BindingKind => kind !== undefined),
+          ),
+        ]
     const all = row.count === 1 ? 'the value' : `all ${row.count} values`
     const replaced =
       own === 0
@@ -850,7 +858,7 @@ export function App() {
           : ` ${own} of them have a choice of their own, which this replaces.`
     setPicker({
       title: group.old,
-      description: `Changes ${all} in this row.${replaced}`,
+      description: `${manual ? `${MANUAL_FIX_PICKER} ` : ''}Changes ${all} in this row.${replaced}`,
       schemes: schemesOf(row.bindings),
       subject: { kinds, group: group.group, candidates: row.candidates },
       current: rowCurrent(row, overrides),

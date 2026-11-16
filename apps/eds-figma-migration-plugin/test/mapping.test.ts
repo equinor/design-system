@@ -252,6 +252,33 @@ describe('Manual fix', () => {
     )
     expect(effectiveCategory(fix, NO_OVERRIDES)).toBe('byHand')
   })
+
+  it('is in the rows Changes lists, so Changes shows every value Apply counts', () => {
+    const all = [
+      ...records,
+      record(
+        'error-icon',
+        'Selectable/Icon size',
+        'byHand',
+        'reset:spacing/md',
+      ),
+    ]
+    const accepted = {
+      records: { 'error-icon': 'reset:spacing/md' },
+      rows: {},
+    }
+    const ready = all.filter(
+      (one) => effectiveCategory(one, accepted) === 'sure',
+    ).length
+    const listed = buildMappingGroups(all)
+      .flatMap((group) => group.rows)
+      .flatMap((row) =>
+        row.bindings.map((binding) => bindingOutcome(row, binding, accepted)),
+      )
+      .filter((outcome) => outcome.category === 'sure').length
+    expect(listed).toBe(ready)
+    expect(ready).toBe(3)
+  })
 })
 
 describe('effectiveCategory', () => {

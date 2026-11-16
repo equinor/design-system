@@ -80,9 +80,15 @@ type MappingViewProps = {
   ) => void
 }
 
-type Status = 'all' | 'sure' | 'check' | 'none' | 'excluded'
+type Status = 'all' | 'sure' | 'check' | 'byHand' | 'none' | 'excluded'
 
-const STATUSES: Exclude<Status, 'all'>[] = ['sure', 'check', 'none', 'excluded']
+const STATUSES: Exclude<Status, 'all'>[] = [
+  'sure',
+  'check',
+  'byHand',
+  'none',
+  'excluded',
+]
 
 /** Sections inside a tab, by what the values are on, as in Figma's Check designs. */
 const SECTION_LABELS: Record<string, string> = {
@@ -370,12 +376,10 @@ export function MappingView({
   const matches = (row: MappingRow, binding: MappingBinding) =>
     status === 'all' ||
     bindingOutcome(row, binding, overrides).category === status
-  // A Manual fix is accepted in Review and listed with its frame, never
-  // changed here, since it is not a swap of one variable for another.
+  // Every value Apply can change is listed, Manual fixes included: an
+  // accepted fix is Ready and counted in Apply, so it has to show here too.
   const items: Item[] = groups.flatMap((group) =>
-    group.rows
-      .filter((row) => row.outcome !== 'byHand')
-      .map((row) => ({ group, row })),
+    group.rows.map((row) => ({ group, row })),
   )
   const countIn = (
     filter: (item: Item) => boolean,
@@ -567,7 +571,9 @@ export function MappingView({
                           'proposal',
                       )
                       const reason =
-                        (row.outcome === 'check' || row.outcome === 'none') &&
+                        (row.outcome === 'check' ||
+                          row.outcome === 'none' ||
+                          row.outcome === 'byHand') &&
                         undecided &&
                         row.reason
                           ? (plainReason(row.reason) ?? row.reason)
@@ -579,23 +585,33 @@ export function MappingView({
                       const own = row.bindings.filter(
                         (binding) => binding.id in overrides.records,
                       ).length
+                      const manual = row.outcome === 'byHand'
                       return (
                         <li key={row.key} className="check-row-block">
                           <div className="check-row">
-                            <Checkbox
-                              className="binding-check"
-                              aria-label={`Select the ${row.count} values that use ${group.old}`}
-                              checked={state.checked}
-                              indeterminate={state.indeterminate}
-                              onChange={(event) =>
-                                selection.set(
-                                  row.bindings.map((binding) =>
-                                    selectableBinding(item, binding),
-                                  ),
-                                  event.target.checked,
-                                )
-                              }
-                            />
+                            {/* A Manual fix is decided one at a time, so it
+                                has no checkbox for the bulk bar. */}
+                            {manual ? (
+                              <span
+                                className="binding-check"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <Checkbox
+                                className="binding-check"
+                                aria-label={`Select the ${row.count} values that use ${group.old}`}
+                                checked={state.checked}
+                                indeterminate={state.indeterminate}
+                                onChange={(event) =>
+                                  selection.set(
+                                    row.bindings.map((binding) =>
+                                      selectableBinding(item, binding),
+                                    ),
+                                    event.target.checked,
+                                  )
+                                }
+                              />
+                            )}
                             <button
                               type="button"
                               className="check-legacy"
@@ -731,12 +747,20 @@ export function MappingView({
                                       note={
                                         mine ? sourceLabel('record') : undefined
                                       }
+                                      // A Manual fix says how to make it, and
+                                      // what to set again, until it is decided.
+                                      {...(manual &&
+                                      outcome.source === 'proposal' &&
+                                      binding.reason
+                                        ? { reason: binding.reason }
+                                        : {})}
                                       category={outcome.category}
                                       held={isHeld(outcome.category, row.rule)}
                                       {...(binding.override
                                         ? { origin: 'override' as const }
                                         : {})}
                                       changeable
+                                      selectable={!manual}
                                       selected={selection.has(binding.id)}
                                       onToggle={(selected) =>
                                         selection.set(
@@ -790,7 +814,9 @@ export function MappingView({
               <Dialog.Title>
                 {why.row.outcome === 'check'
                   ? 'Why it needs a check'
-                  : unchangedLabel(why.row.rule)}
+                  : why.row.outcome === 'byHand'
+                    ? 'How to fix it'
+                    : unchangedLabel(why.row.rule)}
               </Dialog.Title>
             </Dialog.Header>
             <Dialog.Content>
@@ -820,7 +846,8 @@ export function MappingView({
                   onChangeRow(item.group, item.row)
                 }}
               >
-                {why.row.outcome === 'none' && why.row.candidates.length > 0
+                {(why.row.outcome === 'none' || why.row.outcome === 'byHand') &&
+                why.row.candidates.length > 0
                   ? 'Choose what to do'
                   : 'Change target'}
               </Button>

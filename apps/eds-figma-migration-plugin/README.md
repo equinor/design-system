@@ -273,6 +273,11 @@ the binding counts as Ready or Excluded; **Skip** leaves it for later.
 The review ends with what was confirmed, changed, excluded and skipped. From a
 frame, the review covers that frame only.
 
+Changes lists Manual fixes too, so every value Apply counts is on a tab: an
+accepted fix is Ready and made by Apply. Their rows have no checkbox, since a
+fix is decided one at a time, and their pickers offer only the fix or keeping
+the legacy variable.
+
 **Typography components.** The legacy Typography component is a text in a
 component. When the scan finds instances of it (outside other instances),
 Changes gets a Typography tab after the kinds of value, which offers **Convert

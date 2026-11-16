@@ -79,7 +79,9 @@ its colour, so the row lists them with the EDS Beta value to set again.
 
 The plugin can make this fix for you, but only after you accept it, since it
 is more than a swap of one variable for another. Manual fixes are part of
-**Review**: the step explains the fix, and **Accept the fix** lets the plugin
+**Review** and of **Changes**, where they are listed with the other values
+(Width and height, on the Size tab) and show as Ready once accepted, since
+Apply makes them: the step explains the fix, and **Accept the fix** lets the plugin
 read every change on the layer, reset it, swap it back and set the changes
 again on the next Apply. It checks each change afterwards; if one cannot be
 copied, it leaves the layer as it was and says why. **Keep the legacy
