@@ -85,27 +85,37 @@ jobs:
             echo "::error::studio CLI install failed verification"
             exit 1
           fi
-      # No alias argument = pull every source configured in
-      # packages/eds-tokens/.studio.json (token sets + $themes.json +
-      # $metadata.json). --verbose because the run is unattended — the
-      # Actions log is the only place to diagnose a bad pull
+      # Pulls only the raw outputs in packages/eds-tokens/.studio.json
+      # (token sets + $themes.json + $metadata.json). The CSS and DTCG
+      # outputs are generated from these, so they are not backed up.
+      # The names come from .studio.json (outputs with format raw) so a
+      # rename never requires a workflow change. An empty list fails the
+      # step: if .studio.json changes shape the backup must go red, not
+      # stay green pulling nothing. --verbose because the run is
+      # unattended, the Actions log is the only place to diagnose a bad
+      # pull
       - name: Pull tokens from Tokens Studio
         working-directory: packages/eds-tokens
         run: |
           ~/studio-cli/node_modules/.bin/studio --version
-          ~/studio-cli/node_modules/.bin/studio tokens pull --ci --verbose
-      # Aliases and output dirs are read from .studio.json so a config
+          raw=$(jq -r '(.outputs // error("no outputs in .studio.json")) | to_entries[] | select(.value.format == "raw") | .key' .studio.json)
+          if [ -z "$raw" ]; then
+            echo "::error::No raw outputs found in packages/eds-tokens/.studio.json, nothing to back up"
+            exit 1
+          fi
+          # the names are separate arguments, so $raw is left unquoted
+          ~/studio-cli/node_modules/.bin/studio pull $raw --ci --verbose
+      # Output names and dirs are read from .studio.json so a config
       # rename (e.g. eds-test-3 → eds) never requires a workflow
-      # change — but removed aliases are never cleaned up; delete
-      # backup/<old-alias>/ on the backup branch manually. Each source
-      # lands at backup/<alias>/; --delete keeps removals visible in
-      # the diff. An empty list fails the step: if .studio.json changes
-      # shape the backup must go red, not stay green copying nothing
+      # change, but removed outputs are never cleaned up; delete
+      # backup/<old-output>/ on the backup branch manually. Each raw
+      # output lands at backup/<output>/; --delete keeps removals
+      # visible in the diff
       - name: Sync pulled sources into the backup branch
         run: |
-          sources=$(jq -r '(.configurations // error("no configurations in .studio.json, is it a v2 file?")) | to_entries[] | "\(.key)\t\(.value.output // error("configuration \(.key) has no output"))"' packages/eds-tokens/.studio.json)
+          sources=$(jq -r '(.outputs // error("no outputs in .studio.json")) | to_entries[] | select(.value.format == "raw") | "\(.key)\t\(.value.dir // error("output \(.key) has no dir"))"' packages/eds-tokens/.studio.json)
           if [ -z "$sources" ]; then
-            echo "::error::No configurations found in packages/eds-tokens/.studio.json, nothing to back up"
+            echo "::error::No raw outputs found in packages/eds-tokens/.studio.json, nothing to back up"
             exit 1
           fi
           while IFS=$'\t' read -r alias output; do
@@ -124,24 +134,6 @@ jobs:
             git commit -m "chore: tokens backup $(date -u +%Y-%m-%dT%H:%M:%SZ) (run ${GITHUB_RUN_ID})"
             git push origin tokens-studio-backup
           fi
-      # Rehearsal only, remove once the release pipeline uses `studio
-      # pull`. It runs after the backup is pushed, on a v2 copy of
-      # .studio.json in a temporary directory, so it cannot change what
-      # is backed up, and it writes nothing. It may fail without failing
-      # the run. The log shows whether `studio pull` accepts the CI
-      # login and renders from a v2 file. That cannot be tested from a
-      # branch (the login only works from main)
-      - name: Rehearse studio pull on a v2 config (dry run)
-        continue-on-error: true
-        # continue-on-error covers a failure, not a hang that would run
-        # into the 15 minute job limit. A backup run takes about 15 seconds
-        timeout-minutes: 5
-        run: |
-          rehearsal=$(mktemp -d)
-          cp packages/eds-tokens/.studio.json "$rehearsal/"
-          cd "$rehearsal"
-          ~/studio-cli/node_modules/.bin/studio config migrate --write --no-input
-          ~/studio-cli/node_modules/.bin/studio pull --dry-run --ci --verbose
       # The run is unattended and hourly — a broken backup must not be
       # silent, or the safety net quietly stops existing
       - name: log-errors-to-slack

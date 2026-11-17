@@ -67,27 +67,25 @@ jobs:
       - name: Install dependencies (cache-miss fallback)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install --force
-      - name: Pull tokens from Tokens Studio
-        run: pnpm --filter @equinor/eds-tokens exec studio tokens pull --ci --verbose
-      # `studio exports run` writes over the previous release's files
-      # without pruning, and the TS generator discovers its inputs from
-      # whatever is on disk (see buildContext). A folder renamed upstream
-      # would otherwise leave both copies behind and abort the run, and a
+      # `studio pull` writes over the previous release's files without
+      # pruning, and the TS generator discovers its inputs from whatever
+      # is on disk (see buildContext). A folder renamed upstream would
+      # otherwise leave both copies behind and abort the run, and a
       # removed one would keep resolving to its stale value.
       - name: Clear the previous generated exports
         run: rm -rf packages/eds-tokens/src/tokens/css packages/eds-tokens/src/tokens/dtcg
-      # Runs the saved export configurations on the platform and writes
-      # the generated files. This output will replace the local Style
-      # Dictionary build in the new pipeline — it is not yet wired into
-      # the package exports map.
-      # The exports are referenced by ID, not name — a rename in Tokens
+      # Pulls every output in packages/eds-tokens/.studio.json: the raw
+      # token sets, and the saved CSS (EDS-CSS) and DTCG (EDS-DTCG)
+      # exports, which Tokens Studio runs on the platform. The exports
+      # are referenced by ID (use.id), not name, so a rename in Tokens
       # Studio must not break the pipeline (it already happened once).
+      # The CSS and DTCG output will replace the local Style Dictionary
+      # build in the new pipeline, it is not yet wired into the package
+      # exports map.
       # --verbose because the run is unattended and the resulting PR gets
-      # no CI — the Actions log is the only place to diagnose a bad export
-      - name: Run CSS export from Tokens Studio (EDS-CSS)
-        run: pnpm --filter @equinor/eds-tokens exec studio exports run 39d37416-632b-4f04-b49b-cfaec63e3baa --ci --verbose --out src/tokens/css
-      - name: Run DTCG export from Tokens Studio (EDS-DTCG)
-        run: pnpm --filter @equinor/eds-tokens exec studio exports run 019463d4-9bef-4e37-9425-6de80eec87c8 --ci --verbose --out src/tokens/dtcg
+      # no CI, the Actions log is the only place to diagnose a bad pull
+      - name: Pull tokens and exports from Tokens Studio
+        run: pnpm --filter @equinor/eds-tokens exec studio pull --ci --verbose
       # The foundation and input sets are the palette maths. They stay
       # Enabled in Studio (#5551), which cannot yet leave them out of an
       # export, so they land in every colour-scheme file. Nothing
