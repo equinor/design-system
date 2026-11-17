@@ -67,13 +67,15 @@ jobs:
       - name: Install dependencies (cache-miss fallback)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install --force
-      # `studio pull` writes over the previous release's files without
-      # pruning, and the TS build and the CSS bundle read whatever is on
-      # disk. A folder renamed upstream would otherwise leave both copies
-      # behind, and a removed one would keep resolving to its stale value.
-      # The raw token sets are cleared too, so a set deleted upstream also
-      # leaves the repo, in the same PR.
-      - name: Clear the previous generated exports
+      # `studio pull` only removes files that studio.lock lists from an
+      # earlier pull, and the lock does not list the v2 outputs until the
+      # first v2 pull has been committed. The TS build and the CSS bundle
+      # read whatever is on disk, so clearing first means a folder renamed
+      # upstream cannot leave both copies behind, and a removed one cannot
+      # keep resolving to its stale value. The raw token sets are cleared
+      # too, so a set deleted upstream also leaves the repo, in the same
+      # PR.
+      - name: Clear the previous pull
         run: rm -rf packages/eds-tokens/src/tokens/raw packages/eds-tokens/src/tokens/css packages/eds-tokens/src/tokens/dtcg packages/eds-tokens/src/tokens/ts-export
       # Pulls every output in packages/eds-tokens/.studio.json: the raw
       # token sets, and the saved CSS (EDS-CSS) and DTCG (EDS-DTCG)
