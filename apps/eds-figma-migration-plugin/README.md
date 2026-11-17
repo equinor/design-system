@@ -196,14 +196,28 @@ of a page or the file it opens on **Frames**, where the work is.
 Targets can be changed for one value, one row or many values at a time:
 **Change** on a value wins over its row, the target of a row changes every
 value in it and replaces the choices made on single values there, such as the
-ones Review saves (otherwise a row change on a reviewed value showed nowhere;
-`rowChoiceChanges` in `src/scan/mapping.ts`). A row in an open frame or on
-the Main components tab lists only its values there, but its target is
-stored by the row's key and reaches every value in the row, so the picker
-works on the whole row of Changes (`wholeRow`): it counts all its values,
-replaces the choices on all of them, and says how many are elsewhere in the
-scope and not listed. Ticking values opens a bar with **Apply**, **Change
-target**, **Decide later**, **Reset choices** and **Clear selection**. Apply there
+ones Review saves and Decide later (otherwise a row change on a reviewed value
+showed nowhere). The window sends a choice on a row as one `row-choice`
+message, and the plugin makes it in one step (`withRowChoice` in
+`src/scan/mapping.ts`): it removes the choices on the row's values and puts
+them aside in `replaced`, by row key and value. A second change on the row
+adds the choices made since to them, and a value put aside before keeps the
+choice it had then. **Undo my change** in the row's picker removes the row's
+choice and brings back the choices put aside, except on a value that has a
+choice of its own again, made after the change on the row, which is kept.
+Then nothing stays put aside for the row. Choosing the proposal again on a
+Ready row stores no choice on the row, but puts the values' choices aside all
+the same, so Undo my change brings them back there too. Undo my change on a
+row never removes a choice on a single value, so a row with only those has no
+Undo; Undo my change on the value, or Reset choices in the bulk bar, removes
+them. When a target replaces choices, the picker says "Undo my change brings
+back the N choices it replaced". A row in an open frame or on the Main components tab lists only its values
+there, but its target is stored by the row's key and reaches every value in
+the row, so the picker works on the whole row of Changes (`wholeRow`): it
+counts all its values, replaces the choices on all of them and puts them
+aside, and says how many are elsewhere in the scope and not listed. Ticking
+values opens a bar with **Apply**, **Change target**, **Decide later**,
+**Reset choices** and **Clear selection**. Apply there
 makes only the Ready changes among the ticked values (the `apply-selected`
 message), behind the same kind of confirmation as Apply in the footer. Its
 counts come from a preview of that run, so it names the legacy modes that
@@ -536,7 +550,10 @@ The plugin keeps two things in the shared plugin data of the document
   with the lowest health). It is shown as **Last scan** when the plugin opens,
   before the designer scans again.
 - `choices`: the targets the designer chose, so a review can continue another
-  day. When they are too many to keep, the window says so. Earlier versions
+  day, with the choices on single values that a change on a row put aside
+  (`replaced`), so Undo my change on the row still brings them back. When
+  they are too many to keep, the window says so. Choices saved before
+  `replaced` existed load as they are, without it. Earlier versions
   stored `null` for a value whose legacy variable was kept (Excluded);
   `savedChoices` in `src/scan/mapping.ts` reads it as Decide later.
   The saved `health` totals of such a version can have an `excluded` count,

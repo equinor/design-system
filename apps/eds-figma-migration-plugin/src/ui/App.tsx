@@ -8,11 +8,13 @@ import {
   DECIDE_LATER,
   NO_KEPT_MODES,
   NO_OVERRIDES,
+  choicesToBringBack,
+  choicesToBringBackAfter,
   effectiveTarget,
   filterGroups,
   ownChoices,
   readyCount,
-  rowChoiceChanges,
+  rowChoiceTarget,
   rowCurrent,
   rowKey,
   wholeRow,
@@ -88,7 +90,7 @@ import type { SelectionInfo } from './components/ScanControls'
 import { send, useFigmaColorScheme, usePluginMessages } from './figma'
 import { reviewItems } from './review'
 import type { ReviewItem } from './review'
-import { modePickerExtra, modePickerNote } from './targets'
+import { modePickerExtra, modePickerNote, rowChoicesNote } from './targets'
 import { selectionStatus, useSelection } from './selection'
 import type { Selection } from './selection'
 
@@ -938,11 +940,22 @@ export function App() {
     // in it, as in Changes, so the picker counts, and the change replaces
     // the choices on, all of them, and says how many are not listed.
     const row = wholeRow(mapping, shown)
+    const target = rowChoiceTarget(row)
     const notListed = row.count - shown.count
     const own = ownChoices(row, overrides)
+    // A target saved on the row replaces the choices on its values, and Undo
+    // my change brings them back (withRowChoice in scan/mapping.ts).
+    const back = choicesToBringBack(overrides, row.key)
+    const choicesNote = rowChoicesNote(
+      row.count,
+      own,
+      back,
+      own > 0 ? choicesToBringBackAfter(overrides, target) : 0,
+    )
+    const replaced = choicesNote ? ` ${choicesNote}` : ''
     // Legacy modes in the row that wait for values below them: the picker
     // says what they wait for, and offers removing them anyway.
-    const ids = row.bindings.map((binding) => binding.id)
+    const ids = target.bindingIds
     const waitNote = modePickerNote(ids, blocked)
     const waits = waitNote ? ` ${waitNote}` : ''
     const extra = modePickerExtra(ids, blocked)
@@ -959,14 +972,6 @@ export function App() {
           ),
         ]
     const all = row.count === 1 ? 'the value' : `all ${row.count} values`
-    const replaced =
-      own === 0
-        ? ''
-        : own === row.count
-          ? row.count === 1
-            ? ' The value has a choice of its own, which this replaces.'
-            : ' Each of them has a choice of its own, which this replaces.'
-          : ` ${own} of them have a choice of their own, which this replaces.`
     const elsewhere =
       notListed === 0
         ? ''
@@ -982,8 +987,12 @@ export function App() {
         ...(extra ? { extra } : {}),
       },
       current: rowCurrent(row, overrides),
-      changed: row.key in overrides.rows || own > 0,
-      onSave: (value) => sendOverrides(rowChoiceChanges(row, value, overrides)),
+      // Undo my change undoes the change on the row and brings back the
+      // choices it replaced. It keeps the choices made on single values, so
+      // a row with only those has nothing to undo: Undo my change on each
+      // value, or Reset choices in the bulk bar, removes them.
+      changed: row.key in overrides.rows || back > 0,
+      onSave: (value) => send({ type: 'row-choice', row: target, value }),
     })
   }
 

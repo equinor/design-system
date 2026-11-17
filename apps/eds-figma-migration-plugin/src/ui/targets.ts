@@ -74,6 +74,42 @@ export function modePickerNote(
 }
 
 /**
+ * What the row picker says about the choices on single values in the row.
+ * `own` is how many values in the row have a choice of their own, which a
+ * target saved on the row replaces. `back` is how many choices Undo my
+ * change brings back now, and `backAfterSave` how many it brings back once
+ * a target saved on the row has replaced the values' own choices
+ * (choicesToBringBack in scan/mapping.ts). Undo keeps the own choices, so
+ * with `back` the note says that too. Empty when there is nothing to say.
+ */
+export function rowChoicesNote(
+  count: number,
+  own: number,
+  back: number,
+  backAfterSave: number,
+): string {
+  const choices = (n: number) => (n === 1 ? 'the choice' : `the ${n} choices`)
+  if (own === 0) {
+    return back === 0
+      ? ''
+      : `Undo my change brings back ${choices(back)} it replaced.`
+  }
+  const which =
+    own === count
+      ? count === 1
+        ? 'The value has a choice of its own'
+        : 'Each of them has a choice of its own'
+      : own === 1
+        ? '1 of them has a choice of its own'
+        : `${own} of them have a choice of their own`
+  const undo =
+    back === 0
+      ? `Undo my change brings back ${choices(backAfterSave)} it replaced.`
+      : `Undo my change keeps ${own === 1 ? 'it' : 'them'} and brings back ${choices(back)} it replaced.`
+  return `${which}, which this replaces. ${undo}`
+}
+
+/**
  * What a No equivalent value says before anybody has chosen a target: the
  * stand-in the plugin proposes for the gap in the EDS Beta. A string or
  * boolean variable has no stand-in. A legacy mode that waits for the values

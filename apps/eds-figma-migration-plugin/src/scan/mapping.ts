@@ -30,6 +30,12 @@ export type Overrides = {
   records: Record<string, OverrideValue>
   /** By mapping row key, from the Mapping view */
   rows: Record<string, OverrideValue>
+  /**
+   * The choices on single values that a change on a row replaced, by row
+   * key and then record id, so Undo my change on the row brings them back
+   * (withRowChoice). Left out when there are none.
+   */
+  replaced?: Record<string, Record<string, OverrideValue>>
 }
 
 export const NO_OVERRIDES: Overrides = { records: {}, rows: {} }
@@ -45,21 +51,63 @@ export const NO_OVERRIDES: Overrides = { records: {}, rows: {} }
  * REMOVE_ANYWAY (scan/classify.ts). A stored clearing is kept as it is,
  * since the stored choices do not say whether the mode was held, and it now
  * clears the mode once nothing below reads it.
+ *
+ * The choices a change on a row replaced (`replaced`) are read the same way,
+ * row by row. Choices saved before there were any have none, and a row
+ * without a choice to bring back is left out.
  */
 export function savedChoices(saved: unknown): Overrides {
+  const isMap = (map: unknown): map is object =>
+    !!map && typeof map === 'object' && !Array.isArray(map)
   const read = (map: unknown): Record<string, OverrideValue> => {
     const result: Record<string, OverrideValue> = {}
-    if (!map || typeof map !== 'object') return result
+    if (!isMap(map)) return result
     for (const [key, value] of Object.entries(map)) {
       if (typeof value === 'string') result[key] = value
       else if (value === null) result[key] = DECIDE_LATER
     }
     return result
   }
-  if (!saved || typeof saved !== 'object') return { records: {}, rows: {} }
-  const { records, rows } = saved as { records?: unknown; rows?: unknown }
+  if (!isMap(saved)) return { records: {}, rows: {} }
+  const { records, rows, replaced } = saved as {
+    records?: unknown
+    rows?: unknown
+    replaced?: unknown
+  }
   if (!records || !rows) return { records: {}, rows: {} }
-  return { records: read(records), rows: read(rows) }
+  const stashes: Record<string, Record<string, OverrideValue>> = {}
+  if (isMap(replaced)) {
+    for (const [key, stash] of Object.entries(replaced)) {
+      const choices = read(stash)
+      if (Object.keys(choices).length > 0) stashes[key] = choices
+    }
+  }
+  return {
+    records: read(records),
+    rows: read(rows),
+    ...(Object.keys(stashes).length > 0 ? { replaced: stashes } : {}),
+  }
+}
+
+/**
+ * The choices after changes on single values (the set-overrides message):
+ * a value sets a choice, undefined removes it. The choices a change on a row
+ * replaced stay put aside, so Undo my change on that row still brings them
+ * back, except on a value that has a choice of its own again.
+ */
+export function withChanges(
+  overrides: Overrides,
+  changes: OverrideChange[],
+): Overrides {
+  const records = { ...overrides.records }
+  const rows = { ...overrides.rows }
+  for (const { target, value } of changes) {
+    const map = target.type === 'record' ? records : rows
+    const key = target.type === 'record' ? target.id : target.key
+    if (value === undefined) delete map[key]
+    else map[key] = value
+  }
+  return { ...overrides, records, rows }
 }
 
 /** Categories the Mapping view lists: the ones a designer can still decide on. */
@@ -464,34 +512,118 @@ export function rowCurrent(
 }
 
 /**
- * The changes a choice on a row makes. It reaches every value in the row, so
- * it also removes the choices made on single values there, such as the ones
- * Review saves: otherwise those win, and the row's change shows nowhere.
- * Undefined undoes the row's change and those choices.
+ * The row a choice is made on, as the window sends it to the plugin (the
+ * row-choice message): its key, every value in it across the scope
+ * (wholeRow), and the proposal and outcome the rule gave it.
  */
-export function rowChoiceChanges(
-  row: MappingRow,
-  value: OverrideValue | undefined,
+export type RowChoiceTarget = {
+  key: string
+  bindingIds: string[]
+  proposal?: string
+  outcome: MappingRow['outcome']
+}
+
+export function rowChoiceTarget(row: MappingRow): RowChoiceTarget {
+  return {
+    key: row.key,
+    bindingIds: row.bindings.map((binding) => binding.id),
+    ...(row.proposal !== undefined ? { proposal: row.proposal } : {}),
+    outcome: row.outcome,
+  }
+}
+
+/** The choices as stored, leaving `replaced` out when no row has choices put aside. */
+function choicesOf(
+  records: Overrides['records'],
+  rows: Overrides['rows'],
+  replaced: NonNullable<Overrides['replaced']>,
+): Overrides {
+  return Object.keys(replaced).length > 0
+    ? { records, rows, replaced }
+    : { records, rows }
+}
+
+/**
+ * The choices once a change on the row has removed the choices on its
+ * values and put them aside under the row's key. Choices put aside by an
+ * earlier change on the row are kept: a value put aside then keeps the
+ * choice it had then, and its choice since is dropped.
+ */
+function putAside(overrides: Overrides, row: RowChoiceTarget): Overrides {
+  const records = { ...overrides.records }
+  const replaced = { ...overrides.replaced }
+  const stash = { ...replaced[row.key] }
+  for (const id of row.bindingIds) {
+    if (!(id in records)) continue
+    if (!(id in stash)) stash[id] = records[id]
+    delete records[id]
+  }
+  if (Object.keys(stash).length > 0) replaced[row.key] = stash
+  return choicesOf(records, overrides.rows, replaced)
+}
+
+/**
+ * The choices after a choice on a row, made in one step by the plugin. A
+ * target reaches every value in the row, so it also removes the choices made
+ * on single values there, such as the ones Review saves: otherwise those
+ * win, and the row's change shows nowhere. They are put aside under the
+ * row's key (`replaced`).
+ *
+ * Undefined undoes the change on the row: the row's choice goes, and the
+ * choices put aside come back, except on a value that has a choice of its
+ * own again, made after the change on the row, which is kept. Nothing stays
+ * put aside for the row after that.
+ */
+export function withRowChoice(
   overrides: Overrides,
-): OverrideChange[] {
-  // Choosing the proposal again on a Ready row is no change; on a row that
-  // needs a check, it settles the row. Saving the choice the row has
-  // already keeps it.
+  row: RowChoiceTarget,
+  value: OverrideValue | undefined,
+): Overrides {
+  if (value === undefined) {
+    const records = { ...overrides.records }
+    const rows = { ...overrides.rows }
+    const { [row.key]: stash = {}, ...replaced } = overrides.replaced ?? {}
+    delete rows[row.key]
+    for (const [id, choice] of Object.entries(stash)) {
+      if (!(id in records)) records[id] = choice
+    }
+    return choicesOf(records, rows, replaced)
+  }
+  const aside = putAside(overrides, row)
+  const rows = { ...aside.rows }
+  // Choosing the proposal again on a Ready row is no change, so no choice
+  // is stored on the row; the choices on its values are put aside all the
+  // same. On a row that needs a check, the proposal settles the row. Saving
+  // the choice the row has already keeps it.
   const noChange =
     value === row.proposal &&
     row.outcome === 'sure' &&
     overrides.rows[row.key] !== value
-  return [
-    {
-      target: { type: 'row', key: row.key },
-      value: noChange ? undefined : value,
-    },
-    ...row.bindings
-      .filter((binding) => binding.id in overrides.records)
-      .map((binding): OverrideChange => ({
-        target: { type: 'record', id: binding.id },
-      })),
-  ]
+  if (noChange) delete rows[row.key]
+  else rows[row.key] = value
+  return { ...aside, rows }
+}
+
+/**
+ * How many choices on single values Undo my change on the row brings back:
+ * the ones changes on the row replaced, except on values that have a choice
+ * of their own again, which Undo keeps.
+ */
+export function choicesToBringBack(overrides: Overrides, key: string): number {
+  return Object.keys(overrides.replaced?.[key] ?? {}).filter(
+    (id) => !(id in overrides.records),
+  ).length
+}
+
+/**
+ * How many choices Undo my change on the row brings back once a target
+ * chosen on the row now has replaced the choices on its values.
+ */
+export function choicesToBringBackAfter(
+  overrides: Overrides,
+  row: RowChoiceTarget,
+): number {
+  return choicesToBringBack(putAside(overrides, row), row.key)
 }
 
 /** How many bindings get each target, most first. */

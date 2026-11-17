@@ -31,7 +31,8 @@ import {
   effectiveCategory,
   keptModeText,
   NO_OVERRIDES,
-  rowChoiceChanges,
+  rowChoiceTarget,
+  withRowChoice,
 } from '../src/scan/mapping'
 import type { KeptModes, Overrides } from '../src/scan/mapping'
 import { buildReport } from '../src/scan/report'
@@ -754,13 +755,13 @@ describe('legacy modes a run keeps (decision C)', () => {
       (group) => group.group === 'modes',
     )?.rows[0]
     if (!row) throw new Error('No mode row')
-    expect(rowChoiceChanges(row, REMOVE_ANYWAY, later)[0].value).toBe(
-      REMOVE_ANYWAY,
-    )
-    expect(rowChoiceChanges(row, CLEAR_MODE, later)[0].value).toBeUndefined()
+    const rowChoice = (value: string, overrides: Overrides) =>
+      withRowChoice(overrides, rowChoiceTarget(row), value).rows[row.key]
+    expect(rowChoice(REMOVE_ANYWAY, later)).toBe(REMOVE_ANYWAY)
+    expect(rowChoice(CLEAR_MODE, later)).toBeUndefined()
     // Saving the choice the row has already keeps it.
     const chosen: Overrides = { records: {}, rows: { [row.key]: CLEAR_MODE } }
-    expect(rowChoiceChanges(row, CLEAR_MODE, chosen)[0].value).toBe(CLEAR_MODE)
+    expect(rowChoice(CLEAR_MODE, chosen)).toBe(CLEAR_MODE)
   })
 
   it('clears the legacy mode for removing anyway, with no new mode', () => {

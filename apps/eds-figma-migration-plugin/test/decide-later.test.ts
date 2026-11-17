@@ -12,9 +12,10 @@ import {
   DECIDE_LATER,
   effectiveCategory,
   NO_OVERRIDES,
-  rowChoiceChanges,
+  rowChoiceTarget,
   rowCurrent,
   savedChoices,
+  withRowChoice,
 } from '../src/scan/mapping'
 import type { Overrides } from '../src/scan/mapping'
 import { buildReport } from '../src/scan/report'
@@ -28,7 +29,6 @@ import {
 } from '../src/scan/summary'
 import { SCORED_CATEGORIES } from '../src/scan/types'
 import type { BindingRecord, OldInstance, ScanSummary } from '../src/scan/types'
-import type { OverrideChange } from '../src/shared/messages'
 import { groupInstances, LIBRARY_INSTANCES_NOTE } from '../src/ui/instances'
 import { reviewItems, reviewSummary } from '../src/ui/review'
 import { sourceLabel, targetLabel } from '../src/ui/targets'
@@ -79,19 +79,6 @@ const later = (ids: string[]): Overrides => ({
   records: Object.fromEntries(ids.map((id) => [id, DECIDE_LATER])),
   rows: {},
 })
-
-/** What the plugin does with the changes (code.ts, setOverrides). */
-const store = (overrides: Overrides, changes: OverrideChange[]) => {
-  const records = { ...overrides.records }
-  const rows = { ...overrides.rows }
-  for (const { target, value } of changes) {
-    const map = target.type === 'record' ? records : rows
-    const key = target.type === 'record' ? target.id : target.key
-    if (value === undefined) delete map[key]
-    else map[key] = value
-  }
-  return { records, rows }
-}
 
 describe('Decide later', () => {
   it('makes a Ready value Needs check, and Apply leaves it', () => {
@@ -147,8 +134,16 @@ describe('Decide later', () => {
       records: { card: 'border/non-interactive/neutral/default' },
       rows: {},
     }
-    const after = store(before, rowChoiceChanges(row, DECIDE_LATER, before))
-    expect(after).toEqual({ records: {}, rows: { [row.key]: DECIDE_LATER } })
+    const after = withRowChoice(before, rowChoiceTarget(row), DECIDE_LATER)
+    // The value's own choice is put aside, so Undo my change on the row
+    // brings it back.
+    expect(after).toEqual({
+      records: {},
+      rows: { [row.key]: DECIDE_LATER },
+      replaced: {
+        [row.key]: { card: 'border/non-interactive/neutral/default' },
+      },
+    })
     expect(rowCurrent(row, after)).toBe(DECIDE_LATER)
     for (const binding of row.bindings) {
       expect(bindingOutcome(row, binding, after)).toEqual({

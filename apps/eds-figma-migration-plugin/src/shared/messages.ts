@@ -11,6 +11,7 @@ import type {
   MappingGroup,
   OverrideValue,
   Overrides,
+  RowChoiceTarget,
 } from '../scan/mapping'
 import type { Report } from '../scan/report'
 import type {
@@ -260,11 +261,18 @@ export type UiToPlugin =
   /** Selects every layer with a binding to migrate that uses one legacy variable */
   | { type: 'select-old'; oldKey: string }
   /**
-   * Sets targets for bindings or for rows in the Mapping view, in one batch.
-   * A value of null leaves the legacy binding as it is; undefined removes the
-   * override, so the row's target or the proposal applies again.
+   * Sets targets for single values, from the inspector, Review and the bulk
+   * bar, in one batch. Undefined removes the choice, so the row's target or
+   * the proposal applies again. A choice on a row is sent as `row-choice`.
    */
   | { type: 'set-overrides'; changes: OverrideChange[] }
+  /**
+   * A target chosen on a row, or undefined to undo the change on the row.
+   * The plugin makes it in one step: a target puts the choices on the row's
+   * values aside, and undoing it brings them back, except on a value with a
+   * choice of its own again (withRowChoice in scan/mapping.ts).
+   */
+  | { type: 'row-choice'; row: RowChoiceTarget; value?: OverrideValue }
   /** Applies every Ready change in the entries */
   | { type: 'apply'; entryIds: string[] }
   /** Applies the Ready changes among the bindings a designer has selected */

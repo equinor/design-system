@@ -161,6 +161,19 @@ again. A Ready value you set to Decide later counts as Needs check until you
 choose a target. The row's target then says what its values get, so a row
 whose values are all set to it says **Decide later**.
 
+A target you choose on a row reaches every value in it, so it replaces the
+choices you made on single values there, such as your answers in Review and
+Decide later. The plugin keeps those choices, and the picker says so: "Undo
+my change brings back the 3 choices it replaced". **Undo my change** in the
+row's picker then removes the row's target and brings back each of those
+choices. A value you have given a choice of its own since the change on the
+row keeps that one. When you change the row again before you undo, a value
+keeps the choice it had before your first change. Choosing the proposal
+again on a Ready row works the same way, and Undo my change brings the
+choices back there too. Undo my change on a row never removes a choice on a
+single value: to remove one, use Undo my change in the value's own picker, or
+tick the values and use **Reset choices** in the bar at the bottom.
+
 An open frame and the Main components tab list only their own values of a
 row, but the target of a row is the same everywhere: changing it there
 changes every value in the row in the scope, as in Changes. The picker

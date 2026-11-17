@@ -9,6 +9,8 @@ import {
   effectiveCategory,
   isMappable,
   NO_KEPT_MODES,
+  withChanges,
+  withRowChoice,
 } from '../scan/mapping'
 import { recount } from '../scan/summary'
 import type { KeptModes, Overrides } from '../scan/mapping'
@@ -404,16 +406,12 @@ async function selectOld(oldKey: string) {
   await select(nodeIds)
 }
 
-function setOverrides(changes: OverrideChange[]) {
-  const records = { ...overrides.records }
-  const rows = { ...overrides.rows }
-  for (const { target, value } of changes) {
-    const map = target.type === 'record' ? records : rows
-    const key = target.type === 'record' ? target.id : target.key
-    if (value === undefined) delete map[key]
-    else map[key] = value
-  }
-  overrides = { records, rows }
+/**
+ * Keeps the designer's choices, saves them in the file, and counts the scan
+ * again with them.
+ */
+function keepChoices(next: Overrides) {
+  overrides = next
   post({ type: 'overrides', overrides })
   if (!saveChoices(overrides)) post({ type: 'choices-not-saved' })
   if (lastScan) {
@@ -422,6 +420,10 @@ function setOverrides(changes: OverrideChange[]) {
     post({ type: 'kept-modes', kept, blocked })
     post({ type: 'summary', summary: lastScan.summary })
   }
+}
+
+function setOverrides(changes: OverrideChange[]) {
+  keepChoices(withChanges(overrides, changes))
 }
 
 async function entryDetail(entryId: string) {
@@ -570,6 +572,9 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'set-overrides':
         setOverrides(message.changes)
+        break
+      case 'row-choice':
+        keepChoices(withRowChoice(overrides, message.row, message.value))
         break
       case 'apply':
         await apply(message.entryIds)
