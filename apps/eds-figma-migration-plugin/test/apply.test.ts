@@ -898,6 +898,7 @@ describe('previewRun', () => {
       modesKept: [],
       resets: 1,
       inInstances: 2,
+      fromMain: { file: 0, library: 0, typography: 0 },
     })
   })
 

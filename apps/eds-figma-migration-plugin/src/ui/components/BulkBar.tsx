@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
-import { useRunPreview } from '../preview'
+import {
+  applyDisabled,
+  applyText,
+  useRunPreview,
+  waitingLine,
+} from '../preview'
 import { PreviewCounts } from './PreviewCounts'
 
 type BulkBarProps = {
@@ -26,9 +31,9 @@ type BulkBarProps = {
 /**
  * The actions on the ticked bindings, kept at the bottom of the window.
  * Apply changes only the Ready values among them, behind the same kind of
- * confirmation as Apply in the footer, with the plugin's preview of the run.
- * The preview names the legacy modes that stay because values below them
- * are not selected.
+ * confirmation as Apply in the footer, with the plugin's preview of the run
+ * (ui/preview.ts, applyText). The preview names the legacy modes that stay
+ * because values below them are not selected.
  */
 export function BulkBar({
   count,
@@ -120,25 +125,24 @@ export function BulkBar({
           </Dialog.Title>
         </Dialog.Header>
         <Dialog.Content>
-          <p>
-            The plugin binds the EDS Beta variables and text styles on the
-            selected values that are Ready. Nothing else in the scope changes in
-            this run.
-          </p>
-          <PreviewCounts preview={preview} />
-          <p className="muted">
-            {left > 0
-              ? `${left} of the selected value${left === 1 ? '' : 's'} wait${left === 1 ? 's' : ''} for you to choose a target, and ${left === 1 ? 'is' : 'are'} left for a later run. `
-              : ''}
-            Undo with Ctrl or Cmd+Z, or later with Revert frame.
-          </p>
+          <PreviewCounts
+            counting="Counting what the run changes…"
+            text={
+              preview &&
+              applyText(preview, {
+                revertLabel: 'Revert frame',
+                later: waitingLine(left),
+                selected: true,
+              })
+            }
+          />
         </Dialog.Content>
         <Dialog.Actions>
           <Button variant="ghost" onClick={() => setConfirm(false)}>
             Cancel
           </Button>
           <Button
-            disabled={preview?.changes === 0}
+            disabled={applyDisabled(preview)}
             onClick={() => {
               setConfirm(false)
               onApply()

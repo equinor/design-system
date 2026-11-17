@@ -1,6 +1,11 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
-import { useRunPreview } from '../preview'
+import {
+  applyDisabled,
+  applyText,
+  reviewLaterLine,
+  useRunPreview,
+} from '../preview'
 import type { PreviewScope } from '../preview'
 import { PreviewCounts } from './PreviewCounts'
 
@@ -41,8 +46,10 @@ type Confirm = 'apply' | 'revert' | undefined
 /**
  * Apply, Review and Revert, each behind a short confirmation that says what
  * will change and how to undo it. The Apply confirmation asks the plugin
- * for a preview of the run as it opens, and counts what the run changes and
- * which legacy modes stay.
+ * for a preview of the run as it opens, and says what the run changes, what
+ * changes inside instances, which legacy modes stay, and the change log it
+ * writes, all from that preview (ui/preview.ts, applyText). Apply waits
+ * for the preview.
  */
 export function ApplyActions({
   ready,
@@ -150,44 +157,24 @@ export function ApplyActions({
               </Dialog.Title>
             </Dialog.Header>
             <Dialog.Content>
-              <p>
-                The plugin binds the EDS Beta variables and text styles, and
-                sets the new modes. A legacy mode is cleared only when no layer
-                below it uses a legacy variable any more.
-              </p>
-              <PreviewCounts preview={preview} />
-              {mainComponents && (
-                <p>
-                  {mainComponents.count === 1
-                    ? 'The main component is'
-                    : `The ${mainComponents.count} main components are`}{' '}
-                  used {mainComponents.instances} time
-                  {mainComponents.instances === 1 ? '' : 's'} in the file. Every
-                  instance changes with{' '}
-                  {mainComponents.count === 1 ? 'it' : 'them'}, and keeps the
-                  text and other overrides set in it.
-                </p>
-              )}
-              <p className="muted">
-                {/* The preview counts the values an instance overrides,
-                    which change in the instance. */}
-                {preview && preview.inInstances > 0
-                  ? ''
-                  : mainComponents
-                    ? 'The plugin changes nothing in an instance directly.'
-                    : 'Nothing inside an instance changes.'}
-                {toReview > 0
-                  ? ` ${toReview} value${toReview === 1 ? '' : 's'} to review ${toReview === 1 ? 'is' : 'are'} left for a later run: review ${toReview === 1 ? 'it' : 'them'}, then apply again.`
-                  : ''}{' '}
-                Undo with Ctrl or Cmd+Z, or later with {revertLabel}.
-              </p>
+              <PreviewCounts
+                counting="Counting what the run changes…"
+                text={
+                  preview &&
+                  applyText(preview, {
+                    revertLabel,
+                    ...(mainComponents ? { mainComponents } : {}),
+                    later: reviewLaterLine(toReview),
+                  })
+                }
+              />
             </Dialog.Content>
             <Dialog.Actions>
               <Button variant="ghost" onClick={close}>
                 Cancel
               </Button>
               <Button
-                disabled={preview?.changes === 0}
+                disabled={applyDisabled(preview)}
                 onClick={() => {
                   close()
                   onApply()

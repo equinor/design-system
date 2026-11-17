@@ -5,7 +5,7 @@
  */
 import type { DisplaySettings } from './window'
 import type { FilePage } from './pages'
-import type { RunPreview } from '../scan/apply-plan'
+import type { ConversionPreview, RunPreview } from '../scan/apply-plan'
 import type {
   KeptModes,
   MappingGroup,
@@ -203,6 +203,8 @@ export type PluginToUi =
   | { type: 'kept-modes'; kept: KeptModes; blocked: Record<string, string> }
   /** The answer to a `preview` request: what the run would do */
   | { type: 'preview'; id: number; preview: RunPreview }
+  /** The answer to a `preview-convert` request: what Convert would do */
+  | { type: 'convert-preview'; id: number; preview: ConversionPreview }
   | { type: 'apply-progress'; done: number; total: number }
   | { type: 'apply-done'; result: ApplyResult }
   | { type: 'revert-done'; result: RevertResult }
@@ -299,6 +301,12 @@ export type UiToPlugin =
    * text style and colour its rows on the Typography tab show
    */
   | { type: 'convert-typography'; instanceIds: string[] }
+  /**
+   * Asks what Convert would do with the instances, as the Convert
+   * confirmation opens. The plugin answers with a `convert-preview` of the
+   * same id.
+   */
+  | { type: 'preview-convert'; id: number; instanceIds: string[] }
   /** Counts the instances of the main components that have a Typography instance in them */
   | { type: 'get-typography-components' }
   /** Resizes the window; done when the drag ends, so the size is kept */

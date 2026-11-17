@@ -10,7 +10,7 @@ import {
   modeBlockers,
   REMOVE_ANYWAY,
 } from './classify'
-import { conversionId } from './conversions'
+import { conversionId, dropsTextCase } from './conversions'
 import { propertyLabel } from './labels'
 import {
   DECIDE_LATER,
@@ -473,6 +473,15 @@ export type RunPreview = {
   resets: number
   /** Of the changes, values an instance overrides, which change in the instance */
   inInstances: number
+  /**
+   * Legacy values in the scope that instances take from their main
+   * component, which a run never changes in the instance, by where they
+   * change: with a main component in this file (`file`), when an instance
+   * of a library component is swapped to an EDS Beta component
+   * (`library`), or when a Typography instance is converted to text
+   * (`typography`). With `recordIds`, only those among the selected values.
+   */
+  fromMain: { file: number; library: number; typography: number }
 }
 
 /** "Density: Spacious" for a legacy mode, as the rows in Changes name it. */
@@ -510,6 +519,20 @@ export function previewRun(
     modesKept: [],
     resets: 0,
     inInstances: 0,
+    fromMain: { file: 0, library: 0, typography: 0 },
+  }
+  const instances = new Map(oldInstances.map((item) => [item.id, item]))
+  for (const record of records) {
+    if (record.category !== 'inInstance' || !entryIds.has(record.entryId)) {
+      continue
+    }
+    if (recordIds && !recordIds.has(record.id)) continue
+    const instance = record.instanceId
+      ? instances.get(record.instanceId)
+      : undefined
+    if (instance?.typography) preview.fromMain.typography += 1
+    else if (instance?.mainComponent?.remote) preview.fromMain.library += 1
+    else preview.fromMain.file += 1
   }
   const reset = new Set<string>()
   for (const change of plan) {
@@ -586,6 +609,12 @@ export type PlannedConversion = {
   style: ConversionTarget
   /** The EDS Beta colour; without it the legacy fill is copied, and Changes lists it after converting */
   colour?: ConversionTarget
+  /**
+   * The colour record when its colour is not Ready after the choices: the
+   * new text layer keeps the legacy variable. Without a colour record, the
+   * text has no legacy colour, and its colour is copied as it is.
+   */
+  legacyFill?: BindingRecord
 }
 
 /** An instance Convert leaves as it is, and why. */
@@ -690,7 +719,97 @@ export function planConversions(
             },
           }
         : {}),
+      ...(fill && colour === undefined ? { legacyFill: fill } : {}),
     })
   }
   return plan
+}
+
+/** A main component with a converted Typography instance in it. */
+export type CarriedComponent = {
+  id: string
+  name: string
+  /**
+   * How many instances it has in the file, each of which gets its text
+   * carried across; undefined until the plugin has counted them
+   */
+  instances?: number
+}
+
+/** What a Convert would do, counted from its plan, for the Convert confirmation. */
+export type ConversionPreview = {
+  /** Typography instances replaced by text layers with an EDS Beta text style */
+  converted: number
+  /** Of those, text colours changed to an EDS Beta variable */
+  coloursChanged: number
+  /**
+   * Text colours left on their legacy variable, since the colour needs a
+   * check, has no equivalent or is set to Decide later; Changes lists them
+   * after converting
+   */
+  coloursLegacy: number
+  /** Text colours copied as they are, since they use no legacy variable */
+  coloursCopied: number
+  /** Converted instances whose text case the text style drops, which a designer has confirmed */
+  casesDropped: number
+  /** Converted instances inside a main component, which Revert main component puts back */
+  inComponents: number
+  /** The main components whose instances get their text carried across to the new text layer */
+  carried: CarriedComponent[]
+  /** The instances Convert leaves, counted by reason, in the order of the plan */
+  skipped: { reason: string; count: number }[]
+}
+
+/**
+ * Counts what a Convert would do, from the same plan the plugin converts
+ * with (planConversions), so the confirmation says what Convert then does.
+ * `componentCounts` are the instances of each main component with a
+ * Typography instance in it (the `typography-components` message), when
+ * they have been counted.
+ */
+export function previewConversions(
+  plan: ConversionPlan,
+  oldInstances: OldInstance[],
+  componentCounts?: Record<string, number>,
+): ConversionPreview {
+  const instances = new Map(oldInstances.map((item) => [item.id, item]))
+  const preview: ConversionPreview = {
+    converted: plan.convert.length,
+    coloursChanged: 0,
+    coloursLegacy: 0,
+    coloursCopied: 0,
+    casesDropped: 0,
+    inComponents: 0,
+    carried: [],
+    skipped: [],
+  }
+  const carried = new Map<string, CarriedComponent>()
+  for (const item of plan.convert) {
+    if (item.colour) preview.coloursChanged += 1
+    else if (item.legacyFill) preview.coloursLegacy += 1
+    else preview.coloursCopied += 1
+    if (dropsTextCase(item.style.record, item.style.target)) {
+      preview.casesDropped += 1
+    }
+    const component = instances.get(item.instanceId)?.inComponent
+    if (!component) continue
+    preview.inComponents += 1
+    if (carried.has(component.id)) continue
+    const count = componentCounts?.[component.id]
+    carried.set(component.id, {
+      id: component.id,
+      name: component.name,
+      ...(count !== undefined ? { instances: count } : {}),
+    })
+  }
+  // A main component without instances carries nothing across.
+  preview.carried = [...carried.values()].filter(
+    (component) => component.instances !== 0,
+  )
+  const reasons = new Map<string, number>()
+  for (const skip of plan.skipped) {
+    reasons.set(skip.reason, (reasons.get(skip.reason) ?? 0) + 1)
+  }
+  preview.skipped = [...reasons].map(([reason, count]) => ({ reason, count }))
+  return preview
 }

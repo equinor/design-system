@@ -282,7 +282,24 @@ run): values bound to EDS Beta variables, numbers set without a variable,
 text styles applied, new modes set, legacy modes removed, layers reset for a
 Manual fix, how many of the changes are values an instance overrides, the
 legacy modes a designer removes anyway, with the values below that change,
-and the legacy modes that stay, each with what it waits for. The run:
+the legacy modes that stay, each with what it waits for, and the legacy
+values in the scope that instances take from their main component
+(`fromMain`), by where they change: with a main component in this file, when
+an instance of a library component is swapped, or when a Typography
+instance is converted.
+
+The window builds the text of every Apply confirmation (the footer of the
+scope, of a frame and of the Main components tab, and Apply on ticked
+values) from those counts alone, with `applyText` in `src/ui/preview.ts`, so
+each sentence follows from the run: what changes inside instances (the
+values an instance overrides, and what a reset for a Manual fix removes and
+puts back), the values left to their main component, the main components and
+how many instances follow them, the values left for a later run, and the
+change log the run writes. Until 2026-11-17 the confirmation said "Nothing
+inside an instance changes" whenever the preview counted no override, also
+when the run reset a layer inside an instance; that sentence is gone
+(`test/confirmations.test.ts`). Apply in the confirmation waits for the
+preview, and is disabled when the run changes nothing. The run:
 
 - binds the EDS Foundation variable on the same field, paint or effect, and
   keeps the other bindings on the layer;
@@ -325,7 +342,8 @@ from the layer, has no stand-in; the report lists them among the token gaps
 as "None possible", with a note that no stand-in is possible.
 
 Bindings that need a check are not applied until a designer has chosen a
-target for them. Inside an instance only its own overrides change. Before each change the
+target for them. Inside an instance only its own overrides change, and the
+layers an accepted Manual fix resets. Before each change the
 plugin checks that the layer still has the legacy binding from the scan, and
 lists what it could not change, with Go to. One run is one step in Figma's
 undo history (`figma.commitUndo`). After the run the plugin scans the same
@@ -343,7 +361,13 @@ the effect's field. The next scan counts such a number as migrated while the
 layer or the effect still has it. A binding someone
 has changed since the apply is left alone and reported. Shared plugin data is
 used because private plugin data needs a published plugin id, so a
-development copy could not keep a log.
+development copy could not keep a log. On a layer inside an instance, the log
+is plugin data the instance sets on that layer (`appendLog(…, inherited)`,
+see `logIsInherited`), so an override of the instance. Every Apply
+confirmation ends on the log: "The plugin notes each change in the layer's
+plugin data, so Revert frame can undo it later", with ", and inside an
+instance that note is an override of the instance" when the run changes a
+value an instance overrides or resets a layer (`changeLogLine`).
 
 A legacy mode is kept while a value below still reads its collection: its own
 collection or one in its alias chain (a colour reads its whole library and the
@@ -470,6 +494,25 @@ copied to the text layer, and Changes lists it after converting, which the
 row says beforehand. The change log notes how the text style came about
 (`sure`, `confirmed` or `override`) and the rule.
 
+Each Convert opens a confirmation first. As it opens, the window sends
+`preview-convert` with the instances, and the plugin answers with
+`convert-preview`: `previewConversions` in `src/scan/apply-plan.ts` counts
+the same plan `convert` runs (`planConversions`), with the instances
+replaced by text layers, the colours changed to EDS Beta, left on their
+legacy variable (`legacyFill` on the planned conversion) or copied as they
+are, the text cases dropped (the conversion's text style record keeps the
+legacy `textCase`, and `dropsTextCase` compares it with the style the
+conversion uses), the main components whose instances get their text carried
+across, with their instances when the tab has had them counted
+(`typography-components`), and the instances Convert leaves, by reason.
+`convertText` in `src/ui/preview.ts` builds the text, and ends on the change
+log on the new text layer, which Revert frame, or Revert main component for
+an instance in a main component, reads. That layer takes the instance's
+place, so it is never inside an instance. The confirmation's Convert waits
+for the preview and is disabled when nothing converts. Mono numbers are not
+in the preview, since the scan does not read the component's properties;
+the result counts them.
+
 A text case is a text style property, and setting one on a text layer
 detaches its text style in Figma. The scan reads the case of the legacy text
 (`textCase` on the typography unit, MIXED for more than one), and when it
@@ -543,8 +586,10 @@ with one row per binding, where a stand-in nobody has chosen yet reads
 "Stand-in:" and the target. Both can be downloaded; the Markdown can also be copied, for where a
 download from the plugin window is blocked.
 
-The plugin keeps two things in the shared plugin data of the document
-(namespace `eds_migration`):
+Besides the changes each run makes and the change log on each changed layer,
+the plugin keeps these in the shared plugin data of the document (namespace
+`eds_migration`), which the designer guide lists under "What the plugin
+writes into the file":
 
 - `health`: the latest scan summary (when, where, the totals and the frames
   with the lowest health). It is shown as **Last scan** when the plugin opens,
@@ -558,6 +603,8 @@ The plugin keeps two things in the shared plugin data of the document
   `savedChoices` in `src/scan/mapping.ts` reads it as Decide later.
   The saved `health` totals of such a version can have an `excluded` count,
   which `savedCounts` in `src/scan/summary.ts` adds to Needs check.
+- `left-out-pages`: the pages a scan of the file leaves out, chosen in
+  **Select pages**, for everyone who scans the file.
 
 The window follows Figma's light or dark theme. A scope without EDS
 variables, a scope with nothing left to migrate, an empty Changes or

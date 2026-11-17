@@ -48,6 +48,14 @@ export function styleTextCase(name: string): TextCase {
   return getNewTextStyle(name)?.textCase ?? 'ORIGINAL'
 }
 
+/**
+ * True when converting with the text style `style` drops the text case of
+ * the legacy text, which the conversion's text style record keeps.
+ */
+export function dropsTextCase(record: BindingRecord, style: string): boolean {
+  return (record.textCase ?? 'ORIGINAL') !== styleTextCase(style)
+}
+
 const CASE_WORDS: Record<TextCase | 'MIXED', string> = {
   ORIGINAL: 'no text case',
   UPPER: 'upper case',
@@ -66,11 +74,15 @@ const CASE_WORDS: Record<TextCase | 'MIXED', string> = {
  * decides later.
  */
 function withTextCase(
-  record: BindingRecord,
+  given: BindingRecord,
   textCase: TextCase | 'MIXED' | undefined,
 ): BindingRecord {
-  const style = record.candidates?.[0]
   const legacy = textCase ?? 'ORIGINAL'
+  // Kept on the record, so the Convert confirmation can count the cases a
+  // conversion drops with the style a designer chose (previewConversions).
+  const record: BindingRecord =
+    legacy === 'ORIGINAL' ? given : { ...given, textCase: legacy }
+  const style = record.candidates?.[0]
   if (!style) return record
   const target = styleTextCase(style)
   if (legacy === target) return record

@@ -283,9 +283,16 @@ it.
 
 The Apply confirmation counts what the run does: values bound to EDS Beta
 variables, numbers set without a variable, text styles applied, new modes
-set, legacy modes removed, layers reset for a Manual fix, and how many of
-the changes are values an instance overrides. It also names the legacy
-modes that stay, and what each waits for.
+set, legacy modes removed, and layers reset for a Manual fix. It says what
+changes inside instances: how many of the changes are values an instance
+overrides, which change in that instance, and that a reset also removes the
+other overrides on the layer and the layers below it, which the plugin puts
+back as they are. It counts the legacy values that instances take from their
+main component, which the run does not change in the instance, and says
+where they change instead. It names the legacy modes that stay, with what
+each waits for, and says that the plugin notes each change in the layer's
+plugin data (see [What the plugin writes into the file](#what-the-plugin-writes-into-the-file)).
+The confirmation's Apply button is on once the counts are there.
 
 Check the frame afterwards. Small differences in colour and spacing come from
 the new token values, not from the plugin.
@@ -317,6 +324,16 @@ is until you decide; its Convert button is off, and the row says why. A
 colour that is not Ready stays on its legacy variable after converting, and
 Changes lists it then.
 
+Every Convert, for all instances, for a row or for one instance, asks first.
+The confirmation counts the instances replaced by text layers with an EDS
+Beta text style, the colours changed to EDS Beta, left on their legacy
+variable or copied as they are, the text cases dropped, and the main
+components whose instances get their text carried across, with how many
+instances they have. It lists the instances Convert leaves, with why, and
+says that the plugin notes each conversion in the new text layer's plugin
+data, so Revert frame can put the instance back. When nothing would be
+converted, its Convert button is off.
+
 Some instances need a check because of their text case. The legacy text can
 be in upper case, for example, and the EDS Beta text styles have no text
 case. Figma detaches the text style from a layer when a text case is set on
@@ -337,6 +354,57 @@ figures; the result has a button that selects those texts.
   changes. A value you have changed since is left as you made it.
 - After an undo or an edit, the plugin says the page has changed since the
   scan, and Apply waits until you scan again.
+
+## What the plugin writes into the file
+
+Apply and Convert each open a confirmation that lists what the run changes,
+counted from the run itself. Besides those changes, the plugin notes each
+change on the layer it changes, and keeps your choices in the file. This is
+everything it writes:
+
+- **Variable bindings.** Apply binds the EDS Beta variable on the same
+  property of the layer, such as a fill, a stroke, an effect or a padding.
+  The other bindings on the layer stay as they are.
+- **Text styles.** Apply sets an EDS Beta text style on a text, or on a range
+  of it, in place of the legacy typography variables.
+- **Modes.** Apply sets the new density or colour scheme mode on the layer
+  that had the legacy one. It removes the legacy mode once nothing below it
+  reads it, or in the same run when you chose to remove it anyway.
+- **Values without a variable.** Where the EDS Beta has no variable, such as
+  for a border width, Apply sets the number itself, on the layer or on an
+  effect, in place of the legacy variable.
+- **Reset layers.** For a Manual fix you accepted, Apply resets the layer
+  inside the instance, so it takes its size from the main component again,
+  swaps it back if it was a swapped icon, and puts the other overrides on it
+  and below it back as they are. The fix lists those in Changes.
+- **Converted text layers.** Convert replaces a Typography instance with a
+  text layer in the same place, with the same text, an EDS Beta text style
+  and a colour. In a main component, the text each instance of the component
+  showed is set on the new text layer in that instance.
+- **The change log.** On every layer it changes, the plugin notes what it
+  changed in the layer's plugin data (shared plugin data, namespace
+  `eds_migration`, key `log`): the legacy variable, typography, mode or
+  component, what replaced it, whether it was Ready, confirmed or your
+  choice, the rule that proposed it, and the time. Revert frame reads this
+  note to put the legacy values back. On a layer inside an instance, the note
+  is plugin data the instance sets on that layer, so it is an override of the
+  instance, as the changed value is. Other plugins can read the note, so a
+  team can check a migration with its own tools.
+- **Saved choices, health and left-out pages.** In the file's own plugin
+  data, the plugin keeps the targets you chose, with the choices a change on
+  a row put aside so Undo can bring them back; the result of the latest scan,
+  shown as **Last scan** when the plugin opens; and the pages a scan of the
+  file leaves out. Everyone who opens the plugin in the file sees them.
+
+Your display settings, the window size and whether you have seen the
+introduction are kept for you in Figma, not in the file.
+
+Inside an instance, the plugin changes only the values the instance
+overrides and the layers it resets for a Manual fix, and the confirmation
+counts both. A value an instance takes from its main component is not
+changed in the instance: it changes with the main component, and an instance
+of a library component keeps it until you swap the instance to an EDS Beta
+component.
 
 ## Share the result
 

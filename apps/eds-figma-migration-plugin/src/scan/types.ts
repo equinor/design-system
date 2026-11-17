@@ -249,6 +249,12 @@ export type BindingRecord = {
   oldFields?: Partial<Record<TypographyField, { key: string; name: string }>>
   /** The font of a text or range before the change */
   oldFont?: { family: string; style: string }
+  /**
+   * For the text style of a conversion: the text case of the legacy text,
+   * when it has one. Converting drops it when the text style has another
+   * (scan/conversions.ts), which the Convert confirmation counts.
+   */
+  textCase?: TextCase | 'MIXED'
   /** The number the legacy variable resolves to on the layer, in px */
   oldValue?: number
   /** The colour the legacy variable resolves to on the layer */

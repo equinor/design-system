@@ -243,6 +243,8 @@ describe('text case (decision B)', () => {
     })
     expect(style.reason).toMatch(/^The legacy text has upper case/)
     expect(style.reason).toMatch(/drops the case/)
+    // Kept, so the Convert confirmation counts the case it drops.
+    expect(style.textCase).toBe('UPPER')
     // The colour is not affected by the case.
     expect(fill.category).toBe('sure')
   })
@@ -260,6 +262,7 @@ describe('text case (decision B)', () => {
     const [style] = conversionRecords([source], [typography()])
     expect(style.category).toBe('sure')
     expect(style.reason).not.toMatch(/text case/)
+    expect(style.textCase).toBeUndefined()
   })
 
   it('keeps the text case through the fixture format', () => {

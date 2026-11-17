@@ -3,7 +3,12 @@
  * document, and talks to the plugin window (src/ui) through messages.
  */
 import { MAPPING_VERSION } from '../mapping/version'
-import { modeWaits, planConversions, previewRun } from '../scan/apply-plan'
+import {
+  modeWaits,
+  planConversions,
+  previewConversions,
+  previewRun,
+} from '../scan/apply-plan'
 import {
   buildMappingGroups,
   effectiveCategory,
@@ -607,6 +612,25 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         break
       case 'convert-typography':
         await convert(message.instanceIds)
+        break
+      case 'preview-convert':
+        // From the same plan as convert(), with the instances of the main
+        // components when the Typography tab has had them counted.
+        if (lastScan) {
+          post({
+            type: 'convert-preview',
+            id: message.id,
+            preview: previewConversions(
+              planConversions(
+                lastScan.conversions,
+                overrides,
+                message.instanceIds,
+              ),
+              lastScan.oldInstances,
+              componentCounts,
+            ),
+          })
+        }
         break
       case 'get-typography-components':
         if (lastScan) {

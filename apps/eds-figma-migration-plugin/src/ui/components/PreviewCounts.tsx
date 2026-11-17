@@ -1,76 +1,75 @@
 /**
- * What a run will change, from the plugin's preview, for the Apply
- * confirmations: the values, numbers, text styles and modes it changes,
- * the Manual fix resets, the changes inside instances, and the legacy modes
- * that stay with what each waits for.
+ * The body of an Apply or Convert confirmation: the text built from the
+ * plugin's preview of the run (ui/preview.ts, applyText and convertText),
+ * so the dialog says what the run changes, what changes inside instances,
+ * the legacy modes that stay or go, the instances Convert leaves, and the
+ * change log the run writes. Until the plugin answers, it says it is
+ * counting.
  */
-import type { RunPreview } from '../../scan/apply-plan'
-import { instancesLine, keptLine, previewLines, removedLine } from '../preview'
+import { Fragment } from 'react'
+import type { ConfirmationText } from '../preview'
 
-/** How many kept legacy modes are named before "and N more" */
-const KEPT_SHOWN = 5
+/**
+ * Keys for lines that can repeat, such as two layers with the same name
+ * and the same legacy mode: the line, and how often it came before.
+ */
+function keyed(lines: string[]): [string, string][] {
+  const seen = new Map<string, number>()
+  return lines.map((line) => {
+    const n = seen.get(line) ?? 0
+    seen.set(line, n + 1)
+    return [`${line}#${n}`, line]
+  })
+}
 
-export function PreviewCounts({ preview }: { preview?: RunPreview }) {
-  if (!preview) {
+export function PreviewCounts({
+  text,
+  counting,
+}: {
+  text?: ConfirmationText
+  /** What the dialog says while the plugin counts */
+  counting: string
+}) {
+  if (!text) {
     return (
       <p className="muted" role="status">
-        Counting what the run changes…
+        {counting}
       </p>
     )
   }
-  const lines = previewLines(preview)
-  const instances = instancesLine(preview)
-  const kept = preview.modesKept
-  const removed = preview.modesRemovedAnyway
+  const { lead, changes, details, lists, notes, footnote } = text
   return (
     <div className="stack-tight">
-      {lines.length > 0 ? (
-        <>
-          <p>This run makes these changes:</p>
-          <ul className="review-summary">
-            {lines.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </>
+      {lead && <p>{lead}</p>}
+      {typeof changes === 'string' ? (
+        <p>{changes}</p>
       ) : (
-        <p>This run changes nothing.</p>
-      )}
-      {instances && <p>{instances}</p>}
-      {removed.length > 0 && (
         <>
-          <p>
-            {removed.length === 1
-              ? 'You chose to remove 1 legacy mode anyway:'
-              : `You chose to remove ${removed.length} legacy modes anyway:`}
-          </p>
+          <p>{changes.lead}</p>
           <ul className="review-summary">
-            {removed.slice(0, KEPT_SHOWN).map((item) => (
-              <li key={item.id}>{removedLine(item)}</li>
+            {keyed(changes.items).map(([key, line]) => (
+              <li key={key}>{line}</li>
             ))}
-            {removed.length > KEPT_SHOWN && (
-              <li>and {removed.length - KEPT_SHOWN} more</li>
-            )}
           </ul>
         </>
       )}
-      {kept.length > 0 && (
-        <>
-          <p>
-            {kept.length === 1
-              ? '1 legacy mode stays, because values below it that read it are not changed in this run:'
-              : `${kept.length} legacy modes stay, because values below them that read them are not changed in this run:`}
-          </p>
+      {keyed(details).map(([key, line]) => (
+        <p key={key}>{line}</p>
+      ))}
+      {lists.map((list) => (
+        <Fragment key={list.lead}>
+          <p>{list.lead}</p>
           <ul className="review-summary">
-            {kept.slice(0, KEPT_SHOWN).map((item) => (
-              <li key={item.id}>{keptLine(item)}</li>
+            {keyed(list.items).map(([key, item]) => (
+              <li key={key}>{item}</li>
             ))}
-            {kept.length > KEPT_SHOWN && (
-              <li>and {kept.length - KEPT_SHOWN} more</li>
-            )}
           </ul>
-        </>
-      )}
+        </Fragment>
+      ))}
+      {keyed(notes).map(([key, line]) => (
+        <p key={key}>{line}</p>
+      ))}
+      <p className="muted">{footnote}</p>
     </div>
   )
 }

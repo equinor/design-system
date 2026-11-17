@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Button } from '@equinor/eds-core-react/next'
+import { Button, Dialog } from '@equinor/eds-core-react/next'
 import { isUndecided } from '../../scan/mapping'
 import type {
   MappingBinding,
@@ -11,11 +11,14 @@ import type { OldInstance } from '../../scan/types'
 import { conversionStates } from '../conversions'
 import type { ConversionState } from '../conversions'
 import { plainReason } from '../plain'
+import { convertDisabled, convertText, useConversionPreview } from '../preview'
+import type { ConfirmationText } from '../preview'
 import { reviewItems } from '../review'
 import type { ReviewItem } from '../review'
 import { BindingRow } from './BindingRow'
 import { bindingTarget, ChangeRow, WhyDialog } from './ChangeRow'
 import type { Item } from './ChangeRow'
+import { PreviewCounts } from './PreviewCounts'
 
 type TypographyViewProps = {
   /** Instances of the legacy Typography component in the scope */
@@ -74,7 +77,9 @@ function carriedText(
  * typography and text style, then the text colours, each with its status,
  * its picker and its instances. Convert stays its own action: it converts
  * the instances whose text style is Ready after the designer's choices, and
- * says why it leaves the others.
+ * says why it leaves the others. Each Convert, for all of them, a row or
+ * one instance, opens a confirmation with the plugin's preview of the
+ * conversion (ui/preview.ts, convertText).
  */
 export function TypographyView({
   instances,
@@ -93,6 +98,13 @@ export function TypographyView({
 }: TypographyViewProps) {
   const [open, setOpen] = useState<Set<string>>(new Set())
   const [why, setWhy] = useState<Item>()
+  // The instances a Convert asks to convert, while its confirmation is open.
+  const [confirm, setConfirm] = useState<string[]>()
+  const { preview, request } = useConversionPreview()
+  const askConvert = (ids: string[]) => {
+    request(ids)
+    setConfirm(ids)
+  }
   const inComponents = instances.filter((instance) => instance.inComponent)
   const needsCounts = inComponents.length > 0 && componentCounts === undefined
   // Counted when the tab opens, since finding instances can load every page.
@@ -208,7 +220,7 @@ export function TypographyView({
                         <Button
                           size="small"
                           disabled={busy || rowConverts.length === 0}
-                          onClick={() => onConvert(rowIds)}
+                          onClick={() => askConvert(rowIds)}
                         >
                           Convert {rowConverts.length} to text
                         </Button>
@@ -275,7 +287,7 @@ export function TypographyView({
                                     variant="secondary"
                                     disabled={busy || state?.skip !== undefined}
                                     aria-label={`Convert ${name} to text${state?.skip ? `. ${state.skip}` : ''}`}
-                                    onClick={() => onConvert([binding.nodeId])}
+                                    onClick={() => askConvert([binding.nodeId])}
                                   >
                                     Convert
                                   </Button>
@@ -342,7 +354,7 @@ export function TypographyView({
           <Button
             size="small"
             disabled={busy || toConvert.length === 0}
-            onClick={() => onConvert(allIds)}
+            onClick={() => askConvert(allIds)}
           >
             Convert {toConvert.length} to text
           </Button>
@@ -388,6 +400,62 @@ export function TypographyView({
         onClose={() => setWhy(undefined)}
         onChangeRow={onChangeRow}
       />
+      <Dialog
+        open={confirm !== undefined}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) setConfirm(undefined)
+        }}
+      >
+        {confirm && (
+          <ConvertConfirmation
+            count={preview?.converted ?? converts(confirm).length}
+            text={preview && convertText(preview)}
+            disabled={convertDisabled(preview)}
+            onCancel={() => setConfirm(undefined)}
+            onConvert={() => {
+              setConfirm(undefined)
+              onConvert(confirm)
+            }}
+          />
+        )}
+      </Dialog>
     </div>
+  )
+}
+
+/** The Convert confirmation, with what converting changes from the plugin's preview. */
+function ConvertConfirmation({
+  count,
+  text,
+  disabled,
+  onCancel,
+  onConvert,
+}: {
+  /** The instances converted: the preview's count, or the tab's until it answers */
+  count: number
+  text?: ConfirmationText
+  disabled: boolean
+  onCancel: () => void
+  onConvert: () => void
+}) {
+  return (
+    <>
+      <Dialog.Header>
+        <Dialog.Title>
+          Convert {plural(count, 'Typography instance')} to text?
+        </Dialog.Title>
+      </Dialog.Header>
+      <Dialog.Content>
+        <PreviewCounts counting="Counting what Convert changes…" text={text} />
+      </Dialog.Content>
+      <Dialog.Actions>
+        <Button variant="ghost" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button disabled={disabled} onClick={onConvert}>
+          Convert
+        </Button>
+      </Dialog.Actions>
+    </>
   )
 }
