@@ -274,6 +274,6 @@ describe('check-contrast', () => {
   it('fails with a hint when the TS modules are missing', () => {
     const result = run(path.join(os.tmpdir(), 'eds-contrast-does-not-exist'))
     expect(result.status).toBe(1)
-    expect(result.stderr).toContain('generate:ts-tokens')
+    expect(result.stderr).toContain('build:ts-modules')
   })
 })

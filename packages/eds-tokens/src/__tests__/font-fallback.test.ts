@@ -14,8 +14,8 @@ import { describe, it, expect } from 'vitest'
  * `sans-serif` while it concatenates (generate-css-bundle.mjs).
  *
  * It is appended there, in memory, rather than in the export files, because
- * generate-ts-tokens.mjs reads its values from those same files and React
- * Native's `fontFamily` takes one family name. That split is the point of the
+ * the TypeScript modules carry the same value and React Native's
+ * `fontFamily` takes one family name. That split is the point of the
  * fix, so it is asserted from both ends here: the bundle carries the fallback,
  * the export and the TS modules do not.
  *

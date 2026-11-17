@@ -68,12 +68,11 @@ jobs:
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: pnpm install --force
       # `studio pull` writes over the previous release's files without
-      # pruning, and the TS generator discovers its inputs from whatever
-      # is on disk (see buildContext). A folder renamed upstream would
-      # otherwise leave both copies behind and abort the run, and a
-      # removed one would keep resolving to its stale value.
+      # pruning, and the TS build and the CSS bundle read whatever is on
+      # disk. A folder renamed upstream would otherwise leave both copies
+      # behind, and a removed one would keep resolving to its stale value.
       - name: Clear the previous generated exports
-        run: rm -rf packages/eds-tokens/src/tokens/css packages/eds-tokens/src/tokens/dtcg
+        run: rm -rf packages/eds-tokens/src/tokens/css packages/eds-tokens/src/tokens/dtcg packages/eds-tokens/src/tokens/ts-export
       # Pulls every output in packages/eds-tokens/.studio.json: the raw
       # token sets, and the saved CSS (EDS-CSS) and DTCG (EDS-DTCG)
       # exports, which Tokens Studio runs on the platform. The exports
@@ -94,11 +93,15 @@ jobs:
       # there is nothing left to strip.
       - name: Strip internal token sets (foundation, input)
         run: pnpm --filter @equinor/eds-tokens run strip:internal-token-sets
-      # TypeScript token modules are generated locally from the DTCG
-      # export (structure) + CSS export (evaluated values) — the platform
-      # has no TS export format. See the script header for details.
-      - name: Generate TypeScript tokens
-        run: pnpm --filter @equinor/eds-tokens run generate:ts-tokens
+      # The TypeScript token modules are rebuilt from the platform's
+      # TypeScript export (one file per colour scheme and density, pulled
+      # into the ignored src/tokens/ts-export above) into the published
+      # layout, one module per token set. The DTCG export says which
+      # groups belong to which set. A value that is missing or not
+      # evaluated fails the run before any module is written. See the
+      # script header for details.
+      - name: Build TypeScript token modules
+        run: pnpm --filter @equinor/eds-tokens run build:ts-modules
       # Widen the semantic layer to [data-color-scheme] and [data-density],
       # the density base to [data-density="comfortable"] and the light
       # colour scheme to :root (#5226, #5247, #5795;
@@ -112,9 +115,8 @@ jobs:
       # #5423) and a generic family (sans-serif, or monospace for mono)
       # on every --eds-family-* declaration (#5701, #5800), which is why
       # those lines differ from the export files in this PR's diff. It is appended here rather
-      # than in the export because generate-ts-tokens.mjs above reads
-      # the same files, and React Native's fontFamily takes one family
-      # name. Importable on
+      # than in the export because the TypeScript modules carry the same
+      # value, and React Native's fontFamily takes one family name. Importable on
       # the beta line as @equinor/eds-tokens/next/css/variables.css via
       # the ./next/css/* wildcard publish_tokens.yaml already injects.
       - name: Widen semantic scope and bundle CSS into variables.css
@@ -139,6 +141,13 @@ jobs:
       # scope and bundle CSS" would not say what actually went wrong.
       - name: Check for colliding custom-property names
         run: pnpm --filter @equinor/eds-tokens run check:css:names
+      # Every var() in the CSS export has to point at a declared name, and
+      # no chain of references may loop back on itself. The TS script that
+      # used to resolve these chains is gone, and the check keeps the
+      # guarantee (neither case is caught by the name check above). Placed
+      # before Create Pull Request for the same reason: the PR gets no CI.
+      - name: Check CSS custom-property references
+        run: pnpm --filter @equinor/eds-tokens run check:css:references
       # Contrast of the documented colour pairings (#5382, ADR-0016
       # Confirmation 5), measured on the TS modules generated above,
       # which hold every semantic colour resolved per scheme. A pair
