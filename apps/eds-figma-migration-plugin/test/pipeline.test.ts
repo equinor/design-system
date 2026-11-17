@@ -10,10 +10,12 @@
  */
 import { existsSync, readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
+import { keptModesByRecord } from '../src/scan/apply-plan'
 import { classifyUnits } from '../src/scan/classify'
 import { unpackFixture } from '../src/scan/fixture'
 import type { PackedFixture } from '../src/scan/fixture'
 import { propertyLabel } from '../src/scan/labels'
+import { NO_OVERRIDES } from '../src/scan/mapping'
 import type { BindingRecord } from '../src/scan/types'
 
 const path = new URL('./fixtures/test-frame.json', import.meta.url)
@@ -119,10 +121,7 @@ describe.skipIf(!fixture)('pipeline on the test frame', () => {
 
   it('reports nothing as having no equivalent', () => {
     const none = records
-      .filter(
-        (record) =>
-          record.category === 'none' && record.rule !== 'mode/after-review',
-      )
+      .filter((record) => record.category === 'none')
       .map((record) => `${record.nodeName}: ${propertyLabel(record.property)}`)
       .sort()
     expect(none).toEqual([])
@@ -138,9 +137,11 @@ describe.skipIf(!fixture)('pipeline on the test frame', () => {
     }
   })
 
-  it('holds the Appearance modes until the bindings below that need a check are reviewed', () => {
+  it('keeps the Appearance modes in the next run until the bindings below that need a check are decided', () => {
+    const entries = new Set(records.map((record) => record.entryId))
+    const kept = keptModesByRecord(records, NO_OVERRIDES, entries, [])
     const held = records
-      .filter((record) => record.rule === 'mode/after-review')
+      .filter((record) => kept[record.id]?.setsMode === false)
       .map((record) => record.nodeName)
       .sort()
     expect(held).toEqual([

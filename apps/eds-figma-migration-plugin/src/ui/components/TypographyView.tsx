@@ -10,7 +10,6 @@ import type {
 import type { OldInstance } from '../../scan/types'
 import { conversionStates } from '../conversions'
 import type { ConversionState } from '../conversions'
-import { isHeld } from '../labels'
 import { plainReason } from '../plain'
 import { reviewItems } from '../review'
 import type { ReviewItem } from '../review'
@@ -260,7 +259,6 @@ export function TypographyView({
                             {...(reason ? { reason } : {})}
                             effects={effects}
                             category={outcome.category}
-                            held={isHeld(outcome.category, row.rule)}
                             changeable
                             selectable={false}
                             selected={false}

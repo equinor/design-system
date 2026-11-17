@@ -3,6 +3,7 @@
  * a later run. It replaces every way to keep a legacy variable, so a value
  * set to it is never applied and keeps counting as not migrated.
  */
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { planChanges } from '../src/scan/apply-plan'
 import {
@@ -29,7 +30,7 @@ import { SCORED_CATEGORIES } from '../src/scan/types'
 import type { BindingRecord, OldInstance, ScanSummary } from '../src/scan/types'
 import type { OverrideChange } from '../src/shared/messages'
 import { groupInstances, LIBRARY_INSTANCES_NOTE } from '../src/ui/instances'
-import { reviewItems } from '../src/ui/review'
+import { reviewItems, reviewSummary } from '../src/ui/review'
 import { sourceLabel, targetLabel } from '../src/ui/targets'
 
 const record = (
@@ -347,5 +348,27 @@ describe('the Instances tab', () => {
     expect(LIBRARY_INSTANCES_NOTE).toBe(
       'The plugin migrates variables, not components. Swap these to EDS Beta components in Figma; their legacy values go with them.',
     )
+  })
+})
+
+describe('Review keeps only Decide later (decided 2026-11-16, phase 6b)', () => {
+  it('counts confirmed, changed and Decide later in its closing summary, and nothing skipped', () => {
+    const summary = reviewSummary(['confirmed', 'later', 'changed', 'later'])
+    expect(summary.map((line) => [line.decision, line.count])).toEqual([
+      ['confirmed', 1],
+      ['changed', 1],
+      ['later', 2],
+    ])
+    expect(summary.map((line) => line.text).join(' ')).not.toMatch(/skip/i)
+  })
+
+  it('has no Skip button, and offers Decide later where Skip was', () => {
+    const source = readFileSync(
+      new URL('../src/ui/components/ReviewView.tsx', import.meta.url),
+      'utf8',
+    )
+    expect(source).not.toMatch(/\bSkip\b|skipped/)
+    // Decide later is a button both for a Manual fix and for other values.
+    expect(source.match(/\{DECIDE_LATER_LABEL\}/g)?.length).toBe(2)
   })
 })

@@ -325,7 +325,11 @@ export function resetEffectsText(
 export function groupOf(unit: RawUnit): PropertyGroup {
   if (unit.unit === 'typography') return 'typography'
   if (unit.unit === 'mode') return 'modes'
-  if (unit.unit === 'value') return 'size'
+  // A number on an effect, such as the blur of a shadow, is grouped with
+  // the other effect numbers.
+  if (unit.unit === 'value') {
+    return unit.property.type === 'effect' ? 'other' : 'size'
+  }
   switch (unit.kind) {
     case 'fill':
     case 'stroke':
@@ -400,7 +404,12 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     }
     const rules = resolveVariable({
       kind: unit.kind,
-      variable: toOldVariable(variable),
+      variable: {
+        ...toOldVariable(variable),
+        ...(unit.layerValue !== undefined
+          ? { layerValue: unit.layerValue }
+          : {}),
+      },
       context: toRoleContext(unit.context),
     })
     const fix = manualFix(unit)
@@ -678,40 +687,44 @@ export function modeBlockers(
 }
 
 /**
- * Bindings that wait for a designer: a Needs check, or a No equivalent with
- * a stand-in, which is applied once a designer chooses it or another target.
+ * Bindings that stay legacy whatever a designer chooses in the window:
+ * inside instances, with no equivalent and no stand-in, or to change by
+ * hand.
  */
-function waitsForDecision(record: BindingRecord): boolean {
-  if (record.category === 'check') return true
-  return record.category === 'none' && (record.candidates?.length ?? 0) > 0
-}
-
-/** Bindings that will not change: inside instances, with no equivalent and no stand-in, or to change by hand. */
 function staysAsItIs(record: BindingRecord): boolean {
-  if (record.category === 'none') return !waitsForDecision(record)
+  if (record.category === 'none') return (record.candidates?.length ?? 0) === 0
   return ['inInstance', 'byHand'].includes(record.category)
 }
 
 /**
  * A legacy mode can only be cleared once nothing below it uses a legacy
  * variable through it, including inside instances: an instance still
- * resolves its legacy variables through the mode. A mode above a binding
- * that will not change stays for good; a mode above a binding that needs a
- * check, or has no equivalent and a stand-in, stays until the binding is
- * reviewed and applied. A mode that sets a
- * new one is still applied, and keeps the legacy mode beside it. A mode
- * with nothing to do now counts as No equivalent, with the reason, so Apply
- * never offers a change that changes nothing.
+ * resolves its legacy variables through the mode. Which values below are
+ * changed depends on the designer's choices and on what a run includes, so
+ * the rules leave every legacy mode with its own outcome and proposal, and
+ * the plugin works out from the choices which modes the next run keeps
+ * (apply-plan.ts, keptModes). A mode that is only cleared counts as Ready
+ * when every value below that reads it is Ready and changes in the same
+ * run, and Apply clears it after those values; otherwise it waits (Waiting)
+ * and says what for. A mode that sets a new mode is Ready either way, and
+ * keeps the legacy mode beside it while values below read it.
+ *
+ * Two cases are decided here. A mode whose EDS Beta mode is already set on
+ * the layer, as after a run that kept the legacy mode beside it, is only
+ * cleared, so a run that keeps it changes nothing and it waits like any
+ * mode that is only cleared. A mode an instance sets itself, held only by
+ * values the instance takes from its main component, waits for the main
+ * component like those values do, so it is counted with them in Inside
+ * instances (rule mode/from-main).
  */
 export function holdModes(records: BindingRecord[]): BindingRecord[] {
   const forGood = blockedModes(records, staysAsItIs)
-  // For a mode an instance overrides: the values below that stay because
-  // the instance has them as its own, not from its main component.
+  // The values below that stay because the instance has them as its own,
+  // not from its main component.
   const ownForGood = blockedModes(
     records,
     (record) => staysAsItIs(record) && record.category !== 'inInstance',
   )
-  const untilReview = blockedModes(records, waitsForDecision)
   const newModes = new Set(
     records
       .filter(
@@ -720,53 +733,41 @@ export function holdModes(records: BindingRecord[]): BindingRecord[] {
       )
       .map((record) => `${record.nodeId}|${record.current?.split(':')[0]}`),
   )
-  return records.map((record) => {
+  return records.map((found) => {
     if (
-      record.property.type !== 'mode' ||
-      record.category !== 'sure' ||
-      !record.oldMode
+      found.property.type !== 'mode' ||
+      found.category !== 'sure' ||
+      !found.oldMode
     ) {
-      return record
+      return found
     }
-    const key = `${record.nodeId}|${record.oldMode.collectionKey}`
-    const stays = forGood.has(key)
-      ? 'The legacy mode stays while layers below use legacy variables that are not changed: inside instances, with no equivalent and no stand-in, or to change by hand.'
-      : untilReview.has(key)
-        ? 'The legacy mode is cleared once the bindings below that need a check, or wait for a stand-in to be chosen, are reviewed and applied.'
+    const proposal = found.candidates?.[0]
+    const collection =
+      proposal !== undefined && proposal !== CLEAR_MODE
+        ? proposal.split(':')[0]
         : undefined
-    if (!stays) return record
+    const record: BindingRecord =
+      collection && newModes.has(`${found.nodeId}|${collection}`)
+        ? {
+            ...found,
+            candidates: [CLEAR_MODE],
+            reason: `${found.reason ?? ''}. The layer already has a mode of the EDS Beta ${collection} collection, so only the legacy mode is left to clear`,
+          }
+        : found
+    if (!record.override) return record
+    const key = `${record.nodeId}|${record.oldMode?.collectionKey}`
+    if (!forGood.has(key) || ownForGood.has(key)) return record
     const target = record.candidates?.[0]
-    const setsMode = target !== undefined && target !== CLEAR_MODE
-    const alreadySet =
-      setsMode && newModes.has(`${record.nodeId}|${target.split(':')[0]}`)
-    if (setsMode && !alreadySet) {
-      return { ...record, reason: `${record.reason ?? ''}. ${stays}` }
-    }
-    // A mode an instance sets itself, held only by values the instance
-    // takes from its main component, waits for the main component like
-    // those values do, so it is counted with them.
-    if (record.override && forGood.has(key) && !ownForGood.has(key)) {
-      const { outcome, candidates, ...rest } = record
-      void outcome
-      void candidates
-      return {
-        ...rest,
-        category: 'inInstance',
-        reason:
-          'The instance sets this legacy mode itself, and layers below it take legacy values from the main component through it. Update the main component first. The plugin clears the mode once nothing below it uses legacy variables.',
-        rule: 'mode/from-main',
-      }
-    }
+    if (target !== undefined && target !== CLEAR_MODE) return record
+    const { outcome, candidates, ...rest } = record
+    void outcome
+    void candidates
     return {
-      ...record,
-      category: 'none',
-      outcome: 'none',
-      // Clearing stays the proposal: Apply makes it once nothing below reads
-      // the mode. A designer who accepts that the legacy values below change
-      // can choose REMOVE_ANYWAY in the picker instead.
-      candidates: [CLEAR_MODE],
-      reason: stays,
-      rule: forGood.has(key) ? 'mode/kept' : 'mode/after-review',
+      ...rest,
+      category: 'inInstance',
+      reason:
+        'The instance sets this legacy mode itself, and layers below it take legacy values from the main component through it. Update the main component first. The plugin clears the mode once nothing below it uses legacy variables.',
+      rule: 'mode/from-main',
     }
   })
 }

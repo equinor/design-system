@@ -16,6 +16,7 @@ import type {
 } from '../../mapping/types'
 import { INSTANCE_LOCKED_FIELDS } from '../../scan/classify'
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
+import { effectNumber } from '../../shared/effect-numbers'
 import { readLog } from '../apply/log'
 import {
   effectVariableId,
@@ -384,6 +385,19 @@ export class Collector {
     }
   }
 
+  /**
+   * A legacy number variable whose value could not be read on the layer,
+   * such as one from a library that is not enabled. The scan then reads the
+   * value the layer has now, which the stand-in takes as its px.
+   */
+  private unreadNumber(variable: RawVariable): boolean {
+    return (
+      this.options.oldKeys.has(variable.collectionKey) &&
+      variable.type === 'FLOAT' &&
+      variable.value === undefined
+    )
+  }
+
   private async rawVariable(
     id: string,
     node: SceneNode,
@@ -603,6 +617,9 @@ export class Collector {
         override && instanceRoot && INSTANCE_LOCKED_FIELDS.has(field)
           ? await this.mainSide(node, instanceRoot, instancePath, field, modes)
           : undefined
+      const layerValue = this.unreadNumber(variable)
+        ? (node as unknown as Record<string, unknown>)[field]
+        : undefined
       push({
         ...base,
         ...(override ? { override: true } : {}),
@@ -610,6 +627,7 @@ export class Collector {
         kind: FIELD_KINDS[field] ?? 'other',
         property,
         variable,
+        ...(typeof layerValue === 'number' ? { layerValue } : {}),
         ...mainSide,
       })
     }
@@ -669,6 +687,9 @@ export class Collector {
             (counterpart) =>
               effectVariableId(counterpart, index, field) === alias.id,
           )
+          const layerValue = this.unreadNumber(variable)
+            ? effectNumber(effect, field)
+            : undefined
           push({
             ...base,
             ...(override ? { override: true } : {}),
@@ -676,30 +697,51 @@ export class Collector {
             kind: field === 'color' ? 'effect' : 'other',
             property,
             variable,
+            ...(layerValue !== undefined ? { layerValue } : {}),
           })
         }
       }
     }
 
     // Numbers the plugin set in place of a legacy variable, such as border
-    // widths, count as migrated while the layer keeps them.
+    // widths or the blur of a shadow, count as migrated while the layer
+    // keeps them.
     if (hasLog) {
       const counted = new Set<string>()
       for (const entry of readLog(node)) {
-        if (entry.new.type !== 'value' || entry.property.type !== 'field') {
+        if (entry.new.type !== 'value') continue
+        const { property } = entry
+        let key: string
+        if (property.type === 'field') {
+          const { field } = property
+          if (field in bound) continue
+          const current = (node as unknown as Record<string, unknown>)[field]
+          if (current !== entry.new.value) continue
+          key = field
+        } else if (property.type === 'effect') {
+          const effect =
+            'effects' in node ? node.effects[property.index] : undefined
+          const effectBound = (
+            effect && 'boundVariables' in effect
+              ? effect.boundVariables
+              : undefined
+          ) as Record<string, VariableAlias | undefined> | undefined
+          if (!effect || effectBound?.[property.field]) continue
+          if (effectNumber(effect, property.field) !== entry.new.value) {
+            continue
+          }
+          key = `effects[${property.index}].${property.field}`
+        } else {
           continue
         }
-        const { field } = entry.property
-        if (counted.has(field) || field in bound) continue
-        const current = (node as unknown as Record<string, unknown>)[field]
-        if (current !== entry.new.value) continue
-        counted.add(field)
+        if (counted.has(key)) continue
+        counted.add(key)
         push({
           ...base,
           // Only a change log of the instance's own is read inside one.
           ...(instanceRoot ? { override: true } : {}),
           unit: 'value',
-          property: entry.property,
+          property,
           value: entry.new.value,
         })
       }

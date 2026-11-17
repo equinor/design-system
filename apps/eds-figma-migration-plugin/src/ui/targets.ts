@@ -75,16 +75,11 @@ export function modePickerNote(
 
 /**
  * What a No equivalent value says before anybody has chosen a target: the
- * stand-in the plugin proposes for the gap in the EDS Beta, or why a legacy
- * mode is kept. A string or boolean variable has no stand-in.
+ * stand-in the plugin proposes for the gap in the EDS Beta. A string or
+ * boolean variable has no stand-in. A legacy mode that waits for the values
+ * below says so from the kept modes instead (KEPT_TARGET_LABEL).
  */
-export function unchangedLabel(
-  rule: string | undefined,
-  standIn?: string | null,
-): string {
-  if (rule === 'mode/kept') return 'Kept: legacy values below read it'
-  if (rule === 'mode/after-review')
-    return 'Kept until the values below are reviewed'
+export function unchangedLabel(standIn?: string | null): string {
   if (standIn) {
     return `Stand-in: ${standIn === CLEAR_MODE ? 'Remove the legacy mode' : targetLabel(standIn)}`
   }

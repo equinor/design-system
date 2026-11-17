@@ -7,7 +7,8 @@ import { DECIDE_LATER } from '../../scan/mapping'
 import type { OverrideValue } from '../../scan/mapping'
 import { pathBelow } from '../paths'
 import { plainReason, targetMeaning } from '../plain'
-import type { ReviewItem } from '../review'
+import { reviewSummary } from '../review'
+import type { ReviewDecision as Decision, ReviewItem } from '../review'
 import { REMOVE_ANYWAY } from '../../scan/classify'
 import {
   DECIDE_LATER_LABEL,
@@ -16,8 +17,6 @@ import {
 } from '../targets'
 import { ResetEffects } from './ResetEffects'
 import { VariableList } from './VariableList'
-
-type Decision = 'confirmed' | 'changed' | 'later' | 'skipped'
 
 type ReviewViewProps = {
   /** The items, fixed when the review starts, so a decision does not move the list */
@@ -44,9 +43,9 @@ type ReviewViewProps = {
  * Steps through the bindings that need a check or have a stand-in, one at a
  * time: selects the layer in Figma, shows why the rule was unsure or what
  * the EDS Beta lacks, the proposal and the other candidates, and lets the
- * designer confirm, choose another target, decide later, or skip it for
- * now. Decide later is stored, so the value says so in Changes; both come
- * back in the next review.
+ * designer confirm, choose another target, or decide later. Decide later is
+ * the only way to put a value off: it is stored, so the value says so in
+ * Changes, and it comes back in the next review.
  */
 export function ReviewView({
   items,
@@ -101,27 +100,17 @@ export function ReviewView({
   }
 
   if (!item) {
-    const count = (decision: Decision) =>
-      decisions.filter((candidate) => candidate === decision).length
     return (
       <section className="stack" aria-labelledby="review-done">
         <h2 id="review-done" className="inspector-title">
           Review done
         </h2>
         <ul className="review-summary">
-          <li>
-            <strong>{count('confirmed')}</strong> proposals confirmed
-          </li>
-          <li>
-            <strong>{count('changed')}</strong> given another target
-          </li>
-          <li>
-            <strong>{count('later')}</strong> set to Decide later, left for a
-            later run
-          </li>
-          <li>
-            <strong>{count('skipped')}</strong> skipped, still to decide on
-          </li>
+          {reviewSummary(decisions).map((line) => (
+            <li key={line.decision}>
+              <strong>{line.count}</strong> {line.text}
+            </li>
+          ))}
         </ul>
         <p className="muted">
           {run === 'Convert'
@@ -262,9 +251,6 @@ export function ReviewView({
           >
             {DECIDE_LATER_LABEL}
           </Button>
-          <Button variant="secondary" onClick={() => next('skipped')}>
-            Skip
-          </Button>
           <Button variant="ghost" disabled={index === 0} onClick={back}>
             Previous
           </Button>
@@ -305,9 +291,17 @@ export function ReviewView({
                         : 'Confirm proposal'
                     : 'Use this target'}
             </Button>
-            <Button variant="secondary" onClick={() => next('skipped')}>
-              Skip
-            </Button>
+            {value !== DECIDE_LATER && (
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  onDecide(item, DECIDE_LATER)
+                  next('later')
+                }}
+              >
+                {DECIDE_LATER_LABEL}
+              </Button>
+            )}
             <Button variant="ghost" disabled={index === 0} onClick={back}>
               Previous
             </Button>

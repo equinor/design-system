@@ -27,7 +27,6 @@ import { CLEAR_MODE } from '../../scan/classify'
 import {
   bindingOutcome,
   DECIDE_LATER,
-  isHeldMode,
   isUndecided,
   keptModeText,
   NO_KEPT_MODES,
@@ -97,9 +96,9 @@ export function legacyText(group: MappingGroup): string {
  * a No equivalent value nobody has decided on shows its stand-in, and a
  * legacy mode the next Apply keeps says that it is kept.
  */
-function countLabel({ target, noEquivalent, rule, kept }: TargetCount): string {
+function countLabel({ target, noEquivalent, kept }: TargetCount): string {
   if (kept) return KEPT_TARGET_LABEL
-  if (noEquivalent) return unchangedLabel(rule, target)
+  if (noEquivalent) return unchangedLabel(target)
   if (target === CLEAR_MODE) return 'Remove the legacy mode'
   return targetLabel(target)
 }
@@ -135,10 +134,7 @@ function mainTarget(
   kept: KeptModes,
 ): string | null {
   const [first] = targetCounts([row], overrides, kept)
-  return !first ||
-    first.target === DECIDE_LATER ||
-    first.kept ||
-    (first.noEquivalent && isHeldMode(first.rule))
+  return !first || first.target === DECIDE_LATER || first.kept
     ? null
     : first.target
 }
@@ -147,7 +143,7 @@ function mainTarget(
 function rowTargetText(row: MappingRow, overrides: Overrides): string {
   if (row.key in overrides.rows) return targetLabel(overrides.rows[row.key])
   return row.outcome === 'none'
-    ? unchangedLabel(row.rule, row.proposal)
+    ? unchangedLabel(row.proposal)
     : targetLabel(row.proposal ?? null)
 }
 
@@ -287,14 +283,11 @@ function rowReason(
  */
 function StatusCell({
   categories,
-  rule,
   kept = false,
   why,
   onWhy,
 }: {
   categories: [Category, number][]
-  /** The row's rule; a held legacy mode shows as Waiting */
-  rule?: string
   /** The row has legacy modes the next Apply keeps, which show as Waiting */
   kept?: boolean
   why?: string
@@ -303,8 +296,8 @@ function StatusCell({
   const text = categories
     .map(([category, count]) =>
       categories.length === 1
-        ? statusLabel(category, rule, kept)
-        : `${statusLabel(category, rule, kept)} ${count}`,
+        ? statusLabel(category, kept)
+        : `${statusLabel(category, kept)} ${count}`,
     )
     .join(', ')
   const needsCheck = categories.some(([category]) => category === 'check')
@@ -312,7 +305,7 @@ function StatusCell({
     <span
       key={category}
       className="health-swatch"
-      data-category={isHeld(category, rule, kept) ? 'held' : category}
+      data-category={isHeld(category, kept) ? 'held' : category}
       aria-hidden="true"
     />
   ))
@@ -517,7 +510,6 @@ export function ChangeRow({
           )}
           <StatusCell
             categories={rowCategories(row, overrides, kept)}
-            rule={row.rule}
             kept={keptHere}
             why={rowReason(row, overrides, kept)}
             onWhy={onWhy}
@@ -607,9 +599,7 @@ export function WhyDialog({
                   ? 'Why it needs a check'
                   : item.row.outcome === 'byHand'
                     ? 'How to fix it'
-                    : isHeldMode(item.row.rule)
-                      ? unchangedLabel(item.row.rule)
-                      : 'No equivalent in the EDS Beta'}
+                    : 'No equivalent in the EDS Beta'}
             </Dialog.Title>
           </Dialog.Header>
           <Dialog.Content>
@@ -667,9 +657,7 @@ export function WhyDialog({
                 onChangeRow(item.group, item.row)
               }}
             >
-              {item.row.outcome === 'byHand' ||
-              waiting ||
-              (item.row.outcome === 'none' && isHeldMode(item.row.rule))
+              {item.row.outcome === 'byHand' || waiting
                 ? 'Choose what to do'
                 : item.row.outcome === 'none'
                   ? 'Choose a target'

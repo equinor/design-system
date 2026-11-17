@@ -7,7 +7,6 @@ import {
   CATEGORY_DESCRIPTIONS as PLUGIN_DESCRIPTIONS,
   CATEGORY_LABELS as PLUGIN_LABELS,
 } from '../scan/labels'
-import { isHeldMode } from '../scan/mapping'
 import type { Category } from '../scan/types'
 
 export { GROUP_LABELS, KEPT_TARGET_LABEL, propertyLabel } from '../scan/labels'
@@ -37,31 +36,21 @@ export const ORIGIN_LABELS: Record<ValueOrigin, string> = {
 }
 
 /**
- * A legacy mode the plugin keeps for now, because layers below still read
- * legacy values: one the rules keep (mapping.ts, isHeldMode), or a Ready
- * one that the next Apply keeps because values below it are not changed in
- * that run (isKeptWaiting). It counts as No equivalent, but it has a change,
- * clearing the mode, that waits for the layers below, so its badge says
- * Waiting.
+ * A legacy mode that is only cleared and that the next Apply keeps, because
+ * values below it that read it are not changed in that run (mapping.ts,
+ * isKeptWaiting). It counts as No equivalent, but it has a change, clearing
+ * the mode, that waits for the layers below, so its badge says Waiting.
  */
 export const HELD_LABEL = 'Waiting'
 
 /** `kept` is true for a legacy mode the next Apply keeps (isKeptWaiting). */
-export function isHeld(
-  category: Category,
-  rule: string | undefined,
-  kept = false,
-): boolean {
-  return category === 'none' && (kept || isHeldMode(rule))
+export function isHeld(category: Category, kept = false): boolean {
+  return category === 'none' && kept
 }
 
-/** The status shown on one binding or row: its category, or Waiting for a held or kept mode. */
-export function statusLabel(
-  category: Category,
-  rule: string | undefined,
-  kept = false,
-): string {
-  return isHeld(category, rule, kept) ? HELD_LABEL : CATEGORY_LABELS[category]
+/** The status shown on one binding or row: its category, or Waiting for a kept mode. */
+export function statusLabel(category: Category, kept = false): string {
+  return isHeld(category, kept) ? HELD_LABEL : CATEGORY_LABELS[category]
 }
 
 /** “1 value”, “14 values” */

@@ -193,10 +193,11 @@ plugin remembers the size.
 the No equivalent values with a stand-in, and the values you set to Decide
 later. The plugin selects the layer, tells you why it was unsure or what the
 EDS Beta lacks, and shows its proposal and the other targets that fit. Confirm
-the proposal or use the stand-in, choose another target, decide later, or
-skip it. A target you choose then counts as Ready. **Decide later** is kept
-as your choice, so Changes shows it, and the value comes back in the next
-review; **Skip** moves on without a choice.
+the proposal or use the stand-in, choose another target, or decide later. A
+target you choose then counts as Ready. **Decide later** is the way to put a
+value off: it is kept as your choice, so Changes shows it, and the value comes
+back in the next review. Review has no Skip, so every value you move past
+keeps a choice you can see and change in Changes.
 
 ### No equivalent and stand-ins
 
@@ -208,7 +209,10 @@ row shows as **Stand-in:** and the target:
 
 - A number gets the EDS Beta variable with the same px in the density the
   layer will have, such as `spacing/xl` for a 24px gap in comfortable. When no
-  variable has that px, it gets the px without a variable.
+  variable has that px, it gets the px without a variable. This goes for a
+  number on a shadow too, such as its blur. When the plugin cannot read the
+  legacy value, for example because the legacy library is not enabled in the
+  file, it uses the value the layer has now, and the row says so.
 - A colour gets the EDS Beta colour for what the layer is (text, icon, border
   or background, interactive or not) that looks nearest to the legacy colour.
   A colour on a shadow is offered `overlay/scrim` too, the one see-through
@@ -220,7 +224,9 @@ row shows as **Stand-in:** and the target:
 Apply changes the value once you choose the stand-in or another target, in
 Changes or in Review. Until then it counts as not migrated, so the file is
 done only when every gap has a target. Only a string or boolean variable, or
-a number the plugin could not read, has no stand-in.
+a number the plugin could read neither from the variable nor from the layer,
+has no stand-in. The report lists these with the other gaps, as "None
+possible"; change them in Figma where the EDS Beta has nothing that fits.
 
 ## 5. Apply
 
@@ -233,10 +239,18 @@ modes on the frames that had the legacy ones:
 - Light and Dark become **light** and **dark**.
 
 A legacy mode is removed only when no layer below it uses a legacy variable
-any more. While an instance or an icon size below still needs it, it stays,
-and the plugin says why. Such a mode is marked **Waiting**: the change is to
-clear it, and Apply makes that change once the layers below are migrated. In
-the health bar it counts as No equivalent.
+any more. While a value below still needs it, it stays, and the plugin says
+why. Such a mode is marked **Waiting**: the change is to clear it, and Apply
+makes that change once the layers below are migrated. In the health bar it
+counts as No equivalent.
+
+The plugin works this out from your choices, so you do not need to scan and
+apply twice. A legacy mode above a value that needs a check waits until you
+decide the value. Once every value below it is Ready, the mode is Ready too,
+and the same Apply changes the values and then removes the mode. It keeps
+waiting while a value below stays legacy: inside an instance, No equivalent
+without your choice or without a stand-in, a check you have not decided, a
+value set to Decide later, or a Manual fix you have not accepted.
 
 Ready means ready to change: the Ready count is what the next Apply changes.
 So a legacy mode that would be cleared becomes Waiting as soon as you set a

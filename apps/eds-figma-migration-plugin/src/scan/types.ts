@@ -94,6 +94,13 @@ export type RawUnit = {
       kind: BindingKind
       variable: RawVariable
       /**
+       * For a legacy number variable whose value could not be read: the
+       * value the layer has now for the field, or for the field of the
+       * effect, in px (a fraction for an opacity). The stand-in for a
+       * number takes it as its px (OldVariable.layerValue).
+       */
+      layerValue?: number
+      /**
        * For a size an instance overrides on a layer inside it: the variable
        * the layer at the same place in the main component binds, if any
        */

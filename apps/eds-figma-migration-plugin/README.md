@@ -272,6 +272,12 @@ and the legacy modes that stay, each with what it waits for. The run:
 
 - binds the EDS Foundation variable on the same field, paint or effect, and
   keeps the other bindings on the layer;
+- sets a number without a variable, such as a border width, on the field of
+  the layer, or on the field of an effect, such as the blur of a shadow: the
+  legacy variable is removed from the effect's field
+  (`setBoundVariableForEffect` with null) and the number set there, with
+  `withEffectNumber` in `src/shared/effect-numbers.ts`, since Figma keeps the
+  offset of a shadow in `offset` but binds it as `offsetX` and `offsetY`;
 - applies the text style to a text or a range of text, after loading its
   fonts, and keeps the fill bindings;
 - sets the new `density` or `color-scheme` mode on the layer that had the
@@ -292,8 +298,17 @@ layer's density, or the px without a variable (rules `number/same-px` and
 `number/as-px`); a colour gets the EDS Beta colour for the layer's role that
 looks nearest to the legacy colour (`colour/nearest-by-role`); a type size
 gets the nearest step (`type/nearest-step`); an unknown legacy mode gets
-removing it. Only a string or boolean variable, or a number whose px could
-not be read, has no stand-in.
+removing it. A number on an effect, such as the blur of a shadow, is a
+spacing number like the others, so with no spacing token at its px it gets
+the px without a variable, which Apply sets on the effect. When the scan
+cannot read the legacy value of a number, for example because the legacy
+library is not enabled, it reads the value the layer has now for the field
+(`layerValue` on the unit, from the node or from the effect in
+`src/plugin/scan/collect.ts`), and the stand-in takes that as its px; the
+reason says the px is the layer's current value. Only a string or boolean
+variable, or a number whose value can be read neither from the variable nor
+from the layer, has no stand-in; the report lists them among the token gaps
+as "None possible", with a note that no stand-in is possible.
 
 Bindings that need a check are not applied until a designer has chosen a
 target for them. Inside an instance only its own overrides change. Before each change the
@@ -308,24 +323,35 @@ mode, what replaced it, whether it was sure, confirmed or an override, the
 rule that proposed the target (from 2026-11-16, so a value migrated to a
 stand-in can be found), the rules version and the time. **Revert frame**, in a frame that has changes,
 puts the legacy bindings, typography and modes back from that log, newest
-first, as long as the legacy libraries are still published. A binding someone
+first, as long as the legacy libraries are still published. A number set
+without a variable gets its legacy variable back, on the layer's field or on
+the effect's field. The next scan counts such a number as migrated while the
+layer or the effect still has it. A binding someone
 has changed since the apply is left alone and reported. Shared plugin data is
 used because private plugin data needs a published plugin id, so a
 development copy could not keep a log.
 
 A legacy mode is kept while a value below still reads its collection: its own
 collection or one in its alias chain (a colour reads its whole library and the
-colour scheme). The row then says "Kept: legacy values below read it" or "Kept
-until the values below are reviewed", the status icon explains why, and the
-picker offers removing the mode anyway, for a designer who accepts that the
-legacy values below change. A ⚠ or ⓘ at the end of a row has a tooltip with
-the reason, and a click opens it in full.
+colour scheme). The row then says what the mode waits for, the status icon
+explains why, and the picker offers removing the mode anyway, for a designer
+who accepts that the legacy values below change. A ⚠ or ⓘ at the end of a row
+has a tooltip with the reason, and a click opens it in full.
 
-The scan keeps those modes by the rules' categories, and does not know the
-designer's choices. A Ready value below a legacy mode that a designer sets to
-Decide later would keep the mode at run time, while the window still said
-Ready. So the plugin works out the kept modes again with every count
-(`keptModes` in `src/scan/apply-plan.ts`): it plans the run, takes the
+Whether a run keeps a mode depends on the designer's choices: a Needs check
+below changes in the run once it is confirmed, and a Ready value set to
+Decide later does not. So the rules leave every legacy mode with its own
+outcome, Ready with clearing as the proposal for a mode that only selects a
+tone or a step, and the plugin works out the kept modes again with every
+count (`keptModes` in `src/scan/apply-plan.ts`). Until 2026-11-16 the scan
+held a mode above values that were not Ready (rules `mode/kept` and
+`mode/after-review`), so a mode above a Needs check stayed after the value
+was confirmed and applied, and needed a second scan and Apply; now the same
+Apply clears it. `holdModes` in `src/scan/classify.ts` only decides two
+cases: a legacy mode whose EDS Beta mode is already set on the layer is only
+cleared, and a mode an instance sets itself that values from the main
+component read stays in Inside instances (`mode/from-main`). The plugin
+plans the run, takes the
 bindings it changes, and finds the mode changes above a legacy binding that
 the run leaves (`keptModeChanges`, with the bindings that keep each mode in place, from
 `modeBlockers` in `src/scan/classify.ts`). `applyChanges` keeps the modes
@@ -341,7 +367,9 @@ with what it waits for, in a `kept-modes` message before every summary, and:
 - a kept mode that sets a new mode stays Ready, since the run sets the new
   mode, with the note "The legacy mode stays beside it until …".
 
-Review leaves a kept mode out, as it does the held ones. A Ready mode set to
+Review leaves a kept mode out, and steps through the values below it instead.
+Once every value below that reads the mode is Ready and in the same run, the
+mode is Ready as well, and the run clears it after those values. A Ready mode set to
 Decide later comes back in Review; when values below read it, the step says
 what clearing it waits for, **Clear it once nothing below reads it** stores
 the proposal (the mode is then Waiting), and the picker there offers removing
@@ -353,7 +381,10 @@ designer removes anyway, with the values below that change.
 Saved choices from earlier versions can contain clearing on a mode the rules
 kept, which then removed it whatever read it below. They are read as they
 are, since the stored choices do not say whether the mode was held, and now
-clear the mode once nothing below reads it.
+clear the mode once nothing below reads it. A choice saved on the row of a
+mode the rules held is keyed to that row's No equivalent outcome, so it no
+longer matches the mode's row, which is Ready now; a choice saved on the mode
+itself still applies.
 
 A legacy mode stays beside another new mode a designer chooses, too, while
 values below read it: only removing it anyway removes it before that.
@@ -371,10 +402,12 @@ the rule's own words under Details), the proposal and every other target that
 fits. **Confirm proposal** (**Use the stand-in** for No equivalent) and **Use
 this target** store the choice, so the value counts as Ready. **Decide later**
 stores that choice instead, so Changes shows it, and the value comes back in
-the next review; **Skip** moves on without a choice. A Manual fix has
-**Accept the fix**, **Decide later** and **Skip**. The review ends with what
-was confirmed, changed, set to Decide later and skipped. From a frame, the
-review covers that frame only.
+the next review. It is the only way to put a value off: Review has no Skip
+since 2026-11-16, so every value a designer moves past has a choice that is
+saved. A Manual fix has **Accept the fix** and **Decide later**. The review
+ends with what was confirmed, changed and set to Decide later
+(`reviewSummary` in `src/ui/review.ts`). From a frame, the review covers that
+frame only.
 
 Changes lists Manual fixes too, so every value Apply counts is on a tab: an
 accepted fix is Ready and made by Apply. Their rows have no checkbox, since a

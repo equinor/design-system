@@ -84,7 +84,10 @@ export type LoggedNewMode = {
   previousModeId: string | null
 }
 
-/** A value set without a variable, such as a border width; null when the property was cleared */
+/**
+ * A value set without a variable, such as a border width on a layer or the
+ * blur of a shadow on an effect; null when the property was cleared
+ */
 export type LoggedValue = { type: 'value'; value: number | null }
 
 export type LogEntry = {

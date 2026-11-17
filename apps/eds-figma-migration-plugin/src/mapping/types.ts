@@ -32,6 +32,14 @@ export type OldVariable = {
   /** The value the variable resolves to on the node, when it was read. */
   resolvedValue?: number | string | boolean | null
   /**
+   * For a number variable whose value could not be read, such as one from a
+   * library that is not enabled: the value the layer has now for the
+   * property the variable is bound to, in px (a fraction for an opacity).
+   * Figma keeps the last value the variable gave the layer, so the stand-in
+   * for a number takes it as its px (rules.ts, numberStandIn).
+   */
+  layerValue?: number
+  /**
    * The colour a colour variable resolves to on the node, as #rrggbb or
    * #rrggbbaa, when it was read. The stand-in for a colour without a rule is
    * the EDS Beta colour nearest to it.

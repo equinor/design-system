@@ -111,7 +111,7 @@ export function targetText(
     default: {
       const { target, source } = effectiveTarget(record, overrides)
       if (record.category === 'none' && source === 'proposal') {
-        return unchangedLabel(record.rule, target)
+        return unchangedLabel(target)
       }
       if (isKeptWaiting(record.id, kept)) return KEPT_TARGET_LABEL
       return targetLabel(target)
@@ -220,7 +220,7 @@ function groupSummary(
 ): string {
   const parts = [values(records.length)]
   const held = (record: BindingRecord) =>
-    isHeld(categoryOf(record), record.rule, isKeptWaiting(record.id, kept))
+    isHeld(categoryOf(record), isKeptWaiting(record.id, kept))
   for (const category of ['check', 'byHand', 'none'] as const) {
     const count = records.filter(
       (record) => categoryOf(record) === category && !held(record),
@@ -669,11 +669,7 @@ export function Inspector({
                                   ...(keptText && !waits ? [keptText] : []),
                                 ]}
                                 category={categoryOf(record)}
-                                held={isHeld(
-                                  categoryOf(record),
-                                  record.rule,
-                                  waits,
-                                )}
+                                held={isHeld(categoryOf(record), waits)}
                                 {...(group.instance
                                   ? {
                                       origin: record.override

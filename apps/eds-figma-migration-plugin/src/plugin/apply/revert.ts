@@ -168,6 +168,30 @@ async function revertEntry(
     return
   }
 
+  if (
+    entry.old.type === 'variable' &&
+    entry.new.type === 'value' &&
+    property.type === 'effect'
+  ) {
+    // A number set without a variable on an effect, such as the blur of a
+    // shadow: bind the legacy variable to the effect's field again, as long
+    // as nobody has bound another variable there since.
+    if (!('effects' in node)) throw new LayerChanged()
+    const effects = [...node.effects]
+    const effect = effects[property.index]
+    const bound = (
+      effect && 'boundVariables' in effect ? effect.boundVariables : {}
+    ) as Record<string, VariableAlias | undefined> | undefined
+    if (!effect || bound?.[property.field]) throw new LayerChanged()
+    const legacy = await legacyVariable(entry.old.key)
+    effects[property.index] = figma.variables.setBoundVariableForEffect(
+      effect,
+      property.field as VariableBindableEffectField,
+      legacy,
+    )
+    node.effects = effects
+    return
+  }
   if (entry.old.type === 'variable' && entry.new.type === 'value') {
     // A number set without a variable: bind the legacy variable again, as
     // long as nobody has bound another variable since.

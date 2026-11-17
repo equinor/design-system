@@ -247,9 +247,25 @@ as for icon sizes: a spacing token for a padding, gap or size, a corner radius
 token for a radius. `Page/Gap horizontal` at 24px in comfortable gets
 `spacing/xl`. When no variable has that px, the px without a variable, as for
 stroke widths: 18px becomes 18px. A 0 is always 0 without a variable, since a 0
-needs no token. A number on an effect, such as the blur of a shadow, only
-takes a variable, so it gets the spacing token with the same px or no
-stand-in.
+needs no token. A number on an effect, such as the blur or the spread of a
+shadow, is treated as spacing: it gets the spacing token with the same px, and
+otherwise the px without a variable, which Apply sets on the effect (decided
+2026-11-16, phase 6b).
+
+The px is the legacy value as it resolves on the layer. When the scan could
+not read it, for example because the legacy library is not enabled, the px is
+the value the layer has now for the property: the field on the layer, such as
+its width or padding, or the field of the effect. Figma keeps the last value
+the variable gave the layer, so this is the legacy value as the layer shows
+it. The reason says so, for example "sizing/icon/lg: the legacy size could not
+be read, so the rule cannot match a spacing token to it; the px is the layer's
+current value, 24px; the stand-in is spacing/xl, which is 24px in
+comfortable". The same goes for the rules that need the legacy value
+themselves: an icon or control size (`size/icon`, `size/control`) and a
+stroke weight (`number/stroke-weight`) get the stand-in by px, and an opacity
+(`number/opacity`) gets the layer's opacity without a variable. These are No
+equivalent with a stand-in, so a designer decides on them, also where the
+legacy value would have made the rule sure.
 
 **Colours by role** (rule `colour/nearest-by-role`). The EDS Beta colour for
 the role of the layer that looks nearest to the legacy colour as it resolves
@@ -283,32 +299,47 @@ either, the `md` step of the role, which keeps the font: `body/md/default`,
 from the EDS Beta falls back to `body/md/default`.
 
 **No stand-in.** A value stays No equivalent without a proposal only where no
-stand-in is possible: a string or boolean variable (`other/type`), a number
-whose px could not be read (`size/icon`, `size/control`,
-`number/stroke-weight`, `number/opacity`, and the number rules above), and a
-number on an effect when no spacing token has its px.
+stand-in is possible: a string or boolean variable (`other/type`), which has
+no px or colour to match an EDS Beta token to, and a number whose value could
+be read neither from the variable nor from the layer, such as a corner radius
+that differs per corner. The report lists them with the other gaps, marked
+"None possible", with a note that no stand-in is possible for them.
 
 A legacy mode above a value with a stand-in waits for the value to be decided,
-as it does for a Needs check (rule `mode/after-review`). Apply writes the rule
-of each change into the change log on the layer, so a value migrated to a
+as it does for a Needs check (see the next section). Apply writes the rule of
+each change into the change log on the layer, so a value migrated to a
 stand-in can be found later.
 
 ### Legacy modes a run keeps
 
-The rules keep a legacy mode by the categories of the values below it
-(`mode/kept`, `mode/after-review`), before any designer has chosen. A choice
-can keep one too: a Ready value below a legacy mode, set to Decide later, is
-not changed by the next Apply, so Apply keeps the mode it reads. Apply on
-selected values does the same for a value below that is not selected. The
-plugin works these kept modes out from the plan of the run with every count
-(decided 2026-11-16, decision C):
+A legacy mode stays while a value below it reads it, so whether a run can
+clear it depends on which values below the run changes. That depends on the
+designer's choices: a Needs check below changes once it is confirmed, a value
+set to Decide later does not, and Apply on selected values leaves a value
+below that is not selected. The rules therefore give a legacy mode its own
+outcome and proposal, Ready with clearing as the proposal for a mode that only
+selects a tone or a step, and the plugin works out from the plan of the run,
+with every count, which modes the run keeps (decided 2026-11-16, decision C,
+and phase 6b for the modes the rules used to hold at scan time, under the
+rules `mode/kept` and `mode/after-review`, which are gone). A mode above a
+Needs check is therefore cleared by the same Apply that changes the value
+once a designer confirms it, without a second scan:
 
 - A Ready legacy mode that is only cleared, and that the run would keep,
   counts as No equivalent and shows as **Waiting**, with what it waits for:
-  the values below to be decided, fixed or selected, a main component in this
-  file to be migrated, a library instance to be swapped to an EDS Beta
-  component, or a Typography instance to be converted. Ready is then what the
-  run changes.
+  the values below to be decided (a Needs check or a No equivalent without a
+  choice, or a value set to Decide later), fixed (a Manual fix not accepted),
+  selected, or no longer legacy (No equivalent without a stand-in), a main
+  component in this file to be migrated, a library instance to be swapped to
+  an EDS Beta component, or a Typography instance to be converted. Ready is
+  then what the run changes.
+- Once every value below that reads the mode is Ready after the choices and
+  changes in the same run, the mode counts as Ready, and the run clears it
+  after changing those values. A value below that fails in the run keeps the
+  mode, and the result says so.
+- A legacy mode whose EDS Beta mode is already set on the layer, as after a
+  run that kept the legacy mode beside a new one, is only cleared, so it
+  waits like any mode that is only cleared.
 - A Ready legacy mode that sets a new mode stays Ready: the run sets the new
   mode and keeps the legacy one beside it, and the row says what the legacy
   mode waits for. It is one row; a later run clears the legacy mode.

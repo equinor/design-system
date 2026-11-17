@@ -15,7 +15,6 @@ import {
   DECIDE_LATER,
   effectiveCategory,
   effectiveTarget,
-  isHeldMode,
   isKeptWaiting,
   isMappable,
   keptModeText,
@@ -128,11 +127,14 @@ export function buildReport(input: ReportInput): Report {
   const byHand = records.filter((record) => category(record) === 'byHand')
   const none = records.filter((record) => category(record) === 'none')
   // No equivalent is a gap in the EDS Beta tokens, except for a legacy mode
-  // the plugin keeps while values below it read it (Waiting).
-  const held = (record: BindingRecord) =>
-    isHeldMode(record.rule) || isKeptWaiting(record.id, kept)
+  // the next Apply keeps while values below it read it (Waiting).
+  const held = (record: BindingRecord) => isKeptWaiting(record.id, kept)
   const waiting = none.filter(held)
   const gaps = none.filter((record) => !held(record))
+  // A string or boolean variable, or a number with no value to read
+  const withoutStandIn = gaps.filter(
+    (record) => (record.candidates?.length ?? 0) === 0,
+  )
   const why = (record: BindingRecord) => {
     const keep = kept[record.id]
     return keep ? keptModeText(keep) : record.reason
@@ -299,6 +301,12 @@ export function buildReport(input: ReportInput): Report {
               record.reason,
             ]),
           ),
+          ...(withoutStandIn.length > 0
+            ? [
+                '',
+                `${withoutStandIn.length === 1 ? 'One value has' : `${withoutStandIn.length} values have`} no stand-in (None possible). No stand-in is possible for a string or boolean variable, such as a text or a visibility, since it has no px or colour to match an EDS Beta token to, nor for a number whose value could be read neither from the variable nor from the layer. Apply changes these only once a designer chooses a target, and where the EDS Beta has nothing that fits, they have to be changed in Figma.`,
+              ]
+            : []),
         ].join('\n')
       : 'The EDS Beta has a token for every legacy value in the scope.',
     ...(waiting.length > 0
@@ -387,8 +395,7 @@ export function buildReport(input: ReportInput): Report {
           ? // A stand-in is only proposed until a designer chooses it.
             record.category === 'none' &&
             target.source === 'proposal' &&
-            target.target !== null &&
-            !isHeldMode(record.rule)
+            target.target !== null
             ? `Stand-in: ${targetText(target.target)}`
             : isKeptWaiting(record.id, kept)
               ? KEPT_TARGET_LABEL

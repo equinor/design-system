@@ -185,8 +185,17 @@ describe('modesToKeep', () => {
 })
 
 describe('holdModes', () => {
-  it('turns a mode that is only cleared into No equivalent while an instance below uses legacy variables', () => {
-    const [held] = holdModes([
+  const FRAME = new Set(['frame'])
+  const instance: OldInstance = {
+    id: 'instance',
+    name: 'Chip 1',
+    entryId: 'frame',
+    count: 1,
+    mainComponent: { name: 'Chip', key: 'c', remote: false, id: '1:2' },
+  }
+
+  it('leaves a mode that is only cleared Ready, and the run keeps it as Waiting while an instance below uses legacy variables', () => {
+    const records = holdModes([
       mode('chip', OLD.borderRadius, CLEAR_MODE),
       binding('inside', 'inInstance', {
         oldKey: `${OLD.borderRadius}/Radius`,
@@ -194,33 +203,58 @@ describe('holdModes', () => {
         instanceId: 'instance',
       }),
     ])
-    expect(held.category).toBe('none')
-    expect(held.rule).toBe('mode/kept')
+    const [held] = records
+    expect(held).toMatchObject({ category: 'sure', candidates: [CLEAR_MODE] })
+    const kept = keptModesByRecord(records, NO_OVERRIDES, FRAME, [instance])
+    expect(kept[held.id]).toEqual({
+      setsMode: false,
+      waitsFor: 'the main component Chip is migrated',
+    })
+    expect(effectiveCategory(held, NO_OVERRIDES, kept)).toBe('none')
   })
 
-  it('still sets a new density mode, and says the legacy one stays', () => {
-    const [held] = holdModes([
+  it('still sets a new density mode, and the kept modes say the legacy one stays', () => {
+    const records = holdModes([
       mode('root', OLD.density, 'density: comfortable', {
         reason: 'Spacious is comfortable',
       }),
-      binding('icon', 'none', { modeHolders: ['root'] }),
+      binding('icon', 'none', { nodeName: 'Icon', modeHolders: ['root'] }),
     ])
-    expect(held.category).toBe('sure')
-    expect(held.reason).toContain('The legacy mode stays')
+    const [held] = records
+    expect(held).toMatchObject({
+      category: 'sure',
+      reason: 'Spacious is comfortable',
+    })
+    const kept = keptModesByRecord(records, NO_OVERRIDES, FRAME, [])
+    expect(keptModeText(kept[held.id])).toBe(
+      'The legacy mode stays beside it until Icon, padding left no longer uses a legacy variable.',
+    )
+    expect(effectiveCategory(held, NO_OVERRIDES, kept)).toBe('sure')
   })
-})
 
-describe('holdModes and the review', () => {
-  it('holds a mode that is only cleared until the bindings below that need a check are applied', () => {
-    const [held] = holdModes([
-      mode('button', OLD.appearance, CLEAR_MODE),
-      binding('fill', 'check', {
-        oldKey: `${OLD.appearance}/Bg/Fill/Emphasis/Default`,
-        modeHolders: ['button'],
+  it('only clears a legacy mode whose EDS Beta mode is already set on the layer', () => {
+    const records = holdModes([
+      mode('root', OLD.density, 'density: comfortable', {
+        reason: 'Spacious is comfortable',
       }),
+      {
+        ...mode('root', 'new-density', CLEAR_MODE),
+        id: 'root|mode:new-density',
+        category: 'migrated',
+        current: 'density: comfortable',
+        oldMode: undefined,
+      },
+      binding('label', 'check', { nodeName: 'Label', modeHolders: ['root'] }),
     ])
-    expect(held.category).toBe('none')
-    expect(held.rule).toBe('mode/after-review')
+    const [legacy] = records
+    expect(legacy.candidates).toEqual([CLEAR_MODE])
+    expect(legacy.reason).toContain(
+      'The layer already has a mode of the EDS Beta density collection, so only the legacy mode is left to clear',
+    )
+    // Nothing to set, so the run that keeps it changes nothing there.
+    const kept = keptModesByRecord(records, NO_OVERRIDES, FRAME, [])
+    expect(kept[legacy.id]).toMatchObject({ setsMode: false })
+    expect(effectiveCategory(legacy, NO_OVERRIDES, kept)).toBe('none')
   })
 })
 
@@ -277,10 +311,11 @@ describe('legacy modes an instance overrides', () => {
     expect(planChanges([held], NO_OVERRIDES, new Set(['frame']))).toEqual([])
   })
 
-  it('is kept as No equivalent while values the instance overrides read it', () => {
-    const [held] = holdModes([
+  it('waits as a mode the run keeps while values the instance overrides read it', () => {
+    const records = holdModes([
       overridden,
       binding('icon', 'none', {
+        nodeName: 'Icon',
         oldKey: `${OLD.appearance}/Icon/Default`,
         modeHolders: ['icon-item'],
         instanceId: 'adornment',
@@ -288,7 +323,19 @@ describe('legacy modes an instance overrides', () => {
         reads: [OLD.appearance],
       }),
     ])
-    expect(held).toMatchObject({ category: 'none', rule: 'mode/kept' })
+    const [held] = records
+    expect(held).toMatchObject({ category: 'sure', candidates: [CLEAR_MODE] })
+    const kept = keptModesByRecord(
+      records,
+      NO_OVERRIDES,
+      new Set(['frame']),
+      [],
+    )
+    expect(kept[held.id]).toEqual({
+      setsMode: false,
+      waitsFor: 'Icon, padding left no longer uses a legacy variable',
+    })
+    expect(effectiveCategory(held, NO_OVERRIDES, kept)).toBe('none')
   })
 })
 
@@ -342,9 +389,16 @@ describe('modes held only by what reads them', () => {
     })
     const proportions = mode('frame', OLD.spaceProportions, CLEAR_MODE)
     const semantic = mode('frame', OLD.spacingSemantic, CLEAR_MODE)
-    const [freed, held] = holdModes([proportions, semantic, reader, other])
-    expect(freed.category).toBe('sure')
-    expect(held.category).toBe('none')
+    const records = holdModes([proportions, semantic, reader, other])
+    const kept = keptModesByRecord(
+      records,
+      NO_OVERRIDES,
+      new Set(['frame']),
+      [],
+    )
+    expect(Object.keys(kept)).toEqual([semantic.id])
+    expect(effectiveCategory(records[0], NO_OVERRIDES, kept)).toBe('sure')
+    expect(effectiveCategory(records[1], NO_OVERRIDES, kept)).toBe('none')
   })
 
   it('still offers to remove a kept mode, and removes it only when removed anyway', () => {
@@ -359,11 +413,12 @@ describe('modes held only by what reads them', () => {
     ])
     const [held] = records
     expect(held.candidates).toEqual([CLEAR_MODE])
-    // Choosing clearing confirms the proposal: the run keeps the mode while
-    // the value inside the instance reads it.
+    // Clearing is the proposal of a Ready mode, so choosing it changes
+    // nothing: the run keeps the mode while the value inside the instance
+    // reads it.
     const chosen = { records: { [held.id]: CLEAR_MODE }, rows: {} }
     const plan = planChanges(records, chosen, new Set(['frame']))
-    expect(plan.map((change) => change.outcome)).toEqual(['confirmed'])
+    expect(plan.map((change) => change.outcome)).toEqual(['sure'])
     expect(
       keptModes(records, chosen, new Set(['frame'])).map(
         (item) => item.record.id,
@@ -657,7 +712,10 @@ describe('legacy modes a run keeps (decision C)', () => {
       }),
     ])
     const id = held[0].id
-    expect(held[0]).toMatchObject({ category: 'none', rule: 'mode/kept' })
+    expect(held[0]).toMatchObject({
+      category: 'sure',
+      candidates: [CLEAR_MODE],
+    })
     const { blocked } = modeWaits(held, NO_OVERRIDES, FRAME, [
       {
         id: 'instance',

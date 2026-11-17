@@ -19,6 +19,7 @@ import { propertyLabel } from '../../scan/labels'
 import type { Overrides } from '../../scan/mapping'
 import type { BindingRecord } from '../../scan/types'
 import type { LogEntry } from '../../shared/changelog'
+import { withEffectNumber } from '../../shared/effect-numbers'
 import type { ChangeFailure, ApplyResult } from '../../shared/messages'
 import { appendLog, logIsInherited } from './log'
 import { resetLayer } from './reset'
@@ -203,6 +204,34 @@ async function applyBinding(
   // A number without a variable, such as a border width: unbind the legacy
   // variable and set the number it resolved to.
   const literal = literalValue(target)
+  if (literal !== undefined && property.type === 'effect') {
+    // On an effect, such as the blur of a shadow: the variable is removed
+    // from the effect's field, and the number set there.
+    if (!('effects' in node)) throw new LayerChanged()
+    const effects = [...node.effects]
+    const effect = effects[property.index]
+    if (!effect) throw new LayerChanged()
+    const bound = ('boundVariables' in effect ? effect.boundVariables : {}) as
+      Record<string, VariableAlias | undefined> | undefined
+    expectOld(record, bound?.[property.field]?.id)
+    if (literal === null) {
+      throw new Error(
+        'An effect needs a number here, so the plugin cannot remove it. Choose a number or a variable.',
+      )
+    }
+    const unbound = figma.variables.setBoundVariableForEffect(
+      effect,
+      property.field as VariableBindableEffectField,
+      null,
+    )
+    effects[property.index] = withEffectNumber(unbound, property.field, literal)
+    node.effects = effects
+    return {
+      ...entry,
+      old: oldVariableLog(record),
+      new: { type: 'value', value: literal },
+    }
+  }
   if (literal !== undefined) {
     if (property.type !== 'field') throw new LayerChanged()
     const bindable = node as Bindable & Record<string, unknown>

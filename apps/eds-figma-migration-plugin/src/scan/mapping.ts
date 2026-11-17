@@ -240,7 +240,7 @@ export type MappingRow = {
   candidates: string[]
   /** One reason, from the first binding in the row */
   reason?: string
-  /** The rule that decided the row, such as mode/kept */
+  /** The rule that decided the row, such as number/as-px */
   rule?: string
   count: number
   kind?: BindingKind
@@ -412,17 +412,13 @@ export function readyCount(
   return ready
 }
 
-/** A legacy mode kept because values below still read it. */
-export function isHeldMode(rule: string | undefined): boolean {
-  return rule === 'mode/kept' || rule === 'mode/after-review'
-}
-
 /** What one binding in a row gets, after the designer's choices. */
 export type BindingOutcome = EffectiveTarget & {
   category: Category
   /**
-   * A legacy mode that waits for the values below it, shown as Waiting: one
-   * the rules keep (isHeldMode), or a Ready one the next Apply keeps
+   * A legacy mode that is only cleared and that the next Apply keeps,
+   * because values below it that read it are not changed in that run. It
+   * waits for them, shown as Waiting.
    */
   held?: true
   /** For a legacy mode the next Apply keeps: what it waits for */
@@ -440,11 +436,10 @@ export function bindingOutcome(
   const keep = kept[binding.id]
   const waiting = after === 'sure' && isKeptWaiting(binding.id, kept)
   const category = waiting ? 'none' : after
-  const held = waiting || (category === 'none' && isHeldMode(row.rule))
   return {
     ...target,
     category,
-    ...(held ? { held: true as const } : {}),
+    ...(waiting ? { held: true as const } : {}),
     ...(keep ? { kept: keep } : {}),
   }
 }
@@ -502,9 +497,9 @@ export function rowChoiceChanges(
 /** How many bindings get each target, most first. */
 export type TargetCount = {
   target: string | null
-  /** True when nothing changes: no equivalent, or a legacy mode that is kept, and nobody chose anything */
+  /** True when nothing changes: no equivalent, and nobody chose anything */
   noEquivalent: boolean
-  /** Why nothing changes, such as mode/kept */
+  /** The rule that found no equivalent, such as number/as-px or other/type */
   rule?: string
   /** A Ready legacy mode the next Apply keeps, because values below it wait (isKeptWaiting) */
   kept?: true

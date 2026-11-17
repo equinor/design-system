@@ -38,7 +38,13 @@ type PackedUnit = {
   /** An override of the instance, which the plugin can change */
   override?: true
 } & (
-  | { unit: 'variable'; kind: string; ref: PackedRef }
+  | {
+      unit: 'variable'
+      kind: string
+      ref: PackedRef
+      /** The value the layer has now, when the legacy value could not be read */
+      layerValue?: number
+    }
   | {
       unit: 'typography'
       fields: Partial<Record<TypographyField, PackedRef>>
@@ -148,6 +154,9 @@ export function packFixture(
         unit: 'variable',
         kind: unit.kind,
         ref: ref(unit.variable),
+        ...(unit.layerValue !== undefined
+          ? { layerValue: unit.layerValue }
+          : {}),
       }
     }
     if (unit.unit === 'typography') {
@@ -227,6 +236,9 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
         unit: 'variable',
         kind: unit.kind as Extract<RawUnit, { unit: 'variable' }>['kind'],
         variable: variable(unit.ref),
+        ...(unit.layerValue !== undefined
+          ? { layerValue: unit.layerValue }
+          : {}),
       }
     }
     if (unit.unit === 'typography') {

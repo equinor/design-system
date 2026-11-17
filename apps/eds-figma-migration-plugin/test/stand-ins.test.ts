@@ -17,7 +17,11 @@ import type {
   Resolution,
   RoleContext,
 } from '../src/mapping/types'
-import { changeOutcome, planChanges } from '../src/scan/apply-plan'
+import {
+  changeOutcome,
+  keptModesByRecord,
+  planChanges,
+} from '../src/scan/apply-plan'
 import { CLEAR_MODE, classifyUnit, holdModes } from '../src/scan/classify'
 import {
   buildMappingGroups,
@@ -25,6 +29,8 @@ import {
   NO_OVERRIDES,
   targetCounts,
 } from '../src/scan/mapping'
+import type { KeptModes } from '../src/scan/mapping'
+import { packFixture, unpackFixture } from '../src/scan/fixture'
 import { buildReport } from '../src/scan/report'
 import { emptyCounts } from '../src/scan/summary'
 import type { BindingRecord, RawUnit, ScanSummary } from '../src/scan/types'
@@ -152,17 +158,23 @@ describe('numbers by px', () => {
     })
   })
 
-  it('a number on an effect only gets a variable, since the plugin cannot set a number there', () => {
+  it('a number on an effect gets the spacing token with its px, or the px without a variable', () => {
     expect(resolve('other', semantic('Page/Gap horizontal', 8))).toMatchObject({
       candidates: ['spacing/xs'],
       rule: 'number/same-px',
     })
-    expect(resolve('other', semantic('Page/Gap horizontal', 18))).toMatchObject(
-      { outcome: 'none', candidates: [], rule: 'spacing/unknown' },
+    const blur = resolve('other', semantic('Page/Gap horizontal', 18))
+    expect(blur).toMatchObject({
+      outcome: 'none',
+      candidates: ['value:18'],
+      rule: 'number/as-px',
+    })
+    expect(blur.reason).toMatch(
+      /no EDS Beta spacing token is 18px in comfortable, so the stand-in is 18px without a variable$/,
     )
   })
 
-  it('a number whose px could not be read has no stand-in', () => {
+  it('a number whose px could be read neither from the variable nor from the layer has no stand-in', () => {
     expect(resolve('spacing', semantic('Page/Gap horizontal'))).toMatchObject({
       outcome: 'none',
       candidates: [],
@@ -186,6 +198,123 @@ describe('numbers by px', () => {
     expect(resolve('size', semantic('Selectable/Size', 18)).rule).toBe(
       'size/control',
     )
+  })
+})
+
+describe("numbers whose legacy px could not be read take the layer's current value", () => {
+  it("get the EDS Beta variable with that px in the layer's density", () => {
+    const result = resolve('size', {
+      ...density('sizing/icon/lg'),
+      layerValue: 24,
+    })
+    expect(result).toMatchObject({
+      outcome: 'none',
+      candidates: ['spacing/xl'],
+      rule: 'number/same-px',
+    })
+    expect(result.reason).toBe(
+      "sizing/icon/lg: the legacy size could not be read, so the rule cannot match a spacing token to it; the px is the layer's current value, 24px; the stand-in is spacing/xl, which is 24px in comfortable",
+    )
+    const compact = ctx(['Panel'], { modes: { [OLD.density]: 'Comfortable' } })
+    expect(
+      resolve(
+        'spacing',
+        { ...semantic('Page/Gap horizontal'), layerValue: 12 },
+        compact,
+      ),
+    ).toMatchObject({ candidates: ['spacing/md'], rule: 'number/same-px' })
+  })
+
+  it('get the px without a variable when no EDS Beta variable has it', () => {
+    const result = resolve('spacing', {
+      ...semantic('Page/Gap horizontal'),
+      layerValue: 18,
+    })
+    expect(result).toMatchObject({
+      outcome: 'none',
+      candidates: ['value:18'],
+      rule: 'number/as-px',
+    })
+    expect(result.reason).toBe(
+      "No rule for Page/Gap horizontal: the plugin knows no EDS Beta token for it; the legacy value could not be read, so the px is the layer's current value, 18px; no EDS Beta spacing token is 18px in comfortable, so the stand-in is 18px without a variable",
+    )
+    expect(
+      resolve('strokeWeight', {
+        ...semantic('Generic/Stroke width'),
+        layerValue: 1,
+      }),
+    ).toMatchObject({
+      outcome: 'none',
+      candidates: ['value:1'],
+      rule: 'number/as-px',
+    })
+  })
+
+  it("give an opacity the layer's opacity without a variable", () => {
+    const result = resolve('opacity', {
+      ...semantic('Disabled/Opacity'),
+      layerValue: 0.4,
+    })
+    expect(result).toMatchObject({
+      outcome: 'none',
+      candidates: ['value:40%'],
+      rule: 'number/opacity',
+    })
+    expect(result.reason).toMatch(
+      /the stand-in is the layer's current opacity, 40%, without a variable$/,
+    )
+  })
+
+  it('give a number on an effect the px without a variable', () => {
+    expect(
+      resolve('other', { ...semantic('Shadow/Blur'), layerValue: 5 }),
+    ).toMatchObject({
+      outcome: 'none',
+      candidates: ['value:5'],
+      rule: 'number/as-px',
+    })
+  })
+
+  it('keep the legacy value when it was read', () => {
+    const result = resolve('spacing', {
+      ...semantic('Page/Gap horizontal', 24),
+      layerValue: 18,
+    })
+    expect(result.candidates).toEqual(['spacing/xl'])
+    expect(result.reason).toMatch(/the same as the legacy value$/)
+  })
+
+  it('is read by the scan, passed to the rules and kept in a fixture', () => {
+    const unit: RawUnit = {
+      nodeId: '1:2',
+      nodeName: 'Icon',
+      nodeType: 'INSTANCE',
+      entryId: '1:1',
+      path: [],
+      unit: 'variable',
+      kind: 'size',
+      property: { type: 'field', field: 'width' },
+      variable: {
+        id: 'VariableID:icon',
+        key: 'icon',
+        name: 'sizing/icon/lg',
+        type: 'FLOAT',
+        collectionKey: OLD.density,
+        collectionName: '💎 Density',
+      },
+      layerValue: 24,
+      context: ctx(['Icon']),
+    }
+    expect(classifyUnit(unit)).toMatchObject({
+      category: 'none',
+      candidates: ['spacing/xl'],
+      rule: 'number/same-px',
+    })
+    const packed = packFixture(
+      { generatedAt: 'now', fileName: 'File', frame: { id: '1:1', name: 'F' } },
+      [unit],
+    )
+    expect(unpackFixture(packed)[0]).toMatchObject({ layerValue: 24 })
   })
 })
 
@@ -455,6 +584,10 @@ const standIn = (
   ...options,
 })
 
+/**
+ * A legacy mode that is only cleared: Ready by its rule, and Waiting when
+ * the next run keeps it (heldKept).
+ */
 const heldMode = (): BindingRecord => ({
   id: `root|mode:${OLD.appearance}`,
   nodeId: 'root',
@@ -467,14 +600,14 @@ const heldMode = (): BindingRecord => ({
     collectionId: `VariableCollectionId:${OLD.appearance}/1`,
   },
   group: 'modes',
-  category: 'none',
-  outcome: 'none',
+  category: 'sure',
+  outcome: 'sure',
   oldKey: `mode:${OLD.appearance}:Danger`,
   old: 'Danger',
   oldCollection: '🎨 Appearance',
   candidates: [CLEAR_MODE],
-  reason: 'The legacy mode stays',
-  rule: 'mode/kept',
+  reason: 'The mode only selects a tone',
+  rule: 'mode/clear',
   oldMode: {
     collectionId: `VariableCollectionId:${OLD.appearance}/1`,
     collectionKey: OLD.appearance,
@@ -482,6 +615,14 @@ const heldMode = (): BindingRecord => ({
     modeName: 'Danger',
   },
 })
+
+/** The kept modes the plugin sends while a value below the held mode waits. */
+const heldKept: KeptModes = {
+  [heldMode().id]: {
+    setsMode: false,
+    waitsFor: 'string, padding left is decided',
+  },
+}
 
 const noStandIn = standIn('string', {
   oldKey: `${OLD.density}/typography/ui-body/font-family`,
@@ -523,7 +664,9 @@ describe('a stand-in in Review', () => {
       heldMode(),
     ])
     expect(
-      reviewItems(groups, NO_OVERRIDES).map((item) => item.binding.id),
+      reviewItems(groups, NO_OVERRIDES, undefined, heldKept).map(
+        (item) => item.binding.id,
+      ),
     ).toEqual(['stroke'])
   })
 
@@ -539,33 +682,26 @@ describe('a stand-in in the window', () => {
     const [group] = buildMappingGroups([standIn('stroke')])
     const [count] = targetCounts(group.rows, NO_OVERRIDES)
     expect(count).toMatchObject({ target: 'value:1', noEquivalent: true })
-    expect(unchangedLabel(count.rule, count.target)).toBe(
+    expect(unchangedLabel(count.target)).toBe(
       'Stand-in: 1px, without a variable',
     )
-    expect(unchangedLabel('mode/unknown', CLEAR_MODE)).toBe(
-      'Stand-in: Remove the legacy mode',
-    )
+    expect(unchangedLabel(CLEAR_MODE)).toBe('Stand-in: Remove the legacy mode')
   })
 
-  it('keeps the wording of a held legacy mode and of a value without a stand-in', () => {
-    expect(unchangedLabel('mode/kept', CLEAR_MODE)).toBe(
-      'Kept: legacy values below read it',
-    )
-    expect(unchangedLabel('mode/after-review', CLEAR_MODE)).toBe(
-      'Kept until the values below are reviewed',
-    )
-    expect(unchangedLabel('other/type', null)).toBe(
-      'No equivalent and no stand-in',
-    )
+  it('shows a legacy mode the next run keeps as kept, and a value without a stand-in as such', () => {
+    const [group] = buildMappingGroups([heldMode()])
+    expect(targetCounts(group.rows, NO_OVERRIDES, heldKept)[0]).toMatchObject({
+      target: CLEAR_MODE,
+      noEquivalent: false,
+      kept: true,
+    })
+    expect(unchangedLabel(null)).toBe('No equivalent and no stand-in')
   })
 })
 
 describe('a legacy mode above a stand-in', () => {
   const mode = (): BindingRecord => ({
     ...heldMode(),
-    category: 'sure',
-    outcome: 'sure',
-    rule: 'mode/clear',
     oldKey: `mode:${OLD.spacingSemantic}:x`,
     oldMode: {
       collectionId: `VariableCollectionId:${OLD.spacingSemantic}/1`,
@@ -574,18 +710,37 @@ describe('a legacy mode above a stand-in', () => {
       modeName: 'x',
     },
   })
+  const FRAME = new Set(['frame'])
 
-  it('waits for the stand-in to be decided, as for a Needs check', () => {
-    const [held] = holdModes([
+  it('waits for the stand-in to be decided, as for a Needs check, and is cleared in the run that applies it', () => {
+    const records = holdModes([
       mode(),
-      standIn('stroke', { modeHolders: ['root'] }),
+      standIn('stroke', { nodeName: 'Card', modeHolders: ['root'] }),
     ])
-    expect(held).toMatchObject({ category: 'none', rule: 'mode/after-review' })
+    const [held] = records
+    expect(held).toMatchObject({ category: 'sure', rule: 'mode/clear' })
+    const kept = keptModesByRecord(records, NO_OVERRIDES, FRAME, [])
+    expect(kept[held.id]).toEqual({
+      setsMode: false,
+      waitsFor: 'Card, padding left is decided',
+    })
+    expect(effectiveCategory(held, NO_OVERRIDES, kept)).toBe('none')
+    const chosen = { records: { stroke: 'value:1' }, rows: {} }
+    const freed = keptModesByRecord(records, chosen, FRAME, [])
+    expect(freed).toEqual({})
+    expect(effectiveCategory(held, chosen, freed)).toBe('sure')
   })
 
-  it('stays for good above a value without a stand-in', () => {
-    const [held] = holdModes([mode(), { ...noStandIn, modeHolders: ['root'] }])
-    expect(held).toMatchObject({ category: 'none', rule: 'mode/kept' })
+  it('waits above a value without a stand-in until it no longer uses a legacy variable', () => {
+    const records = holdModes([
+      mode(),
+      { ...noStandIn, nodeName: 'Label', modeHolders: ['root'] },
+    ])
+    const kept = keptModesByRecord(records, NO_OVERRIDES, FRAME, [])
+    expect(kept[records[0].id]).toEqual({
+      setsMode: false,
+      waitsFor: 'Label, padding left no longer uses a legacy variable',
+    })
   })
 })
 
@@ -621,6 +776,7 @@ describe('the report', () => {
     records,
     oldInstances: [],
     overrides: NO_OVERRIDES,
+    kept: heldKept,
   })
 
   it('lists No equivalent as gaps in the tokens, each with its stand-in', () => {
@@ -631,6 +787,38 @@ describe('the report', () => {
     )
     expect(report.markdown).toMatch(
       /typography\/ui-body\/font-family \| None possible \|/,
+    )
+  })
+
+  it('lists string and boolean variables among the gaps, with a note that no stand-in is possible', () => {
+    const flag = standIn('flag', {
+      property: { type: 'field', field: 'visible' },
+      kind: 'other',
+      oldKey: `${OLD.density}/flags/show-icon`,
+      old: 'flags/show-icon',
+      candidates: [],
+      rule: 'other/type',
+      reason:
+        'No rule for boolean variables such as flags/show-icon, and a boolean has no stand-in by px or by colour',
+    })
+    const withFlag = buildReport({
+      fileName: 'Test',
+      summary,
+      records: [...records, flag],
+      oldInstances: [],
+      overrides: NO_OVERRIDES,
+      kept: heldKept,
+    })
+    const gaps = withFlag.markdown.slice(
+      withFlag.markdown.indexOf('## No equivalent'),
+      withFlag.markdown.indexOf('### Legacy modes waiting'),
+    )
+    expect(gaps).toMatch(/flags\/show-icon \| None possible \|/)
+    expect(gaps).toContain(
+      '2 values have no stand-in (None possible). No stand-in is possible for a string or boolean variable',
+    )
+    expect(report.markdown).toContain(
+      'One value has no stand-in (None possible).',
     )
   })
 

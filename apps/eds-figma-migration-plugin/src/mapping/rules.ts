@@ -736,7 +736,7 @@ function resolveIconSize(
   const value = readPx(variable)
   if (value === undefined) {
     return none(
-      `${variable.name}: the size could not be read, so no spacing token can be matched to it`,
+      `${variable.name}: the legacy size could not be read, so the rule cannot match a spacing token to it`,
       rule,
     )
   }
@@ -1067,7 +1067,7 @@ function resolveNumber(
     const value = variable.value ?? variable.resolvedValue
     if (typeof value !== 'number') {
       return none(
-        `${variable.name}: there is no stroke width variable, and the width could not be read`,
+        `${variable.name}: there is no stroke width variable, and the legacy width could not be read`,
         'number/stroke-weight',
       )
     }
@@ -1083,7 +1083,7 @@ function resolveNumber(
     const value = variable.value ?? variable.resolvedValue
     if (typeof value !== 'number') {
       return none(
-        `${variable.name}: there is no opacity variable, and the opacity could not be read`,
+        `${variable.name}: there is no opacity variable, and the legacy opacity could not be read`,
         'number/opacity',
       )
     }
@@ -1148,7 +1148,19 @@ function noNumberRule(name: string): Resolution {
 // stand-in as its first candidate. Apply leaves the value until a designer
 // chooses the stand-in or another target (categoryAfter in scan/mapping.ts).
 // A value gets no stand-in only where none is possible: a string or boolean
-// variable, or a number whose px could not be read.
+// variable, or a number whose px could be read neither from the variable nor
+// from the layer.
+
+/**
+ * Rules that end in No equivalent only because the legacy value could not
+ * be read, and say so in their reason.
+ */
+const UNREAD_VALUE_RULES = [
+  'size/icon',
+  'size/control',
+  'number/stroke-weight',
+  'number/opacity',
+]
 
 /** A No equivalent with a stand-in: the reason names the gap, then the stand-in. */
 function standIn(
@@ -1170,8 +1182,14 @@ function standIn(
  * the density the layer will have, as for icon sizes, so spacing for spacing
  * and sizes, and corner radius for radius. Without one, the px without a
  * variable, as for stroke widths. A number on an effect, such as the blur of
- * a shadow, only takes a variable: the plugin cannot set a number there
- * without one, so it gets a stand-in only when a spacing token has its px.
+ * a shadow, is a spacing number like any other, and Apply sets the px on the
+ * effect when no spacing token has it.
+ *
+ * The px is the legacy value as it resolves on the layer. When the scan
+ * could not read it, for example because the legacy library is not enabled,
+ * it is the value the layer has now for the property (`layerValue`), which
+ * is the last value the variable gave it, and the reason says so. An
+ * opacity read from the layer gets the opacity without a variable.
  */
 function numberStandIn(
   gap: Resolution,
@@ -1179,9 +1197,28 @@ function numberStandIn(
   variable: OldVariable,
   context: RoleContext,
 ): Resolution {
-  const px = readPx(variable)
-  // An opacity is a fraction or a percent, not px; its rule reads it.
-  if (px === undefined || kind === 'opacity') return gap
+  const legacy = readPx(variable)
+  const px = legacy ?? variable.layerValue
+  if (px === undefined) return gap
+  // Said first when the px comes from the layer, with the cause unless the
+  // gap already gives it.
+  const fromLayer =
+    legacy === undefined
+      ? `${UNREAD_VALUE_RULES.includes(gap.rule) ? '' : 'the legacy value could not be read, so '}the px is the layer's current value, ${px}px; `
+      : ''
+  // An opacity is a fraction or a percent, not px. Its rule reads the
+  // legacy value, so only the layer's opacity is left for here.
+  if (kind === 'opacity') {
+    if (legacy !== undefined) return gap
+    const opacity = px > 1 ? px / 100 : px
+    const percent = Math.round(opacity * 1000) / 10
+    return standIn(
+      gap,
+      [opacityTarget(opacity)],
+      `the stand-in is the layer's current opacity, ${percent}%, without a variable`,
+      'number/opacity',
+    )
+  }
   const density = targetDensity(context.modes)
   const family =
     kind === 'radius'
@@ -1189,13 +1226,12 @@ function numberStandIn(
       : kind === 'strokeWeight'
         ? undefined
         : { pattern: SPACING_STEP, words: 'spacing' }
-  const takesNumber = kind !== 'other'
   // A 0 needs no token (zeroWithoutToken), so spacing/none is not proposed.
-  if (px === 0 && takesNumber && kind !== 'radius') {
+  if (px === 0 && kind !== 'radius') {
     return standIn(
       gap,
       [literalTarget(0)],
-      'the stand-in is 0 without a variable, since a 0 needs no token',
+      `${fromLayer}the stand-in is 0 without a variable, since a 0 needs no token`,
       'number/as-px',
     )
   }
@@ -1206,15 +1242,14 @@ function numberStandIn(
     return standIn(
       gap,
       [same.name],
-      `the stand-in is ${same.name}, which is ${px}px in ${density}, the same as the legacy value`,
+      `${fromLayer}the stand-in is ${same.name}, which is ${px}px in ${density}${fromLayer ? '' : ', the same as the legacy value'}`,
       'number/same-px',
     )
   }
-  if (!takesNumber) return gap
   return standIn(
     gap,
     [literalTarget(px)],
-    `${family ? `no EDS Beta ${family.words} token is ${px}px in ${density}, so ` : ''}the stand-in is ${px}px without a variable`,
+    `${fromLayer}${family ? `no EDS Beta ${family.words} token is ${px}px in ${density}, so ` : ''}the stand-in is ${px}px without a variable`,
     'number/as-px',
   )
 }

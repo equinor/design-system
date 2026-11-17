@@ -8,7 +8,6 @@
 import {
   bindingOutcome,
   DECIDE_LATER,
-  isHeldMode,
   isUndecided,
   NO_KEPT_MODES,
 } from '../scan/mapping'
@@ -29,18 +28,14 @@ export type ReviewItem = {
 /**
  * A row whose values wait for a designer: Needs check, a Manual fix, or No
  * equivalent with a stand-in. A Ready value set to Decide later waits for a
- * designer too, as a Needs check does. A legacy mode the plugin keeps
+ * designer too, as a Needs check does. A legacy mode the next Apply keeps
  * (Waiting) waits for the values below it instead, so it is not reviewed on
- * its own.
+ * its own (reviewItems).
  */
 function needsDecision(row: MappingRow, deferred: boolean): boolean {
   if (row.outcome === 'check' || row.outcome === 'byHand') return true
   if (row.outcome === 'sure') return deferred
-  return (
-    row.outcome === 'none' &&
-    row.proposal !== undefined &&
-    !isHeldMode(row.rule)
-  )
+  return row.outcome === 'none' && row.proposal !== undefined
 }
 
 /**
@@ -69,4 +64,36 @@ export function reviewItems(
     }
   }
   return items
+}
+
+/**
+ * What a designer did with a value in Review. Decide later is the only way
+ * to put a value off, so every value Review steps through gets a choice
+ * that is saved and shows in Changes.
+ */
+export type ReviewDecision = 'confirmed' | 'changed' | 'later'
+
+/** The closing summary of a review: how many values got each decision, in the order Review shows them. */
+export function reviewSummary(
+  decisions: readonly (ReviewDecision | undefined)[],
+): { decision: ReviewDecision; count: number; text: string }[] {
+  const count = (decision: ReviewDecision) =>
+    decisions.filter((candidate) => candidate === decision).length
+  return [
+    {
+      decision: 'confirmed',
+      count: count('confirmed'),
+      text: 'proposals confirmed',
+    },
+    {
+      decision: 'changed',
+      count: count('changed'),
+      text: 'given another target',
+    },
+    {
+      decision: 'later',
+      count: count('later'),
+      text: 'set to Decide later, left for a later run',
+    },
+  ]
 }
