@@ -74,6 +74,8 @@ type WalkState = {
   isRoot: boolean
   /** Ids of ancestors in the entry that set explicit modes */
   modeHolders: string[]
+  /** An ancestor is hidden */
+  hidden: boolean
 }
 
 /** The fields every unit of a node shares. */
@@ -86,6 +88,7 @@ type UnitBase = Pick<
   | 'path'
   | 'instanceId'
   | 'modeHolders'
+  | 'hidden'
   | 'context'
 >
 
@@ -178,6 +181,15 @@ function modesSignature(modes: Modes): string {
     .join(';')
 }
 
+/** Whether a layer above the node, up to the page, is hidden. */
+function hiddenAbove(node: BaseNode): boolean {
+  for (let parent = node.parent; parent; parent = parent.parent) {
+    if (parent.type === 'PAGE' || parent.type === 'DOCUMENT') return false
+    if ('visible' in parent && !parent.visible) return true
+  }
+  return false
+}
+
 export function explicitModes(node: BaseNode): Modes {
   return 'explicitVariableModes' in node
     ? { ...(node.explicitVariableModes as Modes) }
@@ -230,6 +242,8 @@ export class Collector {
         inComponent,
         isRoot: true,
         modeHolders: [],
+        // A selection scan can start below a hidden layer.
+        hidden: hiddenAbove(root),
       })
     }
   }
@@ -561,6 +575,7 @@ export class Collector {
       node.type === 'TEXT' || SHAPE_TYPES.has(node.type)
         ? { ...own, fillUnder: state.fillUnder }
         : own
+    const hidden = state.hidden || !node.visible
     const base: UnitBase = {
       nodeId: node.id,
       nodeName: node.name,
@@ -570,6 +585,7 @@ export class Collector {
       instanceId,
       context,
       ...(modeHolders.length > 0 ? { modeHolders } : {}),
+      ...(hidden ? { hidden: true as const } : {}),
     }
     const push = (unit: RawUnit) => {
       this.units.push(unit)
@@ -771,6 +787,7 @@ export class Collector {
           node.type === 'COMPONENT_SET',
         isRoot: false,
         modeHolders,
+        hidden,
       }
       for (const [index, child] of node.children.entries()) {
         await this.walk(child, {

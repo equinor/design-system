@@ -110,6 +110,16 @@ describe('classifyUnit', () => {
     })
   })
 
+  it('keeps that a layer is hidden, and classifies it like a shown one', () => {
+    const record = classifyUnit(
+      fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface'), { hidden: true }),
+    )
+    expect(record).toMatchObject({ category: 'sure', hidden: true })
+    expect(
+      classifyUnit(fill(raw(OLD.staticSemantic, 'Bg/Neutral/Surface')))?.hidden,
+    ).toBeUndefined()
+  })
+
   // EDS Core Components, Text Field: the swapped error icon inside the
   // .Icon Wrapper instance overrides its size with `Selectable/Icon size`.
   const iconSize = (extra: Partial<RawUnit> = {}): RawUnit =>

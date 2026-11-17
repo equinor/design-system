@@ -381,13 +381,83 @@ async function select(nodeIds: string[]) {
   if (page && page !== figma.currentPage) await figma.setCurrentPageAsync(page)
   const onPage = nodes.filter((node) => pageOf(node) === figma.currentPage)
   figma.currentPage.selection = onPage
-  figma.viewport.scrollAndZoomIntoView(onPage)
+  // A hidden layer can be selected, but the canvas draws no box around it
+  // and the view does not move to it. The view goes to the layers the canvas
+  // shows, or, when every layer is hidden, to the layers they are in.
+  const shown = onPage.filter((node) => !isHidden(node))
+  const around =
+    shown.length > 0
+      ? shown
+      : [
+          ...new Set(
+            onPage
+              .map(shownAncestor)
+              .filter((node): node is SceneNode => node !== null),
+          ),
+        ]
+  if (around.length > 0) figma.viewport.scrollAndZoomIntoView(around)
+  const notes: string[] = []
+  const hidden = onPage.length - shown.length
+  if (hidden > 0) notes.push(hiddenNote(onPage, hidden, around, shown.length))
   const elsewhere = nodes.length - onPage.length
   if (elsewhere > 0) {
-    figma.notify(
+    notes.push(
       `Selected ${onPage.length} on this page. ${elsewhere} more ${elsewhere === 1 ? 'is' : 'are'} on other pages.`,
     )
   }
+  if (notes.length > 0) figma.notify(notes.join(' '), { timeout: 6000 })
+}
+
+/** Whether the node or a layer above it is hidden, so the canvas does not show it. */
+function isHidden(node: SceneNode): boolean {
+  for (
+    let current: BaseNode | null = node;
+    current && current.type !== 'PAGE' && current.type !== 'DOCUMENT';
+    current = current.parent
+  ) {
+    if ('visible' in current && !current.visible) return true
+  }
+  return false
+}
+
+/**
+ * The nearest layer above a hidden node that the canvas shows: the parent of
+ * the outermost hidden layer. Null when that parent is the page.
+ */
+function shownAncestor(node: SceneNode): SceneNode | null {
+  let outermost: BaseNode = node
+  for (
+    let current = node.parent;
+    current && current.type !== 'PAGE' && current.type !== 'DOCUMENT';
+    current = current.parent
+  ) {
+    if ('visible' in current && !current.visible) outermost = current
+  }
+  const parent = outermost.parent
+  return parent && parent.type !== 'PAGE' && parent.type !== 'DOCUMENT'
+    ? (parent as SceneNode)
+    : null
+}
+
+/** Says that Go to selected hidden layers, which only the Layers panel shows. */
+function hiddenNote(
+  selected: SceneNode[],
+  hidden: number,
+  around: SceneNode[],
+  shown: number,
+): string {
+  if (shown > 0) {
+    return `${hidden} of the ${selected.length} selected layers ${hidden === 1 ? 'is' : 'are'} hidden, so only the Layers panel shows ${hidden === 1 ? 'it' : 'them'}.`
+  }
+  const view =
+    around.length === 0
+      ? ''
+      : around.length === 1
+        ? ` The view shows ${around[0].name}, the layer ${hidden === 1 ? 'it is' : 'they are'} in.`
+        : ' The view shows the layers they are in.'
+  return hidden === 1
+    ? `${selected[0].name} is hidden, so it is only selected in the Layers panel.${view}`
+    : `The ${hidden} layers are hidden, so they are only selected in the Layers panel.${view}`
 }
 
 /** The entries the bindings are in, for Apply on the selected values. */

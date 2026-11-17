@@ -104,6 +104,18 @@ describe('buildMappingGroups', () => {
       bindings.find((binding) => binding.id === 'frame')?.override,
     ).toBeUndefined()
   })
+
+  it('marks a hidden layer, so its row can say Go to only selects it', () => {
+    const [group] = buildMappingGroups([
+      { ...record('icon', 'Icon/Size', 'check', '24'), hidden: true },
+      record('frame', 'Icon/Size', 'check', '24'),
+    ])
+    const bindings = group.rows[0].bindings
+    expect(bindings.find((binding) => binding.id === 'icon')?.hidden).toBe(true)
+    expect(
+      bindings.find((binding) => binding.id === 'frame')?.hidden,
+    ).toBeUndefined()
+  })
 })
 
 describe('effectiveTarget', () => {

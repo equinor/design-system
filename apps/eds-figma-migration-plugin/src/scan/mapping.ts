@@ -270,6 +270,8 @@ export type MappingBinding = {
   kind?: BindingKind
   /** Inside an instance, which overrides the value itself */
   override?: true
+  /** The layer or a layer above it is hidden (RawUnit.hidden) */
+  hidden?: true
   /**
    * For a Manual fix: how to fix this layer, which differs per layer. With
    * `ownReasons`, also the binding's own reason when it differs from the
@@ -365,6 +367,7 @@ export function buildMappingGroups(
       property: record.property,
       kind: record.kind,
       ...(record.override ? { override: true as const } : {}),
+      ...(record.hidden ? { hidden: true as const } : {}),
       ...((record.category === 'byHand' ||
         (ownReasons && record.reason !== row.reason)) &&
       record.reason

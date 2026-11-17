@@ -364,6 +364,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     scheme: targetScheme(unit.context.modes),
     ...(unit.override ? { override: true as const } : {}),
     ...(unit.modeHolders ? { modeHolders: unit.modeHolders } : {}),
+    ...(unit.hidden ? { hidden: true as const } : {}),
   }
 
   // Test session finding 8: a border width set as a number is migrated.

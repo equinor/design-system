@@ -405,6 +405,7 @@ export function MappingView({
                                       {...(binding.override
                                         ? { origin: 'override' as const }
                                         : {})}
+                                      hidden={binding.hidden === true}
                                       changeable
                                       selectable={!manual}
                                       selected={selection.has(binding.id)}

@@ -12,6 +12,7 @@ import {
   CATEGORY_LABELS,
   GROUP_LABELS,
   HELD_LABEL,
+  HIDDEN_LABEL,
   isHeld,
   KEPT_TARGET_LABEL,
   propertyLabel,
@@ -534,6 +535,10 @@ export function Inspector({
                 (record) => record.override,
               ).length
               const inherited = group.records.length - overridden
+              // A hidden layer, or an instance hidden as a whole, says so
+              // once in its header; a hidden layer in a shown instance says
+              // so on its row.
+              const hidden = group.records.every((record) => record.hidden)
               const state = groupState(
                 selection,
                 mappable.map((record) => record.id),
@@ -552,6 +557,9 @@ export function Inspector({
                         )}{' '}
                         {group.title}
                       </span>
+                      {hidden && (
+                        <span className="hidden-label">{HIDDEN_LABEL}</span>
+                      )}
                       <span className="binding-path">
                         {[
                           group.subtitle,
@@ -677,6 +685,7 @@ export function Inspector({
                                         : ('main' as const),
                                     }
                                   : {})}
+                                hidden={!hidden && record.hidden === true}
                                 changeable={isMappable(record)}
                                 selectable={
                                   isMappable(record) &&

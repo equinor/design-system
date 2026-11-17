@@ -1173,6 +1173,15 @@ code {
   }
 }
 
+/* A hidden layer, or one in a hidden layer: Go to only selects it in the
+   Layers panel, since the canvas draws no box around it. */
+.hidden-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
 /* Target picker */
 .picker-options {
   display: flex;

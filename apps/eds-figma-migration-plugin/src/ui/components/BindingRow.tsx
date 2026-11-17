@@ -1,6 +1,11 @@
 import type { ReactNode } from 'react'
 import { Badge, Button, Checkbox } from '@equinor/eds-core-react/next'
-import { CATEGORY_LABELS, HELD_LABEL, ORIGIN_LABELS } from '../labels'
+import {
+  CATEGORY_LABELS,
+  HELD_LABEL,
+  HIDDEN_LABEL,
+  ORIGIN_LABELS,
+} from '../labels'
 import type { ValueOrigin } from '../labels'
 import type { Category } from '../../scan/types'
 import { BADGES, HELD_BADGE } from '../badges'
@@ -26,6 +31,8 @@ type BindingRowProps = {
   held?: boolean
   /** Inside an instance: whether the instance overrides the value or takes it from its main component */
   origin?: ValueOrigin
+  /** The layer or a layer above it is hidden, so Go to only selects it in the Layers panel */
+  hidden?: boolean
   /** Shows a checkbox and a Change button */
   changeable: boolean
   /** Shows the checkbox; false for a Manual fix, which is decided one at a time */
@@ -50,6 +57,7 @@ export function BindingRow({
   category,
   held = false,
   origin,
+  hidden = false,
   changeable,
   selectable = changeable,
   selected,
@@ -74,6 +82,7 @@ export function BindingRow({
       <button type="button" className="binding-select" onClick={onSelectLayer}>
         <span className="binding-name">{title}</span>
         {subtitle && <span className="binding-path">{subtitle}</span>}
+        {hidden && <span className="hidden-label">{HIDDEN_LABEL}</span>}
         {origin && (
           <span className="origin-label" data-origin={origin}>
             {ORIGIN_LABELS[origin]}

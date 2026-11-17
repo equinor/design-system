@@ -87,6 +87,11 @@ export type RawUnit = {
   override?: true
   /** Ids of the node and its ancestors in the entry that set explicit modes, outermost first */
   modeHolders?: string[]
+  /**
+   * The layer or a layer above it is hidden, so the canvas does not show it.
+   * Go to then selects it in the Layers panel and shows the layer it is in.
+   */
+  hidden?: true
   context: RawContext
 } & (
   | {
@@ -237,6 +242,8 @@ export type BindingRecord = {
   override?: true
   /** Ids of the node and its ancestors in the entry that set explicit modes */
   modeHolders?: string[]
+  /** The layer or a layer above it is hidden (RawUnit.hidden) */
+  hidden?: true
   /**
    * Keys of the legacy collections the binding reads, so a legacy mode on one
    * of them above it has to stay while the binding does: its own collection

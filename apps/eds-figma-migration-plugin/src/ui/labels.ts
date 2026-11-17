@@ -36,6 +36,12 @@ export const ORIGIN_LABELS: Record<ValueOrigin, string> = {
 }
 
 /**
+ * A layer that is hidden, or is in a hidden layer. Figma draws no box around
+ * it, so Go to selects it in the Layers panel and shows the layer it is in.
+ */
+export const HIDDEN_LABEL = 'Hidden'
+
+/**
  * A legacy mode that is only cleared and that the next Apply keeps, because
  * values below it that read it are not changed in that run (mapping.ts,
  * isKeptWaiting). It counts as No equivalent, but it has a change, clearing
