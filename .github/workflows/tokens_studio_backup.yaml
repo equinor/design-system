@@ -91,9 +91,13 @@ jobs:
       # The names come from .studio.json (outputs with format raw) so a
       # rename never requires a workflow change. An empty list fails the
       # step: if .studio.json changes shape the backup must go red, not
-      # stay green pulling nothing. --verbose because the run is
-      # unattended, the Actions log is the only place to diagnose a bad
-      # pull
+      # stay green pulling nothing. The raw folders are emptied first:
+      # a pull only removes files that studio.lock lists from an earlier
+      # pull, so without this a set deleted in Tokens Studio would stay
+      # in the working copy and in the backup. A failed pull stops the
+      # job before the sync, so nothing is removed from the backup
+      # branch. --verbose because the run is unattended, the Actions log
+      # is the only place to diagnose a bad pull
       - name: Pull tokens from Tokens Studio
         working-directory: packages/eds-tokens
         run: |
@@ -103,6 +107,14 @@ jobs:
             echo "::error::No raw outputs found in packages/eds-tokens/.studio.json, nothing to back up"
             exit 1
           fi
+          dirs=$(jq -r '.outputs | to_entries[] | select(.value.format == "raw") | .value.dir // error("a raw output has no dir")' .studio.json)
+          while IFS= read -r dir; do
+            if [[ "$dir" == *..* || "$dir" != src/tokens/?* ]]; then
+              echo "::error::Refusing to empty $dir, a raw output dir must be under src/tokens"
+              exit 1
+            fi
+            rm -rf "$dir"
+          done <<< "$dirs"
           # the names are separate arguments, so $raw is left unquoted
           ~/studio-cli/node_modules/.bin/studio pull $raw --ci --verbose
       # Output names and dirs are read from .studio.json so a config
@@ -119,6 +131,10 @@ jobs:
             exit 1
           fi
           while IFS=$'\t' read -r alias output; do
+            if [ -z "$(ls -A "packages/eds-tokens/$output" 2>/dev/null)" ]; then
+              echo "::error::packages/eds-tokens/$output is empty after the pull, not syncing"
+              exit 1
+            fi
             echo "Syncing $alias (packages/eds-tokens/$output → backup/$alias)"
             rsync -a --delete "packages/eds-tokens/$output/" "backup/$alias/"
           done <<< "$sources"
