@@ -34,7 +34,7 @@ const read = (file: string) =>
 
 const bundle = read('../tokens/css/variables.css')
 const exportedCss = read('../tokens/css/font/default.css')
-const exportedTs = read('../tokens/ts/font/default.ts')
+const exportedTs = read('../tokens/ts/light-comfortable.ts')
 
 const GENERIC_FAMILIES = [
   'serif',

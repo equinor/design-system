@@ -8,10 +8,10 @@ changes. Fix token values in Tokens Studio instead.
 
 | Directory  | Content                                | Produced by                                     |
 | ---------- | -------------------------------------- | ----------------------------------------------- |
-| `raw/`     | Raw token sets (JSON, with `{alias}`s) | `studio tokens pull` (sources in `.studio.json`) |
-| `css/`     | CSS custom properties                  | `studio exports run` (EDS-CSS configuration)    |
-| `dtcg/`    | DTCG interchange JSON                  | `studio exports run` (EDS-DTCG configuration)   |
-| `ts/`      | TypeScript modules                     | `pnpm run build:ts-modules` (picks from the TypeScript export by the sets in `dtcg/`) |
+| `raw/`     | Raw token sets (JSON, with `{alias}`s) | `studio pull` (the `eds` output in `.studio.json`) |
+| `css/`     | CSS custom properties                  | `studio pull` (the `css` output, EDS-CSS)       |
+| `dtcg/`    | DTCG interchange JSON                  | `studio pull` (the `dtcg` output, EDS-DTCG)     |
+| `ts/`      | TypeScript, one file per colour scheme and density | `pnpm run build:ts-modules` (checks the TypeScript export that `studio pull` writes to the git-ignored `ts-export/` against `dtcg/`) |
 
 The generated output is published on the beta line
 (`@equinor/eds-tokens@beta`, injected at publish time by
@@ -24,7 +24,7 @@ see [ADR-0009](../../../../documentation/adr/0009-temporary-next-subpaths-for-ed
 for the full lifecycle.
 
 The `./next/ts/*` pattern supplies the `.ts` extension, so the specifier
-carries none: `@equinor/eds-tokens/next/ts/semantic/light`, matching the
+carries none: `@equinor/eds-tokens/next/ts/light-comfortable`, matching the
 2.x `./ts/*` patterns that `eds-mobile-components` already imports from.
 Betas up to `3.0.0-beta.8` behaved the other way round and needed
 `light.ts` spelled out; that is fixed from the next beta

@@ -1,52 +1,48 @@
 /**
- * Build the published TypeScript token modules from the Tokens Studio
+ * Build the published TypeScript token files from the Tokens Studio
  * TypeScript export.
  *
  * The platform's TypeScript export (`EDS-Typescript`, shape
  * `theme-object`) writes one file per colour scheme and density
- * combination, e.g. `light-comfortable.cjs`, each holding every token in
- * one `theme` object with the values already evaluated (typed numbers,
- * hex colours). The published modules are split by token set instead,
- * the same sets the CSS export writes as files: `semantic/light.ts`,
- * `density/compact.ts`, `colors/default.ts` and so on. This script
- * rebuilds that layout.
+ * combination when `selections` is `included`, e.g. `light-comfortable.cjs`,
+ * each holding every token in one `theme` object with the values already
+ * evaluated (typed numbers, hex colours). ADR-0028 point 4 decided that
+ * the published TypeScript is one complete tree per colour scheme and
+ * density, so this script publishes those six files, one
+ * `<scheme>-<density>.ts` each, and an app imports the file for the mode
+ * it renders.
  *
- * The DTCG export is already split by set, so it says which groups
- * belong to which module. For every DTCG file the script picks the
- * matching groups out of the export, following the DTCG tree down to the
- * token (this is how `elevation`, a name two sets share, is split by its
- * inner names):
+ * What the script adds is the safety net. Before anything is written it
+ * checks every variant against the DTCG export. That is a separate
+ * export of the same tokens, which lists each one with its `$type`. No
+ * value comes from it: it is the checklist the TypeScript export is
+ * checked against, so the two exports cannot drift apart unnoticed:
  *
- *  - `color-scheme/<scheme>` comes from the `<scheme>-<base density>`
- *    variant, and `density/<density>` from the first scheme's
- *    `<scheme>-<density>` variant. The two settings do not affect each
- *    other, so those variants are enough.
- *  - every other set is picked once per scheme at the base density, and
- *    is written once when the schemes agree and per scheme when they
- *    differ (`semantic/light.ts`, `semantic/dark.ts`).
- *  - a set whose only root group carries its own name (`density.density`)
- *    is hoisted, so a module reads `density.spacing`.
+ *  - every token the DTCG export names has to be in the variant, and
+ *    every token in the variant has to be named by the DTCG export, so a
+ *    new or renamed set stops the run instead of shipping unreviewed
+ *  - values are checked by `$type`: a colour is hex, a dimension, font
+ *    size, line height, font weight or number is a finite number, a font
+ *    family is a plain string, and a shadow is a list of layers with
+ *    plain numbers and a hex colour. A unit string like '16px' or a
+ *    formula like 'pow(2, 3)' means the platform did not evaluate the
+ *    token
  *
- * Keys follow the committed modules: `2xl` becomes `twoXl` and kebab
- * case becomes camelCase. The internal `foundation` and `input` sets are
- * left out. Values are checked before anything is written: a number must
- * be finite, a colour must be hex, and nothing may still hold a `var()`,
- * `calc()` or other unevaluated form. A problem fails the run, and the
- * release workflow with it, so a PR never carries a half-updated set of
- * modules. Nothing is written, and the old output is left untouched,
- * while any problem is open.
+ * Keys follow ADR-0028 point 3: digit-leading tiers are spelled out
+ * (`2xl` becomes `twoXl`) and kebab case becomes camelCase. The internal
+ * `foundation` and `input` sets are left out. A problem fails the run,
+ * and the release workflow with it, so a PR never carries a half-updated
+ * set of files. Nothing is written, and the old output is left
+ * untouched, while any problem is open.
  *
  * Usage: node scripts/build-ts-modules.mjs [--export <dir>] [--dtcg <dir>] [--out <dir>]
  */
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { createRequire } from 'node:module'
-import { dirname, join, relative, resolve } from 'node:path'
+import { join, relative, resolve } from 'node:path'
 import process from 'node:process'
 
 const require = createRequire(import.meta.url)
-
-// Must match the density base the CSS bundle and the docs use
-const BASE_DENSITY = 'comfortable'
 
 // The palette maths. They stay Enabled in Studio (#5551), so they arrive in
 // every export, and nothing published reads them
@@ -72,7 +68,20 @@ const DIGIT_WORDS = [
 ]
 
 const HEX_COLOUR = /^#[0-9a-f]{6}(?:[0-9a-f]{2})?$/
-const UNEVALUATED = /var\(|calc\(|oklch\(|oklab\(|color\(|\bNaN\b|undefined/
+const UNEVALUATED =
+  /var\(|calc\(|pow\(|min\(|max\(|clamp\(|oklch\(|oklab\(|color\(|rgba?\(|hsla?\(|\bNaN\b|undefined/
+
+// What the export holds for each DTCG `$type`, as observed on the real
+// export: these arrive as plain numbers, so a unit string like '16px' or a
+// formula like 'pow(2, 3)' means the platform did not evaluate the token
+const NUMBER_TYPES = new Set([
+  'dimension',
+  'fontSize',
+  'lineHeight',
+  'fontWeight',
+  'number',
+])
+const STRING_TYPES = new Set(['fontFamily', 'text'])
 
 function parseArgs(argv) {
   const out = {}
@@ -94,14 +103,14 @@ const EXPORT_DIR = args.export ?? 'src/tokens/ts-export'
 const DTCG_DIR = args.dtcg ?? 'src/tokens/dtcg'
 const OUT_DIR = args.out ?? 'src/tokens/ts'
 
-/** @type {Set<string>} deduped, a group is picked once per variant */
+/** @type {Set<string>} deduped, a token is checked once per variant */
 const problems = new Set()
 
 /** Kebab case to camelCase, the way the platform names export keys. */
 const exportKey = (segment) =>
   segment.replace(/-([a-z0-9])/g, (_, letter) => letter.toUpperCase())
 
-/** The key a published module uses: `2xl` becomes `twoXl`. */
+/** The key a published file uses: `2xl` becomes `twoXl`. */
 function tsKey(segment) {
   if (/^\d+$/.test(segment)) return segment
   let normalized = segment
@@ -131,15 +140,58 @@ async function listFiles(dir, extension) {
 const isToken = (node) =>
   node !== null && typeof node === 'object' && '$value' in node
 
-/** Check one value that arrived from the export. */
+const show = (value) => JSON.stringify(value) ?? String(value)
+
+/** A shadow is a list of layers, each with plain numbers and a hex colour. */
+function checkShadow(value, path) {
+  if (!Array.isArray(value) || value.length === 0) {
+    problems.add(
+      `${path}: a shadow must be a list of layers, got ${show(value)}`,
+    )
+    return
+  }
+  value.forEach((layer, index) => {
+    const at = `${path}[${index}]`
+    if (layer === null || typeof layer !== 'object') {
+      problems.add(
+        `${at}: a shadow layer must be an object, got ${show(layer)}`,
+      )
+      return
+    }
+    for (const key of ['offsetX', 'offsetY', 'blur', 'spread'])
+      if (!Number.isFinite(layer[key]))
+        problems.add(
+          `${at}.${key}: expected a finite number, got ${show(layer[key])}`,
+        )
+    if (typeof layer.color !== 'string' || !HEX_COLOUR.test(layer.color))
+      problems.add(
+        `${at}.color: expected a hex colour, got ${show(layer.color)}`,
+      )
+    if (layer.inset !== undefined && typeof layer.inset !== 'boolean')
+      problems.add(
+        `${at}.inset: expected true or false, got ${show(layer.inset)}`,
+      )
+  })
+}
+
+/** Check one value that arrived from the export, by its DTCG `$type`. */
 function checkValue(value, type, path) {
-  if (typeof value === 'number') {
+  if (type === 'shadow') {
+    checkShadow(value, path)
+  } else if (type === 'color') {
+    if (typeof value !== 'string' || !HEX_COLOUR.test(value))
+      problems.add(`${path}: expected a hex colour, got ${show(value)}`)
+  } else if (NUMBER_TYPES.has(type)) {
+    if (!Number.isFinite(value))
+      problems.add(`${path}: expected a finite number, got ${show(value)}`)
+  } else if (STRING_TYPES.has(type)) {
+    if (typeof value !== 'string' || value === '' || UNEVALUATED.test(value))
+      problems.add(`${path}: expected a plain string, got ${show(value)}`)
+  } else if (typeof value === 'number') {
     if (!Number.isFinite(value)) problems.add(`${path}: not a finite number`)
   } else if (typeof value === 'string') {
     if (UNEVALUATED.test(value))
       problems.add(`${path}: not evaluated, got "${value}"`)
-    else if (type === 'color' && !HEX_COLOUR.test(value))
-      problems.add(`${path}: expected a hex colour, got "${value}"`)
   } else if (Array.isArray(value)) {
     value.forEach((item, index) =>
       checkValue(item, undefined, `${path}[${index}]`),
@@ -150,34 +202,6 @@ function checkValue(value, type, path) {
   } else if (typeof value !== 'boolean') {
     problems.add(`${path}: unexpected value ${String(value)}`)
   }
-}
-
-/**
- * Pick from an export subtree the groups and tokens a DTCG subtree names.
- * Keys are translated, and a token or group the export lacks is a problem.
- */
-function pick(exported, tree, path) {
-  if (isToken(tree)) {
-    checkValue(exported, tree.$type, path.join('.'))
-    return exported
-  }
-  const picked = {}
-  for (const [key, child] of Object.entries(tree)) {
-    if (key.startsWith('$')) continue
-    const found =
-      exported !== null && typeof exported === 'object'
-        ? exported[exportKey(key)]
-        : undefined
-    const childPath = [...path, key]
-    if (found === undefined) {
-      problems.add(
-        `${childPath.join('.')}: in the DTCG export, missing from the TypeScript export`,
-      )
-      continue
-    }
-    picked[tsKey(key)] = pick(found, child, childPath)
-  }
-  return picked
 }
 
 const IDENTIFIER = /^[A-Za-z_$][\w$]*$/
@@ -205,12 +229,9 @@ function toLiteral(value, indent) {
   return `{\n${entries.join('\n')}\n${indent}}`
 }
 
-function toTsSource(exportName, value) {
-  const typeName = exportName[0].toUpperCase() + exportName.slice(1)
-  return `${HEADER}\nexport const ${exportName} = ${toLiteral(value, '')} as const\n\nexport type ${typeName} = typeof ${exportName}\n`
+function toTsSource(value) {
+  return `${HEADER}\nexport const theme = ${toLiteral(value, '')} as const\n\nexport type Theme = typeof theme\n`
 }
-
-const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 
 const dtcgFiles = await listFiles(DTCG_DIR, '.json')
 if (dtcgFiles.length === 0) fail(`no DTCG files found in ${DTCG_DIR}`)
@@ -223,19 +244,118 @@ const schemes = variantNames('color-scheme')
 const densities = variantNames('density')
 if (schemes.length === 0)
   fail('no color-scheme variants found in the DTCG export')
-if (!densities.includes(BASE_DENSITY))
-  fail(`the base density "${BASE_DENSITY}" is not in the DTCG export`)
+if (densities.length === 0) fail('no density variants found in the DTCG export')
 
-/** @type {Map<string, Record<string, unknown>>} */
-const variants = new Map()
-function themeFor(scheme, density) {
-  const name = `${scheme}-${density}`
-  if (!variants.has(name)) {
+/**
+ * Every token the DTCG export names, as its path in the TypeScript export
+ * (kebab case turned into the platform's camelCase) with its `$type`, and
+ * every prefix of those paths, to tell a known group from an unknown one.
+ * @type {Map<string, string | undefined>}
+ */
+const tokens = new Map()
+/** @type {Set<string>} */
+const groups = new Set()
+
+function collect(node, path) {
+  if (isToken(node)) {
+    tokens.set(path.join('.'), node.$type)
+    return
+  }
+  for (const [key, child] of Object.entries(node)) {
+    if (key.startsWith('$')) continue
+    const next = [...path, exportKey(key)]
+    groups.add(next.join('.'))
+    collect(child, next)
+  }
+}
+for (const file of dtcgFiles)
+  collect(JSON.parse(await readFile(join(DTCG_DIR, file), 'utf8')), [])
+
+/** Check one variant of the export against the DTCG export. */
+function checkTheme(theme) {
+  // an export token the DTCG export does not name
+  const visit = (value, path) => {
+    const key = path.join('.')
+    if (tokens.has(key)) {
+      checkValue(value, tokens.get(key), key)
+    } else if (
+      value !== null &&
+      typeof value === 'object' &&
+      !Array.isArray(value)
+    ) {
+      if (!groups.has(key))
+        problems.add(
+          path.length === 1
+            ? `${key}: in the TypeScript export, but no DTCG set contains it`
+            : `${key}: in the TypeScript export, but not in the DTCG export`,
+        )
+      else
+        for (const [k, child] of Object.entries(value))
+          visit(child, [...path, k])
+    } else {
+      problems.add(
+        `${key}: in the TypeScript export, but not in the DTCG export`,
+      )
+    }
+  }
+  for (const [group, value] of Object.entries(theme))
+    if (!INTERNAL_GROUPS.has(group)) visit(value, [group])
+
+  // a DTCG token the export lacks
+  for (const key of tokens.keys()) {
+    let found = theme
+    for (const segment of key.split('.'))
+      found =
+        found !== null && typeof found === 'object' ? found[segment] : undefined
+    if (found === undefined)
+      problems.add(
+        `${key}: in the DTCG export, missing from the TypeScript export`,
+      )
+  }
+}
+
+/** The published tree: internal groups out, keys as ADR-0028 names them. */
+function publish(value) {
+  if (Array.isArray(value)) return value.map(publish)
+  if (value === null || typeof value !== 'object') return value
+  const result = {}
+  for (const [key, child] of Object.entries(value)) {
+    const renamed = tsKey(key)
+    if (renamed in result)
+      problems.add(`${key}: becomes ${renamed}, which another key already uses`)
+    result[renamed] = publish(child)
+  }
+  return result
+}
+
+// A colour scheme or density the platform export builds but the DTCG export
+// lacks would otherwise be skipped without a word
+const NOT_VARIANTS = new Set(['index', 'tokenTypes', '__meta__'])
+const expectedVariants = new Set(
+  schemes.flatMap((scheme) =>
+    densities.map((density) => `${scheme}-${density}`),
+  ),
+)
+for (const file of await listFiles(EXPORT_DIR, '.cjs')) {
+  const name = file.replace(/\.cjs$/, '')
+  if (!NOT_VARIANTS.has(name) && !expectedVariants.has(name))
+    problems.add(
+      `${name}: built by the TypeScript export, but its colour scheme or density is not in the DTCG export`,
+    )
+}
+
+/** @type {Array<[outPath: string, value: unknown]>} */
+const files = []
+for (const scheme of schemes)
+  for (const density of densities) {
+    const name = `${scheme}-${density}`
     const file = resolve(EXPORT_DIR, `${name}.cjs`)
     let loaded
     try {
       loaded = require(file)
-    } catch {
+    } catch (error) {
+      // a syntax error or another load failure is not a missing file
+      if (error?.code !== 'MODULE_NOT_FOUND') throw error
       fail(
         `${relative(process.cwd(), file)} not found. The TypeScript export has to build every colour scheme and density (selections: included), as ${name}.cjs`,
       )
@@ -243,70 +363,12 @@ function themeFor(scheme, density) {
     const theme = loaded.theme ?? loaded.default ?? loaded
     if (theme === null || typeof theme !== 'object')
       fail(`${name}.cjs does not export a theme object`)
-    variants.set(name, theme)
-  }
-  return variants.get(name)
-}
-
-/** The root groups each DTCG file names, to find export groups no set owns. */
-const owned = new Set()
-
-/** @type {Array<[outPath: string, exportName: string, value: unknown]>} */
-const modules = []
-
-for (const file of dtcgFiles) {
-  let tree = JSON.parse(await readFile(join(DTCG_DIR, file), 'utf8'))
-  const [folder, variantFile] = file.split('/')
-  const variant = variantFile.replace('.json', '')
-  const exportName = tsKey(folder)
-
-  for (const key of Object.keys(tree))
-    if (!key.startsWith('$')) owned.add(exportKey(key))
-
-  // Hoist a single self-named wrapper group (density/*.json nests
-  // everything under "density") so modules don't read density.density.*
-  let hoisted = null
-  const rootKeys = Object.keys(tree).filter((key) => !key.startsWith('$'))
-  if (rootKeys.length === 1 && tsKey(rootKeys[0]) === exportName) {
-    hoisted = rootKeys[0]
-    tree = tree[rootKeys[0]]
-  }
-  const fromTheme = (theme) =>
-    hoisted === null
-      ? pick(theme, tree, [])
-      : pick(theme[exportKey(hoisted)], tree, [hoisted])
-
-  /** @type {Array<[outFile: string, value: unknown]>} */
-  let outputs
-  if (folder === 'color-scheme') {
-    outputs = [[file, fromTheme(themeFor(variant, BASE_DENSITY))]]
-  } else if (folder === 'density') {
-    // density tokens never depend on the colour scheme, so any scheme works
-    outputs = [[file, fromTheme(themeFor(schemes[0], variant))]]
-  } else {
-    const perScheme = schemes.map((scheme) => [
-      `${folder}/${scheme}.json`,
-      fromTheme(themeFor(scheme, BASE_DENSITY)),
-    ])
-    outputs = perScheme.every(([, value]) => deepEqual(value, perScheme[0][1]))
-      ? [[file, perScheme[0][1]]]
-      : perScheme
-  }
-
-  for (const [outFile, value] of outputs)
-    modules.push([
-      join(OUT_DIR, outFile.replace('.json', '.ts')),
-      exportName,
-      value,
-    ])
-}
-
-// A group in the export that no DTCG set names is a new set, or a rename
-for (const group of Object.keys(themeFor(schemes[0], BASE_DENSITY)))
-  if (!owned.has(group) && !INTERNAL_GROUPS.has(group))
-    problems.add(
-      `${group}: in the TypeScript export, but no DTCG set contains it`,
+    checkTheme(theme)
+    const published = Object.fromEntries(
+      Object.entries(theme).filter(([group]) => !INTERNAL_GROUPS.has(group)),
     )
+    files.push([join(OUT_DIR, `${name}.ts`), publish(published)])
+  }
 
 if (problems.size > 0) {
   console.error(
@@ -316,15 +378,15 @@ if (problems.size > 0) {
   process.exit(1)
 }
 
-// Clear the previous output only once everything resolved, so a failed
-// run leaves the committed modules in place
+// Clear the previous output only once everything checked out, so a failed
+// run leaves the committed files in place
 await rm(OUT_DIR, { recursive: true, force: true })
+await mkdir(OUT_DIR, { recursive: true })
 const written = []
-for (const [outPath, exportName, value] of modules) {
-  await mkdir(dirname(outPath), { recursive: true })
-  await writeFile(outPath, toTsSource(exportName, value))
+for (const [outPath, value] of files) {
+  await writeFile(outPath, toTsSource(value))
   written.push(relative(OUT_DIR, outPath))
 }
 
-console.log(`build-ts-modules: wrote ${written.length} module(s) to ${OUT_DIR}`)
+console.log(`build-ts-modules: wrote ${written.length} file(s) to ${OUT_DIR}`)
 for (const file of written) console.log(`  ${file}`)

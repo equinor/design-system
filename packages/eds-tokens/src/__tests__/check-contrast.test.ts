@@ -4,8 +4,8 @@ import * as os from 'node:os'
 import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
-import { semantic as committedLight } from '../tokens/ts/semantic/light'
-import { semantic as committedDark } from '../tokens/ts/semantic/dark'
+import { theme as committedLight } from '../tokens/ts/light-comfortable'
+import { theme as committedDark } from '../tokens/ts/dark-comfortable'
 
 /**
  * Covers `scripts/check-contrast.mjs` (#5382, ADR-0016 § Confirmation
@@ -60,11 +60,10 @@ const runEdited = (
 
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'eds-contrast-'))
   tempRoots.push(root)
-  fs.mkdirSync(path.join(root, 'semantic'))
   for (const [scheme, tree] of Object.entries(schemes))
     fs.writeFileSync(
-      path.join(root, 'semantic', `${scheme}.ts`),
-      `export const semantic = ${JSON.stringify(tree, null, 2)} as const\n`,
+      path.join(root, `${scheme}-comfortable.ts`),
+      `export const theme = ${JSON.stringify(tree, null, 2)} as const\n`,
     )
   return run(root)
 }

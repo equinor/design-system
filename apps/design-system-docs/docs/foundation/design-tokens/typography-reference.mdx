@@ -107,26 +107,27 @@ name segment that starts with a digit becomes a word, and a hyphenated segment i
 `typography.header.2xl.line-height` is `typography.header.twoXl.lineHeight`.
 
 ```ts
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { theme } from '@equinor/eds-tokens/next/ts/light-comfortable'
 
-semantic.typography.label.md.fontSize // 14
-semantic.typography.header.twoXl.lineHeight // 32
-semantic.fontWeight.medium // 500
+theme.typography.label.md.fontSize // 14
+theme.typography.header.twoXl.lineHeight // 32
+theme.fontWeight.medium // 500
 ```
 
 The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy
 to miss:
 
 - **The values are unitless numbers, not lengths.** `14`, not `14px`. Add the unit yourself.
-- **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the
-  densities are separate modules and you pick one:
+- **The density is part of the file name.** There is no attribute for an object to read, so each
+  density has its own file, and you pick one:
 
 ```ts
-import { density } from '@equinor/eds-tokens/next/ts/density/compact'
+import { theme } from '@equinor/eds-tokens/next/ts/light-compact'
 
-density.typography.label.md.fontSize // 12
+theme.typography.label.md.fontSize // 12
 ```
 
-The family and weight tokens are only in `semantic`, because they do not change with density.
+The family and weight tokens are the same in every file, because they do not change with colour
+scheme or density.
 
 {/* GEN:token-reference END */}

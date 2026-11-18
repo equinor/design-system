@@ -10,11 +10,11 @@ Every 3.x colour token carries its tone in its name, so a component binds to the
 
 ## One name in Figma, CSS and TypeScript
 
-| Where      | How it is written                                 |
-| ---------- | ------------------------------------------------- |
-| Figma      | `background.non-interactive.accent.muted`         |
-| CSS        | `--eds-background-non-interactive-accent-muted`   |
-| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+| Where      | How it is written                               |
+| ---------- | ----------------------------------------------- |
+| Figma      | `background.non-interactive.accent.muted`       |
+| CSS        | `--eds-background-non-interactive-accent-muted` |
+| TypeScript | `theme.background.nonInteractive.accent.muted`  |
 
 CSS is `--eds-` followed by the dotted name, with hyphens for the dots. TypeScript uses the dotted name with each segment in camelCase. If the pattern and the [token reference](https://eds.equinor.com/docs/Next/foundation/colour/reference/) ever disagree, the reference is right.
 
@@ -78,20 +78,20 @@ The tokens also ship as TypeScript objects for places a CSS custom property cann
 ### Import
 
 ```typescript
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { theme } from '@equinor/eds-tokens/next/ts/light-comfortable'
 
-semantic.background.interactive.accent.emphasis.default // '#21767e'
+theme.background.interactive.accent.emphasis.default // '#21767e'
 ```
 
-Each module is imported directly; there is no barrel. The modules are raw `.ts`, so they need a TypeScript-aware consumer. The objects are `as const`, and each module also exports its type (`Semantic`), so a name that does not exist is a compile error.
+There is one file for each colour scheme and density: `light-comfortable`, `light-compact`, `light-relaxed`, `dark-comfortable`, `dark-compact` and `dark-relaxed`. Each is a complete tree, resolved for its own mode. Each file is imported directly; there is no barrel. The files are raw `.ts`, so they need a TypeScript-aware consumer. The object is `as const`, and each file also exports its type (`Theme`), so a name that does not exist is a compile error.
 
-### Colour scheme
+### Colour scheme and density
 
-In TypeScript there is no attribute to switch the scheme. `semantic/light` and `semantic/dark` are separate objects, and you choose which one to use:
+In TypeScript there is no attribute to switch the scheme or the density. The six files are separate objects, and you choose which one to use:
 
 ```typescript
-import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light'
-import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark'
+import { theme as light } from '@equinor/eds-tokens/next/ts/light-comfortable'
+import { theme as dark } from '@equinor/eds-tokens/next/ts/dark-comfortable'
 
 const tokens = prefersDark ? dark : light
 ```
@@ -100,15 +100,15 @@ Prefer CSS custom properties wherever they work.
 
 ### Naming conversion
 
-| CSS variable                                       | TypeScript path                                       |
-| -------------------------------------------------- | ----------------------------------------------------- |
-| `--eds-background-canvas`                          | `semantic.background.canvas`                          |
-| `--eds-background-interactive-neutral-muted-hover` | `semantic.background.interactive.neutral.muted.hover` |
-| `--eds-background-non-interactive-danger-emphasis` | `semantic.background.nonInteractive.danger.emphasis`  |
-| `--eds-text-on-emphasis-success`                   | `semantic.text.onEmphasis.success`                    |
-| `--eds-border-interactive-focus`                   | `semantic.border.interactive.focus`                   |
+| CSS variable                                       | TypeScript path                                    |
+| -------------------------------------------------- | -------------------------------------------------- |
+| `--eds-background-canvas`                          | `theme.background.canvas`                          |
+| `--eds-background-interactive-neutral-muted-hover` | `theme.background.interactive.neutral.muted.hover` |
+| `--eds-background-non-interactive-danger-emphasis` | `theme.background.nonInteractive.danger.emphasis`  |
+| `--eds-text-on-emphasis-success`                   | `theme.text.onEmphasis.success`                    |
+| `--eds-border-interactive-focus`                   | `theme.border.interactive.focus`                   |
 
-From `next/ts/`, import `semantic` only. The other modules hold the layers it is resolved from and can change in any release.
+Use the semantic names. The other groups in the file (the colour-scheme ladders, the palettes, `primitives`, `density`, and the font and shadow sets) hold the layers the semantic names are resolved from and can change in any release.
 
 ## Best practices
 

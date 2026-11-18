@@ -6,10 +6,10 @@ import { fileURLToPath } from 'node:url'
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 
 /**
- * Guards `scripts/build-ts-modules.mjs`, which rebuilds the published
- * by-set TypeScript modules from the platform's TypeScript export (one
- * `theme` file per colour scheme and density) and the DTCG export (which
- * says which groups belong to which set).
+ * Guards `scripts/build-ts-modules.mjs`, which publishes the platform's
+ * TypeScript export as one complete tree per colour scheme and density
+ * (ADR-0028 point 4), after checking every variant against the DTCG
+ * export, which lists every token with its `$type`.
  *
  * The fixture is a small stand-in for the real exports.
  */
@@ -47,7 +47,11 @@ const dtcgFixture = (): Record<string, Json> => ({
     density: { spacing: { '2xl': token('dimension'), md: token('dimension') } },
   },
   'colors/default.json': { light: { gray: { '1': token('color') } } },
-  'font/default.json': { family: { ui: token('fontFamily') } },
+  'font/default.json': {
+    family: { ui: token('fontFamily') },
+    weight: { bold: token('fontWeight') },
+    ratio: { double: token('number') },
+  },
 })
 
 const layer = {
@@ -64,8 +68,7 @@ const themeFixture = (scheme: 'light' | 'dark', density: string): Json => ({
   accent: { emphasis: scheme === 'light' ? '#111111' : '#eeeeee' },
   background: { canvas: scheme === 'light' ? '#ffffff' : '#000000' },
   cornerRadius: { rounded: density === 'compact' ? 2 : 4 },
-  // `elevation` is a name two sets share: ambient belongs to the colour
-  // scheme, high to the semantic set
+  // `elevation` is a name two sets share, and both arrive in the one tree
   elevation: { ambient: '#0000001f', high: [layer] },
   density: {
     spacing:
@@ -73,6 +76,8 @@ const themeFixture = (scheme: 'light' | 'dark', density: string): Json => ({
   },
   light: { gray: { '1': '#f8f8f8' } },
   family: { ui: 'Inter' },
+  weight: { bold: 700 },
+  ratio: { double: 2 },
   // the internal palette maths, which every export carries
   foundation: { anchor: { hue: 240 } },
   input: { scale: { lightness: 0.5 } },
@@ -120,18 +125,11 @@ const run = () =>
 const read = (file: string) =>
   fs.readFileSync(path.join(dirs.out, file), 'utf8')
 
-const listed = (dir: string): string[] => {
-  const found: string[] = []
-  const walk = (current: string) => {
-    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
-      const full = path.join(current, entry.name)
-      if (entry.isDirectory()) walk(full)
-      else found.push(path.relative(dir, full).split(path.sep).join('/'))
-    }
-  }
-  walk(dir)
-  return found.sort()
-}
+const listed = (dir: string): string[] =>
+  fs
+    .readdirSync(dir, { withFileTypes: true })
+    .map((entry) => entry.name)
+    .sort()
 
 beforeEach(() => {
   root = fs.mkdtempSync(path.join(os.tmpdir(), 'eds-build-ts-'))
@@ -151,52 +149,49 @@ afterEach(() => {
 
 describe('build-ts-modules', () => {
   describe('Layout', () => {
-    it('writes one module per set, split per scheme only where values differ', () => {
+    it('writes one file per colour scheme and density', () => {
       const result = run()
       expect(result.status).toBe(0)
       expect(listed(dirs.out)).toEqual([
-        'color-scheme/dark.ts',
-        'color-scheme/light.ts',
-        'colors/default.ts',
-        'density/comfortable.ts',
-        'density/compact.ts',
-        'font/default.ts',
-        'semantic/dark.ts',
-        'semantic/light.ts',
+        'dark-comfortable.ts',
+        'dark-compact.ts',
+        'light-comfortable.ts',
+        'light-compact.ts',
       ])
     })
 
-    it('hoists a self-named root group and renames 2xl style keys', () => {
+    it('writes a complete tree with a theme export and a Theme type', () => {
       run()
-      const compact = read('density/compact.ts')
-      expect(compact).toContain('export const density = {')
-      expect(compact).toContain('twoXl: 24')
-      expect(compact).toContain('md: 8')
-      expect(compact).not.toContain('density: {')
-      expect(compact).toContain('export type Density = typeof density')
+      const file = read('light-comfortable.ts')
+      expect(file).toContain('export const theme = {')
+      expect(file).toContain('export type Theme = typeof theme')
+      // semantic and density tokens sit side by side in the one tree
+      expect(file).toContain('background: {')
+      expect(file).toContain('density: {')
     })
 
-    it('takes density modules from the density variants and the rest at the base density', () => {
+    it('renames 2xl style keys and keeps the rest of the key casing', () => {
       run()
-      expect(read('density/comfortable.ts')).toContain('twoXl: 32')
-      // semantic is picked at the base density, comfortable
-      expect(read('semantic/light.ts')).toContain('rounded: 4')
+      const file = read('light-compact.ts')
+      expect(file).toContain('twoXl: 24')
+      expect(file).not.toContain("'2xl'")
+      expect(file).toContain('cornerRadius: {')
     })
 
-    it('splits a name two sets share by the DTCG tree', () => {
+    it('gives every file its own colour scheme and density values', () => {
       run()
-      const scheme = read('color-scheme/light.ts')
-      expect(scheme).toContain("ambient: '#0000001f'")
-      expect(scheme).not.toContain('offsetX')
-      const semantic = read('semantic/light.ts')
-      expect(semantic).toContain('offsetX: 0')
-      expect(semantic).not.toContain('ambient')
+      expect(read('light-compact.ts')).toContain("emphasis: '#111111'")
+      expect(read('dark-compact.ts')).toContain("emphasis: '#eeeeee'")
+      // the semantic corner radius follows the density in every file
+      expect(read('light-compact.ts')).toContain('rounded: 2')
+      expect(read('light-comfortable.ts')).toContain('rounded: 4')
     })
 
-    it('picks each scheme from its own variant', () => {
+    it('keeps the tokens of both sets that share a name', () => {
       run()
-      expect(read('color-scheme/light.ts')).toContain("emphasis: '#111111'")
-      expect(read('color-scheme/dark.ts')).toContain("emphasis: '#eeeeee'")
+      const file = read('light-comfortable.ts')
+      expect(file).toContain("ambient: '#0000001f'")
+      expect(file).toContain('offsetX: 0')
     })
 
     it('leaves the internal palette sets out', () => {
@@ -215,7 +210,7 @@ describe('build-ts-modules', () => {
       const result = run()
       expect(result.status).toBe(1)
       expect(result.stderr).toContain(message)
-      // a failed run leaves the committed modules in place
+      // a failed run leaves the committed files in place
       expect(fs.existsSync(marker)).toBe(true)
     }
 
@@ -226,11 +221,18 @@ describe('build-ts-modules', () => {
       failsWith('background.canvas')
     })
 
+    it('fails on a token the DTCG export does not name', () => {
+      writeExport((theme) => {
+        ;(theme.accent as Json).extra = '#123456'
+      })
+      failsWith('accent.extra: in the TypeScript export, but not in the DTCG')
+    })
+
     it('fails on a value that is not evaluated', () => {
       writeExport((theme) => {
         ;(theme.cornerRadius as Json).rounded = 'calc(1px + 2px)'
       })
-      failsWith('corner-radius.rounded')
+      failsWith('cornerRadius.rounded')
     })
 
     it('fails on a colour that is not hex', () => {
@@ -248,6 +250,65 @@ describe('build-ts-modules', () => {
       failsWith('density.spacing.md')
     })
 
+    it('fails on a dimension that is a unit string', () => {
+      writeExport((theme) => {
+        ;(theme.cornerRadius as Json).rounded = '16px'
+      })
+      failsWith('expected a finite number, got "16px"')
+    })
+
+    it('fails on a font weight that is a string', () => {
+      writeExport((theme) => {
+        ;(theme.weight as Json).bold = '500'
+      })
+      failsWith('weight.bold: expected a finite number, got "500"')
+    })
+
+    it('fails on a number that is a formula', () => {
+      writeExport((theme) => {
+        ;(theme.ratio as Json).double = 'pow(2, 3)'
+      })
+      failsWith('ratio.double: expected a finite number, got "pow(2, 3)"')
+    })
+
+    it('fails on a shadow layer with a unit string for a number', () => {
+      writeExport((theme) => {
+        ;((theme.elevation as Json).high as Json[])[0].blur = '8px'
+      })
+      failsWith('elevation.high[0].blur: expected a finite number, got "8px"')
+    })
+
+    it('fails on a shadow layer with a colour that is not hex', () => {
+      writeExport((theme) => {
+        ;((theme.elevation as Json).high as Json[])[0].color =
+          'rgba(0, 0, 0, 0.2)'
+      })
+      failsWith('elevation.high[0].color: expected a hex colour')
+    })
+
+    it('fails on a shadow that is not a list of layers', () => {
+      writeExport((theme) => {
+        ;(theme.elevation as Json).high = '0px 4px 12px #00000033'
+      })
+      failsWith('elevation.high: a shadow must be a list of layers')
+    })
+
+    it('reports a variant file that does not load as itself, not as a missing file', () => {
+      write(
+        path.join(dirs.exported, 'light-comfortable.cjs'),
+        'module.exports = {\n',
+      )
+      const result = run()
+      expect(result.status).not.toBe(0)
+      expect(result.stderr).toContain('SyntaxError')
+      expect(result.stderr).not.toContain('selections: included')
+    })
+
+    it('fails on a variant the TypeScript export builds but the DTCG export lacks', () => {
+      writeVariant('light-relaxed', themeFixture('light', 'relaxed'))
+      failsWith('light-relaxed: built by the TypeScript export')
+    })
+
     it('fails on a group no DTCG set contains', () => {
       writeExport((theme) => {
         theme.brandNew = { x: 1 }
@@ -256,7 +317,6 @@ describe('build-ts-modules', () => {
     })
 
     it('fails with a hint when a colour scheme and density variant is missing', () => {
-      // the density modules come from the first scheme's variants
       fs.rmSync(path.join(dirs.exported, 'dark-compact.cjs'))
       failsWith('selections: included')
     })

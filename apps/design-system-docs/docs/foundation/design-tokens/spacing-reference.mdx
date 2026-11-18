@@ -63,27 +63,27 @@ word, so `spacing.2xl` is `spacing.twoXl` and `corner-radius.rounded-outer` is
 `cornerRadius.roundedOuter`.
 
 ```ts
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { theme } from '@equinor/eds-tokens/next/ts/light-comfortable'
 
-semantic.spacing.md // 16
-semantic.spacing.twoXl // 28
-semantic.cornerRadius.roundedOuter // 5
+theme.spacing.md // 16
+theme.spacing.twoXl // 28
+theme.cornerRadius.roundedOuter // 5
 ```
 
 The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy
 to miss:
 
 - **The values are unitless numbers, not lengths.** `16`, not `16px`. Add the unit yourself.
-- **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the
-  densities are separate modules and you pick one:
+- **The density is part of the file name.** There is no attribute for an object to read, so each
+  density has its own file, and you pick one:
 
 ```ts
-import { density } from '@equinor/eds-tokens/next/ts/density/compact'
+import { theme } from '@equinor/eds-tokens/next/ts/light-compact'
 
-density.spacing.md // 12
+theme.spacing.md // 12
 ```
 
 So prefer the CSS custom properties wherever they work. Use the TypeScript objects only
-where they do not, and expect to handle density yourself when you do.
+where they do not, and expect to choose the colour scheme and density yourself when you do.
 
 {/* GEN:token-reference END */}

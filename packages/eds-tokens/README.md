@@ -48,11 +48,11 @@ Three subpaths are published API:
 | Import                                            | Siblings               | What it is                                                               |
 | ------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------ |
 | `@equinor/eds-tokens/next/css/variables.css`      |                        | The CSS custom properties, every mode in one bundle                      |
-| `@equinor/eds-tokens/next/ts/semantic/light`      | `dark`                 | TypeScript twins of the semantic CSS names, one module per colour scheme |
-| `@equinor/eds-tokens/next/ts/density/comfortable` | `compact`, `relaxed`   | Spacing, corner radius and typography per density mode                   |
+| `@equinor/eds-tokens/next/ts/light-comfortable`   | `light-compact`, `light-relaxed`, `dark-comfortable`, `dark-compact`, `dark-relaxed` | TypeScript twins of the CSS names, one complete tree per colour scheme and density |
 
-Everything else under `next/*` (the primitive, colour-scheme and font layers,
-the granular CSS files and the DTCG export) is resolution plumbing, not API. It
+Everything else under `next/*` (the granular CSS files, the DTCG export, and
+the primitive, colour-scheme and font groups inside the TypeScript files) is
+resolution plumbing, not API. It
 is physically present in the package because `var()` resolution is late-bound,
 but it can be renamed or restructured in any beta without notice. Do not import
 it, and do not reference its variable names. See
@@ -133,17 +133,20 @@ Components then bind to the semantic names:
 ### TypeScript
 
 For places a CSS custom property cannot reach, such as a chart library, canvas,
-email template or React Native surface:
+email template or React Native surface. There is one file per colour scheme and
+density (`light-comfortable`, `light-compact`, `light-relaxed`,
+`dark-comfortable`, `dark-compact` and `dark-relaxed`), each a complete tree for
+its own mode:
 
 ```typescript
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+import { theme } from '@equinor/eds-tokens/next/ts/light-comfortable'
 
-semantic.background.interactive.accent.emphasis.default // '#21767e'
+theme.background.interactive.accent.emphasis.default // '#21767e'
 ```
 
-Each module is imported directly, there is no barrel. The objects are `as const`
-and export their own type (`Semantic`, `Density`), so a name that does not exist
-is a compile error.
+Each file is imported directly, there is no barrel. The object is `as const` and
+each file exports its own type (`Theme`), so a name that does not exist is a
+compile error.
 
 The subpath serves raw `.ts` modules rather than compiled `.js` plus `.d.ts`, so
 they have to be compiled by the consumer: a bundler (Vite, webpack, esbuild) or
@@ -152,19 +155,18 @@ which Node refuses inside `node_modules`.
 
 Two things differ from the CSS bundle:
 
-* **The colour scheme does not switch for you.** `semantic/light` and
-  `semantic/dark` are separate objects, and you choose which one to read. There
-  is no attribute to resolve against.
-* **Density is a separate module for now.** `semantic/*` carries the
-  `comfortable` values for spacing, corner radius and typography. For another
-  density, read the matching density module. This is a temporary exception: once
-  `semantic/*` carries the right value per density, `ts/density/*` leaves the
-  published surface ([#5552](https://github.com/equinor/design-system/issues/5552)).
+* **Neither the colour scheme nor the density switches for you.** The six files
+  are separate objects, and you choose which one to read. There is no attribute
+  to resolve against.
+* **Shadows are lists of layers.** `elevation.low` and `elevation.high` are
+  lists of `{ offsetX, offsetY, blur, spread, color, inset }`. React Native's
+  `boxShadow` takes the same layers, with `blur` named `blurRadius` and
+  `spread` named `spreadDistance`.
 
 ```typescript
-import { density } from '@equinor/eds-tokens/next/ts/density/compact'
+import { theme } from '@equinor/eds-tokens/next/ts/light-compact'
 
-density.spacing.md // 12
+theme.spacing.md // 12
 ```
 
 ### The `next` prefix is temporary

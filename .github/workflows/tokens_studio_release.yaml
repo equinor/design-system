@@ -94,13 +94,15 @@ jobs:
       # there is nothing left to strip.
       - name: Strip internal token sets (foundation, input)
         run: pnpm --filter @equinor/eds-tokens run strip:internal-token-sets
-      # The TypeScript token modules are rebuilt from the platform's
-      # TypeScript export (one file per colour scheme and density, pulled
-      # into the ignored src/tokens/ts-export above) into the published
-      # layout, one module per token set. The DTCG export says which
-      # groups belong to which set. A value that is missing or not
-      # evaluated fails the run before any module is written. See the
-      # script header for details.
+      # The platform's TypeScript export (one file per colour scheme and
+      # density, pulled into the ignored src/tokens/ts-export above) is
+      # published as one complete tree per colour scheme and density
+      # (ADR-0028 point 4). Every token is checked against the DTCG export,
+      # a separate export of the same tokens that lists each with its type.
+      # No value comes from it. A missing token, a token the DTCG export
+      # does not name, or a value of the wrong type or not evaluated fails
+      # the run before any file is written. See the script header for
+      # details.
       - name: Build TypeScript token modules
         run: pnpm --filter @equinor/eds-tokens run build:ts-modules
       # Widen the semantic layer to [data-color-scheme] and [data-density],
