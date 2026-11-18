@@ -73,7 +73,9 @@
     & label {
       cursor: pointer;
 
-      /* Centres the first line of the label on the 24px icon */
+      /* Makes a one-line label as tall as the 24px icon, so the two line up.
+         Field centres the control on the label, so a label that wraps
+         centres the switch on all its lines, as Checkbox and Radio do. */
       padding-block: calc(
         (var(--_icon-size) - var(--eds-typography-label-md-line-height)) / 2
       );
