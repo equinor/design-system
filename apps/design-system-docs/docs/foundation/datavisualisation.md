@@ -60,15 +60,7 @@ It is not recommended to rely on colour alone, since some users can have trouble
 
 #### Chart colour tokens
 
-EDS has a separate group of colour tokens for charts, `data-visualization.*`. They are tuned for telling series apart, not for contrast against a background, and no EDS component uses them. The [palette page](./colour/palette.mdx#data-visualisation) shows every value.
-
-| Group           | Tokens                                                             | Use for                                                                         |
-| --------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| **Categorical** | `data-visualization.cat.1` to `cat.10`, each with steps `1` to `5` | Categories with no order between them, such as assets, regions or products      |
-| **Sequential**  | `data-visualization.seq.1` to `seq.7`                              | Ordered values that run from low to high                                        |
-| **Diverging**   | `data-visualization.div.1` to `div.9`                              | Values that run in two directions from a midpoint, such as above and below plan |
-
-Most of the values differ between light and dark. Each categorical ramp runs from light to dark in one colour scheme and from dark to light in the other, so the same step does not have the same lightness in both. Check your charts in both colour schemes.
+EDS has a separate group of colour tokens for charts, `data-visualization.*`, with categorical, sequential and diverging ramps. No EDS component uses them. [Data visualisation colours](./colour/data-visualisation.mdx) explains which group and step to use, how the values change between light and dark, and which steps reach enough contrast for lines and markers.
 
 ### Data visualisation types
 
