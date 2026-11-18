@@ -1,14 +1,31 @@
 {
-  "$schema": "https://tokens.studio/schema/cli",
-  "configurations": {
+  "$schema": "https://tokens.studio/schema/cli/v2.json",
+  "outputs": {
     "eds": {
-      "project": "4952a007-699a-4124-a043-124e80cc28d6",
-      "ref": {
-        "type": "branch",
-        "name": "main"
+      "format": "raw",
+      "dir": "src/tokens/raw"
+    },
+    "css": {
+      "use": {
+        "id": "39d37416-632b-4f04-b49b-cfaec63e3baa",
+        "name": "EDS-CSS"
       },
-      "output": "src/tokens/raw",
-      "format": "raw"
+      "dir": "src/tokens/css"
+    },
+    "dtcg": {
+      "use": {
+        "id": "019463d4-9bef-4e37-9425-6de80eec87c8",
+        "name": "EDS-DTCG"
+      },
+      "dir": "src/tokens/dtcg"
     }
-  }
+  },
+  "source": {
+    "project": "4952a007-699a-4124-a043-124e80cc28d6",
+    "ref": {
+      "type": "branch",
+      "name": "main"
+    }
+  },
+  "version": 2
 }

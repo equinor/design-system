@@ -169,6 +169,9 @@ export const ControlledAndUncontrolled: StoryFn<RadioProps> = () => {
         gap: '48px',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
+        // Room for the address field in every density, so the frame keeps
+        // its height when Delivery is chosen
+        minHeight: '16rem',
       }}
     >
       <fieldset style={{ width: '220px' }}>
@@ -204,9 +207,7 @@ export const ControlledAndUncontrolled: StoryFn<RadioProps> = () => {
               setSelected(e.target.value)
             }
           />
-          <div style={{ minHeight: '4.5rem' }}>
-            {selected === 'delivery' && <TextField label="Delivery address" />}
-          </div>
+          {selected === 'delivery' && <TextField label="Delivery address" />}
         </Wrapper>
       </fieldset>
     </div>
@@ -224,7 +225,7 @@ ControlledAndUncontrolled.parameters = {
 
 export const Density: StoryFn<RadioProps> = () => (
   <div style={{ display: 'flex', gap: '48px', alignItems: 'flex-start' }}>
-    {(['spacious', 'comfortable'] as const).map((density) => (
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
       <div key={density} data-density={density}>
         <ExampleLabel>
           {density.charAt(0).toUpperCase() + density.slice(1)}
@@ -248,75 +249,7 @@ Density.parameters = {
   docs: {
     description: {
       story:
-        'Set `data-density` on a parent element to change the size. Comfortable is more compact.',
-    },
-  },
-}
-
-export const LightAndDarkMode: StoryFn<RadioProps> = () => (
-  <div style={{ display: 'flex', gap: '32px' }}>
-    <div
-      data-color-scheme="light"
-      style={{ padding: '24px', background: 'var(--eds-color-bg-canvas)' }}
-    >
-      <ExampleLabel>Light Mode</ExampleLabel>
-      <fieldset>
-        <legend>Selectable</legend>
-        <Wrapper gap={8}>
-          <Radio label="Email" name="light-selectable" value="email" />
-          <Radio
-            label="SMS"
-            name="light-selectable"
-            value="sms"
-            defaultChecked
-          />
-        </Wrapper>
-      </fieldset>
-      <fieldset disabled>
-        <legend>Disabled</legend>
-        <Wrapper gap={8}>
-          <Radio label="Email" name="light-disabled" value="email" />
-          <Radio label="SMS" name="light-disabled" value="sms" defaultChecked />
-        </Wrapper>
-      </fieldset>
-    </div>
-    <div
-      data-color-scheme="dark"
-      style={{
-        padding: '24px',
-        background: 'var(--eds-color-bg-canvas)',
-        color: 'var(--eds-color-text-strong)',
-      }}
-    >
-      <ExampleLabel>Dark Mode</ExampleLabel>
-      <fieldset>
-        <legend>Selectable</legend>
-        <Wrapper gap={8}>
-          <Radio label="Email" name="dark-selectable" value="email" />
-          <Radio
-            label="SMS"
-            name="dark-selectable"
-            value="sms"
-            defaultChecked
-          />
-        </Wrapper>
-      </fieldset>
-      <fieldset disabled>
-        <legend>Disabled</legend>
-        <Wrapper gap={8}>
-          <Radio label="Email" name="dark-disabled" value="email" />
-          <Radio label="SMS" name="dark-disabled" value="sms" defaultChecked />
-        </Wrapper>
-      </fieldset>
-    </div>
-  </div>
-)
-
-LightAndDarkMode.parameters = {
-  docs: {
-    description: {
-      story:
-        'Radio follows the colour scheme set with `data-color-scheme` on a parent element.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }

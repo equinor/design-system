@@ -46,6 +46,6 @@ Use `event=REQUEST_CHANGES` for Request changes.
 
 ## Reply
 
-If the review is still pending, give the link to it, the recommended type in one line, and the count per severity. Remind the reviewer to submit it with the type they choose. Do not paste the inline comments into the chat, but do paste the `body` text, in a fenced markdown block, and tell the reviewer to paste it into the "Finish your review" box before submitting.
+If the review is still pending, give the link to it, the recommended type in one line, and the count per severity. Remind the reviewer to submit it with the type they choose. Do not paste the inline comments into the chat, but do paste the `body` text in a fenced markdown block between `-----` lines, so it is clear where to start and stop copying, and tell the reviewer to paste it into the "Finish your review" box before submitting.
 
 If you submitted it, give the link, the type you submitted and the count per severity.

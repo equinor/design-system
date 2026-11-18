@@ -1,0 +1,69 @@
+.dataviz-step-swap {
+  overflow-x: auto;
+  margin: var(--eds-spacing-xl) 0 var(--eds-spacing-2xl);
+}
+
+.dataviz-step-swap table {
+  display: table;
+  border-spacing: 0 var(--eds-spacing-3xs);
+  border-collapse: separate;
+  width: 100%;
+}
+
+.dataviz-step-swap th,
+.dataviz-step-swap td {
+  padding: var(--eds-spacing-2xs) var(--eds-spacing-sm);
+  border: 0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.dataviz-step-swap thead th {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: 600;
+  color: var(--eds-text-secondary);
+}
+
+.dataviz-step-swap tbody th {
+  width: 3rem;
+
+  font-family: var(--ifm-font-family-monospace);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: 400;
+  color: var(--eds-text-secondary);
+}
+
+/* Each cell carries data-color-scheme, so the surface and the swatches resolve to that scheme. */
+.dataviz-step-swap .cell {
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+  background: var(--eds-background-surface);
+}
+
+.dataviz-step-swap .swatches {
+  display: grid;
+  grid-template-columns: repeat(10, var(--eds-spacing-md));
+  gap: var(--eds-spacing-3xs);
+}
+
+.dataviz-step-swap .swatch {
+  display: block;
+  height: var(--eds-spacing-md);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.dataviz-step-swap .meaning {
+  min-width: 9rem;
+  font-size: var(--eds-typography-label-md-font-size);
+  color: var(--eds-text-primary);
+}
+
+.dataviz-step-swap tr.base .meaning {
+  font-weight: 600;
+}
+
+.dataviz-step-swap .caption {
+  margin: var(--eds-spacing-3xs) 0 0;
+  font-size: var(--eds-typography-label-sm-font-size);
+  color: var(--eds-text-secondary);
+}

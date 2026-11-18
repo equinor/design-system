@@ -358,7 +358,7 @@
             }
           },
           "5": {
-            "$value": "#e0c9ee",
+            "$value": "#c0e6ff",
             "$type": "color",
             "$extensions": {
               "com.figma": {

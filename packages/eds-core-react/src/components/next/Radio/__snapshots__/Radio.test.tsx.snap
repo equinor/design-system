@@ -4,10 +4,8 @@ exports[`Radio (next) matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="eds-field eds-radio"
-    data-color-appearance="accent"
     data-position="start"
-    data-selectable-space="md"
-    data-space-proportions="squished"
+    data-tone="accent"
   >
     <input
       class="input"

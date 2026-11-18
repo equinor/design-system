@@ -48,6 +48,9 @@ RUN npm install -g pnpm@11.27.0 && \
     apk add --no-cache tini && \
     chown "$USER":"$USER" /app
 
+# The runtime only needs pnpm. Remove the npm bundled in the Node image and its vulnerable dependencies.
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
+
 # Copy package files for production install
 COPY --chown="$USER":"$USER" package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY --chown="$USER":"$USER" apps/eds-color-palette-generator/package.json ./apps/eds-color-palette-generator/
