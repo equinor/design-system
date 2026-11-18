@@ -97,7 +97,7 @@ jobs:
       # The platform's TypeScript export (one file per colour scheme and
       # density, pulled into the ignored src/tokens/ts-export above) is
       # published as one complete tree per colour scheme and density
-      # (ADR-0028 point 4). Every token is checked against the DTCG export,
+      # (ADR-0028 point 4), with the semantic layer only (point 7). Every token is checked against the DTCG export,
       # a separate export of the same tokens that lists each with its type.
       # No value comes from it. A missing token, a token the DTCG export
       # does not name, or a value of the wrong type or not evaluated fails

@@ -144,18 +144,16 @@ Values are hex rather than the OKLCH used by the CSS output. They are generated 
 so they agree, but a value copied from TypeScript does not carry the CSS output's wide-gamut
 precision.
 
-The spacing, corner radius and typography follow the density in the file name. Shadows
-(`elevation.low` and `elevation.high`) are lists of layers, each with `offsetX`, `offsetY`, `blur`,
-`spread`, `color` and `inset`. React Native's `boxShadow` style takes the same layers, with `blur`
-named `blurRadius` and `spread` named `spreadDistance`.
+The spacing, corner radius and typography follow the density in the file name. Each shadow
+(`elevation.low` and `elevation.high`) is a CSS `boxShadow` string and a `layers` list, where each
+layer has `offsetX`, `offsetY`, `blur`, `spread`, `color` and `inset`. React Native's `boxShadow` style
+takes the layers, with `blur` named `blurRadius` and `spread` named `spreadDistance`.
 
-Use the semantic names: `background`, `border`, `icon`, `overlay`, `text`, `dataVisualization`,
-`fontFamily`, `fontWeight`, `typography`, `spacing`, `cornerRadius` and the two shadows. The other
-groups (`accent`, `danger`, `info`, `neutral`, `success`, `warning`, `dataviz`, `light`, `dark`,
-`family`, `weight`, `shadow`, `density`, `primitives`, and the `ambient` and `key` colours in
-`elevation`) hold the layers the semantic names are resolved from. They are internal and can be
-renamed or restructured in any release. [The palette](./palette.mdx) explains the colour layers as
-concepts.
+The files carry the semantic layer only: `background`, `border`, `icon`, `overlay`, `text`,
+`dataVisualization`, `fontFamily`, `fontWeight`, `typography`, `spacing`, `cornerRadius` and the two
+shadows, `elevation.low` and `elevation.high`. The layers they are resolved from, such as the
+primitives, the colour ladders and the density layer, are not published. [The palette](./palette.mdx)
+explains the colour layers as concepts.
 
 ## For designers
 

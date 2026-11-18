@@ -38,6 +38,7 @@ const dtcgFixture = (): Record<string, Json> => ({
   'semantic/default.json': {
     background: { canvas: token('color') },
     'corner-radius': { rounded: token('dimension') },
+    spacing: { '2xl': token('dimension'), md: token('dimension') },
     elevation: { high: token('shadow') },
   },
   'density/compact.json': {
@@ -68,6 +69,7 @@ const themeFixture = (scheme: 'light' | 'dark', density: string): Json => ({
   accent: { emphasis: scheme === 'light' ? '#111111' : '#eeeeee' },
   background: { canvas: scheme === 'light' ? '#ffffff' : '#000000' },
   cornerRadius: { rounded: density === 'compact' ? 2 : 4 },
+  spacing: density === 'compact' ? { '2xl': 24, md: 8 } : { '2xl': 32, md: 12 },
   // `elevation` is a name two sets share, and both arrive in the one tree
   elevation: { ambient: '#0000001f', high: [layer] },
   density: {
@@ -165,9 +167,9 @@ describe('build-ts-modules', () => {
       const file = read('light-comfortable.ts')
       expect(file).toContain('export const theme = {')
       expect(file).toContain('export type Theme = typeof theme')
-      // semantic and density tokens sit side by side in the one tree
+      // the semantic tokens that follow the colour scheme and the density sit side by side
       expect(file).toContain('background: {')
-      expect(file).toContain('density: {')
+      expect(file).toContain('spacing: {')
     })
 
     it('renames 2xl style keys and keeps the rest of the key casing', () => {
@@ -180,18 +182,47 @@ describe('build-ts-modules', () => {
 
     it('gives every file its own colour scheme and density values', () => {
       run()
-      expect(read('light-compact.ts')).toContain("emphasis: '#111111'")
-      expect(read('dark-compact.ts')).toContain("emphasis: '#eeeeee'")
-      // the semantic corner radius follows the density in every file
+      expect(read('light-compact.ts')).toContain("canvas: '#ffffff'")
+      expect(read('dark-compact.ts')).toContain("canvas: '#000000'")
+      // the semantic spacing and corner radius follow the density in every file
       expect(read('light-compact.ts')).toContain('rounded: 2')
+      expect(read('light-compact.ts')).toContain('md: 8')
       expect(read('light-comfortable.ts')).toContain('rounded: 4')
+      expect(read('light-comfortable.ts')).toContain('md: 12')
     })
 
-    it('keeps the tokens of both sets that share a name', () => {
+    it('publishes a shadow as CSS text and as its list of layers', () => {
       run()
       const file = read('light-comfortable.ts')
-      expect(file).toContain("ambient: '#0000001f'")
+      expect(file).toContain("boxShadow: '0px 4px 12px 0px #00000033'")
+      expect(file).toContain('layers: [')
       expect(file).toContain('offsetX: 0')
+    })
+
+    it('writes inset and several layers into the CSS text', () => {
+      writeExport((theme) => {
+        ;(theme.elevation as Json).high = [
+          layer,
+          { ...layer, offsetY: 12, blur: 16, spread: 6, inset: true },
+        ]
+      })
+      run()
+      expect(read('light-comfortable.ts')).toContain(
+        "boxShadow: '0px 4px 12px 0px #00000033, inset 0px 12px 16px 6px #00000033'",
+      )
+    })
+
+    it('publishes only the tokens of the semantic set', () => {
+      run()
+      const file = read('light-comfortable.ts')
+      // the shadow the semantic set holds is in, its loose parts are not
+      expect(file).toContain('offsetX: 0')
+      expect(file).not.toContain('ambient')
+      // the colour ladders, the palettes, the font set and the density group stay out
+      expect(file).not.toContain('accent')
+      expect(file).not.toContain('gray')
+      expect(file).not.toContain('Inter')
+      expect(file).not.toContain('density')
     })
 
     it('leaves the internal palette sets out', () => {
@@ -307,6 +338,17 @@ describe('build-ts-modules', () => {
     it('fails on a variant the TypeScript export builds but the DTCG export lacks', () => {
       writeVariant('light-relaxed', themeFixture('light', 'relaxed'))
       failsWith('light-relaxed: built by the TypeScript export')
+    })
+
+    it('fails on a token with a $type no check covers', () => {
+      write(
+        path.join(dirs.dtcg, 'timing/default.json'),
+        JSON.stringify({ timing: { fast: token('duration') } }),
+      )
+      writeExport((theme) => {
+        theme.timing = { fast: '200ms' }
+      })
+      failsWith('timing.fast: unknown $type "duration"')
     })
 
     it('fails on a group no DTCG set contains', () => {

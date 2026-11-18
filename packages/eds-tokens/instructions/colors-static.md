@@ -108,7 +108,7 @@ Prefer CSS custom properties wherever they work.
 | `--eds-text-on-emphasis-success`                   | `theme.text.onEmphasis.success`                    |
 | `--eds-border-interactive-focus`                   | `theme.border.interactive.focus`                   |
 
-Use the semantic names. The other groups in the file (the colour-scheme ladders, the palettes, `primitives`, `density`, and the font and shadow sets) hold the layers the semantic names are resolved from and can change in any release.
+The files carry the semantic layer only, so every name in them is safe to use. The layers it is resolved from (the colour-scheme ladders, the palettes, `primitives`, `density` and the font and shadow sets) are not published.
 
 ## Best practices
 

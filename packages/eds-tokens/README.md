@@ -50,9 +50,8 @@ Three subpaths are published API:
 | `@equinor/eds-tokens/next/css/variables.css`      |                        | The CSS custom properties, every mode in one bundle                      |
 | `@equinor/eds-tokens/next/ts/light-comfortable`   | `light-compact`, `light-relaxed`, `dark-comfortable`, `dark-compact`, `dark-relaxed` | TypeScript twins of the CSS names, one complete tree per colour scheme and density |
 
-Everything else under `next/*` (the granular CSS files, the DTCG export, and
-the primitive, colour-scheme and font groups inside the TypeScript files) is
-resolution plumbing, not API. It
+Everything else under `next/*` (the granular CSS files and the DTCG export) is
+resolution plumbing, not API. The TypeScript files carry the semantic layer only. It
 is physically present in the package because `var()` resolution is late-bound,
 but it can be renamed or restructured in any beta without notice. Do not import
 it, and do not reference its variable names. See
@@ -158,10 +157,11 @@ Two things differ from the CSS bundle:
 * **Neither the colour scheme nor the density switches for you.** The six files
   are separate objects, and you choose which one to read. There is no attribute
   to resolve against.
-* **Shadows are lists of layers.** `elevation.low` and `elevation.high` are
-  lists of `{ offsetX, offsetY, blur, spread, color, inset }`. React Native's
-  `boxShadow` takes the same layers, with `blur` named `blurRadius` and
-  `spread` named `spreadDistance`.
+* **Shadows come as CSS text and as layers.** `elevation.low` and
+  `elevation.high` each have a `boxShadow` string and a `layers` list of
+  `{ offsetX, offsetY, blur, spread, color, inset }`. React Native's
+  `boxShadow` takes the layers, with `blur` named `blurRadius` and `spread`
+  named `spreadDistance`.
 
 ```typescript
 import { theme } from '@equinor/eds-tokens/next/ts/light-compact'

@@ -28,9 +28,15 @@
  *    formula like 'pow(2, 3)' means the platform did not evaluate the
  *    token
  *
- * Keys follow ADR-0028 point 3: digit-leading tiers are spelled out
- * (`2xl` becomes `twoXl`) and kebab case becomes camelCase. The internal
- * `foundation` and `input` sets are left out. A problem fails the run,
+ * Only the tokens of the semantic set are published (ADR-0028 point 7:
+ * the semantic layer is the contract). The hidden collections, such as
+ * primitives, density, the colour ladders, the font set and the loose
+ * parts of a shadow, are checked but left out, and so are the internal
+ * `foundation` and `input` sets. A `$type` no check covers fails the run.
+ * A shadow is published the way ADR-0028 point 7 describes, as a
+ * `boxShadow` string for CSS and as a `layers` list. Keys follow ADR-0028
+ * point 3: digit-leading tiers are spelled out (`2xl` becomes `twoXl`)
+ * and kebab case becomes camelCase. A problem fails the run,
  * and the release workflow with it, so a PR never carries a half-updated
  * set of files. Nothing is written, and the old output is left
  * untouched, while any problem is open.
@@ -187,20 +193,10 @@ function checkValue(value, type, path) {
   } else if (STRING_TYPES.has(type)) {
     if (typeof value !== 'string' || value === '' || UNEVALUATED.test(value))
       problems.add(`${path}: expected a plain string, got ${show(value)}`)
-  } else if (typeof value === 'number') {
-    if (!Number.isFinite(value)) problems.add(`${path}: not a finite number`)
-  } else if (typeof value === 'string') {
-    if (UNEVALUATED.test(value))
-      problems.add(`${path}: not evaluated, got "${value}"`)
-  } else if (Array.isArray(value)) {
-    value.forEach((item, index) =>
-      checkValue(item, undefined, `${path}[${index}]`),
+  } else {
+    problems.add(
+      `${path}: unknown $type ${show(type)}, add a check for it before it is published`,
     )
-  } else if (value !== null && typeof value === 'object') {
-    for (const [key, child] of Object.entries(value))
-      checkValue(child, undefined, `${path}.${key}`)
-  } else if (typeof value !== 'boolean') {
-    problems.add(`${path}: unexpected value ${String(value)}`)
   }
 }
 
@@ -255,21 +251,38 @@ if (densities.length === 0) fail('no density variants found in the DTCG export')
 const tokens = new Map()
 /** @type {Set<string>} */
 const groups = new Set()
+/**
+ * The tokens of the semantic set, and every prefix of their paths. ADR-0028
+ * point 7: the semantic layer is the published contract, and the hidden
+ * collections (primitives, density, the colour ladders, the font set and
+ * the loose parts of a shadow) stay out of the published files.
+ * @type {Set<string>}
+ */
+const published = new Set()
+const publishedGroups = new Set()
 
-function collect(node, path) {
+function collect(node, path, isSemantic) {
   if (isToken(node)) {
-    tokens.set(path.join('.'), node.$type)
+    const key = path.join('.')
+    tokens.set(key, node.$type)
+    if (isSemantic) published.add(key)
     return
   }
   for (const [key, child] of Object.entries(node)) {
     if (key.startsWith('$')) continue
     const next = [...path, exportKey(key)]
     groups.add(next.join('.'))
-    collect(child, next)
+    if (isSemantic) publishedGroups.add(next.join('.'))
+    collect(child, next, isSemantic)
   }
 }
 for (const file of dtcgFiles)
-  collect(JSON.parse(await readFile(join(DTCG_DIR, file), 'utf8')), [])
+  collect(
+    JSON.parse(await readFile(join(DTCG_DIR, file), 'utf8')),
+    [],
+    file.startsWith('semantic/'),
+  )
+if (published.size === 0) fail('no semantic set found in the DTCG export')
 
 /** Check one variant of the export against the DTCG export. */
 function checkTheme(theme) {
@@ -314,16 +327,38 @@ function checkTheme(theme) {
   }
 }
 
-/** The published tree: internal groups out, keys as ADR-0028 names them. */
-function publish(value) {
-  if (Array.isArray(value)) return value.map(publish)
-  if (value === null || typeof value !== 'object') return value
+/** A shadow as CSS text, the way a `box-shadow` declaration writes its layers. */
+const shadowText = (layers) =>
+  layers
+    .map(
+      ({ offsetX, offsetY, blur, spread, color, inset }) =>
+        `${inset ? 'inset ' : ''}${offsetX}px ${offsetY}px ${blur}px ${spread}px ${color}`,
+    )
+    .join(', ')
+
+/**
+ * The published tree: only the tokens of the semantic set, with the keys
+ * ADR-0028 names (`2xl` becomes `twoXl`), in the order the export has them.
+ */
+function publish(value, path = []) {
+  const key = path.join('.')
+  // ADR-0028 point 7: a finished shadow is published as CSS text and as
+  // its list of layers, so a consumer that needs the text does not have to
+  // build it
+  if (published.has(key))
+    return tokens.get(key) === 'shadow' && Array.isArray(value)
+      ? { boxShadow: shadowText(value), layers: value }
+      : value
   const result = {}
-  for (const [key, child] of Object.entries(value)) {
-    const renamed = tsKey(key)
+  for (const [name, child] of Object.entries(value)) {
+    const next = [...path, name].join('.')
+    if (!published.has(next) && !publishedGroups.has(next)) continue
+    const renamed = tsKey(name)
     if (renamed in result)
-      problems.add(`${key}: becomes ${renamed}, which another key already uses`)
-    result[renamed] = publish(child)
+      problems.add(
+        `${next}: becomes ${renamed}, which another key already uses`,
+      )
+    result[renamed] = publish(child, [...path, name])
   }
   return result
 }
@@ -364,10 +399,7 @@ for (const scheme of schemes)
     if (theme === null || typeof theme !== 'object')
       fail(`${name}.cjs does not export a theme object`)
     checkTheme(theme)
-    const published = Object.fromEntries(
-      Object.entries(theme).filter(([group]) => !INTERNAL_GROUPS.has(group)),
-    )
-    files.push([join(OUT_DIR, `${name}.ts`), publish(published)])
+    files.push([join(OUT_DIR, `${name}.ts`), publish(theme)])
   }
 
 if (problems.size > 0) {
