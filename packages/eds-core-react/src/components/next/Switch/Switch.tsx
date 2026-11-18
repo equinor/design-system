@@ -1,75 +1,58 @@
-import { forwardRef, useState, useCallback, useId } from 'react'
+import { forwardRef, useId } from 'react'
 import { Field } from '../Field'
 import type { SwitchProps } from './Switch.types'
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
-  {
-    label,
-    disabled,
-    className,
-    style,
-    id,
-    checked: controlledChecked,
-    defaultChecked,
-    onChange,
-    ...rest
-  },
+  { label, disabled, className, style, id, ...rest },
   ref,
 ) {
   const generatedId = useId()
   // `||`, not `??`: an empty string is treated as no id
   const inputId = id || generatedId
 
-  // Track checked state for dynamic color appearance
-  const isControlled = controlledChecked !== undefined
-  const [internalChecked, setInternalChecked] = useState(
-    defaultChecked ?? false,
+  const control = (
+    <span className="control">
+      <input
+        type="checkbox"
+        role="switch"
+        id={inputId}
+        className="input"
+        disabled={disabled}
+        ref={ref}
+        {...rest}
+      />
+      <span className="track">
+        <span className="handle" />
+      </span>
+    </span>
   )
-  const isChecked = isControlled ? controlledChecked : internalChecked
 
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (!isControlled) {
-        setInternalChecked(event.target.checked)
-      }
-      onChange?.(event)
-    },
-    [isControlled, onChange],
-  )
+  const rootClassName = ['eds-switch', className].filter(Boolean).join(' ')
+
+  if (label) {
+    return (
+      <Field
+        position="start"
+        disabled={disabled}
+        className={rootClassName}
+        style={style}
+        data-tone="accent"
+      >
+        {control}
+        <Field.Label htmlFor={inputId}>{label}</Field.Label>
+      </Field>
+    )
+  }
 
   return (
-    <Field
-      position="start"
-      disabled={disabled}
-      className={['eds-switch', className].filter(Boolean).join(' ')}
+    <span
+      className={rootClassName}
       style={style}
-      data-font-size="md"
-      data-selectable-space="md"
-      data-space-proportions="squished"
-      data-color-appearance="accent"
+      data-standalone={true}
+      data-tone="accent"
     >
-      <span
-        className="control"
-        data-color-appearance={isChecked ? 'accent' : 'neutral'}
-      >
-        <input
-          type="checkbox"
-          role="switch"
-          id={inputId}
-          className="input"
-          disabled={disabled}
-          ref={ref}
-          checked={isControlled ? controlledChecked : undefined}
-          defaultChecked={!isControlled ? defaultChecked : undefined}
-          onChange={handleChange}
-          {...rest}
-        />
-        <span className="track">
-          <span className="handle" />
-        </span>
-      </span>
-      <Field.Label htmlFor={inputId}>{label}</Field.Label>
-    </Field>
+      {control}
+    </span>
   )
 })
 
