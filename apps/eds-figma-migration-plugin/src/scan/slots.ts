@@ -61,3 +61,27 @@ export function outermostInstance<Layer extends SlotLayer>(
   // Every layer above a layer is a layer of the same document.
   return found as Layer | null
 }
+
+/**
+ * Where `node` is among `children`, or -1. A layer a session added to a
+ * slot can show another id there than in its parent's list (a plain id
+ * against `I<instance>;<slot>;<id>`), and the list can hold other objects
+ * for the same layers, so `indexOf` alone returned -1 when Revert put a
+ * Typography instance back in a slot (FRIOD test page, 2026-11-19). The
+ * layer is matched by object, then by id, then by its own id part, the part
+ * after the last `;`, when exactly one child has it.
+ */
+export function indexAmongChildren(
+  children: readonly SlotLayer[],
+  node: SlotLayer,
+): number {
+  const same = children.indexOf(node)
+  if (same !== -1) return same
+  const byId = children.findIndex((child) => child.id === node.id)
+  if (byId !== -1) return byId
+  const own = (id: string) => id.slice(id.lastIndexOf(';') + 1)
+  const matches = children.flatMap((child, index) =>
+    own(child.id) === own(node.id) ? [index] : [],
+  )
+  return matches.length === 1 ? matches[0] : -1
+}

@@ -73,7 +73,10 @@ on FRIOD 2026-11-19). A layer a session adds to the slot, such as the text
 layer Convert puts there, keeps a plain id in that session until the file is
 opened again, while other sessions see it below the slot's id; a plain id in a
 slot of an instance is owned content as well, since content that follows the
-main component always has an `I` id. Every value also records the
+main component always has an `I` id. For the same reason Convert and Revert
+find a layer among its parent's children with `indexAmongChildren`, not
+`indexOf` alone, and Revert removes the Typography instance it made when
+putting it back fails, instead of leaving it on the page. Every value also records the
 full chain of instances it is in (`instances`, outermost first, through owned
 slot content too), and each instance on the Instances tab carries a tree of the
 instances in it with the legacy values each takes from its main component

@@ -15,6 +15,7 @@
  */
 import { MAPPING_VERSION } from '../../mapping/version'
 import type { ConversionPlan } from '../../scan/apply-plan'
+import { indexAmongChildren } from '../../scan/slots'
 import type { LogEntry } from '../../shared/changelog'
 import type { ChangeFailure, ConvertResult } from '../../shared/messages'
 import { Fonts } from './apply'
@@ -38,7 +39,9 @@ function isAutoLayout(node: BaseNode | null): boolean {
 function place(text: TextNode, instance: InstanceNode, source: TextNode) {
   const parent = instance.parent as (BaseNode & ChildrenMixin) | null
   if (!parent) throw new Error('The instance has no parent.')
-  parent.insertChild(parent.children.indexOf(instance), text)
+  const index = indexAmongChildren(parent.children, instance)
+  if (index === -1) throw new Error('The instance is no longer in its parent.')
+  parent.insertChild(index, text)
   text.name = instance.name
   text.visible = instance.visible
   text.locked = instance.locked

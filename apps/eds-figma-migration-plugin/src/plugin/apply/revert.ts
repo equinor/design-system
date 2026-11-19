@@ -5,8 +5,9 @@
  */
 import type { TypographyField } from '../../mapping/types'
 import { propertyLabel } from '../../scan/labels'
+import { indexAmongChildren } from '../../scan/slots'
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
-import type { LogEntry } from '../../shared/changelog'
+import type { LogEntry, LoggedComponent } from '../../shared/changelog'
 import type { ChangeFailure, RevertResult } from '../../shared/messages'
 import { expectBound, Fonts, LayerChanged } from './apply'
 import { restoreInstanceTexts } from './instance-texts'
@@ -43,6 +44,68 @@ function aliasId(value: unknown): string | undefined {
     : undefined
 }
 
+/**
+ * Puts a Typography instance, made from the logged component, back where
+ * the text layer is, with its name, modes, text colour and sizing, and
+ * removes the text layer.
+ */
+async function putBackTypography(
+  node: TextNode,
+  parent: BaseNode & ChildrenMixin,
+  index: number,
+  instance: InstanceNode,
+  old: LoggedComponent,
+  fonts: Fonts,
+): Promise<void> {
+  try {
+    instance.setProperties(old.properties)
+  } catch {
+    // A property the component no longer has; the rest are set.
+  }
+  parent.insertChild(index, instance)
+  instance.name = old.name
+  // The legacy modes on the instance give its text the size it had.
+  for (const [collectionId, modeId] of Object.entries(old.modes ?? {})) {
+    const collection = await figma.variables
+      .getVariableCollectionByIdAsync(collectionId)
+      .catch(() => null)
+    if (collection) {
+      instance.setExplicitVariableModeForCollection(collection, modeId)
+    }
+  }
+  const text = instance.findOne((child) => child.type === 'TEXT')
+  if (text?.type === 'TEXT' && old.textFills) {
+    await fonts.loadText(text)
+    text.fills = old.textFills as Paint[]
+  }
+  const inFlow =
+    'layoutMode' in parent && (parent as FrameNode).layoutMode !== 'NONE'
+  instance.layoutAlign = node.layoutAlign
+  instance.layoutGrow = node.layoutGrow
+  const sizing = old.sizing
+  if (sizing) {
+    if (sizing.horizontal === 'FIXED' || sizing.vertical === 'FIXED') {
+      instance.resize(sizing.width, sizing.height)
+    }
+    if (inFlow || sizing.horizontal !== 'FILL') {
+      instance.layoutSizingHorizontal = sizing.horizontal
+    }
+    if (inFlow || sizing.vertical !== 'FILL') {
+      instance.layoutSizingVertical = sizing.vertical
+    }
+  }
+  if (!inFlow) {
+    instance.x = node.x
+    instance.y = node.y
+  }
+  if (old.exposed) instance.isExposedInstance = true
+  node.remove()
+  // In a main component: each instance gets back the text it showed.
+  if (old.instances) {
+    await restoreInstanceTexts(instance, old.instances, fonts)
+  }
+}
+
 async function revertEntry(
   node: SceneNode,
   entry: LogEntry,
@@ -57,6 +120,8 @@ async function revertEntry(
     if (node.type !== 'TEXT') throw new LayerChanged()
     const parent = node.parent as (BaseNode & ChildrenMixin) | null
     if (!parent || !entry.old.key) throw new LayerChanged()
+    const index = indexAmongChildren(parent.children, node)
+    if (index === -1) throw new LayerChanged()
     const component = await figma
       .importComponentByKeyAsync(entry.old.key)
       .catch(() => {
@@ -66,53 +131,13 @@ async function revertEntry(
       })
     const instance = component.createInstance()
     try {
-      instance.setProperties(entry.old.properties)
-    } catch {
-      // A property the component no longer has; the rest are set.
-    }
-    parent.insertChild(parent.children.indexOf(node), instance)
-    instance.name = entry.old.name
-    // The legacy modes on the instance give its text the size it had.
-    for (const [collectionId, modeId] of Object.entries(
-      entry.old.modes ?? {},
-    )) {
-      const collection = await figma.variables
-        .getVariableCollectionByIdAsync(collectionId)
-        .catch(() => null)
-      if (collection) {
-        instance.setExplicitVariableModeForCollection(collection, modeId)
-      }
-    }
-    const text = instance.findOne((child) => child.type === 'TEXT')
-    if (text?.type === 'TEXT' && entry.old.textFills) {
-      await fonts.loadText(text)
-      text.fills = entry.old.textFills as Paint[]
-    }
-    const inFlow =
-      'layoutMode' in parent && (parent as FrameNode).layoutMode !== 'NONE'
-    instance.layoutAlign = node.layoutAlign
-    instance.layoutGrow = node.layoutGrow
-    const sizing = entry.old.sizing
-    if (sizing) {
-      if (sizing.horizontal === 'FIXED' || sizing.vertical === 'FIXED') {
-        instance.resize(sizing.width, sizing.height)
-      }
-      if (inFlow || sizing.horizontal !== 'FILL') {
-        instance.layoutSizingHorizontal = sizing.horizontal
-      }
-      if (inFlow || sizing.vertical !== 'FILL') {
-        instance.layoutSizingVertical = sizing.vertical
-      }
-    }
-    if (!inFlow) {
-      instance.x = node.x
-      instance.y = node.y
-    }
-    if (entry.old.exposed) instance.isExposedInstance = true
-    node.remove()
-    // In a main component: each instance gets back the text it showed.
-    if (entry.old.instances) {
-      await restoreInstanceTexts(instance, entry.old.instances, fonts)
+      await putBackTypography(node, parent, index, instance, entry.old, fonts)
+    } catch (error) {
+      // Leave nothing behind: while the text layer is still there, the new
+      // instance is a leftover of the failed step. Once the text layer is
+      // removed, the instance is what was put back, so it stays.
+      if (!instance.removed && !node.removed) instance.remove()
+      throw error
     }
     return
   }

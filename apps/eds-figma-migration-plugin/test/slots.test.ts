@@ -5,7 +5,11 @@
  * instance's overrides, which do not list that content).
  */
 import { describe, expect, it } from 'vitest'
-import { isOwnedSlotContent, outermostInstance } from '../src/scan/slots'
+import {
+  indexAmongChildren,
+  isOwnedSlotContent,
+  outermostInstance,
+} from '../src/scan/slots'
 
 type FakeNode = {
   id: string
@@ -83,5 +87,31 @@ describe('outermostInstance', () => {
     expect(outermostInstance(tab, true)?.id).toBe(tab.id)
     expect(outermostInstance(tab, false)).toBeNull()
     expect(outermostInstance(ownedFrame, true)).toBeNull()
+  })
+})
+
+describe('indexAmongChildren', () => {
+  it('finds a layer by object, by id, then by its own id part', () => {
+    const { slot } = tree()
+    const a: FakeNode = { id: 'I1:2;5:3;7:1', type: 'FRAME', parent: slot }
+    const b: FakeNode = { id: 'I1:2;5:3;2117:515', type: 'TEXT', parent: slot }
+    const children = [a, b]
+    expect(indexAmongChildren(children, b)).toBe(1)
+    expect(indexAmongChildren(children, { ...b })).toBe(1)
+    // The same layer as the session that added it sees it
+    const plain: FakeNode = { id: '2117:515', type: 'TEXT', parent: slot }
+    expect(indexAmongChildren(children, plain)).toBe(1)
+  })
+
+  it('gives -1 when the own id part is not unique or missing', () => {
+    const { slot } = tree()
+    const a: FakeNode = { id: 'I1:2;5:3;7:1', type: 'FRAME', parent: slot }
+    const b: FakeNode = { id: 'I9:9;7:1', type: 'FRAME', parent: slot }
+    expect(
+      indexAmongChildren([a, b], { id: '7:1', type: 'FRAME', parent: slot }),
+    ).toBe(-1)
+    expect(
+      indexAmongChildren([a], { id: '8:8', type: 'FRAME', parent: slot }),
+    ).toBe(-1)
   })
 })
