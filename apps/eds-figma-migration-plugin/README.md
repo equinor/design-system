@@ -69,7 +69,11 @@ the layers of a frame: a layer there has no `instanceId`, and an instance
 there is the outermost instance of its own layers and reads its own
 `overrides` (`outermostInstance`). The change log once read it against the
 outer instance's `overrides`, so Revert frame put nothing back there (found
-on FRIOD 2026-11-19). Every value also records the
+on FRIOD 2026-11-19). A layer a session adds to the slot, such as the text
+layer Convert puts there, keeps a plain id in that session until the file is
+opened again, while other sessions see it below the slot's id; a plain id in a
+slot of an instance is owned content as well, since content that follows the
+main component always has an `I` id. Every value also records the
 full chain of instances it is in (`instances`, outermost first, through owned
 slot content too), and each instance on the Instances tab carries a tree of the
 instances in it with the legacy values each takes from its main component

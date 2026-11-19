@@ -7,6 +7,14 @@
  * main component's layer after the instance's (`I<instance>;<layer>`).
  * Tested on the FRIOD test page and on the pasted PE Editor, 2026-11-19.
  *
+ * A layer a session adds to the slot keeps a plain id (`2117:515`) in that
+ * session until the file is opened again; other sessions see it below the
+ * slot's id. Found on 2026-11-19: text layers Convert put in a slot read as
+ * PE Editor's in the browser that ran Convert, so the scan did not count
+ * their change logs and Revert frame was not offered. Content that follows
+ * the main component always has an `I` id, so a plain id in a slot of an
+ * instance is owned content too.
+ *
  * The scan, the change log and the reset of a Manual fix all ask which
  * instance's `overrides` list the changes on a layer. Owned slot content
  * answers that like a frame: an instance in it is the outermost one for its
@@ -25,7 +33,9 @@ export function isOwnedSlotContent(
   parent: SlotLayer,
   child: SlotLayer,
 ): boolean {
-  return parent.type === 'SLOT' && child.id.startsWith(`${parent.id};`)
+  // A slot in an instance has an `I` id; a slot in a main component does not.
+  if (parent.type !== 'SLOT' || !parent.id.startsWith('I')) return false
+  return child.id.startsWith(`${parent.id};`) || !child.id.startsWith('I')
 }
 
 /**

@@ -54,6 +54,20 @@ describe('isOwnedSlotContent', () => {
     expect(isOwnedSlotContent(slot, following)).toBe(false)
     expect(isOwnedSlotContent(editor, ownedFrame)).toBe(false)
   })
+
+  it('reads a layer added in this session, with a plain id, as owned', () => {
+    const { slot } = tree()
+    const added: FakeNode = { id: '2117:515', type: 'TEXT', parent: slot }
+    expect(isOwnedSlotContent(slot, added)).toBe(true)
+    expect(outermostInstance(added, true)).toBeNull()
+  })
+
+  it('leaves the slot of a main component alone', () => {
+    const component: FakeNode = { id: '3:1', type: 'COMPONENT', parent: null }
+    const slot: FakeNode = { id: '3:2', type: 'SLOT', parent: component }
+    const child: FakeNode = { id: '3:3', type: 'FRAME', parent: slot }
+    expect(isOwnedSlotContent(slot, child)).toBe(false)
+  })
 })
 
 describe('outermostInstance', () => {
