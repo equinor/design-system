@@ -23,18 +23,11 @@ exports[`TextField (Next EDS 2.0) Matches snapshot 1`] = `
     </p>
     <div
       class="eds-input"
-      data-color-appearance="neutral"
-      data-font-size="md"
-      data-selectable-space="sm"
-      data-space-proportions="squished"
+      data-tone="neutral"
     >
       <input
         aria-describedby="test-id-description test-id-helper-message"
         class="control"
-        data-color-appearance="neutral"
-        data-font-family="ui"
-        data-font-size="md"
-        data-line-height="default"
         id="test-id-input"
         placeholder="Placeholder"
         type="text"

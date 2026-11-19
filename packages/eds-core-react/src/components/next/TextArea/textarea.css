@@ -18,7 +18,6 @@
     & .eds-input {
       overflow: hidden;
       align-items: flex-start;
-      padding-block: var(--eds-container-space-vertical);
 
       & textarea.control {
         resize: vertical;
@@ -26,8 +25,8 @@
         overflow: auto;
 
         box-sizing: border-box;
-        padding-block-end: var(--eds-container-space-vertical);
-        padding-inline-end: var(--eds-selectable-space-horizontal);
+        padding-block-end: var(--eds-spacing-xs);
+        padding-inline-end: var(--eds-spacing-xs);
 
         text-overflow: clip;
         white-space: pre-wrap;
@@ -61,7 +60,7 @@
 
   /* Extend textarea to bottom-right corner so the resize handle sits flush. */
   & textarea.control {
-    margin-block-end: calc(-1 * var(--eds-container-space-vertical));
-    margin-inline-end: calc(-1 * var(--eds-selectable-space-horizontal));
+    margin-block-end: calc(-1 * var(--eds-spacing-xs));
+    margin-inline-end: calc(-1 * var(--eds-spacing-xs));
   }
 }
