@@ -45,9 +45,9 @@
  * docs page; the run must not fail because a pair got better.
  *
  * The values come from the generated TS modules
- * (`src/tokens/ts/semantic/{light,dark}.ts`), which hold every semantic
+ * (`src/tokens/ts/{light,dark}-comfortable.ts`), which hold every semantic
  * colour resolved per scheme and converted from OKLCH to sRGB hex with
- * the CSS Color 4 gamut mapping (see `generate-ts-tokens.mjs`). That is
+ * the platform's gamut mapping (see `build-ts-modules.mjs`). That is
  * the colour a consumer gets, and the hex in the report can be pasted
  * into any contrast checker. The modules are TypeScript, so this script
  * relies on Node's type stripping, which is on by default from Node
@@ -281,10 +281,11 @@ function documentedPairs() {
 }
 
 async function loadSemantic(scheme) {
-  const file = resolve(join(TS_DIR, 'semantic', `${scheme}.ts`))
+  // the colours do not depend on the density, so the base density will do
+  const file = resolve(join(TS_DIR, `${scheme}-comfortable.ts`))
   await access(file).catch(() =>
     fail(
-      `cannot read ${file}. Run "pnpm run generate:ts-tokens" (or pass --ts <dir>) before checking`,
+      `cannot read ${file}. Run "pnpm run build:ts-modules" (or pass --ts <dir>) before checking`,
     ),
   )
   const module = await import(pathToFileURL(file).href).catch((error) =>
@@ -294,12 +295,12 @@ async function loadSemantic(scheme) {
         : `cannot import ${file}: ${error?.message ?? error}`,
     ),
   )
-  if (typeof module.semantic !== 'object' || module.semantic === null)
-    fail(`${file} does not export a "semantic" object`)
-  return module.semantic
+  if (typeof module.theme !== 'object' || module.theme === null)
+    fail(`${file} does not export a "theme" object`)
+  return module.theme
 }
 
-/** `text.on-muted.accent` -> semantic.text.onMuted.accent */
+/** `text.on-muted.accent` -> theme.text.onMuted.accent */
 function lookup(semantic, token) {
   return token
     .split('.')

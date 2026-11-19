@@ -11,7 +11,7 @@
  *   dtcg/density/<density>.json    which primitive step each density picks
  *   dtcg/primitives/default.json   the type scale and the line-height scale
  *   css/variables.css              the resolved value, per density
- *   ts/semantic/light.ts and ts/density/<density>.ts
+ *   ts/light-<density>.ts
  *                                  the TypeScript names the reference page quotes
  *
  * No typography value is ever typed into a page by hand. A text style is two tokens at three
@@ -601,9 +601,9 @@ const tsPath = (dotted) => dotted.split('.').map(tsSegment).join('.')
 
 // The reference page quotes TypeScript paths and their values. Both are claims about generated
 // output, so each one is read back, with its value, rather than restated.
-const tsSemantic = tsLeaves(join(tokens, 'ts', 'semantic', 'light.ts'))
+const tsSemantic = tsLeaves(join(tokens, 'ts', 'light-comfortable.ts'))
 const tsDensity = Object.fromEntries(
-  DENSITIES.map((d) => [d, tsLeaves(join(tokens, 'ts', 'density', `${d}.ts`))]),
+  DENSITIES.map((d) => [d, tsLeaves(join(tokens, 'ts', `light-${d}.ts`))]),
 )
 
 for (const role of Object.keys(ROLES)) {
@@ -612,13 +612,13 @@ for (const role of Object.keys(ROLES)) {
       const path = tsPath(`typography.${role}.${step}.${prop}`)
       if (tsSemantic.get(path) !== px(role, step, prop, 'comfortable')) {
         problems.push(
-          `semantic TypeScript has ${path} = ${tsSemantic.get(path)}, not the Comfortable value`,
+          `light-comfortable TypeScript has ${path} = ${tsSemantic.get(path)}, not the Comfortable value`,
         )
       }
       for (const density of DENSITIES) {
         if (tsDensity[density].get(path) !== px(role, step, prop, density)) {
           problems.push(
-            `${density} TypeScript has ${path} = ${tsDensity[density].get(path)}`,
+            `light-${density} TypeScript has ${path} = ${tsDensity[density].get(path)}`,
           )
         }
       }
@@ -631,7 +631,7 @@ for (const name of fontTokens.keys()) {
   const found = tsSemantic.get(path)
   if (String(found) !== String(expected)) {
     problems.push(
-      `semantic TypeScript has ${path} = ${found}, the CSS bundle has ${expected}`,
+      `light-comfortable TypeScript has ${path} = ${found}, the CSS bundle has ${expected}`,
     )
   }
 }
@@ -871,27 +871,28 @@ tables['token-reference'] = [
   `${code('typography.header.2xl.line-height')} is ${code(example.twoXl)}.`,
   '',
   '```ts',
-  "import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'",
+  "import { theme } from '@equinor/eds-tokens/next/ts/light-comfortable'",
   '',
-  `semantic.${example.size} // ${px('label', 'md', 'font-size', 'comfortable')}`,
-  `semantic.${example.twoXl} // ${px('header', '2xl', 'line-height', 'comfortable')}`,
-  `semantic.${example.weight} // ${fontValue('font-weight.medium')}`,
+  `theme.${example.size} // ${px('label', 'md', 'font-size', 'comfortable')}`,
+  `theme.${example.twoXl} // ${px('header', '2xl', 'line-height', 'comfortable')}`,
+  `theme.${example.weight} // ${fontValue('font-weight.medium')}`,
   '```',
   '',
   'The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy',
   'to miss:',
   '',
   '- **The values are unitless numbers, not lengths.** `14`, not `14px`. Add the unit yourself.',
-  '- **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the',
-  '  densities are separate modules and you pick one:',
+  '- **The density is part of the file name.** There is no attribute for an object to read, so each',
+  '  density has its own file, and you pick one:',
   '',
   '```ts',
-  "import { density } from '@equinor/eds-tokens/next/ts/density/compact'",
+  "import { theme } from '@equinor/eds-tokens/next/ts/light-compact'",
   '',
-  `density.${example.size} // ${px('label', 'md', 'font-size', 'compact')}`,
+  `theme.${example.size} // ${px('label', 'md', 'font-size', 'compact')}`,
   '```',
   '',
-  'The family and weight tokens are only in `semantic`, because they do not change with density.',
+  'The family and weight tokens are the same in every file, because they do not change with colour',
+  'scheme or density.',
 ]
 
 if (problems.length) {

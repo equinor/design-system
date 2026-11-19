@@ -173,7 +173,7 @@ The bundle contains more names than your code should use. Every name a semantic 
 | `--eds-typography-header-*`, `--eds-typography-label-*`, `--eds-typography-body-*` | Font size and line height for each role and step |
 | `--eds-font-family-header`, `--eds-font-family-ui`, `--eds-font-weight-*` | Typefaces and weights |
 
-The same boundary applies to the other files in the package. Import `next/css/variables.css`, not the per-collection CSS files it is built from. In TypeScript, the published modules are `@equinor/eds-tokens/next/ts/semantic/light` and `@equinor/eds-tokens/next/ts/semantic/dark`, plus the `next/ts/density/*` modules, which stay published only until the semantic modules carry the right value for each density. The [README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#typescript) describes the TypeScript modules.
+The same boundary applies to the other files in the package. Import `next/css/variables.css`, not the per-collection CSS files it is built from. In TypeScript, the published files are `@equinor/eds-tokens/next/ts/{light,dark}-{comfortable,compact,relaxed}`, one complete tree per colour scheme and density. The [README](https://github.com/equinor/design-system/blob/main/packages/eds-tokens/README.md#typescript) describes the TypeScript modules.
 
 ## The token layer and the component layers
 

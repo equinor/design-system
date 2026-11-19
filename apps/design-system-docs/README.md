@@ -140,11 +140,11 @@ A colour token is written three ways, and the docs cover all of them:
 |---|---|
 | Figma | `background.non-interactive.accent.muted` |
 | CSS | `--eds-background-non-interactive-accent-muted` |
-| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+| TypeScript | `theme.background.nonInteractive.accent.muted` |
 
 The reference table carries the first two. The TypeScript form is documented as a rule rather than a
 column, because a fourth column made the table unreadable and the rule holds for all 263 colour
-tokens. `check:colour-docs` asserts that: it flattens the generated `ts/semantic/light.ts` and
+tokens. `check:colour-docs` asserts that: it flattens the generated `ts/light-comfortable.ts` and
 verifies every canonical name camel-cases to a path that actually exists, so the documented rule
 cannot quietly become false.
 
