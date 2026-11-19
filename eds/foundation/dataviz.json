@@ -1,0 +1,208 @@
+{
+  "foundation": {
+    "dataviz": {
+      "cat": {
+        "1": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.1.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.1.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "2": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.2.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.2.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "3": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.3.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.3.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "4": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.4.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.4.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "5": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.5.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.5.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "6": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.6.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.6.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "7": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.7.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.7.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "8": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.8.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.8.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "9": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.9.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.9.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "10": {
+          "c": {
+            "$value": "chroma({light.dataviz.cat.10.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "l": {
+            "$value": "lightness({light.dataviz.cat.10.3})",
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
