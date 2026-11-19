@@ -53,10 +53,10 @@
  * family is set per name in FONT_FALLBACKS below.
  *
  * It happens here, in memory, and not in the committed export files,
- * because generate-ts-tokens.mjs takes its values from the same CSS
- * export: a fallback written into `css/font/default.css` would land in
- * the TypeScript modules, whose `fontFamily` feeds React Native and
- * takes a single family name (mobile moves onto that export in #5495).
+ * because the token value has to stay a single family name: the
+ * TypeScript modules carry the same value, and their `fontFamily` feeds
+ * React Native, which takes one family name (mobile moves onto that
+ * export in #5495).
  * Setting it in the Tokens Studio export configuration fails for the
  * same reason, and the Figma variable behind the token has to stay one
  * font name as well. The cost of keeping it here is that the granular

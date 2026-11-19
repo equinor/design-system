@@ -18,6 +18,19 @@
         "name": "EDS-DTCG"
       },
       "dir": "src/tokens/dtcg"
+    },
+    "ts": {
+      "use": {
+        "id": "c39c19df-2601-4a11-a728-d52654b12832",
+        "name": "EDS-Typescript"
+      },
+      "dir": "src/tokens/ts-export",
+      "options": {
+        "selections": "included",
+        "moduleFormat": "cjs",
+        "emitDeclarations": false,
+        "emitPackageJson": false
+      }
     }
   },
   "source": {

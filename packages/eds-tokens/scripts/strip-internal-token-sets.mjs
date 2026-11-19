@@ -11,9 +11,8 @@
  * colour-scheme file with identical values. This step strips them until
  * the export can exclude them itself.
  *
- * Runs after the exports and before generate-ts-tokens.mjs, so the TS
- * modules (built from DTCG structure + CSS values) and the bundle never
- * see the sets.
+ * Runs after the pull and before build-ts-modules.mjs, so the checklist
+ * that script uses (this DTCG export) and the bundle never see the sets.
  *
  * - CSS: drops every `--eds-foundation-*` / `--eds-input-*` declaration,
  *   then fails if any `var()` still points at one, since that would

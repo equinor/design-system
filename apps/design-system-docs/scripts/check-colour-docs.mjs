@@ -519,10 +519,10 @@ for (const file of PROSE) {
 // camel-cased. That is a claim about generated output, so it is checked rather than trusted: if the
 // generator ever changes how it keys a name, the documented rule becomes a lie that nothing else
 // would catch.
-const tsFile = join(tokens, 'ts', 'semantic', 'light.ts')
+const tsFile = join(tokens, 'ts', 'light-comfortable.ts')
 if (existsSync(tsFile)) {
   const src = readFileSync(tsFile, 'utf8')
-  const body = src.slice(src.indexOf('export const semantic'))
+  const body = src.slice(src.indexOf('export const theme'))
   const stack = []
   const tsPaths = new Set()
   for (const line of body.split('\n')) {

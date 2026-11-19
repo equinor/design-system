@@ -231,8 +231,8 @@ for (const { index, px: value } of primitives) {
 // The reference page tells the reader what a step is called in TypeScript. Spacing breaks the rule
 // the colour pages state: a segment starting with a digit becomes a word, so `2xl` is `twoXl` and
 // not `2xl`. That is a claim about generated output, so it is read back rather than restated.
-const tsSemantic = join(tokens, 'ts', 'semantic', 'light.ts')
-const tsDensity = join(tokens, 'ts', 'density', 'compact.ts')
+const tsComfortable = join(tokens, 'ts', 'light-comfortable.ts')
+const tsCompact = join(tokens, 'ts', 'light-compact.ts')
 
 const DIGIT_WORD = {
   2: 'two',
@@ -267,8 +267,8 @@ const tsNames = new Map(
 )
 
 for (const [file, prefix] of [
-  [tsSemantic, 'semantic'],
-  [tsDensity, 'density'],
+  [tsComfortable, 'comfortable'],
+  [tsCompact, 'compact'],
 ]) {
   if (!existsSync(file)) {
     problems.push(`${prefix} TypeScript export is missing at ${file}`)
@@ -385,28 +385,28 @@ tables['token-reference'] = [
   `\`${tsNames.get('corner-radius.rounded-outer')}\`.`,
   '',
   '```ts',
-  "import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'",
+  "import { theme } from '@equinor/eds-tokens/next/ts/light-comfortable'",
   '',
-  `semantic.${tsNames.get('spacing.md')} // ${px(value('spacing.md', 'comfortable'))}`,
-  `semantic.${tsNames.get('spacing.2xl')} // ${px(value('spacing.2xl', 'comfortable'))}`,
-  `semantic.${tsNames.get('corner-radius.rounded-outer')} // ${px(value('corner-radius.rounded-outer', 'comfortable'))}`,
+  `theme.${tsNames.get('spacing.md')} // ${px(value('spacing.md', 'comfortable'))}`,
+  `theme.${tsNames.get('spacing.2xl')} // ${px(value('spacing.2xl', 'comfortable'))}`,
+  `theme.${tsNames.get('corner-radius.rounded-outer')} // ${px(value('corner-radius.rounded-outer', 'comfortable'))}`,
   '```',
   '',
   'The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy',
   'to miss:',
   '',
   '- **The values are unitless numbers, not lengths.** `16`, not `16px`. Add the unit yourself.',
-  '- **`semantic` is frozen at Comfortable.** There is no attribute for an object to read, so the',
-  '  densities are separate modules and you pick one:',
+  '- **The density is part of the file name.** There is no attribute for an object to read, so each',
+  '  density has its own file, and you pick one:',
   '',
   '```ts',
-  "import { density } from '@equinor/eds-tokens/next/ts/density/compact'",
+  "import { theme } from '@equinor/eds-tokens/next/ts/light-compact'",
   '',
-  `density.${tsNames.get('spacing.md')} // ${px(value('spacing.md', 'compact'))}`,
+  `theme.${tsNames.get('spacing.md')} // ${px(value('spacing.md', 'compact'))}`,
   '```',
   '',
   'So prefer the CSS custom properties wherever they work. Use the TypeScript objects only',
-  'where they do not, and expect to handle density yourself when you do.',
+  'where they do not, and expect to choose the colour scheme and density yourself when you do.',
 ]
 
 if (problems.length) {

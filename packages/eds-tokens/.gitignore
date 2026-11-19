@@ -1,2 +1,5 @@
 /build-generate-variables
 /output
+
+# Raw Tokens Studio TypeScript export, rebuilt into src/tokens/ts by scripts/build-ts-modules.mjs
+/src/tokens/ts-export
