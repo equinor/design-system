@@ -20,6 +20,7 @@
     --_focus-ring: none;
     --_cursor: auto;
     --_control-cursor: text;
+    --_error-icon-display: flex;
 
     /* No width token: the design uses 1px for every stroke (#5692) */
     --_stroke-width: 1px;
@@ -75,10 +76,6 @@
       --_border-color: var(--_border-muted-hover);
     }
 
-    &:active {
-      --_border-color: var(--_border-muted-pressed);
-    }
-
     /* A 1px ring with a 1px gap, as in Figma and Button. The outline draws
      * the border, so the ring is a box-shadow. Focus also takes the hover
      * border, as in Figma. */
@@ -89,9 +86,14 @@
         0 0 0 calc(var(--_stroke-width) * 2) var(--eds-border-interactive-focus);
     }
 
+    /* After :focus-within, because pressing the field also focuses it */
+    &:active {
+      --_border-color: var(--_border-muted-pressed);
+    }
+
     /* Read-only and disabled have no border in Figma. :has() makes these
      * selectors more specific than :hover, :active and :focus-within. */
-    &:has(> .control:read-only) {
+    &:has(> .control[readonly]) {
       --_border-color: transparent;
     }
 
@@ -99,6 +101,10 @@
      * styling also covers disabling inherited from an ancestor, e.g.
      * fieldset[disabled] (#5412) */
     &:has(> .control:disabled) {
+      /* The tone and error icon follow the disabled prop, so reset them here
+         for disabling inherited from a fieldset, as the prop does */
+      --_bg-field: var(--eds-background-input);
+      --_error-icon-display: none;
       --_border-color: transparent;
       --_text-color: var(--eds-text-interactive-disabled);
       --_placeholder-color: var(--eds-text-interactive-disabled);
@@ -144,7 +150,7 @@
 
     /* Error icon */
     & > .error-icon {
-      display: flex;
+      display: var(--_error-icon-display);
       flex-shrink: 0;
       color: var(--eds-icon-on-default-danger);
     }

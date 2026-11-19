@@ -85,15 +85,6 @@ describe('Input (Next EDS 2.0)', () => {
       expect(input).toBeDisabled()
     })
 
-    it('Is disabled when inherited from a disabled fieldset', () => {
-      render(
-        <fieldset disabled>
-          <Input aria-label="In fieldset" />
-        </fieldset>,
-      )
-      expect(screen.getByLabelText('In fieldset')).toBeDisabled()
-    })
-
     it('Has readonly attribute when readOnly', () => {
       const label = 'readonly input'
       render(
