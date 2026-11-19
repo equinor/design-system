@@ -64,6 +64,12 @@ async function putBackTypography(
   }
   parent.insertChild(index, instance)
   instance.name = old.name
+  // Convert copied these from the instance to the text layer (convert.ts,
+  // place); a hidden Typography instance came back visible without them
+  // (FRIOD test page, 2026-11-19).
+  instance.visible = node.visible
+  instance.locked = node.locked
+  instance.opacity = node.opacity
   // The legacy modes on the instance give its text the size it had.
   for (const [collectionId, modeId] of Object.entries(old.modes ?? {})) {
     const collection = await figma.variables
