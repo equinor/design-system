@@ -124,6 +124,8 @@ These controls must not vary by harness:
 
 **Known asymmetry, not a finding:** Claude Code checks `*.key` only on file paths, in `read_hook.js` and in `settings.json`, and not in Bash commands. In a shell command `.key` is almost always a property, as in `jq '.key' package.json` or `obj.key`, and blocking it there stopped ordinary commands. The Copilot hook makes the same exception: it checks `.key` only on a value without whitespace, which is a file path, and not on each word.
 
+**Known asymmetry, not a finding:** `.claude/hooks/pr_flow_hook.js` hands the agent the matching part of `PR_REVIEWS.md` when it runs a pull request command, in Claude Code only. Copilot CLI and OpenCode follow `PR_REVIEWS.md` from the pointer in `AGENTS.md` § PR Reviews and the Project Board. The rules are written only in `PR_REVIEWS.md`; the hook passes the text on and restates nothing.
+
 ### Step 7 — MCP server parity
 
 If multiple harnesses configure MCP servers (e.g. `.vscode/mcp.json` for Copilot in VS Code, personal settings for Claude / OpenCode), check that the same servers are wired with equivalent tool allow-lists. Note any harness pinning a specific model (e.g. `model: 'Claude Sonnet 4'` in a Copilot prompt's frontmatter). Stale or inconsistent pins are findings.

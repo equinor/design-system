@@ -11,7 +11,7 @@ Claude Code reads this directory automatically. The shared EDS conventions live 
 ├── settings.json       # Shared settings (permission denies, hooks)
 ├── settings.local.json # Personal settings (gitignored)
 ├── commands/           # Slash commands (see § Slash Commands)
-├── hooks/              # Hook scripts (read_hook.js, format_hook.js)
+├── hooks/              # Hook scripts (read_hook.js, format_hook.js, pr_flow_hook.js)
 ├── rules/              # Path-scoped rules
 └── skills/             # Skills (write-pr-description, write-issue)
 ```
@@ -73,6 +73,7 @@ Hooks are shell commands that run in response to Claude Code events.
 |------|-------|---------|
 | `read_hook.js` | `PreToolUse` | Blocks access to `.env` and other secret files |
 | `format_hook.js` | `PostToolUse` | Runs `eslint --fix` on edited `.ts`/`.tsx`, `stylelint --fix` on `/components/next/` CSS, and `prettier --write` on `.css`/`.md` |
+| `pr_flow_hook.js` | `PreToolUse` | Hands the agent the matching part of `PR_REVIEWS.md` when it runs `git push`, `gh pr create`, `gh pr ready` or a review command |
 
 For hook authoring, configuration, and the full event reference, see [`documentation/how-to/CLAUDE_HOOKS.md`](../documentation/how-to/CLAUDE_HOOKS.md).
 
