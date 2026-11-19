@@ -13,7 +13,7 @@ npm install @equinor/eds-mobile-components
 This library requires the following peer dependencies:
 
 ```bash
-npm install expo-font react-native-gesture-handler react-native-reanimated react-native-svg react-native-worklets
+npm install @expo/vector-icons expo-font react-native-gesture-handler react-native-reanimated react-native-svg react-native-worklets
 ```
 
 Make sure to follow the installation instructions for each:
