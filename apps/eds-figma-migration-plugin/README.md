@@ -76,7 +76,10 @@ slot of an instance is owned content as well, since content that follows the
 main component always has an `I` id. For the same reason Convert and Revert
 find a layer among its parent's children with `indexAmongChildren`, not
 `indexOf` alone, and Revert removes the Typography instance it made when
-putting it back fails, instead of leaving it on the page. Every value also records the
+putting it back fails, instead of leaving it on the page. Revert finds the
+logged layers by walking `children`: in the session that added a layer to a
+slot, `findAllWithCriteria` returns another layer for it, which is not in its
+parent's list. Every value also records the
 full chain of instances it is in (`instances`, outermost first, through owned
 slot content too), and each instance on the Instances tab carries a tree of the
 instances in it with the legacy values each takes from its main component

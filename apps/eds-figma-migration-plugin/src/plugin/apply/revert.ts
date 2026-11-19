@@ -324,19 +324,22 @@ async function revertEntry(
  * included. A layer inside an instance also shows the log of the main
  * component's layer, and reverting that would put an override on the
  * instance, so it is left to the main component.
+ *
+ * The layers are found by walking `children`, not with
+ * `findAllWithCriteria`: for a layer a session has added to the slot of an
+ * instance, the search returns another layer (`I<instance>;<slot>;2134:519`
+ * for the `2134:518` in the slot's list) that is not among its parent's
+ * children, so a Typography instance could not be put back in its place
+ * (FRIOD test page, 2026-11-19, Convert and Revert in one session).
  */
 function loggedLayers(roots: SceneNode[]): SceneNode[] {
+  figma.skipInvisibleInstanceChildren = false
   const found: SceneNode[] = []
-  for (const root of roots) {
-    if (root.getSharedPluginData(NAMESPACE, LOG_KEY)) found.push(root)
-    if ('findAllWithCriteria' in root) {
-      found.push(
-        ...root.findAllWithCriteria({
-          sharedPluginData: { namespace: NAMESPACE, keys: [LOG_KEY] },
-        }),
-      )
-    }
+  const visit = (node: SceneNode) => {
+    if (node.getSharedPluginData(NAMESPACE, LOG_KEY)) found.push(node)
+    if ('children' in node) for (const child of node.children) visit(child)
   }
+  for (const root of roots) visit(root)
   return found.filter((node) => !logIsInherited(node))
 }
 
