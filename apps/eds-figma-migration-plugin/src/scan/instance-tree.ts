@@ -14,6 +14,7 @@ function nodeOf(step: InstanceStep): InstanceTree {
     ...(step.component ? { component: step.component } : {}),
     ...(step.hidden ? { hidden: true as const } : {}),
     ...(step.slot ? { slot: true as const } : {}),
+    ...(step.slotName ? { slotName: step.slotName } : {}),
     count: 0,
     hiddenCount: 0,
     own: 0,

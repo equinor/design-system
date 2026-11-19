@@ -80,8 +80,11 @@ type WalkState = {
   hidden: boolean
   /** The instances above the node, outermost first, through owned slot content too */
   chain: InstanceStep[]
-  /** The node is in slot content an instance owns, with no instance between */
-  inOwnedSlot: boolean
+  /**
+   * The node is in slot content an instance owns, with no instance between:
+   * the name of the slot
+   */
+  ownedSlot?: string
 }
 
 /** The fields every unit of a node shares. */
@@ -265,7 +268,6 @@ export class Collector {
         // A selection scan can start below a hidden layer.
         hidden: hiddenAbove(root),
         chain: [],
-        inOwnedSlot: false,
       })
     }
   }
@@ -563,7 +565,7 @@ export class Collector {
     const hidden = state.hidden || !node.visible
     const step =
       node.type === 'INSTANCE'
-        ? await this.instanceStep(node, hidden, state.inOwnedSlot)
+        ? await this.instanceStep(node, hidden, state.ownedSlot)
         : undefined
     const chain = step ? [...state.chain, step] : state.chain
     if (node.type === 'INSTANCE' && step && !state.instanceId) {
@@ -574,7 +576,7 @@ export class Collector {
         entryId: state.entryId,
         path: state.path,
         step,
-        ...(state.inOwnedSlot && above
+        ...(state.ownedSlot !== undefined && above
           ? { within: { id: above.id, name: above.name } }
           : {}),
       })
@@ -823,7 +825,7 @@ export class Collector {
         hidden,
         chain,
         // Past an instance, its layers are its own, not the slot's.
-        inOwnedSlot: node.type === 'INSTANCE' ? false : state.inOwnedSlot,
+        ownedSlot: node.type === 'INSTANCE' ? undefined : state.ownedSlot,
       }
       for (const [index, child] of node.children.entries()) {
         await this.walk(
@@ -837,7 +839,7 @@ export class Collector {
                 instanceId: undefined,
                 instanceRoot: undefined,
                 instancePath: [],
-                inOwnedSlot: true,
+                ownedSlot: node.name,
               }
             : {
                 ...childState,
@@ -852,7 +854,7 @@ export class Collector {
   private async instanceStep(
     node: InstanceNode,
     hidden: boolean,
-    inOwnedSlot: boolean,
+    ownedSlot: string | undefined,
   ): Promise<InstanceStep> {
     const main = await node.getMainComponentAsync().catch(() => null)
     return {
@@ -860,7 +862,9 @@ export class Collector {
       name: node.name,
       ...(main ? { component: componentName(main) } : {}),
       ...(hidden ? { hidden: true as const } : {}),
-      ...(inOwnedSlot ? { slot: true as const } : {}),
+      ...(ownedSlot !== undefined
+        ? { slot: true as const, slotName: ownedSlot }
+        : {}),
     }
   }
 

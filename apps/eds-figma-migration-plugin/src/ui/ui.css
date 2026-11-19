@@ -1182,6 +1182,188 @@ code {
   color: var(--eds-text-secondary);
 }
 
+/* The Instances tab's tree, drawn as Figma's Layers panel draws layers so
+   designers know it at once: 32px rows at 11px, 24px indent per level, a caret
+   and a 16px layer icon, instances in Figma's component purple, slot content
+   under a row in Figma's slot pink, hidden instances dimmed with the hidden
+   icon. The colours are Figma's own, read from its stylesheet on 2026-11-19
+   (component text #8638e5 light, #d9b8ff dark; dimmed #c5b2dc, #7f699b; slot
+   #ea10ac, #ff99e0; row hover #f5f5f5, #383838), so they follow the window's
+   colour scheme with light-dark(). The slot icon is Figma's square with a plus
+   (checked against Figma 2026-11-19). */
+.tree-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.instance-tree {
+  --_component: light-dark(#8638e5, #d9b8ff);
+  --_component-dimmed: light-dark(#c5b2dc, #7f699b);
+  --_slot: light-dark(#ea10ac, #ff99e0);
+  /* Figma draws layer icons a step softer than the name, and at full
+     colour on hover: #a38cc0 and #7f699b for instances, #ab5998 for slots */
+  --_component-icon: light-dark(#a38cc0, #7f699b);
+  --_slot-icon: #ab5998;
+  --_hover: light-dark(#f5f5f5, #383838);
+  --_secondary: light-dark(#00000080, #ffffffb2);
+
+  font-family: Inter, var(--eds-font-family-ui);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.tree-row {
+  --_color: var(--eds-text-primary);
+
+  display: flex;
+  align-items: center;
+  block-size: 32px;
+  padding-inline: calc(var(--_depth, 0) * 24px) 1px;
+  color: var(--_color);
+  border-radius: 5px;
+
+  &:hover,
+  &:focus-within {
+    background-color: var(--_hover);
+  }
+
+  &[data-kind='instance'] {
+    --_color: var(--_component);
+    --_icon: var(--_component-icon);
+  }
+
+  &[data-kind='slot'] {
+    --_color: var(--_slot);
+    --_icon: var(--_slot-icon);
+  }
+
+  /* Frames and loose layers in Figma's text colour, a main component in
+     the component colour */
+  &[data-kind='frame'],
+  &[data-kind='loose'] {
+    --_icon: var(--_secondary);
+  }
+
+  &[data-kind='component'] {
+    --_color: var(--_component);
+    --_icon: var(--_component-icon);
+  }
+
+  &[data-hidden] {
+    --_color: var(--_component-dimmed);
+    --_icon: var(--_component-dimmed);
+  }
+
+  &:hover .tree-icon,
+  &:focus-within .tree-icon {
+    --_icon: var(--_color);
+  }
+}
+
+/* A row without layers below keeps the caret's place, without its hover. */
+.tree-spacer {
+  flex: none;
+  inline-size: 30px;
+}
+
+/* The caret fills the row's height but for 1px above and below, 30 by 30, so
+   it is easy to hit. */
+.tree-caret {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 30px;
+  block-size: 30px;
+  padding: 0;
+  color: var(--_secondary);
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: light-dark(#0000000d, #ffffff1a);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+.tree-icon {
+  flex: none;
+  color: var(--_icon, currentColor);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+
+  &[data-filled],
+  & [data-fill] {
+    fill: currentColor;
+    stroke: none;
+  }
+}
+
+.tree-label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-inline-size: 0;
+  padding-inline-start: 4px;
+}
+
+.tree-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-hidden {
+  flex: none;
+  margin-inline-end: 8px;
+  color: var(--_secondary);
+}
+
+.tree-count {
+  flex: none;
+  color: var(--_secondary);
+}
+
+/* Go to at the right end of the row: 30px high, in the row's 11px, styled as
+   the EDS ghost button (Button variant ghost, tone accent): no border, the
+   muted accent fill on hover and focus, the pressed fill when pressed. */
+.tree-goto {
+  --_bg: transparent;
+
+  flex: none;
+  block-size: 30px;
+  margin-inline-start: 4px;
+  padding-inline: 8px;
+  font: inherit;
+  color: var(--eds-text-on-default-accent);
+  cursor: pointer;
+  background-color: var(--_bg);
+  border: 0;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:hover,
+  &:focus-visible {
+    --_bg: var(--eds-background-interactive-accent-muted-hover);
+  }
+
+  &:active {
+    --_bg: var(--eds-background-interactive-accent-muted-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
 /* Target picker */
 .picker-options {
   display: flex;

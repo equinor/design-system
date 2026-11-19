@@ -351,7 +351,7 @@ function Overview({
         {view === 'instances' ? (
           <InstancesView
             instances={otherInstances}
-            entryNames={entryNames}
+            entries={summary.entries}
             onSelect={onSelectLayer}
             typographyCount={typographyInstances.length}
             onShowTypography={() => {

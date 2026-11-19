@@ -12,7 +12,8 @@ const repoRoot = here('../../../')
  * forked into prototype/src/ui. Both are single files, so they can be
  * opened straight from disk or shared as two files.
  *
- * `--mode window` builds the window, `--mode shell` the shell.
+ * `--mode window` builds the window, `--mode shell` the shell, and `--mode
+ * tree` the review page of the Instances tree (phase 2, tree.html).
  */
 export default defineConfig(({ mode }) => ({
   root: here('./'),
@@ -38,7 +39,13 @@ export default defineConfig(({ mode }) => ({
     outDir: here('./review'),
     emptyOutDir: false,
     rollupOptions: {
-      input: here(mode === 'shell' ? './index.html' : './window.html'),
+      input: here(
+        mode === 'shell'
+          ? './index.html'
+          : mode === 'tree'
+            ? './tree.html'
+            : './window.html',
+      ),
     },
   },
 }))

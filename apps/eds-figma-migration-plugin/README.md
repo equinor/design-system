@@ -557,10 +557,20 @@ replaced, its properties, modes, sizing and colour, so Revert frame puts the
 instance back as it was. Typography instances inside other components stay
 until those components are updated.
 
-**The Instances tab** lists every other instance in the scope that still uses
-legacy variables, grouped by main component, with the number of instances,
-whether the component is in this file or in a library, and Go to for one
-instance or all of them. The plugin does not change what an instance takes
+**The Instances tab** shows every other instance in the scope that still uses
+legacy variables as a tree in Figma's Layers panel style
+(`src/ui/components/InstanceTree.tsx`, phase 2 of the nested-instances plan,
+2026-11-19): the entries of the scan at the top with Figma's frame and main
+component icons, the outermost instances in each in layer order, and in each
+instance the instances it holds (`OldInstance.tree`), with slot content under
+a row for its slot (`instanceForest`, `entryForest` in `src/ui/instances.ts`).
+Rows are 32px at 11px with a 24px indent, instances and slots in Figma's
+component purple and slot pink, read from Figma's stylesheet, hidden
+instances dimmed with the hidden icon; each row has the legacy count and a
+Go to. Only instances with legacy values from their main components are in
+the tree, and the slots that hold them; frames and other layers between them
+are left out. The design was reviewed on `prototype/review/tree.html`, built
+with `vite build -c prototype/vite.config.ts --mode tree`. The plugin does not change what an instance takes
 from its main component, and it never swaps a component (decided
 2026-11-16). For instances of a library component the tab says: "The plugin
 migrates variables, not components. Swap these to EDS Beta components in

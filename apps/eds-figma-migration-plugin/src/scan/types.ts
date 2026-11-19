@@ -83,6 +83,8 @@ export type InstanceStep = {
    * `overrides`; an instance in it reads its own overrides instead.
    */
   slot?: true
+  /** For an instance in slot content: the name of the slot, such as Content */
+  slotName?: string
 }
 
 /** One counted unit: a paint binding, a bound field, the typography of a text or range, or an explicit mode. */
@@ -387,6 +389,7 @@ export type InstanceTree = {
   component?: string
   hidden?: true
   slot?: true
+  slotName?: string
   /** Legacy values in the instance and the instances in it */
   count: number
   /** Of `count`: values on hidden layers */

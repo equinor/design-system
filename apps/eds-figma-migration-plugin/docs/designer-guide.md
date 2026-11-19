@@ -118,12 +118,20 @@ the steps.
   The **Typography** tab in Changes lists the instances of the legacy
   Typography component with the text style and colour each one gets (see
   [Typography components](#typography-components)).
-- **Instances** lists the instances that still use legacy variables, grouped
-  by component. For a component in this file, **Go to main component** takes
-  you to it: migrate its page, and every instance follows. The plugin
-  migrates variables, not components, so for a component from a library the
-  tab asks you to swap the instances to EDS Beta components in Figma; their
-  legacy values go with them. Instances of the legacy Typography component
+- **Instances** shows the instances that still take legacy variables from
+  their main component as a tree, drawn as Figma's Layers panel draws
+  layers: each frame of the scan, the instances in it in layer order, and
+  inside each instance the instances it holds, with slot content under its
+  slot. Hidden instances are dimmed and show the hidden icon, so you find the
+  ones the canvas does not show. Each row gives the number of legacy values
+  in the instance and the instances in it, and **Go to**. The tree shows only
+  the instances that hold such values, and the slots they are in; frames and
+  other layers between them are left out, so a level in the tree can be
+  deeper in the Layers panel. A component in this file changes every
+  instance once its main component is migrated; the Main components tab
+  lists it. The plugin migrates variables, not components, so an instance
+  of a library component is swapped to an EDS Beta component in Figma, and
+  its legacy values go with it. Instances of the legacy Typography component
   are not listed here; **Show** opens their tab in Changes.
 - **Main components** lists the main components in the scope. On this tab,
   Apply in the footer changes all of them in one run and leaves the frames
@@ -155,8 +163,8 @@ library.
 Content you place in a slot of an instance belongs to that instance once you
 edit the slot, and no longer follows the main component. The plugin treats it
 like layers in a frame: a legacy value there can be changed like any other,
-and an instance you placed there is listed on the Instances tab as an
-instance of its own.
+and an instance you placed there is listed on the Instances tab under the
+slot, by the slot's name.
 
 To change a target, press **Change** on one value or the target of a row, or
 tick several values and use the bar at the bottom of the window. The picker
