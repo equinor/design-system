@@ -68,6 +68,23 @@ export type RawTextStyle = {
   name: string
 }
 
+/** An instance a layer is in, for the tree of the instances inside an instance. */
+export type InstanceStep = {
+  id: string
+  name: string
+  /** The name of its main component, or of the component set for a variant */
+  component?: string
+  /** The instance or a layer above it is hidden */
+  hidden?: true
+  /**
+   * The instance sits in slot content that the instance above it owns. Once
+   * a slot is edited in an instance, its content gets ids of its own, no
+   * longer follows the main component and is not in the instance's
+   * `overrides`; an instance in it reads its own overrides instead.
+   */
+  slot?: true
+}
+
 /** One counted unit: a paint binding, a bound field, the typography of a text or range, or an explicit mode. */
 export type RawUnit = {
   nodeId: string
@@ -78,8 +95,20 @@ export type RawUnit = {
   /** Names from the entry's root down to the node's parent */
   path: string[]
   property: PropertyRef
-  /** Id of the outermost instance the node is in, or the node itself when it is an instance */
+  /**
+   * Id of the outermost instance the node is in, or the node itself when it
+   * is an instance: the instance whose `overrides` say whether a value is its
+   * own. Slot content an instance owns starts over: an instance in it is the
+   * outermost one for its layers, and a layer in it outside any instance has
+   * none, as in a frame.
+   */
   instanceId?: string
+  /**
+   * Every instance the layer is in, outermost first, and the layer itself
+   * last when it is an instance. Unlike `instanceId`, it runs on through
+   * slot content an instance owns, so it gives the full tree.
+   */
+  instances?: InstanceStep[]
   /**
    * Inside an instance: the instance sets this value itself, as an override,
    * instead of taking it from its main component, so it can change here.
@@ -238,6 +267,8 @@ export type BindingRecord = {
   resetEffects?: string[]
   rule?: string
   instanceId?: string
+  /** Every instance the layer is in, outermost first (RawUnit.instances) */
+  instances?: InstanceStep[]
   /** Inside an instance: a value the instance overrides, which the plugin can change there */
   override?: true
   /** Ids of the node and its ancestors in the entry that set explicit modes */
@@ -326,6 +357,15 @@ export type OldInstance = {
   inComponent?: { id: string; name: string }
   /** Old variables inside the instance or on it */
   count: number
+  /** The instance or a layer above it is hidden */
+  hidden?: true
+  /**
+   * For an instance in slot content that another instance owns: that
+   * instance, the nearest one above it
+   */
+  within?: { id: string; name: string }
+  /** Where in the instance the legacy values are: the instances in it, as a tree */
+  tree?: InstanceTree
   mainComponent?: {
     name: string
     key: string
@@ -333,6 +373,27 @@ export type OldInstance = {
     /** For a main component in this file, to go to it */
     id?: string
   }
+}
+
+/**
+ * An instance and the instances in it, with the legacy values each takes
+ * from its main component (category Inside instances). The root is an
+ * instance from the Instances tab; the counts of a node include the
+ * instances below it.
+ */
+export type InstanceTree = {
+  id: string
+  name: string
+  component?: string
+  hidden?: true
+  slot?: true
+  /** Legacy values in the instance and the instances in it */
+  count: number
+  /** Of `count`: values on hidden layers */
+  hiddenCount: number
+  /** Of `count`: values on the instance's own layers, outside the instances in it */
+  own: number
+  children: InstanceTree[]
 }
 
 /** An instance inside a main component, for the list in the component's inspector. */

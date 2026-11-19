@@ -1,6 +1,7 @@
 /** Reads and writes the change log in a layer's shared plugin data. */
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
 import type { LogEntry } from '../../shared/changelog'
+import { outermostInstance } from '../../scan/slots'
 
 export function readLog(node: BaseNode): LogEntry[] {
   const raw = node.getSharedPluginData(NAMESPACE, LOG_KEY)
@@ -37,13 +38,11 @@ export function appendLog(
 /**
  * Whether the log on a layer is the main component's, read through an
  * instance: the layer is in an instance, or is one, and the outermost
- * instance has no plugin data of its own on it.
+ * instance has no plugin data of its own on it. Slot content an instance
+ * owns has its own log, like a layer in a frame (src/scan/slots.ts).
  */
 export function logIsInherited(node: BaseNode): boolean {
-  let outermost: InstanceNode | undefined
-  for (let current: BaseNode | null = node; current; current = current.parent) {
-    if (current.type === 'INSTANCE') outermost = current
-  }
+  const outermost = outermostInstance(node, true) as InstanceNode | null
   if (!outermost) return false
   const own = outermost.overrides.find((override) => override.id === node.id)
   return !(own?.overriddenFields as string[] | undefined)?.includes(

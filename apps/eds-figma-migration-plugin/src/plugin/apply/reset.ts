@@ -12,6 +12,7 @@
  * changes; a change that does not read back afterwards is reported.
  */
 import { NAMESPACE } from '../../shared/changelog'
+import { outermostInstance } from '../../scan/slots'
 
 /** Size fields: the reset is what changes them, so they are not copied back. */
 const SIZE_FIELDS = new Set([
@@ -71,17 +72,6 @@ export class ResetRefused extends Error {}
 
 function clone(value: unknown): unknown {
   return value === undefined ? undefined : JSON.parse(JSON.stringify(value))
-}
-
-/** The outermost instance a layer is in, whose overrides list its changes. */
-function outermostInstance(node: SceneNode): InstanceNode | null {
-  let found: InstanceNode | null = null
-  let current: BaseNode | null = node.parent
-  while (current && current.type !== 'PAGE' && current.type !== 'DOCUMENT') {
-    if (current.type === 'INSTANCE') found = current
-    current = current.parent
-  }
-  return found
 }
 
 /** The variable bindings on a layer, apart from its size and paint arrays. */
@@ -247,7 +237,7 @@ export async function resetLayer(node: SceneNode): Promise<void> {
       'Only an instance inside an instance can be reset by the plugin. Reset it in Figma.',
     )
   }
-  const outer = outermostInstance(node)
+  const outer = outermostInstance(node, false) as InstanceNode | null
   if (!outer) throw new ResetRefused('The layer is not inside an instance.')
   figma.skipInvisibleInstanceChildren = false
 

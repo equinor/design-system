@@ -5,7 +5,13 @@
  * a quarter of the size. `unpackFixture` rebuilds the units exactly.
  */
 import type { ChainStep, RoleContext, TypographyField } from '../mapping/types'
-import type { PropertyRef, RawTextStyle, RawUnit, RawVariable } from './types'
+import type {
+  InstanceStep,
+  PropertyRef,
+  RawTextStyle,
+  RawUnit,
+  RawVariable,
+} from './types'
 
 type PackedVariable = Omit<
   RawVariable,
@@ -28,6 +34,10 @@ type PackedNode = {
   /** The layer that owns the fill under this one, and the variable on that fill */
   fillUnder?: { owner: string; variable?: string }
   modeHolders?: string[]
+  /** The layer or a layer above it is hidden */
+  hidden?: true
+  /** Ids in `steps` of the instances the layer is in, outermost first */
+  instances?: string[]
 }
 
 type PackedUnit = {
@@ -70,6 +80,8 @@ export type PackedFixture = {
   frame: { id: string; name: string }
   variables: Record<string, PackedVariable>
   nodes: Record<string, PackedNode>
+  /** The instances the layers are in, by id; missing in fixtures made before they were recorded */
+  steps?: Record<string, InstanceStep>
   units: PackedUnit[]
 }
 
@@ -91,6 +103,7 @@ export function packFixture(
 ): PackedFixture {
   const variables: Record<string, PackedVariable> = {}
   const nodes: Record<string, PackedNode> = {}
+  const steps: Record<string, InstanceStep> = {}
   /** Owner node ids by context, to point a fill under at the layer that owns it */
   const owners: { id: string; context: Omit<RoleContext, 'fillUnder'> }[] = []
 
@@ -114,6 +127,15 @@ export function packFixture(
         path: unit.path,
         context,
         ...(unit.modeHolders ? { modeHolders: unit.modeHolders } : {}),
+        ...(unit.hidden ? { hidden: true as const } : {}),
+        ...(unit.instances
+          ? {
+              instances: unit.instances.map((step) => {
+                steps[step.id] ??= step
+                return step.id
+              }),
+            }
+          : {}),
       }
       owners.push({ id: unit.nodeId, context })
     }
@@ -188,7 +210,13 @@ export function packFixture(
     }
   })
 
-  return { ...header, variables, nodes, units: packedUnits }
+  return {
+    ...header,
+    variables,
+    nodes,
+    ...(Object.keys(steps).length > 0 ? { steps } : {}),
+    units: packedUnits,
+  }
 }
 
 export function unpackFixture(fixture: PackedFixture): RawUnit[] {
@@ -229,6 +257,16 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
       ...(unit.override ? { override: true as const } : {}),
       context,
       ...(node.modeHolders ? { modeHolders: node.modeHolders } : {}),
+      ...(node.hidden ? { hidden: true as const } : {}),
+      ...(node.instances
+        ? {
+            instances: node.instances.map((id) => {
+              const step = fixture.steps?.[id]
+              if (!step) throw new Error(`The fixture has no instance ${id}`)
+              return step
+            }),
+          }
+        : {}),
     }
     if (unit.unit === 'variable') {
       return {

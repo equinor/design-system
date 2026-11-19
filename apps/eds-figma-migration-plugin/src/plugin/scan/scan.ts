@@ -7,6 +7,7 @@ import { OLD_COLLECTION_KEYS, OLD_DENSITY_KEY } from '../../mapping/old-keys'
 import { MAPPING_VERSION } from '../../mapping/version'
 import { classifyUnits } from '../../scan/classify'
 import { conversionRecords } from '../../scan/conversions'
+import { buildInstanceTree } from '../../scan/instance-tree'
 import type { ConversionSource } from '../../scan/conversions'
 import { healthOf, summariseEntries, totalsOf } from '../../scan/summary'
 import type { EntryMeta } from '../../scan/summary'
@@ -438,21 +439,26 @@ async function findOldInstances(
   collector: Collector,
   records: BindingRecord[],
 ): Promise<OldInstance[]> {
-  const counts = new Map<string, number>()
+  const byInstance = new Map<string, BindingRecord[]>()
   for (const record of records) {
     if (record.category === 'inInstance' && record.instanceId) {
-      counts.set(record.instanceId, (counts.get(record.instanceId) ?? 0) + 1)
+      const list = byInstance.get(record.instanceId) ?? []
+      list.push(record)
+      byInstance.set(record.instanceId, list)
     }
   }
   const result: OldInstance[] = []
-  for (const [id, count] of counts) {
+  for (const [id, own] of byInstance) {
     const found = collector.instances.get(id)
     if (!found) continue
     const instance: OldInstance = {
       id: found.id,
       name: found.name,
       entryId: found.entryId,
-      count,
+      count: own.length,
+      ...(found.step.hidden ? { hidden: true as const } : {}),
+      ...(found.within ? { within: found.within } : {}),
+      tree: buildInstanceTree(found.step, own),
     }
     const node = await figma.getNodeByIdAsync(id)
     if (node?.type === 'INSTANCE') {

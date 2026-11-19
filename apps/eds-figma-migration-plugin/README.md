@@ -58,6 +58,24 @@ setting it again both work from a plugin, also when the main component's
 layer sets another mode; the layer then has no mode, not the main
 component's (tested on FRIOD 2026-11-16).
 
+Slot content an instance owns starts over. A slot in an instance follows its
+main component, and its layers have ids of the form `I<instance>;<layer>`,
+until the slot is edited in the instance. From then on its content gets ids
+below the slot's own (`I<instance>;<slot>;<new id>`), no longer follows the
+main component and is missing from the instance's `overrides`
+(`isOwnedSlotContent` in `src/scan/slots.ts`, tested on FRIOD 2026-11-19).
+The scan, the change log and the reset of a Manual fix read that content like
+the layers of a frame: a layer there has no `instanceId`, and an instance
+there is the outermost instance of its own layers and reads its own
+`overrides` (`outermostInstance`). The change log once read it against the
+outer instance's `overrides`, so Revert frame put nothing back there (found
+on FRIOD 2026-11-19). Every value also records the
+full chain of instances it is in (`instances`, outermost first, through owned
+slot content too), and each instance on the Instances tab carries a tree of the
+instances in it with the legacy values each takes from its main component
+(`buildInstanceTree` in `src/scan/instance-tree.ts`). An instance in owned slot
+content names the instance it sits in (`within`).
+
 The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md),
 and the guide for designers in [`docs/designer-guide.md`](./docs/designer-guide.md).
 
@@ -665,7 +683,14 @@ checks it against the answer key; until the file is there, it is skipped.
 
 `pnpm run build:fixture-script` builds the same reader as a standalone script,
 `dist/collect-fixture.js`, for tools that run Plugin API code in a file. It
-takes the collection keys as arguments, so it carries no inventory.
+takes the collection keys as arguments, so it carries no inventory, and it
+must stay below the 50 kB code limit of the Figma MCP server's `use_figma`:
+the reader imports nothing from the rules (`INSTANCE_LOCKED_FIELDS` lives in
+`src/scan/locked-fields.ts` for that reason; imported from
+`src/scan/classify.ts` it pulled the rules and the inventory in, at 87 kB).
+A large frame's export is too big to return through the MCP server, so
+`test/fixtures/nested-instances.json` keeps only the legacy units and the
+layers, variables and instances they refer to.
 
 ## Tests
 
@@ -681,6 +706,8 @@ pnpm --filter @equinor/eds-figma-migration-plugin run test:run
 - `test/scan.test.ts`: classification, health and the fixture format.
 - `test/pipeline.test.ts`: the scan of the test frame against the answer key,
   when the fixture is there.
+- `test/nested-instances.test.ts`: owned slot content, the chain of
+  instances and the tree, on the FRIOD test frame 2100:1825 (Casper's case).
 
 ## Fonts and network access
 

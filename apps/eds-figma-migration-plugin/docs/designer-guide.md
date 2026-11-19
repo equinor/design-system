@@ -152,6 +152,12 @@ the instance overrides can be changed there, like any other layer. A value
 from the main component cannot: it changes with the main component or its
 library.
 
+Content you place in a slot of an instance belongs to that instance once you
+edit the slot, and no longer follows the main component. The plugin treats it
+like layers in a frame: a legacy value there can be changed like any other,
+and an instance you placed there is listed on the Instances tab as an
+instance of its own.
+
 To change a target, press **Change** on one value or the target of a row, or
 tick several values and use the bar at the bottom of the window. The picker
 never offers to keep a legacy variable, since the goal is a file with none

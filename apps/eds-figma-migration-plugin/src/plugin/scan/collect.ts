@@ -14,10 +14,11 @@ import type {
   TypographyField,
   VariableType,
 } from '../../mapping/types'
-import { INSTANCE_LOCKED_FIELDS } from '../../scan/classify'
+import { INSTANCE_LOCKED_FIELDS } from '../../scan/locked-fields'
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
 import { effectNumber } from '../../shared/effect-numbers'
 import { readLog } from '../apply/log'
+import { isOwnedSlotContent } from '../../scan/slots'
 import {
   effectVariableId,
   explicitModeId,
@@ -29,6 +30,7 @@ import {
 } from './overrides'
 import type { SameBinding } from './overrides'
 import type {
+  InstanceStep,
   PropertyRef,
   RawFillUnder,
   RawTextStyle,
@@ -76,6 +78,10 @@ type WalkState = {
   modeHolders: string[]
   /** An ancestor is hidden */
   hidden: boolean
+  /** The instances above the node, outermost first, through owned slot content too */
+  chain: InstanceStep[]
+  /** The node is in slot content an instance owns, with no instance between */
+  inOwnedSlot: boolean
 }
 
 /** The fields every unit of a node shares. */
@@ -87,6 +93,7 @@ type UnitBase = Pick<
   | 'entryId'
   | 'path'
   | 'instanceId'
+  | 'instances'
   | 'modeHolders'
   | 'hidden'
   | 'context'
@@ -101,6 +108,10 @@ export type FoundInstance = {
   entryId: string
   /** Layer names from the entry down to the instance's parent */
   path: string[]
+  /** The instance itself, as the first step of the trees of its values */
+  step: InstanceStep
+  /** For an instance in slot content another instance owns: that instance */
+  within?: { id: string; name: string }
 }
 
 /** A component's name as the window shows it: its component set's, for a variant. */
@@ -181,6 +192,15 @@ function modesSignature(modes: Modes): string {
     .join(';')
 }
 
+/** Whether `child` is slot content an instance owns (src/scan/slots.ts), read like a frame. */
+export function ownedSlotContent(
+  parent: BaseNode,
+  child: BaseNode,
+  instanceRoot: InstanceNode | undefined,
+): boolean {
+  return instanceRoot !== undefined && isOwnedSlotContent(parent, child)
+}
+
 /** Whether a layer above the node, up to the page, is hidden. */
 function hiddenAbove(node: BaseNode): boolean {
   for (let parent = node.parent; parent; parent = parent.parent) {
@@ -244,6 +264,8 @@ export class Collector {
         modeHolders: [],
         // A selection scan can start below a hidden layer.
         hidden: hiddenAbove(root),
+        chain: [],
+        inOwnedSlot: false,
       })
     }
   }
@@ -538,12 +560,23 @@ export class Collector {
     const instanceRoot =
       state.instanceRoot ?? (node.type === 'INSTANCE' ? node : undefined)
     const instancePath = state.instanceRoot ? state.instancePath : []
-    if (node.type === 'INSTANCE' && !state.instanceId) {
+    const hidden = state.hidden || !node.visible
+    const step =
+      node.type === 'INSTANCE'
+        ? await this.instanceStep(node, hidden, state.inOwnedSlot)
+        : undefined
+    const chain = step ? [...state.chain, step] : state.chain
+    if (node.type === 'INSTANCE' && step && !state.instanceId) {
+      const above = state.chain[state.chain.length - 1]
       this.instances.set(node.id, {
         id: node.id,
         name: node.name,
         entryId: state.entryId,
         path: state.path,
+        step,
+        ...(state.inOwnedSlot && above
+          ? { within: { id: above.id, name: above.name } }
+          : {}),
       })
     }
     const owns: Ownership = (property, same) =>
@@ -575,7 +608,6 @@ export class Collector {
       node.type === 'TEXT' || SHAPE_TYPES.has(node.type)
         ? { ...own, fillUnder: state.fillUnder }
         : own
-    const hidden = state.hidden || !node.visible
     const base: UnitBase = {
       nodeId: node.id,
       nodeName: node.name,
@@ -583,6 +615,7 @@ export class Collector {
       entryId: state.entryId,
       path: state.path,
       instanceId,
+      ...(chain.length > 0 ? { instances: chain } : {}),
       context,
       ...(modeHolders.length > 0 ? { modeHolders } : {}),
       ...(hidden ? { hidden: true as const } : {}),
@@ -788,13 +821,46 @@ export class Collector {
         isRoot: false,
         modeHolders,
         hidden,
+        chain,
+        // Past an instance, its layers are its own, not the slot's.
+        inOwnedSlot: node.type === 'INSTANCE' ? false : state.inOwnedSlot,
       }
       for (const [index, child] of node.children.entries()) {
-        await this.walk(child, {
-          ...childState,
-          instancePath: instanceRoot ? [...instancePath, index] : [],
-        })
+        await this.walk(
+          child,
+          ownedSlotContent(node, child, instanceRoot)
+            ? // Slot content the instance owns is read like the layers of
+              // a frame: an instance in it is the outermost one for its
+              // layers and reads its own overrides (spike S1, 2026-11-19).
+              {
+                ...childState,
+                instanceId: undefined,
+                instanceRoot: undefined,
+                instancePath: [],
+                inOwnedSlot: true,
+              }
+            : {
+                ...childState,
+                instancePath: instanceRoot ? [...instancePath, index] : [],
+              },
+        )
       }
+    }
+  }
+
+  /** The instance as a step of the chain its layers record, with its main component's name. */
+  private async instanceStep(
+    node: InstanceNode,
+    hidden: boolean,
+    inOwnedSlot: boolean,
+  ): Promise<InstanceStep> {
+    const main = await node.getMainComponentAsync().catch(() => null)
+    return {
+      id: node.id,
+      name: node.name,
+      ...(main ? { component: componentName(main) } : {}),
+      ...(hidden ? { hidden: true as const } : {}),
+      ...(inOwnedSlot ? { slot: true as const } : {}),
     }
   }
 

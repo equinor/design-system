@@ -483,6 +483,21 @@ clears it. A mode the instance sets itself that values from the main
 component still read stays in Inside instances (rule `mode/from-main`),
 because it can only be cleared after the main component is migrated.
 
+Slot content an instance owns is read like the layers of a frame (decided
+2026-11-19). A slot in an instance follows its main component until it is
+edited in the instance; from then on all its content belongs to the instance,
+gets ids of its own and is not in the instance's `overrides`. A value on a
+layer there goes through the rules like any other layer, and an instance placed
+there is the outermost instance of its own layers: what it overrides goes
+through the rules, and what it takes from its main component is Inside
+instances, listed under that instance. Without this, the legacy values a panel
+component such as PE Editor holds in its slot all counted as Inside instances
+of the panel, although the panel's main component does not have them (Casper's
+case, 2026-11-18). A plugin can bind a fill, a padding, a width and a mode on a
+frame in owned slot content and on the root of an instance there; a layer
+inside such an instance has the same limit on sizes as any layer inside an
+instance (tested on FRIOD on 2026-11-19).
+
 When the layer is an instance and the reset would give an EDS Beta variable
 or a number, the plugin can make the fix itself (target `reset:<variable>`).
 It is never applied as the rule's outcome: a designer accepts it in Review,

@@ -6,6 +6,7 @@ import { literalText } from '../mapping/literal'
 import { nearNamesMatch } from '../mapping/role'
 import { isResetTarget, resetTarget, resetVariable } from '../mapping/reset'
 import { propertyLabel } from './labels'
+import { INSTANCE_LOCKED_FIELDS } from './locked-fields'
 import { targetDensity } from '../mapping/density'
 import { targetScheme } from '../mapping/scheme'
 import {
@@ -126,16 +127,6 @@ export function readsOf(variable: RawVariable): string[] {
     ]),
   ]
 }
-
-/** Fields a plugin cannot bind a variable to on a layer inside an instance; it can only unbind them. */
-export const INSTANCE_LOCKED_FIELDS = new Set([
-  'width',
-  'height',
-  'minWidth',
-  'maxWidth',
-  'minHeight',
-  'maxHeight',
-])
 
 const LOCKED_FIELD_NAMES: Record<string, string> = {
   width: 'width',
@@ -360,6 +351,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     property: unit.property,
     group: groupOf(unit),
     instanceId: unit.instanceId,
+    ...(unit.instances ? { instances: unit.instances } : {}),
     density: targetDensity(unit.context.modes),
     scheme: targetScheme(unit.context.modes),
     ...(unit.override ? { override: true as const } : {}),
