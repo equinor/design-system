@@ -3,7 +3,7 @@
 # Commit this file to version control.
 
 version = 2
-generated_at = "2026-11-11T11:05:43Z"
+generated_at = "2026-11-19T13:39:37Z"
 cli_version = "dev"
 
 [[dependencies]]
@@ -122,6 +122,340 @@ cli_version = "dev"
     size = 32030
     tokens = 0
 
+[[exports]]
+  name = "css"
+  preset_id = "39d37416-632b-4f04-b49b-cfaec63e3baa"
+  advisory_name = "EDS-CSS"
+  source_ref_type = "branch"
+  source_ref_name = "main"
+  preset_hash = "sha256:7dcc66c3b5ef5f7de6b47cd3a7555f120815e7908c57ba3683de6c0d5b072dfc"
+  output_hash = "sha256:149134809c98f7944e24a6a2516b1d281db35ca29e8c1b14f07a5b2628855a98"
+  updated_at = "2026-11-19T13:39:37Z"
+
+  [[exports.files]]
+    path = "color-scheme/dark.css"
+    hash = "sha256:836e2b379f54259524b0091eab8b92e8a2d259c9e32d227ae98d9001bf415778"
+    size = 18382
+    tokens = 0
+
+  [[exports.files]]
+    path = "color-scheme/light.css"
+    hash = "sha256:757fb08d4f39332276b361e3b815175e6111e70d60765a83ec28a2bb9391875f"
+    size = 18464
+    tokens = 0
+
+  [[exports.files]]
+    path = "colors/default.css"
+    hash = "sha256:abc5dda0c758d769d12a65083003cdcde0beb1e79aebc5a032576cad38cf1015"
+    size = 16997
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/comfortable.css"
+    hash = "sha256:083035840f75b8fb70c6fb2b0740bbffb85ead6eb5a3a060bb17c8a6def5b3b5"
+    size = 6088
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/compact.css"
+    hash = "sha256:3e38bada4867fdd6bf7207f8a4ca175e48e596821698945fbe942d196caf0317"
+    size = 6101
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/relaxed.css"
+    hash = "sha256:01d14e1770e0558aa68ccf2ffe391564e32a917f3f52403936edc10969e65259"
+    size = 6113
+    tokens = 0
+
+  [[exports.files]]
+    path = "elevation/default.css"
+    hash = "sha256:b901b735725d884571299918814dfbd521a8c9d38c48aa5ce8593feae483395b"
+    size = 822
+    tokens = 0
+
+  [[exports.files]]
+    path = "font/default.css"
+    hash = "sha256:d5fec65e249a171b67e9e5a8b0f0078a68289de6485866ef6ae453adfca78012"
+    size = 396
+    tokens = 0
+
+  [[exports.files]]
+    path = "primitives/default.css"
+    hash = "sha256:93e12337431b78d51bb988f4069561a6eac69d4fa0f446f05b1c63c38dec6ebd"
+    size = 4274
+    tokens = 0
+
+  [[exports.files]]
+    path = "semantic/default.css"
+    hash = "sha256:af46aff038ec083cd960c72bd1192da498a2fbfe83e0134cc750c846c75f1c80"
+    size = 23342
+    tokens = 0
+
+[[exports]]
+  name = "dtcg"
+  preset_id = "019463d4-9bef-4e37-9425-6de80eec87c8"
+  advisory_name = "EDS-DTCG"
+  source_ref_type = "branch"
+  source_ref_name = "main"
+  preset_hash = "sha256:047c3de5945ae2f7e85725e840721b3dd2df359f35143dfdf75078dcd7c5d468"
+  output_hash = "sha256:fb2d9c939c6185db983232d580dd1375697f19835ca485a21b2acdb5704f745f"
+  updated_at = "2026-11-19T13:39:37Z"
+
+  [[exports.files]]
+    path = "color-scheme/dark.json"
+    hash = "sha256:57bdf4fdd0403fb8d2aef241714a4076b937144d2c39d751a656b675451011b0"
+    size = 75088
+    tokens = 0
+
+  [[exports.files]]
+    path = "color-scheme/light.json"
+    hash = "sha256:33d46d9c6a0d8595bd6b20f261d06256b39b69797a1d4b528b77e95f3a7f1af8"
+    size = 75169
+    tokens = 0
+
+  [[exports.files]]
+    path = "colors/default.json"
+    hash = "sha256:fb685603a1e47265c7ef14e960b8266d0bc03f259e066ca0d2ad2b7e1179250d"
+    size = 166536
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/comfortable.json"
+    hash = "sha256:859961a439c7dd6d9578d116ba0266c3d8d215de7f71ee6a9928f931b1a9703d"
+    size = 31305
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/compact.json"
+    hash = "sha256:18488994a664815501f3f2221d65efb5db2005432a39c122f039d1d8c9c7b392"
+    size = 31299
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/relaxed.json"
+    hash = "sha256:f57df710f722ae1042b4e1cfbac70bfe775091df180b11c834eaf2c9d07c899e"
+    size = 31311
+    tokens = 0
+
+  [[exports.files]]
+    path = "elevation/default.json"
+    hash = "sha256:5761be68b1e3e20142d91817c855dc9fafbc06ddfeeaa48f1a109da8b6af5e61"
+    size = 4237
+    tokens = 0
+
+  [[exports.files]]
+    path = "font/default.json"
+    hash = "sha256:2cc8273f1a375bd0802cfa2d98c7440f20ea7a23e9d9487211952896a84c936d"
+    size = 2140
+    tokens = 0
+
+  [[exports.files]]
+    path = "primitives/default.json"
+    hash = "sha256:80313b9425c1f6ed4696da5d8fe8c0c426a5b5488ee9bf40245763b1ed3f0194"
+    size = 31818
+    tokens = 0
+
+  [[exports.files]]
+    path = "semantic/default.json"
+    hash = "sha256:b189ed014911372042db53fe2600e6577bdc18c32a208b54da1d79dd105eddd8"
+    size = 134840
+    tokens = 0
+
+[[exports]]
+  name = "eds"
+  inline = true
+  source_ref_type = "branch"
+  source_ref_name = "main"
+  preset_hash = "sha256:682797888d970f3e50b89ba220d984af170b3ac6035e2e018517aa8912b2561e"
+  output_hash = "sha256:0429f9466762093c6e99fdcee0be530189fb1fe049e9a0f1298dab539f1729cb"
+  updated_at = "2026-11-19T13:39:37Z"
+
+  [[exports.files]]
+    path = "$metadata.json"
+    hash = "sha256:e733bc3e7a8b40137bb60aca77489f95d126fc4b1113526b7067dd14d8f6c537"
+    size = 426
+    tokens = 0
+
+  [[exports.files]]
+    path = "$themes.json"
+    hash = "sha256:80a183b99f1655267ed887b0a472c15b5b9b610676d4579378e17b16dc249ebc"
+    size = 27520
+    tokens = 0
+
+  [[exports.files]]
+    path = "color/dark.json"
+    hash = "sha256:79ce36e9485429a4ff6f57be0d47af0e8d086440704afe6fe46279e2ccf451dc"
+    size = 76256
+    tokens = 0
+
+  [[exports.files]]
+    path = "color/light.json"
+    hash = "sha256:28b44d33ad3c9cfba8361b90d14f180632d97f3d8d041e3cb4adb300c3450e3f"
+    size = 76798
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/comfortable.json"
+    hash = "sha256:2b28adfc5cf3d4005e60b468b02ecd6cd818bdd5fc02af54bf27b9505a5a1c6d"
+    size = 31255
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/compact.json"
+    hash = "sha256:2791591a72d4b4296ce2c708acc3a753929114b24726ae54892878ee35e061b7"
+    size = 31249
+    tokens = 0
+
+  [[exports.files]]
+    path = "density/relaxed.json"
+    hash = "sha256:b0aaa0b1220e9ee0084e9434c86494257fb3fe10b1165899e2923f8cbe13da11"
+    size = 31261
+    tokens = 0
+
+  [[exports.files]]
+    path = "elevation/default.json"
+    hash = "sha256:d03bcc820760af2f16decd3772fd864f4f8b18d1bd045fd9fa8d7f15602aef84"
+    size = 3324
+    tokens = 0
+
+  [[exports.files]]
+    path = "font/default.json"
+    hash = "sha256:0142dbe17f2f0853bf7d37897d4f4a848188bf1c9859cd7a4ffbe830f4ceb496"
+    size = 2139
+    tokens = 0
+
+  [[exports.files]]
+    path = "foundation/anchor.json"
+    hash = "sha256:65797fd6431330b7d06db2c99f1094e298f13708893653b37774840100e57762"
+    size = 4012
+    tokens = 0
+
+  [[exports.files]]
+    path = "foundation/dataviz.json"
+    hash = "sha256:feeb3dcb4f1808d251fb91310262ded14258fb1ce895ca116dec8c89ad26d6c7"
+    size = 5373
+    tokens = 0
+
+  [[exports.files]]
+    path = "foundation/gaussian.json"
+    hash = "sha256:f0e9fe5f857e9bd5bb775ac50338b1a779545f53cc94bf93e707507aa4e56f27"
+    size = 10216
+    tokens = 0
+
+  [[exports.files]]
+    path = "input/dataviz.json"
+    hash = "sha256:4ed423ba5a1441ae436983c5153d50cc6ce3e6258a6dc1c4fd267a1094ea8df3"
+    size = 2912
+    tokens = 0
+
+  [[exports.files]]
+    path = "input/palette.json"
+    hash = "sha256:46abf3262dbf15fbb6fc2a1f78f245f098c0cc01b62cfe123f9d4b3aa383a87a"
+    size = 1867
+    tokens = 0
+
+  [[exports.files]]
+    path = "input/scale.json"
+    hash = "sha256:03829a2673f1bae09b323db07b19e4917bdb8177b7f3df0fbce4e3a3f9594049"
+    size = 8611
+    tokens = 0
+
+  [[exports.files]]
+    path = "primitives/default.json"
+    hash = "sha256:e3ce0b73d6009f4512d546c934231d1373c4c55440055f4dd08f1fc1166932aa"
+    size = 28238
+    tokens = 0
+
+  [[exports.files]]
+    path = "scheme/dark.json"
+    hash = "sha256:8eef151aff17d4bef5cb0b55e00ab2e5e9c6484b9be60aa35de0f7283fe23be1"
+    size = 45423
+    tokens = 0
+
+  [[exports.files]]
+    path = "scheme/light.json"
+    hash = "sha256:d2d9496487df090df6131b1fcdbbb4c08b9ea04dfbea90469a42ad0d7bf10925"
+    size = 45334
+    tokens = 0
+
+  [[exports.files]]
+    path = "semantic.json"
+    hash = "sha256:1ca8ed4e0ed94885cc6cdd56819fd882e494108de40f62743f53d10764c1ee0e"
+    size = 102587
+    tokens = 0
+
+  [[exports.files]]
+    path = "semantic/default.json"
+    hash = "sha256:aa2f6459432d10c9b7778d661c579c81645968cb54526dd23b58190f905a3e3c"
+    size = 32030
+    tokens = 0
+
+[[exports]]
+  name = "ts"
+  layered = true
+  preset_id = "c39c19df-2601-4a11-a728-d52654b12832"
+  advisory_name = "EDS-Typescript"
+  source_ref_type = "branch"
+  source_ref_name = "main"
+  preset_hash = "sha256:5460079f7cccbf8686d9825867194739c353ef7cf620fd873132b6c038795209"
+  output_hash = "sha256:df16215a9c21a408afe7145cdc4346c53176d70a0899aa8d233ab05d63d456d0"
+  updated_at = "2026-11-19T13:39:37Z"
+
+  [[exports.files]]
+    path = "__meta__.cjs"
+    hash = "sha256:01d2556993cd871f9e29c24cfee2b3cb368a33e02205f42b341398878f3451f8"
+    size = 335
+    tokens = 0
+
+  [[exports.files]]
+    path = "dark-comfortable.cjs"
+    hash = "sha256:4f5a4cda9dba553d4c515b8d638eb6e6a6cda18f1119dc6ac6881f517eb5ece1"
+    size = 34805
+    tokens = 0
+
+  [[exports.files]]
+    path = "dark-compact.cjs"
+    hash = "sha256:25d4582349c2b933999bdf5ed9da16fedf121e70657cde5d79b9a3cd99082dba"
+    size = 34803
+    tokens = 0
+
+  [[exports.files]]
+    path = "dark-relaxed.cjs"
+    hash = "sha256:cc6c0c82aadabeaaf2f1892d10f417658dcf8fc0914654ebcc157f90afa5158f"
+    size = 34809
+    tokens = 0
+
+  [[exports.files]]
+    path = "index.cjs"
+    hash = "sha256:12a4ddc3b7baf18e9609de004826c4402f076e817a62a49fd4420c889fc1f9a8"
+    size = 569
+    tokens = 0
+
+  [[exports.files]]
+    path = "light-comfortable.cjs"
+    hash = "sha256:a58bb8618c6346f2ebc825962f2bf5d9de5bcaab75554433df5a0ecff3d066b8"
+    size = 34805
+    tokens = 0
+
+  [[exports.files]]
+    path = "light-compact.cjs"
+    hash = "sha256:2cf495fed5b9a56546dbe987f247ca32a3371e805bd16d3397d90e093e0180f3"
+    size = 34803
+    tokens = 0
+
+  [[exports.files]]
+    path = "light-relaxed.cjs"
+    hash = "sha256:bd5e92bd4c6e33971d3effee18f8f3f8d2f2280177b75977ed6ee606a544b2c9"
+    size = 34809
+    tokens = 0
+
+  [[exports.files]]
+    path = "tokenTypes.cjs"
+    hash = "sha256:9f258ec3179e94dfd3487d1e191f163fabd38bdce72a0d92d6e6591eef9b5eeb"
+    size = 43545
+    tokens = 0
+
 [integrity]
-  lockfile_hash = "sha256:81ea431e20f52b69a96ae87e8951855e7bb4e71ae031ded8d84c4d3d594d2136"
+  lockfile_hash = "sha256:a9904a0d1118457fe6fdbbc2f1c868053725a7d09c4857985512e39091a72c92"
   algorithm = "sha256"
