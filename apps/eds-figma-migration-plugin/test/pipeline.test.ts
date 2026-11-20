@@ -1,7 +1,8 @@
 /**
  * The full pipeline on a scan of the test frame "Migration test – old EDS
- * variables": the raw units the plugin read from Figma, classified by the
- * same code as in the plugin, checked against the answer key.
+ * variables", called Well overview in the fixture: the raw units the plugin
+ * read from Figma, classified by the same code as in the plugin, checked
+ * against the answer key.
  *
  * The fixture is exported from Figma with Plugins → Development → EDS
  * variable migration → Developer → Export scan of selected frame as fixture,
@@ -25,9 +26,9 @@ const fixture = existsSync(path)
 
 /** Proposals by layer and property, from the answer key. */
 const EXPECTED: [layer: string, property: string, proposal: string][] = [
-  ['Migration test – old EDS variables', 'Fill', 'background/canvas'],
-  ['Migration test – old EDS variables', 'Padding left', 'spacing/xl'],
-  ['Migration test – old EDS variables', 'Gap', 'spacing/lg'],
+  ['Well overview', 'Fill', 'background/canvas'],
+  ['Well overview', 'Padding left', 'spacing/xl'],
+  ['Well overview', 'Gap', 'spacing/lg'],
   ['Top bar', 'Stroke', 'border/non-interactive/neutral/muted'],
   ['Top bar', 'Padding top', 'spacing/md'],
   ['Vector', 'Fill', 'icon/primary'],

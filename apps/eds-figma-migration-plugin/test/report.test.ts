@@ -43,7 +43,7 @@ describe.skipIf(!fixture)('buildReport on the test frame', () => {
     entries,
   }
   const report = buildReport({
-    fileName: 'AI Testing',
+    fileName: 'Sample file',
     summary,
     records,
     oldInstances: [],
@@ -52,12 +52,12 @@ describe.skipIf(!fixture)('buildReport on the test frame', () => {
 
   it('has the health, the frames, and the check and no-equivalent lists', () => {
     expect(report.markdown).toContain(
-      '# EDS variable migration report: AI Testing',
+      '# EDS variable migration report: Sample file',
     )
     expect(report.markdown).toContain('## Health: 0%')
     expect(report.markdown).toContain(`## Needs check (${totals.check})`)
     expect(report.markdown).toContain(`## No equivalent (${totals.none})`)
-    expect(report.markdown).toContain('Migration test – old EDS variables')
+    expect(report.markdown).toContain('Well overview')
   })
 
   it('has one CSV row per binding, with a header', () => {
@@ -71,7 +71,7 @@ describe.skipIf(!fixture)('buildReport on the test frame', () => {
   })
 
   it('names the files after the file and the date', () => {
-    expect(report.baseName).toBe('eds-migration-AI-Testing-2026-11-11')
+    expect(report.baseName).toBe('eds-migration-Sample-file-2026-11-11')
   })
 })
 

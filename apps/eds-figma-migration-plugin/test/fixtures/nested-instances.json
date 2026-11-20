@@ -1,9 +1,9 @@
 {
   "generatedAt": "2026-11-19",
-  "fileName": "FRIOD Main Design (branch test)",
+  "fileName": "Sample file",
   "frame": {
     "id": "2100:1825",
-    "name": "Casper case (local): PE Editor (test) instance"
+    "name": "Well details"
   },
   "variables": {
     "VariableID:9458bde037474d1ffdf45e49031dbc06252c21bf/4014:1103": {
@@ -129,16 +129,16 @@
   },
   "nodes": {
     "2100:1826": {
-      "name": "PE Editor (test)",
+      "name": "Details panel",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance"
+        "Well details"
       ],
       "context": {
         "nodeType": "INSTANCE",
         "names": [
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -161,15 +161,15 @@
       "name": "Header",
       "type": "FRAME",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)"
+        "Well details",
+        "Details panel"
       ],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Header",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -186,8 +186,8 @@
       "name": "Typography",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Header"
       ],
       "context": {
@@ -195,8 +195,8 @@
         "names": [
           "Typography",
           "Header",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -214,8 +214,8 @@
       "name": "Typography",
       "type": "TEXT",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Header",
         "Typography"
       ],
@@ -225,8 +225,8 @@
           "Typography",
           "Typography",
           "Header",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -249,8 +249,8 @@
       "name": "icon",
       "type": "BOOLEAN_OPERATION",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Header",
         "Close",
         "Leading Icon"
@@ -262,8 +262,8 @@
           "Leading Icon",
           "Close",
           "Header",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -288,22 +288,22 @@
       }
     },
     "I2100:1826;2100:1813;2100:1952": {
-      "name": "Tab [EDS Beta] (Not in storybook)",
+      "name": "Tab",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content",
         "Tabs"
       ],
       "context": {
         "nodeType": "INSTANCE",
         "names": [
-          "Tab [EDS Beta] (Not in storybook)",
+          "Tab",
           "Tabs",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -325,22 +325,22 @@
       ]
     },
     "I2100:1826;2100:1813;2100:1953": {
-      "name": "Tab [EDS Beta] (Not in storybook)",
+      "name": "Tab",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content",
         "Tabs"
       ],
       "context": {
         "nodeType": "INSTANCE",
         "names": [
-          "Tab [EDS Beta] (Not in storybook)",
+          "Tab",
           "Tabs",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -362,20 +362,20 @@
       ]
     },
     "I2100:1826;2100:1813;2100:1954": {
-      "name": "Badge [EDS Beta] (Not in storybook)",
+      "name": "Badge",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content"
       ],
       "context": {
         "nodeType": "INSTANCE",
         "names": [
-          "Badge [EDS Beta] (Not in storybook)",
+          "Badge",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Accent"
@@ -401,8 +401,8 @@
       "name": "Typography",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content"
       ],
       "context": {
@@ -410,8 +410,8 @@
         "names": [
           "Typography",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -429,8 +429,8 @@
       "name": "Typography",
       "type": "TEXT",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content",
         "Typography"
       ],
@@ -440,8 +440,8 @@
           "Typography",
           "Typography",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -461,20 +461,20 @@
       }
     },
     "I2100:1826;2100:1813;2100:2033": {
-      "name": "Badge [EDS Beta] (Not in storybook)",
+      "name": "Badge",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content"
       ],
       "context": {
         "nodeType": "INSTANCE",
         "names": [
-          "Badge [EDS Beta] (Not in storybook)",
+          "Badge",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Info"
@@ -499,10 +499,10 @@
       "name": "icon",
       "type": "BOOLEAN_OPERATION",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content",
-        "Button [EDS Beta]",
+        "Button",
         "Trailing Icon"
       ],
       "context": {
@@ -510,10 +510,10 @@
         "names": [
           "icon",
           "Trailing Icon",
-          "Button [EDS Beta]",
+          "Button",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -541,8 +541,8 @@
       "name": "Typography",
       "type": "INSTANCE",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content"
       ],
       "context": {
@@ -550,8 +550,8 @@
         "names": [
           "Typography",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -570,8 +570,8 @@
       "name": "Typography",
       "type": "TEXT",
       "path": [
-        "Casper case (local): PE Editor (test) instance",
-        "PE Editor (test)",
+        "Well details",
+        "Details panel",
         "Content",
         "Typography"
       ],
@@ -581,8 +581,8 @@
           "Typography",
           "Typography",
           "Content",
-          "PE Editor (test)",
-          "Casper case (local): PE Editor (test) instance"
+          "Details panel",
+          "Well details"
         ],
         "modes": {
           "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
@@ -606,8 +606,8 @@
   "steps": {
     "2100:1826": {
       "id": "2100:1826",
-      "name": "PE Editor (test)",
-      "component": "PE Editor (test)"
+      "name": "Details panel",
+      "component": "Details panel"
     },
     "I2100:1826;2100:1775": {
       "id": "I2100:1826;2100:1775",
@@ -617,7 +617,7 @@
     "I2100:1826;2100:1777": {
       "id": "I2100:1826;2100:1777",
       "name": "Close",
-      "component": "Button [EDS Beta]"
+      "component": "Button"
     },
     "I2100:1826;2100:1777;5823:9340": {
       "id": "I2100:1826;2100:1777;5823:9340",
@@ -626,20 +626,20 @@
     },
     "I2100:1826;2100:1813;2100:1952": {
       "id": "I2100:1826;2100:1813;2100:1952",
-      "name": "Tab [EDS Beta] (Not in storybook)",
-      "component": "Tab [EDS Beta] (Not in storybook)",
+      "name": "Tab",
+      "component": "Tab",
       "slot": true
     },
     "I2100:1826;2100:1813;2100:1953": {
       "id": "I2100:1826;2100:1813;2100:1953",
-      "name": "Tab [EDS Beta] (Not in storybook)",
-      "component": "Tab [EDS Beta] (Not in storybook)",
+      "name": "Tab",
+      "component": "Tab",
       "slot": true
     },
     "I2100:1826;2100:1813;2100:1954": {
       "id": "I2100:1826;2100:1813;2100:1954",
-      "name": "Badge [EDS Beta] (Not in storybook)",
-      "component": "Badge [EDS Beta] (Not in storybook)",
+      "name": "Badge",
+      "component": "Badge",
       "hidden": true,
       "slot": true
     },
@@ -651,14 +651,14 @@
     },
     "I2100:1826;2100:1813;2100:2033": {
       "id": "I2100:1826;2100:1813;2100:2033",
-      "name": "Badge [EDS Beta] (Not in storybook)",
-      "component": "Badge [EDS Beta] (Not in storybook)",
+      "name": "Badge",
+      "component": "Badge",
       "slot": true
     },
     "I2100:1826;2100:1813;2100:2108": {
       "id": "I2100:1826;2100:1813;2100:2108",
-      "name": "Button [EDS Beta]",
-      "component": "Button [EDS Beta]",
+      "name": "Button",
+      "component": "Button",
       "slot": true
     },
     "I2100:1826;2100:1813;2100:2108;5823:7987": {

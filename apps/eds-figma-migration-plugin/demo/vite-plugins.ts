@@ -1,6 +1,6 @@
 /**
  * The Vite plugins that build the demo: the plugin window, built from its
- * own config into a string, the cleaned fixtures, and the removal of the
+ * own config into a string, the fixtures with new ids, and the removal of the
  * library keys from the inventories.
  */
 import { readFileSync } from 'node:fs'
@@ -8,11 +8,7 @@ import { fileURLToPath } from 'node:url'
 import { build } from 'vite'
 import type { Plugin } from 'vite'
 import type { PackedFixture } from '../src/scan/fixture'
-import {
-  DETAILS_PANEL_NAMES,
-  WELL_OVERVIEW_NAMES,
-  sanitiseFixture,
-} from './sample/sanitise'
+import { sanitiseFixture } from './sample/sanitise'
 
 const here = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 
@@ -90,7 +86,7 @@ function readFixture(name: string): PackedFixture {
 
 /**
  * `virtual:demo-fixtures`: the test frame and the frame with the details
- * panel, cleaned for a public page (sample/sanitise.ts).
+ * panel, with new layer and variable ids (sample/sanitise.ts).
  */
 export function demoFixtures(): Plugin {
   return {
@@ -101,11 +97,9 @@ export function demoFixtures(): Plugin {
     load(id) {
       if (id !== `\0${FIXTURES_ID}`) return null
       const wellOverview = sanitiseFixture(readFixture('test-frame'), {
-        names: WELL_OVERVIEW_NAMES,
         idPrefix: 10,
       })
       const detailsPanel = sanitiseFixture(readFixture('nested-instances'), {
-        names: DETAILS_PANEL_NAMES,
         idPrefix: 20,
       })
       return [

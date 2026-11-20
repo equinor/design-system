@@ -1,15 +1,16 @@
 /**
- * What is inside an instance (Casper's case, 2026-11-18): the chain of
- * instances a value is in, slot content an instance owns, and the tree the
- * Instances tab shows.
+ * What is inside an instance (a panel component pasted from another file,
+ * 2026-11-18): the chain of instances a value is in, slot content an
+ * instance owns, and the tree the Instances tab shows.
  *
- * The fixture is the FRIOD test branch frame 2100:1825 "Casper case (local)",
- * exported with dist/collect-fixture.js and cut down to its legacy values. It
- * holds one instance of PE Editor (test), whose main component has a header
- * (a Typography title and a Close button) and a slot. The instance owns its
- * slot content: Tabs with legacy strokes, a hidden Badge and a Badge with a
- * legacy mode, a Button with a legacy icon fill, and two Typography
- * instances, one of them hidden.
+ * The fixture is a frame in a test file in Figma (node 2100:1825), exported
+ * with dist/collect-fixture.js and cut down to its legacy values. The frame
+ * is called Well details in it, and the panel Details panel. It holds one
+ * instance of the panel, whose main component has a header (a Typography
+ * title and a Close button) and a slot. The instance owns its slot content:
+ * Tabs with legacy strokes, a hidden Badge and a Badge with a legacy mode, a
+ * Button with a legacy icon fill, and two Typography instances, one of them
+ * hidden.
  */
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
@@ -30,8 +31,8 @@ const fixture = JSON.parse(
 const units = unpackFixture(fixture)
 const records = classifyUnits(units)
 
-const PE_EDITOR = '2100:1826'
-const SLOT = `I${PE_EDITOR};2100:1813`
+const PANEL = '2100:1826'
+const SLOT = `I${PANEL};2100:1813`
 const stepOf = (id: string): InstanceStep => {
   const step = fixture.steps?.[id]
   if (!step) throw new Error(`No step ${id}`)
@@ -71,15 +72,15 @@ describe('slot content an instance owns', () => {
     }
   })
 
-  it('keeps PE Editor in the chain of every value below it', () => {
+  it('keeps the panel in the chain of every value below it', () => {
     for (const record of records) {
-      expect(record.instances?.[0]?.id).toBe(PE_EDITOR)
+      expect(record.instances?.[0]?.id).toBe(PANEL)
     }
     expect(stepOf(`${SLOT};2100:1954`)).toMatchObject({
       hidden: true,
       slot: true,
     })
-    expect(stepOf(`I${PE_EDITOR};2100:1777`).slot).toBeUndefined()
+    expect(stepOf(`I${PANEL};2100:1777`).slot).toBeUndefined()
   })
 })
 
@@ -87,7 +88,7 @@ describe('values an instance takes from its main component', () => {
   it('keeps them with the instance, outside its owned slot content', () => {
     const fromMain = records.filter(
       (record) =>
-        record.instanceId === PE_EDITOR && record.category === 'inInstance',
+        record.instanceId === PANEL && record.category === 'inInstance',
     )
     expect(fromMain).toHaveLength(16)
     expect(fromMain.every((record) => !record.override)).toBe(true)
@@ -95,11 +96,11 @@ describe('values an instance takes from its main component', () => {
 })
 
 describe('buildInstanceTree', () => {
-  it('shows where in PE Editor its legacy values are', () => {
-    const tree = buildInstanceTree(stepOf(PE_EDITOR), records)
+  it('shows where in the panel its legacy values are', () => {
+    const tree = buildInstanceTree(stepOf(PANEL), records)
     expect(tree).toMatchObject({
-      id: PE_EDITOR,
-      name: 'PE Editor (test)',
+      id: PANEL,
+      name: 'Details panel',
       count: 16,
       hiddenCount: 0,
       own: 12,
@@ -111,7 +112,7 @@ describe('buildInstanceTree', () => {
       ['Close', 1, 0],
     ])
     const close = tree.children[1]
-    expect(close.component).toBe('Button [EDS Beta]')
+    expect(close.component).toBe('Button')
     expect(close.children.map((child) => [child.name, child.own])).toEqual([
       ['Leading Icon', 1],
     ])
@@ -161,11 +162,11 @@ describe('buildInstanceTree', () => {
 })
 
 describe('valueTree', () => {
-  // Every value in PE Editor's group of the frame's Layers view
-  const inPeEditor = records.filter(
-    (record) => record.instances?.[0]?.id === PE_EDITOR,
+  // Every value in the panel's group of the frame's Layers view
+  const inPanel = records.filter(
+    (record) => record.instances?.[0]?.id === PANEL,
   )
-  const { root, own } = valueTree(stepOf(PE_EDITOR), inPeEditor)
+  const { root, own } = valueTree(stepOf(PANEL), inPanel)
   const child = (id: string) => {
     const found = root.children.find((node) => node.id === id)
     if (!found) throw new Error(`No node ${id}`)
@@ -173,9 +174,9 @@ describe('valueTree', () => {
   }
 
   it('puts every value of the instance in the tree, overrides too', () => {
-    expect(root).toMatchObject({ count: inPeEditor.length, overridden: 5 })
+    expect(root).toMatchObject({ count: inPanel.length, overridden: 5 })
     const leaves = [...own.values()].flat()
-    expect(leaves).toHaveLength(inPeEditor.length)
+    expect(leaves).toHaveLength(inPanel.length)
     expect(leaves.filter((record) => record.override)).toHaveLength(5)
   })
 
@@ -194,7 +195,7 @@ describe('valueTree', () => {
 
   it('gives each value to the instance whose own layer it is on', () => {
     // The Button's legacy icon fill is on the icon instance in it, two
-    // levels below PE Editor, and the Button has none of its own.
+    // levels below the panel, and the Button has none of its own.
     const button = child(`${SLOT};2100:2108`)
     expect(button).toMatchObject({ own: 0, count: 1, overridden: 1 })
     const [icon] = button.children
@@ -239,11 +240,11 @@ describe('valueTree', () => {
   })
 
   it('puts the values on a frame in an owned slot under the slot', () => {
-    // Casper's Actions frame in PE Editor's Content slot: not an instance,
-    // so it has no instanceId, but its chain ends at PE Editor.
-    const pe = { id: 'pe', name: 'PE Editor' }
+    // An Actions frame in the panel's Content slot: not an instance, so it
+    // has no instanceId, but its chain ends at the panel.
+    const panel = { id: 'panel', name: 'Details panel' }
     const field = {
-      id: 'pe;slot;tf',
+      id: 'panel;slot;tf',
       name: 'Text Field',
       slot: true as const,
       slotName: 'Content',
@@ -259,46 +260,46 @@ describe('valueTree', () => {
       {
         ...base,
         id: 'own',
-        nodeId: 'pe',
-        nodeName: 'PE Editor',
+        nodeId: 'panel',
+        nodeName: 'Details panel',
         nodeType: 'INSTANCE',
         category: 'inInstance',
-        instanceId: 'pe',
-        instances: [pe],
+        instanceId: 'panel',
+        instances: [panel],
       },
       {
         ...base,
         id: 'frame',
-        nodeId: 'pe;slot;actions',
+        nodeId: 'panel;slot;actions',
         nodeName: 'Actions',
         nodeType: 'FRAME',
         category: 'sure',
-        instances: [pe],
+        instances: [panel],
         slotName: 'Content',
       },
       {
         ...base,
         id: 'field',
-        nodeId: 'pe;slot;tf',
+        nodeId: 'panel;slot;tf',
         nodeName: 'Text Field',
         nodeType: 'INSTANCE',
         category: 'sure',
         override: true,
-        instanceId: 'pe;slot;tf',
-        instances: [pe, field],
+        instanceId: 'panel;slot;tf',
+        instances: [panel, field],
       },
     ]
-    const { root, own } = valueTree(pe, records)
+    const { root, own } = valueTree(panel, records)
     expect(root).toMatchObject({ count: 3, own: 1, overridden: 1 })
     expect(root.slotValues).toEqual([
-      { slot: 'Content', own: 1, ownIds: ['pe;slot;actions'] },
+      { slot: 'Content', own: 1, ownIds: ['panel;slot;actions'] },
     ])
-    expect(own.get(slotKeyOf('pe', 'Content'))?.map((item) => item.id)).toEqual(
-      ['frame'],
-    )
-    expect(own.get('pe')?.map((item) => item.id)).toEqual(['own'])
+    expect(
+      own.get(slotKeyOf('panel', 'Content'))?.map((item) => item.id),
+    ).toEqual(['frame'])
+    expect(own.get('panel')?.map((item) => item.id)).toEqual(['own'])
     expect(root.children).toMatchObject([
-      { id: 'pe;slot;tf', inSlot: true, slotName: 'Content', own: 1 },
+      { id: 'panel;slot;tf', inSlot: true, slotName: 'Content', own: 1 },
     ])
     expect(hasInner(root)).toBe(true)
   })

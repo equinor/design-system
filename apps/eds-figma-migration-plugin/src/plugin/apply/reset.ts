@@ -5,7 +5,7 @@
  *
  * Figma lets nobody change the size of a layer inside an instance, but a
  * reset gives back the main component's size, and a swap keeps the size the
- * slot had (tested on FRIOD 2026-11-13). The reset removes every other change
+ * slot had (tested in Figma, 2026-11-13). The reset removes every other change
  * on the layer and the layers below it as well, so they are read first,
  * from the overrides of the outermost instance, and set again after. A field
  * the plugin does not know how to copy stops the fix before anything
@@ -200,7 +200,7 @@ type SwapProperty = {
  * instance above it, when the swap was made through one, as `.Icon Wrapper`
  * in Core Components does with its Icon property. A reset of the layer keeps
  * the property's component, without the slot's size; setting the property
- * to its default and back gives the size the slot has (tested on FRIOD
+ * to its default and back gives the size the slot has (tested in Figma,
  * 2026-11-13).
  */
 async function swapProperty(node: InstanceNode): Promise<SwapProperty | null> {

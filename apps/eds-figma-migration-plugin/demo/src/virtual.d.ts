@@ -5,8 +5,8 @@ declare module 'virtual:demo-window' {
 }
 
 declare module 'virtual:demo-fixtures' {
-  /** The test frame, cleaned for a public page, as a PackedFixture */
+  /** The test frame, with new layer and variable ids, as a PackedFixture */
   export const wellOverview: unknown
-  /** The frame with the details panel, cleaned for a public page, as a PackedFixture */
+  /** The frame with the details panel, with new layer and variable ids, as a PackedFixture */
   export const detailsPanel: unknown
 }

@@ -3,7 +3,7 @@
 The plugin swaps variables from the deprecated EDS libraries for variables and
 text styles in EDS Foundation [EDS Beta]. This file is the source for the
 rules. `src/mapping/rules.ts` implements them, and `test/answer-key.test.ts`
-checks them against the test frame in the AI-Testing file. Change this file
+checks them against the test frame in a test file in Figma. Change this file
 and the code together, and raise `MAPPING_VERSION` in `src/mapping/version.ts`.
 
 Sections 3 to 6 are copied from the prompt used for the trial with Figma's AI
@@ -454,7 +454,7 @@ Figma does not let a plugin bind a variable to the width, height or minimum
 and maximum size of a layer inside an instance, and it ignores `resize()` on
 such a layer as well; only removing the binding works. Removing the
 instance's overrides with `removeOverrides()` would reset the size, but it
-also undoes a swapped icon and the icon's colour (tested on FRIOD
+also undoes a swapped icon and the icon's colour (tested in Figma,
 2026-11-13). A legacy size the instance overrides on a layer inside it is
 therefore a **Manual fix** (category `byHand`, rule
 `instance/size-override`, decided 2026-11-13): the plugin flags it, Apply
@@ -491,12 +491,12 @@ layer there goes through the rules like any other layer, and an instance placed
 there is the outermost instance of its own layers: what it overrides goes
 through the rules, and what it takes from its main component is Inside
 instances, listed under that instance. Without this, the legacy values a panel
-component such as PE Editor holds in its slot all counted as Inside instances
-of the panel, although the panel's main component does not have them (Casper's
-case, 2026-11-18). A plugin can bind a fill, a padding, a width and a mode on a
-frame in owned slot content and on the root of an instance there; a layer
-inside such an instance has the same limit on sizes as any layer inside an
-instance (tested on FRIOD on 2026-11-19).
+component holds in its slot all counted as Inside instances of the panel,
+although the panel's main component does not have them (a panel component
+pasted from another file, 2026-11-18). A plugin can bind a fill, a padding, a
+width and a mode on a frame in owned slot content and on the root of an
+instance there; a layer inside such an instance has the same limit on sizes as
+any layer inside an instance (tested in Figma on 2026-11-19).
 
 When the layer is an instance and the reset would give an EDS Beta variable
 or a number, the plugin can make the fix itself (target `reset:<variable>`).
@@ -504,6 +504,6 @@ It is never applied as the rule's outcome: a designer accepts it in Review,
 since a reset is more than a swap of variables, and the run then reads every
 override on the layer and the layers below it, resets the layer, swaps it
 back, sets the overrides again and reads them back. A layer with an override
-the plugin cannot copy is refused before anything changes. When the swap was made through an instance-swap property of the instance above, as Text Field does with the Icon property of `.Icon Wrapper`, a reset of the layer keeps the property's icon without the slot's size, so the plugin sets the property to its default and back, which brings the size; the row's steps say the same for a designer. Tested on FRIOD
+the plugin cannot copy is refused before anything changes. When the swap was made through an instance-swap property of the instance above, as Text Field does with the Icon property of `.Icon Wrapper`, a reset of the layer keeps the property's icon without the slot's size, so the plugin sets the property to its default and back, which brings the size; the row's steps say the same for a designer. Tested in Figma
 on 2026-11-13 with a swapped icon, its colour style, stroke weights, a
 hidden layer and the plugin's own change log.

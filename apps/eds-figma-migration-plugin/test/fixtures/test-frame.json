@@ -1,9 +1,9 @@
 {
   "generatedAt": "2026-11-11",
-  "fileName": "AI Testing",
+  "fileName": "Sample file",
   "frame": {
     "id": "2300:3213",
-    "name": "Migration test – old EDS variables"
+    "name": "Well overview"
   },
   "variables": {
     "VariableID:e2c3f325f2cb47727f7cbe5a34f8773fbad53f83/7009:0": {
@@ -577,12 +577,12 @@
   },
   "nodes": {
     "2300:3213": {
-      "name": "Migration test – old EDS variables",
+      "name": "Well overview",
       "type": "FRAME",
       "path": [],
       "context": {
         "nodeType": "FRAME",
-        "names": ["Migration test – old EDS variables"],
+        "names": ["Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -593,10 +593,10 @@
     "2300:3214": {
       "name": "Top bar",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables"],
+      "path": ["Well overview"],
       "context": {
         "nodeType": "FRAME",
-        "names": ["Top bar", "Migration test – old EDS variables"],
+        "names": ["Top bar", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -608,14 +608,10 @@
     "2300:3215": {
       "name": "Title group",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Top bar"],
+      "path": ["Well overview", "Top bar"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Title group",
-          "Top bar",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Title group", "Top bar", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -626,15 +622,10 @@
     "2300:3216": {
       "name": "Icon / menu",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Top bar", "Title group"],
+      "path": ["Well overview", "Top bar", "Title group"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Icon / menu",
-          "Title group",
-          "Top bar",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Icon / menu", "Title group", "Top bar", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -645,12 +636,7 @@
     "2300:3217": {
       "name": "Vector",
       "type": "VECTOR",
-      "path": [
-        "Migration test – old EDS variables",
-        "Top bar",
-        "Title group",
-        "Icon / menu"
-      ],
+      "path": ["Well overview", "Top bar", "Title group", "Icon / menu"],
       "context": {
         "nodeType": "VECTOR",
         "names": [
@@ -658,7 +644,7 @@
           "Icon / menu",
           "Title group",
           "Top bar",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -674,15 +660,10 @@
     "2300:3218": {
       "name": "Page title",
       "type": "TEXT",
-      "path": ["Migration test – old EDS variables", "Top bar", "Title group"],
+      "path": ["Well overview", "Top bar", "Title group"],
       "context": {
         "nodeType": "TEXT",
-        "names": [
-          "Page title",
-          "Title group",
-          "Top bar",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Page title", "Title group", "Top bar", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -698,10 +679,10 @@
     "2300:3219": {
       "name": "Link",
       "type": "TEXT",
-      "path": ["Migration test – old EDS variables", "Top bar"],
+      "path": ["Well overview", "Top bar"],
       "context": {
         "nodeType": "TEXT",
-        "names": ["Link", "Top bar", "Migration test – old EDS variables"],
+        "names": ["Link", "Top bar", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -717,10 +698,10 @@
     "2300:3220": {
       "name": "Banner / Info",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables"],
+      "path": ["Well overview"],
       "context": {
         "nodeType": "FRAME",
-        "names": ["Banner / Info", "Migration test – old EDS variables"],
+        "names": ["Banner / Info", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -731,14 +712,10 @@
     "2300:3221": {
       "name": "Message",
       "type": "TEXT",
-      "path": ["Migration test – old EDS variables", "Banner / Info"],
+      "path": ["Well overview", "Banner / Info"],
       "context": {
         "nodeType": "TEXT",
-        "names": [
-          "Message",
-          "Banner / Info",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Message", "Banner / Info", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -754,10 +731,10 @@
     "2300:3222": {
       "name": "Card row",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables"],
+      "path": ["Well overview"],
       "context": {
         "nodeType": "FRAME",
-        "names": ["Card row", "Migration test – old EDS variables"],
+        "names": ["Card row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -768,14 +745,10 @@
     "2300:3223": {
       "name": "Card / Well",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Card row"],
+      "path": ["Well overview", "Card row"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Card / Well",
-          "Card row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Card / Well", "Card row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -787,15 +760,10 @@
     "2300:3224": {
       "name": "Card title",
       "type": "TEXT",
-      "path": ["Migration test – old EDS variables", "Card row", "Card / Well"],
+      "path": ["Well overview", "Card row", "Card / Well"],
       "context": {
         "nodeType": "TEXT",
-        "names": [
-          "Card title",
-          "Card / Well",
-          "Card row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Card title", "Card / Well", "Card row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -811,15 +779,10 @@
     "2300:3225": {
       "name": "Description",
       "type": "TEXT",
-      "path": ["Migration test – old EDS variables", "Card row", "Card / Well"],
+      "path": ["Well overview", "Card row", "Card / Well"],
       "context": {
         "nodeType": "TEXT",
-        "names": [
-          "Description",
-          "Card / Well",
-          "Card row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Description", "Card / Well", "Card row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -835,15 +798,10 @@
     "2300:3226": {
       "name": "Chip / Status",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Card row", "Card / Well"],
+      "path": ["Well overview", "Card row", "Card / Well"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Chip / Status",
-          "Card / Well",
-          "Card row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Chip / Status", "Card / Well", "Card row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light",
@@ -859,12 +817,7 @@
     "2300:3227": {
       "name": "Chip label",
       "type": "TEXT",
-      "path": [
-        "Migration test – old EDS variables",
-        "Card row",
-        "Card / Well",
-        "Chip / Status"
-      ],
+      "path": ["Well overview", "Card row", "Card / Well", "Chip / Status"],
       "context": {
         "nodeType": "TEXT",
         "names": [
@@ -872,7 +825,7 @@
           "Chip / Status",
           "Card / Well",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -894,14 +847,10 @@
     "2300:3228": {
       "name": "Card / Form",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Card row"],
+      "path": ["Well overview", "Card row"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Card / Form",
-          "Card row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Card / Form", "Card row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -913,15 +862,10 @@
     "2300:3229": {
       "name": "Card title",
       "type": "TEXT",
-      "path": ["Migration test – old EDS variables", "Card row", "Card / Form"],
+      "path": ["Well overview", "Card row", "Card / Form"],
       "context": {
         "nodeType": "TEXT",
-        "names": [
-          "Card title",
-          "Card / Form",
-          "Card row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Card title", "Card / Form", "Card row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -937,14 +881,14 @@
     "2300:3230": {
       "name": "Text field (focused, error)",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Card row", "Card / Form"],
+      "path": ["Well overview", "Card row", "Card / Form"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Text field (focused, error)",
           "Card / Form",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -957,7 +901,7 @@
       "name": "Field label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card row",
         "Card / Form",
         "Text field (focused, error)"
@@ -969,7 +913,7 @@
           "Text field (focused, error)",
           "Card / Form",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -987,7 +931,7 @@
       "name": "Input",
       "type": "FRAME",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card row",
         "Card / Form",
         "Text field (focused, error)"
@@ -999,7 +943,7 @@
           "Text field (focused, error)",
           "Card / Form",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1013,7 +957,7 @@
       "name": "Value",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card row",
         "Card / Form",
         "Text field (focused, error)",
@@ -1027,7 +971,7 @@
           "Text field (focused, error)",
           "Card / Form",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1045,7 +989,7 @@
       "name": "Helper text (error)",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card row",
         "Card / Form",
         "Text field (focused, error)"
@@ -1057,7 +1001,7 @@
           "Text field (focused, error)",
           "Card / Form",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1074,14 +1018,14 @@
     "2300:3235": {
       "name": "Chip / Warning (dynamic)",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Card row", "Card / Form"],
+      "path": ["Well overview", "Card row", "Card / Form"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Chip / Warning (dynamic)",
           "Card / Form",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1096,7 +1040,7 @@
       "name": "Chip label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card row",
         "Card / Form",
         "Chip / Warning (dynamic)"
@@ -1108,7 +1052,7 @@
           "Chip / Warning (dynamic)",
           "Card / Form",
           "Card row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1126,10 +1070,10 @@
     "2300:3237": {
       "name": "Card / Actions",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables"],
+      "path": ["Well overview"],
       "context": {
         "nodeType": "FRAME",
-        "names": ["Card / Actions", "Migration test – old EDS variables"],
+        "names": ["Card / Actions", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -1141,14 +1085,10 @@
     "2300:3238": {
       "name": "Card title",
       "type": "TEXT",
-      "path": ["Migration test – old EDS variables", "Card / Actions"],
+      "path": ["Well overview", "Card / Actions"],
       "context": {
         "nodeType": "TEXT",
-        "names": [
-          "Card title",
-          "Card / Actions",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Card title", "Card / Actions", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -1164,14 +1104,10 @@
     "2300:3239": {
       "name": "Buttons",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Card / Actions"],
+      "path": ["Well overview", "Card / Actions"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Buttons",
-          "Card / Actions",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Buttons", "Card / Actions", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -1182,18 +1118,14 @@
     "2300:3240": {
       "name": "Button / Primary",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Card / Actions",
-        "Buttons"
-      ],
+      "path": ["Well overview", "Card / Actions", "Buttons"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Button / Primary",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1206,7 +1138,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card / Actions",
         "Buttons",
         "Button / Primary"
@@ -1218,7 +1150,7 @@
           "Button / Primary",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1235,18 +1167,14 @@
     "2300:3242": {
       "name": "Button / Primary (hover)",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Card / Actions",
-        "Buttons"
-      ],
+      "path": ["Well overview", "Card / Actions", "Buttons"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Button / Primary (hover)",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1259,7 +1187,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card / Actions",
         "Buttons",
         "Button / Primary (hover)"
@@ -1271,7 +1199,7 @@
           "Button / Primary (hover)",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1289,7 +1217,7 @@
       "name": "Shortcut hint",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card / Actions",
         "Buttons",
         "Button / Primary (hover)"
@@ -1301,7 +1229,7 @@
           "Button / Primary (hover)",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1318,18 +1246,14 @@
     "2300:3245": {
       "name": "Button / Outlined",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Card / Actions",
-        "Buttons"
-      ],
+      "path": ["Well overview", "Card / Actions", "Buttons"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Button / Outlined",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1343,7 +1267,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card / Actions",
         "Buttons",
         "Button / Outlined"
@@ -1355,7 +1279,7 @@
           "Button / Outlined",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1372,18 +1296,14 @@
     "2300:3247": {
       "name": "Button / Ghost (hover)",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Card / Actions",
-        "Buttons"
-      ],
+      "path": ["Well overview", "Card / Actions", "Buttons"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Button / Ghost (hover)",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1396,7 +1316,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card / Actions",
         "Buttons",
         "Button / Ghost (hover)"
@@ -1408,7 +1328,7 @@
           "Button / Ghost (hover)",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1425,18 +1345,14 @@
     "2300:3249": {
       "name": "Button / Danger (dynamic)",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Card / Actions",
-        "Buttons"
-      ],
+      "path": ["Well overview", "Card / Actions", "Buttons"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Button / Danger (dynamic)",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1450,7 +1366,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card / Actions",
         "Buttons",
         "Button / Danger (dynamic)"
@@ -1462,7 +1378,7 @@
           "Button / Danger (dynamic)",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1480,18 +1396,14 @@
     "2300:3251": {
       "name": "Button / Disabled",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Card / Actions",
-        "Buttons"
-      ],
+      "path": ["Well overview", "Card / Actions", "Buttons"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Button / Disabled",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1505,7 +1417,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Card / Actions",
         "Buttons",
         "Button / Disabled"
@@ -1517,7 +1429,7 @@
           "Button / Disabled",
           "Buttons",
           "Card / Actions",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -1534,10 +1446,10 @@
     "2301:2904": {
       "name": "Bottom row",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables"],
+      "path": ["Well overview"],
       "context": {
         "nodeType": "FRAME",
-        "names": ["Bottom row", "Migration test – old EDS variables"],
+        "names": ["Bottom row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -1548,14 +1460,10 @@
     "2301:2905": {
       "name": "Table / Wells (dense)",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Bottom row"],
+      "path": ["Well overview", "Bottom row"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Table / Wells (dense)",
-          "Bottom row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Table / Wells (dense)", "Bottom row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Light"
@@ -1567,18 +1475,14 @@
     "2301:2906": {
       "name": "Row / Header",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Row / Header",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1592,7 +1496,7 @@
       "name": "Cell",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Table / Wells (dense)",
         "Row / Header"
@@ -1604,7 +1508,7 @@
           "Row / Header",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1622,7 +1526,7 @@
       "name": "Cell",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Table / Wells (dense)",
         "Row / Header"
@@ -1634,7 +1538,7 @@
           "Row / Header",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1652,7 +1556,7 @@
       "name": "Cell",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Table / Wells (dense)",
         "Row / Header"
@@ -1664,7 +1568,7 @@
           "Row / Header",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1681,18 +1585,14 @@
     "2301:2910": {
       "name": "Row",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1705,12 +1605,7 @@
     "2301:2911": {
       "name": "Cell",
       "type": "TEXT",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)",
-        "Row"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)", "Row"],
       "context": {
         "nodeType": "TEXT",
         "names": [
@@ -1718,7 +1613,7 @@
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1735,12 +1630,7 @@
     "2301:2912": {
       "name": "Cell",
       "type": "TEXT",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)",
-        "Row"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)", "Row"],
       "context": {
         "nodeType": "TEXT",
         "names": [
@@ -1748,7 +1638,7 @@
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1765,12 +1655,7 @@
     "2301:2913": {
       "name": "Cell",
       "type": "TEXT",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)",
-        "Row"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)", "Row"],
       "context": {
         "nodeType": "TEXT",
         "names": [
@@ -1778,7 +1663,7 @@
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1795,18 +1680,14 @@
     "2301:2914": {
       "name": "Row (hover)",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Row (hover)",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1820,7 +1701,7 @@
       "name": "Cell",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Table / Wells (dense)",
         "Row (hover)"
@@ -1832,7 +1713,7 @@
           "Row (hover)",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1850,7 +1731,7 @@
       "name": "Cell",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Table / Wells (dense)",
         "Row (hover)"
@@ -1862,7 +1743,7 @@
           "Row (hover)",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1880,7 +1761,7 @@
       "name": "Cell",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Table / Wells (dense)",
         "Row (hover)"
@@ -1892,7 +1773,7 @@
           "Row (hover)",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1909,18 +1790,14 @@
     "2301:2918": {
       "name": "Row",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1933,12 +1810,7 @@
     "2301:2919": {
       "name": "Cell",
       "type": "TEXT",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)",
-        "Row"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)", "Row"],
       "context": {
         "nodeType": "TEXT",
         "names": [
@@ -1946,7 +1818,7 @@
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1963,12 +1835,7 @@
     "2301:2920": {
       "name": "Cell",
       "type": "TEXT",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)",
-        "Row"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)", "Row"],
       "context": {
         "nodeType": "TEXT",
         "names": [
@@ -1976,7 +1843,7 @@
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -1993,12 +1860,7 @@
     "2301:2921": {
       "name": "Cell",
       "type": "TEXT",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Table / Wells (dense)",
-        "Row"
-      ],
+      "path": ["Well overview", "Bottom row", "Table / Wells (dense)", "Row"],
       "context": {
         "nodeType": "TEXT",
         "names": [
@@ -2006,7 +1868,7 @@
           "Row",
           "Table / Wells (dense)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Comfortable",
@@ -2023,14 +1885,10 @@
     "2301:2922": {
       "name": "Overlay (dark scheme)",
       "type": "FRAME",
-      "path": ["Migration test – old EDS variables", "Bottom row"],
+      "path": ["Well overview", "Bottom row"],
       "context": {
         "nodeType": "FRAME",
-        "names": [
-          "Overlay (dark scheme)",
-          "Bottom row",
-          "Migration test – old EDS variables"
-        ],
+        "names": ["Overlay (dark scheme)", "Bottom row", "Well overview"],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
           "d323d76c6333d5655c51cee7d829139a07f4cc3a": "Dark"
@@ -2041,18 +1899,14 @@
     "2301:2923": {
       "name": "Menu",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Overlay (dark scheme)"
-      ],
+      "path": ["Well overview", "Bottom row", "Overlay (dark scheme)"],
       "context": {
         "nodeType": "FRAME",
         "names": [
           "Menu",
           "Overlay (dark scheme)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -2065,12 +1919,7 @@
     "2301:2924": {
       "name": "Menu item",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Overlay (dark scheme)",
-        "Menu"
-      ],
+      "path": ["Well overview", "Bottom row", "Overlay (dark scheme)", "Menu"],
       "context": {
         "nodeType": "FRAME",
         "names": [
@@ -2078,7 +1927,7 @@
           "Menu",
           "Overlay (dark scheme)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -2091,7 +1940,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Overlay (dark scheme)",
         "Menu",
@@ -2105,7 +1954,7 @@
           "Menu",
           "Overlay (dark scheme)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -2122,12 +1971,7 @@
     "2301:2926": {
       "name": "Menu item (selected)",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Overlay (dark scheme)",
-        "Menu"
-      ],
+      "path": ["Well overview", "Bottom row", "Overlay (dark scheme)", "Menu"],
       "context": {
         "nodeType": "FRAME",
         "names": [
@@ -2135,7 +1979,7 @@
           "Menu",
           "Overlay (dark scheme)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -2148,7 +1992,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Overlay (dark scheme)",
         "Menu",
@@ -2162,7 +2006,7 @@
           "Menu",
           "Overlay (dark scheme)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -2179,12 +2023,7 @@
     "2301:2928": {
       "name": "Menu item",
       "type": "FRAME",
-      "path": [
-        "Migration test – old EDS variables",
-        "Bottom row",
-        "Overlay (dark scheme)",
-        "Menu"
-      ],
+      "path": ["Well overview", "Bottom row", "Overlay (dark scheme)", "Menu"],
       "context": {
         "nodeType": "FRAME",
         "names": [
@@ -2192,7 +2031,7 @@
           "Menu",
           "Overlay (dark scheme)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",
@@ -2205,7 +2044,7 @@
       "name": "Label",
       "type": "TEXT",
       "path": [
-        "Migration test – old EDS variables",
+        "Well overview",
         "Bottom row",
         "Overlay (dark scheme)",
         "Menu",
@@ -2219,7 +2058,7 @@
           "Menu",
           "Overlay (dark scheme)",
           "Bottom row",
-          "Migration test – old EDS variables"
+          "Well overview"
         ],
         "modes": {
           "a0090fc9e5f10901592819d77214a0b6b62fba64": "Spacious",

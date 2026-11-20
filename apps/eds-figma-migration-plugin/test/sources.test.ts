@@ -1,8 +1,9 @@
 /**
  * Where the legacy values of an instance can be fixed (phase 3, 2026-11-20):
  * the main components the check imports, and how the Instances tab groups
- * them in Where to fix them. Casper's PE Editor is from another file, and the
- * Core Components in its slot have a library update with no legacy values.
+ * them in Where to fix them. The panel, Details panel, is from another file
+ * that is not a library, and the Core Components in its slot have a library
+ * update with no legacy values.
  */
 import { describe, expect, it } from 'vitest'
 import { remoteMainComponents } from '../src/scan/sources'
@@ -26,12 +27,12 @@ const instance = (
 })
 
 const instances = [
-  instance('pe', 'PE Editor', 32),
+  instance('panel', 'Details panel', 32),
   instance('tf1', 'Text Field [EDS]', 117, true, {
-    within: { id: 'pe', name: 'PE Editor' },
+    within: { id: 'panel', name: 'Details panel' },
   }),
   instance('tf2', 'Text Field [EDS]', 119, true, {
-    within: { id: 'pe', name: 'PE Editor' },
+    within: { id: 'panel', name: 'Details panel' },
   }),
   instance('card', 'Card', 4, false),
   instance('type', 'Typography', 3, true, { typography: true }),
@@ -40,7 +41,7 @@ const instances = [
 describe('remoteMainComponents', () => {
   it('checks each library main component once, not Typography or this file', () => {
     expect(remoteMainComponents(instances)).toEqual([
-      { key: 'key-PE Editor', instanceId: 'pe' },
+      { key: 'key-Details panel', instanceId: 'panel' },
       { key: 'key-Text Field [EDS]', instanceId: 'tf1' },
     ])
   })
@@ -48,7 +49,7 @@ describe('remoteMainComponents', () => {
 
 describe('sourceGroups', () => {
   const checked = new Map<string, ComponentSource>([
-    ['key-PE Editor', { kind: 'no-library' }],
+    ['key-Details panel', { kind: 'no-library' }],
     ['key-Text Field [EDS]', { kind: 'update', legacy: 152, latestLegacy: 0 }],
   ])
 

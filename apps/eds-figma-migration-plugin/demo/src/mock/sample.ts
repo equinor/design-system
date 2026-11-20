@@ -1,7 +1,7 @@
 /**
  * The file the demo pretends to be, Sample file, as the raw units a scan
  * reads from it. The layers come from two fixtures of the plugin's tests,
- * cleaned for a public page at build time (demo/sample/sanitise.ts):
+ * given new layer and variable ids at build time (demo/sample/sanitise.ts):
  *
  * - Well overview, the test frame (test/fixtures/test-frame.json): Ready
  *   values, values that need a check, and legacy modes;

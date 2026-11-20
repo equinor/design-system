@@ -152,9 +152,9 @@ function SlotIcon() {
  * rows at the top, with Figma's frame and main component icons. Only
  * instances with legacy values from their main components are shown, and
  * the slots that hold them; frames and other layers between them are left
- * out. Casper's case (2026-11-18): PE Editor held 672 legacy values in Text
- * Fields, Switches and Buttons, many of them hidden, and the tab showed only
- * the total.
+ * out. Found on 2026-11-18: a panel component pasted from another file held
+ * 672 legacy values in Text Fields, Switches and Buttons, many of them
+ * hidden, and the tab showed only the total.
  *
  * A click anywhere on a row opens it: the caret is the button, stretched over
  * the row, and Go to sits above it. With `leaves`, in a frame's Layers view,

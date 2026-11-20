@@ -1,9 +1,9 @@
 /**
  * Where in an instance its legacy values are: the instances in it, as a
  * tree, with the values each takes from its main component. A panel
- * component such as PE Editor holds Text Fields, Switches and Buttons, some
- * of them hidden, and the Instances tab shows which of them carry the values
- * (Casper's case, 2026-11-18).
+ * component can hold Text Fields, Switches and Buttons, some of them hidden,
+ * and the Instances tab shows which of them carry the values (a panel
+ * component pasted from another file, 2026-11-18).
  */
 import type { BindingRecord, InstanceStep, InstanceTree } from './types'
 

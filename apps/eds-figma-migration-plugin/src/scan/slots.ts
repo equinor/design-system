@@ -5,12 +5,12 @@
  * longer follows the main component and is not in the instance's
  * `overrides`. Content that follows the main component has the id of the
  * main component's layer after the instance's (`I<instance>;<layer>`).
- * Tested on the FRIOD test page and on the pasted PE Editor, 2026-11-19.
+ * Tested on a test page in Figma and on a pasted panel component, 2026-11-19.
  *
  * A layer a session adds to the slot keeps a plain id (`2117:515`) in that
  * session until the file is opened again; other sessions see it below the
  * slot's id. Found on 2026-11-19: text layers Convert put in a slot read as
- * PE Editor's in the browser that ran Convert, so the scan did not count
+ * the panel's in the browser that ran Convert, so the scan did not count
  * their change logs and Revert frame was not offered. Content that follows
  * the main component always has an `I` id, so a plain id in a slot of an
  * instance is owned content too.
@@ -67,7 +67,7 @@ export function outermostInstance<Layer extends SlotLayer>(
  * slot can show another id there than in its parent's list (a plain id
  * against `I<instance>;<slot>;<id>`), and the list can hold other objects
  * for the same layers, so `indexOf` alone returned -1 when Revert put a
- * Typography instance back in a slot (FRIOD test page, 2026-11-19). The
+ * Typography instance back in a slot (test page in Figma, 2026-11-19). The
  * layer is matched by object, then by id, then by its own id part, the part
  * after the last `;`, when exactly one child has it.
  */

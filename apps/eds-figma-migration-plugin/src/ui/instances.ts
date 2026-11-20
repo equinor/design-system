@@ -127,9 +127,9 @@ export function legacySummary(overridden: number, fromMain: number): string {
  * One instance in the Instances tab's tree: the instances in it below, and
  * the legacy values it and they take from their main components. Built from
  * the scan's `OldInstance.tree`, with the instances in slot content it owns
- * put under it (`OldInstance.within`), so a panel component such as PE Editor
- * shows the Text Fields and Switches in its slot (Casper's case,
- * 2026-11-18).
+ * put under it (`OldInstance.within`), so a panel component shows the Text
+ * Fields and Switches in its slot (a panel component pasted from another
+ * file, 2026-11-18).
  */
 export type TreeNode = {
   key: string
@@ -353,9 +353,10 @@ export function entryForest(
  * layers in a slot it owns that are not in an instance there by the slot's
  * key (`slotKeyOf`), the ones an instance overrides first. A value from a
  * fixture made before chains were recorded counts on the top instance's own
- * layers. Casper's case (2026-11-18): the frame listed PE Editor's 638 values,
- * and those of the 12 instances in its slot, in flat lists of one group per
- * instance, and the frames in the slot as layers of the frame.
+ * layers. Found on 2026-11-18, on a panel component pasted from another
+ * file: the frame listed the panel's 638 values, and those of the 12
+ * instances in its slot, in flat lists of one group per instance, and the
+ * frames in the slot as layers of the frame.
  */
 export function valueTree(
   top: InstanceStep,

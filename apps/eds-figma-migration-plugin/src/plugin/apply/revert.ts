@@ -66,7 +66,7 @@ async function putBackTypography(
   instance.name = old.name
   // Convert copied these from the instance to the text layer (convert.ts,
   // place); a hidden Typography instance came back visible without them
-  // (FRIOD test page, 2026-11-19).
+  // (test page in Figma, 2026-11-19).
   instance.visible = node.visible
   instance.locked = node.locked
   instance.opacity = node.opacity
@@ -330,7 +330,7 @@ async function revertEntry(
  * instance, the search returns another layer (`I<instance>;<slot>;2134:519`
  * for the `2134:518` in the slot's list) that is not among its parent's
  * children, so a Typography instance could not be put back in its place
- * (FRIOD test page, 2026-11-19, Convert and Revert in one session).
+ * (test page in Figma, 2026-11-19, Convert and Revert in one session).
  */
 function loggedLayers(roots: SceneNode[]): SceneNode[] {
   figma.skipInvisibleInstanceChildren = false

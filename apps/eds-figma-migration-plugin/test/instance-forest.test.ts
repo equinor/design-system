@@ -58,7 +58,7 @@ const entry = (id: string, name: string, nodeIds = [id]): EntrySummary => ({
   oldInstances: 0,
 })
 
-const editor = { id: 'editor', name: 'PE Editor' }
+const editor = { id: 'editor', name: 'Details panel' }
 
 describe('instanceForest', () => {
   it('puts slot content under the instance that owns it, in layer order', () => {
@@ -109,7 +109,7 @@ describe('instanceForest', () => {
     expect(forest).toHaveLength(1)
     expect(forest[0]).toMatchObject({
       id: 'editor',
-      name: 'PE Editor',
+      name: 'Details panel',
       count: 117,
     })
   })

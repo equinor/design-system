@@ -6,7 +6,7 @@
  * The script is also the smoke test of the demo: it fails when a step does
  * not open (the demo page sets data-state="failed" with the reason), when the
  * view of a step is not visible in the window, and when the built demo
- * contains a name or key from an internal file.
+ * contains a file key or a library key.
  *
  * It uses the Chromium that comes with Playwright. When that version is not
  * installed, it takes the newest Chromium in Playwright's browser folder, so
@@ -29,20 +29,11 @@ const demo = join(root, 'demo/dist/index.html')
 const out = join(root, 'demo/dist/images')
 
 /**
- * Names and keys that must not be in the built demo, which is published on
- * the public docs site: the internal files the fixtures come from, the
- * person whose case one fixture is, and the file and library keys.
+ * Keys that must not be in the built demo, which is published on the public
+ * docs site: the file key of EDS Foundation and the library keys, which the
+ * demo's Vite config leaves out of the inventories.
  */
-const FORBIDDEN = [
-  /FRIOD/i,
-  /PE Editor/i,
-  /Casper/i,
-  /Main Design/i,
-  /AI[ -]Testing/i,
-  /Not in storybook/i,
-  /fileKey/,
-  /lk-[0-9a-f]{16,}/,
-]
+const FORBIDDEN = [/fileKey/, /lk-[0-9a-f]{16,}/]
 
 /** What each step shows, checked in the window before the image is saved. */
 const STEPS = {
@@ -154,7 +145,7 @@ async function main() {
   const found = FORBIDDEN.filter((pattern) => pattern.test(html))
   if (found.length > 0) {
     throw new Error(
-      `The built demo contains internal names or keys: ${found.join(', ')}`,
+      `The built demo contains file or library keys: ${found.join(', ')}`,
     )
   }
   mkdirSync(out, { recursive: true })

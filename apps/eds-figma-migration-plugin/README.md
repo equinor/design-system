@@ -38,7 +38,7 @@ whatever the status, so it stays in view once the fix is accepted and
 Ready, and the report prints it after the steps. The target is the EDS
 Beta variable the main component uses at that place. Such a legacy size
 comes from a swap made while the slot used a legacy size: the swap copies
-the size onto the icon as an override (tested on FRIOD 2026-11-13). The
+the size onto the icon as an override (tested in Figma, 2026-11-13). The
 plugin can make the fix itself (target `reset:<variable>`,
 `src/mapping/reset.ts`), but only after a designer accepts it in Review;
 `src/plugin/apply/reset.ts` reads the layer's overrides, calls
@@ -56,20 +56,20 @@ takes from its main component read the mode, it stays in Inside instances
 (rule `mode/from-main`). Clearing a mode on a layer inside an instance and
 setting it again both work from a plugin, also when the main component's
 layer sets another mode; the layer then has no mode, not the main
-component's (tested on FRIOD 2026-11-16).
+component's (tested in Figma, 2026-11-16).
 
 Slot content an instance owns starts over. A slot in an instance follows its
 main component, and its layers have ids of the form `I<instance>;<layer>`,
 until the slot is edited in the instance. From then on its content gets ids
 below the slot's own (`I<instance>;<slot>;<new id>`), no longer follows the
 main component and is missing from the instance's `overrides`
-(`isOwnedSlotContent` in `src/scan/slots.ts`, tested on FRIOD 2026-11-19).
+(`isOwnedSlotContent` in `src/scan/slots.ts`, tested in Figma, 2026-11-19).
 The scan, the change log and the reset of a Manual fix read that content like
 the layers of a frame: a layer there has no `instanceId`, and an instance
 there is the outermost instance of its own layers and reads its own
 `overrides` (`outermostInstance`). The change log once read it against the
 outer instance's `overrides`, so Revert frame put nothing back there (found
-on FRIOD 2026-11-19). A layer a session adds to the slot, such as the text
+in Figma, 2026-11-19). A layer a session adds to the slot, such as the text
 layer Convert puts there, keeps a plain id in that session until the file is
 opened again, while other sessions see it below the slot's id; a plain id in a
 slot of an instance is owned content as well, since content that follows the
@@ -133,7 +133,7 @@ The build has two parts:
 4. Run it from **Plugins → Development → EDS variable migration → Open**.
 
 Always try the plugin on a duplicate of a frame. The test frame is
-**Migration test – old EDS variables** in the AI-Testing file.
+**Migration test – old EDS variables**, in a test file in Figma.
 
 ## Scan
 
@@ -602,9 +602,9 @@ library main component of the listed instances by its key
 `src/scan/sources.ts`), one at a time, posting a `source` for each. The
 import tells the sources apart, as spikes S2 and S3 found: it fails when no
 library the file reaches has the main component (`no-library`), either
-because it is in another file that is not a library (Casper's PE Editor) or
-because its library no longer publishes it (the old Core Components Badge
-and Divider, which Figma answers with a 404 in the console); it
+because it is in another file that is not a library (a pasted panel
+component) or because its library no longer publishes it (the old Core
+Components Badge and Divider, which Figma answers with a 404 in the console); it
 returns the file's own copy when that copy is current (`library`); it
 returns a new node when the library has a newer version (`update`, with the
 legacy bindings and modes counted in the copy and in the new version by
@@ -706,8 +706,8 @@ variables, a scope with nothing left to migrate, an empty Changes or
 Instances tab and a search without matches each say so in the window. When
 only values inside instances are left, Changes says how many, with Show for
 the Instances tab (`nothingLeftText`, phase 4 of the nested-instances plan,
-2026-11-20); "Nothing left to migrate" read as done while Casper's PE Editor
-still had 638 legacy values inside instances.
+2026-11-20); "Nothing left to migrate" read as done while a pasted panel
+component still had 638 legacy values inside instances.
 
 ## Publish to Equinor
 
@@ -768,6 +768,15 @@ fixture**. Save the file as `test/fixtures/test-frame.json`. The pipeline test
 then runs the same classification as the plugin on what the scanner read, and
 checks it against the answer key; until the file is there, it is skipped.
 
+The export records the names of the file and the frame. The demo is built from
+the fixtures and published on a public site, so the fixtures in the repository
+use neutral names: the file is called Sample file in both, the test frame Well
+overview, and in `test/fixtures/nested-instances.json` the frame is called Well
+details and the panel component in it Details panel. Rename them the same way
+in a new export, before it is committed; `test/demo-sample.test.ts` fails on
+another file name, and `test/pipeline.test.ts` looks for the frame as Well
+overview.
+
 `pnpm run build:fixture-script` builds the same reader as a standalone script,
 `dist/collect-fixture.js`, for tools that run Plugin API code in a file. It
 takes the collection keys as arguments, so it carries no inventory, and it
@@ -794,10 +803,12 @@ pnpm --filter @equinor/eds-figma-migration-plugin run test:run
 - `test/pipeline.test.ts`: the scan of the test frame against the answer key,
   when the fixture is there.
 - `test/nested-instances.test.ts`: owned slot content, the chain of
-  instances and the tree, on the FRIOD test frame 2100:1825 (Casper's case).
-- `test/demo-sample.test.ts`: the sample file of the demo has no internal
-  names or ids left, and gets the same statuses and targets as the fixtures
-  it is made from.
+  instances and the tree, on a frame with a panel component pasted from
+  another file (2026-11-18).
+- `test/demo-sample.test.ts`: the fixtures the demo is made from are called
+  Sample file and have no file or library keys, and with the new ids the demo
+  gives them they keep the shape the scan reads and get the same statuses and
+  targets.
 
 ## Demo of the window
 
@@ -872,22 +883,25 @@ Typography instances outside other instances, a library icon and an instance
 of the main component in the file. The added layers are written as the
 scanner reads them, and go through the same rules. The demo is published on
 a public site, so it must not contain the names of internal files or of
-people, Figma file keys, or node ids from Equinor files. The fixtures are
-cleaned when the demo is built (`demo/sample/sanitise.ts`): the file is called
-Sample file, internal frame and component names are replaced, and every layer
-and variable id is replaced with a neutral one of the same shape. The build of
-the window and of the page leaves out the file and library keys of the
-inventories, which only the developer export uses. Check any name you add to
-the sample file before it goes on the site.
+people, or Figma file keys. The fixtures carry neutral names for that reason
+(see the developer command above). When the demo is built,
+`demo/sample/sanitise.ts` gives every layer of a fixture a new id of the same
+shape under one prefix, `10:n` for the test frame and `20:n` for the frame
+with the details panel, and every variable a `sample-…` id and key.
+`sample.ts` copies layers of the test frame under the prefixes 11, 12 and 13,
+and gives the layers it adds `21:n` ids, so no two layers share an id. The
+build of the window and of the page leaves out the file and library keys of
+the inventories, which only the developer export uses. Check any name you add
+to the sample file before it goes on the site.
 
 **Images.** `demo:images` opens the built demo with Playwright at each step,
 in light and dark, at twice the resolution, waits until the view of the step
 is visible, and saves `demo/dist/images/<step>-<theme>.png`, 964 × 1524 px,
 about 4.4 MB for the 26 images. It is also the smoke test of the demo: it
 fails when a step does not open, when the view of a step is not there, and
-when the built demo contains an internal name or key. It uses Playwright's own
-Chromium; when that version is not installed, it takes the newest Chromium in
-Playwright's browser folder instead of downloading one.
+when the built demo contains a file key or a library key. It uses
+Playwright's own Chromium; when that version is not installed, it takes the
+newest Chromium in Playwright's browser folder instead of downloading one.
 
 ## Docs pages
 

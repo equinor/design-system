@@ -1,6 +1,6 @@
 /**
  * Slot content an instance owns, for the scan, the change log and the reset
- * (found on the FRIOD test page on 2026-11-19: Revert frame put back nothing
+ * (found on a test page in Figma on 2026-11-19: Revert frame put back nothing
  * on owned slot content, because the change log was read against the outer
  * instance's overrides, which do not list that content).
  */

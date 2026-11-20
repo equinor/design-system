@@ -108,7 +108,8 @@ export const SOURCES: Record<
  * What Changes says when nothing is left for it (phase 4 of the
  * nested-instances plan, 2026-11-20). With values left inside instances it
  * says how many and where to find them: "Nothing left to migrate" read as
- * done while Casper's PE Editor still had 638 legacy values inside instances.
+ * done while a pasted panel component still had 638 legacy values inside
+ * instances.
  */
 export function nothingLeftText(inInstances: number, where: string): string {
   if (inInstances === 0) return `Nothing left to migrate ${where}.`

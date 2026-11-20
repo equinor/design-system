@@ -1,7 +1,7 @@
 /**
  * The answer key for the test frame "Migration test – old EDS variables" in
- * the AI-Testing file (node 2300:3213), one test per row. The key lives in
- * design-system-internal: team-assistant/me/work/figma-var-migration/test-scenario.md.
+ * a test file in Figma (node 2300:3213), one test per row. The key is a table
+ * of the frame's layers with the target each layer should get.
  *
  * The contexts copy the frame's layer names, strokes and modes as they were
  * on 2026-11-11. Where the key was corrected after it was written, the test
@@ -1030,7 +1030,7 @@ describe('rules added on 2026-11-11', () => {
   })
 })
 
-describe('rules added after the FRIOD test session (2026-11-11)', () => {
+describe('rules added after the test session (2026-11-11)', () => {
   const generic = (name: string, resolvedValue?: number): OldVariable => ({
     collectionKey: OLD.spacingSemantic,
     name,

@@ -147,7 +147,7 @@ type VariableUnit = Extract<RawUnit, { unit: 'variable' }>
  * says how to fix it in Figma, which is to reset the layer so it takes the
  * size from its main component again. A swapped icon goes back to the
  * component the main component has there, so it is swapped again after the
- * reset, and a swap keeps the size (tested on FRIOD 2026-11-13). The target
+ * reset, and a swap keeps the size (tested in Figma, 2026-11-13). The target
  * is the EDS Beta variable the main component uses there, or else the rules'
  * proposal. Null for a layer outside these rules, such as the instance
  * itself, which a plugin can bind.

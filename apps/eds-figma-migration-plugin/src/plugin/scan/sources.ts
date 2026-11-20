@@ -2,8 +2,8 @@
  * Where the legacy values an instance takes from its main component can be
  * fixed (phase 3 of the nested-instances plan, 2026-11-20). Figma has no
  * read-only way to tell: getPublishStatusAsync answers UNPUBLISHED for every
- * remote component, the current Typography component too (tested on FRIOD
- * Main Design, 2026-11-20). So the check imports each main component by its
+ * remote component, the current Typography component too (tested in Figma,
+ * 2026-11-20). So the check imports each main component by its
  * key, as spikes S2 and S3 found (2026-11-19): the import fails when no
  * library this file reaches has the main component, either because it is in
  * another file that is not a library or because its library no longer

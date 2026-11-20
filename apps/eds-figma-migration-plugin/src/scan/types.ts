@@ -115,8 +115,9 @@ export type RawUnit = {
    * For a layer in slot content an instance owns, and not inside an instance
    * there: the name of the slot, such as Content. The instance is the last in
    * `instances`. The frame's Layers view puts the layer's values under that
-   * slot of the instance, as Figma's Layers panel does (Casper's Container,
-   * Type and Actions frames in PE Editor's Content, 2026-11-19).
+   * slot of the instance, as Figma's Layers panel does (the Container, Type
+   * and Actions frames in the Content slot of a pasted panel component,
+   * 2026-11-19).
    */
   slotName?: string
   /**
@@ -393,10 +394,10 @@ export type OldInstance = {
  * importing the main component by its key, which tells the sources apart
  * (spikes S2 and S3, 2026-11-19): a main component in this file needs no
  * import; an import that fails means no library this file reaches has the
- * main component: it is in another file that is not a library, such as
- * Casper's PE Editor, or its library no longer publishes it, such as the old
- * Badge and Divider of Core Components (tested on FRIOD Main Design,
- * 2026-11-20); an import that returns the file's
+ * main component: it is in another file that is not a library, such as a
+ * panel component pasted from another file, or its library no longer
+ * publishes it, such as the old Badge and Divider of Core Components (tested
+ * in Figma, 2026-11-20); an import that returns the file's
  * own copy means the copy is the library's current version; a new node means
  * the library has a newer version. `legacy` counts the legacy bindings and
  * modes in the file's copy of the main component, `latestLegacy` those in

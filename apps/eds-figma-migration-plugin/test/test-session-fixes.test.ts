@@ -1,4 +1,4 @@
-/** Fixes from the FRIOD test session on 2026-11-11 that can be tested without Figma. */
+/** Fixes from the test session on 2026-11-11 that can be tested without Figma. */
 import { describe, expect, it } from 'vitest'
 import { classifyUnit } from '../src/scan/classify'
 import { NO_OVERRIDES } from '../src/scan/mapping'
