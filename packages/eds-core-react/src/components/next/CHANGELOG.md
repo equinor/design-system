@@ -4,6 +4,34 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.6...eds-core-react-next@v3.0.0-beta.7) (2026-11-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* the TypeScript tokens under `@equinor/eds-tokens/next/ts/*` are now one file per colour scheme and density (`light-comfortable` and five more), each exporting `theme` with the semantic layer only. The `semantic`, `density`, `colors`, `primitives`, `font`, `elevation` and `color-scheme` modules are removed. The `layers` of a shadow use the platform's field names (`offsetX`, `offsetY`, `blur`, `spread`, `color`, `inset`) instead of React Native's shadow fields.
+* Switch (next) sets `data-tone="accent"` instead of `data-color-appearance`, and no longer sets `data-selectable-space`, `data-space-proportions` or `data-font-size`. Switch needs the beta token bundle.
+* Checkbox (next) sets `data-tone="accent"` instead of `data-color-appearance`, and no longer sets `data-selectable-space` or `data-space-proportions`. Checkbox needs the beta token bundle.
+* Radio (next) sets `data-tone="accent"` instead of `data-color-appearance`, and no longer sets `data-selectable-space` or `data-space-proportions`. A Radio without a label is a rounded square with the same padding and hover fill as a labelled Radio, instead of a circle. Radio needs the beta token bundle.
+* Field.Label, Field.Description and Field.HelperMessage no longer set `data-baseline`, so their text is not trimmed and Field-based components get taller labels. Field needs the beta token bundle.
+
+### ✨ Added
+
+* publish the TypeScript tokens as one file per colour scheme and density ([#5930](https://github.com/equinor/design-system/issues/5930)) ([b2b8f3c](https://github.com/equinor/design-system/commit/b2b8f3c1bf10da921e6b551ad8f95ff20f715b8e))
+
+
+### 🐛 Fixed
+
+* default beta colour tokens to light when no data-color-scheme is set ([#5835](https://github.com/equinor/design-system/issues/5835)) ([b26fde5](https://github.com/equinor/design-system/commit/b26fde564e142708977665d42bfd9c2cb45445bb))
+
+
+### ♻️ Refactoring
+
+* migrate Checkbox (next) to beta tokens ([#5796](https://github.com/equinor/design-system/issues/5796)) ([11aedac](https://github.com/equinor/design-system/commit/11aedace921ac02cbbf28d9d62802304c321e089))
+* migrate Field (next) to beta tokens ([#5794](https://github.com/equinor/design-system/issues/5794)) ([e5710cd](https://github.com/equinor/design-system/commit/e5710cd03cf4316930f2a75befeb6a6b2205de64))
+* migrate Radio (next) to beta tokens ([#5803](https://github.com/equinor/design-system/issues/5803)) ([22b8515](https://github.com/equinor/design-system/commit/22b851558a36152eb0bf0adab567dcbb66e68548))
+* migrate Switch (next) to beta tokens ([#5887](https://github.com/equinor/design-system/issues/5887)) ([531ac93](https://github.com/equinor/design-system/commit/531ac93348c6a3c3316f88e15dffd6e57e898d96))
+
 ## [3.0.0-beta.6](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.5...eds-core-react-next@v3.0.0-beta.6) (2026-11-04)
 
 
