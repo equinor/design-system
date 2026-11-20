@@ -1,6 +1,7 @@
 /**
  * Check the contrast of the documented colour pairings (#5382,
- * ADR-0016 § Confirmation 5).
+ * ADR-0016 § Confirmation 5), and of the categorical data visualisation
+ * colours where components and charts use them (#5883, #5884).
  *
  * EDS measures colour pairs on two levels. WCAG 2.1 AA is the minimum
  * every pair must meet: 4.5:1 for text and 3:1 for icons, which WCAG
@@ -34,7 +35,30 @@
  *
  * Borders stay out of scope, as Confirmation 5 records: APCA has no
  * agreed target for them, and the border-to-surface pairs are not
- * documented.
+ * documented. The categorical resting border below is the one exception.
+ *
+ * The categorical colours, `data-visualization.cat.1` to `cat.10`, are
+ * also used by components. Chip, Badge and diagram objects rest on step
+ * 1, use step 2 for hover and pressed, and have a resting border in step
+ * 4 (#5883, #5884). For each category, in both schemes, the run fails on:
+ *
+ * - text on step 1 and on step 2 below 4.5:1. A component shows either
+ *   `text.primary` or `text.inverted` on a category, so the pair meets
+ *   the minimum when one of the two does. The output names the
+ *   foreground used: of the ones that meet the minimum, the one with the
+ *   higher Lc, otherwise the one with the higher ratio. The target is
+ *   Lc 60, marked "assumed" because neither the docs nor ADR-0016 give
+ *   one for these pairs yet
+ * - step 4 below 3:1 against `background.canvas` and
+ *   `background.surface`, the WCAG minimum for a border that identifies
+ *   the component (1.4.11). It has no APCA target
+ *
+ * The chart goals in `foundation/colour/data-visualisation.mdx`
+ * § Contrast are reported and never fail the run, because that page
+ * lists the hues that miss them and asks for their values as text
+ * instead: step 3, for bars and other filled marks, against
+ * `background.surface` at 3:1 and Lc 30, and step 4, for lines and small
+ * markers, against `background.surface` at 3:1 and Lc 45.
  *
  * EXCEPTIONS lists the pairs the docs exclude from the minimum, each by
  * scheme, foreground and background, exactly as the docs list them. They
@@ -85,6 +109,16 @@ const MINIMUM = { text: 4.5, icon: 3 }
 const BODY_TEXT_TARGET = 90
 const TARGET = 60
 
+/** The categorical data visualisation colours (#5883, #5884). */
+const CATEGORIES = Array.from(
+  { length: 10 },
+  (_, index) => `data-visualization.cat.${index + 1}`,
+)
+/** WCAG 2.1 AA 1.4.11 for a border that identifies a component. */
+const BORDER_MINIMUM = 3
+/** foundation/colour/data-visualisation.mdx § Contrast, reported only. */
+const CHART_GOAL = { minimum: 3, fill: 30, line: 45 }
+
 /**
  * Documented pairs that do not have to meet the minimum, written as
  * `<scheme> <foreground> on <background>`. Each group names the page that
@@ -123,10 +157,15 @@ const semanticByScheme = Object.fromEntries(
   ),
 )
 
-const pairs = documentedPairs()
+const documented = documentedPairs()
+const categorical = categoricalPairs()
+const chartGoals = chartGoalPairs()
+const pairs = [...documented, ...categorical, ...chartGoals]
 const failures = []
 const excepted = []
 const shortfalls = []
+/** Chart goals not met, reported only */
+const missedGoals = []
 /** Listed exceptions that now meet the minimum */
 const clearedExceptions = []
 /** Listed exceptions the loop has met, to catch a typo in EXCEPTIONS */
@@ -134,28 +173,59 @@ const seenExceptions = new Set()
 
 for (const scheme of SCHEMES) {
   for (const pair of pairs) {
-    const foreground = lookup(semanticByScheme[scheme], pair.foreground)
+    const foregroundName = pair.foregrounds.join(' or ')
     const background = lookup(semanticByScheme[scheme], pair.background)
-    const key = `${scheme} ${pair.foreground} on ${pair.background}`
+    const key = `${scheme} ${foregroundName} on ${pair.background}`
     const exception = exceptionFor.get(key)
     if (exception !== undefined) seenExceptions.add(key)
-    const where = `${scheme.padEnd(5)}  ${pair.foreground} on ${pair.background}`
+    const where = `${scheme.padEnd(5)}  ${foregroundName} on ${pair.background}`
 
+    const candidates = pair.foregrounds.map((token) => ({
+      token,
+      value: lookup(semanticByScheme[scheme], token),
+    }))
     const problem =
-      colourProblem(pair.foreground, foreground) ??
-      colourProblem(pair.background, background)
+      candidates
+        .map(({ token, value }) => colourProblem(token, value, pair.source))
+        .find((found) => found !== undefined) ??
+      colourProblem(pair.background, background, pair.source)
     if (problem !== undefined) {
       failures.push(`${where}: ${problem}`)
       continue
     }
 
-    const ratio = wcagRatio(foreground, background)
-    const lc = Math.abs(apcaContrast(foreground, background))
+    const measured = candidates.map((candidate) => ({
+      ...candidate,
+      ratio: wcagRatio(candidate.value, background),
+      lc: Math.abs(apcaContrast(candidate.value, background)),
+    }))
+    const {
+      token,
+      value: foreground,
+      ratio,
+      lc,
+    } = better(measured, pair.minimum)
+    const level = pair.goal ? 'goal' : 'minimum'
     const target =
       pair.target === null
         ? ''
-        : ` (target Lc ${pair.target}${pair.assumed ? ', assumed' : ''})`
-    const line = `${where}  ${foreground} on ${background}  ${ratio.toFixed(2)}:1 (minimum ${pair.minimum}:1)  Lc ${lc.toFixed(1)}${target}`
+        : ` (${pair.goal ? 'goal' : 'target'} Lc ${pair.target}${pair.assumed ? ', assumed' : ''})`
+    // With a choice of foregrounds, name the one measured and give the other
+    const used = measured.length > 1 ? `${token} ` : ''
+    const others = measured
+      .filter((other) => other.token !== token)
+      .map(
+        (other) =>
+          `  (other: ${other.token} ${other.value} ${other.ratio.toFixed(2)}:1, Lc ${other.lc.toFixed(1)})`,
+      )
+      .join('')
+    const line = `${where}  ${used}${foreground} on ${background}  ${ratio.toFixed(2)}:1 (${level} ${pair.minimum}:1)  Lc ${lc.toFixed(1)}${target}${others}`
+
+    if (pair.goal) {
+      if (ratio < pair.minimum || (pair.target !== null && lc < pair.target))
+        missedGoals.push(line)
+      continue
+    }
 
     if (ratio < pair.minimum) {
       if (exception === undefined) failures.push(line)
@@ -176,7 +246,10 @@ for (const key of exceptionFor.keys())
 
 const checks = pairs.length * SCHEMES.length
 console.log(
-  `check-contrast: ${pairs.length} documented pairs in ${SCHEMES.join(' and ')} (${checks} checks). Minimum: WCAG 2.1 AA, ${MINIMUM.text}:1 for text and ${MINIMUM.icon}:1 for icons. Target: APCA Lc ${BODY_TEXT_TARGET} for text.primary on the surface, Lc ${TARGET} otherwise, none for tertiary; "assumed" marks a target the docs and ADR-0016 do not give.`,
+  `check-contrast: ${documented.length} documented pairs, ${categorical.length} categorical data visualisation pairs and ${chartGoals.length} chart goals in ${SCHEMES.join(' and ')} (${checks} checks). Minimum: WCAG 2.1 AA, ${MINIMUM.text}:1 for text and ${MINIMUM.icon}:1 for icons. Target: APCA Lc ${BODY_TEXT_TARGET} for text.primary on the surface, Lc ${TARGET} otherwise, none for tertiary; "assumed" marks a target the docs and ADR-0016 do not give.`,
+)
+console.log(
+  `Categorical (#5883, #5884): text on steps 1 and 2 passes when text.primary or text.inverted reaches ${MINIMUM.text}:1, target Lc ${TARGET}; step 4 needs ${BORDER_MINIMUM}:1 against the canvas and the surface. Chart goals (data-visualisation.mdx § Contrast), reported only: step 3 ${CHART_GOAL.minimum}:1 and Lc ${CHART_GOAL.fill}, step 4 ${CHART_GOAL.minimum}:1 and Lc ${CHART_GOAL.line}, against the surface.`,
 )
 
 if (excepted.length > 0) {
@@ -192,6 +265,11 @@ if (shortfalls.length > 0)
     `\nBelow the APCA target (${shortfalls.length}, reported, not failed):\n  ${shortfalls.join('\n  ')}`,
   )
 
+if (missedGoals.length > 0)
+  console.log(
+    `\nChart goals not met (${missedGoals.length}, reported, not failed; data-visualisation.mdx § Contrast lists these hues):\n  ${missedGoals.join('\n  ')}`,
+  )
+
 if (clearedExceptions.length > 0)
   console.warn(
     `check-contrast: ${clearedExceptions.length} pair(s) listed in EXCEPTIONS now meet the minimum. Remove each one from EXCEPTIONS and from the page that documents it:\n  ${clearedExceptions.join('\n  ')}`,
@@ -199,11 +277,11 @@ if (clearedExceptions.length > 0)
 
 if (failures.length > 0)
   fail(
-    `${failures.length} documented pair(s) below the WCAG 2.1 AA minimum or not measurable:\n  ${failures.join('\n  ')}`,
+    `${failures.length} pair(s) below the WCAG 2.1 AA minimum or not measurable:\n  ${failures.join('\n  ')}`,
   )
 
 console.log(
-  `\ncheck-contrast: every documented pair meets the minimum, apart from the ${excepted.length} documented exception(s).`,
+  `\ncheck-contrast: every documented and categorical pair meets the minimum, apart from the ${excepted.length} documented exception(s).`,
 )
 
 /** The pairs the usage page documents, for text and icons. */
@@ -211,12 +289,14 @@ function documentedPairs() {
   const list = []
   const add = (kind, role, background, target, assumed) =>
     list.push({
-      foreground: `${kind}.${role}`,
+      foregrounds: [`${kind}.${role}`],
       background,
       minimum: MINIMUM[kind],
       target,
       // Every icon target is assumed: the targets are given for text
       assumed: kind === 'icon' || assumed,
+      goal: false,
+      source: 'usage.mdx § Foreground pairing',
     })
 
   for (const kind of ['text', 'icon']) {
@@ -280,6 +360,69 @@ function documentedPairs() {
   return list
 }
 
+/**
+ * The categorical colours as components use them (#5883, #5884): rest on
+ * step 1, hover and pressed on step 2, the resting border in step 4.
+ */
+function categoricalPairs() {
+  // No docs page lists these pairs yet, so only this script names them
+  const source = null
+  const list = []
+  for (const category of CATEGORIES) {
+    for (const step of [1, 2])
+      list.push({
+        foregrounds: ['text.primary', 'text.inverted'],
+        background: `${category}.${step}`,
+        minimum: MINIMUM.text,
+        target: TARGET,
+        assumed: true,
+        goal: false,
+        source,
+      })
+    for (const background of ['background.canvas', 'background.surface'])
+      list.push({
+        foregrounds: [`${category}.4`],
+        background,
+        minimum: BORDER_MINIMUM,
+        target: null,
+        assumed: false,
+        goal: false,
+        source,
+      })
+  }
+  return list
+}
+
+/** The chart goals on data-visualisation.mdx § Contrast, reported only. */
+function chartGoalPairs() {
+  const source = 'data-visualisation.mdx § Contrast'
+  return CATEGORIES.flatMap((category) =>
+    [
+      [3, CHART_GOAL.fill],
+      [4, CHART_GOAL.line],
+    ].map(([step, target]) => ({
+      foregrounds: [`${category}.${step}`],
+      background: 'background.surface',
+      minimum: CHART_GOAL.minimum,
+      target,
+      assumed: false,
+      goal: true,
+      source,
+    })),
+  )
+}
+
+/**
+ * Of the foregrounds that meet the minimum, the one with the higher Lc;
+ * when none does, the one with the higher ratio, the closest to passing.
+ */
+function better(measured, minimum) {
+  const passing = measured.filter(({ ratio }) => ratio >= minimum)
+  return passing.length > 0
+    ? passing.reduce((best, next) => (next.lc > best.lc ? next : best))
+    : measured.reduce((best, next) => (next.ratio > best.ratio ? next : best))
+}
+
 async function loadSemantic(scheme) {
   // the colours do not depend on the density, so the base density will do
   const file = resolve(join(TS_DIR, `${scheme}-comfortable.ts`))
@@ -310,9 +453,9 @@ function lookup(semantic, token) {
     .reduce((node, key) => (node == null ? undefined : node[key]), semantic)
 }
 
-function colourProblem(token, value) {
+function colourProblem(token, value, source) {
   if (value === undefined)
-    return `${token} does not exist. A token was renamed or removed, so update the pairs in this script and in usage.mdx § Foreground pairing`
+    return `${token} does not exist. A token was renamed or removed, so update the pairs in this script${source === null ? '' : ` and in ${source}`}`
   if (typeof value !== 'string' || !/^#[0-9a-f]{6}$/i.test(value))
     return `${token} is ${JSON.stringify(value)}, not an opaque #rrggbb colour (ADR-0016 D4), so it has no contrast value`
   return undefined
