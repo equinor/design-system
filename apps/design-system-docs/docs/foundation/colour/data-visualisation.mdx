@@ -115,8 +115,8 @@ the lowest values, and `seq.7` sits furthest from it and stands for the highest.
 the midpoint `div.5` sits closest to the background and stands for no difference, and the two ends,
 the blue `div.1` and the orange `div.9`, sit furthest from it.
 
-These two ramps are generated separately for each scheme, so the dark values are not the light values
-in reverse order.
+Like the categorical steps, these two ramps are generated separately for each scheme, so the dark
+values are not the light values in reverse order.
 
 The low end of the sequential ramp and the middle of the diverging ramp are close to invisible on the
 surface, especially in dark, where `seq.1` and `div.4` to `div.6` score APCA Lc 0. That is intended,
@@ -133,8 +133,7 @@ to tell "low", "zero" and "no data" apart:
 Most data-visualisation values change between schemes: 56 of the 66 values are different, and only
 the categorical step 3 values stay the same. A chart keeps its meaning when the scheme changes,
 because each step keeps its position relative to the background, but it does not keep its exact
-colours. Check every chart in both schemes, and use the tokens rather than the hex values of one
-scheme.
+colours. Check every chart in both schemes, and use the tokens rather than the values of one scheme.
 
 ## Contrast
 
@@ -157,6 +156,13 @@ Measured against `background.surface`:
 | 3 | 6 of 10 hues | 26 to 94 | 9 of 10 hues | 9 to 77 |
 | 4 | 10 of 10 hues | 61 to 101 | 10 of 10 hues | 36 to 88 |
 | 5 | 10 of 10 hues | 87 to 105 | 10 of 10 hues | 67 to 98 |
+
+Many of the generated categorical steps lie outside sRGB. The figures above are for their sRGB
+values, with chroma reduced at the same lightness and hue as in the TypeScript tokens. A browser that
+clips the colour, or a wide-gamut screen that shows it unchanged, gives a slightly different Lc, so
+treat the ranges as approximate. The counts of hues that reach 3:1 and the list below are the same
+either way. The contrast check that runs on every token release reports each step 3 and step 4
+that misses these goals.
 
 These hues miss the minimum or the goal at the step they are used for. Make their values available as
 text as well, with direct labels, a tooltip or a data table:
