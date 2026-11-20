@@ -2,6 +2,7 @@
 
 import { AppHeader } from '@/components/shared/AppHeader'
 import { DataVizPanel } from '@/components/themebuilder/dataviz/DataVizPanel'
+import { DatavizFormulaPanel } from '@/components/themebuilder/dataviz/DatavizFormulaPanel'
 import { Main } from '@/components/shared/Main'
 
 export default function DataVizPage() {
@@ -16,8 +17,14 @@ export default function DataVizPage() {
           distinct categorical series, ordered sequential scales, and diverging
           scales around a midpoint. Everything is checked for
           colour-vision-deficiency safety and adapts to light and dark mode.
+          Below the generator, the EDS categorical ramps are computed from their
+          Tokens Studio inputs and checked, and the inputs can be changed to try
+          a proposal.
         </p>
         <DataVizPanel />
+        <div className="mt-10">
+          <DatavizFormulaPanel />
+        </div>
       </Main>
     </div>
   )
