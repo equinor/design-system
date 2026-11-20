@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import Color from 'colorjs.io'
 import { deltaE, generateColorScale } from '@/utils/color'
 import {
   SCHEMES,
@@ -278,6 +279,69 @@ describe('TS_SEMANTIC', () => {
             ? `var(--eds-${token.ref.path.split('.').join('-')})`
             : token.ref.value
       expect(exported.get(token.cssVar), token.path).toBe(expected)
+    }
+  })
+})
+
+// The data visualisation values in the CSS export, keyed by scheme and path
+// (`light` → `dataviz.cat.1.1`). Hand-picked values are hex; values that
+// Tokens Studio computes are oklch(), possibly outside sRGB.
+function readTokensStudioDataviz(): Map<string, string> {
+  const css = readFileSync(TS_COLOURS_CSS, 'utf-8')
+  const values = new Map<string, string>()
+  for (const match of css.matchAll(
+    /--eds-(light|dark)-(dataviz-[a-z0-9-]+):\s*([^;]+);/g,
+  )) {
+    values.set(`${match[1]} ${match[2].split('-').join('.')}`, match[3].trim())
+  }
+  return values
+}
+
+describe('TS_DATAVIZ', () => {
+  it('has the same tokens in both schemes', () => {
+    expect(Object.keys(TS_DATAVIZ.light).length).toBeGreaterThan(0)
+    expect(Object.keys(TS_DATAVIZ.dark).sort()).toEqual(
+      Object.keys(TS_DATAVIZ.light).sort(),
+    )
+  })
+
+  it('holds every value as sRGB hex', () => {
+    for (const scheme of SCHEMES) {
+      for (const [path, colour] of Object.entries(TS_DATAVIZ[scheme])) {
+        expect(colour, `${scheme} ${path}`).toMatch(/^#[0-9a-f]{6}$/i)
+      }
+    }
+  })
+
+  it('matches every data visualisation value in the Tokens Studio CSS export', () => {
+    const exported = readTokensStudioDataviz()
+    const keys = SCHEMES.flatMap((scheme) =>
+      Object.keys(TS_DATAVIZ[scheme]).map((path) => `${scheme} ${path}`),
+    )
+    expect([...exported.keys()].sort()).toEqual([...keys].sort())
+    for (const scheme of SCHEMES) {
+      for (const [path, colour] of Object.entries(TS_DATAVIZ[scheme])) {
+        const expected = exported.get(`${scheme} ${path}`) as string
+        if (expected.startsWith('#')) {
+          expect(colour, `${scheme} ${path}`).toBe(expected)
+          continue
+        }
+        // The TypeScript export maps an oklch() value outside sRGB into it by
+        // reducing chroma at the same lightness and hue. Mapping the CSS value
+        // the same way (with `jnd: 0`, so colorjs.io does not stop early at a
+        // clipped colour) gives its hex; the small limit covers the CSS export
+        // rounding OKLCH to four decimals. Other tools map such values
+        // differently (Figma clamps each channel), so this pins the export's
+        // method, not the only possible answer.
+        const mapped = new Color(expected)
+          .toGamut({ space: 'srgb', method: 'oklch.c', jnd: 0 })
+          .to('srgb')
+          .toString({ format: 'hex' })
+        expect(
+          deltaE(colour, mapped, 'OK'),
+          `${scheme} ${path}: read ${colour}, CSS export ${expected} → ${mapped}`,
+        ).toBeLessThan(0.005)
+      }
     }
   })
 })
