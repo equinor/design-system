@@ -31,9 +31,6 @@
     "src/scan/**/*.ts",
     "test/**/*.ts",
     "*.config.ts",
-    "prototype/src/**/*.ts",
-    "prototype/src/**/*.tsx",
-    "prototype/vite.config.ts",
     "demo/**/*.ts"
   ]
 }

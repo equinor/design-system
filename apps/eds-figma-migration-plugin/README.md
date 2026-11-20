@@ -179,9 +179,10 @@ Always try the plugin on a duplicate of a frame. The test frame is
 
 ## The window
 
-The window follows the prototype in [`prototype/`](./prototype/README.md),
-which was designed on Figma's Check designs and reviewed twice with a
-designer persona ([`prototype/ux-review/final/findings.md`](./prototype/ux-review/final/findings.md)).
+The window follows an HTML prototype that was designed on Figma's Check
+designs and reviewed twice with a designer persona. The prototype, the
+comparison with Check designs and both reviews are not on `main`: they are in
+the commits of the pull request that added the plugin.
 
 - **The header** has the title and a **settings** menu: layer counts in the
   rows, frames without EDS variables, local components, and Export report.
@@ -585,8 +586,8 @@ Go to; the caret's click area is stretched over the row, so a click
 anywhere on it opens the row, and Go to sits above it. Only instances with
 legacy values from their main components are in
 the tree, and the slots that hold them; frames and other layers between them
-are left out. The design was reviewed on `prototype/review/tree.html`, built
-with `vite build -c prototype/vite.config.ts --mode tree`. The plugin does not change what an instance takes
+are left out. The design was reviewed in the HTML prototype before it was
+built. The plugin does not change what an instance takes
 from its main component, and it never swaps a component (decided
 2026-11-16). For instances of a library component the tab says: "The plugin
 migrates variables, not components. Swap these to EDS Beta components in
@@ -620,8 +621,8 @@ component under way, and when the check ends a status line says what it found
 (`checkSummary`), with the names when a kind has three or fewer, and the
 library updates open: in the app the imports were quick enough that the
 count went from 0 to done with no sign that the check had run. Stop
-(`cancel-sources`) ends the check at once, and an import has 30 s. The design was reviewed on
-`prototype/review/tree.html`, with the sources the spikes found.
+(`cancel-sources`) ends the check at once, and an import has 30 s. The design was reviewed in
+the HTML prototype, with the sources the spikes found.
 
 A layer inside an instance reads the change log of the main component's
 layer until the instance has plugin data of its own on it (`pluginData` in
@@ -659,9 +660,8 @@ values of its own and instances in it shows its values under such a row too,
 so the instances in it are not far down below a long list. Values on layers
 in owned slot content outside the instances there are under the slot's row
 (`slotValues`), without an Overridden or From the main component mark, and
-rows count the values the instance overrides (review of
-`prototype/review/inspector.html`, built with `--mode inspector`,
-2026-11-19).
+rows count the values the instance overrides (review of the inspector in
+the HTML prototype, 2026-11-19).
 
 Main components, and layers selected inside one, are marked in Figma's
 component purple, `#8A38F5`. The value is `--main-component-colour` in
@@ -939,5 +939,4 @@ docs/            mapping-rules.md, the source for the rules, and designer-guide.
 test/            Vitest tests and fixtures
 demo/            a demo of the window for the docs site, with a stand-in for the main thread
 BETA-GAPS.md     what was missing or awkward in the Beta while building this
-prototype/       an HTML prototype for UX review, the Check designs comparison and the UX review
 ```

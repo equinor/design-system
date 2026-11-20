@@ -16,7 +16,6 @@
     "test": "vitest",
     "test:run": "vitest run",
     "types": "tsc -p tsconfig.json && tsc -p tsconfig.plugin.json",
-    "prototype": "vite build -c prototype/vite.config.ts --mode window && vite build -c prototype/vite.config.ts --mode shell",
     "build:demo": "vite build -c demo/vite.demo.config.ts --configLoader runner",
     "demo:images": "node scripts/demo-images.mjs",
     "docs:sync": "pnpm run build:demo && pnpm run demo:images && node scripts/docs-sync.mjs"
