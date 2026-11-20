@@ -12,6 +12,16 @@ export const WINDOW = {
   maxHeight: 1400,
 } as const
 
+/**
+ * The shortest the window gets when it shrinks to fit the room Figma gives
+ * it, which can be less than the smallest size a drag allows.
+ */
+export const FIT_MIN_HEIGHT = 240
+
+export function fitHeight(height: number): number {
+  return Math.max(FIT_MIN_HEIGHT, Math.floor(height))
+}
+
 /** The key of the window size in figma.clientStorage, kept per person. */
 export const WINDOW_SIZE_KEY = 'window-size'
 

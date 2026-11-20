@@ -222,7 +222,8 @@ The bar at the bottom has these actions for the ticked values:
 - **Clear selection** unticks them.
 
 The window is too narrow? Drag the grip in its bottom right corner. The
-plugin remembers the size.
+plugin remembers the size. When Figma has less room than that, the window
+shrinks to fit, so the Apply bar stays in view.
 
 ## 4. Review the ⚠ values
 

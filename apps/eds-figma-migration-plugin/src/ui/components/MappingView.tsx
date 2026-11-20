@@ -30,6 +30,7 @@ import {
 } from './ChangeRow'
 import type { Item } from './ChangeRow'
 import { Tabs } from './Tabs'
+import { InfoNote } from './InfoButton'
 
 /** The tabs in Changes: a kind of value, or the legacy Typography component */
 export type ChangesTab = PropertyGroup | 'typography-component'
@@ -161,13 +162,22 @@ export function MappingView({
   // and the designer should not have to guess why the numbers differ from
   // the health bar. Values an instance overrides are listed.
   const instancesNote = (
-    <p className="muted">
-      {inInstances > 0
-        ? `Values that instances take from their main component are not part of Changes. The ${inInstances} legacy value${inInstances === 1 ? '' : 's'} inside instances change${inInstances === 1 ? 's' : ''} with ${inInstances === 1 ? 'its' : 'their'} main component or library; the Instances tab lists them. Values an instance overrides are listed here, marked Overridden in the instance.`
-        : 'Values that instances take from their main component are not part of Changes; they change with the main component or its library. Values an instance overrides are listed here, marked Overridden in the instance.'}
-      {typography &&
-        ' The legacy Typography component is the exception: its instances are on the Typography tab, to be converted to text.'}
-    </p>
+    <InfoNote
+      summary={
+        inInstances > 0
+          ? `The ${inInstances} legacy value${inInstances === 1 ? '' : 's'} inside instances ${inInstances === 1 ? 'is' : 'are'} on the Instances tab.`
+          : 'Values inside instances are not listed here.'
+      }
+      label="About values inside instances"
+    >
+      <p>
+        {inInstances > 0
+          ? `Values that instances take from their main component are not part of Changes. The ${inInstances} legacy value${inInstances === 1 ? '' : 's'} inside instances change${inInstances === 1 ? 's' : ''} with ${inInstances === 1 ? 'its' : 'their'} main component or library; the Instances tab lists them. Values an instance overrides are listed here, marked Overridden in the instance.`
+          : 'Values that instances take from their main component are not part of Changes; they change with the main component or its library. Values an instance overrides are listed here, marked Overridden in the instance.'}
+        {typography &&
+          ' The legacy Typography component is the exception: its instances are on the Typography tab, to be converted to text.'}
+      </p>
+    </InfoNote>
   )
 
   if (groups.length === 0 && !typography) {
@@ -437,17 +447,22 @@ export function MappingView({
         )}
       </Tabs>
       {!onTypography && (
-        <p className="muted">
-          {values(
+        <InfoNote
+          summary={`${values(
             countIn(
               () => true,
               () => true,
             ),
-          )}{' '}
-          still to migrate {where}. A click on a legacy variable selects its
-          layers; the target opens the picker and changes every value in the
-          row.
-        </p>
+          )} still to migrate ${where}.`}
+          label="How to change values"
+        >
+          <p>
+            A click on a legacy variable selects its layers in Figma. The target
+            opens the picker and changes every value in the row. Show the layers
+            lists the values one by one, each with its own target. Tick values
+            to change several at once in the bar at the bottom of the window.
+          </p>
+        </InfoNote>
       )}
       <WhyDialog
         item={why}

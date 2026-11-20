@@ -60,6 +60,7 @@ import { ComponentInstances } from './ComponentInstances'
 import { MappingView } from './MappingView'
 import { BindingRow } from './BindingRow'
 import { HealthBar, HealthLegend } from './HealthBar'
+import { InfoButton, SectionHeading } from './InfoButton'
 import { InstanceTree } from './InstanceTree'
 import { InsideMainComponent, MainComponentLabel } from './MainComponentLabel'
 import { Tabs } from './Tabs'
@@ -687,11 +688,6 @@ export function Inspector({
                   <Accordion.Panel>
                     {isOpen && (
                       <div className="stack-tight">
-                        {group.instance && (
-                          <p className="muted">
-                            {instanceNote(overridden, inherited, inSlots)}
-                          </p>
-                        )}
                         <div className="panel-actions">
                           {mappable.length > 1 ? (
                             <Checkbox
@@ -709,6 +705,15 @@ export function Inspector({
                             <span />
                           )}
                           <span className="apply-buttons">
+                            {group.instance && (
+                              <InfoButton
+                                label={`About the values in ${group.title}`}
+                              >
+                                <p>
+                                  {instanceNote(overridden, inherited, inSlots)}
+                                </p>
+                              </InfoButton>
+                            )}
                             {group.instance?.mainId && (
                               <Button
                                 size="small"
@@ -783,17 +788,21 @@ export function Inspector({
       )}
       {!isMain && !inside && oldInstances && oldInstances.length > 0 && (
         <section className="stack-tight" aria-labelledby="old-instances">
-          <h3 id="old-instances" className="section-title">
-            Instances with legacy variables
-          </h3>
-          <p className="muted">
-            The plugin does not change a value an instance takes from its main
-            component. A component in this file changes with its main component.
-            The plugin migrates variables, not components: swap an instance of a
-            library component to an EDS Beta component in Figma, and its legacy
-            values go with it. A value an instance overrides is listed above,
-            marked Overridden in the instance, and changes here.
-          </p>
+          <SectionHeading
+            id="old-instances"
+            level={3}
+            title="Instances with legacy variables"
+            label="About instances with legacy variables"
+          >
+            <p>
+              The plugin does not change a value an instance takes from its main
+              component. A component in this file changes with its main
+              component. The plugin migrates variables, not components: swap an
+              instance of a library component to an EDS Beta component in Figma,
+              and its legacy values go with it. A value an instance overrides is
+              listed above, marked Overridden in the instance, and changes here.
+            </p>
+          </SectionHeading>
           <ul className="binding-list">
             {groupInstances(oldInstances).map((group) => (
               <li key={group.key} className="binding-row">

@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import type { KeyboardEvent, PointerEvent } from 'react'
 import { clampSize } from '../../shared/window'
 import { send } from '../figma'
+import { pauseFitting } from '../fit'
 
 /** How far one arrow key press resizes the window. */
 const STEP = 40
@@ -13,7 +14,9 @@ type Drag = { x: number; y: number; width: number; height: number }
  * taller or shorter. Figma plugin windows cannot be resized by hand, so the
  * grip sends the size to the main thread, which resizes the window and keeps
  * the size for the next time. Screen coordinates are used because the window
- * grows under the pointer while it is dragged. The arrow keys do the same.
+ * grows under the pointer while it is dragged. The arrow keys do the same. A
+ * window made taller than the room Figma gives it shrinks back to fit once
+ * the drag ends (src/ui/fit.ts).
  */
 export function ResizeHandle() {
   const drag = useRef<Drag | null>(null)
@@ -39,6 +42,7 @@ export function ResizeHandle() {
 
   const onPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId)
+    pauseFitting(true)
     asked.current = null
     drag.current = {
       x: event.screenX,
@@ -62,6 +66,9 @@ export function ResizeHandle() {
     drag.current = null
     cancelAnimationFrame(frame.current)
     if (size) resize(size.width, size.height, true)
+    // The window is fitted when it has taken the final size, if it is then
+    // taller than the room.
+    pauseFitting(false)
   }
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {

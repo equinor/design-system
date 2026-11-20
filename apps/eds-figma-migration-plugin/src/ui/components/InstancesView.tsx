@@ -1,6 +1,7 @@
 import { Button } from '@equinor/eds-core-react/next'
 import type { EntrySummary, OldInstance } from '../../scan/types'
 import { entryForest } from '../instances'
+import { InfoNote } from './InfoButton'
 import { InstanceTree } from './InstanceTree'
 
 type InstancesViewProps = {
@@ -62,20 +63,26 @@ export function InstancesView({
       {typographyNote}
       {/* Test session finding 16: local components need other advice
           than library components. */}
-      <p className="muted">
-        These are the legacy values instances take from their main component,
-        which the plugin does not change in the instance. A component in this
-        file changes every instance of it once its main component is migrated.
-        The plugin migrates variables, not components, so an instance of a
-        library component is swapped to an EDS Beta component in Figma, and its
-        legacy values go with it. A value an instance overrides itself is listed
-        in Changes, marked Overridden in the instance.
-      </p>
-      <p className="muted">
-        The tree shows only the instances that hold such values, and the slots
-        they are in. Frames and other layers between them are left out, so a
-        level here can be deeper in the Layers panel.
-      </p>
+      <InfoNote
+        summary="The legacy values instances take from their main component."
+        label="About the Instances tab"
+      >
+        <p>
+          These are the legacy values instances take from their main component,
+          which the plugin does not change in the instance. A component in this
+          file changes every instance of it once its main component is migrated.
+          The plugin migrates variables, not components, so an instance of a
+          library component is swapped to an EDS Beta component in Figma, and
+          its legacy values go with it. A value an instance overrides itself is
+          listed in Changes, marked Overridden in the instance.
+        </p>
+        <p>
+          The tree shows only the instances that hold such values, and the slots
+          they are in. Frames and other layers between them are left out, so a
+          level here can be deeper in the Layers panel. A click on a row opens
+          it; Go to selects the instance in Figma.
+        </p>
+      </InfoNote>
       <InstanceTree
         nodes={nodes}
         initiallyOpen={nodes.map((node) => node.key)}

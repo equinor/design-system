@@ -2026,6 +2026,36 @@ code {
   align-items: center;
 }
 
+/* The layer src/ui/fit.ts watches to see how much of the window is in view:
+   the whole window, under everything, drawing nothing. */
+.fit-probe {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* One line of a longer explanation, and a section title, with the rest of
+   the explanation behind an info button at the end (src/ui/components/
+   InfoButton.tsx). */
+.info-note,
+.section-heading {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+
+  & p {
+    margin: 0;
+  }
+}
+
 /* The grip that resizes the window, in the bottom right corner. */
 .resize-handle {
   position: fixed;

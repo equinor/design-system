@@ -194,11 +194,23 @@ designer persona ([`prototype/ux-review/final/findings.md`](./prototype/ux-revie
 - **The footer** says what Apply changes ("Change 492 values in 3 frames on
   2 pages") and has **Review** and **Apply**. While values are ticked, the
   bulk bar takes its place.
+- **Explanations**: a long explanation, such as what the Instances tab
+  lists or what an instance group's values are, sits behind an info button
+  (`InfoButton`, `InfoNote` and `SectionHeading` in
+  `src/ui/components/InfoButton.tsx`) that opens it in a dialog, with one
+  line or a section title left in the window, so the lists start near the
+  top in a short window (2026-11-20).
 - **The size**: drag the grip in the bottom right corner, or focus it and use
   the arrow keys. Figma does not let people resize a plugin window, so the
   grip asks the main thread to resize it (`figma.ui.resize`), and the size is
   kept per person in `figma.clientStorage` for the next time. The window is
-  between 380 × 480 and 1600 × 1400.
+  between 380 × 480 and 1600 × 1400. Figma caps a plugin window at the
+  canvas height, title bar included, and clips a taller window instead of
+  shrinking it, which hid the Apply bar under the bottom edge. So the window
+  watches how much of it is in view (an IntersectionObserver on `.fit-probe`,
+  `src/ui/fit.ts`) and shrinks to that height, down to 240 px if it has to,
+  without changing the size that is kept. A drag past the room shrinks back
+  once it ends.
 
 ## Changes, frames and instances
 

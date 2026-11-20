@@ -12,6 +12,7 @@ import { EntryList } from './EntryList'
 import { MainComponentLabel } from './MainComponentLabel'
 import { MappingView } from './MappingView'
 import type { ChangesTab } from './MappingView'
+import { SectionHeading } from './InfoButton'
 
 type MainComponentsViewProps = {
   /** The local main components in the scope */
@@ -142,14 +143,17 @@ export function MainComponentsView({
       </p>
       {components.length > 0 && (
         <section className="stack-tight" aria-labelledby="main-in-scope">
-          <h2 id="main-in-scope" className="section-title">
-            In the scope
-          </h2>
-          <p className="muted">
-            Apply in the footer changes all of these main components in one run,
-            and nothing else. The frames in the scope stay as they are until you
-            apply them from Changes or Frames.
-          </p>
+          <SectionHeading
+            id="main-in-scope"
+            title="In the scope"
+            label="About the main components in the scope"
+          >
+            <p>
+              Apply in the footer changes all of these main components in one
+              run, and nothing else. The frames in the scope stay as they are
+              until you apply them from Changes or Frames.
+            </p>
+          </SectionHeading>
           <EntryList
             entries={components}
             showPages={showPages}
@@ -161,23 +165,25 @@ export function MainComponentsView({
       )}
       {components.length > 0 && (
         <section className="stack-tight" aria-labelledby="main-changes">
-          <h2 id="main-changes" className="section-title">
-            What Apply changes
-          </h2>
+          <SectionHeading
+            id="main-changes"
+            title="What Apply changes"
+            label="About what Apply changes"
+          >
+            <p>
+              The legacy values in these main components, listed as in Changes,
+              with the same status, targets and pickers. Apply in the footer
+              changes the Ready values on every tab here, and its count is their
+              number. The others wait for a decision, here or in Review, and a
+              legacy mode that stays waits for the values below it.
+            </p>
+          </SectionHeading>
           {groups.length === 0 ? (
             <p className="muted">
               No value in these main components is left for Apply to change.
             </p>
           ) : (
             <>
-              <p className="muted">
-                The legacy values in these main components, listed as in
-                Changes, with the same status, targets and pickers. Apply in the
-                footer changes the Ready values on every tab here, and its count
-                is their number. The others wait for a decision, here or in
-                Review, and a legacy mode that stays waits for the values below
-                it.
-              </p>
               <MappingView
                 groups={groups}
                 overrides={overrides}
@@ -213,14 +219,17 @@ export function MainComponentsView({
       )}
       {elsewhere.length > 0 && (
         <section className="stack-tight" aria-labelledby="main-elsewhere">
-          <h2 id="main-elsewhere" className="section-title">
-            Used here, on another page
-          </h2>
-          <p className="muted">
-            {partialFile
-              ? 'Instances in the scope use these, but their main components are outside it. Scan the pages chosen for File to have the main components on them on this tab, or scan the page of one.'
-              : 'Instances in the scope use these, but their main components are outside it. Scan the whole file to have every main component on this tab and apply them all at once, or scan the page of one.'}
-          </p>
+          <SectionHeading
+            id="main-elsewhere"
+            title="Used here, on another page"
+            label="About main components on another page"
+          >
+            <p>
+              {partialFile
+                ? 'Instances in the scope use these, but their main components are outside it. Scan the pages chosen for File to have the main components on them on this tab, or scan the page of one.'
+                : 'Instances in the scope use these, but their main components are outside it. Scan the whole file to have every main component on this tab and apply them all at once, or scan the page of one.'}
+            </p>
+          </SectionHeading>
           <div className="panel-actions">
             <span />
             <Button

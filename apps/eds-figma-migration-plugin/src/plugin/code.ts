@@ -52,6 +52,7 @@ import { buildReport } from '../scan/report'
 import type { ScanState, ScanTarget } from './scan/scan'
 import {
   clampSize,
+  fitHeight,
   INTRO_KEY,
   INTRO_VERSION,
   readSettings,
@@ -716,7 +717,10 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
         }
         break
       case 'resize': {
-        const { width, height } = clampSize(message.width, message.height)
+        const clamped = clampSize(message.width, message.height)
+        const { width, height } = message.fit
+          ? { width: clamped.width, height: fitHeight(message.height) }
+          : clamped
         figma.ui.resize(width, height)
         if (message.done) {
           await figma.clientStorage

@@ -309,8 +309,18 @@ export type UiToPlugin =
   | { type: 'preview-convert'; id: number; instanceIds: string[] }
   /** Counts the instances of the main components that have a Typography instance in them */
   | { type: 'get-typography-components' }
-  /** Resizes the window; done when the drag ends, so the size is kept */
-  | { type: 'resize'; width: number; height: number; done: boolean }
+  /**
+   * Resizes the window; done when the drag ends, so the size is kept. With
+   * fit, the window shrinks to the room Figma gives it (src/ui/fit.ts), below
+   * the smallest size a drag allows if it has to, and the size is not kept.
+   */
+  | {
+      type: 'resize'
+      width: number
+      height: number
+      done: boolean
+      fit?: true
+    }
   | { type: 'run-dev-export-inventory' }
   | { type: 'run-dev-export-fixture' }
   | { type: 'notify'; message: string }

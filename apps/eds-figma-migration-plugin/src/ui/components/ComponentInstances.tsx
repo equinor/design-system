@@ -3,6 +3,7 @@ import { Accordion, Button } from '@equinor/eds-core-react/next'
 import type { ComponentInstance } from '../../scan/types'
 import { groupComponentInstances, legacySummary } from '../instances'
 import { pathBelow } from '../paths'
+import { SectionHeading } from './InfoButton'
 
 type ComponentInstancesProps = {
   /** Undefined while the plugin reads them */
@@ -27,22 +28,25 @@ export function ComponentInstances({
   const groups = instances ? groupComponentInstances(instances) : []
   return (
     <section className="stack-tight" aria-labelledby="component-instances">
-      <h3 id="component-instances" className="section-title">
-        Instances in this component
-        {instances ? ` (${instances.length})` : ''}
-      </h3>
+      <SectionHeading
+        id="component-instances"
+        level={3}
+        title={`Instances in this component${instances ? ` (${instances.length})` : ''}`}
+        label="About the instances in this component"
+      >
+        <p>
+          A legacy value an instance overrides is changed here, with the other
+          values of this component. A legacy value it takes from its main
+          component changes there: migrate that component first, or update it in
+          its library, and the instances here follow.
+        </p>
+      </SectionHeading>
       {!instances ? (
         <p className="muted">Loading…</p>
       ) : instances.length === 0 ? (
         <p className="muted">There are no instances in this component.</p>
       ) : (
         <>
-          <p className="muted">
-            A legacy value an instance overrides is changed here, with the other
-            values of this component. A legacy value it takes from its main
-            component changes there: migrate that component first, or update it
-            in its library, and the instances here follow.
-          </p>
           <Accordion className="binding-groups">
             {groups.map((group) => {
               const isOpen = open.has(group.key)
