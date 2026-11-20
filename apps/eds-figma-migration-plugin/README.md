@@ -703,7 +703,11 @@ writes into the file":
 
 The window follows Figma's light or dark theme. A scope without EDS
 variables, a scope with nothing left to migrate, an empty Changes or
-Instances tab and a search without matches each say so in the window.
+Instances tab and a search without matches each say so in the window. When
+only values inside instances are left, Changes says how many, with Show for
+the Instances tab (`nothingLeftText`, phase 4 of the nested-instances plan,
+2026-11-20); "Nothing left to migrate" read as done while Casper's PE Editor
+still had 638 legacy values inside instances.
 
 ## Publish a test version to Equinor
 

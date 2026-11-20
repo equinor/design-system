@@ -537,6 +537,7 @@ export function Inspector({
             selection={selection}
             showCounts={showCounts}
             inInstances={entry.counts.inInstance}
+            where={isMain ? 'in this main component' : 'in this frame'}
             onSelectOld={(oldKey) =>
               onSelect([
                 ...new Set(

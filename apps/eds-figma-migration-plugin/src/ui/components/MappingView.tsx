@@ -17,7 +17,12 @@ import type {
 } from '../../scan/mapping'
 import { PROPERTY_GROUPS } from '../../scan/types'
 import type { PropertyGroup } from '../../scan/types'
-import { CATEGORY_LABELS, propertyLabel, values } from '../labels'
+import {
+  CATEGORY_LABELS,
+  nothingLeftText,
+  propertyLabel,
+  values,
+} from '../labels'
 import { pathBelow } from '../paths'
 import type { Selection } from '../selection'
 import { BindingRow } from './BindingRow'
@@ -52,6 +57,8 @@ type MappingViewProps = {
   inInstances?: number
   /** Where the values listed are, for the count at the end: “in the scope” by default */
   where?: string
+  /** Opens the Instances tab, when nothing is left here but values inside instances */
+  onShowInstances?: () => void
   /**
    * The selected tab, when the overview keeps it so the Instances tab can
    * open one. Without it, the view keeps its own (in a frame).
@@ -128,6 +135,7 @@ export function MappingView({
   showCounts = true,
   inInstances = 0,
   where = 'in the scope',
+  onShowInstances,
   tab: tabProp,
   onTab,
   typography,
@@ -181,11 +189,22 @@ export function MappingView({
   )
 
   if (groups.length === 0 && !typography) {
-    return (
-      <div className="stack">
-        {instancesNote}
-        <p className="muted">Nothing left to migrate in the scope.</p>
+    return inInstances > 0 ? (
+      <div className="components-note">
+        <span className="muted">{nothingLeftText(inInstances, where)}</span>
+        {onShowInstances && (
+          <Button
+            size="small"
+            variant="secondary"
+            aria-label="Show the Instances tab"
+            onClick={onShowInstances}
+          >
+            Show
+          </Button>
+        )}
       </div>
+    ) : (
+      <p className="muted">{nothingLeftText(0, where)}</p>
     )
   }
 

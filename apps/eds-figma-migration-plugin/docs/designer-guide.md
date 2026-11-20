@@ -117,7 +117,11 @@ the steps.
   layers; a click on the target changes it for every layer that uses it.
   The **Typography** tab in Changes lists the instances of the legacy
   Typography component with the text style and colour each one gets (see
-  [Typography components](#typography-components)).
+  [Typography components](#typography-components)). When nothing is left to
+  change but values inside instances, Changes says how many, such as
+  "Nothing left to change in the scope. 638 legacy values are left inside
+  instances", and **Show** opens the Instances tab, which shows where to fix
+  them.
 - **Instances** shows the instances that still take legacy variables from
   their main component as a tree, drawn as Figma's Layers panel draws
   layers: each frame of the scan, the instances in it in layer order, and

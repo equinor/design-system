@@ -405,6 +405,7 @@ function Overview({
             entryNames={entryNames}
             showCounts={showCounts}
             inInstances={totals.inInstance}
+            onShowInstances={() => onView('instances')}
             tab={changesTab}
             onTab={setChangesTab}
             typography={

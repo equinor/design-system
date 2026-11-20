@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest'
 import { remoteMainComponents } from '../src/scan/sources'
 import type { ComponentSource, OldInstance } from '../src/scan/types'
 import { checkSummary, knownSources, sourceGroups } from '../src/ui/instances'
+import { nothingLeftText } from '../src/ui/labels'
 
 const instance = (
   id: string,
@@ -152,6 +153,23 @@ describe('checkSummary', () => {
       ),
     ).toBe(
       'No library components to check: every main component here is in this file.',
+    )
+  })
+})
+
+describe('nothingLeftText', () => {
+  it('says how many values are left inside instances, not that all is done', () => {
+    expect(nothingLeftText(638, 'in the scope')).toBe(
+      'Nothing left to change in the scope. 638 legacy values are left inside instances; the Instances tab shows where to fix them.',
+    )
+    expect(nothingLeftText(1, 'in this frame')).toBe(
+      'Nothing left to change in this frame. 1 legacy value is left inside instances; the Instances tab shows where to fix it.',
+    )
+  })
+
+  it('says nothing is left when nothing is', () => {
+    expect(nothingLeftText(0, 'in the scope')).toBe(
+      'Nothing left to migrate in the scope.',
     )
   })
 })
