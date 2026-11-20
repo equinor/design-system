@@ -57,9 +57,14 @@ both.
 
 <DataVizStepSwap />
 
-Step 3 is the base colour of each hue and looks the same in both schemes. The other steps swap places
-around it: the pale tint that is step 1 in light is step 5 in dark. The interface colours work the
-same way, as [the palette](./palette.mdx#what-the-step-numbers-mean) explains.
+Step 3 is the base colour of each hue and has the same value in both schemes. The other four steps
+are generated from it, separately for each scheme: each one moves the base colour part of the way
+towards white or towards black in lightness, and reduces its chroma in proportion to the move. In
+light, steps 1 and 2 move towards white and steps 4 and 5 towards black, and in dark the directions
+are the other way round. The distances are set per scheme, so the dark ramp is not the light ramp in
+reverse: the pale tint at step 5 in dark is darker than step 1 in light, for example. The interface
+colours also give each step a role and set its values per scheme, as
+[the palette](./palette.mdx#what-the-step-numbers-mean) explains.
 
 Because step 3 looks the same in both schemes, it does not stand out equally in both. In row 3 of the
 table, the dark teal of `cat.1` (the first swatch) is strong on the light surface and almost
@@ -71,7 +76,7 @@ disappears on the dark one, and the yellow of `cat.2` (the second swatch) does t
 | Step | Use it for | Why |
 | --- | --- | --- |
 | 1 | Decorative areas that carry no meaning, such as a hover background or a tint behind the plot area | Closest to the background, and below 3:1 for every hue in both schemes |
-| 2 | Bands that carry meaning, such as a target range or an uncertainty band, always with a label; filled marks that should step back, such as the other bars when one is selected. Not for lines or points | Reaches 3:1 for only 2 of 10 hues in light and 4 of 10 in dark, so it needs a label |
+| 2 | Bands that carry meaning, such as a target range or an uncertainty band, always with a label; filled marks that should step back, such as the other bars when one is selected. Not for lines or points | Reaches 3:1 for none of the 10 hues in light and for 2 of 10 in dark, so it needs a label |
 | 3 | The default colour for bars, areas and other filled marks | The anchor of the hue, the same in both schemes |
 | 4 | Lines, points and a series that should stand out | Reaches 3:1 for every hue in both schemes |
 | 5 | The one line or mark that has to stand out most, such as a target series | Furthest from the background in both schemes. Not for several series at once: at step 5 most of the first five hues look alike |
@@ -147,11 +152,11 @@ Measured against `background.surface`:
 
 | Categorical step | Light: reaches 3:1 | Light: APCA Lc | Dark: reaches 3:1 | Dark: APCA Lc |
 | --- | --- | --- | --- | --- |
-| 1 | 0 of 10 hues | 10 to 35 | 0 of 10 hues | 0 to 10 |
-| 2 | 2 of 10 hues | 18 to 69 | 4 of 10 hues | 0 to 38 |
+| 1 | 0 of 10 hues | 0 to 14 | 0 of 10 hues | 0 to 15 |
+| 2 | 0 of 10 hues | 0 to 36 | 2 of 10 hues | 0 to 29 |
 | 3 | 6 of 10 hues | 26 to 94 | 9 of 10 hues | 9 to 77 |
-| 4 | 10 of 10 hues | 64 to 99 | 10 of 10 hues | 33 to 86 |
-| 5 | 10 of 10 hues | 93 to 102 | 10 of 10 hues | 68 to 94 |
+| 4 | 10 of 10 hues | 61 to 101 | 10 of 10 hues | 36 to 88 |
+| 5 | 10 of 10 hues | 87 to 105 | 10 of 10 hues | 67 to 98 |
 
 These hues miss the minimum or the goal at the step they are used for. Make their values available as
 text as well, with direct labels, a tooltip or a data table:
@@ -160,7 +165,7 @@ text as well, with direct labels, a tooltip or a data table:
 | --- | --- | --- |
 | Step 3 fills, below 3:1 | `cat.2`, `cat.3`, `cat.8`, `cat.10` | `cat.1` |
 | Step 3 fills, above 3:1 but below Lc 30 | none | `cat.6` (Lc 22), `cat.7` (Lc 20) |
-| Step 4 lines, below Lc 45 | none | `cat.1` (Lc 33), `cat.7` (Lc 43) |
+| Step 4 lines, below Lc 45 | none | `cat.1` (Lc 36) |
 
 In dark the two measures disagree more than in light. `cat.7.3` reaches 3.13:1 but only Lc 20, so it
 passes the minimum while still looking faint on the dark surface.
