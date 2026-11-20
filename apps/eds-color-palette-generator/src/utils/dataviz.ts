@@ -9,6 +9,11 @@ import {
 } from './dataviz-a11y'
 import { EDS_CATEGORICAL_SEEDS } from '@/config/dataviz-defaults'
 import type {
+  DatavizFormulaInputs,
+  DatavizFormulaStep,
+  Scheme,
+} from '@/config/tokensStudio'
+import type {
   CategoricalConfig,
   SequentialConfig,
   DivergingConfig,
@@ -240,6 +245,112 @@ export function generateDivergingScale(
     const c = cfg.chroma * d
     return { name: `${i + 1}`, hex: oklchToHex(l, c, hue) }
   })
+}
+
+/* ------------------------------------------------------------------ */
+/*  EDS categorical ramps (the Tokens Studio formula)                  */
+/* ------------------------------------------------------------------ */
+
+const FALLBACK_HEX = '#808080'
+
+/**
+ * A colour in sRGB hex, mapping a colour outside sRGB into it the way the
+ * Tokens Studio TypeScript export does: chroma is reduced at the same
+ * lightness and hue. `jnd: 0` stops colorjs.io from settling early for a
+ * clipped colour, which the export does not do.
+ */
+function toSrgbHex(colour: Color): string {
+  const mapped = colour
+    .toGamut({ space: 'srgb', method: 'oklch.c', jnd: 0 })
+    .to('srgb')
+  mapped.alpha = 1
+  return mapped.toString({ format: 'hex', collapse: false })
+}
+
+/** Which way a step moves from the base, and which chroma reduction it uses. */
+export function datavizStepSide(
+  scheme: Scheme,
+  step: DatavizFormulaStep,
+): { towards: 'white' | 'black'; side: 'background' | 'contrast' } {
+  const side = step < 3 ? 'background' : 'contrast'
+  // Light: the background side is light (towards white). Dark: the other way.
+  const towardsWhite = (scheme === 'light') === (side === 'background')
+  return { towards: towardsWhite ? 'white' : 'black', side }
+}
+
+/**
+ * One computed step of a categorical ramp, as in Tokens Studio:
+ * `set_chroma(set_lightness(base, L'), C')` with `L' = L + w × (1 − L)`
+ * towards white or `L' = L × (1 − w)` towards black, and
+ * `C' = C × (1 − reduction × w)`. The hue is the base hue. Returns sRGB hex,
+ * or a grey if the base cannot be read.
+ */
+export function datavizFormulaStep(
+  base: string,
+  weight: number,
+  chromaReduction: number,
+  towards: 'white' | 'black',
+): string {
+  try {
+    const [l, c, h] = new Color(base).to('oklch').coords
+    const lightness = l ?? 0
+    const chroma = c ?? 0
+    const hue = h == null || Number.isNaN(h) ? 0 : h
+    const newLightness =
+      towards === 'white'
+        ? lightness + weight * (1 - lightness)
+        : lightness * (1 - weight)
+    const newChroma = chroma * (1 - chromaReduction * weight)
+    return toSrgbHex(
+      new Color('oklch', [newLightness, Math.max(0, newChroma), hue]),
+    )
+  } catch {
+    return FALLBACK_HEX
+  }
+}
+
+/** The five steps of each category, `cat.1` first, per scheme. */
+export type DatavizRamps = Record<Scheme, string[][]>
+
+/**
+ * The categorical ramps from the formula inputs: per scheme and category,
+ * steps 1 to 5 as sRGB hex. Step 3 is the base colour itself.
+ */
+export function generateDatavizRamps(
+  inputs: DatavizFormulaInputs,
+): DatavizRamps {
+  const ramp = (scheme: Scheme, base: string): string[] => {
+    let baseHex: string
+    try {
+      baseHex = toSrgbHex(new Color(base))
+    } catch {
+      return Array(5).fill(FALLBACK_HEX)
+    }
+    return [1, 2, 3, 4, 5].map((step) => {
+      if (step === 3) return baseHex
+      const formulaStep = step as DatavizFormulaStep
+      const { towards, side } = datavizStepSide(scheme, formulaStep)
+      return datavizFormulaStep(
+        base,
+        inputs.weight[scheme][formulaStep],
+        inputs.chromaReduction[scheme][side],
+        towards,
+      )
+    })
+  }
+  return {
+    light: inputs.bases.map((base) => ramp('light', base)),
+    dark: inputs.bases.map((base) => ramp('dark', base)),
+  }
+}
+
+/** The ramps keyed like `TS_DATAVIZ`: `dataviz.cat.1.1` → hex. */
+export function datavizRampValues(ramps: string[][]): Record<string, string> {
+  return Object.fromEntries(
+    ramps.flatMap((steps, i) =>
+      steps.map((hex, s) => [`dataviz.cat.${i + 1}.${s + 1}`, hex]),
+    ),
+  )
 }
 
 /* ------------------------------------------------------------------ */
