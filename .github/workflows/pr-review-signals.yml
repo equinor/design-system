@@ -10,7 +10,7 @@
 # Uses only the built-in token (pull-requests: write), so it needs no secret.
 # It never checks out or runs code from the PR. Bot PRs and PRs from forks are
 # skipped: the built-in token is read-only on forks, and bot PRs follow their
-# own routines (see AGENTS.md § PR Reviews and the Project Board).
+# own routines (see documentation/agent-instructions/PR_REVIEWS.md § The board).
 #
 # Known limits: a reply in a review thread counts as a Comment review, and a
 # merge of `main` or "Update branch" counts as a push, so the label can be set
