@@ -2,6 +2,7 @@
 import type {
   BindingRecord,
   ComponentInstance,
+  ComponentSource,
   EntrySummary,
   InstanceStep,
   InstanceTree,
@@ -155,6 +156,11 @@ export type TreeNode = {
   page?: true
   /** The layers Go to selects, when not the row's own id */
   goTo?: string[]
+  /**
+   * For an instance listed on the Instances tab, not one inside it: the key
+   * of its main component, to show where its values can be fixed
+   */
+  componentKey?: string
   /** Legacy values in it and the instances below */
   count: number
   /** Of `count`: values on hidden layers */
@@ -223,7 +229,13 @@ export function instanceForest(instances: OldInstance[]): TreeNode[] {
     byId.set(node.id, node)
     node.children.forEach(index)
   }
-  const nodeOf = (instance: OldInstance): TreeNode =>
+  const nodeOf = (instance: OldInstance): TreeNode => ({
+    ...nodeOfTree(instance),
+    ...(instance.mainComponent
+      ? { componentKey: instance.mainComponent.key }
+      : {}),
+  })
+  const nodeOfTree = (instance: OldInstance): TreeNode =>
     instance.tree
       ? fromTree(instance.tree, instance.id)
       : {
@@ -421,4 +433,156 @@ export function valueTree(
   }
   withIds(root)
   return { root, own }
+}
+
+/**
+ * The sources the Instances tab knows: those the check found, by main
+ * component key, and the main components in this file, which need no check.
+ */
+export function knownSources(
+  instances: OldInstance[],
+  checked: ReadonlyMap<string, ComponentSource>,
+): Map<string, ComponentSource> {
+  const known = new Map(checked)
+  for (const instance of instances) {
+    const main = instance.mainComponent
+    if (main && !main.remote) known.set(main.key, { kind: 'this-file' })
+  }
+  return known
+}
+
+/** One main component in Where to fix them, with the instances of it on the tab. */
+export type SourceComponent = {
+  key: string
+  name: string
+  source: ComponentSource
+  instanceIds: string[]
+  /** Legacy values the instances take from it */
+  count: number
+}
+
+export type SourceGroup = {
+  kind: ComponentSource['kind']
+  components: SourceComponent[]
+}
+
+const SOURCE_ORDER: ComponentSource['kind'][] = [
+  'update',
+  'library',
+  'this-file',
+  'no-library',
+  'failed',
+]
+
+/**
+ * Where to fix them, on the Instances tab: the main components of the
+ * instances, grouped by what fixes their legacy values, a library update
+ * first, since it fixes them all in Figma without migrating anything, and in
+ * a group the components with the most values first. Instances whose source
+ * is not known yet are left out.
+ */
+export function sourceGroups(
+  instances: OldInstance[],
+  sources: ReadonlyMap<string, ComponentSource>,
+): SourceGroup[] {
+  const byKey = new Map<string, SourceComponent>()
+  for (const instance of instances) {
+    const main = instance.mainComponent
+    const source = main && sources.get(main.key)
+    if (!main || !source) continue
+    let component = byKey.get(main.key)
+    if (!component) {
+      component = {
+        key: main.key,
+        name: main.name,
+        source,
+        instanceIds: [],
+        count: 0,
+      }
+      byKey.set(main.key, component)
+    }
+    component.instanceIds.push(instance.id)
+    component.count += instance.count
+  }
+  return SOURCE_ORDER.flatMap((kind) => {
+    const components = [...byKey.values()]
+      .filter((component) => component.source.kind === kind)
+      .sort((a, b) => b.count - a.count)
+    return components.length > 0 ? [{ kind, components }] : []
+  })
+}
+
+/** How far the source check is (src/plugin/scan/sources.ts) */
+export type SourceCheck = {
+  done: number
+  total: number
+  running: boolean
+  /** The key of the main component being checked */
+  current?: string
+  /** The keys the last check answered, in order */
+  checked: string[]
+  /** Checks finished so far, to open the results of the last one */
+  runs: number
+  /** Stop was pressed, and the plugin has not answered yet */
+  stopping?: boolean
+  /** The check ended before the last main component */
+  stopped?: boolean
+}
+
+const SUMMARY_ORDER: ComponentSource['kind'][] = [
+  'update',
+  'library',
+  'no-library',
+  'failed',
+]
+
+/** At most this many main components are named in a part of the summary */
+const SUMMARY_NAMES = 3
+
+const SUMMARY_PARTS: Record<ComponentSource['kind'], string> = {
+  update: 'with a library update',
+  library: 'current in its library',
+  'this-file': 'in this file',
+  'no-library': 'not in a library',
+  failed: 'not checked',
+}
+
+/**
+ * What the last check found, in one line under its button, so the designer
+ * sees that it ran and what changed (2026-11-20: in the app the imports were
+ * so quick that the count went from 0 to done, and the groups it filled were
+ * closed).
+ */
+export function checkSummary(
+  check: SourceCheck,
+  sources: ReadonlyMap<string, ComponentSource>,
+  /** The main components' names, by key, to name a few */
+  names: ReadonlyMap<string, string> = new Map(),
+): string {
+  if (check.total === 0) {
+    return 'No library components to check: every main component here is in this file.'
+  }
+  const byKind = new Map<ComponentSource['kind'], string[]>()
+  for (const key of check.checked) {
+    const kind = sources.get(key)?.kind
+    if (kind) byKind.set(kind, [...(byKind.get(kind) ?? []), key])
+  }
+  // A few main components are named, so the designer sees which one is not
+  // in a library without opening its group (2026-11-20).
+  const parts = SUMMARY_ORDER.flatMap((kind) => {
+    const keys = byKind.get(kind) ?? []
+    if (keys.length === 0) return []
+    const part = `${keys.length} ${SUMMARY_PARTS[kind]}`
+    const named = keys.map((key) => names.get(key)).filter(Boolean)
+    return [
+      keys.length <= SUMMARY_NAMES && named.length === keys.length
+        ? `${part} (${named.join(', ')})`
+        : part,
+    ]
+  })
+  const checked = check.checked.length
+  const lead = check.stopped
+    ? `Stopped after ${checked} of ${check.total}`
+    : `Checked ${checked} library component${checked === 1 ? '' : 's'}`
+  return parts.length > 0 ? `${lead}: ${parts.join(', ')}.` : `${lead}.`
 }

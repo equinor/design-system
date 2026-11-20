@@ -594,6 +594,35 @@ Figma; their legacy values go with them." A component in this file changes
 with its main component, which **Go to main component** opens. Overrides of
 an instance are listed with the other changes instead.
 
+**Where to fix them** (phase 3, 2026-11-20): **Check for library updates** on
+the Instances tab sends `check-sources`, and the main thread imports each
+library main component of the listed instances by its key
+(`src/plugin/scan/sources.ts`, the keys from `remoteMainComponents` in
+`src/scan/sources.ts`), one at a time, posting a `source` for each. The
+import tells the sources apart, as spikes S2 and S3 found: it fails when no
+library the file reaches has the main component (`no-library`), either
+because it is in another file that is not a library (Casper's PE Editor) or
+because its library no longer publishes it (the old Core Components Badge
+and Divider, which Figma answers with a 404 in the console); it
+returns the file's own copy when that copy is current (`library`); it
+returns a new node when the library has a newer version (`update`, with the
+legacy bindings and modes counted in the copy and in the new version by
+`LegacyCounter`). A main component in this file needs no import
+(`this-file`, `knownSources`). Figma has no read-only way to tell:
+`getPublishStatusAsync` answers UNPUBLISHED for every remote component, the
+current Typography component too (tested 2026-11-20). An import changes no
+layer but keeps a hidden copy of the latest version in the file, so the
+check runs only from the button, never after a scan. Each instance row on
+the tab gets a label (Update, Library, This file, No library), and Where to
+fix them groups the main components by it (`sourceGroups`), a library update
+first, each group closed at the start. A `source-checking` message names the
+component under way, and when the check ends a status line says what it found
+(`checkSummary`), with the names when a kind has three or fewer, and the
+library updates open: in the app the imports were quick enough that the
+count went from 0 to done with no sign that the check had run. Stop
+(`cancel-sources`) ends the check at once, and an import has 30 s. The design was reviewed on
+`prototype/review/tree.html`, with the sources the spikes found.
+
 A layer inside an instance reads the change log of the main component's
 layer until the instance has plugin data of its own on it (`pluginData` in
 `overrides`). The scan and Revert frame only read a log the instance owns, and

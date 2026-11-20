@@ -4,7 +4,8 @@ import { Icon } from '@equinor/eds-core-react/next'
 import { chevron_down, chevron_right, visibility_off } from '@equinor/eds-icons'
 import { hasInner, slotKeyOf } from '../instances'
 import type { TreeNode } from '../instances'
-import { HIDDEN_LABEL, values } from '../labels'
+import { HIDDEN_LABEL, SOURCES, values } from '../labels'
+import type { ComponentSource } from '../../scan/types'
 
 export { slotKeyOf }
 
@@ -28,6 +29,8 @@ type InstanceTreeProps = {
   leaves?: (key: string, owner: TreeNode, depth: number) => ReactNode
   /** Counts are of legacy values (the Instances tab), or of every value (a frame's Layers view) */
   legacyOnly?: boolean
+  /** Where the values of the instances on the Instances tab can be fixed, by main component key */
+  sources?: ReadonlyMap<string, ComponentSource>
   onSelect: (nodeIds: string[]) => void
 }
 
@@ -166,6 +169,7 @@ export function InstanceTree({
   initiallyOpen = [],
   leaves,
   legacyOnly = true,
+  sources,
   onSelect,
 }: InstanceTreeProps) {
   const [open, setOpen] = useState<Set<string>>(new Set(initiallyOpen))
@@ -318,7 +322,15 @@ export function InstanceTree({
     const name = node.name.trim()
     const inner = hasInner(node)
     const expandable = inner || (leaves !== undefined && node.own > 0)
-    const details = summary(node, legacyOnly)
+    const source = node.componentKey
+      ? sources?.get(node.componentKey)
+      : undefined
+    const details = [
+      summary(node, legacyOnly),
+      source && SOURCES[source.kind].title.toLowerCase(),
+    ]
+      .filter(Boolean)
+      .join(', ')
     return (
       <li key={node.key}>
         <div
@@ -341,6 +353,15 @@ export function InstanceTree({
           <span className="tree-label">
             <span className="tree-name">{name}</span>
           </span>
+          {source && (
+            <span
+              className="tree-source"
+              data-source={source.kind}
+              aria-hidden="true"
+            >
+              {SOURCES[source.kind].label}
+            </span>
+          )}
           {node.hidden && (
             <Icon
               className="tree-hidden"

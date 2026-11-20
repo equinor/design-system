@@ -50,6 +50,9 @@ import {
 } from './store'
 import { buildReport } from '../scan/report'
 import type { ScanState, ScanTarget } from './scan/scan'
+import { componentSource, LegacyCounter } from './scan/sources'
+import { remoteMainComponents } from '../scan/sources'
+import type { ComponentSource } from '../scan/types'
 import {
   clampSize,
   fitHeight,
@@ -96,6 +99,10 @@ function post(message: PluginToUi) {
 }
 
 let lastScan: ScanState | undefined
+/** A source check is running (src/plugin/scan/sources.ts) */
+let checkingSources = false
+/** Stops the source check under way, at once */
+let onStopSources: (() => void) | undefined
 let lastTarget: ScanTarget | undefined
 /** The instances of the main components with a Typography instance in them, counted once per scan when the Typography tab asks */
 let componentCounts: Record<string, number> | undefined
@@ -715,6 +722,49 @@ figma.ui.onmessage = async (message: UiToPlugin) => {
             post({ type: 'typography-components', counts })
           }
         }
+        break
+      case 'check-sources':
+        // One check at a time; the button is off while one runs.
+        if (lastScan && !checkingSources) {
+          checkingSources = true
+          let stopped = false
+          try {
+            figma.skipInvisibleInstanceChildren = false
+            const mains = remoteMainComponents(lastScan.oldInstances)
+            post({ type: 'sources-start', total: mains.length })
+            const counter = new LegacyCounter()
+            // Stop ends the check at once: the import under way goes on in
+            // Figma, but its answer is dropped.
+            const stop = new Promise<'stopped'>((resolve) => {
+              onStopSources = () => resolve('stopped')
+            })
+            for (const { key, instanceId } of mains) {
+              post({ type: 'source-checking', key })
+              const source = await Promise.race([
+                componentSource(instanceId, counter).catch(
+                  (error: unknown): ComponentSource => ({
+                    kind: 'failed',
+                    message:
+                      error instanceof Error ? error.message : String(error),
+                  }),
+                ),
+                stop,
+              ])
+              if (source === 'stopped') {
+                stopped = true
+                break
+              }
+              post({ type: 'source', key, source })
+            }
+          } finally {
+            checkingSources = false
+            onStopSources = undefined
+            post({ type: 'sources-done', ...(stopped ? { stopped } : {}) })
+          }
+        }
+        break
+      case 'cancel-sources':
+        onStopSources?.()
         break
       case 'resize': {
         const clamped = clampSize(message.width, message.height)

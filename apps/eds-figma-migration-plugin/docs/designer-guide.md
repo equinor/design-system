@@ -134,6 +134,22 @@ the steps.
   of a library component is swapped to an EDS Beta component in Figma, and
   its legacy values go with it. Instances of the legacy Typography component
   are not listed here; **Show** opens their tab in Changes.
+  **Check for library updates** finds where the values of each instance can
+  be fixed, and labels its row: **Update** (the library has a newer version:
+  accept it with Review library updates in Figma's left sidebar),
+  **Library** (the library's current version still uses legacy variables:
+  swap the instances to EDS Beta components), **This file** (migrate the main
+  component on the Main components tab) or **No library** (no library the
+  file reaches has the main component: it is from another file, or its
+  library no longer publishes it; swap the instances to EDS Beta components,
+  migrate the main component in its own file, or detach the
+  instances). **Where to fix them** groups the main components the same way,
+  with how many values each fix removes and Go to for the instances. The
+  check imports the latest version of each library component to compare it
+  with the copy in your file, a second or two each. No layer changes, but
+  Figma keeps a hidden copy of each latest version in the file, so the check
+  runs only when you start it. A line under the button says which component it is checking and, when it ends, what it found, naming the components when there are few, such as "1 not in a library (\_Badge [EDS])"; the library updates open by themselves. **Stop** ends it at once. A main component in your file is labelled
+  without a check.
 - **Main components** lists the main components in the scope. On this tab,
   Apply in the footer changes all of them in one run and leaves the frames
   as they are; Apply on Changes or Frames changes the main components and

@@ -7,7 +7,7 @@ import {
   CATEGORY_DESCRIPTIONS as PLUGIN_DESCRIPTIONS,
   CATEGORY_LABELS as PLUGIN_LABELS,
 } from '../scan/labels'
-import type { Category } from '../scan/types'
+import type { Category, ComponentSource } from '../scan/types'
 
 export { GROUP_LABELS, KEPT_TARGET_LABEL, propertyLabel } from '../scan/labels'
 
@@ -62,4 +62,44 @@ export function statusLabel(category: Category, kept = false): string {
 /** “1 value”, “14 values” */
 export function values(count: number): string {
   return `${count} value${count === 1 ? '' : 's'}`
+}
+
+/**
+ * Where the legacy values an instance takes from its main component can be
+ * fixed (phase 3, 2026-11-20): the short label on the instance's row, and the
+ * title and advice of its group in Where to fix them on the Instances tab.
+ */
+export const SOURCES: Record<
+  ComponentSource['kind'],
+  { label: string; title: string; advice: string }
+> = {
+  update: {
+    label: 'Update',
+    title: 'Library update available',
+    advice:
+      'Accept the updates in Figma, with Review library updates at the top of the left sidebar.',
+  },
+  library: {
+    label: 'Library',
+    title: 'Current library version',
+    advice:
+      "The library's current version still uses legacy variables. Swap these instances to EDS Beta components in Figma.",
+  },
+  'this-file': {
+    label: 'This file',
+    title: 'In this file',
+    advice:
+      'Migrate the main components on the Main components tab, and the instances follow.',
+  },
+  'no-library': {
+    label: 'No library',
+    title: 'Not in a library',
+    advice:
+      'No library this file reaches has the main component: it is from another file, or its library no longer publishes it. Swap the instances to EDS Beta components, migrate the main component in its own file, or detach the instances.',
+  },
+  failed: {
+    label: 'Not checked',
+    title: 'Not checked',
+    advice: 'The check could not read these. Scan again and check again.',
+  },
 }

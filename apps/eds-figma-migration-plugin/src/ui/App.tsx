@@ -40,6 +40,7 @@ import {
 import type {
   BindingRecord,
   ComponentInstance,
+  ComponentSource,
   EntrySummary,
   OldInstance,
   ScanSummary,
@@ -64,6 +65,7 @@ import { EntryList } from './components/EntryList'
 import { HealthBar, HealthLegend } from './components/HealthBar'
 import { Inspector } from './components/Inspector'
 import { InstancesView } from './components/InstancesView'
+import type { SourceCheck } from './components/InstancesView'
 import {
   MainComponentsView,
   mainComponentsElsewhere,
@@ -142,6 +144,10 @@ function Overview({
   componentCounts,
   onCountComponents,
   onReviewConversions,
+  sources,
+  sourceCheck,
+  onCheckSources,
+  onStopSources,
 }: {
   summary: ScanSummary
   view: View
@@ -183,6 +189,10 @@ function Overview({
   onCountComponents: () => void
   /** Opens Review with the conversion values that wait for a decision */
   onReviewConversions: (items: ReviewItem[]) => void
+  sources: ReadonlyMap<string, ComponentSource>
+  sourceCheck?: SourceCheck
+  onCheckSources: () => void
+  onStopSources: () => void
 }) {
   const entryNames = new Map(
     summary.entries.map((entry) => [entry.id, entry.name]),
@@ -358,6 +368,10 @@ function Overview({
               setChangesTab('typography-component')
               onView('mapping')
             }}
+            sources={sources}
+            sourceCheck={sourceCheck}
+            onCheckSources={onCheckSources}
+            onStopSources={onStopSources}
           />
         ) : view === 'components' ? (
           <MainComponentsView
@@ -555,6 +569,12 @@ export function App() {
   const [componentCounts, setComponentCounts] =
     useState<Record<string, number>>()
   const [instances, setInstances] = useState<OldInstance[]>([])
+  // Where the values of each library main component can be fixed, by key.
+  // Kept across scans in a session: a library changes only when published.
+  const [sources, setSources] = useState<Map<string, ComponentSource>>(
+    () => new Map(),
+  )
+  const [sourceCheck, setSourceCheck] = useState<SourceCheck>()
   const [review, setReview] = useState<ReviewItem[]>()
   // Review of the conversions ends on a note about Convert, not Apply.
   const [reviewRun, setReviewRun] = useState<'Apply' | 'Convert'>('Apply')
@@ -724,6 +744,45 @@ export function App() {
           break
         case 'instances':
           setInstances(message.instances)
+          break
+        case 'sources-start':
+          setSourceCheck((previous) => ({
+            done: 0,
+            total: message.total,
+            running: true,
+            checked: [],
+            runs: previous?.runs ?? 0,
+          }))
+          break
+        case 'source-checking': {
+          const { key } = message
+          setSourceCheck(
+            (previous) => previous && { ...previous, current: key },
+          )
+          break
+        }
+        case 'source': {
+          const { key, source } = message
+          setSources((previous) => new Map(previous).set(key, source))
+          setSourceCheck(
+            (previous) =>
+              previous && {
+                ...previous,
+                done: previous.done + 1,
+                checked: [...previous.checked, key],
+              },
+          )
+          break
+        }
+        case 'sources-done':
+          setSourceCheck((previous) => ({
+            done: previous?.done ?? 0,
+            total: previous?.total ?? 0,
+            running: false,
+            checked: previous?.checked ?? [],
+            runs: (previous?.runs ?? 0) + 1,
+            ...(message.stopped ? { stopped: true } : {}),
+          }))
           break
         case 'saved-health':
           setSaved(message.saved)
@@ -1318,6 +1377,15 @@ export function App() {
                   onReviewConversions={(items) => {
                     setReviewRun('Convert')
                     setReview(items)
+                  }}
+                  sources={sources}
+                  sourceCheck={sourceCheck}
+                  onCheckSources={() => send({ type: 'check-sources' })}
+                  onStopSources={() => {
+                    setSourceCheck(
+                      (previous) => previous && { ...previous, stopping: true },
+                    )
+                    send({ type: 'cancel-sources' })
                   }}
                 />
               </div>

@@ -1392,6 +1392,50 @@ code {
   }
 }
 
+/* Where an instance's legacy values can be fixed (phase 3): a short label on
+   its row and on its group in Where to fix them, in the row's type. A library
+   update is information, in info blue, as Ready is; the others are neutral. */
+.tree-source {
+  --_bg: var(--eds-background-non-interactive-neutral-muted);
+  --_color: var(--eds-text-on-muted-neutral);
+
+  flex: none;
+  margin-inline-start: 6px;
+  padding-inline: 4px;
+  font-family: Inter, var(--eds-font-family-ui);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--_color);
+  white-space: nowrap;
+  background-color: var(--_bg);
+  border-radius: 3px;
+
+  &[data-source='update'] {
+    --_bg: var(--eds-background-non-interactive-info-muted);
+    --_color: var(--eds-text-on-muted-info);
+  }
+}
+
+.source-check {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.source-title {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+
+  & .tree-source {
+    margin-inline-start: 0;
+  }
+}
+
 /* In a frame's Layers view: the values on an instance's own layers, under its
    row at the level of the instances in it, in the window's type rather than
    the tree's 11px. A margin, so the list's top line starts at the indent too. */

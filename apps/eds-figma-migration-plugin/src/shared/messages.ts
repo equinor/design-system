@@ -17,6 +17,7 @@ import type { Report } from '../scan/report'
 import type {
   BindingRecord,
   ComponentInstance,
+  ComponentSource,
   Counts,
   OldInstance,
   ScanSummary,
@@ -231,6 +232,14 @@ export type PluginToUi =
   | { type: 'choices-not-saved' }
   | { type: 'overrides'; overrides: Overrides }
   | { type: 'scan-cancelled' }
+  /** The source check starts, for `total` main components (src/plugin/scan/sources.ts) */
+  | { type: 'sources-start'; total: number }
+  /** The check starts on the main component with this key */
+  | { type: 'source-checking'; key: string }
+  /** The source of the main component with this key, as the check finds it */
+  | { type: 'source'; key: string; source: ComponentSource }
+  /** The check ended; stopped when the designer stopped it before the last main component */
+  | { type: 'sources-done'; stopped?: true }
   | {
       type: 'entry-detail'
       entryId: string
@@ -309,6 +318,18 @@ export type UiToPlugin =
   | { type: 'preview-convert'; id: number; instanceIds: string[] }
   /** Counts the instances of the main components that have a Typography instance in them */
   | { type: 'get-typography-components' }
+  /**
+   * Finds where the legacy values of the instances on the Instances tab can
+   * be fixed, by importing each library main component by its key. Asked for
+   * by the designer, since each import leaves a hidden copy of the library's
+   * latest version in the file.
+   */
+  | { type: 'check-sources' }
+  /**
+   * Stops the source check at once: the import under way goes on in Figma,
+   * but its answer is dropped.
+   */
+  | { type: 'cancel-sources' }
   /**
    * Resizes the window; done when the drag ends, so the size is kept. With
    * fit, the window shrinks to the room Figma gives it (src/ui/fit.ts), below

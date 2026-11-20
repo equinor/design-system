@@ -388,6 +388,28 @@ export type OldInstance = {
 }
 
 /**
+ * Where the legacy values an instance takes from its main component can be
+ * fixed (phase 3 of the nested-instances plan, 2026-11-20), found by
+ * importing the main component by its key, which tells the sources apart
+ * (spikes S2 and S3, 2026-11-19): a main component in this file needs no
+ * import; an import that fails means no library this file reaches has the
+ * main component: it is in another file that is not a library, such as
+ * Casper's PE Editor, or its library no longer publishes it, such as the old
+ * Badge and Divider of Core Components (tested on FRIOD Main Design,
+ * 2026-11-20); an import that returns the file's
+ * own copy means the copy is the library's current version; a new node means
+ * the library has a newer version. `legacy` counts the legacy bindings and
+ * modes in the file's copy of the main component, `latestLegacy` those in
+ * the library's newer version.
+ */
+export type ComponentSource =
+  | { kind: 'this-file' }
+  | { kind: 'library'; legacy: number }
+  | { kind: 'update'; legacy: number; latestLegacy: number }
+  | { kind: 'no-library' }
+  | { kind: 'failed'; message: string }
+
+/**
  * An instance and the instances in it, with the legacy values each takes
  * from its main component (category Inside instances). The root is an
  * instance from the Instances tab; the counts of a node include the
