@@ -157,8 +157,10 @@ export const DATAVIZ_RAMP_TARGETS = {
   /** Step 3 in a chart against `background.surface` */
   step3ChartRatio: 3,
   step3ChartLc: 30,
-  /** Step 4 in a chart against `background.surface` */
-  step4ChartRatio: 3,
+  /**
+   * Step 4 in a chart against `background.surface`. Only the APCA goal: its
+   * 3:1 on the surface is already the border requirement above.
+   */
   step4ChartLc: 45,
 } as const
 

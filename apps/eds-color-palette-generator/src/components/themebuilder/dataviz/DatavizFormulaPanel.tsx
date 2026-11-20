@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useId, useMemo, useState } from 'react'
 import { useColorScheme } from '@/context/ColorSchemeContext'
 import {
   DATAVIZ_FORMULA_STEPS,
@@ -111,22 +111,25 @@ function TextCheck({ pair }: { pair: ContrastPair }) {
   )
 }
 
+/** Chart goals: the ratio is left out where another check already covers it. */
 function ChartCheck({
   pair,
   ratio,
   lc,
 }: {
   pair: ContrastPair
-  ratio: number
+  ratio?: number
   lc: number
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <Measure
-        text={formatRatio(pair.ratio)}
-        pass={pair.ratio >= ratio}
-        kind="goal"
-      />
+      {ratio !== undefined && (
+        <Measure
+          text={formatRatio(pair.ratio)}
+          pass={pair.ratio >= ratio}
+          kind="goal"
+        />
+      )}
       <Measure text={formatLc(pair.lc)} pass={pair.lc >= lc} kind="goal" />
     </div>
   )
@@ -143,27 +146,50 @@ function NumberInput({
   tokensStudio: number
   onChange: (value: number) => void
 }) {
+  const id = useId()
+  const hintId = `${id}-hint`
+  // The typed text, so the field can be cleared or hold a half-typed number.
+  // Only a number that parses is sent up, clamped to 0 to 1.
+  const [draft, setDraft] = useState(String(value))
+  // Take the value again when it changes from outside, e.g. on Reset or when
+  // the scheme changes
+  const [syncedValue, setSyncedValue] = useState(value)
+  if (value !== syncedValue) {
+    setSyncedValue(value)
+    setDraft(String(value))
+  }
+
   return (
-    <label className="flex flex-col gap-1 text-sm text-primary">
-      <span className="font-medium">{label}</span>
+    <div className="flex flex-col gap-1 text-sm text-primary">
+      <label htmlFor={id} className="font-medium">
+        {label}
+      </label>
       <input
+        id={id}
         type="number"
         min={0}
         max={1}
         step={0.01}
-        value={value}
+        value={draft}
+        aria-describedby={hintId}
         onChange={(e) => {
-          const next = e.target.valueAsNumber
-          if (Number.isFinite(next)) onChange(Math.min(1, Math.max(0, next)))
+          const text = e.target.value
+          setDraft(text)
+          const next = Number(text)
+          if (text.trim() !== '' && Number.isFinite(next)) {
+            onChange(Math.min(1, Math.max(0, next)))
+          }
         }}
+        // An empty or unfinished field shows the value in use again
+        onBlur={() => setDraft(String(value))}
         className={INPUT_CLASS}
       />
-      <span className="text-xs text-secondary">
+      <span id={hintId} className="text-xs text-secondary">
         {value === tokensStudio
           ? 'Tokens Studio value'
           : `Tokens Studio: ${tokensStudio}`}
       </span>
-    </label>
+    </div>
   )
 }
 
@@ -178,19 +204,24 @@ export function DatavizFormulaPanel() {
   const [chosenScheme, setScheme] = useState<Scheme | null>(null)
   const scheme = chosenScheme ?? colorScheme
   const [inputs, setInputs] = useState<DatavizFormulaInputs>(TS_DATAVIZ_FORMULA)
+  const captionId = useId()
 
   const ramps = useMemo(() => generateDatavizRamps(inputs), [inputs])
 
   const changed = changedInputs(inputs)
-  const differing = SCHEMES.reduce((count, s) => {
-    const values = datavizRampValues(ramps[s])
-    return (
-      count +
-      Object.entries(values).filter(
-        ([path, hex]) => TS_DATAVIZ[s][path] !== hex,
-      ).length
-    )
-  }, 0)
+  const differing = useMemo(
+    () =>
+      SCHEMES.reduce((count, s) => {
+        const values = datavizRampValues(ramps[s])
+        return (
+          count +
+          Object.entries(values).filter(
+            ([path, hex]) => TS_DATAVIZ[s][path] !== hex,
+          ).length
+        )
+      }, 0),
+    [ramps],
+  )
 
   // The backgrounds and text colours of the chosen scheme, from Tokens Studio
   const checks: DatavizCategoryCheck[] = useMemo(() => {
@@ -227,6 +258,13 @@ export function DatavizFormulaPanel() {
     (c) =>
       c.step4OnCanvas >= T.borderRatio && c.step4OnSurface >= T.borderRatio,
   ).length
+  const cvdScores = cvd.flatMap(({ scores }) => scores)
+  const cvdMet = cvdScores.filter((s) => s.minDeltaE >= CVD_FLOOR).length
+
+  const summary = `Text on steps 1 and 2 reaches ${T.textRatio}:1 in ${textPasses} of ${checks.length} categories, and step 4 reaches ${T.borderRatio}:1 on both canvas and surface in ${borderPasses} of ${checks.length}. The colour-blindness goal is met in ${cvdMet} of ${cvdScores.length} simulations.`
+  // Read out by screen readers only when the proposal state or a count
+  // changes, not on every change of a value
+  const announcement = `${changed === 0 ? 'Tokens Studio values.' : 'Proposal.'} ${summary}`
 
   const setWeight = (step: DatavizFormulaStep, value: number) =>
     setInputs((prev) => ({
@@ -276,10 +314,7 @@ export function DatavizFormulaPanel() {
           change the inputs in Tokens Studio.
         </p>
 
-        <p
-          className="m-0 flex flex-wrap items-center gap-2 text-sm text-secondary"
-          role="status"
-        >
+        <p className="m-0 flex flex-wrap items-center gap-2 text-sm text-secondary">
           {changed === 0 ? (
             <>
               <Badge pass={differing === 0} label="Tokens Studio" />
@@ -303,6 +338,10 @@ export function DatavizFormulaPanel() {
           onChange={setScheme}
           className="self-start"
         />
+
+        <p className="sr-only" role="status">
+          {announcement}
+        </p>
 
         {/* Formula inputs for the chosen scheme */}
         <fieldset className="m-0 flex flex-wrap gap-5 border-0 p-0">
@@ -335,7 +374,8 @@ export function DatavizFormulaPanel() {
         {/* Colour-blindness score of the first five series */}
         <div className="flex flex-col gap-2 text-sm">
           <h3 className="m-0 text-sm font-medium text-primary">
-            Series 1 to {DATAVIZ_SCORED_SERIES} under colour-vision deficiency
+            Goal: series 1 to {DATAVIZ_SCORED_SERIES} apart under colour-vision
+            deficiency
           </h3>
           {cvd.map(({ step, scores }) => (
             <div
@@ -349,32 +389,34 @@ export function DatavizFormulaPanel() {
                   {s.worstPair[0] + 1} and cat.{s.worstPair[1] + 1})
                   <Badge
                     pass={s.minDeltaE >= CVD_FLOOR}
-                    label={s.minDeltaE >= CVD_FLOOR ? 'OK' : 'LOW'}
+                    label={s.minDeltaE >= CVD_FLOOR ? 'Met' : 'Below'}
                   />
                 </span>
               ))}
             </div>
           ))}
           <p className="m-0 text-xs text-secondary">
-            The closest pair of the five series after simulation, with the same
-            floor (ΔE {CVD_FLOOR.toFixed(2)}) as the categorical generator
-            above.
+            The closest pair of the five series after simulation. The goal is a
+            ΔE of {CVD_FLOOR.toFixed(2)} or more, the same floor as the
+            categorical generator above. It is a goal, so a pair below it is
+            reported and does not fail the ramps.
           </p>
         </div>
 
-        <p className="m-0 text-sm text-secondary">
-          Text on steps 1 and 2 reaches {T.textRatio}:1 in {textPasses} of{' '}
-          {checks.length} categories, and step 4 reaches {T.borderRatio}:1 on
-          both canvas and surface in {borderPasses} of {checks.length}.
-        </p>
+        <p className="m-0 text-sm text-secondary">{summary}</p>
 
         {/* The ramps and checks, shown in the chosen scheme */}
+        {/* Scrolls sideways when the table is wider than the card. It can take
+            focus so the keyboard can scroll it too. */}
         <div
           data-color-scheme={scheme}
+          role="region"
+          aria-labelledby={captionId}
+          tabIndex={0}
           className="overflow-x-auto rounded-sm border border-muted bg-surface text-primary"
         >
           <table className="w-full border-collapse text-sm">
-            <caption className="sr-only">
+            <caption id={captionId} className="sr-only">
               Categorical ramps and checks, {scheme} scheme
             </caption>
             <thead>
@@ -408,7 +450,7 @@ export function DatavizFormulaPanel() {
                 <th scope="col" className={TH}>
                   Chart, step 4 on surface
                   <br />
-                  Goal {T.step4ChartRatio}:1, Lc {T.step4ChartLc}
+                  Goal Lc {T.step4ChartLc}
                 </th>
               </tr>
             </thead>
@@ -497,7 +539,6 @@ export function DatavizFormulaPanel() {
                     <td className={TD}>
                       <ChartCheck
                         pair={check.step4Chart}
-                        ratio={T.step4ChartRatio}
                         lc={T.step4ChartLc}
                       />
                     </td>
@@ -510,7 +551,9 @@ export function DatavizFormulaPanel() {
         <p className="m-0 text-xs text-secondary">
           Pass and Fail are requirements: text on the fills of Chip, Badge and
           diagram objects, and the step 4 border. Met and Below are targets and
-          chart goals. The text is text.primary or text.inverted, whichever
+          goals: the APCA target for text, the chart goals and the
+          colour-blindness goal above. The 3:1 of step 4 on the surface is
+          checked once, as the border requirement. The text is text.primary or text.inverted, whichever
           reads better on both steps 1 and 2, because rest and hover share it. A
           base colour applies to both schemes, as in Tokens Studio.
         </p>
