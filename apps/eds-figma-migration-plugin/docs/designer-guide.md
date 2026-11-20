@@ -124,7 +124,8 @@ the steps.
   inside each instance the instances it holds, with slot content under its
   slot. Hidden instances are dimmed and show the hidden icon, so you find the
   ones the canvas does not show. Each row gives the number of legacy values
-  in the instance and the instances in it, and **Go to**. The tree shows only
+  in the instance and the instances in it, and **Go to**; a click anywhere
+  else on the row opens it. The tree shows only
   the instances that hold such values, and the slots they are in; frames and
   other layers between them are left out, so a level in the tree can be
   deeper in the Layers panel. A component in this file changes every
@@ -153,9 +154,16 @@ the steps.
   legacy values each one overrides (they change here) and takes from its
   main component (they change there).
 
-In a frame, the **Layers** view shows each instance as one row, marked
-Instance. Each value in it is marked **Overridden in the instance** or **From
-the main component**, and the row says how many are overridden. A legacy value
+In a frame, the **Layers** view shows each instance as one group, marked
+Instance, with everything inside it, the instances in its slots too. In the
+group, **Directly in** and the instance's name opens to the values on the
+instance's own layers. Under **Inner instances** are the instances in it, in
+the same tree as the Instances tab: each opens to the values directly in it,
+then the instances inside it, so you can reach a nested instance without
+scrolling past a long list. Each value is marked **Overridden in the
+instance** or **From the main component**. The group and each row say how
+many are overridden, so you can find the values that change here without
+opening every row. A legacy value
 the instance overrides can be changed there, like any other layer. A value
 from the main component cannot: it changes with the main component or its
 library.
@@ -164,7 +172,9 @@ Content you place in a slot of an instance belongs to that instance once you
 edit the slot, and no longer follows the main component. The plugin treats it
 like layers in a frame: a legacy value there can be changed like any other,
 and an instance you placed there is listed on the Instances tab under the
-slot, by the slot's name.
+slot, by the slot's name. In the frame's Layers view, everything in the slot
+is in the instance's group under the slot's row: the instances, and the
+other layers, such as a frame, under **Directly in** and the slot's name.
 
 To change a target, press **Change** on one value or the target of a row, or
 tick several values and use the bar at the bottom of the window. The picker

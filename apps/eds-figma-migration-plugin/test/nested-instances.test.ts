@@ -17,6 +17,7 @@ import { classifyUnits } from '../src/scan/classify'
 import { packFixture, unpackFixture } from '../src/scan/fixture'
 import type { PackedFixture } from '../src/scan/fixture'
 import { buildInstanceTree } from '../src/scan/instance-tree'
+import { hasInner, slotKeyOf, valueTree } from '../src/ui/instances'
 import type { BindingRecord, InstanceStep } from '../src/scan/types'
 
 const fixture = JSON.parse(
@@ -159,10 +160,162 @@ describe('buildInstanceTree', () => {
   })
 })
 
+describe('valueTree', () => {
+  // Every value in PE Editor's group of the frame's Layers view
+  const inPeEditor = records.filter(
+    (record) => record.instances?.[0]?.id === PE_EDITOR,
+  )
+  const { root, own } = valueTree(stepOf(PE_EDITOR), inPeEditor)
+  const child = (id: string) => {
+    const found = root.children.find((node) => node.id === id)
+    if (!found) throw new Error(`No node ${id}`)
+    return found
+  }
+
+  it('puts every value of the instance in the tree, overrides too', () => {
+    expect(root).toMatchObject({ count: inPeEditor.length, overridden: 5 })
+    const leaves = [...own.values()].flat()
+    expect(leaves).toHaveLength(inPeEditor.length)
+    expect(leaves.filter((record) => record.override)).toHaveLength(5)
+  })
+
+  it('puts the instances of its owned slot under it, in the slot', () => {
+    const slotted = root.children.filter((node) => node.inSlot)
+    expect(slotted.map((node) => node.id)).toEqual([
+      `${SLOT};2100:1952`,
+      `${SLOT};2100:1953`,
+      `${SLOT};2100:1954`,
+      `${SLOT};2100:1955`,
+      `${SLOT};2100:2033`,
+      `${SLOT};2100:2108`,
+      `${SLOT};2100:2150`,
+    ])
+  })
+
+  it('gives each value to the instance whose own layer it is on', () => {
+    // The Button's legacy icon fill is on the icon instance in it, two
+    // levels below PE Editor, and the Button has none of its own.
+    const button = child(`${SLOT};2100:2108`)
+    expect(button).toMatchObject({ own: 0, count: 1, overridden: 1 })
+    const [icon] = button.children
+    expect(own.get(icon.key)?.map((record) => record.nodeId)).toEqual([
+      `${SLOT};2100:2108;5823:7987;67:16`,
+    ])
+    expect(own.get(button.key)).toBeUndefined()
+    // Go to on the row of the values directly in an instance selects their layers
+    expect(icon.ownIds).toEqual([`${SLOT};2100:2108;5823:7987;67:16`])
+    expect(button.ownIds).toBeUndefined()
+  })
+
+  it('keeps a hidden instance hidden, with its values counted as hidden', () => {
+    expect(child(`${SLOT};2100:2150`)).toMatchObject({
+      hidden: true,
+      count: 3,
+      hiddenCount: 3,
+    })
+  })
+
+  it('lists the values an instance overrides first on each row', () => {
+    const top = {
+      id: 'a',
+      name: 'A',
+    }
+    const record = (id: string, override: boolean): BindingRecord => ({
+      id,
+      nodeId: 'a',
+      nodeName: 'A',
+      nodeType: 'INSTANCE',
+      entryId: 'frame',
+      path: [],
+      property: { type: 'field', field: 'paddingLeft' },
+      group: 'spacing',
+      category: override ? 'sure' : 'inInstance',
+      instanceId: 'a',
+      ...(override ? { override: true } : {}),
+    })
+    const tree = valueTree(top, [record('1', false), record('2', true)])
+    expect(tree.own.get('a')?.map((item) => item.id)).toEqual(['2', '1'])
+    expect(tree.root).toMatchObject({ own: 2, ownOverridden: 1 })
+  })
+
+  it('puts the values on a frame in an owned slot under the slot', () => {
+    // Casper's Actions frame in PE Editor's Content slot: not an instance,
+    // so it has no instanceId, but its chain ends at PE Editor.
+    const pe = { id: 'pe', name: 'PE Editor' }
+    const field = {
+      id: 'pe;slot;tf',
+      name: 'Text Field',
+      slot: true as const,
+      slotName: 'Content',
+    }
+    const base: Pick<BindingRecord, 'entryId' | 'path' | 'property' | 'group'> =
+      {
+        entryId: 'frame',
+        path: [],
+        property: { type: 'field', field: 'paddingLeft' },
+        group: 'spacing',
+      }
+    const records: BindingRecord[] = [
+      {
+        ...base,
+        id: 'own',
+        nodeId: 'pe',
+        nodeName: 'PE Editor',
+        nodeType: 'INSTANCE',
+        category: 'inInstance',
+        instanceId: 'pe',
+        instances: [pe],
+      },
+      {
+        ...base,
+        id: 'frame',
+        nodeId: 'pe;slot;actions',
+        nodeName: 'Actions',
+        nodeType: 'FRAME',
+        category: 'sure',
+        instances: [pe],
+        slotName: 'Content',
+      },
+      {
+        ...base,
+        id: 'field',
+        nodeId: 'pe;slot;tf',
+        nodeName: 'Text Field',
+        nodeType: 'INSTANCE',
+        category: 'sure',
+        override: true,
+        instanceId: 'pe;slot;tf',
+        instances: [pe, field],
+      },
+    ]
+    const { root, own } = valueTree(pe, records)
+    expect(root).toMatchObject({ count: 3, own: 1, overridden: 1 })
+    expect(root.slotValues).toEqual([
+      { slot: 'Content', own: 1, ownIds: ['pe;slot;actions'] },
+    ])
+    expect(own.get(slotKeyOf('pe', 'Content'))?.map((item) => item.id)).toEqual(
+      ['frame'],
+    )
+    expect(own.get('pe')?.map((item) => item.id)).toEqual(['own'])
+    expect(root.children).toMatchObject([
+      { id: 'pe;slot;tf', inSlot: true, slotName: 'Content', own: 1 },
+    ])
+    expect(hasInner(root)).toBe(true)
+  })
+})
+
 describe('fixture format', () => {
   it('keeps the chain of instances and hidden layers through a pack', () => {
     const again = unpackFixture(packFixture(fixture, units))
     expect(again).toEqual(units)
     expect(units.filter((unit) => unit.hidden)).toHaveLength(4)
+  })
+
+  it('keeps the slot of a layer in owned slot content through a pack', () => {
+    const withSlot = units.map((unit, index) =>
+      index === 0 ? { ...unit, slotName: 'Content' } : unit,
+    )
+    const [first] = unpackFixture(packFixture(fixture, withSlot))
+    expect(first.slotName).toBe('Content')
   })
 })

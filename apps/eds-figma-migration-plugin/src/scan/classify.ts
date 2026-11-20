@@ -352,6 +352,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
     group: groupOf(unit),
     instanceId: unit.instanceId,
     ...(unit.instances ? { instances: unit.instances } : {}),
+    ...(unit.slotName ? { slotName: unit.slotName } : {}),
     density: targetDensity(unit.context.modes),
     scheme: targetScheme(unit.context.modes),
     ...(unit.override ? { override: true as const } : {}),

@@ -38,6 +38,8 @@ type PackedNode = {
   hidden?: true
   /** Ids in `steps` of the instances the layer is in, outermost first */
   instances?: string[]
+  /** The slot it is in as owned slot content (RawUnit.slotName) */
+  slotName?: string
 }
 
 type PackedUnit = {
@@ -136,6 +138,7 @@ export function packFixture(
               }),
             }
           : {}),
+        ...(unit.slotName ? { slotName: unit.slotName } : {}),
       }
       owners.push({ id: unit.nodeId, context })
     }
@@ -267,6 +270,7 @@ export function unpackFixture(fixture: PackedFixture): RawUnit[] {
             }),
           }
         : {}),
+      ...(node.slotName ? { slotName: node.slotName } : {}),
     }
     if (unit.unit === 'variable') {
       return {

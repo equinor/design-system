@@ -1216,6 +1216,7 @@ code {
 .tree-row {
   --_color: var(--eds-text-primary);
 
+  position: relative;
   display: flex;
   align-items: center;
   block-size: 32px;
@@ -1267,8 +1268,10 @@ code {
   inline-size: 30px;
 }
 
-/* The caret fills the row's height but for 1px above and below, 30 by 30, so
-   it is easy to hit. */
+/* The caret fills the row's height but for 1px above and below, 30 by 30.
+   Its click area is stretched over the whole row, so a click anywhere on the
+   row opens it; the row's hover shows that, so the caret has none of its
+   own. */
 .tree-caret {
   display: inline-flex;
   flex: none;
@@ -1283,14 +1286,35 @@ code {
   border: 0;
   border-radius: 5px;
 
-  &:hover {
-    background-color: light-dark(#0000000d, #ffffff1a);
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    border-radius: 5px;
   }
 
   &:focus-visible {
     outline: 2px solid var(--eds-border-interactive-focus);
     outline-offset: -2px;
   }
+}
+
+/* The values row has no layer icon; its name lines up with the others. */
+.tree-icon-space {
+  flex: none;
+  inline-size: 16px;
+}
+
+/* The small header over the inner instances of an instance in a frame's
+   Layers view, in the tree's type */
+.tree-heading {
+  padding-block: 12px 4px;
+  padding-inline-start: 8px;
+  font-family: Inter, var(--eds-font-family-ui);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--eds-text-secondary);
 }
 
 .tree-icon {
@@ -1329,6 +1353,7 @@ code {
 
 .tree-count {
   flex: none;
+  margin-inline-start: 8px;
   color: var(--_secondary);
 }
 
@@ -1338,6 +1363,9 @@ code {
 .tree-goto {
   --_bg: transparent;
 
+  /* Above the caret's click area */
+  position: relative;
+  z-index: 1;
   flex: none;
   block-size: 30px;
   margin-inline-start: 4px;
@@ -1362,6 +1390,16 @@ code {
     outline: 1px solid var(--eds-border-interactive-focus);
     outline-offset: 1px;
   }
+}
+
+/* In a frame's Layers view: the values on an instance's own layers, under its
+   row at the level of the instances in it, in the window's type rather than
+   the tree's 11px. A margin, so the list's top line starts at the indent too. */
+.tree-leaves {
+  margin-inline-start: calc(var(--_depth, 0) * 24px);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
 }
 
 /* Target picker */

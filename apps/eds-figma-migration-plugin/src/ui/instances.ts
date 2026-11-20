@@ -1,7 +1,9 @@
 /** Instances that still use legacy variables, grouped by main component. */
 import type {
+  BindingRecord,
   ComponentInstance,
   EntrySummary,
+  InstanceStep,
   InstanceTree,
   OldInstance,
 } from '../scan/types'
@@ -159,7 +161,36 @@ export type TreeNode = {
   hiddenCount: number
   /** Of `count`: values on its own layers */
   own: number
+  /** Of `count`, in a frame's Layers view: values the instance overrides */
+  overridden?: number
+  /** Of `own`, in a frame's Layers view: values the instance overrides */
+  ownOverridden?: number
+  /** In a frame's Layers view: the layers of the values on its own layers, for their Go to */
+  ownIds?: string[]
+  /**
+   * In a frame's Layers view: the values on layers in slot content the
+   * instance owns that are not in an instance there, such as a frame in the
+   * slot, per slot (`BindingRecord.slotName`)
+   */
+  slotValues?: SlotValues[]
   children: TreeNode[]
+}
+
+/** The values on the layers of one slot that are not in an instance there */
+export type SlotValues = {
+  slot: string
+  own: number
+  ownIds: string[]
+}
+
+/** The key of the row for a slot, to open it from outside and to find its values. */
+export function slotKeyOf(parentKey: string, slot: string): string {
+  return `${parentKey}:slot:${slot}`
+}
+
+/** A row with instances or slot content below it, not only values of its own */
+export function hasInner(node: TreeNode): boolean {
+  return node.children.length > 0 || (node.slotValues?.length ?? 0) > 0
 }
 
 function fromTree(tree: InstanceTree, key: string): TreeNode {
@@ -300,4 +331,94 @@ export function entryForest(
     if (!known.has(entryId)) result.push(...children)
   }
   return result
+}
+
+/**
+ * The values in one instance of a frame and in the instances inside it, for
+ * the frame's Layers view: the tree of the Instances tab with the values as
+ * its leaves, one level per instance in the chain each value records. `own`
+ * gives the values on each node's own layers by its key, and the values on
+ * layers in a slot it owns that are not in an instance there by the slot's
+ * key (`slotKeyOf`), the ones an instance overrides first. A value from a
+ * fixture made before chains were recorded counts on the top instance's own
+ * layers. Casper's case (2026-11-18): the frame listed PE Editor's 638 values,
+ * and those of the 12 instances in its slot, in flat lists of one group per
+ * instance, and the frames in the slot as layers of the frame.
+ */
+export function valueTree(
+  top: InstanceStep,
+  records: BindingRecord[],
+): { root: TreeNode; own: Map<string, BindingRecord[]> } {
+  const nodeOf = (step: InstanceStep, key: string): TreeNode => ({
+    key,
+    id: step.id,
+    name: step.name,
+    ...(step.component ? { component: step.component } : {}),
+    ...(step.hidden ? { hidden: true as const } : {}),
+    ...(step.slot ? { inSlot: true as const } : {}),
+    ...(step.slotName ? { slotName: step.slotName } : {}),
+    count: 0,
+    hiddenCount: 0,
+    own: 0,
+    overridden: 0,
+    ownOverridden: 0,
+    children: [],
+  })
+  const root = nodeOf(top, top.id)
+  const own = new Map<string, BindingRecord[]>()
+  const ids = new Map<string, Set<string>>()
+  const add = (key: string, record: BindingRecord) => {
+    own.set(key, [...(own.get(key) ?? []), record])
+    ids.set(key, (ids.get(key) ?? new Set()).add(record.nodeId))
+  }
+  for (const record of records) {
+    const chain = record.instances ?? []
+    const at = chain.findIndex((step) => step.id === top.id)
+    let node = root
+    const count = (target: TreeNode) => {
+      target.count += 1
+      if (record.hidden) target.hiddenCount += 1
+      if (record.override) target.overridden = (target.overridden ?? 0) + 1
+    }
+    count(node)
+    for (const step of at === -1 ? [] : chain.slice(at + 1)) {
+      let child = node.children.find((item) => item.id === step.id)
+      if (!child) {
+        child = nodeOf(step, `${node.key}/${step.id}`)
+        node.children.push(child)
+      }
+      node = child
+      count(node)
+    }
+    // A layer in slot content the instance owns, outside the instances
+    // there, is under the slot, as in Figma's Layers panel.
+    if (record.slotName && record.instanceId === undefined) {
+      const slot = record.slotName
+      node.slotValues ??= []
+      let values = node.slotValues.find((item) => item.slot === slot)
+      if (!values) {
+        values = { slot, own: 0, ownIds: [] }
+        node.slotValues.push(values)
+      }
+      values.own += 1
+      add(slotKeyOf(node.key, slot), record)
+      continue
+    }
+    node.own += 1
+    if (record.override) node.ownOverridden = (node.ownOverridden ?? 0) + 1
+    add(node.key, record)
+  }
+  for (const list of own.values()) {
+    list.sort((a, b) => Number(!a.override) - Number(!b.override))
+  }
+  const withIds = (node: TreeNode) => {
+    const found = ids.get(node.key)
+    if (found) node.ownIds = [...found]
+    for (const values of node.slotValues ?? []) {
+      values.ownIds = [...(ids.get(slotKeyOf(node.key, values.slot)) ?? [])]
+    }
+    node.children.forEach(withIds)
+  }
+  withIds(root)
+  return { root, own }
 }

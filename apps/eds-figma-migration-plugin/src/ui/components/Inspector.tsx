@@ -43,10 +43,12 @@ import type {
   Category,
   ComponentInstance,
   EntrySummary,
+  InstanceStep,
   OldInstance,
   PropertyGroup,
 } from '../../scan/types'
-import { groupInstances } from '../instances'
+import { groupInstances, hasInner, valueTree } from '../instances'
+import type { TreeNode } from '../instances'
 import { pathBelow } from '../paths'
 import { reviewItems } from '../review'
 import { groupState } from '../selection'
@@ -58,6 +60,7 @@ import { ComponentInstances } from './ComponentInstances'
 import { MappingView } from './MappingView'
 import { BindingRow } from './BindingRow'
 import { HealthBar, HealthLegend } from './HealthBar'
+import { InstanceTree } from './InstanceTree'
 import { InsideMainComponent, MainComponentLabel } from './MainComponentLabel'
 import { Tabs } from './Tabs'
 
@@ -135,8 +138,11 @@ type Group = {
   title: string
   subtitle?: string
   records: BindingRecord[]
-  /** In the Layers view: an instance, with everything inside it in one group */
-  instance?: { id: string; mainId?: string }
+  /**
+   * In the Layers view: an instance at the top of the frame, with everything
+   * inside it in one group, the instances in it too
+   */
+  instance?: { id: string; mainId?: string; step: InstanceStep }
 }
 
 function groupRecords(
@@ -150,8 +156,23 @@ function groupRecords(
   for (const record of records) {
     // An instance is one group in the Layers view, with the values it takes
     // from its main component and the ones it overrides, so its layers are
-    // not listed as layers of the frame.
-    const instanceId = pivot === 'layers' ? record.instanceId : undefined
+    // not listed as layers of the frame. An instance in slot content another
+    // instance owns is in the group of that instance, at the top of the
+    // chain, where the tree shows it in the slot.
+    // A layer in slot content an instance owns is in that instance's group
+    // too, under the slot, though it is not in an instance itself.
+    const top =
+      pivot !== 'layers'
+        ? undefined
+        : record.instanceId
+          ? (record.instances?.[0] ?? {
+              id: record.instanceId,
+              name: instances.get(record.instanceId)?.name ?? record.nodeName,
+            })
+          : record.slotName
+            ? record.instances?.[0]
+            : undefined
+    const instanceId = top?.id
     const key = instanceId
       ? `instance:${instanceId}`
       : pivot === 'layers'
@@ -160,14 +181,15 @@ function groupRecords(
     let group = groups.get(key)
     if (!group) {
       const known = instanceId ? instances.get(instanceId) : undefined
-      group = instanceId
+      group = top
         ? {
             key,
-            title: known?.name ?? record.nodeName,
+            title: top.name,
             subtitle: undefined,
             records: [],
             instance: {
-              id: instanceId,
+              id: top.id,
+              step: top,
               ...(known?.mainComponent?.id && !known.mainComponent.remote
                 ? { mainId: known.mainComponent.id }
                 : {}),
@@ -196,13 +218,6 @@ function groupRecords(
     group.records.push(record)
   }
   const result = [...groups.values()]
-  // In an instance, the values it overrides first: those are the ones the
-  // plugin can change there.
-  for (const group of result) {
-    if (group.instance) {
-      group.records.sort((a, b) => Number(!a.override) - Number(!b.override))
-    }
-  }
   // In the Variables view, the most used variables first; in the Layers
   // view, the layers of the frame first and the instances after them.
   if (pivot === 'variables') {
@@ -237,8 +252,16 @@ function groupSummary(
   return parts.join(', ')
 }
 
-/** What an instance group says about the values it overrides and the ones it takes from its main component. */
-function instanceNote(overridden: number, inherited: number): string {
+/**
+ * What an instance group says about the values it overrides, the ones it
+ * takes from its main component, and the ones on layers in its slots outside
+ * the instances there, which are its own, as layers in a frame are.
+ */
+function instanceNote(
+  overridden: number,
+  inherited: number,
+  inSlots: number,
+): string {
   const own =
     overridden === 1
       ? 'This instance overrides 1 value. It is marked Overridden in the instance, and a legacy one changes here.'
@@ -247,10 +270,19 @@ function instanceNote(overridden: number, inherited: number): string {
     inherited === 1
       ? 'The value marked From the main component changes with its main component or library.'
       : 'The values marked From the main component change with its main component or library.'
-  if (overridden === 0) {
-    return 'This instance overrides none of these values. They come from its main component and change with it or its library.'
-  }
-  return inherited === 0 ? own : `${own} ${main}`
+  const slots =
+    inSlots === 1
+      ? 'The value on a layer in its slots, outside the instances there, changes here, as in a frame.'
+      : `The ${inSlots} values on layers in its slots, outside the instances there, change here, as in a frame.`
+  const parts =
+    overridden === 0
+      ? inherited > 0
+        ? [
+            'This instance overrides none of the values in it. The ones marked From the main component change with it or its library.',
+          ]
+        : []
+      : [own, ...(inherited > 0 ? [main] : [])]
+  return [...parts, ...(inSlots > 0 ? [slots] : [])].join(' ')
 }
 
 /**
@@ -534,7 +566,12 @@ export function Inspector({
               const overridden = group.records.filter(
                 (record) => record.override,
               ).length
-              const inherited = group.records.length - overridden
+              // Layers in a slot the instance owns, outside the instances
+              // there, are neither overridden nor from the main component.
+              const inSlots = group.records.filter(
+                (record) => record.instanceId === undefined,
+              ).length
+              const inherited = group.records.length - overridden - inSlots
               // A hidden layer, or an instance hidden as a whole, says so
               // once in its header; a hidden layer in a shown instance says
               // so on its row.
@@ -543,6 +580,80 @@ export function Inspector({
                 selection,
                 mappable.map((record) => record.id),
               )
+              // One value; in an instance, `node` is the instance in the
+              // tree whose own layer it is on.
+              const row = (record: BindingRecord, node?: TreeNode) => {
+                const target = isMappable(record)
+                  ? effectiveTarget(record, overrides)
+                  : undefined
+                const decided = target !== undefined && !isUndecided(target)
+                // What a Manual fix's reset also removes and
+                // sets again, whatever its status.
+                const effects =
+                  record.category === 'byHand'
+                    ? resetEffectsText(record.resetEffects, isMappable(record))
+                    : undefined
+                // A legacy mode the next Apply keeps says what
+                // it waits for: as its reason while it waits,
+                // beside the new mode once it sets one.
+                const keep = kept[record.id]
+                const waits = isKeptWaiting(record.id, kept)
+                const keptText = keep && keptModeText(keep)
+                return (
+                  <BindingRow
+                    key={record.id}
+                    title={
+                      node && record.nodeId !== node.id
+                        ? `${record.nodeName}: ${propertyLabel(record.property)}`
+                        : propertyLabel(record.property)
+                    }
+                    old={record.old}
+                    target={targetText(record, overrides, kept)}
+                    note={
+                      target
+                        ? sourceLabel(target.source, target.target)
+                        : undefined
+                    }
+                    reason={
+                      waits && keptText
+                        ? keptText
+                        : decided
+                          ? undefined
+                          : record.reason
+                    }
+                    effects={[
+                      ...(effects ? [effects] : []),
+                      ...(keptText && !waits ? [keptText] : []),
+                    ]}
+                    category={categoryOf(record)}
+                    held={isHeld(categoryOf(record), waits)}
+                    {...(group.instance && record.instanceId
+                      ? {
+                          origin: record.override
+                            ? ('override' as const)
+                            : ('main' as const),
+                        }
+                      : {})}
+                    hidden={!hidden && !node?.hidden && record.hidden === true}
+                    changeable={isMappable(record)}
+                    selectable={
+                      isMappable(record) && record.category !== 'byHand'
+                    }
+                    selected={selection.has(record.id)}
+                    onToggle={(selected) =>
+                      selection.set([selectable(record)], selected)
+                    }
+                    onSelectLayer={() => onSelect([record.nodeId])}
+                    onChange={() => onChange(record)}
+                  />
+                )
+              }
+              // An instance shows the values on its own layers, then the
+              // instances in it as a tree with their values as the leaves.
+              const tree =
+                isOpen && group.instance
+                  ? valueTree(group.instance.step, group.records)
+                  : undefined
               return (
                 <Accordion.Item
                   key={group.key}
@@ -578,7 +689,7 @@ export function Inspector({
                       <div className="stack-tight">
                         {group.instance && (
                           <p className="muted">
-                            {instanceNote(overridden, inherited)}
+                            {instanceNote(overridden, inherited, inSlots)}
                           </p>
                         )}
                         <div className="panel-actions">
@@ -627,80 +738,32 @@ export function Inspector({
                             </Button>
                           </span>
                         </div>
-                        <ul className="binding-list">
-                          {group.records.map((record) => {
-                            const target = isMappable(record)
-                              ? effectiveTarget(record, overrides)
-                              : undefined
-                            const decided =
-                              target !== undefined && !isUndecided(target)
-                            // What a Manual fix's reset also removes and
-                            // sets again, whatever its status.
-                            const effects =
-                              record.category === 'byHand'
-                                ? resetEffectsText(
-                                    record.resetEffects,
-                                    isMappable(record),
-                                  )
-                                : undefined
-                            // A legacy mode the next Apply keeps says what
-                            // it waits for: as its reason while it waits,
-                            // beside the new mode once it sets one.
-                            const keep = kept[record.id]
-                            const waits = isKeptWaiting(record.id, kept)
-                            const keptText = keep && keptModeText(keep)
-                            return (
-                              <BindingRow
-                                key={record.id}
-                                title={
-                                  group.instance &&
-                                  record.nodeId !== group.instance.id
-                                    ? `${record.nodeName}: ${propertyLabel(record.property)}`
-                                    : propertyLabel(record.property)
-                                }
-                                old={record.old}
-                                target={targetText(record, overrides, kept)}
-                                note={
-                                  target
-                                    ? sourceLabel(target.source, target.target)
-                                    : undefined
-                                }
-                                reason={
-                                  waits && keptText
-                                    ? keptText
-                                    : decided
-                                      ? undefined
-                                      : record.reason
-                                }
-                                effects={[
-                                  ...(effects ? [effects] : []),
-                                  ...(keptText && !waits ? [keptText] : []),
-                                ]}
-                                category={categoryOf(record)}
-                                held={isHeld(categoryOf(record), waits)}
-                                {...(group.instance
-                                  ? {
-                                      origin: record.override
-                                        ? ('override' as const)
-                                        : ('main' as const),
-                                    }
-                                  : {})}
-                                hidden={!hidden && record.hidden === true}
-                                changeable={isMappable(record)}
-                                selectable={
-                                  isMappable(record) &&
-                                  record.category !== 'byHand'
-                                }
-                                selected={selection.has(record.id)}
-                                onToggle={(selected) =>
-                                  selection.set([selectable(record)], selected)
-                                }
-                                onSelectLayer={() => onSelect([record.nodeId])}
-                                onChange={() => onChange(record)}
-                              />
-                            )
-                          })}
-                        </ul>
+                        {tree && hasInner(tree.root) ? (
+                          <InstanceTree
+                            parent={tree.root}
+                            legacyOnly={false}
+                            leaves={(key, owner, depth) => (
+                              <ul
+                                className="binding-list tree-leaves"
+                                style={{ '--_depth': depth } as never}
+                              >
+                                {(tree.own.get(key) ?? []).map((record) =>
+                                  row(record, owner),
+                                )}
+                              </ul>
+                            )}
+                            onSelect={onSelect}
+                          />
+                        ) : (
+                          // An instance without instances in it lists its
+                          // values as a layer does, the overrides first.
+                          <ul className="binding-list">
+                            {(tree
+                              ? (tree.own.get(tree.root.key) ?? [])
+                              : group.records
+                            ).map((record) => row(record, tree?.root))}
+                          </ul>
+                        )}
                       </div>
                     )}
                   </Accordion.Panel>

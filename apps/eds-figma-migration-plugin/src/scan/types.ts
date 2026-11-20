@@ -112,6 +112,14 @@ export type RawUnit = {
    */
   instances?: InstanceStep[]
   /**
+   * For a layer in slot content an instance owns, and not inside an instance
+   * there: the name of the slot, such as Content. The instance is the last in
+   * `instances`. The frame's Layers view puts the layer's values under that
+   * slot of the instance, as Figma's Layers panel does (Casper's Container,
+   * Type and Actions frames in PE Editor's Content, 2026-11-19).
+   */
+  slotName?: string
+  /**
    * Inside an instance: the instance sets this value itself, as an override,
    * instead of taking it from its main component, so it can change here.
    */
@@ -271,6 +279,8 @@ export type BindingRecord = {
   instanceId?: string
   /** Every instance the layer is in, outermost first (RawUnit.instances) */
   instances?: InstanceStep[]
+  /** The slot of the last instance in `instances` the layer is in, as owned slot content (RawUnit.slotName) */
+  slotName?: string
   /** Inside an instance: a value the instance overrides, which the plugin can change there */
   override?: true
   /** Ids of the node and its ancestors in the entry that set explicit modes */

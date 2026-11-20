@@ -97,6 +97,7 @@ type UnitBase = Pick<
   | 'path'
   | 'instanceId'
   | 'instances'
+  | 'slotName'
   | 'modeHolders'
   | 'hidden'
   | 'context'
@@ -618,6 +619,10 @@ export class Collector {
       path: state.path,
       instanceId,
       ...(chain.length > 0 ? { instances: chain } : {}),
+      // A layer in owned slot content, outside the instances in it
+      ...(state.ownedSlot !== undefined && instanceId === undefined
+        ? { slotName: state.ownedSlot }
+        : {}),
       context,
       ...(modeHolders.length > 0 ? { modeHolders } : {}),
       ...(hidden ? { hidden: true as const } : {}),

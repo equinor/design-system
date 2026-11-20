@@ -84,7 +84,9 @@ full chain of instances it is in (`instances`, outermost first, through owned
 slot content too), and each instance on the Instances tab carries a tree of the
 instances in it with the legacy values each takes from its main component
 (`buildInstanceTree` in `src/scan/instance-tree.ts`). An instance in owned slot
-content names the instance it sits in (`within`).
+content names the instance it sits in (`within`), and a layer there outside
+the instances names its slot (`slotName`), so the frame's Layers view puts it
+under the slot of the last instance in its chain.
 
 The mapping rules are in [`docs/mapping-rules.md`](./docs/mapping-rules.md),
 and the guide for designers in [`docs/designer-guide.md`](./docs/designer-guide.md).
@@ -567,7 +569,9 @@ a row for its slot (`instanceForest`, `entryForest` in `src/ui/instances.ts`).
 Rows are 32px at 11px with a 24px indent, instances and slots in Figma's
 component purple and slot pink, read from Figma's stylesheet, hidden
 instances dimmed with the hidden icon; each row has the legacy count and a
-Go to. Only instances with legacy values from their main components are in
+Go to; the caret's click area is stretched over the row, so a click
+anywhere on it opens the row, and Go to sits above it. Only instances with
+legacy values from their main components are in
 the tree, and the slots that hold them; frames and other layers between them
 are left out. The design was reviewed on `prototype/review/tree.html`, built
 with `vite build -c prototype/vite.config.ts --mode tree`. The plugin does not change what an instance takes
@@ -604,7 +608,19 @@ health bar and the number of changes in the preview of the run
 not part of this Apply. The tab also lists the main components on other
 pages that instances in the scope use, with Go to and Scan its page, and Scan
 the whole file to bring them all into the scope.
-In a frame, the Layers view shows each instance as one row.
+In a frame, the Layers view shows each instance at the top of the frame as
+one group, with the instances in it and in the slot content it owns
+(`valueTree` in `src/ui/instances.ts`, from each value's chain). The group
+has a row for the values on the instance's own layers, closed at the start,
+then the instances in it under a small Inner instances header, in the tree of
+the Instances tab with the values as the leaves. An instance that has both
+values of its own and instances in it shows its values under such a row too,
+so the instances in it are not far down below a long list. Values on layers
+in owned slot content outside the instances there are under the slot's row
+(`slotValues`), without an Overridden or From the main component mark, and
+rows count the values the instance overrides (review of
+`prototype/review/inspector.html`, built with `--mode inspector`,
+2026-11-19).
 
 Main components, and layers selected inside one, are marked in Figma's
 component purple, `#8A38F5`. The value is `--main-component-colour` in
