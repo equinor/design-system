@@ -36,6 +36,7 @@ If you need to create a new team, read Figma's team creation guidelines first. C
 - Set the colour scheme and density with variable modes on your top-level frame. Colours, spacing and typography in the EDS library are variables, so everything inside the frame follows the modes you set
 - Read the [spacing guidelines](/docs/Next/foundation/design-tokens/spacing) before laying out EDS components
 - Always place content on frames or artboards
+- If your file uses the legacy EDS variables, [Migrating a Figma file](./migration-plugin.mdx) shows how to move it to the EDS Beta tokens with the EDS Variable Migration plugin
 
 **Use components properly:**
 
