@@ -724,6 +724,12 @@ Figma desktop app, with the plugin imported from `manifest.json`:
 4. `manifest.json` has the id Figma created at the first publish
    (`1702357333472971124`), so publishing again updates the same plugin.
    Figma keeps the version history, so there is no version number to raise.
+5. Update the docs pages to the published window:
+   `pnpm --filter @equinor/eds-figma-migration-plugin run docs:sync`. Then
+   read the two pages (see [Docs pages](#docs-pages)) for buttons, tabs and
+   statuses that were renamed, and for anything the window now does
+   differently, and commit the pages, the demo and the images with the
+   release.
 
 Figma's documentation and forum disagree on whether any member or only an
 admin can publish a private plugin. If Publish is not offered, ask the Figma
@@ -789,6 +795,129 @@ pnpm --filter @equinor/eds-figma-migration-plugin run test:run
   when the fixture is there.
 - `test/nested-instances.test.ts`: owned slot content, the chain of
   instances and the tree, on the FRIOD test frame 2100:1825 (Casper's case).
+- `test/demo-sample.test.ts`: the sample file of the demo has no internal
+  names or ids left, and gets the same statuses and targets as the fixtures
+  it is made from.
+
+## Demo of the window
+
+The docs site shows the plugin window to designers who have not opened it
+yet, as a live demo and as an image of each step. `demo/` builds that demo:
+one HTML file that runs the plugin's own window in a browser, with no Figma.
+The window talks to Figma only through `src/ui/figma.ts`, so it runs unchanged
+in an iframe, and the page around it answers its messages in place of the
+main thread. The page gets to a step by clicking the window's controls, found
+by role and accessible name, so `src/ui` has no code for the demo.
+
+```bash
+pnpm --filter @equinor/eds-figma-migration-plugin run build:demo   # demo/dist/index.html
+pnpm --filter @equinor/eds-figma-migration-plugin run demo:images  # demo/dist/images/
+```
+
+`build:demo` needs `eds-core-react` and `eds-tokens` built, as the plugin
+does. It builds the window with the plugin's own `vite.config.ts`, as
+`dist/ui.html` is built, inlines it as the `srcdoc` of an iframe, and inlines
+the page's script and CSS too (`demo/vite.demo.config.ts` and
+`demo/vite-plugins.ts`). The file is about 1.2 MB, 260 kB gzipped, and
+`demo/dist` is not committed. A `srcdoc` iframe has the page's origin, so the
+page can set Figma's theme class (`figma-light` or `figma-dark`) on the
+window's `<html>` and reach its controls. Fonts come from
+`cdn.eds.equinor.com`, as in the plugin.
+
+The demo is 482 × 762 px: the plugin's window of 480 × 720 px (`WINDOW` in
+`src/shared/window.ts`), a title bar of 40 px that says EDS Variable Migration
+[BETA], as Figma's does, and a border of 1 px. The page around it is
+transparent, so the docs set the iframe to that size. In a narrower iframe the
+window takes the width it gets.
+
+- `?step=` opens the demo at a step: `scan` (the window as it opens),
+  `health` (after a scan of the page, on Frames), `changes`, `review` (the
+  first value that needs a check), `apply` (the result of Apply on the page),
+  `revert` (a frame after Apply, with the confirmation of Revert frame open),
+  `instances` (the tree, with the details panel open), `sources` (after Check
+  for library updates), `manual-fix` (the Size tab filtered to Manual fix,
+  with the row open), `typography`, `statuses` (the dialog that explains the
+  categories), `modes` and `intro` (the introduction). The steps are in
+  `demo/src/steps.ts`.
+- `?theme=light` or `?theme=dark` sets Figma's theme. Without it the demo
+  follows the reader's colour scheme, also when it changes.
+- Without `step`, the demo opens as the plugin does and can be used like it.
+  Every step can be used too once it is shown. The introduction counts as
+  seen, except on the step `intro`.
+- Each load starts from the same file, held in memory, so several demos on
+  one page and a reload look the same.
+
+**The stand-in for the main thread** (`demo/src/mock/plugin.ts`) answers
+every message in `UiToPlugin`, with a switch that fails the typecheck when a
+message is added. It uses the plugin's own code for the rules, the counts,
+the choices, the apply plan, the conversions and the report. What only Figma
+can do, it does on the raw units of the sample file (`demo/src/mock/units.ts`):
+Apply puts the EDS Beta variable, number, text style or mode on the unit and
+keeps a legacy mode while values below read it (`keptModeChanges`), Revert
+puts the legacy units back, Convert replaces a Typography instance with a text
+layer, and the next scan classifies the units again, as the plugin scans
+again after a run. A change in the main component in the file also changes
+its instance. No change fails, so a run never reports what it could not do,
+and Check for library updates answers from the sample file. Buttons that act
+on the canvas, such as Go to, select nothing; the page shows a short note
+above the footer that says what they do in Figma, such as "In Figma, Go to
+selects the layer on the canvas and zooms to it."
+
+**The sample file**, Sample file, is made in `demo/src/mock/sample.ts` from
+the test frame (`test/fixtures/test-frame.json`) and the frame with the
+details panel (`test/fixtures/nested-instances.json`), with layers added for
+what the fixtures lack: a Text field whose swapped icon overrides its size
+with a legacy variable (Manual fix), a shadow colour (No equivalent), two
+Typography instances outside other instances, a library icon and an instance
+of the main component in the file. The added layers are written as the
+scanner reads them, and go through the same rules. The demo is published on
+a public site, so it must not contain the names of internal files or of
+people, Figma file keys, or node ids from Equinor files. The fixtures are
+cleaned when the demo is built (`demo/sample/sanitise.ts`): the file is called
+Sample file, internal frame and component names are replaced, and every layer
+and variable id is replaced with a neutral one of the same shape. The build of
+the window and of the page leaves out the file and library keys of the
+inventories, which only the developer export uses. Check any name you add to
+the sample file before it goes on the site.
+
+**Images.** `demo:images` opens the built demo with Playwright at each step,
+in light and dark, at twice the resolution, waits until the view of the step
+is visible, and saves `demo/dist/images/<step>-<theme>.png`, 964 × 1524 px,
+about 4.4 MB for the 26 images. It is also the smoke test of the demo: it
+fails when a step does not open, when the view of a step is not there, and
+when the built demo contains an internal name or key. It uses Playwright's own
+Chromium; when that version is not installed, it takes the newest Chromium in
+Playwright's browser folder instead of downloading one.
+
+## Docs pages
+
+Designers read about the plugin on the docs site, under Get started →
+Design, in two pages in `apps/design-system-docs/docs/about/getting-started/design/`:
+`migration-plugin.mdx` (a first run) and `migration-plugin-statuses.mdx` (the
+statuses and special cases). The Design landing page, the Figma page and the
+migration sections of colour, spacing and typography link to the first one.
+The pages show the live demo and an image of the window beside each step,
+with the components in `apps/design-system-docs/src/components/MigrationPlugin/`.
+A page names the step an image shows, such as `<PluginStep step="health">`.
+
+The docs show the published plugin, so they are updated when it is published
+(step 5 of [Publish to Equinor](#publish-to-equinor)), and not on every
+change to the window. `pnpm run docs:sync` builds the demo, takes the images,
+and runs `scripts/docs-sync.mjs`, which:
+
+- copies the demo to `static/migration-plugin/demo.html` in the docs,
+- reads the steps the pages name (`scripts/docs-steps.mjs`), and saves the
+  light and dark image of each in `static/img/migration-plugin/` as WebP,
+  640 px wide, twice the 20rem the docs show them at,
+- removes the images no page uses any more.
+
+`test/docs-steps.test.ts` fails when a page names a step the demo does not
+have (`demo/src/step-names.ts`), so renaming or removing a step means
+updating the pages in the same change. The text of the pages is written by
+hand: nothing checks it against the window, which is why step 5 of the
+publish asks you to read it. The alt text of an image describes what the
+window shows without the sample file's counts, so a change to the sample file
+does not make it wrong.
 
 ## Fonts and network access
 
@@ -808,6 +937,7 @@ src/shared/      message types between the main thread and the window
 src/ui/          the plugin window, React and the EDS Beta components
 docs/            mapping-rules.md, the source for the rules, and designer-guide.md
 test/            Vitest tests and fixtures
+demo/            a demo of the window for the docs site, with a stand-in for the main thread
 BETA-GAPS.md     what was missing or awkward in the Beta while building this
 prototype/       an HTML prototype for UX review, the Check designs comparison and the UX review
 ```

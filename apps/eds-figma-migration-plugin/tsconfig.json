@@ -33,6 +33,7 @@
     "*.config.ts",
     "prototype/src/**/*.ts",
     "prototype/src/**/*.tsx",
-    "prototype/vite.config.ts"
+    "prototype/vite.config.ts",
+    "demo/**/*.ts"
   ]
 }

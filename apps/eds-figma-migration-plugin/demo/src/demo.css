@@ -1,0 +1,130 @@
+/*
+ * The page around the plugin window: transparent, with the window at the
+ * plugin's size and a title bar like Figma's, so a reader recognises it.
+ * The colours follow Figma's light and dark themes; they are Figma's own
+ * chrome, so they are not EDS tokens.
+ */
+:root {
+  --demo-title-bar-height: 40px;
+  --demo-border: #e6e6e6;
+  --demo-surface: #ffffff;
+  --demo-text: rgb(0 0 0 / 90%);
+  --demo-muted: rgb(0 0 0 / 50%);
+  --demo-note-surface: #1e1e1e;
+  --demo-note-text: #ffffff;
+
+  background: transparent;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Arial,
+    sans-serif;
+}
+
+:root[data-theme='dark'] {
+  --demo-border: #444444;
+  --demo-surface: #2c2c2c;
+  --demo-text: #ffffff;
+  --demo-muted: rgb(255 255 255 / 55%);
+  --demo-note-surface: #ffffff;
+  --demo-note-text: #1e1e1e;
+}
+
+body {
+  margin: 0;
+  background: transparent;
+}
+
+.demo-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  inline-size: min(var(--demo-width), 100vw);
+  block-size: min(var(--demo-height), 100vh);
+  overflow: hidden;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  background: var(--demo-surface);
+  color: var(--demo-text);
+}
+
+.demo-title-bar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  box-sizing: border-box;
+  block-size: var(--demo-title-bar-height);
+  padding-inline: 16px;
+  border-block-end: 1px solid var(--demo-border);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.demo-body {
+  position: relative;
+  flex: 1;
+  min-block-size: 0;
+}
+
+.demo-body iframe {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.demo-loading {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline: 0;
+  margin: 0;
+  color: var(--demo-muted);
+  font-size: 12px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.demo-window[data-state='preparing'] iframe {
+  opacity: 0;
+}
+
+.demo-window:not([data-state='preparing']) .demo-loading {
+  display: none;
+}
+
+/* Says what a button does on Figma's canvas, as Figma's own notifications do. */
+.demo-note {
+  position: absolute;
+  inset-block-end: var(--demo-note-offset, 80px);
+  inset-inline: 16px;
+  margin-inline: auto;
+  inline-size: fit-content;
+  max-inline-size: calc(100% - 32px);
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--demo-note-surface);
+  color: var(--demo-note-text);
+  font-size: 12px;
+  line-height: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+.demo-note[data-shown] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-body iframe,
+  .demo-note {
+    transition: none;
+  }
+}
