@@ -326,21 +326,21 @@ describe('TS_DATAVIZ', () => {
           expect(colour, `${scheme} ${path}`).toBe(expected)
           continue
         }
-        // An oklch() value inside sRGB has one hex. Outside it, tools map it
-        // in differently: the TypeScript export reduces chroma, the CSS Color 4
-        // method in colorjs.io can stop at a clipped colour, and Figma clamps
-        // each channel. Those results differ by up to about 0.07 for the pale
-        // tints, so out-of-gamut values only need to stay that close.
-        const exportedColour = new Color(expected)
-        const limit = exportedColour.inGamut('srgb') ? 0.005 : 0.08
-        const mapped = exportedColour
-          .toGamut({ space: 'srgb', method: 'css' })
+        // The TypeScript export maps an oklch() value outside sRGB into it by
+        // reducing chroma at the same lightness and hue. Mapping the CSS value
+        // the same way (with `jnd: 0`, so colorjs.io does not stop early at a
+        // clipped colour) gives its hex; the small limit covers the CSS export
+        // rounding OKLCH to four decimals. Other tools map such values
+        // differently (Figma clamps each channel), so this pins the export's
+        // method, not the only possible answer.
+        const mapped = new Color(expected)
+          .toGamut({ space: 'srgb', method: 'oklch.c', jnd: 0 })
           .to('srgb')
           .toString({ format: 'hex' })
         expect(
           deltaE(colour, mapped, 'OK'),
           `${scheme} ${path}: read ${colour}, CSS export ${expected} → ${mapped}`,
-        ).toBeLessThan(limit)
+        ).toBeLessThan(0.005)
       }
     }
   })
