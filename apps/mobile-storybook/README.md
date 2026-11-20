@@ -8,8 +8,7 @@ This is an [Expo](https://expo.dev) project using [file-based routing](https://d
 
 - [Node.js](https://nodejs.org/) (v22 or higher)
 - [pnpm](https://pnpm.io/) (v10 or higher)
-- For iOS: [Xcode](https://developer.apple.com/xcode/) and CocoaPods
-- For Android: [Android Studio](https://developer.android.com/studio) with an emulator configured
+- [Xcode](https://developer.apple.com/xcode/) and CocoaPods. Use the Xcode version that the installed Expo SDK requires, which is listed per SDK version in the table in [Expo's SDK reference](https://docs.expo.dev/versions/latest/).
 
 ## Get started
 
@@ -31,7 +30,7 @@ This is an [Expo](https://expo.dev) project using [file-based routing](https://d
     pnpm dev:mobile
     ```
 
-4. Press `i` to open in iOS Simulator or `a` for Android Emulator.
+4. Press `i` to open in iOS Simulator.
 
 ### iOS Setup
 
@@ -61,12 +60,12 @@ apps/mobile-storybook/
 │   └── (tabs)/
 │       ├── index.tsx       # Home screen
 │       ├── about.tsx       # About screen
-│       └── components/     # Component showcase screens (Slice 1 only)
+│       └── components/     # Component showcase screens
 │           ├── button.tsx
 │           ├── input.tsx
 │           ├── selectioncontrols.tsx
 │           ├── typography.tsx
-│           └── ...         # Future screens added per slice
+│           └── ...         # One screen per component with a demo
 ├── components/             # Shared storybook UI (Section, Surface, SettingsControls)
 └── ios/                    # Native iOS project
 ```

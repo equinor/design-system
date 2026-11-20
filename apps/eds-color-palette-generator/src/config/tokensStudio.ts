@@ -5,15 +5,16 @@
  * to `packages/eds-tokens/src/tokens/raw/` and exposes what the generator
  * needs: the seven hue anchors, the hand-set lightness scale, the gaussian
  * chroma parameters, the tone → hue mapping per scheme, and the semantic
- * layer's alias table.
+ * layer's alias table. The data visualisation colours come from the
+ * TypeScript export of the same pull (`ts/`), which holds them as sRGB hex.
  *
  * No colour value is typed here. To change one, change it in Tokens Studio;
  * the next release pull updates the JSON and this module follows.
  */
 import paletteJson from '../../../../packages/eds-tokens/src/tokens/raw/input/palette.json'
 import scaleJson from '../../../../packages/eds-tokens/src/tokens/raw/input/scale.json'
-import colorLightJson from '../../../../packages/eds-tokens/src/tokens/raw/color/light.json'
-import colorDarkJson from '../../../../packages/eds-tokens/src/tokens/raw/color/dark.json'
+import { theme as lightTheme } from '../../../../packages/eds-tokens/src/tokens/ts/light-comfortable'
+import { theme as darkTheme } from '../../../../packages/eds-tokens/src/tokens/ts/dark-comfortable'
 import schemeLightJson from '../../../../packages/eds-tokens/src/tokens/raw/scheme/light.json'
 import schemeDarkJson from '../../../../packages/eds-tokens/src/tokens/raw/scheme/dark.json'
 import semanticJson from '../../../../packages/eds-tokens/src/tokens/raw/semantic.json'
@@ -187,29 +188,36 @@ export const TS_HUES: TsHue[] = hueKeys
   )
 
 /* ------------------------------------------------------------------ */
-/*  Data visualisation (color/light, color/dark)                       */
+/*  Data visualisation (ts/light-comfortable, ts/dark-comfortable)     */
 /* ------------------------------------------------------------------ */
 
+type ColourTree = { [key: string]: string | ColourTree }
+
+/** Flattens `{ cat: { 1: { 1: '#…' } } }` to `{ 'dataviz.cat.1.1': '#…' }`. */
 function datavizValues(
-  colorJson: unknown,
-  scheme: Scheme,
+  tree: ColourTree,
+  path: string[] = ['dataviz'],
 ): Record<string, string> {
-  const tree = subtree(colorJson as TokenTree, [scheme, 'dataviz'])
   return Object.fromEntries(
-    flatten(tree, ['dataviz']).map(([path, leaf]) => [
-      path,
-      String(leaf.$value),
-    ]),
+    Object.entries(tree).flatMap(([key, value]) =>
+      typeof value === 'string'
+        ? [[[...path, key].join('.'), value]]
+        : Object.entries(datavizValues(value, [...path, key])),
+    ),
   )
 }
 
 /**
- * The hand-picked data visualisation colours, keyed `dataviz.cat.1.1`. They
- * sit outside the OKLCH generator in Tokens Studio (ADR 0016, Unresolved).
+ * The data visualisation colours, keyed `dataviz.cat.1.1`, as sRGB hex. They
+ * are read from the TypeScript export, not the raw sets: the categorical
+ * steps are formulas in Tokens Studio, so the raw sets hold the formula text,
+ * while the export holds the evaluated colour, mapped into sRGB where the
+ * formula falls outside it. Colour does not change with density, so the
+ * comfortable modules stand for every density.
  */
 export const TS_DATAVIZ: Record<Scheme, Record<string, string>> = {
-  light: datavizValues(colorLightJson, 'light'),
-  dark: datavizValues(colorDarkJson, 'dark'),
+  light: datavizValues(lightTheme.dataVisualization),
+  dark: datavizValues(darkTheme.dataVisualization),
 }
 
 /* ------------------------------------------------------------------ */
