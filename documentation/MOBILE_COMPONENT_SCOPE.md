@@ -4,6 +4,10 @@ The current, maintained list of which components — from EDS web or common mobi
 
 This is a living document, not a frozen decision. Individual rows get revisited as consuming teams make the case for an exception — update the relevant row directly via a normal PR, reviewed like any other doc change. That doesn't need a new ADR: ADR-0020 already decided the _policy_ of case-by-case scoping; only the _application_ of it to one component is changing.
 
+## Platform
+
+EDS mobile supports iOS only. It is built with React Native and Expo, and Android is out of scope for `eds-mobile-components` and its demo app, `apps/mobile-storybook`. The `android` script in the demo app's `package.json`, the `android` block in its `app.json` and `android/` in its `.gitignore` are still in the repository, but Android is not supported.
+
 ## Renames and replacements
 
 | Component (old)      | Decision                          | Reason                                                                                                                                                                                                                                                                                                                      |

@@ -21,7 +21,6 @@ pnpm start:mobile
 
 # Or from this directory
 pnpm ios       # Run on iOS simulator
-pnpm android   # Run on Android emulator
 pnpm start     # Start Metro bundler
 ```
 
@@ -73,7 +72,7 @@ app/
 │       ├── input.tsx       # Input showcase
 │       ├── selectioncontrols.tsx  # Radio / Switch / Checkbox showcase
 │       ├── typography.tsx  # Typography showcase
-│       └── ...             # Future screens added per slice
+│       └── ...             # One screen per component with a demo
 ├── +not-found.tsx          # 404 screen
 
 components/                 # Storybook-specific utility components
@@ -252,12 +251,6 @@ const { typography } = useToken();
 - **First time:** Run `cd ios && pod install`
 - **Hot reload:** Works automatically with Metro bundler
 - **Physical device:** Use Expo development build or scan QR with Expo Go (limited features)
-
-### Android Development
-
-- **Requires:** Android Studio with Android SDK and emulator
-- **Hot reload:** Works automatically with Metro bundler
-- **Physical device:** Enable USB debugging or scan QR with Expo Go
 
 ## Common Tasks
 
