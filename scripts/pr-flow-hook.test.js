@@ -56,6 +56,12 @@ describe('classify', () => {
       classify('gh api repos/equinor/design-system/pulls/5935/reviews -X POST'),
       ['review'],
     )
+    assert.deepStrictEqual(
+      classify(
+        'gh api -X POST repos/equinor/design-system/pulls/5935/reviews/123/events -f event=COMMENT',
+      ),
+      ['review'],
+    )
     assert.deepStrictEqual(classify('gh pr edit 5935 --add-reviewer someone'), [
       'claim',
     ])
@@ -94,6 +100,11 @@ describe('sections', () => {
     }
   })
 
+  test('finds a heading in a file with CRLF line endings', () => {
+    const text = section('## A\r\nfirst\r\n\r\n## B\r\nsecond', 'A')
+    assert.strictEqual(text, '## A\nfirst')
+  })
+
   test('a section stops at the next heading', () => {
     const text = section('## A\nfirst\n\n## B\nsecond', 'A')
     assert.strictEqual(text, '## A\nfirst')
@@ -106,11 +117,20 @@ describe('sections', () => {
 
 describe('hook', () => {
   test('hands over the board rules when a PR is created', () => {
-    const output = JSON.parse(runHook('gh pr create --title "x"'))
-    assert.strictEqual(output.hookSpecificOutput.hookEventName, 'PreToolUse')
-    const context = output.hookSpecificOutput.additionalContext
-    assert.match(context, /## After every push/)
-    assert.match(context, /## The board/)
+    const sessionId = randomUUID()
+    try {
+      const output = JSON.parse(
+        runHook('gh pr create --title "x"', 'Bash', sessionId),
+      )
+      assert.strictEqual(output.hookSpecificOutput.hookEventName, 'PreToolUse')
+      const context = output.hookSpecificOutput.additionalContext
+      assert.match(context, /## After every push/)
+      assert.match(context, /## The board/)
+    } finally {
+      rmSync(join(tmpdir(), `pr-flow-hook-${sessionId.replace(/\W/g, '')}`), {
+        force: true,
+      })
+    }
   })
 
   test('hands over the review rules when a review is posted', () => {
@@ -118,6 +138,7 @@ describe('hook', () => {
     const context = output.hookSpecificOutput.additionalContext
     assert.match(context, /## Recommend a type/)
     assert.match(context, /## Put the review in/)
+    assert.match(context, /## Submit it/)
   })
 
   test('sends the board rules once per session, then only the checklist', () => {

@@ -29,7 +29,7 @@ const EVENTS = {
   review: {
     pattern:
       /\bgh\s+pr\s+review\b|\bgh\s+api\b[^|;&]*\/pulls\/[^\s|;&]*\/reviews/,
-    sections: ['Recommend a type', 'Put the review in'],
+    sections: ['Recommend a type', 'Put the review in', 'Submit it'],
   },
   claim: {
     pattern: /\bgh\s+pr\s+edit\b[^|;&]*--add-reviewer/,
@@ -45,7 +45,7 @@ function classify(command) {
 
 // The text of one `## heading` section, up to the next `##` heading.
 function section(markdown, heading) {
-  const lines = markdown.split('\n')
+  const lines = markdown.split(/\r?\n/)
   const start = lines.findIndex((line) => line === `## ${heading}`)
   if (start === -1) return null
   const next = lines.findIndex((line, i) => i > start && line.startsWith('## '))

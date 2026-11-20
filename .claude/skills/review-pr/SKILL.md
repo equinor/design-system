@@ -13,7 +13,8 @@ Review the PR in `$ARGUMENTS` (a number, URL or branch) and put the findings in 
 
 1. Take the PR from `$ARGUMENTS`, or from the current branch (`gh pr view`) if it is empty.
 2. Read `gh pr view <n> --json title,body,author,baseRefName,headRefName,files,reviews,comments` and `gh pr diff <n>`, including existing reviews and the bot's. The inline comments in review threads are not in that output, so also read `gh api repos/{owner}/{repo}/pulls/<n>/comments`. Open the surrounding source when the diff alone is ambiguous.
-3. Check the diff against `AGENTS.md`. For `/next` components, also check `documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`, and check token names against `packages/eds-tokens/build/css/` instead of assuming them. When a finding depends on test, lint or build output, run it against the PR head (`git fetch origin pull/<n>/head`) and say which ref the result comes from. Take line numbers for comments from the PR head too (`git show <ref>:<path>`), because your local branch may be a different one.
-4. Rank each finding by § Severity. Keep a finding only the bot raised, and leave out one that another reviewer has already raised. Before suggesting a new issue, search open and closed issues (`gh issue list --state all --search "..."`).
-5. Recommend a review type as § Recommend a type in `PR_REVIEWS.md` says.
-6. Put the review in as § Put the review in describes, submit it only if the user asked, then reply as § Reply describes.
+3. Check the diff against `AGENTS.md`. For `/next` components, also check `documentation/agent-instructions/BUILDING_EDS_2_COMPONENTS.md`, and check token names against `packages/eds-tokens/build/css/` instead of assuming them. Take line numbers for comments from the PR head (`git show <ref>:<path>`), because your local branch may be a different one.
+4. Check what the description claims, as § Check what the description claims in `PR_REVIEWS.md` says. Fetch the head with `git fetch origin pull/<n>/head`, and say which ref each result comes from. Run any finding that depends on test, lint or build output the same way.
+5. Rank each finding by § Severity. Keep a finding only the bot raised, and leave out one that another reviewer has already raised. Before suggesting a new issue, search open and closed issues (`gh issue list --state all --search "..."`).
+6. Recommend a review type as § Recommend a type in `PR_REVIEWS.md` says.
+7. Put the review in as § Put the review in describes, submit it only if the user asked, then reply as § Reply describes.

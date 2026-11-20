@@ -6,7 +6,17 @@ Harness entry points: the `review-pr` skill in Claude Code, and the `advisor` pr
 
 The `@claude` action cannot create a pending review, so it keeps posting its review as a comment.
 
-The document has two parts. If you are reviewing someone else's PR, read § Severity to § Claim the PR and the labels. If you are the author's agent, read § The board and § After every push, and § Claim the PR and the labels for how the `awaiting author` label works.
+The document has two parts. If you are reviewing someone else's PR, read § Check what the description claims to § Claim the PR and the labels. If you are the author's agent, read § The board and § After every push, and § Claim the PR and the labels for how the `awaiting author` label works.
+
+## Check what the description claims
+
+A description that says what was tested is a list of things to check, not a reason to skip them.
+
+1. List every claim in the description and in the code comments that can be checked: a command that passes, a test count, a test that fails without the fix, two outputs that match, a number such as a tolerance, a size or a count.
+2. Run each one yourself on the PR head (`git fetch origin pull/<n>/head`), not on whatever branch is checked out, and without touching uncommitted work. A worktree is a clean way to do that, but a checkout the user has said is free to use is fine too. For "fails without the fix", run the test with the PR's changes reverted and the input the claim names, and show that it fails there and passes with the fix. A claim that cannot be run from here, such as one about a device or a CI-only job, is covered by step 5.
+3. Measure a number before you comment on it. A tolerance that looks wide, or a size that looks large, is a guess until you have the worst real value.
+4. Set the checkout up like CI (`.github/workflows/checks.yaml`: `pnpm install --frozen-lockfile`, then `pnpm run build`), or unrelated failures will look like the PR's. Compare every failure with the base before you blame the PR. Mention the Node version only when it could change a result, for example when the author names one and yours differs.
+5. Write "not verified" for each claim you skipped, and give the reason. A claim you could not check counts as a question that needs an answer first, so recommend Comment and not Approve (§ Recommend a type).
 
 ## Severity
 
@@ -31,7 +41,7 @@ The board moves a PR to "Needs revision" on a **Request changes** review and to 
 | Should fix, Suggestion, or a question that needs an answer first, with nothing Blocking        | Comment                            |
 | Only nits, each prefixed `nit:`                                                                | Approve, with the nits as comments |
 
-Nits are optional and do not send the PR back. Reviews post under the user's account.
+Nits are optional and do not send the PR back. A claim in the description that you could not verify also rules out Approve, so recommend Comment. Reviews post under the user's account.
 
 ## Put the review in
 
@@ -40,7 +50,7 @@ Nits are optional and do not send the PR back. Reviews post under the user's acc
 3. With the harness's file-writing tool, write `/tmp/pr-<n>-review.json`, outside the repo:
    - `commit_id`: the head SHA.
    - No `event` field, unless the user asked you to submit (see § Submit it). Leaving it out keeps the review pending.
-   - `body`: a short opener with what you verified, plus the findings that have no line.
+   - `body`: a short opener with what you ran and what you did not, plus the findings that have no line. Add the Node version when it could change a result. See § Check what the description claims. Never write "tested" for a partial run.
    - `comments`: one per finding that has a line, as `{path, line, side: "RIGHT", body}`. `line` is on the new side of the diff and must fall inside a hunk, otherwise move the finding into `body`.
 4. Post it: `gh api -X POST repos/{owner}/{repo}/pulls/<n>/reviews --input /tmp/pr-<n>-review.json --jq '{id,state,html_url}'`, and check that `state` is `PENDING`, or `COMMENTED` or `CHANGES_REQUESTED` if you submitted.
 5. `line` and `side` read `null` while the review is pending. That is normal.
@@ -94,7 +104,7 @@ Go through this after every push, draft or ready change and review re-request on
 
 In Claude Code, the hook `.claude/hooks/pr_flow_hook.js` hands you this section and the board table when you run `git push`, `gh pr create` or `gh pr ready`. On a push it also gives you the PR's approval state from before the command. It does the same with the review sections when you post a review. It only passes on the text and decides nothing. Other tools have no such hook, so follow this section without the reminder.
 
-1. Before you push, read `gh pr view <n> --json reviewDecision,reviews`. A push dismisses approvals on `main`, so you need to know whether this PR is approved or has a Request changes open.
+1. Before you push, read `gh pr view <n> --json reviewDecision,latestReviews`. A push dismisses approvals on `main`, so you need to know whether this PR is approved or has a Request changes open.
 2. After the push, find the row in § The board and move the card to the status in it.
 3. Re-request review from the reviewers who already reviewed when the row says so (`gh pr edit <n> --add-reviewer <login>`).
 4. Read the card's status back, and set it again if it shows something else.
