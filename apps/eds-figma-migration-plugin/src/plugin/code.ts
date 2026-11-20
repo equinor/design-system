@@ -77,7 +77,7 @@ figma.showUI(__html__, {
   themeColors: true,
   width: WINDOW.width,
   height: WINDOW.height,
-  title: 'EDS Variable Migration [WIP BETA]',
+  title: 'EDS Variable Migration [BETA]',
 })
 
 // The window opens at the size the person last gave it.

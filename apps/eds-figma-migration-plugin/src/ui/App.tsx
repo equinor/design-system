@@ -1110,7 +1110,7 @@ export function App() {
       <header className="app-header">
         <h1 className="app-title">EDS Variable Migration</h1>
         <Badge tone="warning" emphasis="medium">
-          WIP beta
+          Beta
         </Badge>
         {command === 'open' && (
           <div className="header-actions">

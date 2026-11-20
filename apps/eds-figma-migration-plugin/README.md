@@ -93,16 +93,16 @@ and the guide for designers in [`docs/designer-guide.md`](./docs/designer-guide.
 
 ## Status
 
-| Milestone                                      | State                                                                                             |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| 1. Scaffold, manifest, build, inventory export | Done                                                                                              |
-| 2. Rules and tests                             | Done                                                                                              |
-| 3. Read-only scan                              | Done                                                                                              |
-| 4. Mapping view and overrides                  | Done; tested on the test file in Figma                                                            |
-| 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma                                            |
-| 6. Review and the remaining views              | Done; tested in Figma                                                                             |
-| 7. Report and saved health                     | Done; tested in Figma                                                                             |
-| 8. Release                                     | Test version published privately to Equinor; publish again for this build. Designer guide written |
+| Milestone                                      | State                                                                                                  |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| 1. Scaffold, manifest, build, inventory export | Done                                                                                                   |
+| 2. Rules and tests                             | Done                                                                                                   |
+| 3. Read-only scan                              | Done                                                                                                   |
+| 4. Mapping view and overrides                  | Done; tested on the test file in Figma                                                                 |
+| 5. Apply                                       | Done; tested on a duplicate of the test frame in Figma                                                 |
+| 6. Review and the remaining views              | Done; tested in Figma                                                                                  |
+| 7. Report and saved health                     | Done; tested in Figma                                                                                  |
+| 8. Release                                     | First version, published privately to Equinor as EDS Variable Migration [BETA]. Designer guide written |
 
 ## Build
 
@@ -709,17 +709,17 @@ the Instances tab (`nothingLeftText`, phase 4 of the nested-instances plan,
 2026-11-20); "Nothing left to migrate" read as done while Casper's PE Editor
 still had 638 legacy values inside instances.
 
-## Publish a test version to Equinor
+## Publish to Equinor
 
-The test version is published privately to the Equinor organisation as
-**EDS Variable Migration [WIP BETA]**. Publishing is only possible from the
+The plugin is published privately to the Equinor organisation as
+**EDS Variable Migration [BETA]**. Publishing is only possible from the
 Figma desktop app, with the plugin imported from `manifest.json`:
 
 1. Build it: `pnpm run build` at the root, then
    `pnpm --filter @equinor/eds-figma-migration-plugin run build`. Figma uploads
    `dist/code.js` and `dist/ui.html` as they are when you publish.
 2. Choose **Plugins → Development → Manage plugins in development**, open the
-   menu on **EDS Variable Migration [WIP BETA]** and choose **Publish**.
+   menu on **EDS Variable Migration [BETA]** and choose **Publish**.
 3. Publish to **Equinor** (private to the organisation), not to the Community.
 4. `manifest.json` has the id Figma created at the first publish
    (`1702357333472971124`), so publishing again updates the same plugin.
@@ -729,7 +729,7 @@ Figma's documentation and forum disagree on whether any member or only an
 admin can publish a private plugin. If Publish is not offered, ask the Figma
 admin.
 
-The published test version keeps the Developer menu. Both commands only read
+The published plugin keeps the Developer menu. Both commands only read
 the file.
 
 ## Developer command: export the inventories

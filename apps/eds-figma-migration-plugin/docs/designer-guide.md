@@ -7,8 +7,9 @@ Beta]**. The plugin runs in your file and uses no AI credits. Inside an
 instance it only changes what the instance overrides itself; the rest changes
 with the main component.
 
-The plugin is a test version, marked **[WIP BETA]**. Try it on a copy of a
-frame or in a branch first, and tell the EDS team what does not work.
+The plugin is marked **[BETA]**, as the EDS Beta tokens it moves your file
+to are. Try it on a copy of a frame or in a branch first, and tell the EDS team
+what does not work.
 
 ## Before you start
 
@@ -16,7 +17,7 @@ frame or in a branch first, and tell the EDS team what does not work.
    The plugin imports its variables and text styles from there.
 2. Keep the legacy libraries enabled until you are done. Revert frame needs
    them to put the legacy variables back.
-3. Open the plugin: **Plugins → Equinor → EDS Variable Migration [WIP BETA]**.
+3. Open the plugin: **Plugins → Equinor → EDS Variable Migration [BETA]**.
    The first time, a short introduction explains what the plugin does, what it
    does not do and how to use it. **Settings** (the sliders button in the
    header) opens it again, and holds the display switches, a Dark mode switch
