@@ -49,6 +49,11 @@
  *   higher Lc, otherwise the one with the higher ratio. The target is
  *   Lc 60, marked "assumed" because neither the docs nor ADR-0016 give
  *   one for these pairs yet
+ * - no single text colour reaching 4.5:1 on both step 1 and step 2. A
+ *   component keeps its text colour from rest to hover, so a category
+ *   where only `text.primary` passes on one step and only
+ *   `text.inverted` on the other cannot be used, although each step
+ *   passes on its own
  * - step 4 below 3:1 against `background.canvas` and
  *   `background.surface`, the WCAG minimum for a border that identifies
  *   the component (1.4.11). It has no APCA target
@@ -114,6 +119,8 @@ const CATEGORIES = Array.from(
   { length: 10 },
   (_, index) => `data-visualization.cat.${index + 1}`,
 )
+/** The text colours a component can show on a categorical fill. */
+const CATEGORICAL_TEXT = ['text.primary', 'text.inverted']
 /** WCAG 2.1 AA 1.4.11 for a border that identifies a component. */
 const BORDER_MINIMUM = 3
 /** foundation/colour/data-visualisation.mdx § Contrast, reported only. */
@@ -205,11 +212,13 @@ for (const scheme of SCHEMES) {
       ratio,
       lc,
     } = better(measured, pair.minimum)
-    const level = pair.goal ? 'goal' : 'minimum'
+    const [level, targetLevel] = pair.goal
+      ? ['goal', 'goal']
+      : ['minimum', 'target']
     const target =
       pair.target === null
         ? ''
-        : ` (${pair.goal ? 'goal' : 'target'} Lc ${pair.target}${pair.assumed ? ', assumed' : ''})`
+        : ` (${targetLevel} Lc ${pair.target}${pair.assumed ? ', assumed' : ''})`
     // With a choice of foregrounds, name the one measured and give the other
     const used = measured.length > 1 ? `${token} ` : ''
     const others = measured
@@ -238,6 +247,44 @@ for (const scheme of SCHEMES) {
   }
 }
 
+// One text colour has to work on both steps of a category, rest and hover.
+// A step that no text colour passes is already a failure above.
+for (const scheme of SCHEMES)
+  for (const category of CATEGORIES) {
+    const steps = [1, 2].map((step) => ({
+      name: `${category}.${step}`,
+      value: lookup(semanticByScheme[scheme], `${category}.${step}`),
+    }))
+    const options = CATEGORICAL_TEXT.map((token) => {
+      const value = lookup(semanticByScheme[scheme], token)
+      return {
+        token,
+        value,
+        ratios: steps.map((step) => ratioOrNull(value, step.value)),
+      }
+    })
+    const measurable = options.every(({ ratios }) =>
+      ratios.every((r) => r !== null),
+    )
+    if (!measurable) continue
+    const eachStepPasses = steps.every((_, index) =>
+      options.some(({ ratios }) => ratios[index] >= MINIMUM.text),
+    )
+    const shared = options.some(({ ratios }) =>
+      ratios.every((r) => r >= MINIMUM.text),
+    )
+    if (!eachStepPasses || shared) continue
+    const measured = options
+      .map(
+        ({ token, value, ratios }) =>
+          `${token} ${value} ${ratios.map((r) => `${r.toFixed(2)}:1`).join(' and ')}`,
+      )
+      .join(', ')
+    failures.push(
+      `${scheme.padEnd(5)}  text.primary or text.inverted on ${steps[0].name} and ${steps[1].name}: no single text colour reaches ${MINIMUM.text}:1 on both steps (${measured})`,
+    )
+  }
+
 for (const key of exceptionFor.keys())
   if (!seenExceptions.has(key))
     failures.push(
@@ -249,7 +296,7 @@ console.log(
   `check-contrast: ${documented.length} documented pairs, ${categorical.length} categorical data visualisation pairs and ${chartGoals.length} chart goals in ${SCHEMES.join(' and ')} (${checks} checks). Minimum: WCAG 2.1 AA, ${MINIMUM.text}:1 for text and ${MINIMUM.icon}:1 for icons. Target: APCA Lc ${BODY_TEXT_TARGET} for text.primary on the surface, Lc ${TARGET} otherwise, none for tertiary; "assumed" marks a target the docs and ADR-0016 do not give.`,
 )
 console.log(
-  `Categorical (#5883, #5884): text on steps 1 and 2 passes when text.primary or text.inverted reaches ${MINIMUM.text}:1, target Lc ${TARGET}; step 4 needs ${BORDER_MINIMUM}:1 against the canvas and the surface. Chart goals (data-visualisation.mdx § Contrast), reported only: step 3 ${CHART_GOAL.minimum}:1 and Lc ${CHART_GOAL.fill}, step 4 ${CHART_GOAL.minimum}:1 and Lc ${CHART_GOAL.line}, against the surface.`,
+  `Categorical (#5883, #5884): text on steps 1 and 2 passes when text.primary or text.inverted reaches ${MINIMUM.text}:1, and one of them has to reach it on both steps, target Lc ${TARGET}; step 4 needs ${BORDER_MINIMUM}:1 against the canvas and the surface. Chart goals (data-visualisation.mdx § Contrast), reported only: step 3 ${CHART_GOAL.minimum}:1 and Lc ${CHART_GOAL.fill}, step 4 ${CHART_GOAL.minimum}:1 and Lc ${CHART_GOAL.line}, against the surface.`,
 )
 
 if (excepted.length > 0) {
@@ -371,7 +418,7 @@ function categoricalPairs() {
   for (const category of CATEGORIES) {
     for (const step of [1, 2])
       list.push({
-        foregrounds: ['text.primary', 'text.inverted'],
+        foregrounds: CATEGORICAL_TEXT,
         background: `${category}.${step}`,
         minimum: MINIMUM.text,
         target: TARGET,
@@ -410,6 +457,14 @@ function chartGoalPairs() {
       source,
     })),
   )
+}
+
+/** The WCAG ratio, or null when either colour has no contrast value. */
+function ratioOrNull(foreground, background) {
+  const opaque = (value) => colourProblem('', value, null) === undefined
+  return opaque(foreground) && opaque(background)
+    ? wcagRatio(foreground, background)
+    : null
 }
 
 /**

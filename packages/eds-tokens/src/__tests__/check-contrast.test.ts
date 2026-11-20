@@ -130,6 +130,8 @@ describe('check-contrast', () => {
     it('meet the minimum on every documented and categorical pair outside the exceptions', () => {
       expect(result.status).toBe(0)
       expect(result.stdout).toContain('134 documented pairs')
+      expect(result.stdout).toContain('40 categorical data visualisation pairs')
+      expect(result.stdout).toContain('20 chart goals')
     })
 
     it('measure primary, secondary and tertiary against the surface only', () => {
@@ -292,21 +294,38 @@ describe('check-contrast', () => {
       )
     })
 
-    it('pass when only one of the two text colours meets 4.5:1', () => {
+    it('pass when only one of the two text colours meets 4.5:1, on both steps', () => {
       // text.primary on its own colour is 1:1, text.inverted is far above
-      const result = runEdited(({ light }) =>
-        set(light, 'dataVisualization.cat.3.1', get(light, 'text.primary')),
-      )
+      const result = runEdited(({ light }) => {
+        set(light, 'dataVisualization.cat.3.1', get(light, 'text.primary'))
+        set(light, 'dataVisualization.cat.3.2', get(light, 'text.primary'))
+      })
       expect(result.status).toBe(0)
-      expect(result.stderr).not.toContain('data-visualization.cat.3.1')
+      expect(result.stderr).not.toContain('data-visualization.cat.3')
+    })
+
+    it('fail the run when no single text colour meets 4.5:1 on both steps', () => {
+      // Step 1 keeps the surface colour, where only text.primary passes;
+      // on step 2, text.primary's own colour, only text.inverted passes
+      const result = runEdited(({ light }) =>
+        set(light, 'dataVisualization.cat.3.2', get(light, 'text.primary')),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toMatch(
+        /light {2}text\.primary or text\.inverted on data-visualization\.cat\.3\.1 and data-visualization\.cat\.3\.2: no single text colour reaches 4\.5:1 on both steps \(text\.primary #[0-9a-f]{6} \d+\.\d{2}:1 and 1\.00:1, text\.inverted #[0-9a-f]{6} \d+\.\d{2}:1 and \d+\.\d{2}:1\)/,
+      )
+      // Each step on its own passes, so neither is reported as a pair
+      expect(result.stderr).not.toContain('on data-visualization.cat.3.2  ')
     })
 
     it('report the text colour used when it is below Lc 60', () => {
       // In dark, only the dark text.inverted meets 4.5:1 on #a28200, at
-      // about Lc 38
-      const result = runEdited(({ dark }) =>
-        set(dark, 'dataVisualization.cat.2.2', '#a28200'),
-      )
+      // about Lc 38. Step 1 takes a pale colour so that text.inverted also
+      // passes there, as one text colour has to work on both steps.
+      const result = runEdited(({ dark }) => {
+        set(dark, 'dataVisualization.cat.2.1', '#f9eab5')
+        set(dark, 'dataVisualization.cat.2.2', '#a28200')
+      })
       expect(result.status).toBe(0)
       expect(result.stdout).toMatch(
         /Below the APCA target[\s\S]*dark {3}text\.primary or text\.inverted on data-visualization\.cat\.2\.2 {2}text\.inverted #[0-9a-f]{6} on #a28200 {2}\d\.\d{2}:1 \(minimum 4\.5:1\) {2}Lc [\d.]+ \(target Lc 60, assumed\) {2}\(other: text\.primary/,
