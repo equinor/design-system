@@ -1,0 +1,192 @@
+---
+title: Statuses and special cases in the migration plugin
+sidebar_label: Statuses and special cases
+description: What each status in the EDS Variable Migration plugin means, and what to do with the values the plugin cannot change by itself.
+---
+
+import { PluginStep } from '@site/src/components/MigrationPlugin/MigrationPlugin'
+
+[Migrating a Figma file](./migration-plugin.mdx) takes you through a first run with the EDS Variable
+Migration plugin. This page explains the status the plugin gives each legacy value, and the cases
+where you, or the components in your file, have to do part of the work.
+
+## The statuses
+
+<PluginStep
+  step="statuses"
+  alt="The dialog What the categories mean, which explains each status in the health bar."
+>
+
+- **Migrated**: already uses the EDS Beta tokens. Only this status is green, because it is done.
+- **Ready**: a legacy variable with one clear EDS Beta token. The Ready count is what the next Apply
+  changes.
+- **Needs check** ⚠: the token depends on what the layer does, for example whether it is interactive
+  or selected. Review asks you.
+- **Manual fix**: a legacy value Figma does not let anyone change where it is. See
+  [Manual fix](#manual-fix).
+- **No equivalent**: the EDS Beta has no token for it. See
+  [No equivalent and stand-ins](#no-equivalent-and-stand-ins).
+- **Inside instances**: comes from an instance's main component. See
+  [Values inside instances](#values-inside-instances).
+
+Health is the share that is migrated, and it reaches 100% only when no legacy variable is left. A
+value you set to **Decide later** counts as not migrated, and a Ready value you set to Decide later
+counts as Needs check until you choose a token.
+
+</PluginStep>
+
+## No equivalent and stand-ins
+
+Some legacy values have no token in the EDS Beta, such as a stroke width variable used as a padding,
+a palette colour or a colour on a shadow. They are gaps in the tokens, and the plugin marks them
+**No equivalent** so the gaps show in the health bar and in the report. Each one gets a stand-in,
+which the row shows as **Stand-in:** followed by the target:
+
+- A number gets the EDS Beta variable with the same px in the density the layer will have, such as
+  `spacing/xl` for a 24px gap in comfortable. When no variable has that px, it gets the px value
+  without a variable.
+- A colour gets the EDS Beta colour for what the layer is (text, icon, border or background,
+  interactive or not) that looks nearest to the legacy colour.
+- A type size gets the nearest text style step.
+- A legacy mode the plugin does not know is removed, so the layer takes the mode set above it.
+
+Apply changes the value once you choose the stand-in or another token, in Changes or in Review. Until
+then it counts as not migrated. When no stand-in fits your design, send the report to the EDS team,
+since it lists every gap with the stand-in the plugin proposed.
+
+## Manual fix
+
+<PluginStep
+  step="manual-fix"
+  alt="A Manual fix on the Size tab: the width of the icon error filled inside the instance Search field uses the legacy Selectable/Icon size, with the steps to fix it."
+>
+
+Figma does not let anyone change the width or height of a layer inside an instance, in the editor or
+from a plugin, so a legacy size there is marked **Manual fix**. It usually comes from an icon that
+was swapped while its slot still used a legacy size. The swap copied the size onto the icon, and the
+size stayed when the main component was migrated.
+
+The row says how to fix it in Figma. Select the layer, right-click it and choose **Reset all
+changes**, then swap the icon again, and it keeps the EDS Beta size from the main component. When
+the icon was picked with a property of the instance above it, the reset keeps the icon but not the
+size, so set the property to the default icon and back instead. The reset also removes the other
+changes on the layer and the layers below it, such as a colour, so the row lists them with the EDS
+Beta value to set again.
+
+The plugin can make the fix for you, but only after you accept it in Review, because it does more
+than swap one variable for another. It reads every change on the layer, resets it, swaps it back and
+sets the changes again, and then checks each one. If a change cannot be copied, the plugin leaves the
+layer as it was and says why.
+
+</PluginStep>
+
+## Values inside instances
+
+<PluginStep
+  step="instances"
+  alt="The Instances tab: the frame Well details with the instances in it as a tree, each with its number of legacy values and Go to."
+>
+
+An instance takes most of its values from its main component. The plugin leaves those values in the
+instance, because a change there would become an override and stop the instance from getting
+updates. It changes the values an instance overrides itself, such as the colour of an icon you
+changed, and marks them **Overridden in the instance**. The rest are marked **From the main
+component**, and they change when the main component changes.
+
+The **Instances** tab shows the instances that still take legacy values from their main component
+as a tree, drawn like Figma's Layers panel: each frame, the instances in it and the instances inside
+those, with the number of legacy values in each. Hidden instances are dimmed.
+
+Content you place in a slot of an instance belongs to that instance once you edit the slot, so the
+plugin treats it like layers in a frame and changes its legacy values.
+
+</PluginStep>
+
+<PluginStep
+  step="sources"
+  alt="The Instances tab after Check for library updates, with the instances grouped under Update, Library, This file and No library."
+>
+
+**Check for library updates** finds where the values of each instance can be fixed, and labels it:
+
+- **Update**: the library has a newer version. Accept it with Review library updates in Figma.
+- **Library**: the library's current version still uses legacy variables. Swap the instances to EDS
+  Beta components.
+- **This file**: the main component is in this file. Migrate it on the **Main components** tab, and
+  every instance follows.
+- **No library**: no library the file uses has the main component, for example because it was
+  copied from another file. Swap the instances to EDS Beta components, migrate the main component in
+  its own file, or detach the instances.
+
+The check imports the latest version of each library component to compare it with the copy in your
+file, which takes a second or two for each. It changes no layer, but Figma keeps a hidden copy of
+each latest version in the file, so the check only runs when you start it.
+
+</PluginStep>
+
+## Typography components
+
+<PluginStep
+  step="typography"
+  alt="The Typography tab in Changes: rows for the legacy text styles and text colours with the EDS Beta style and colour each becomes, and the Review and Convert to text buttons."
+>
+
+The legacy Typography component can become a text layer with an EDS Beta text style and colour, with
+**Convert to text** on the Typography tab in Changes. The tab shows what each instance gets before
+you convert: a row for each legacy typography under Text style, and a row for each legacy colour
+under Text colour. The rows work as they do in Changes.
+
+Convert changes the instances whose text style is Ready, and an instance whose text style needs a
+check waits until you decide. Some need a check because of their text case. The EDS Beta text styles
+have no text case, and Figma detaches a text style from a layer when a text case is set on it, so
+converting keeps the style and the text shows as typed. A Typography component with mono numbers
+loses them, since a text style cannot carry tabular figures.
+
+In a main component, converting carries the text each instance shows across to the new text layer.
+Revert frame puts the Typography instance back.
+
+</PluginStep>
+
+## Legacy modes
+
+<PluginStep
+  step="modes"
+  alt="The Modes tab in Changes, with the legacy density and colour scheme modes and the mode each one becomes."
+>
+
+The legacy density and colour scheme modes set on frames and layers are on the **Modes** tab in
+Changes. Apply sets the new mode, and removes the legacy one once nothing below it uses a legacy
+variable through it. While a value below still does, the mode is marked **Waiting**, and its row
+says what it waits for, for example "Cleared once Icon, width is decided". A value inside an
+instance, a check you have not decided or a value set to Decide later can each hold a mode. In the
+health bar, a waiting mode counts as No equivalent.
+
+The plugin works this out from your choices, so one Apply changes the values below and then removes
+the mode. To remove a legacy mode in the next run anyway, choose **Remove the legacy mode anyway**
+in its picker. The values below that read it then change, and the Apply confirmation names them.
+
+</PluginStep>
+
+## What the plugin writes into the file
+
+Apply and Convert each open a confirmation that counts what the run changes. This is everything the
+plugin writes into the file:
+
+- **Variable bindings, text styles and modes**: the EDS Beta variable on the same property of the
+  layer, an EDS Beta text style in place of the legacy typography variables, and the new density or
+  colour scheme mode.
+- **Values without a variable**: where the EDS Beta has no variable, such as for a border width, the
+  number itself in place of the legacy variable.
+- **Reset layers**: the layers reset for a Manual fix you accepted, with their other changes set
+  again.
+- **Converted text layers**: a text layer with the same text in place of each Typography instance you
+  converted.
+- **A change log on each layer**: what the plugin changed, what replaced it, why and when, in the
+  layer's shared plugin data (namespace `eds_migration`, key `log`). Revert frame reads it, and other
+  plugins can read it too, so a team can check a migration with its own tools.
+- **Saved choices, health and left-out pages**: in the file's plugin data, so everyone who opens the
+  plugin in the file sees the targets you chose, the latest scan and the pages a scan of the file
+  leaves out.
+
+Your display settings, the window size and whether you have seen the introduction are kept for you in
+Figma, not in the file.

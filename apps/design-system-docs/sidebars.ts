@@ -14,7 +14,11 @@ const sidebars: SidebarsConfig = {
         type: 'doc',
         id: 'about/getting-started/design/getting_started_design',
       },
-      items: ['about/getting-started/design/figma'],
+      items: [
+        'about/getting-started/design/figma',
+        'about/getting-started/design/migration-plugin',
+        'about/getting-started/design/migration-plugin-statuses',
+      ],
     },
     {
       type: 'category',
