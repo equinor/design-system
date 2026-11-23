@@ -60,8 +60,8 @@ importers:
         specifier: ^7.29.13
         version: 7.29.13(supports-color@10.2.2)
       '@babel/eslint-parser':
-        specifier: ^7.29.9
-        version: 7.29.9(@babel/core@7.29.13(supports-color@10.2.2))(eslint@9.39.4(jiti@2.7.0)(supports-color@10.2.2))
+        specifier: ^7.29.13
+        version: 7.29.13(@babel/core@7.29.13(supports-color@10.2.2))(eslint@9.39.4(jiti@2.7.0)(supports-color@10.2.2))
       '@babel/plugin-transform-runtime':
         specifier: ^7.29.7
         version: 7.29.7(@babel/core@7.29.13(supports-color@10.2.2))(supports-color@10.2.2)
@@ -1413,8 +1413,8 @@ packages:
     resolution: {integrity: sha512-j1nvOQCZYSgp7HLmisnCXFTpVvFODiijQ9QHkORfGKWH6YDtskTEeCJS7eV545GZ9UBzrq0e2xsOd5QQ5PjIqw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/eslint-parser@7.29.9':
-    resolution: {integrity: sha512-GmrJTAtiRbNip+eKFqeuSvoHMJhKlH36j8U0yE3Gqn45B+SIO7NvsEiHtsmzkBqV1hLSMqYr41dI1aZLTkJ37g==}
+  '@babel/eslint-parser@7.29.13':
+    resolution: {integrity: sha512-MURiSTWPmb5VXh3DQYXSgaZSO6+/Cx9ump7lIiVS7iawLGKhsFQScjDuUvVNA4QuPudQeF453Coxrb67wJboSQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': ^7.11.0
@@ -14434,7 +14434,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/eslint-parser@7.29.9(@babel/core@7.29.13(supports-color@10.2.2))(eslint@9.39.4(jiti@2.7.0)(supports-color@10.2.2))':
+  '@babel/eslint-parser@7.29.13(@babel/core@7.29.13(supports-color@10.2.2))(eslint@9.39.4(jiti@2.7.0)(supports-color@10.2.2))':
     dependencies:
       '@babel/core': 7.29.13(supports-color@10.2.2)
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
