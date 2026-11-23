@@ -13,7 +13,7 @@
   "author": "EDS Core Team",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^18.0.9",
+    "dotenv": "^18.0.10",
     "svgo": "^4.1.0"
   },
   "nodemonConfig": {
