@@ -967,8 +967,8 @@ importers:
   packages/eds-mobile-components:
     dependencies:
       '@equinor/eds-tokens':
-        specifier: 2.3.0-beta.3
-        version: 2.3.0-beta.3
+        specifier: 3.0.0-beta.11
+        version: 3.0.0-beta.11
       '@expo/vector-icons':
         specifier: ^15.1.1
         version: 15.1.1(expo-font@58.0.12)(react-native@0.88.1(@babel/core@7.29.13(supports-color@10.2.2))(@react-native/metro-config@0.88.1(@babel/core@7.29.13(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1)
@@ -3328,14 +3328,14 @@ packages:
   '@equinor/eds-tokens@2.2.0':
     resolution: {integrity: sha512-MUbv83ppGHzRBSgaZTkPqMU+2cAQsaDiE/b22GsIXnmptVH4NV5tyHJdz7Yrd1U7yKWO4L7IUwK849IBixyVyg==}
 
-  '@equinor/eds-tokens@2.3.0-beta.3':
-    resolution: {integrity: sha512-rWQ5uKPEdtJjQdMx/t4n0O9oDBrnXLkJQGmGdc4zJtxcKMDNHttFNXjjEelIm0SY23NElax04FevaoQ4oNcxHg==}
-
   '@equinor/eds-tokens@2.3.2':
     resolution: {integrity: sha512-XdLnBF0TwjhGAEWRmz2mO4eagiZ7x3uoMzpvr3XE3tUyOA7Oh2UBbDGx4wfmd3DTDPut+gVnyed5w/HcRsR6CQ==}
 
   '@equinor/eds-tokens@3.0.0-beta.10':
     resolution: {integrity: sha512-NADWMn8ASgcJzqAPdhnnZlwM+2wUS1zgqvYh81BHYg9UezmcunYr0dH7dU8t19BzgV9FebdxrZTcLEHo2UzMaw==}
+
+  '@equinor/eds-tokens@3.0.0-beta.11':
+    resolution: {integrity: sha512-AYxzx6oPxtSN7Xxuqsm0KYZrggjOUcTmN7qANJL7HKlIJPF+LsRGEeyCskisHxl4n0aZNEPmFs3V1xdq+LeW7Q==}
 
   '@equinor/eds-utils@2.1.0':
     resolution: {integrity: sha512-yMrqw22Rc3UXrru4tGCSSyuLNY60ikuEyhJXu54beorllB3iCxvMxD5P9tFP6tkkTl/V0tYH9tD79JfzO2w6Ew==}
@@ -17570,11 +17570,11 @@ snapshots:
 
   '@equinor/eds-tokens@2.2.0': {}
 
-  '@equinor/eds-tokens@2.3.0-beta.3': {}
-
   '@equinor/eds-tokens@2.3.2': {}
 
   '@equinor/eds-tokens@3.0.0-beta.10': {}
+
+  '@equinor/eds-tokens@3.0.0-beta.11': {}
 
   '@equinor/eds-utils@2.1.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(styled-components@6.6.0(css-to-react-native@3.2.0)(react-dom@19.3.1(react@19.3.1))(react-native@0.88.1(@babel/core@7.29.13(supports-color@10.2.2))(@react-native/metro-config@0.88.1(@babel/core@7.29.13(supports-color@10.2.2))(supports-color@10.2.2))(@types/react@19.2.18)(react@19.3.1)(supports-color@10.2.2))(react@19.3.1))':
     dependencies:
