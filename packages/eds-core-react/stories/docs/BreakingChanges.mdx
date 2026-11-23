@@ -21,7 +21,7 @@ export const components = [
 
 This page lists the intentional breaking changes between the 2.x components and their successors under `/next` in the 3.0.0 beta. It is kept up to date while 3.0.0 is in beta, so that you can tell an intended change from a bug. The full migration guide, together with codemods and AI-assisted rewrites, comes when 3.0.0 is released.
 
-Verified against `@equinor/eds-core-react@3.0.0-beta.2` (September 2026). If a component page in this Storybook shows a different API, the component page is right and this page needs an update.
+Verified against `@equinor/eds-core-react@3.0.0-beta.7` (November 2026). If a component page in this Storybook shows a different API, the component page is right and this page needs an update.
 
 **What counts as a breaking change on this page**
 
@@ -83,7 +83,7 @@ Verified against `@equinor/eds-core-react@3.0.0-beta.2` (September 2026). If a c
 | `Radio`                  | [Radio](#radio)               |                                                                            | Labelled root `<label>` → `<div>`; SVG `path[name]` hooks removed                                       |
 | `Search`                 | [Search](#search)             |                                                                            | Clearing calls `onClear`, not `onChange`; native `<search>` element                                     |
 | `NativeSelect`           | [Select](#select)             | <Tag tone="danger">Known issues</Tag>                                      | `<option>` children → `options` prop; ref points at `<select>`                                          |
-| `Switch`                 | [Switch](#switch)             | <Tag tone="danger">Known issues</Tag>                                      | `label` required; `size` removed; `role="switch"`                                                       |
+| `Switch`                 | [Switch](#switch)             | <Tag tone="danger">Known issues</Tag>                                      | `size` removed; `role="switch"`                                                       |
 | `Textarea`               | [TextArea](#textarea)         |                                                                            | Renamed export; `rowsMax` → `maxRows`; `helperText` → `helperMessage`; auto-grows by default            |
 | `TextField`              | [TextField](#textfield)       |                                                                            | `helperText` → `helperMessage`; `meta` → `indicator`; `variant` → `invalid`                             |
 | `Tooltip`                | [Tooltip](#tooltip)           | <Tag tone="danger">Known issues</Tag>                                      | `placement` reduced to four values; rendered inline, arrow is a CSS pseudo-element                      |
