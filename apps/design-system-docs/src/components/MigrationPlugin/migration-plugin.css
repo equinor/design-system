@@ -25,7 +25,7 @@
 .docs-plugin-demo {
   display: block;
 
-  max-width: 100%;
+  width: 100%;
   margin-block: var(--eds-spacing-md) var(--eds-spacing-xl);
   border: 0;
 

@@ -5,8 +5,7 @@ import ThemedImage from '@theme/ThemedImage'
 
 import './migration-plugin.css'
 
-/** Size of the demo page: the 480 × 720 window, its 40px title bar and a 1px border */
-const DEMO_WIDTH = 482
+/** Height of the demo: the plugin's 720px window, its 40px title bar and a 1px border */
 const DEMO_HEIGHT = 762
 
 /**
@@ -65,18 +64,23 @@ PluginStep.displayName = 'PluginStep'
 
 /**
  * The plugin window running on a sample file, from the demo built in
- * apps/eds-figma-migration-plugin. It follows the site's colour scheme.
+ * apps/eds-figma-migration-plugin. With `size=fill` the window takes the
+ * whole iframe, so it is as wide as the content column, as a designer can
+ * make it in Figma by dragging its corner. It follows the site's colour
+ * scheme.
  */
 export function PluginWindowDemo() {
   const { colorMode } = useColorMode()
-  const src = useBaseUrl(`/migration-plugin/demo.html?theme=${colorMode}`)
+  const src = useBaseUrl(
+    `/migration-plugin/demo.html?theme=${colorMode}&size=fill`,
+  )
 
   return (
     <iframe
       className="docs-plugin-demo"
       src={src}
       title="EDS Variable Migration window with a sample file"
-      width={DEMO_WIDTH}
+      width="100%"
       height={DEMO_HEIGHT}
       loading="lazy"
     />
