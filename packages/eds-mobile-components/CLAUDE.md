@@ -40,6 +40,7 @@ The library uses a token-based theming system sourced from `@equinor/eds-tokens`
 - `theme.colors.*` — color tokens (`ColorToken`)
 - `theme.spacing.*` — spacing tokens (`SpacingToken`)
 - `theme.typography.*` — typography tokens (`TypographyToken`)
+- `token.theme.*` — the tokens from the Tokens Studio export (`ThemeToken`). They sit next to the parts above while the components move over, and replace them once the last one has
 - `theme.geometry.*` / `theme.timing.*` — static constants (no `@equinor/eds-tokens` equivalent yet)
 
 **Theme Context:**

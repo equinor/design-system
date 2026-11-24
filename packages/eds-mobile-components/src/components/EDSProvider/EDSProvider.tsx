@@ -8,6 +8,7 @@ import {
     darkColorToken,
     geometryToken,
     lightColorToken,
+    resolveThemeToken,
     spaciousSpacingToken,
     timingToken,
     typographyToken,
@@ -45,6 +46,11 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
         return darkColorToken;
     }, [props.colorScheme]);
 
+    const themeToken = useMemo(
+        () => resolveThemeToken(props.colorScheme, props.density),
+        [props.colorScheme, props.density]
+    );
+
     const masterToken = useMemo(
         () =>
             ({
@@ -53,8 +59,9 @@ export const EDSProvider = (props: PropsWithChildren<EDSProviderProps>) => {
                 typography: typographyToken,
                 geometry: geometryToken,
                 timing: timingToken,
+                theme: themeToken,
             }) satisfies MasterToken,
-        [colorToken, spacingToken]
+        [colorToken, spacingToken, themeToken]
     );
 
     return (
