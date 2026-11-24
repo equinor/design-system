@@ -9,7 +9,7 @@
         "url": "https://github.com/equinor/design-system/issues"
     },
     "dependencies": {
-        "@equinor/eds-tokens": "2.3.0-beta.3",
+        "@equinor/eds-tokens": "3.0.0-beta.11",
         "@floating-ui/react-native": "^0.10.7",
         "react-error-boundary": "^6.1.6"
     },
