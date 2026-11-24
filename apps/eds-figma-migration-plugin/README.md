@@ -850,6 +850,10 @@ window takes the width it gets.
   with the row open), `typography`, `statuses` (the dialog that explains the
   categories), `modes` and `intro` (the introduction). The steps are in
   `demo/src/steps.ts`.
+- `?size=fill` lets the window take the whole page, so the docs can make it
+  as wide as the content column, as a designer can widen it in Figma by
+  dragging its corner. Without it, the window has the plugin's default size,
+  as in the images.
 - `?theme=light` or `?theme=dark` sets Figma's theme. Without it the demo
   follows the reader's colour scheme, also when it changes.
 - Without `step`, the demo opens as the plugin does and can be used like it.
@@ -924,6 +928,10 @@ and runs `scripts/docs-sync.mjs`, which:
   light and dark image of each in `static/img/migration-plugin/` as WebP,
   640 px wide, twice the 20rem the docs show them at,
 - removes the images no page uses any more.
+
+When the pages are on another branch than the plugin, for example in a
+worktree, point the sync at that docs app with `EDS_DOCS_APP`:
+`EDS_DOCS_APP=<path to the worktree>/apps/design-system-docs pnpm run docs:sync`.
 
 `test/docs-steps.test.ts` fails when a page names a step the demo does not
 have (`demo/src/step-names.ts`), so renaming or removing a step means

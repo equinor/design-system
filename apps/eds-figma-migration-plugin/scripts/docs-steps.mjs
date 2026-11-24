@@ -6,13 +6,19 @@
  * each of them.
  */
 import { readdirSync, readFileSync } from 'node:fs'
-import { dirname, join, relative } from 'node:path'
+import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 
-/** The docs site, next to the plugin in the monorepo */
-export const DOCS_APP = join(root, '../design-system-docs')
+/**
+ * The docs site, next to the plugin in the monorepo. `EDS_DOCS_APP` points
+ * the sync at the docs app in another checkout, such as a worktree with a
+ * docs branch while the pages and the plugin are on different branches.
+ */
+export const DOCS_APP = process.env.EDS_DOCS_APP
+  ? resolve(process.env.EDS_DOCS_APP)
+  : join(root, '../design-system-docs')
 
 /** Where the docs pages are, for the current (Beta) version */
 const DOCS_PAGES = join(DOCS_APP, 'docs')

@@ -7,6 +7,9 @@
  *
  * `?step=` opens the demo at a step (steps.ts), and `?theme=light|dark` sets
  * Figma's theme; without it, the demo follows the reader's colour scheme.
+ * `?size=fill` lets the window take the whole page, as a designer can make it
+ * wider in Figma by dragging its corner; without it, the window has the
+ * plugin's default size, as in the images.
  * The page sets `data-state` on the window frame to `ready` when the step is
  * shown, or `failed` with the reason in `data-error`, for the image script.
  */
@@ -35,6 +38,7 @@ if (!frame || !body || !note) throw new Error('The demo page is incomplete')
 
 frame.style.setProperty('--demo-width', `${WINDOW.width + 2}px`)
 frame.style.setProperty('--demo-height', `${WINDOW.height + 40 + 2}px`)
+if (params.get('size') === 'fill') frame.dataset.size = 'fill'
 
 function theme(): Theme {
   return fixedTheme ?? (prefersDark.matches ? 'dark' : 'light')
