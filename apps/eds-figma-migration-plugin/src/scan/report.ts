@@ -51,9 +51,13 @@ function targetText(target: string | null): string {
   return target
 }
 
-/** Escapes a Markdown table cell. */
+/**
+ * Escapes a Markdown table cell. Backslashes go first, so a layer name with a
+ * backslash keeps it and does not escape the character after it.
+ */
 function cell(text: string | number | undefined): string {
   return String(text ?? '')
+    .replace(/\\/g, '\\\\')
     .replace(/\|/g, '\\|')
     .replace(/\n/g, ' ')
 }

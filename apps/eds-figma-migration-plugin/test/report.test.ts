@@ -135,6 +135,18 @@ describe('buildReport on a Manual fix', () => {
     expect(report.markdown).toContain(`To fix it, reset the layer. ${effects}`)
   })
 
+  it('escapes backslashes and pipes in a table cell', () => {
+    const named: BindingRecord = { ...fix, path: ['Frame', 'Icon \\| left'] }
+    const report = buildReport({
+      fileName: 'File',
+      summary,
+      records: [named],
+      oldInstances: [],
+      overrides: NO_OVERRIDES,
+    })
+    expect(report.markdown).toContain('Icon \\\\\\| left')
+  })
+
   it('keeps them in the CSV once the fix is accepted', () => {
     const report = buildReport({
       fileName: 'File',
