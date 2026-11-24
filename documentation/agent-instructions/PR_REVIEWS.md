@@ -13,10 +13,10 @@ The document has two parts. If you are reviewing someone else's PR, read § Chec
 A description that says what was tested is a list of things to check, not a reason to skip them.
 
 1. List every claim in the description and in the code comments that can be checked: a command that passes, a test count, a test that fails without the fix, two outputs that match, a number such as a tolerance, a size or a count.
-2. Run each one yourself on the PR head (`git fetch origin pull/<n>/head`), not on whatever branch is checked out, and without touching uncommitted work. A worktree is a clean way to do that, but a checkout the user has said is free to use is fine too. For "fails without the fix", run the test with the PR's changes reverted and the input the claim names, and show that it fails there and passes with the fix. A claim that cannot be run from here, such as one about a device or a CI-only job, is covered by step 5.
+2. Run each one yourself on the PR head (`git fetch origin pull/<n>/head`), not on whatever branch is checked out, and without touching uncommitted work. Scale this to the PR: when the diff has no code or config, skip the install and build (step 4) and check only the claims you can read in the diff or run cheaply, such as an internal link or a count. A worktree is a clean way to do that, but a checkout the user has said is free to use is fine too. For "fails without the fix", run the test with the PR's changes reverted and the input the claim names, and show that it fails there and passes with the fix. A claim that cannot be run from here, such as one about a device or a CI-only job, is covered by step 5.
 3. Measure a number before you comment on it. A tolerance that looks wide, or a size that looks large, is a guess until you have the worst real value.
 4. Set the checkout up like CI (`.github/workflows/checks.yaml`: `pnpm install --frozen-lockfile`, then `pnpm run build`), or unrelated failures will look like the PR's. Compare every failure with the base before you blame the PR. Mention the Node version only when it could change a result, for example when the author names one and yours differs.
-5. Write "not verified" for each claim you skipped, and give the reason. A claim you could not check counts as a question that needs an answer first, so recommend Comment and not Approve (§ Recommend a type).
+5. Write "not verified" for each claim you skipped, and give the reason. A skipped claim that the PR's correctness depends on counts as a question that needs an answer first, so recommend Comment and not Approve (§ Recommend a type). A skipped claim that does not affect correctness, such as what an external link says, is reported but does not rule out Approve.
 
 ## Severity
 
@@ -41,7 +41,7 @@ The board moves a PR to "Needs revision" on a **Request changes** review and to 
 | Should fix, Suggestion, or a question that needs an answer first, with nothing Blocking        | Comment                            |
 | Only nits, each prefixed `nit:`                                                                | Approve, with the nits as comments |
 
-Nits are optional and do not send the PR back. A claim in the description that you could not verify also rules out Approve, so recommend Comment. Reviews post under the user's account.
+Nits are optional and do not send the PR back. A claim you could not verify, and that the PR's correctness depends on, also rules out Approve, so recommend Comment. Reviews post under the user's account.
 
 ## Put the review in
 
