@@ -14,7 +14,7 @@ const { test, describe } = require('node:test')
 const assert = require('node:assert')
 const { execFileSync } = require('node:child_process')
 const { randomUUID } = require('node:crypto')
-const { readFileSync, rmSync, utimesSync } = require('node:fs')
+const { readdirSync, readFileSync, rmSync, utimesSync } = require('node:fs')
 const { tmpdir } = require('node:os')
 const { join } = require('node:path')
 
@@ -31,8 +31,16 @@ const doc = readFileSync(
   'utf8',
 )
 
+// The hook leaves one marker file per session and section in the temp folder.
+const removeMarkers = (sessionId) => {
+  const prefix = `pr-flow-hook-${sessionId.replace(/\W/g, '')}`
+  for (const name of readdirSync(tmpdir())) {
+    if (name.startsWith(prefix)) rmSync(join(tmpdir(), name), { force: true })
+  }
+}
+
 // Each call is a new session unless one is given, because the hook remembers
-// per session that it has already sent the board rules.
+// per session which sections it has already sent.
 const runHook = (command, toolName = 'Bash', sessionId = randomUUID()) =>
   execFileSync('node', [hook], {
     input: JSON.stringify({
@@ -134,11 +142,48 @@ describe('hook', () => {
   })
 
   test('hands over the review rules when a review is posted', () => {
-    const output = JSON.parse(runHook('gh pr review 5935 --comment'))
-    const context = output.hookSpecificOutput.additionalContext
-    assert.match(context, /## Recommend a type/)
-    assert.match(context, /## Put the review in/)
-    assert.match(context, /## Submit it/)
+    const sessionId = randomUUID()
+    try {
+      const output = JSON.parse(
+        runHook('gh pr review 5935 --comment', 'Bash', sessionId),
+      )
+      const context = output.hookSpecificOutput.additionalContext
+      assert.match(context, /## Recommend a type/)
+      assert.match(context, /## Put the review in/)
+      assert.match(context, /## Submit it/)
+    } finally {
+      removeMarkers(sessionId)
+    }
+  })
+
+  test('sends the review rules once per session, even for a read of the reviews', () => {
+    const sessionId = randomUUID()
+    try {
+      const post =
+        'gh api -X POST repos/o/r/pulls/1/reviews --input /tmp/x.json'
+      const read = 'gh api repos/o/r/pulls/1/reviews --jq .[].state'
+      assert.match(
+        JSON.parse(runHook(read, 'Bash', sessionId)).hookSpecificOutput
+          .additionalContext,
+        /## Put the review in/,
+      )
+      assert.strictEqual(runHook(post, 'Bash', sessionId), '')
+    } finally {
+      removeMarkers(sessionId)
+    }
+  })
+
+  test('sends the claim rules once per session, so a re-request adds nothing', () => {
+    const sessionId = randomUUID()
+    try {
+      runHook('gh pr edit 1 --add-reviewer millus', 'Bash', sessionId)
+      assert.strictEqual(
+        runHook('gh pr edit 1 --add-reviewer millus', 'Bash', sessionId),
+        '',
+      )
+    } finally {
+      removeMarkers(sessionId)
+    }
   })
 
   test('sends the board rules once per session, then only the checklist', () => {

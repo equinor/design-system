@@ -56,7 +56,9 @@ function section(markdown, heading) {
 }
 
 // What GitHub says about the PR on this branch, before the command runs. A
-// push cancels approvals, so the state has to be read before it. Returns null
+// push cancels approvals, so the state has to be read before it. It looks in
+// the directory the session is in, so `cd other && git push` reads the wrong
+// branch: the reminder still goes out, without the state. Returns null
 // when the branch has no PR yet, and '' when the lookup failed for another
 // reason, so the reminder still goes out.
 function prFacts(cwd) {
@@ -87,6 +89,7 @@ function prFacts(cwd) {
 }
 
 const RESEND_AFTER_MS = 30 * 60 * 1000
+const ALWAYS_SENT = 'After every push'
 
 function isFresh(file) {
   try {
@@ -132,24 +135,31 @@ async function main() {
 
   let headings = [...new Set(events.flatMap((e) => EVENTS[e].sections))]
 
-  // The board rules are long. Send them in full the first time in a session,
-  // and only the checklist for the next half hour. After that, send them in
-  // full again: a long session gets summarised, and the table would be lost.
-  const marker = path.join(
+  // The sections are long, and one review runs several matching commands (the
+  // check for a pending review, the post, the read-back). Send each section in
+  // full the first time in a session, and skip it for the next half hour. Only
+  // the checklist is sent every time, because it is the reminder. After half an
+  // hour send them in full again: a long session gets summarised, and the text
+  // would be lost.
+  const markerBase = path.join(
     os.tmpdir(),
     `pr-flow-hook-${String(input.session_id || 'none').replace(/\W/g, '')}`,
   )
-  if (headings.includes('The board')) {
-    if (isFresh(marker)) {
-      headings = headings.filter((heading) => heading !== 'The board')
-    } else {
-      try {
-        fs.writeFileSync(marker, '')
-      } catch {
-        // Best-effort: without the marker the full text is sent every time
-      }
+  headings = headings.filter((heading) => {
+    if (heading === ALWAYS_SENT) return true
+    // The board keeps the original file name, the others add their own suffix.
+    const marker =
+      heading === 'The board'
+        ? markerBase
+        : `${markerBase}-${heading.toLowerCase().replace(/\W+/g, '-')}`
+    if (isFresh(marker)) return false
+    try {
+      fs.writeFileSync(marker, '')
+    } catch {
+      // Best-effort: without the marker the full text is sent every time
     }
-  }
+    return true
+  })
   const parts = headings
     .map((heading) => section(markdown, heading))
     .filter(Boolean)
