@@ -68,7 +68,7 @@ Each colour token has one name in Figma, one CSS custom property and one TypeScr
 | --- | --- |
 | Figma | `background.non-interactive.accent.muted` |
 | CSS | `--eds-background-non-interactive-accent-muted` |
-| TypeScript | `semantic.background.nonInteractive.accent.muted` |
+| TypeScript | `theme.background.nonInteractive.accent.muted`    |
 
 CSS is `--eds-` followed by the dotted name with hyphens for dots. TypeScript uses the dotted name
 with each segment camel-cased.
@@ -108,31 +108,35 @@ interface, not a region inside it.
 The tokens also ship as TypeScript objects for places a CSS custom property cannot reach, such as a
 chart library, canvas, email template or React Native surface.
 
-```ts
-import { semantic } from '@equinor/eds-tokens/next/ts/semantic/light'
+There is one file for each colour scheme and density: `light-comfortable`, `light-compact`,
+`light-relaxed`, `dark-comfortable`, `dark-compact` and `dark-relaxed`. Each is a complete tree,
+resolved for its own mode, so you import the file for the mode you render.
 
-semantic.background.interactive.accent.emphasis.default // '#21767e'
+```ts
+import { theme } from '@equinor/eds-tokens/next/ts/light-comfortable'
+
+theme.background.interactive.accent.emphasis.default // '#21767e'
 ```
 
-Each module is imported directly; there is no barrel. The objects are `as const`, and each one also
-exports its type, so `Semantic` gives you autocompletion and a compile error on a name that does not
+Each file is imported directly; there is no barrel. The object is `as const`, and each file also
+exports its type, `Theme`, which gives you autocompletion and a compile error on a name that does not
 exist.
 
-:::warning The colour scheme does not switch for you
+:::warning Neither the colour scheme nor the density switches for you
 
-In CSS you write one name and the `data-color-scheme` attribute decides the value. In TypeScript
-there is no attribute to read: `semantic/light` and `semantic/dark` are separate objects, and you
-choose which one to use.
+In CSS you write one name and the `data-color-scheme` and `data-density` attributes decide the value.
+In TypeScript there is no attribute to read: the six files are separate objects, and you choose which
+one to use.
 
 ```ts
-import { semantic as light } from '@equinor/eds-tokens/next/ts/semantic/light'
-import { semantic as dark } from '@equinor/eds-tokens/next/ts/semantic/dark'
+import { theme as light } from '@equinor/eds-tokens/next/ts/light-comfortable'
+import { theme as dark } from '@equinor/eds-tokens/next/ts/dark-comfortable'
 
 const tokens = prefersDark ? dark : light
 ```
 
-Prefer CSS custom properties wherever they work. Reach for the TypeScript objects only where they
-do not, and expect to handle the scheme yourself.
+Prefer CSS custom properties wherever they work. Reach for the TypeScript objects only where they do
+not, and expect to handle the scheme and density yourself.
 
 :::
 
@@ -140,15 +144,16 @@ Values are hex rather than the OKLCH used by the CSS output. They are generated 
 so they agree, but a value copied from TypeScript does not carry the CSS output's wide-gamut
 precision.
 
-From `next/ts/`, import `semantic`. The other modules (`colorScheme`, `colors`, `font`, `elevation`
-and `primitives`) hold the layers that `semantic` is resolved from. They are internal and can be
-renamed or restructured in any release. [The palette](./palette.mdx) explains the colour layers as
-concepts.
+The spacing, corner radius and typography follow the density in the file name. Each shadow
+(`elevation.low` and `elevation.high`) is a CSS `boxShadow` string and a `layers` list, where each
+layer has `offsetX`, `offsetY`, `blur`, `spread`, `color` and `inset`. React Native's `boxShadow` style
+takes the layers, with `blur` named `blurRadius` and `spread` named `spreadDistance`.
 
-`density` is a temporary exception. `semantic` carries the Comfortable values for spacing, corner
-radius and typography, so an app in another density imports those groups from `density/compact` or
-`density/relaxed` instead. The exception lasts until the TypeScript output ships one file per colour
-scheme and density.
+The files carry the semantic layer only: `background`, `border`, `icon`, `overlay`, `text`,
+`dataVisualization`, `fontFamily`, `fontWeight`, `typography`, `spacing`, `cornerRadius` and the two
+shadows, `elevation.low` and `elevation.high`. The layers they are resolved from, such as the
+primitives, the colour ladders and the density layer, are not published. [The palette](./palette.mdx)
+explains the colour layers as concepts.
 
 ## For designers
 

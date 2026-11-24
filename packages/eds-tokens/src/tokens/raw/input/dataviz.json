@@ -1,0 +1,126 @@
+{
+  "input": {
+    "dataviz": {
+      "chroma-reduction": {
+        "dark": {
+          "background": {
+            "$value": 0.25,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "contrast": {
+            "$value": 0.5,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "light": {
+          "background": {
+            "$value": 0.5,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "contrast": {
+            "$value": 0.25,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      },
+      "weight": {
+        "dark": {
+          "1": {
+            "$value": 0.49,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "2": {
+            "$value": 0.35,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "4": {
+            "$value": 0.37,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "5": {
+            "$value": 0.68,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        },
+        "light": {
+          "1": {
+            "$value": 0.86,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "2": {
+            "$value": 0.67,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "4": {
+            "$value": 0.25,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          },
+          "5": {
+            "$value": 0.49,
+            "$type": "number",
+            "$extensions": {
+              "com.figma": {
+                "hiddenFromPublishing": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

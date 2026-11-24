@@ -22,12 +22,12 @@
     "@equinor/eds-icons": "^1.6.0",
     "@equinor/eds-tokens": "3.0.0-beta.10",
     "codemirror": "^6.0.2",
-    "next": "16.4.5",
+    "next": "16.4.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.65.0",
+    "@playwright/test": "^1.65.1",
     "@types/node": "^25.5.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

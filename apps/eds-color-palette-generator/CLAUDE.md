@@ -42,7 +42,7 @@ Reads the raw Tokens Studio sets from `packages/eds-tokens/src/tokens/raw/` by r
 - `TS_SCALE`, `TS_GAUSSIAN`: the hand-set lightness per step and scheme, and the gaussian parameters (`input/scale`)
 - `TS_TONE_HUE`: tone → hue per scheme (`scheme/*`); neutral is gray in light and north-sea in dark
 - `TS_SEMANTIC`, `rolesForStep()`: the semantic layer's alias table (`text.primary` → `neutral.13`, …)
-- `TS_DATAVIZ`: the hand-picked data visualisation colours
+- `TS_DATAVIZ`: the data visualisation colours as sRGB hex, read from the TypeScript export (`ts/light-comfortable.ts`, `ts/dark-comfortable.ts`) and not the raw sets, because the categorical steps are formulas in Tokens Studio and the raw sets hold the formula text
 
 Do not type colour values into the app. `tokensStudio.test.ts` compares the generator's output for every hue and scheme with the resolved values in `packages/eds-tokens/src/tokens/css/colors/default.css`.
 

@@ -46,11 +46,11 @@
     "@figma/rest-api-spec": "^0.47.0",
     "@microsoft/api-extractor": "^7.60.1",
     "@types/node": "^25.5.2",
-    "axios": "^1.21.0",
-    "dotenv": "^18.0.9",
-    "prettier": "^3.9.10",
+    "axios": "^1.21.1",
+    "dotenv": "^18.0.10",
+    "prettier": "^3.10.1",
     "typescript": "^5.9.3",
-    "vite": "^8.3.6",
+    "vite": "^8.3.8",
     "vite-plugin-dts": "^5.1.2"
   }
 }

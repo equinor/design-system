@@ -60,7 +60,7 @@
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "14.6.9",
+    "@testing-library/user-event": "14.6.12",
     "@types/jest": "^30.0.0",
     "@types/ramda": "^0.32.0",
     "@types/react": "^19.3.0",
@@ -72,13 +72,13 @@
     "jest-environment-jsdom": "^30.5.2",
     "jest-styled-components": "^7.4.1",
     "js-file-download": "^0.4.12",
-    "postcss": "^8.5.32",
+    "postcss": "^8.5.33",
     "ramda": "^0.32.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "react-hook-form": "^7.91.0",
+    "react-hook-form": "^7.92.0",
     "react-is": "^19.3.1",
-    "rollup": "^4.68.2",
+    "rollup": "^4.68.6",
     "rollup-plugin-delete": "^3.0.2",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "10.6.7",
@@ -92,15 +92,15 @@
     "styled-components": "^6"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.13",
+    "@babel/runtime": "^7.29.14",
     "@equinor/eds-core-react": "workspace:^",
     "@equinor/eds-icons": "workspace:^",
     "@equinor/eds-tokens": "workspace:^",
     "@equinor/eds-utils": "workspace:^",
     "@types/react-datepicker": "^7.0.0",
     "date-fns": "^4.4.0",
-    "downshift": "9.4.1",
+    "downshift": "9.5.0",
     "react-datepicker": "^9.1.0",
-    "react-fast-compare": "3.2.2"
+    "react-fast-compare": "3.2.3"
   }
 }

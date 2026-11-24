@@ -117,11 +117,11 @@ pnpm add @equinor/eds-tokens@beta
 
 ## Output formats
 
-| Format            | Import path                                           | Use case                                                    |
-| ----------------- | ----------------------------------------------------- | ----------------------------------------------------------- |
-| **CSS variables** | `@equinor/eds-tokens/next/css/variables.css`          | Standard web styling                                        |
-| **TypeScript**    | `@equinor/eds-tokens/next/ts/semantic/{light,dark}`   | Places a CSS custom property cannot reach, such as a canvas |
-| **DTCG JSON**     | `@equinor/eds-tokens/next/dtcg/semantic/default.json` | Tooling and custom transforms                               |
+| Format            | Import path                                                              | Use case                                                    |
+| ----------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| **CSS variables** | `@equinor/eds-tokens/next/css/variables.css`                             | Standard web styling                                        |
+| **TypeScript**    | `@equinor/eds-tokens/next/ts/{light,dark}-{comfortable,compact,relaxed}` | Places a CSS custom property cannot reach, such as a canvas |
+| **DTCG JSON**     | `@equinor/eds-tokens/next/dtcg/semantic/default.json`                    | Tooling and custom transforms                               |
 
 ## Next steps
 
