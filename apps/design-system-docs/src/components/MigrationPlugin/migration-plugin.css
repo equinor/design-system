@@ -11,11 +11,11 @@
   margin-block: var(--eds-spacing-md) var(--eds-spacing-2xl);
 }
 
-.docs-plugin-step-text > :first-child {
+.docs-plugin-step__text > :first-child {
   margin-block-start: 0;
 }
 
-.docs-plugin-image {
+.docs-plugin-step__image {
   display: block;
   width: 100%;
   max-width: 20rem;

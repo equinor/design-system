@@ -30,7 +30,7 @@ export type PluginWindowImageProps = {
 export function PluginWindowImage({ step, alt }: PluginWindowImageProps) {
   return (
     <ThemedImage
-      className="docs-plugin-image"
+      className="docs-plugin-step__image"
       alt={alt}
       width={IMAGE_WIDTH}
       height={IMAGE_HEIGHT}
@@ -54,7 +54,7 @@ export type PluginStepProps = PluginWindowImageProps & {
 export function PluginStep({ step, alt, children }: PluginStepProps) {
   return (
     <div className="docs-plugin-step">
-      <div className="docs-plugin-step-text">{children}</div>
+      <div className="docs-plugin-step__text">{children}</div>
       <PluginWindowImage step={step} alt={alt} />
     </div>
   )
