@@ -111,7 +111,13 @@ function read(node: Layer, field: string): unknown {
   if (name === 'boundVariables') return fieldBindings(node)
   if (name === 'pluginData') {
     const data = pluginData(node)
-    // Plugin data from another plugin cannot be read, so it cannot be put back.
+    // Plugin data from another plugin cannot be read, so it cannot be put
+    // back. Figma has no API that lists the plugins with data on a layer, and
+    // `overrides` names the field, not the plugin: with none of this
+    // plugin's data there, the data is another plugin's, and the reset is
+    // refused. With this plugin's data there, another plugin's may be there
+    // too, and the reset removes it unseen. The window says so before a
+    // designer accepts the fix (resetEffectsLead in scan/classify.ts).
     if (Object.keys(data).length === 0) {
       throw new ResetRefused(
         `${node.name} has data from another plugin, which a reset would remove.`,
@@ -275,6 +281,8 @@ export async function resetLayer(node: SceneNode): Promise<void> {
 
   const property = await swapProperty(node)
 
+  // Removes every override on the layer and below, another plugin's data
+  // included, which cannot be put back (see read).
   node.removeOverrides()
 
   // A swap made through a property: back to the default and to the chosen

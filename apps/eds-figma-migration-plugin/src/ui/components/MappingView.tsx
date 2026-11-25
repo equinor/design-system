@@ -20,6 +20,7 @@ import type { PropertyGroup } from '../../scan/types'
 import {
   CATEGORY_LABELS,
   nothingLeftText,
+  plural,
   propertyLabel,
   values,
 } from '../labels'
@@ -353,7 +354,7 @@ export function MappingView({
                     <Button
                       size="small"
                       variant="ghost"
-                      aria-label={`Go to the ${layers.length} layers with ${SECTION_LABELS[section] ?? section}`}
+                      aria-label={`Go to the ${plural(layers.length, 'layer')} with ${SECTION_LABELS[section] ?? section}`}
                       onClick={() => onSelectLayer(layers)}
                     >
                       Go to all

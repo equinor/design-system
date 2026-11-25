@@ -7,7 +7,7 @@
  * published id. Other plugins can read it, which also lets a team audit a
  * migration with its own tools.
  */
-import type { TypographyField } from '../mapping/types'
+import type { TextCase, TypographyField } from '../mapping/types'
 import type { ChangeOutcome } from '../scan/apply-plan'
 import type { PropertyRef } from '../scan/types'
 
@@ -22,8 +22,27 @@ export type LoggedVariable = { type: 'variable'; key: string; name: string }
 export type LoggedTypography = {
   type: 'typography'
   fields: Partial<Record<TypographyField, { key: string; name: string }>>
-  /** The font before the change, which has to be loaded to bind the legacy variables again */
+  /** The font before the change, which Revert frame sets again before it binds the legacy variables */
   font?: { family: string; style: string }
+  /**
+   * What the text had for the properties a text style sets, read before the
+   * style was applied, so Revert frame puts back the values that had no
+   * legacy variable too. A property whose value differed within the range is
+   * left out. Missing in entries written before 2026-11-25, whose revert
+   * leaves the style's values on those properties.
+   */
+  values?: LoggedTypographyValues
+}
+
+/** A text's own typography values, in Figma's units. */
+export type LoggedTypographyValues = {
+  fontSize?: number
+  lineHeight?: { unit: 'AUTO' } | { unit: 'PIXELS' | 'PERCENT'; value: number }
+  letterSpacing?: { unit: 'PIXELS' | 'PERCENT'; value: number }
+  paragraphSpacing?: number
+  paragraphIndent?: number
+  textCase?: TextCase
+  textDecoration?: 'NONE' | 'UNDERLINE' | 'STRIKETHROUGH'
 }
 
 export type LoggedTextStyle = { type: 'textStyle'; key: string; name: string }

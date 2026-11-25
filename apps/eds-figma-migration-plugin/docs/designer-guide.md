@@ -294,7 +294,7 @@ frame when you are in it. It binds the new variables, applies the text styles, a
 modes on the frames that had the legacy ones:
 
 - Spacious becomes **comfortable**, and Comfortable becomes **compact**. The
-  names moved: the old Comfortable was the dense mode.
+  names moved: the legacy Comfortable was the dense mode.
 - Light and Dark become **light** and **dark**.
 
 A legacy mode is removed only when no layer below it uses a legacy variable
@@ -397,7 +397,14 @@ figures; the result has a button that selects those texts.
 - **Ctrl or Cmd+Z** right after an apply undoes the whole apply.
 - **Revert frame**, in a frame the plugin has changed, puts the legacy
   variables back later, from a log the plugin keeps on every layer it
-  changes. A value you have changed since is left as you made it.
+  changes. A value you have changed since is left as you made it. For a
+  typography change it puts back the font and the values the text had
+  without a variable too, such as a line height of 20px.
+- **A Manual fix the plugin made cannot be reverted.** The plugin made it by
+  resetting a layer inside an instance, and Figma does not let a plugin set a
+  size variable there, so Revert frame lists it among what it could not put
+  back. Undo it with Ctrl or Cmd+Z in the session you applied it in, or keep
+  it: the layer then has the size of its main component.
 - After an undo or an edit, the plugin says the page has changed since the
   scan, and Apply waits until you scan again.
 
@@ -422,7 +429,11 @@ everything it writes:
 - **Reset layers.** For a Manual fix you accepted, Apply resets the layer
   inside the instance, so it takes its size from the main component again,
   swaps it back if it was a swapped icon, and puts the other overrides on it
-  and below it back as they are. The fix lists those in Changes.
+  and below it back as they are. The fix lists those in Changes. The reset
+  also removes data that other plugins keep on those layers, and the plugin
+  cannot put that back, since Figma does not let one plugin read another
+  plugin's data. When only another plugin's data is on a layer, the plugin
+  leaves the layer as it is and says why.
 - **Converted text layers.** Convert replaces a Typography instance with a
   text layer in the same place, with the same text, an EDS Beta text style
   and a colour. In a main component, the text each instance of the component

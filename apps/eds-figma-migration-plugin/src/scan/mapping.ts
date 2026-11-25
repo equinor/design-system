@@ -262,6 +262,8 @@ export type MappingBinding = {
   oldValue?: number
   /** The colour the legacy variable resolves to on the layer */
   oldColour?: string
+  /** For legacy typography: what the rules read from it (BindingRecord.oldTypography) */
+  oldTypography?: string
   /** The density the layer has after the migration */
   density?: Density
   /** The colour scheme the layer has after the migration */
@@ -362,6 +364,7 @@ export function buildMappingGroups(
       ...(record.oldColour !== undefined
         ? { oldColour: record.oldColour }
         : {}),
+      ...(record.oldTypography ? { oldTypography: record.oldTypography } : {}),
       ...(record.density ? { density: record.density } : {}),
       ...(record.scheme ? { scheme: record.scheme } : {}),
       property: record.property,

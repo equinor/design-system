@@ -18,6 +18,7 @@ import {
   oldCollectionInfo,
 } from '../mapping/inventory'
 import {
+  legacyTypographyText,
   resolveMode,
   resolveTypography,
   resolveVariable,
@@ -304,13 +305,23 @@ export function resetEffectsLead(byPlugin: boolean): string {
     : 'Resetting the layer also removes these, so set them again afterwards:'
 }
 
+/**
+ * What a reset by the plugin can remove and not put back, said after the
+ * reset effects before a designer accepts the fix: Figma does not let one
+ * plugin read another plugin's data on a layer, or even list the plugins
+ * that keep some there (src/plugin/apply/reset.ts).
+ */
+export const OTHER_PLUGIN_DATA_NOTE =
+  "Data that another plugin keeps on these layers can be lost: Figma does not let one plugin read another plugin's data, so this plugin cannot put it back."
+
 /** A Manual fix's reset effects in one sentence, or undefined when it has none. */
 export function resetEffectsText(
   effects: string[] | undefined,
   byPlugin: boolean,
 ): string | undefined {
   if (!effects || effects.length === 0) return undefined
-  return `${resetEffectsLead(byPlugin)} ${effects.join('; ')}.`
+  const text = `${resetEffectsLead(byPlugin)} ${effects.join('; ')}.`
+  return byPlugin ? `${text} ${OTHER_PLUGIN_DATA_NOTE}` : text
 }
 
 export function groupOf(unit: RawUnit): PropertyGroup {
@@ -461,7 +472,7 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
       if (unit.instanceId && !unit.override) {
         return { ...base, ...old, category: 'inInstance' }
       }
-      const resolution = resolveTypography({
+      const input = {
         fields: Object.fromEntries(
           oldFields.map(([field, variable]) => [
             field,
@@ -471,10 +482,12 @@ export function classifyUnit(unit: RawUnit): BindingRecord | null {
         font: unit.font,
         fontSize: unit.fontSize,
         context: toRoleContext(unit.context),
-      })
+      }
+      const resolution = resolveTypography(input)
       return {
         ...base,
         ...old,
+        oldTypography: legacyTypographyText(input),
         category: resolution.outcome,
         outcome: resolution.outcome,
         candidates: resolution.candidates,

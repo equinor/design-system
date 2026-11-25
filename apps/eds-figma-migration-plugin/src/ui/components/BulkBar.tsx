@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Button, Dialog } from '@equinor/eds-core-react/next'
+import { plural } from '../labels'
 import {
   applyDisabled,
   applyText,
@@ -71,7 +72,7 @@ export function BulkBar({
             ready === 0
               ? 'None of the selected values is Ready. Choose a target for them first.'
               : left > 0
-                ? `Applies the ${ready} Ready values. The other ${left} wait for you to choose a target, and are left for a later run.`
+                ? `Applies the ${plural(ready, 'Ready value')}. The other ${left} ${left === 1 ? 'waits' : 'wait'} for you to choose a target, and ${left === 1 ? 'is' : 'are'} left for a later run.`
                 : undefined
           }
         >

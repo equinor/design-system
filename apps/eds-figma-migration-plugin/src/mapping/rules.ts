@@ -336,7 +336,7 @@ function resolveBackground(
         `background/interactive/${tone}/selected/${state}`,
         interactive(oldState === 'Hover' ? 'hover' : oldStateAsNew),
       ],
-      `Selected element (${guess.because}): selected fill, whatever the old fill was${toneNote(parsed)}`,
+      `Selected element (${guess.because}): selected fill, whatever the legacy fill was${toneNote(parsed)}`,
       'colour/selected',
     )
   }
@@ -905,7 +905,7 @@ function resolveFromModes(
 ): Resolution | undefined {
   const { name } = variable
   const fromModes =
-    ' (read from the old modes, since the alias chain could not be read)'
+    ' (read from the legacy modes, since the alias chain could not be read)'
   const vertical = /vertical/i.test(name)
 
   const match =
@@ -994,7 +994,7 @@ function resolveGeneric(
   if (mode && mode !== 'none' && SPACING_STEPS.includes(mode)) {
     return check(
       [`spacing/${mode}`],
-      `${variable.name}: the ${collection} mode is ${modeName} (read from the old modes, since the alias chain could not be read)`,
+      `${variable.name}: the ${collection} mode is ${modeName} (read from the legacy modes, since the alias chain could not be read)`,
       'spacing/generic',
     )
   }
@@ -1561,7 +1561,7 @@ function fitScope(
   return {
     ...resolution,
     outcome: 'check',
-    reason: `${resolution.reason}; the old variable sits on a ${PROPERTY_NAMES[kind]}, which ${proposal} is not scoped for`,
+    reason: `${resolution.reason}; the legacy variable sits on a ${PROPERTY_NAMES[kind]}, which ${proposal} is not scoped for`,
   }
 }
 
@@ -1586,7 +1586,7 @@ export function resolveMode(input: ModeInput): ModeResolution {
       return {
         outcome: 'sure',
         target: { collection: 'density', mode: 'comfortable' },
-        reason: `${label}: the old Spacious is the new comfortable`,
+        reason: `${label}: the legacy Spacious is the new comfortable`,
         rule: 'mode/density',
       }
     }
@@ -1594,7 +1594,7 @@ export function resolveMode(input: ModeInput): ModeResolution {
       return {
         outcome: 'sure',
         target: { collection: 'density', mode: 'compact' },
-        reason: `${label}: the old Comfortable was the dense mode, and its values match the new compact`,
+        reason: `${label}: the legacy Comfortable was the dense mode, and its values match the new compact`,
         rule: 'mode/density',
       }
     }
@@ -1607,7 +1607,7 @@ export function resolveMode(input: ModeInput): ModeResolution {
     return {
       outcome: 'sure',
       target: null,
-      reason: `${label}: the mode only selects a ${collectionKey === OLD.appearance ? 'tone' : 'step'}, which goes into the new variable names; it is cleared once nothing below it uses the old variables`,
+      reason: `${label}: the mode only selects a ${collectionKey === OLD.appearance ? 'tone' : 'step'}, which goes into the new variable names; it is cleared once nothing below it uses the legacy variables`,
       rule: 'mode/clear',
     }
   }
@@ -1719,13 +1719,16 @@ function styleName(
   return `${role}/${step}/${weight}`
 }
 
-/** Resolves the typography of a text node, or of one range in it, to a text style. */
-export function resolveTypography(input: TypographyInput): Resolution {
-  const { fields, font, fontSize, context } = input
+/**
+ * The family, step, line height and weight the legacy typography variables
+ * give, from their names or, for the 🗣️ Semantic variables, from the modes
+ * in force.
+ */
+function readTypeInfo(
+  fields: TypographyInput['fields'],
+  context: RoleContext,
+): TypeInfo {
   const info: TypeInfo = {}
-  const notes: string[] = []
-  // Said in the reason without making the style a check item
-  const remarks: string[] = []
   // The size variable decides the step, so it is read first.
   const ordered = Object.entries(fields).sort(
     ([a], [b]) => Number(b === 'fontSize') - Number(a === 'fontSize'),
@@ -1738,6 +1741,47 @@ export function resolveTypography(input: TypographyInput): Resolution {
       readTypeModes(field, context, info)
     }
   }
+  return info
+}
+
+/**
+ * The legacy typography of a text in a few words, as the rules read it: the
+ * family, the step, or the font size when no step can be read, the font
+ * style, with the font's name when it is not the family's own, and the line
+ * height, such as “UI body, md, Medium, squished”. Every instance of the
+ * legacy Typography component binds the same variables and differs only in
+ * its modes and font, so the rows of the Typography tab are told apart by
+ * this (test session 2, 2026-11-25). The step and the weight come first,
+ * since a row at the default width cuts the end off.
+ */
+export function legacyTypographyText(input: TypographyInput): string {
+  const { font, fontSize } = input
+  const info = readTypeInfo(input.fields, input.context)
+  const family =
+    info.family === 'header'
+      ? 'Header'
+      : info.family === 'ui-body'
+        ? 'UI body'
+        : undefined
+  const ownFont =
+    family === 'Header' ? 'Equinor' : family === 'UI body' ? 'Inter' : undefined
+  return [
+    family,
+    info.step ?? (fontSize !== undefined ? `${fontSize}px` : undefined),
+    font.family === ownFont ? font.style : `${font.family} ${font.style}`,
+    info.lineHeight,
+  ]
+    .filter(Boolean)
+    .join(', ')
+}
+
+/** Resolves the typography of a text node, or of one range in it, to a text style. */
+export function resolveTypography(input: TypographyInput): Resolution {
+  const { fields, font, fontSize, context } = input
+  const info = readTypeInfo(fields, context)
+  const notes: string[] = []
+  // Said in the reason without making the style a check item
+  const remarks: string[] = []
 
   // Role
   let role: 'header' | 'label' | 'body' | 'mono'

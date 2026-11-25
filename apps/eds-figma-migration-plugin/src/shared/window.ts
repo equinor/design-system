@@ -40,6 +40,33 @@ export function clampSize(
 }
 
 /**
+ * How long the size the grip last asked for counts as on its way: Figma
+ * takes a moment to resize the window, and quick arrow key presses add up
+ * from the size asked for, not from the window's size.
+ */
+export const RESIZE_PENDING_MS = 500
+
+export type AskedSize = { width: number; height: number; at: number }
+
+/**
+ * The size an arrow key press on the grip starts from: the size last asked
+ * for while Figma has not yet given it, otherwise the window's size. A size
+ * asked for longer ago is out of date, for example once the window has
+ * shrunk to the room Figma gives it (src/ui/fit.ts).
+ */
+export function resizeBase(
+  asked: AskedSize | null,
+  current: { width: number; height: number },
+  now: number,
+): { width: number; height: number } {
+  if (!asked || now - asked.at >= RESIZE_PENDING_MS) return current
+  if (asked.width === current.width && asked.height === current.height) {
+    return current
+  }
+  return { width: asked.width, height: asked.height }
+}
+
+/**
  * The introduction is shown once per person, on the first open. The key in
  * figma.clientStorage holds the version that was seen; raise INTRO_VERSION
  * to show it again after a large change.

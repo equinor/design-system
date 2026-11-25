@@ -9,6 +9,7 @@ import {
   classifyUnit,
   classifyUnits,
   manualFixTarget,
+  OTHER_PLUGIN_DATA_NOTE,
   resetEffectsText,
 } from '../src/scan/classify'
 import { packFixture, unpackFixture } from '../src/scan/fixture'
@@ -332,7 +333,7 @@ describe('classifyUnit', () => {
     it('says who sets them again: the plugin when it makes the fix, the designer when it cannot', () => {
       const effects = ['icon, fill: background/surface']
       expect(resetEffectsText(effects, true)).toBe(
-        'Resetting the layer also removes these. The plugin puts each one back as it is now, and the same Apply changes the Ready ones to the EDS Beta value shown: icon, fill: background/surface.',
+        `Resetting the layer also removes these. The plugin puts each one back as it is now, and the same Apply changes the Ready ones to the EDS Beta value shown: icon, fill: background/surface. ${OTHER_PLUGIN_DATA_NOTE}`,
       )
       expect(resetEffectsText(effects, false)).toBe(
         'Resetting the layer also removes these, so set them again afterwards: icon, fill: background/surface.',

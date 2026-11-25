@@ -1,14 +1,8 @@
 import { Banner, Button } from '@equinor/eds-core-react/next'
-import type {
-  ApplyResult,
-  ConvertResult,
-  RevertResult,
-} from '../../shared/messages'
+import { runSummary } from '../preview'
+import type { Run } from '../preview'
 
-export type Run =
-  | { kind: 'apply'; result: ApplyResult }
-  | { kind: 'revert'; result: RevertResult }
-  | { kind: 'convert'; result: ConvertResult }
+export type { Run } from '../preview'
 
 type RunResultProps = {
   run: Run
@@ -16,69 +10,6 @@ type RunResultProps = {
   onSelect: (nodeIds: string[]) => void
   /** UX review F11: the way back, right after an apply in one frame */
   onRevert?: () => void
-}
-
-const plural = (count: number, one: string, many = `${one}s`) =>
-  `${count} ${count === 1 ? one : many}`
-
-function summary(run: Run): string {
-  if (run.kind === 'apply') {
-    const { values, numbers, modes, layers, modesKept, resets } = run.result
-    // Test session finding 10: values, widths and modes are told apart.
-    const done = [
-      resets > 0 && `reset ${plural(resets, 'layer')} inside instances`,
-      values > 0 && `migrated ${plural(values, 'value')}`,
-      numbers > 0 && `set ${plural(numbers, 'border width')} as numbers`,
-      modes > 0 && `removed or replaced ${plural(modes, 'legacy mode')}`,
-    ].filter((part): part is string => Boolean(part))
-    const what =
-      done.length === 0
-        ? 'Changed nothing'
-        : done.length === 1
-          ? done[0]
-          : `${done.slice(0, -1).join(', ')} and ${done[done.length - 1]}`
-    const parts = [
-      `${what.charAt(0).toUpperCase()}${what.slice(1)}, on ${plural(layers, 'layer')}.`,
-    ]
-    if (modesKept > 0) {
-      parts.push(
-        `${plural(modesKept, 'legacy mode')} stay${modesKept === 1 ? 's' : ''} because layers below still use legacy variables.`,
-      )
-    }
-    return parts.join(' ')
-  }
-  if (run.kind === 'convert') {
-    const { converted, monoNumbers, instanceTexts, caseIds, skipped } =
-      run.result
-    const parts = [
-      `Converted ${plural(converted, 'Typography component')} to text.`,
-    ]
-    if (instanceTexts > 0) {
-      parts.push(
-        `In main components, ${plural(instanceTexts, 'instance')} kept ${instanceTexts === 1 ? 'its' : 'their'} own text.`,
-      )
-    }
-    if (caseIds.length > 0) {
-      parts.push(
-        `${caseIds.length} had another text case, such as uppercase, which the text style does not have; the style is kept, so the text shows as written.`,
-      )
-    }
-    if (monoNumbers > 0) {
-      parts.push(
-        `${monoNumbers} used mono numbers, which a text style cannot carry and a plugin cannot set; set tabular figures on ${monoNumbers === 1 ? 'it' : 'them'} by hand where they matter.`,
-      )
-    }
-    // Convert leaves an instance whose text style is not Ready after the
-    // choices; the list below the message says why for each.
-    if (skipped.length > 0) {
-      parts.push(
-        `Left ${plural(skipped.length, 'instance')} as ${skipped.length === 1 ? 'it was' : 'they were'}; the list says why.`,
-      )
-    }
-    return parts.join(' ')
-  }
-  const { reverted, layers } = run.result
-  return `Put back ${plural(reverted, 'change')} on ${plural(layers, 'layer')}.`
 }
 
 /** What an apply or a revert did, and what it could not do, with Go to for each failure. */
@@ -95,7 +26,7 @@ export function RunResult({
       onDismiss={onDismiss}
     >
       <Banner.Message>
-        {summary(run)}
+        {runSummary(run)}
         {failed.length > 0 &&
           ` ${failed.length} could not be ${run.kind === 'revert' ? 'put back' : run.kind === 'convert' ? 'converted' : 'made'}:`}
         {run.kind === 'apply' &&

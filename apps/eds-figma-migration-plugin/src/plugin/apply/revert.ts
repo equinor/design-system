@@ -5,11 +5,15 @@
  */
 import type { TypographyField } from '../../mapping/types'
 import { propertyLabel } from '../../scan/labels'
-import { indexAmongChildren } from '../../scan/slots'
+import { indexAmongChildren, outermostInstance } from '../../scan/slots'
 import { LOG_KEY, NAMESPACE } from '../../shared/changelog'
-import type { LogEntry, LoggedComponent } from '../../shared/changelog'
+import type {
+  LogEntry,
+  LoggedComponent,
+  LoggedTypography,
+} from '../../shared/changelog'
 import type { ChangeFailure, RevertResult } from '../../shared/messages'
-import { expectBound, Fonts, LayerChanged } from './apply'
+import { expectBound, Fonts, LayerChanged, NotBound } from './apply'
 import { restoreInstanceTexts } from './instance-texts'
 import { logIsInherited, readLog, writeLog } from './log'
 import { Targets } from './targets'
@@ -20,6 +24,9 @@ function legacyVariable(key: string): Promise<Variable> {
   let found = legacyVariables.get(key)
   if (!found) {
     found = figma.variables.importVariableByKeyAsync(key).catch(() => {
+      // Not kept, so a later Revert tries again, for example once the
+      // legacy library is enabled in the file.
+      legacyVariables.delete(key)
       throw new Error(
         'The legacy library is no longer available, so the binding cannot be put back.',
       )
@@ -27,6 +34,84 @@ function legacyVariable(key: string): Promise<Variable> {
     legacyVariables.set(key, found)
   }
   return found
+}
+
+/** The rule of a Manual fix the plugin made by resetting a layer inside an instance (scan/classify.ts). */
+const SIZE_OVERRIDE_RULE = 'instance/size-override'
+
+/**
+ * A Manual fix cannot be reverted: the plugin reset the layer inside the
+ * instance, and Figma ignores a plugin that binds a variable to the width or
+ * height of a layer there, so the legacy size does not come back (NotBound).
+ */
+export const MANUAL_FIX_NOT_REVERTED =
+  'Revert frame cannot put back the legacy size of a Manual fix: the plugin made the fix by resetting the layer inside the instance, and Figma does not let a plugin bind a variable to the size of a layer there. Undo it with Ctrl or Cmd+Z in the session it was made in, or keep it: the layer has the size of its main component.'
+
+/**
+ * Whether a change logged before the rule was (2026-11-16) failed the way a
+ * Manual fix does: a size inside an instance that Figma would not bind.
+ */
+function unloggedManualFix(entry: LogEntry, error: unknown): boolean {
+  return (
+    entry.rule === undefined &&
+    error instanceof NotBound &&
+    entry.property.type === 'field' &&
+    (entry.property.field === 'width' || entry.property.field === 'height')
+  )
+}
+
+/**
+ * Sets the font and the values a text had before the text style, then binds
+ * its legacy variables, which win over the values on their fields. A log
+ * entry from before 2026-11-25 has no values, so the style's stay where no
+ * legacy variable was bound.
+ */
+function restoreTypography(
+  node: TextNode,
+  [start, end]: [number, number],
+  old: LoggedTypography,
+  variables: [TypographyField, Variable][],
+): void {
+  // A range needs one character at least; an empty text takes the values
+  // on the layer.
+  const whole = end <= start
+  if (old.font) {
+    if (whole) node.fontName = old.font
+    else node.setRangeFontName(start, end, old.font)
+  }
+  const values = old.values ?? {}
+  if (values.fontSize !== undefined) {
+    if (whole) node.fontSize = values.fontSize
+    else node.setRangeFontSize(start, end, values.fontSize)
+  }
+  if (values.lineHeight) {
+    if (whole) node.lineHeight = values.lineHeight
+    else node.setRangeLineHeight(start, end, values.lineHeight)
+  }
+  if (values.letterSpacing) {
+    if (whole) node.letterSpacing = values.letterSpacing
+    else node.setRangeLetterSpacing(start, end, values.letterSpacing)
+  }
+  if (values.paragraphSpacing !== undefined) {
+    if (whole) node.paragraphSpacing = values.paragraphSpacing
+    else node.setRangeParagraphSpacing(start, end, values.paragraphSpacing)
+  }
+  if (values.paragraphIndent !== undefined) {
+    if (whole) node.paragraphIndent = values.paragraphIndent
+    else node.setRangeParagraphIndent(start, end, values.paragraphIndent)
+  }
+  if (values.textCase) {
+    if (whole) node.textCase = values.textCase
+    else node.setRangeTextCase(start, end, values.textCase)
+  }
+  if (values.textDecoration) {
+    if (whole) node.textDecoration = values.textDecoration
+    else node.setRangeTextDecoration(start, end, values.textDecoration)
+  }
+  for (const [field, variable] of variables) {
+    if (whole) node.setBoundVariable(field, variable)
+    else node.setRangeBoundVariable(start, end, field, variable)
+  }
 }
 
 async function variableKey(
@@ -120,6 +205,12 @@ async function revertEntry(
 ): Promise<void> {
   const { property } = entry
 
+  // Trying would change nothing, since Figma ignores the binding, so the
+  // legacy variable is not even imported.
+  if (entry.rule === SIZE_OVERRIDE_RULE && outermostInstance(node, false)) {
+    throw new Error(MANUAL_FIX_NOT_REVERTED)
+  }
+
   if (entry.old.type === 'component') {
     // A Typography instance replaced by a text layer: put the instance back
     // where the text is, with its properties, and remove the text.
@@ -187,14 +278,34 @@ async function revertEntry(
     if (typeof styleId !== 'string') throw new LayerChanged()
     const style = await figma.getStyleByIdAsync(styleId)
     if (style?.key !== entry.new.key) throw new LayerChanged()
+    // Everything that can fail on its own comes before the style is
+    // cleared: the fonts and the legacy variables. A failure then leaves the
+    // text in its EDS Beta style, so the check above passes when Revert is
+    // tried again. Cleared first, a failure left the text without a style,
+    // and every later Revert stopped at that check.
     await fonts.loadText(node, property.range)
     if (entry.old.font) await fonts.load(entry.old.font)
-    if (property.range) await node.setRangeTextStyleIdAsync(start, end, '')
-    else await node.setTextStyleIdAsync('')
+    const variables: [TypographyField, Variable][] = []
     for (const [field, old] of Object.entries(entry.old.fields)) {
-      if (!old) continue
-      const variable = await legacyVariable(old.key)
-      node.setRangeBoundVariable(start, end, field as TypographyField, variable)
+      if (old) {
+        variables.push([
+          field as TypographyField,
+          await legacyVariable(old.key),
+        ])
+      }
+    }
+    const setStyle = (id: string) =>
+      property.range
+        ? node.setRangeTextStyleIdAsync(start, end, id)
+        : node.setTextStyleIdAsync(id)
+    await setStyle('')
+    try {
+      restoreTypography(node, [start, end], entry.old, variables)
+    } catch (error) {
+      // Back to the EDS Beta style, so the text is as it was and Revert can
+      // be tried again.
+      await setStyle(styleId).catch(() => undefined)
+      throw error
     }
     return
   }
@@ -358,12 +469,18 @@ export async function revertRoots(roots: SceneNode[]): Promise<RevertResult> {
         reverted += 1
         if (node.removed) break
       } catch (error) {
+        // Kept in the log and reported, as every change that cannot be put
+        // back is, such as one whose legacy library is gone.
         remaining.unshift(entry)
         failed.push({
           nodeId: node.id,
           nodeName: node.name,
           property: propertyLabel(entry.property),
-          message: error instanceof Error ? error.message : String(error),
+          message: unloggedManualFix(entry, error)
+            ? MANUAL_FIX_NOT_REVERTED
+            : error instanceof Error
+              ? error.message
+              : String(error),
         })
       }
     }

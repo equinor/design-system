@@ -369,12 +369,11 @@ describe('previewConversions', () => {
         skipped: [
           {
             reason:
-              'Its text style needs a check. Confirm the proposal or choose another style before converting.',
+              'The text style needs a check. Confirm the proposal or choose another style before converting.',
             count: 2,
           },
           {
-            reason:
-              'Its text style is set to Decide later, so Convert leaves it.',
+            reason: 'The text style is set to Decide later.',
             count: 1,
           },
           { reason: NO_LEGACY_TYPOGRAPHY, count: 1 },
@@ -431,8 +430,8 @@ describe('the Convert confirmation', () => {
       {
         lead: 'Convert leaves 4 instances as they are:',
         items: [
-          'Its text style needs a check. Confirm the proposal or choose another style before converting. (2 instances)',
-          'Its text style is set to Decide later, so Convert leaves it. (1 instance)',
+          'The text style needs a check. Confirm the proposal or choose another style before converting. (2 instances)',
+          'The text style is set to Decide later. (1 instance)',
           `${NO_LEGACY_TYPOGRAPHY} (1 instance)`,
         ],
       },

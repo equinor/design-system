@@ -164,7 +164,12 @@ export async function convertTypography(
         ? await readInstanceTexts(component, node, source)
         : []
 
+      // Until the instance is removed, a failure, in the log on the new text
+      // layer too, removes the text layer, instead of leaving a second copy
+      // of the text beside the instance.
       const text = figma.createText()
+      let dropsCase = false
+      let mono = false
       try {
         await text.setTextStyleIdAsync(style.id)
         text.characters = source.characters
@@ -173,12 +178,8 @@ export async function convertTypography(
         // The style wins, and the case is dropped: the tab marks such an
         // instance Needs check before it is converted (decision B), and the
         // result counts them again.
-        if (
-          source.textCase === figma.mixed ||
-          source.textCase !== style.textCase
-        ) {
-          caseIds.push(text.id)
-        }
+        dropsCase =
+          source.textCase === figma.mixed || source.textCase !== style.textCase
 
         const colour = conversion.colour?.target
         if (colour) {
@@ -196,56 +197,56 @@ export async function convertTypography(
           text.fills = source.fills
         }
         place(text, node, source)
-      } catch (error) {
-        text.remove()
-        throw error
-      }
 
-      const main = await node.getMainComponentAsync()
-      const values = properties(node)
-      if (
-        Object.entries(values).some(
+        const main = await node.getMainComponentAsync()
+        const values = properties(node)
+        mono = Object.entries(values).some(
           ([name, value]) =>
             /mono/i.test(name) && /^true$/i.test(String(value)),
         )
-      ) {
+        const entry: LogEntry = {
+          property: { type: 'typography' },
+          old: {
+            type: 'component',
+            key: main?.key ?? '',
+            name: node.name,
+            properties: values,
+            modes: { ...node.explicitVariableModes },
+            sizing: {
+              horizontal: node.layoutSizingHorizontal,
+              vertical: node.layoutSizingVertical,
+              width: node.width,
+              height: node.height,
+            },
+            ...(source.fills !== figma.mixed
+              ? {
+                  textFills: JSON.parse(
+                    JSON.stringify(source.fills),
+                  ) as unknown[],
+                }
+              : {}),
+            ...(node.isExposedInstance ? { exposed: true } : {}),
+            ...(texts.length > 0 ? { instances: texts } : {}),
+          },
+          new: { type: 'textStyle', key: style.key, name: style.name },
+          outcome: conversion.style.outcome,
+          ...(conversion.style.record.rule
+            ? { rule: conversion.style.record.rule }
+            : {}),
+          mappingVersion: MAPPING_VERSION,
+          at,
+        }
+        appendLog(text, entry)
+        node.remove()
+      } catch (error) {
+        if (!node.removed) text.remove()
+        throw error
+      }
+      if (dropsCase) caseIds.push(text.id)
+      if (mono) {
         monoNumbers += 1
         monoNumberIds.push(text.id)
       }
-      const entry: LogEntry = {
-        property: { type: 'typography' },
-        old: {
-          type: 'component',
-          key: main?.key ?? '',
-          name: node.name,
-          properties: values,
-          modes: { ...node.explicitVariableModes },
-          sizing: {
-            horizontal: node.layoutSizingHorizontal,
-            vertical: node.layoutSizingVertical,
-            width: node.width,
-            height: node.height,
-          },
-          ...(source.fills !== figma.mixed
-            ? {
-                textFills: JSON.parse(
-                  JSON.stringify(source.fills),
-                ) as unknown[],
-              }
-            : {}),
-          ...(node.isExposedInstance ? { exposed: true } : {}),
-          ...(texts.length > 0 ? { instances: texts } : {}),
-        },
-        new: { type: 'textStyle', key: style.key, name: style.name },
-        outcome: conversion.style.outcome,
-        ...(conversion.style.record.rule
-          ? { rule: conversion.style.record.rule }
-          : {}),
-        mappingVersion: MAPPING_VERSION,
-        at,
-      }
-      appendLog(text, entry)
-      node.remove()
       instanceTexts += await writeInstanceTexts(text, texts, fonts)
       converted += 1
     } catch (error) {

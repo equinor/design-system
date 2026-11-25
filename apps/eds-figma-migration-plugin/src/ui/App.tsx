@@ -597,6 +597,14 @@ export function App() {
   const [error, setError] = useState<string>()
   const [applying, setApplying] = useState<{ done: number; total: number }>()
   const [run, setRun] = useState<Run>()
+  // What the scan under way covers, what the last finished scan covered, and
+  // what the scan the last run started from covered (scanKey). A run's
+  // result shows only with scans of the same layers: the scan right after
+  // the run keeps it, and a scan of another page or scope clears it as it
+  // starts (test session 2, 2026-11-25).
+  const startedTarget = useRef<string | undefined>(undefined)
+  const scanTarget = useRef<string | undefined>(undefined)
+  const runTarget = useRef<string | undefined>(undefined)
   const openEntryRef = useRef<string | undefined>(undefined)
   // UX review F4: until the designer chooses a scope or scans, the scope
   // follows the selection: Selection when something is selected.
@@ -639,11 +647,19 @@ export function App() {
           setFilePages({ pages: message.pages, leftOut: message.leftOut })
           break
         case 'scan-start':
+          startedTarget.current = message.target
+          if (runTarget.current !== message.target) {
+            runTarget.current = undefined
+            setRun(undefined)
+          }
+          dispatchTrace(message)
+          break
         case 'scan-map':
         case 'scan-progress':
           dispatchTrace(message)
           break
         case 'scan-done': {
+          scanTarget.current = startedTarget.current
           scopeChosen.current = true
           // A scan of one selected main component, such as a component set,
           // opens it: there is nothing else in the scan to choose.
@@ -705,18 +721,21 @@ export function App() {
           break
         case 'apply-done':
           setApplying(undefined)
+          runTarget.current = scanTarget.current
           setRun({ kind: 'apply', result: message.result })
           setScanning(true)
           dispatchTrace({ type: 'trace-reset' })
           break
         case 'revert-done':
           setApplying(undefined)
+          runTarget.current = scanTarget.current
           setRun({ kind: 'revert', result: message.result })
           setScanning(true)
           dispatchTrace({ type: 'trace-reset' })
           break
         case 'convert-done':
           setApplying(undefined)
+          runTarget.current = scanTarget.current
           setRun({ kind: 'convert', result: message.result })
           setScanning(true)
           dispatchTrace({ type: 'trace-reset' })

@@ -64,7 +64,7 @@ import type {
   SelectionComponent,
   UiToPlugin,
 } from '../../../src/shared/messages'
-import { pagesToScan } from '../../../src/shared/pages'
+import { pagesToScan, scanKey } from '../../../src/shared/pages'
 import type { FilePage } from '../../../src/shared/pages'
 import { DEFAULT_SETTINGS } from '../../../src/shared/window'
 import type { DisplaySettings } from '../../../src/shared/window'
@@ -523,6 +523,7 @@ export class DemoPlugin {
         type: 'scan-start',
         scope: target.scope,
         pageCount: pages.length,
+        target: scanKey(target),
       })
       let nodes = 0
       for (const [pageIndex, page] of pages.entries()) {

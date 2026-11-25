@@ -15,7 +15,12 @@ import type {
   RemovedModePreview,
   RunPreview,
 } from '../scan/apply-plan'
-import type { PluginToUi } from '../shared/messages'
+import type {
+  ApplyResult,
+  ConvertResult,
+  PluginToUi,
+  RevertResult,
+} from '../shared/messages'
 import { send, usePluginMessages } from './figma'
 
 /** What a run applies to: the entries, or the selected values. */
@@ -435,7 +440,8 @@ export function convertText(preview: ConversionPreview): ConfirmationText {
                 : `Convert leaves ${left} instances as they are:`,
               preview.skipped.map(
                 (item) =>
-                  // The reason is written for one instance, so the count follows it.
+                  // The reasons read right for any number of instances, so
+                  // the count follows each (conversionSkipReason).
                   `${item.reason} (${count(item.count, 'instance', 'instances')})`,
               ),
             ),
@@ -451,4 +457,79 @@ export function convertDisabled(
   preview: ConversionPreview | undefined,
 ): boolean {
   return preview === undefined || preview.converted === 0
+}
+
+/** A run that has ended, with what the plugin says it did. */
+export type Run =
+  | { kind: 'apply'; result: ApplyResult }
+  | { kind: 'revert'; result: RevertResult }
+  | { kind: 'convert'; result: ConvertResult }
+
+/**
+ * What a run did, in the words of its confirmation: the numbers set without
+ * a variable are called that, as in previewLines, since they are paddings
+ * and gaps as often as border widths (test session 2, 2026-11-25: all 141 on
+ * a page were paddings and gaps set to 0).
+ */
+export function runSummary(run: Run): string {
+  if (run.kind === 'apply') {
+    const { values, numbers, modes, layers, modesKept, resets } = run.result
+    // Test session finding 10: values, numbers and modes are told apart.
+    const done = [
+      resets > 0 &&
+        `reset ${count(resets, 'layer', 'layers')} inside instances`,
+      values > 0 && `migrated ${count(values, 'value', 'values')}`,
+      numbers > 0 &&
+        `set ${count(numbers, 'number', 'numbers')} without a variable`,
+      modes > 0 &&
+        `removed or replaced ${count(modes, 'legacy mode', 'legacy modes')}`,
+    ].filter((part): part is string => Boolean(part))
+    const what =
+      done.length === 0
+        ? 'Changed nothing'
+        : done.length === 1
+          ? done[0]
+          : `${done.slice(0, -1).join(', ')} and ${done[done.length - 1]}`
+    const parts = [
+      `${what.charAt(0).toUpperCase()}${what.slice(1)}, on ${count(layers, 'layer', 'layers')}.`,
+    ]
+    if (modesKept > 0) {
+      parts.push(
+        `${count(modesKept, 'legacy mode', 'legacy modes')} stay${modesKept === 1 ? 's' : ''} because layers below still use legacy variables.`,
+      )
+    }
+    return parts.join(' ')
+  }
+  if (run.kind === 'convert') {
+    const { converted, monoNumbers, instanceTexts, caseIds, skipped } =
+      run.result
+    const parts = [
+      `Converted ${count(converted, 'Typography component', 'Typography components')} to text.`,
+    ]
+    if (instanceTexts > 0) {
+      parts.push(
+        `In main components, ${count(instanceTexts, 'instance', 'instances')} kept ${instanceTexts === 1 ? 'its' : 'their'} own text.`,
+      )
+    }
+    if (caseIds.length > 0) {
+      parts.push(
+        `${caseIds.length} had another text case, such as uppercase, which the text style does not have; the style is kept, so the text shows as written.`,
+      )
+    }
+    if (monoNumbers > 0) {
+      parts.push(
+        `${monoNumbers} used mono numbers, which a text style cannot carry and a plugin cannot set; set tabular figures on ${monoNumbers === 1 ? 'it' : 'them'} by hand where they matter.`,
+      )
+    }
+    // Convert leaves an instance whose text style is not Ready after the
+    // choices; the list below the message says why for each.
+    if (skipped.length > 0) {
+      parts.push(
+        `Left ${count(skipped.length, 'instance', 'instances')} as ${skipped.length === 1 ? 'it was' : 'they were'}; the list says why.`,
+      )
+    }
+    return parts.join(' ')
+  }
+  const { reverted, layers } = run.result
+  return `Put back ${count(reverted, 'change', 'changes')} on ${count(layers, 'layer', 'layers')}.`
 }

@@ -53,6 +53,7 @@ import type { ScanState, ScanTarget } from './scan/scan'
 import { componentSource, LegacyCounter } from './scan/sources'
 import { remoteMainComponents } from '../scan/sources'
 import type { ComponentSource } from '../scan/types'
+import { scanKey } from '../shared/pages'
 import {
   clampSize,
   fitHeight,
@@ -252,6 +253,7 @@ async function scan(target: ScanTarget) {
       scope: target.scope,
       pageCount:
         target.scope === 'file' ? pagesOfFile(target.pageIds).length : 1,
+      target: scanKey(target),
     })
     const state = await runScan(
       target,
@@ -285,10 +287,17 @@ async function scan(target: ScanTarget) {
 /**
  * Applies the Ready changes in the entries, then scans the same layers
  * again. With `recordIds`, only the Ready changes among those bindings.
+ *
+ * A run that stops on an error, such as LIBRARY_MISSING when EDS Foundation
+ * [EDS Beta] is not enabled, may have changed layers before it stopped, and
+ * the change events of those changes are ignored as the plugin's own. So the
+ * same layers are scanned again before the error goes to the window, which
+ * then shows the file as it is, not the scan from before the run.
  */
 async function apply(entryIds: string[], recordIds?: Set<string>) {
   if (!lastScan || !lastTarget || busy) return
   busy = true
+  let stopped: { error: unknown } | undefined
   try {
     const result = await applyChanges(
       lastScan.records,
@@ -308,9 +317,16 @@ async function apply(entryIds: string[], recordIds?: Set<string>) {
       )
     }
     post({ type: 'apply-done', result })
+  } catch (error) {
+    stopped = { error }
   } finally {
     busy = false
     quietAfterOwnChanges()
+  }
+  if (stopped) {
+    // The error the window shows is the run's, not one from this scan.
+    await scan(lastTarget).catch(() => undefined)
+    throw stopped.error
   }
   await scan(lastTarget)
 }

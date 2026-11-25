@@ -7,6 +7,7 @@ import {
   CATEGORY_DESCRIPTIONS as PLUGIN_DESCRIPTIONS,
   CATEGORY_LABELS as PLUGIN_LABELS,
 } from '../scan/labels'
+import type { MappingGroup, MappingRow } from '../scan/mapping'
 import type { Category, ComponentSource } from '../scan/types'
 
 export { GROUP_LABELS, KEPT_TARGET_LABEL, propertyLabel } from '../scan/labels'
@@ -62,6 +63,76 @@ export function statusLabel(category: Category, kept = false): string {
 /** “1 value”, “14 values” */
 export function values(count: number): string {
   return `${count} value${count === 1 ? '' : 's'}`
+}
+
+/** “1 instance”, “4 instances” */
+export function plural(count: number, one: string, many = `${one}s`): string {
+  return `${count} ${count === 1 ? one : many}`
+}
+
+/**
+ * The legacy side of a row in words (final review FR2 and FR3): typography as
+ * “UI body, sm, Regular, squished” instead of the variable names, and a mode
+ * with its collection, “Appearance: Danger”. With the row, typography is
+ * what the rules read from the row's values (BindingRecord.oldTypography),
+ * so rows that bind the same variables in other modes, as every Typography
+ * instance does, are told apart (test session 2, 2026-11-25).
+ */
+export function legacyText(group: MappingGroup, row?: MappingRow): string {
+  if (group.group === 'typography') {
+    const read = [
+      ...new Set(
+        (row?.bindings ?? [])
+          .map((binding) => binding.oldTypography)
+          .filter((text): text is string => Boolean(text)),
+      ),
+    ]
+    if (read.length > 0) return read.join('; ')
+    const names = group.old.split(', ')
+    const family = names.some((name) => name.includes('/header/'))
+      ? 'Header'
+      : 'UI body'
+    const step = names
+      .map((name) => /\/([a-z0-9]+)\/font-size/.exec(name)?.[1])
+      .find(Boolean)
+    const lineHeight = names
+      .map((name) => /line-height-(\w+)/.exec(name)?.[1])
+      .find(Boolean)
+    const weight = names.some((name) => name.includes('font-weight-bolder'))
+      ? 'bolder'
+      : undefined
+    return [family, step, lineHeight, weight].filter(Boolean).join(', ')
+  }
+  if (group.group === 'modes' && group.oldCollection) {
+    const collection = group.oldCollection.replace(/^[^\p{L}]+/u, '')
+    return `${collection}: ${group.old}`
+  }
+  return group.old
+}
+
+/** What the values of a row are on. */
+export type RowNoun = 'layers' | 'instances'
+
+const ONE: Record<RowNoun, string> = { layers: 'layer', instances: 'instance' }
+
+/**
+ * The accessible names of a row's controls, with the row's legacy side as
+ * the row shows it, and in the singular for one value (test session 2: “Go
+ * to the 1 instances that use …”).
+ */
+export function rowLabels(
+  legacy: string,
+  count: number,
+  noun: RowNoun = 'layers',
+): { select: string; goTo: string; show: string; hide: string } {
+  const what = count === 1 ? ONE[noun] : noun
+  const use = count === 1 ? 'uses' : 'use'
+  return {
+    select: `Select the ${values(count)} that ${use} ${legacy}`,
+    goTo: `Go to the ${count} ${what} that ${use} ${legacy}`,
+    show: `Show the ${what} that ${use} ${legacy}`,
+    hide: `Hide the ${what} that ${use} ${legacy}`,
+  }
 }
 
 /**

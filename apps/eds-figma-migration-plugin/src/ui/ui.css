@@ -1949,58 +1949,6 @@ code {
   margin-inline-start: auto;
 }
 
-.settings-menu {
-  position: relative;
-}
-
-.settings-popover {
-  position: absolute;
-  inset-block-start: calc(100% + var(--eds-spacing-3xs));
-  inset-inline-end: 0;
-  z-index: 3;
-  min-inline-size: 16rem;
-  margin: 0;
-  padding: var(--eds-spacing-3xs) 0;
-  list-style: none;
-  background: var(--eds-background-floating);
-  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
-  border-radius: var(--eds-corner-radius-rounded);
-  box-shadow: var(--eds-elevation-high);
-
-  & [role^='menuitem'] {
-    display: flex;
-    gap: var(--eds-spacing-xs);
-    align-items: center;
-    padding: var(--eds-spacing-2xs) var(--eds-spacing-sm);
-    font-size: var(--eds-typography-label-md-font-size);
-    line-height: var(--eds-typography-label-md-line-height);
-    cursor: pointer;
-
-    &:hover,
-    &:focus-visible {
-      background: var(--eds-background-interactive-neutral-muted-hover);
-      outline: none;
-    }
-  }
-}
-
-.settings-heading {
-  padding: var(--eds-spacing-2xs) var(--eds-spacing-sm) 0;
-  font-size: var(--eds-typography-label-sm-font-size);
-  line-height: var(--eds-typography-label-sm-line-height);
-  color: var(--eds-text-secondary);
-}
-
-.settings-separator {
-  margin-block: var(--eds-spacing-3xs);
-  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
-}
-
-.settings-check {
-  display: inline-flex;
-  inline-size: var(--eds-spacing-md);
-}
-
 /* After a scan the scope and Scan share one line. */
 .scan-controls.compact {
   display: flex;
@@ -2030,6 +1978,14 @@ code {
   align-items: baseline;
   justify-content: space-between;
   min-inline-size: 0;
+
+  /* The name starts at its own width, so the value wraps under it when both
+     do not fit. With the basis of 0 from flex: 1, the name gave way to the
+     value instead, and a text style read "bo…" beside "14px, Inter Regular"
+     at the default width (test session 2, 2026-11-25). */
+  & .check-target-name {
+    flex: 1 1 auto;
+  }
 
   & .option-value {
     overflow: hidden;

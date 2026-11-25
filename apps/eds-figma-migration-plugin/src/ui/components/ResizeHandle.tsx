@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import type { KeyboardEvent, PointerEvent } from 'react'
-import { clampSize } from '../../shared/window'
+import { clampSize, resizeBase } from '../../shared/window'
+import type { AskedSize } from '../../shared/window'
 import { send } from '../figma'
 import { pauseFitting } from '../fit'
 
@@ -21,13 +22,14 @@ type Drag = { x: number; y: number; width: number; height: number }
 export function ResizeHandle() {
   const drag = useRef<Drag | null>(null)
   const frame = useRef(0)
-  // The size last asked for: the window takes a moment to follow, so quick
-  // key presses add up from here rather than from the window's size.
-  const asked = useRef<{ width: number; height: number } | null>(null)
+  // The size last asked for and when: the window takes a moment to follow,
+  // so quick key presses add up from here rather than from the window's
+  // size, but only while it is on its way (resizeBase).
+  const asked = useRef<AskedSize | null>(null)
 
   const resize = (width: number, height: number, done: boolean) => {
     const size = clampSize(width, height)
-    asked.current = size
+    asked.current = { ...size, at: performance.now() }
     send({ type: 'resize', ...size, done })
   }
 
@@ -81,10 +83,11 @@ export function ResizeHandle() {
     const move = moves[event.key]
     if (!move) return
     event.preventDefault()
-    const base = asked.current ?? {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    }
+    const base = resizeBase(
+      asked.current,
+      { width: window.innerWidth, height: window.innerHeight },
+      performance.now(),
+    )
     resize(base.width + move[0], base.height + move[1], true)
   }
 

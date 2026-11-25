@@ -15,6 +15,7 @@ import {
   HIDDEN_LABEL,
   isHeld,
   KEPT_TARGET_LABEL,
+  plural,
   propertyLabel,
   values,
 } from '../labels'
@@ -819,7 +820,7 @@ export function Inspector({
                   <Button
                     size="small"
                     variant="secondary"
-                    aria-label={`Go to the ${group.instances.length} instances of ${group.name}`}
+                    aria-label={`Go to the ${plural(group.instances.length, 'instance')} of ${group.name}`}
                     onClick={() =>
                       onSelect(group.instances.map((instance) => instance.id))
                     }

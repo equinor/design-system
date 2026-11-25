@@ -58,7 +58,7 @@ export type ApplyResult = {
   applied: number
   /** Of the changes made: values bound to EDS Foundation variables or text styles */
   values: number
-  /** Of the changes made: values set as numbers, such as border widths */
+  /** Of the changes made: numbers set without a variable, such as a padding of 0 or a border width */
   numbers: number
   /** Of the changes made: legacy modes removed or replaced */
   modes: number
@@ -185,8 +185,11 @@ export type PluginToUi =
    * and after the choice is changed
    */
   | { type: 'pages'; pages: FilePage[]; leftOut: string[] }
-  /** A scan starts; sent before anything else of it */
-  | { type: 'scan-start'; scope: Scope; pageCount: number }
+  /**
+   * A scan starts; sent before anything else of it. `target` is the same for
+   * two scans of the same layers (scanKey in shared/pages.ts).
+   */
+  | { type: 'scan-start'; scope: Scope; pageCount: number; target: string }
   /** The layers on the next page, sent when the page is loaded and before it is read */
   | { type: 'scan-map'; pageIndex: number; map: ScanMap }
   | { type: 'scan-progress'; progress: ScanProgress }

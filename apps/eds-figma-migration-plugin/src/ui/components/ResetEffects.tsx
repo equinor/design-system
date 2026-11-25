@@ -3,7 +3,7 @@
  * list, for the places with room for one: the "How to fix it" dialog in
  * Changes and the Review step. A row shows the same in one sentence.
  */
-import { resetEffectsLead } from '../../scan/classify'
+import { OTHER_PLUGIN_DATA_NOTE, resetEffectsLead } from '../../scan/classify'
 
 export function ResetEffects({
   effects,
@@ -28,6 +28,7 @@ export function ResetEffects({
           <li key={effect}>{effect}</li>
         ))}
       </ul>
+      {byPlugin && <p>{OTHER_PLUGIN_DATA_NOTE}</p>}
     </div>
   )
 }

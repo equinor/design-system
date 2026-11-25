@@ -32,5 +32,8 @@
     "test/**/*.ts",
     "*.config.ts",
     "demo/**/*.ts"
-  ]
+  ],
+  // The tests of the main thread use the Figma typings, so they are typed by
+  // tsconfig.plugin.json.
+  "exclude": ["test/plugin/**"]
 }

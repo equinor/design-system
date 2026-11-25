@@ -8,7 +8,7 @@ and uses no AI credits.
 The plugin works on layout: the frames, text and shapes a designer built in
 their own file. It does not change a value an instance takes from its main
 component, because a change there becomes an instance override. An instance
-that still uses old variables that way comes from a component that has not
+that still uses legacy variables that way comes from a component that has not
 been updated in its library; the plugin reports it and leaves it alone. The
 plugin migrates variables, not components, so a designer swaps such an
 instance to an EDS Beta component in Figma, and its legacy values go with it.
@@ -43,7 +43,12 @@ plugin can make the fix itself (target `reset:<variable>`,
 `src/mapping/reset.ts`), but only after a designer accepts it in Review;
 `src/plugin/apply/reset.ts` reads the layer's overrides, calls
 `removeOverrides()`, swaps it back, sets the overrides again and reads them
-back, and refuses a layer with an override it cannot copy. Apply reads
+back, and refuses a layer with an override it cannot copy. Plugin data is
+the exception it cannot detect: Figma names the overridden field, not the
+plugins with data there, and gives no way to list them, so with this
+plugin's data on the layer, another plugin's data there is removed and not
+put back. The window says so wherever it lists what the reset removes
+(`OTHER_PLUGIN_DATA_NOTE` in `src/scan/classify.ts`). Apply reads
 every binding back to report the ones Figma did not take. An explicit
 mode on a layer inside an instance is the instance's own
 when `overrides` lists `explicitVariableModes` for that layer and the layer
@@ -223,7 +228,11 @@ of a page or the file it opens on **Frames**, where the work is.
   are on (Text colour, Fill, Stroke, Padding and gaps, Text style, Mode, …),
   and one row per legacy variable and target: the number of layers, the
   legacy variable, and the target with its swatch or value. The legacy side shows the colour a legacy variable resolves to on its layers as a swatch, beside the new one. A row that needs a check says why in plain words under it. Both sides show their numbers in px: the legacy variable as it resolves on each layer, and the target in the density the layer will have (Spacious → comfortable, Comfortable → compact), so a change in size shows before it is applied. Rows are compact, one line each, with the status as a dot in the colours of the health bar (and ⚠ for Needs check); the full names are in the tooltip. Typography reads
-  "UI body, sm, squished", and a mode reads "Density: Comfortable →
+  what the rules read from it, "UI body, sm, Regular, squished", the family,
+  step, font style and line height, from the modes where the variables do not
+  name them, so the rows of Typography instances, which all bind the same
+  variables, can be told apart; the controls of a row are named with the
+  same words. A mode reads "Density: Comfortable →
   density: compact". A click on the legacy variable selects its layers, a
   click on the target opens the picker and changes every value in the row,
   and the chevron lists the layers, each with its own **Change**.
@@ -390,7 +399,13 @@ layers an accepted Manual fix resets. Before each change the
 plugin checks that the layer still has the legacy binding from the scan, and
 lists what it could not change, with Go to. One run is one step in Figma's
 undo history (`figma.commitUndo`). After the run the plugin scans the same
-layers again.
+layers again, also when the run stops on an error such as a missing EDS
+Foundation library, before the error reaches the window: the run may have
+changed layers before it stopped, and the plugin ignores the change events
+of its own changes, so the window would otherwise keep the scan from before
+the run. The result of a run stays above the scans of the same layers that
+follow, and goes when a scan of another page or scope starts (`scanKey` in
+`src/shared/pages.ts`).
 
 Every change is logged on its layer in shared plugin data (namespace
 `eds_migration`, key `log`): the property, the legacy variable, typography or
@@ -400,7 +415,19 @@ stand-in can be found), the rules version and the time. **Revert frame**, in a f
 puts the legacy bindings, typography and modes back from that log, newest
 first, as long as the legacy libraries are still published. A number set
 without a variable gets its legacy variable back, on the layer's field or on
-the effect's field. The next scan counts such a number as migrated while the
+the effect's field. A typography change logs the font and the values the text
+had (font size, line height, letter spacing, paragraph spacing and indent,
+text case and decoration) from 2026-11-25, and Revert frame sets them again
+before it binds the legacy variables, so a field without a legacy variable
+does not keep the style's value; an older entry has no values and puts back
+what it has. Revert frame imports the legacy variables and loads the fonts
+before it clears the text style, so a revert that fails leaves the style on
+and can be tried again, and a legacy library that could not be imported is
+tried again on the next Revert. A Manual fix the plugin made cannot be
+reverted, since Figma ignores a size variable bound inside an instance: Revert
+frame lists it with a message that says to undo it with Ctrl or Cmd+Z in the
+same session, and keeps it in the log, as it keeps every change it could not
+put back. The next scan counts such a number as migrated while the
 layer or the effect still has it. A binding someone
 has changed since the apply is left alone and reported. Shared plugin data is
 used because private plugin data needs a published plugin id, so a
@@ -755,7 +782,7 @@ Developer → Export EDS inventories**:
   cannot list the text styles of a library from another file;
 - in a file where the deprecated libraries are enabled for
   `old-libraries.json`. The API only lists published collections, so the
-  unpublished ones the old variables alias through are carried over from the
+  unpublished ones the legacy variables alias through are carried over from the
   current file.
 
 Copy or download each file, replace it in the repository, run the tests and
@@ -795,7 +822,7 @@ pnpm --filter @equinor/eds-figma-migration-plugin run test:run
 ```
 
 - `test/answer-key.test.ts`: the 59 rows of the answer key for the test frame.
-- `test/inventory.test.ts`: runs every published old variable through the
+- `test/inventory.test.ts`: runs every published legacy variable through the
   rules in a set of contexts and checks that each target exists in EDS
   Foundation with a matching type, that a sure proposal fits the property's
   scope, and that `background/backdrop` is never proposed.
@@ -805,6 +832,14 @@ pnpm --filter @equinor/eds-figma-migration-plugin run test:run
 - `test/nested-instances.test.ts`: owned slot content, the chain of
   instances and the tree, on a frame with a panel component pasted from
   another file (2026-11-18).
+- `test/test-session-2.test.ts`: fixes from the second test session
+  (2026-11-25) that need no Figma: the words of a run's result, the scan a
+  result belongs to, the singular for one value, the rows of Typography
+  instances told apart, and the reasons Convert gives.
+- `test/plugin/`: the main thread's Revert frame and Convert, against a
+  stand-in for `figma` with only the calls they make. These tests use the
+  Figma typings, so `tsconfig.plugin.json` types them and `tsconfig.json`
+  leaves them out.
 - `test/demo-sample.test.ts`: the fixtures the demo is made from are called
   Sample file and have no file or library keys, and with the new ids the demo
   gives them they keep the shape the scan reads and get the same statuses and
@@ -932,6 +967,9 @@ and runs `scripts/docs-sync.mjs`, which:
 When the pages are on another branch than the plugin, for example in a
 worktree, point the sync at that docs app with `EDS_DOCS_APP`:
 `EDS_DOCS_APP=<path to the worktree>/apps/design-system-docs pnpm run docs:sync`.
+A relative path is read from the folder the command runs in, such as the
+repository root for `pnpm --filter … run docs:sync`, not from the plugin
+folder.
 
 `test/docs-steps.test.ts` fails when a page names a step the demo does not
 have (`demo/src/step-names.ts`), so renaming or removing a step means

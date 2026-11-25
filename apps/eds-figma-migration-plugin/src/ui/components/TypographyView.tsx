@@ -9,6 +9,7 @@ import type {
 } from '../../scan/mapping'
 import type { OldInstance } from '../../scan/types'
 import { conversionStates } from '../conversions'
+import { plural } from '../labels'
 import type { ConversionState } from '../conversions'
 import { plainReason } from '../plain'
 import { convertDisabled, convertText, useConversionPreview } from '../preview'
@@ -50,9 +51,6 @@ type TypographyViewProps = {
   onConvert: (instanceIds: string[]) => void
   busy: boolean
 }
-
-const plural = (count: number, one: string, many = `${one}s`) =>
-  `${count} ${count === 1 ? one : many}`
 
 /** What converting an instance in a main component does to the instances of that component. */
 function carriedText(
@@ -187,7 +185,7 @@ export function TypographyView({
           <Button
             size="small"
             variant="ghost"
-            aria-label={`Go to the ${ids.length} instances with ${title}`}
+            aria-label={`Go to the ${plural(ids.length, 'instance')} with ${title}`}
             onClick={() => onSelect(ids)}
           >
             Go to all
@@ -227,7 +225,7 @@ export function TypographyView({
                         <Button
                           size="small"
                           variant="secondary"
-                          aria-label={`Go to the ${rowIds.length} instances in this row`}
+                          aria-label={`Go to the ${plural(rowIds.length, 'instance')} in this row`}
                           onClick={() => onSelect(rowIds)}
                         >
                           Go to all

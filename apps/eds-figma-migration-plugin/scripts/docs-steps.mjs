@@ -14,10 +14,13 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 /**
  * The docs site, next to the plugin in the monorepo. `EDS_DOCS_APP` points
  * the sync at the docs app in another checkout, such as a worktree with a
- * docs branch while the pages and the plugin are on different branches.
+ * docs branch while the pages and the plugin are on different branches. A
+ * relative path is read from where the command was run: pnpm runs the script
+ * in the plugin folder and keeps the folder the command was run from in
+ * `INIT_CWD`.
  */
 export const DOCS_APP = process.env.EDS_DOCS_APP
-  ? resolve(process.env.EDS_DOCS_APP)
+  ? resolve(process.env.INIT_CWD ?? process.cwd(), process.env.EDS_DOCS_APP)
   : join(root, '../design-system-docs')
 
 /** Where the docs pages are, for the current (Beta) version */

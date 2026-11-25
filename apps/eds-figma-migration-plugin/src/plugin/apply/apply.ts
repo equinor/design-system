@@ -18,7 +18,7 @@ import type { PlannedChange } from '../../scan/apply-plan'
 import { propertyLabel } from '../../scan/labels'
 import type { Overrides } from '../../scan/mapping'
 import type { BindingRecord } from '../../scan/types'
-import type { LogEntry } from '../../shared/changelog'
+import type { LogEntry, LoggedTypographyValues } from '../../shared/changelog'
 import { withEffectNumber } from '../../shared/effect-numbers'
 import type { ChangeFailure, ApplyResult } from '../../shared/messages'
 import { appendLog, logIsInherited } from './log'
@@ -82,6 +82,48 @@ export class Fonts {
         : node.getRangeAllFontNames(range?.[0] ?? 0, range?.[1] ?? length)
     for (const font of fonts) await this.load(font)
   }
+}
+
+/**
+ * The values a text style sets, as the text or range has them before the
+ * style is applied, for the change log: Revert frame puts them back where no
+ * legacy variable was bound. A value that differs within the range is left
+ * out. An empty text has no range, so its values are read from the layer.
+ */
+export function readTypographyValues(
+  node: TextNode,
+  range?: [number, number],
+): LoggedTypographyValues {
+  const [start, end] = range ?? [0, node.characters.length]
+  const whole = end <= start
+  const one = <T>(value: T | PluginAPI['mixed']): T | undefined =>
+    value === figma.mixed ? undefined : (value as T)
+  const read: Record<keyof LoggedTypographyValues, unknown> = {
+    fontSize: whole ? node.fontSize : node.getRangeFontSize(start, end),
+    lineHeight: whole ? node.lineHeight : node.getRangeLineHeight(start, end),
+    letterSpacing: whole
+      ? node.letterSpacing
+      : node.getRangeLetterSpacing(start, end),
+    paragraphSpacing: whole
+      ? node.paragraphSpacing
+      : node.getRangeParagraphSpacing(start, end),
+    paragraphIndent: whole
+      ? node.paragraphIndent
+      : node.getRangeParagraphIndent(start, end),
+    textCase: whole ? node.textCase : node.getRangeTextCase(start, end),
+    textDecoration: whole
+      ? node.textDecoration
+      : node.getRangeTextDecoration(start, end),
+  }
+  const values: Record<string, unknown> = {}
+  for (const [field, value] of Object.entries(read)) {
+    const found = one(value)
+    // Copied, since Figma's objects are read-only
+    if (found !== undefined) {
+      values[field] = JSON.parse(JSON.stringify(found)) as unknown
+    }
+  }
+  return values as LoggedTypographyValues
 }
 
 type Bindable = SceneNode & {
@@ -180,12 +222,16 @@ async function applyBinding(
 
   if (property.type === 'typography') {
     if (node.type !== 'TEXT') throw new LayerChanged()
+    if (property.range && property.range[1] > node.characters.length) {
+      throw new LayerChanged()
+    }
     const style = await targets.textStyle(target)
     await fonts.loadText(node, property.range)
     await fonts.load(style.fontName)
+    // Read before the style replaces them, for Revert frame.
+    const values = readTypographyValues(node, property.range)
     if (property.range) {
       const [start, end] = property.range
-      if (end > node.characters.length) throw new LayerChanged()
       await node.setRangeTextStyleIdAsync(start, end, style.id)
     } else {
       await node.setTextStyleIdAsync(style.id)
@@ -196,6 +242,7 @@ async function applyBinding(
         type: 'typography',
         fields: record.oldFields ?? {},
         font: record.oldFont,
+        values,
       },
       new: { type: 'textStyle', key: style.key, name: style.name },
     }

@@ -637,26 +637,29 @@ export type ConversionDecision = {
 }
 
 export const NO_LEGACY_TYPOGRAPHY =
-  'No legacy typography was read in the instance, so no text style can be matched.'
+  'No legacy typography was read, so no text style can be matched.'
 
 /**
  * Why Convert leaves an instance, from its text style after the designer's
  * choices; undefined when the text style is Ready and the instance is
  * converted. The window disables Convert on the instance with this reason,
- * and the plugin reports it when the instance is skipped.
+ * and the plugin reports it when the instance is skipped. The Convert
+ * confirmation counts the instances with each reason after it, so a reason
+ * reads right for one instance and for several (test session 2, 2026-11-25:
+ * “Its text style needs a check. … (4 instances)”).
  */
 export function conversionSkipReason(
   style: ConversionDecision | undefined,
 ): string | undefined {
   if (!style) return NO_LEGACY_TYPOGRAPHY
   if (style.target === DECIDE_LATER) {
-    return 'Its text style is set to Decide later, so Convert leaves it.'
+    return 'The text style is set to Decide later.'
   }
   if (style.category === 'sure' && style.target !== null) return undefined
   if (style.category === 'none') {
-    return 'The EDS Beta has no text style for this text. Choose the stand-in or another style before converting.'
+    return 'The EDS Beta has no text style that matches. Choose the stand-in or another style before converting.'
   }
-  return 'Its text style needs a check. Confirm the proposal or choose another style before converting.'
+  return 'The text style needs a check. Confirm the proposal or choose another style before converting.'
 }
 
 /**

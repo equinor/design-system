@@ -147,7 +147,7 @@ const DRIVERS: Record<Step, (ui: Ui, document: Document) => Promise<void>> = {
     press(await status.findByRole('button', { name: /^Manual fix \d+$/ }))
     press(
       await ui.findByRole('button', {
-        name: /^Show the \w+ that use Selectable\/Icon size$/,
+        name: /^Show the \w+ that uses? Selectable\/Icon size$/,
       }),
     )
     await ui.findAllByText(/^Resetting the layer also removes these/)

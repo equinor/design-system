@@ -7,6 +7,8 @@ import {
   clampSize,
   FIT_MIN_HEIGHT,
   fitHeight,
+  RESIZE_PENDING_MS,
+  resizeBase,
   WINDOW,
 } from '../src/shared/window'
 
@@ -33,5 +35,26 @@ describe('fitHeight', () => {
     expect(fitHeight(400)).toBe(400)
     expect(400).toBeLessThan(WINDOW.minHeight)
     expect(fitHeight(10)).toBe(FIT_MIN_HEIGHT)
+  })
+})
+
+describe('resizeBase', () => {
+  const current = { width: 480, height: 600 }
+  const asked = { width: 520, height: 720, at: 1000 }
+
+  it('adds quick arrow key presses up from the size asked for', () => {
+    expect(resizeBase(asked, current, 1000 + RESIZE_PENDING_MS - 1)).toEqual({
+      width: 520,
+      height: 720,
+    })
+  })
+
+  it('starts from the window once the size asked for is out of date', () => {
+    // The window asked for 720 px and then shrank to the 600 px of room
+    // Figma gave it; an arrow key a while later starts from 600 px.
+    expect(resizeBase(asked, current, 1000 + RESIZE_PENDING_MS)).toEqual(
+      current,
+    )
+    expect(resizeBase(null, current, 0)).toEqual(current)
   })
 })

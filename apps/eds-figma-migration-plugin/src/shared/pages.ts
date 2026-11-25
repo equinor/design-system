@@ -34,3 +34,26 @@ export function pageCountText(pages: FilePage[], leftOut: Iterable<string>) {
   const selected = pagesToScan(pages, leftOut).length
   return `${selected}/${total} ${total === 1 ? 'page' : 'pages'}`
 }
+
+/**
+ * What a scan covers, as a key that is the same for two scans of the same
+ * layers: the selected layers, the page, or the pages of the file. The
+ * window keeps the result of an Apply, Convert or Revert only while the
+ * scans that follow cover the same (test session 2, 2026-11-25: the result
+ * of an Apply on one page stayed above the health of the next page scanned).
+ */
+export function scanKey(target: {
+  scope: 'selection' | 'page' | 'file'
+  pageId: string
+  nodeIds: string[]
+  pageIds?: string[]
+}): string {
+  switch (target.scope) {
+    case 'selection':
+      return `selection:${target.pageId}:${[...target.nodeIds].sort().join(',')}`
+    case 'page':
+      return `page:${target.pageId}`
+    case 'file':
+      return `file:${(target.pageIds ?? []).join(',')}`
+  }
+}

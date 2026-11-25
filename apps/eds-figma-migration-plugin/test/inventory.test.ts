@@ -17,6 +17,7 @@ import {
 import {
   acceptedScopes,
   FORBIDDEN_TARGETS,
+  resolveMode,
   resolveTypography,
   resolveVariable,
   TONES,
@@ -184,6 +185,21 @@ describe('targets', () => {
         !withTarget.has(`${variable.collectionKey}/${variable.name}`),
     ).map((variable) => variable.name)
     expect([...new Set(without)]).toEqual([])
+  })
+
+  it('say legacy in a reason, never old, as the window does (test session 2, 2026-11-25)', () => {
+    const modes = [
+      { collectionKey: OLD.density, modeName: 'Spacious' },
+      { collectionKey: OLD.density, modeName: 'Comfortable' },
+      { collectionKey: OLD.appearance, modeName: 'Danger' },
+    ].map((input) => resolveMode(input).reason)
+    const reasons = [...runs.map((run) => run.resolution.reason), ...modes]
+    expect([
+      ...new Set(reasons.filter((reason) => /\bold\b/i.test(reason))),
+    ]).toEqual([])
+    expect(modes[0]).toBe(
+      '💎 Density: Spacious: the legacy Spacious is the new comfortable',
+    )
   })
 })
 

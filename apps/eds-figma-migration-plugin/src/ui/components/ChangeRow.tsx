@@ -44,7 +44,14 @@ import type {
   TargetCount,
 } from '../../scan/mapping'
 import type { Category } from '../../scan/types'
-import { isHeld, KEPT_TARGET_LABEL, statusLabel } from '../labels'
+import {
+  isHeld,
+  KEPT_TARGET_LABEL,
+  legacyText,
+  rowLabels,
+  statusLabel,
+} from '../labels'
+import type { RowNoun } from '../labels'
 import { plainReason } from '../plain'
 import { groupState } from '../selection'
 import type { Selection, SelectedBinding } from '../selection'
@@ -61,35 +68,6 @@ export type Item = { group: MappingGroup; row: MappingRow }
 
 /** The run that changes a row's values: Apply in Changes, Convert on the Typography tab. */
 export type Run = 'Apply' | 'Convert'
-
-/**
- * The legacy side of a row in words (final review FR2 and FR3): typography as
- * “UI body, sm, squished” instead of three variable names, and a mode with
- * its collection, “Appearance: Danger”.
- */
-export function legacyText(group: MappingGroup): string {
-  if (group.group === 'typography') {
-    const names = group.old.split(', ')
-    const family = names.some((name) => name.includes('/header/'))
-      ? 'Header'
-      : 'UI body'
-    const step = names
-      .map((name) => /\/([a-z0-9]+)\/font-size/.exec(name)?.[1])
-      .find(Boolean)
-    const lineHeight = names
-      .map((name) => /line-height-(\w+)/.exec(name)?.[1])
-      .find(Boolean)
-    const weight = names.some((name) => name.includes('font-weight-bolder'))
-      ? 'bolder'
-      : undefined
-    return [family, step, lineHeight, weight].filter(Boolean).join(', ')
-  }
-  if (group.group === 'modes' && group.oldCollection) {
-    const collection = group.oldCollection.replace(/^[^\p{L}]+/u, '')
-    return `${collection}: ${group.old}`
-  }
-  return group.old
-}
 
 /**
  * What one target in a row is called: a mode that is only cleared says so,
@@ -341,7 +319,7 @@ type ChangeRowProps = {
   /** Show the number of values in the row, from the settings menu */
   showCounts: boolean
   /** What the row's values are on, in the button labels: layers, or instances */
-  noun?: string
+  noun?: RowNoun
   /** The run that changes the values, for the note on Decide later */
   run?: Run
   /**
@@ -410,6 +388,10 @@ export function ChangeRow({
   ].slice(0, 2)
   const own = ownChoices(row, overrides)
   const manual = row.outcome === 'byHand'
+  // The row's legacy side, which the names of its controls use too, so a
+  // screen reader tells the rows apart by the same words as the eye.
+  const legacy = legacyText(group, row)
+  const labels = rowLabels(legacy, row.count, noun)
   const state =
     selection && !manual
       ? groupState(
@@ -423,7 +405,7 @@ export function ChangeRow({
         {selection && state ? (
           <Checkbox
             className="binding-check"
-            aria-label={`Select the ${row.count} values that use ${group.old}`}
+            aria-label={labels.select}
             checked={state.checked}
             indeterminate={state.indeterminate}
             onChange={(event) =>
@@ -439,8 +421,10 @@ export function ChangeRow({
         <button
           type="button"
           className="check-legacy"
-          title={`${group.old}${group.oldCollection ? ` (${group.oldCollection})` : ''}`}
-          aria-label={`Go to the ${row.count} ${noun} that use ${group.old}`}
+          // Typography shows what the rules read, so the tooltip starts
+          // with it in full, before the variable names.
+          title={`${group.group === 'typography' ? `${legacy}\n` : ''}${group.old}${group.oldCollection ? ` (${group.oldCollection})` : ''}`}
+          aria-label={labels.goTo}
           onClick={onSelectOld}
         >
           {showCounts && <span className="check-count">{row.count}</span>}
@@ -455,7 +439,7 @@ export function ChangeRow({
               ))}
             </span>
           )}
-          <span className="check-legacy-name">{legacyText(group)}</span>
+          <span className="check-legacy-name">{legacy}</span>
           {oldValues && <span className="option-value">{oldValues}</span>}
         </button>
         <span className="check-arrow" aria-hidden="true">
@@ -464,7 +448,7 @@ export function ChangeRow({
         <button
           type="button"
           className="check-target"
-          aria-label={`Change the target of all ${row.count}: now ${shortTarget(row, overrides, kept)}`}
+          aria-label={`${row.count === 1 ? 'Change the target' : `Change the target of all ${row.count}`}: now ${shortTarget(row, overrides, kept)}`}
           onClick={onChangeRow}
         >
           <Preview name={target} schemes={schemesOf(row.bindings)} />
@@ -520,11 +504,7 @@ export function ChangeRow({
           size="small"
           icon
           aria-expanded={open}
-          aria-label={
-            open
-              ? `Hide the ${noun} that use ${group.old}`
-              : `Show the ${noun} that use ${group.old}`
-          }
+          aria-label={open ? labels.hide : labels.show}
           onClick={onToggle}
         >
           <Icon data={open ? chevron_up : chevron_down} size="sm" />
@@ -604,7 +584,9 @@ export function WhyDialog({
           </Dialog.Header>
           <Dialog.Content>
             <p className="binding-swap">
-              <span className="binding-old">{legacyText(item.group)}</span>
+              <span className="binding-old">
+                {legacyText(item.group, item.row)}
+              </span>
               <span aria-hidden="true"> → </span>
               <span className="binding-new">
                 {shortTarget(item.row, overrides, kept)}

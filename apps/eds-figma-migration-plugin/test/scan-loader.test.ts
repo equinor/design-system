@@ -146,6 +146,7 @@ describe('traceScan', () => {
       type: 'scan-start',
       scope: 'file',
       pageCount: 2,
+      target: 'file:1,2',
     })
     trace = traceScan(trace, progress(0))
     expect(scanFraction(trace)).toBe(0)

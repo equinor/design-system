@@ -301,6 +301,12 @@ export type BindingRecord = {
   /** The font of a text or range before the change */
   oldFont?: { family: string; style: string }
   /**
+   * For legacy typography: what the rules read from it in a few words, such
+   * as “UI body, md, Medium, squished” (legacyTypographyText), which tells
+   * apart typography that binds the same variables in other modes
+   */
+  oldTypography?: string
+  /**
    * For the text style of a conversion: the text case of the legacy text,
    * when it has one. Converting drops it when the text style has another
    * (scan/conversions.ts), which the Convert confirmation counts.
