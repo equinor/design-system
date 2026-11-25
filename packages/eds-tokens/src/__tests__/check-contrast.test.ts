@@ -20,7 +20,9 @@ import { theme as committedDark } from '../tokens/ts/dark-comfortable'
  *
  * The other cases set the colours they test in a copy of the committed
  * modules and assert on those, so each one tests one rule against the
- * full pairing list.
+ * full pairing list. The copies start from categorical data visualisation
+ * colours that pass (see `runEdited`), so a categorical value in the
+ * committed tokens cannot decide a case about another rule.
  */
 
 const packageRoot = path.resolve(
@@ -56,6 +58,7 @@ const runEdited = (
     light: structuredClone(committedLight) as unknown as Tree,
     dark: structuredClone(committedDark) as unknown as Tree,
   }
+  for (const tree of Object.values(schemes)) passingCategorical(tree)
   edit(schemes)
 
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'eds-contrast-'))
@@ -92,6 +95,26 @@ const remove = (tree: Tree, keyPath: string) => {
 
 const accentSelected = 'background.interactive.accent.selected'
 
+const categories = Array.from({ length: 10 }, (_, index) => index + 1)
+
+/**
+ * Categorical colours that meet every categorical pair and chart goal:
+ * steps 1 and 2 take the surface colour, which text.primary is measured
+ * on, and steps 3 to 5 take text.primary, which stands out on the canvas
+ * and the surface.
+ */
+const passingCategorical = (tree: Tree) => {
+  const surface = get(tree, 'background.surface')
+  const text = get(tree, 'text.primary')
+  for (const category of categories)
+    for (const step of [1, 2, 3, 4, 5])
+      set(
+        tree,
+        `dataVisualization.cat.${category}.${step}`,
+        step <= 2 ? surface : text,
+      )
+}
+
 describe('check-contrast', () => {
   afterAll(() => {
     for (const root of tempRoots)
@@ -104,9 +127,11 @@ describe('check-contrast', () => {
       result = run(path.join(packageRoot, 'src/tokens/ts'))
     })
 
-    it('meet the minimum on every documented pair outside the exceptions', () => {
+    it('meet the minimum on every documented and categorical pair outside the exceptions', () => {
       expect(result.status).toBe(0)
       expect(result.stdout).toContain('134 documented pairs')
+      expect(result.stdout).toContain('40 categorical data visualisation pairs')
+      expect(result.stdout).toContain('20 chart goals')
     })
 
     it('measure primary, secondary and tertiary against the surface only', () => {
@@ -252,6 +277,94 @@ describe('check-contrast', () => {
     it('marks the targets that the docs do not give', () => {
       expect(result.stdout).toMatch(
         /dark {3}icon\.secondary on background\.surface {2}#7a7a7a on #[0-9a-f]{6}[^\n]*\(target Lc 60, assumed\)/,
+      )
+    })
+  })
+
+  describe('the categorical data visualisation colours', () => {
+    it('fail the run when neither text colour meets 4.5:1 on a fill', () => {
+      // Mid grey is about 3.2:1 with near-black text and 3.7:1 with near
+      // white text
+      const result = runEdited(({ light }) =>
+        set(light, 'dataVisualization.cat.3.2', '#808080'),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toMatch(
+        /light {2}text\.primary or text\.inverted on data-visualization\.cat\.3\.2 {2}text\.(primary|inverted) #[0-9a-f]{6} on #808080 {2}\d\.\d{2}:1 \(minimum 4\.5:1\)[^\n]*\(other: text\.(primary|inverted)/,
+      )
+    })
+
+    it('pass when only one of the two text colours meets 4.5:1, on both steps', () => {
+      // text.primary on its own colour is 1:1, text.inverted is far above
+      const result = runEdited(({ light }) => {
+        set(light, 'dataVisualization.cat.3.1', get(light, 'text.primary'))
+        set(light, 'dataVisualization.cat.3.2', get(light, 'text.primary'))
+      })
+      expect(result.status).toBe(0)
+      expect(result.stderr).not.toContain('data-visualization.cat.3')
+    })
+
+    it('fail the run when no single text colour meets 4.5:1 on both steps', () => {
+      // Step 1 keeps the surface colour, where only text.primary passes;
+      // on step 2, text.primary's own colour, only text.inverted passes
+      const result = runEdited(({ light }) =>
+        set(light, 'dataVisualization.cat.3.2', get(light, 'text.primary')),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toMatch(
+        /light {2}text\.primary or text\.inverted on data-visualization\.cat\.3\.1 and data-visualization\.cat\.3\.2: no single text colour reaches 4\.5:1 on both steps \(text\.primary #[0-9a-f]{6} \d+\.\d{2}:1 and 1\.00:1, text\.inverted #[0-9a-f]{6} \d+\.\d{2}:1 and \d+\.\d{2}:1\)/,
+      )
+      // Each step on its own passes, so neither is reported as a pair
+      expect(result.stderr).not.toContain('on data-visualization.cat.3.2  ')
+    })
+
+    it('report the text colour used when it is below Lc 60', () => {
+      // In dark, only the dark text.inverted meets 4.5:1 on #a28200, at
+      // about Lc 38. Step 1 takes a pale colour so that text.inverted also
+      // passes there, as one text colour has to work on both steps.
+      const result = runEdited(({ dark }) => {
+        set(dark, 'dataVisualization.cat.2.1', '#f9eab5')
+        set(dark, 'dataVisualization.cat.2.2', '#a28200')
+      })
+      expect(result.status).toBe(0)
+      expect(result.stdout).toMatch(
+        /Below the APCA target[\s\S]*dark {3}text\.primary or text\.inverted on data-visualization\.cat\.2\.2 {2}text\.inverted #[0-9a-f]{6} on #a28200 {2}\d\.\d{2}:1 \(minimum 4\.5:1\) {2}Lc [\d.]+ \(target Lc 60, assumed\) {2}\(other: text\.primary/,
+      )
+    })
+
+    it('fail the run when step 4 is below 3:1 against the canvas or the surface', () => {
+      const result = runEdited(({ light }) =>
+        set(
+          light,
+          'dataVisualization.cat.5.4',
+          get(light, 'background.canvas'),
+        ),
+      )
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        'light  data-visualization.cat.5.4 on background.canvas',
+      )
+      expect(result.stderr).toContain(
+        'light  data-visualization.cat.5.4 on background.surface',
+      )
+    })
+
+    it('report the chart goals without failing', () => {
+      const result = runEdited(({ light, dark }) => {
+        set(
+          light,
+          'dataVisualization.cat.2.3',
+          get(light, 'background.surface'),
+        )
+        // In dark, #ca7b7a is above 3:1 on the surface but below Lc 45
+        set(dark, 'dataVisualization.cat.7.4', '#ca7b7a')
+      })
+      expect(result.status).toBe(0)
+      expect(result.stdout).toMatch(
+        /Chart goals not met[\s\S]*light {2}data-visualization\.cat\.2\.3 on background\.surface {2}#[0-9a-f]{6} on #[0-9a-f]{6} {2}1\.00:1 \(goal 3:1\) {2}Lc [\d.]+ \(goal Lc 30\)/,
+      )
+      expect(result.stdout).toMatch(
+        /dark {3}data-visualization\.cat\.7\.4 on background\.surface {2}#ca7b7a on #[0-9a-f]{6} {2}\d\.\d{2}:1 \(goal 3:1\) {2}Lc [\d.]+ \(goal Lc 45\)/,
       )
     })
   })
