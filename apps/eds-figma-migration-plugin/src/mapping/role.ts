@@ -23,7 +23,8 @@ export type RoleGuess = {
   because: string
 }
 
-type KeywordList = 'outlineControls' | 'fieldControls' | 'labelControls'
+type KeywordList =
+  'outlineControls' | 'fieldControls' | 'labelControls' | 'runningText'
 
 /** Lower-cases a layer name and turns punctuation into spaces, so keywords match whole words. */
 function normalise(name: string): string {

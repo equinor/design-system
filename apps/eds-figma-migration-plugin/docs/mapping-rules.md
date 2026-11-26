@@ -160,9 +160,19 @@ and `mono/{md|lg}/{default|bold}`. "default" is weight 400.
 Choose the style in three steps:
 
 1. **Role.** Equinor, or bindings under `typography/header/*` → `header`. Inter (`ui-body`) with
-   `line-height-squished` → `label`. Inter with `line-height-default` → `body`, except single-line
-   text inside a control (button, chip, table cell, menu item, field label), which takes `label`
-   without a check (ADR-0027: label is for single-line functional text; decided 2026-11-12). For the `🗣️ Semantic` typography variables (`Typography/Font size`,
+   `line-height-squished` → `label`. Inter with `line-height-default` is chosen by whether the text
+   wraps, since ADR-0027 makes label the role for single-line functional text and body the role
+   for running text that wraps. The legacy default line height was set on almost every UI text, so
+   it does not tell a paragraph from a label: reading it as body proposed body for most short texts
+   in components (rules 2026-11-26.1). The text takes `body` when it is on several lines, and
+   `label` when it is on one line, except in two cases where it takes `body`: its own name or its
+   parent's says it is running text (`runningText` in `role-hints.json`: Description, Helper,
+   Message, Paragraph, Body text, Supporting text), or it is a sentence (three words or more ending
+   with `.`, `?` or `!`, or ten words or more). Single-line text inside a control (button, chip,
+   table cell, menu item, tab) takes `label` in every case (decided 2026-11-12). None of these
+   choices is a check. A text in a box of fixed height, such as a label that fills the height of a
+   row, counts as one line when it is cut to one line or fits the box's width at about 0.55 of the
+   font size per character. For the `🗣️ Semantic` typography variables (`Typography/Font size`,
    `Typography/Line height`, `Typography/Font family`, `Typography/Font weight`), read the modes
    in force on the node: `🅰️ Font and icon size` (XS to 6XL) gives the step, `🅰️ Font family`
    (UI Body, Header) the family, and `🅰️ Line height` (Default, Squished) the line height.
@@ -435,10 +445,10 @@ it is scoped for strokes.
 ### Typography
 
 A text style is sure when the role, step and weight are all read from the
-variables and the font, and when single-line text in a control takes label
-(ADR-0027). It is a check item when the plugin has to choose: the nearest step
-for a role, body for text with no line height variable, Semi Bold as medium,
-or medium on body.
+variables and the font, and when label or body is chosen from whether the text
+wraps (ADR-0027, § 6). It is a check item when the plugin has to choose: the
+nearest step for a role, label or body for text with no line height variable,
+Semi Bold as medium, or medium on body.
 
 ### Instances
 

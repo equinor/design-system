@@ -97,6 +97,12 @@ export type RoleContext = {
   strokeSides?: [number, number, number, number]
   /** For text: true when the text sits on one line */
   singleLine?: boolean
+  /**
+   * For text: the number of words, and whether the text ends with a full
+   * stop, a question mark or an exclamation mark. Together they tell a
+   * sentence from a short label (rules 2026-11-26.1).
+   */
+  words?: { count: number; sentenceEnd: boolean }
   /** Width and height of the layer in px, for shapes */
   size?: [number, number]
   /** The nearest visible fill under the layer, when there is one */

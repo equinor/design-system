@@ -516,7 +516,10 @@ export class Collector {
         context.strokeSides = [weight, weight, weight, weight]
       }
     }
-    if (node.type === 'TEXT') context.singleLine = isSingleLine(node)
+    if (node.type === 'TEXT') {
+      context.singleLine = isSingleLine(node)
+      context.words = countWords(node.characters)
+    }
     // A thin shape or an empty frame can be a line drawn with a fill.
     if (
       SHAPE_TYPES.has(node.type) ||
@@ -1020,7 +1023,14 @@ function toHex({ r, g, b, a }: RGBA): string {
   return `#${byte(r)}${byte(g)}${byte(b)}${alpha}`
 }
 
-/** A text is on one line when it has no line break and is not taller than about one line. */
+/**
+ * A text is on one line when it has no line break and is not taller than
+ * about one line. A text box of a fixed height, such as a label set to fill
+ * the height of a row in a component, is as tall as its box and not as its
+ * text, so its height says nothing about its lines. There the text is on one
+ * line when it is cut to one line, or when it fits the width at an average
+ * Inter character width of about 0.55 of the font size (rules 2026-11-26.1).
+ */
 function isSingleLine(node: TextNode): boolean {
   // Line feed and line separator, written as char codes so the bundle has
   // no escapes (see vite.fixture.config.ts).
@@ -1030,5 +1040,31 @@ function isSingleLine(node: TextNode): boolean {
   }
   if (node.textAutoResize === 'WIDTH_AND_HEIGHT') return true
   const size = typeof node.fontSize === 'number' ? node.fontSize : 14
-  return node.height < size * 2.2
+  if (node.height < size * 2.2) return true
+  if (node.textAutoResize === 'HEIGHT') return false
+  if (node.textTruncation === 'ENDING' && node.maxLines === 1) return true
+  return node.characters.length * size * 0.55 <= node.width
+}
+
+/**
+ * The words in a text and whether it ends like a sentence. Written without
+ * regular expressions, so the bundle has no escapes (see isSingleLine).
+ */
+function countWords(characters: string): {
+  count: number
+  sentenceEnd: boolean
+} {
+  const text = characters.trim()
+  const count = text
+    .split(' ')
+    .join(String.fromCharCode(10))
+    .split(String.fromCharCode(10))
+    .filter((word) => word.length > 0).length
+  const last = text.charAt(text.length - 1)
+  // Full stop, question mark and exclamation mark. An ellipsis is left out,
+  // since it mostly ends a short status such as “Loading…”.
+  const sentenceEnd = [46, 63, 33]
+    .map((code) => String.fromCharCode(code))
+    .includes(last)
+  return { count, sentenceEnd }
 }

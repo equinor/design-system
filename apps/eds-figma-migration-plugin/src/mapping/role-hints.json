@@ -32,5 +32,13 @@
   },
   "outlineControls": ["Button"],
   "fieldControls": ["Input", "Field", "Checkbox", "Radio", "Switch"],
-  "labelControls": ["Button", "Chip", "Menu item", "Tab", "Cell"]
+  "labelControls": ["Button", "Chip", "Menu item", "Tab", "Cell"],
+  "runningText": [
+    "Description",
+    "Helper",
+    "Message",
+    "Paragraph",
+    "Body text",
+    "Supporting text"
+  ]
 }

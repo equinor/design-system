@@ -1775,6 +1775,66 @@ export function legacyTypographyText(input: TypographyInput): string {
     .join(', ')
 }
 
+/**
+ * True when a text reads as a sentence: three words or more ending with a
+ * full stop, question mark or exclamation mark, or ten words or more.
+ */
+function isSentence(context: RoleContext): boolean {
+  const words = context.words
+  if (!words) return false
+  return (words.sentenceEnd && words.count >= 3) || words.count >= 10
+}
+
+/**
+ * Label or body for Inter text that is not squished. ADR-0027: label is for
+ * single-line functional text, body for running text that wraps. The legacy
+ * default line height was the line height of almost every UI text, so it
+ * does not tell a paragraph from a label; whether the text wraps does (rules
+ * 2026-11-26.1, after most short texts in components were proposed body).
+ * A text on one line is still body when its name or its parent's name says
+ * it is a description, helper text or message, or when it is a sentence.
+ */
+function labelOrBody(context: RoleContext): {
+  role: 'label' | 'body'
+  /** Why, after “because”, for the note when no line height variable is bound */
+  because: string
+  /** Said in the reason when the legacy line height is default */
+  remark?: string
+} {
+  if (!context.singleLine) {
+    return { role: 'body', because: 'the text is on several lines' }
+  }
+  if (nearNamesMatch(context, 'labelControls')) {
+    // Decided 2026-11-12 to apply it without asking.
+    return {
+      role: 'label',
+      because: 'the text is on one line inside a control',
+      remark: 'single-line text inside a control takes label (ADR-0027)',
+    }
+  }
+  if (nearNamesMatch(context, 'runningText')) {
+    return {
+      role: 'body',
+      because:
+        'the name says the text is a description, helper text or message',
+      remark:
+        'the text is on one line, but its name says it is a description, helper text or message, which take body',
+    }
+  }
+  if (isSentence(context)) {
+    return {
+      role: 'body',
+      because: 'the text is a sentence',
+      remark: 'the text is on one line, but it is a sentence, which takes body',
+    }
+  }
+  return {
+    role: 'label',
+    because: 'the text is on one line',
+    remark: 'single-line text that is not a sentence takes label (ADR-0027)',
+  }
+}
+
 /** Resolves the typography of a text node, or of one range in it, to a text style. */
 export function resolveTypography(input: TypographyInput): Resolution {
   const { fields, font, fontSize, context } = input
@@ -1791,22 +1851,16 @@ export function resolveTypography(input: TypographyInput): Resolution {
     role = 'header'
   } else if (info.lineHeight === 'squished') {
     role = 'label'
-  } else if (info.lineHeight === 'default') {
-    if (context.singleLine && nearNamesMatch(context, 'labelControls')) {
-      // ADR-0027: label is for single-line functional text (decided
-      // 2026-11-12 to apply it without asking).
-      role = 'label'
-      remarks.push(
-        'single-line text inside a control takes label, not body (ADR-0027)',
-      )
-    } else {
-      role = 'body'
-    }
   } else {
-    role = context.singleLine ? 'label' : 'body'
-    notes.push(
-      `no line height variable, so ${role} is chosen because the text is ${context.singleLine ? 'on one line' : 'on several lines'}`,
-    )
+    const choice = labelOrBody(context)
+    role = choice.role
+    if (info.lineHeight === 'default') {
+      if (choice.remark) remarks.push(choice.remark)
+    } else {
+      notes.push(
+        `no line height variable, so ${role} is chosen because ${choice.because}`,
+      )
+    }
   }
 
   // Step. Where no EDS Beta step fits, the text is No equivalent with a
