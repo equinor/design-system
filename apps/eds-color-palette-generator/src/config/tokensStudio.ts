@@ -7,6 +7,9 @@
  * chroma parameters, the tone → hue mapping per scheme, and the semantic
  * layer's alias table. The data visualisation colours come from the
  * TypeScript export of the same pull (`ts/`), which holds them as sRGB hex.
+ * The inputs of the categorical formula (the base colours, weights and chroma
+ * reductions) come from the raw sets, so `/dataviz` can compute the ramps
+ * from them and try other inputs.
  *
  * No colour value is typed here. To change one, change it in Tokens Studio;
  * the next release pull updates the JSON and this module follows.
@@ -18,6 +21,9 @@ import { theme as darkTheme } from '../../../../packages/eds-tokens/src/tokens/t
 import schemeLightJson from '../../../../packages/eds-tokens/src/tokens/raw/scheme/light.json'
 import schemeDarkJson from '../../../../packages/eds-tokens/src/tokens/raw/scheme/dark.json'
 import semanticJson from '../../../../packages/eds-tokens/src/tokens/raw/semantic.json'
+import datavizInputJson from '../../../../packages/eds-tokens/src/tokens/raw/input/dataviz.json'
+import colourLightJson from '../../../../packages/eds-tokens/src/tokens/raw/color/light.json'
+import colourDarkJson from '../../../../packages/eds-tokens/src/tokens/raw/color/dark.json'
 
 export type Scheme = 'light' | 'dark'
 
@@ -219,6 +225,128 @@ export const TS_DATAVIZ: Record<Scheme, Record<string, string>> = {
   light: datavizValues(lightTheme.dataVisualization),
   dark: datavizValues(darkTheme.dataVisualization),
 }
+
+/* ------------------------------------------------------------------ */
+/*  Categorical formula inputs (input/dataviz, color/light, color/dark) */
+/* ------------------------------------------------------------------ */
+
+/** The categorical steps that Tokens Studio computes from step 3. */
+export const DATAVIZ_FORMULA_STEPS = [1, 2, 4, 5] as const
+
+export type DatavizFormulaStep = (typeof DATAVIZ_FORMULA_STEPS)[number]
+
+export type DatavizFormulaInputs = {
+  /** The base colour (step 3) of each category as hex, `cat.1` first */
+  bases: string[]
+  /** How far each step moves from the base towards white or black, 0 to 1 */
+  weight: Record<Scheme, Record<DatavizFormulaStep, number>>
+  /**
+   * How much chroma a step loses at full weight, 0 to 1, for the background
+   * side (steps 1 and 2) and the contrast side (steps 4 and 5)
+   */
+  chromaReduction: Record<Scheme, { background: number; contrast: number }>
+}
+
+const datavizInputTree = subtree(datavizInputJson as TokenTree, [
+  'input',
+  'dataviz',
+])
+
+function datavizBases(colourJson: unknown, scheme: Scheme): string[] {
+  const cat = subtree(colourJson as TokenTree, [scheme, 'dataviz', 'cat'])
+  return Object.keys(cat)
+    .filter((key) => !key.startsWith('$'))
+    .sort((a, b) => Number(a) - Number(b))
+    .map((key) => {
+      const leaf = subtree(cat, [key, '3']) as unknown as TokenLeaf
+      return String(leaf.$value).toLowerCase()
+    })
+}
+
+/** The step 3 hex of each category, per scheme, as set in Tokens Studio. */
+export const TS_DATAVIZ_BASES: Record<Scheme, string[]> = {
+  light: datavizBases(colourLightJson, 'light'),
+  dark: datavizBases(colourDarkJson, 'dark'),
+}
+
+/**
+ * The inputs of the categorical formula in Tokens Studio. Steps 1, 2, 4 and 5
+ * of each category are `set_chroma(set_lightness(step 3, L'), C')`, where L'
+ * moves the base lightness towards white (`L + w × (1 − L)`) or black
+ * (`L × (1 − w)`) by the step's weight w, and C' is the base chroma times
+ * `1 − ρ × w` for the side's chroma reduction ρ. In light, steps 1 and 2 move
+ * towards white and steps 4 and 5 towards black; dark is the other way round.
+ * The base colours are the same in both schemes, and the formula reads the
+ * lightness and chroma from the light base (`foundation/dataviz`), so one
+ * list stands for both.
+ */
+export const TS_DATAVIZ_FORMULA: DatavizFormulaInputs = {
+  bases: TS_DATAVIZ_BASES.light,
+  weight: {
+    light: Object.fromEntries(
+      DATAVIZ_FORMULA_STEPS.map((step) => [
+        step,
+        numberAt(datavizInputTree, ['weight', 'light', String(step)]),
+      ]),
+    ) as Record<DatavizFormulaStep, number>,
+    dark: Object.fromEntries(
+      DATAVIZ_FORMULA_STEPS.map((step) => [
+        step,
+        numberAt(datavizInputTree, ['weight', 'dark', String(step)]),
+      ]),
+    ) as Record<DatavizFormulaStep, number>,
+  },
+  chromaReduction: {
+    light: {
+      background: numberAt(datavizInputTree, [
+        'chroma-reduction',
+        'light',
+        'background',
+      ]),
+      contrast: numberAt(datavizInputTree, [
+        'chroma-reduction',
+        'light',
+        'contrast',
+      ]),
+    },
+    dark: {
+      background: numberAt(datavizInputTree, [
+        'chroma-reduction',
+        'dark',
+        'background',
+      ]),
+      contrast: numberAt(datavizInputTree, [
+        'chroma-reduction',
+        'dark',
+        'contrast',
+      ]),
+    },
+  },
+}
+
+/**
+ * The formula text of a categorical step in Tokens Studio, keyed
+ * `<scheme> <category>.<step>`, so a test can confirm the app computes the
+ * same formula.
+ */
+export const TS_DATAVIZ_FORMULA_TEXT: Record<string, string> =
+  Object.fromEntries(
+    SCHEMES.flatMap((scheme) => {
+      const json = scheme === 'light' ? colourLightJson : colourDarkJson
+      const cat = subtree(json as TokenTree, [scheme, 'dataviz', 'cat'])
+      return Object.keys(cat)
+        .filter((key) => !key.startsWith('$'))
+        .flatMap((category) =>
+          DATAVIZ_FORMULA_STEPS.map((step) => {
+            const leaf = subtree(cat, [
+              category,
+              String(step),
+            ]) as unknown as TokenLeaf
+            return [`${scheme} ${category}.${step}`, String(leaf.$value)]
+          }),
+        )
+    }),
+  )
 
 /* ------------------------------------------------------------------ */
 /*  Semantic layer (semantic.json)                                     */

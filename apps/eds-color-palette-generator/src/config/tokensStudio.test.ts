@@ -8,6 +8,9 @@ import {
   STEP_COUNT,
   TONES,
   TS_DATAVIZ,
+  TS_DATAVIZ_BASES,
+  TS_DATAVIZ_FORMULA,
+  DATAVIZ_FORMULA_STEPS,
   TS_GAUSSIAN,
   TS_HUES,
   TS_SCALE,
@@ -341,6 +344,53 @@ describe('TS_DATAVIZ', () => {
           deltaE(colour, mapped, 'OK'),
           `${scheme} ${path}: read ${colour}, CSS export ${expected} → ${mapped}`,
         ).toBeLessThan(0.005)
+      }
+    }
+  })
+})
+
+describe('TS_DATAVIZ_FORMULA', () => {
+  it('reads one base colour per categorical colour in the export', () => {
+    const categories = new Set(
+      Object.keys(TS_DATAVIZ.light)
+        .filter((path) => path.startsWith('dataviz.cat.'))
+        .map((path) => path.split('.')[2]),
+    )
+    expect(TS_DATAVIZ_FORMULA.bases).toHaveLength(categories.size)
+    expect(TS_DATAVIZ_FORMULA.bases.length).toBeGreaterThan(0)
+  })
+
+  // The formula reads lightness and chroma from the light base for both
+  // schemes (foundation/dataviz), so one list of bases has to serve both.
+  it('has the same base colours in both schemes', () => {
+    expect(TS_DATAVIZ_BASES.dark).toEqual(TS_DATAVIZ_BASES.light)
+  })
+
+  it('reads each base as the step 3 hex of the export', () => {
+    TS_DATAVIZ_FORMULA.bases.forEach((base, i) => {
+      expect(base).toMatch(/^#[0-9a-f]{6}$/)
+      for (const scheme of SCHEMES) {
+        expect(TS_DATAVIZ[scheme][`dataviz.cat.${i + 1}.3`]).toBe(base)
+      }
+    })
+  })
+
+  it('reads a weight between 0 and 1 for every computed step and scheme', () => {
+    for (const scheme of SCHEMES) {
+      for (const step of DATAVIZ_FORMULA_STEPS) {
+        const weight = TS_DATAVIZ_FORMULA.weight[scheme][step]
+        expect(weight).toBeGreaterThanOrEqual(0)
+        expect(weight).toBeLessThanOrEqual(1)
+      }
+    }
+  })
+
+  it('reads both chroma reductions between 0 and 1 per scheme', () => {
+    for (const scheme of SCHEMES) {
+      for (const side of ['background', 'contrast'] as const) {
+        const reduction = TS_DATAVIZ_FORMULA.chromaReduction[scheme][side]
+        expect(reduction).toBeGreaterThanOrEqual(0)
+        expect(reduction).toBeLessThanOrEqual(1)
       }
     }
   })
