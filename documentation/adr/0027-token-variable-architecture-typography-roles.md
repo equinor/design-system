@@ -111,6 +111,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
   ┌────────────────────────────────────────────────────────────────────┐
   │ Figma text-style layer  header/* · label/*/{default,medium,bold}    │
   │                         · body/*/{default,bold}                     │
+  │                         · mono/{md,lg}/{default,bold}               │
   │   binds SEMANTIC font-size · line-height · font-weight · font-family│
   └───────────────┬────────────────────────────────────────────────────┘
                   │ one-way ▼
@@ -119,7 +120,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
   │   spacing/{none, 4xs … 9xl}                                         │
   │   corner-radius/{none, rounded, rounded-outer, pill}                │
   │   typography/{header,label,body}/{size}/{font-size,line-height}     │
-  │   font-family/{header,ui} · font-weight/{normal,medium,bold}        │
+  │   font-family/{header,ui,mono} · font-weight/{normal,medium,bold}   │
   │   (colour and elevation: separate records)                          │
   │   flat 1:1 aliases, no logic                                        │
   └───────────────┬────────────────────────────────────────────────────┘
@@ -128,13 +129,13 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
   │ MAPPING (mode-bearing, HIDDEN, never consumed directly)             │
   │   Density [Compact · Comfortable · Relaxed]                         │
   │     density/{spacing,corner-radius,typography}/…   step-shift       │
-  │   Font [single mode]  family/{header,ui} · weight/{…}               │
+  │   Font [single mode]  family/{header,ui,mono} · weight/{…}          │
   └───────────────┬────────────────────────────────────────────────────┘
                   │ one-way ▼  (each group → primitives only)
   ┌───────────────┴────────────────────────────────────────────────────┐
   │ PRIMITIVE (raw values, no modes)                                    │
   │   spacing · type-scale (inter, equinor) · lineheight-scale          │
-  │   weight-scale · font-family (inter, equinor)                       │
+  │   weight-scale · font-family (inter, equinor, commitmono)           │
   └────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -146,9 +147,9 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 
 4. **Mapping collections (mode-bearing, hidden):**
    - **Density** [`Compact` · `Comfortable` · `Relaxed`]: `density/spacing/*`, `density/corner-radius/*`, `density/typography/{header,label,body}/{size}/{font-size,line-height}`. Density is set once per surface. Each mode shifts which primitive a token references: `Compact` uses the font-size/line-height pair of the next smaller size on the comfortable scale, `Relaxed` the pair of the next larger size. At the ends of a role's range the pair comes from the primitive steps just beyond it: compact `header/xs` is 10/12 and relaxed `header/4xl` is 36/44. As a result one px font size has the same line-height in every mode for `header` and `body` (in `header`, 16px is 16/20 in every mode; in `body`, 16/28). `label` keeps the former `ui` ramp unchanged, which has one exception: compact `label/sm` is 10/12, while comfortable `label/xs` is 10/16. Spacing and corner-radius shift one step on the spacing primitives. The three domain groups never reference each other, and each aliases only primitives, with two exceptions in corner-radius: `rounded-outer` references `density/corner-radius/rounded` plus `primitives/spacing/6`, the one reference exception in point 1, and `pill` is a raw 9999px instead of an alias.
-   - **Font** [single mode]: `family/header` → Equinor, `family/ui` → Inter, `weight/{normal,medium,bold}`.
+   - **Font** [single mode]: `family/header` → Equinor, `family/ui` → Inter, `family/mono` → Commit Mono, `weight/{normal,medium,bold}`.
 
-5. **The primitive layer is the single source of truth:** the spacing scale, the type scale (`inter`, `equinor`), the line-height scale (`lineheight-scale`, steps 100–1200, where 1200 = 44px was added for the largest relaxed sizes), the weight scale (`weight-scale`: normal 400, medium 500, bold 700) and the font families. No modes.
+5. **The primitive layer is the single source of truth:** the spacing scale, the type scale (`inter`, `equinor`), the line-height scale (`lineheight-scale`, steps 100–1200, where 1200 = 44px was added for the largest relaxed sizes), the weight scale (`weight-scale`: normal 400, medium 500, bold 700) and the font families (`equinor`, `inter`, `commitmono`). No modes.
 
 6. **Three typography roles.** Comfortable values below; compact and relaxed follow the step-shift in point 4. Tokens Studio has the values for all three modes.
    - **`header`**, Equinor, `xs`–`4xl`, for titles. Line-heights are looser than the shared ladder's Inter pairing, so Equinor does not clip:
@@ -172,9 +173,10 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
    - `header/*` → `font-weight/medium` (500) at every size. One weight at every size replaces ADR-0007's header weight that varied by step.
    - `label/*` → `default` (`font-weight/normal`, 400), `medium` (`font-weight/medium`, 500, the former `bolder`) and `bold` (`font-weight/bold`, 700).
    - `body/*` → `default` (400) and `bold` (700).
+   - `mono/{md,lg}` → `default` (400) and `bold` (700). Monospace is a family on the `label` steps, not a fourth role: these styles compose the `label/md` and `label/lg` font-size and line-height with `font-family/mono` (Commit Mono), for figures that line up in columns and for codes and IDs. They follow `label` in every density, so there is no `typography/mono` group.
    - No `label-bold` or per-step weight group exists, and adding one is the anti-pattern this rule forbids.
 
-8. **Text styles.** 47 styles: `header/{xs…4xl}` (8), `label/{xs…5xl}/{default,medium,bold}` (27), `body/{sm…3xl}/{default,bold}` (12). Tokens Studio has no typography composites, so the text styles are maintained in the Figma file and bind only semantic variables: font size, line-height, weight and family (`font-family/header` or `font-family/ui`). Variables are synced from Tokens Studio, which stays canonical for every value. The Figma text styles, composed as point 7 describes, are the reference for typography on every platform: the web implements them in its element and component CSS ([ADR-0029](./0029-typography-approach-for-eds-2-web.md)), and React Native in the Typography component in `packages/eds-mobile-components`.
+8. **Text styles.** 51 styles: `header/{xs…4xl}` (8), `label/{xs…5xl}/{default,medium,bold}` (27), `body/{sm…3xl}/{default,bold}` (12), `mono/{md,lg}/{default,bold}` (4). Tokens Studio has no typography composites, so the text styles are maintained in the Figma file and bind only semantic variables: font size, line-height, weight and family (`font-family/header`, `font-family/ui` or `font-family/mono`). Variables are synced from Tokens Studio, which stays canonical for every value. The Figma text styles, composed as point 7 describes, are the reference for typography on every platform: the web implements them in its element and component CSS ([ADR-0029](./0029-typography-approach-for-eds-2-web.md)), and React Native in the Typography component in `packages/eds-mobile-components`.
 
 9. **Ownership.** Design owns the variable structure (primitive, mapping, semantic) and the text-style layer, including body leading, which is now a token. This replaces ADR-0007's statement that the body 1.5 leading is code-owned.
 
@@ -187,7 +189,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - `corner-radius/*` aliases spacing primitives, except `rounded-outer` and `pill` (point 4).
 - **Full reference chains for the font axis:**
   - **Weight:** `primitives/weight-scale/medium` (500) → `font/weight/medium` → `font-weight/medium`. Likewise `normal` (400) and `bold` (700). Only the semantic token carries the `font-weight/*` spelling.
-  - **Family:** `primitives/font-family/equinor` → `font/family/header` → `font-family/header`, and `primitives/font-family/inter` → `font/family/ui` → `font-family/ui`. `ui` names the Inter family, which both `label` and `body` use; it is no longer a role.
+  - **Family:** `primitives/font-family/equinor` → `font/family/header` → `font-family/header`, and `primitives/font-family/inter` → `font/family/ui` → `font-family/ui`, and `primitives/font-family/commitmono` → `font/family/mono` → `font-family/mono`. `ui` names the Inter family, which both `label` and `body` use; it is no longer a role.
 - **One spelling per concept.** The Equinor role is `header` everywhere: `typography/header/*`, `density/typography/header/*`, `font-family/header` and the `header/*` text styles. `heading` is not used.
 - **Colour uses US spelling** (`color`) in every variable path and output name.
 
@@ -211,6 +213,10 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 - After each Tokens Studio → Figma sync, the Figma typography variables are compared with Tokens Studio, and every text style is checked to bind only semantic variables and to resolve to the expected values in all three density modes.
 - Tests or code review check that the web element CSS (ADR-0029) and the React Native Typography component use the weight point 7 prescribes for each role, so the implementations stay in step with the Figma text styles.
 - The duplicate-name check on the built CSS ([ADR-0028](./0028-token-code-output-architecture-typography-roles.md), Confirmation) runs on each release and fails it if a new `label` or `body` name collides with an existing one.
+
+## Amendments
+
+- 2026-11-26: Commit Mono is added as a third font family, for figures that line up in columns and for codes and IDs ([#5786](https://github.com/equinor/design-system/issues/5786)). Point 4 adds `family/mono` to the Font collection, point 5 the `commitmono` primitive, point 7 the weights of the `mono/*` text styles and point 8 the four `mono/{md,lg}/{default,bold}` styles, which take the total from 47 to 51. The styles use the `label` size and line-height tokens, so the three roles and their scales are unchanged ([#5799](https://github.com/equinor/design-system/issues/5799)).
 
 ## Related
 

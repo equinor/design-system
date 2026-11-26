@@ -15,8 +15,8 @@ Figma or in the browser, the page is stale, so please say so rather than working
 
 {/* GEN:token-reference BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
 
-**51 tokens.** 46 size and line-height tokens, which have one value per
-density, and 5 family and weight tokens, which have one value everywhere. The
+**52 tokens.** 46 size and line-height tokens, which have one value per
+density, and 6 family and weight tokens, which have one value everywhere. The
 **Token** column is the name you pick in Figma and the **CSS custom property** column is the same
 token in code. Both come from the token definition itself, so they cannot drift apart. The
 **Comfortable** column is what you get with no `data-density` attribute set.
@@ -90,15 +90,17 @@ token in code. Both come from the token definition itself, so they cannot drift 
 
 ## Family and weight
 
-These do not change with density.
+These do not change with density. A family resolves to its typeface followed by a generic family,
+which the browser uses when the font has not loaded.
 
-| Token                | CSS custom property        | Value   |
-| -------------------- | -------------------------- | ------- |
-| `font-family.header` | `--eds-font-family-header` | Equinor |
-| `font-family.ui`     | `--eds-font-family-ui`     | Inter   |
-| `font-weight.normal` | `--eds-font-weight-normal` | 400     |
-| `font-weight.medium` | `--eds-font-weight-medium` | 500     |
-| `font-weight.bold`   | `--eds-font-weight-bold`   | 700     |
+| Token                | CSS custom property        | TypeScript          | Value                 |
+| -------------------- | -------------------------- | ------------------- | --------------------- |
+| `font-family.header` | `--eds-font-family-header` | `fontFamily.header` | Equinor, sans-serif   |
+| `font-family.ui`     | `--eds-font-family-ui`     | `fontFamily.ui`     | Inter, sans-serif     |
+| `font-family.mono`   | `--eds-font-family-mono`   | `fontFamily.mono`   | CommitMono, monospace |
+| `font-weight.normal` | `--eds-font-weight-normal` | `fontWeight.normal` | 400                   |
+| `font-weight.medium` | `--eds-font-weight-medium` | `fontWeight.medium` | 500                   |
+| `font-weight.bold`   | `--eds-font-weight-bold`   | `fontWeight.bold`   | 700                   |
 
 ## In TypeScript
 
@@ -114,10 +116,12 @@ theme.typography.header.twoXl.lineHeight // 32
 theme.fontWeight.medium // 500
 ```
 
-The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy
+The `next/` paths are temporary for the beta line. Three differences from the CSS form, all easy
 to miss:
 
 - **The values are unitless numbers, not lengths.** `14`, not `14px`. Add the unit yourself.
+- **A family is the typeface alone.** `theme.fontFamily.mono` is `'CommitMono'`, where
+  the CSS custom property is `CommitMono, monospace`. Add the generic family yourself.
 - **The density is part of the file name.** There is no attribute for an object to read, so each
   density has its own file, and you pick one:
 

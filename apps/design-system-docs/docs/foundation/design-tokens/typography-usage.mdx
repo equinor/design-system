@@ -2,7 +2,7 @@
 title: Using typography
 hide_title: true
 sidebar_label: Using typography
-description: Which role and step to use for each case, how to build hierarchy, which header step each heading level takes, and common mistakes.
+description: Which role and step to use for each case, how to set figures and codes in Commit Mono, how to build hierarchy, which header step each heading level takes, and common mistakes.
 ---
 
 import { DensitySwitch } from '@site/src/components/tokens/DensitySwitch'
@@ -16,7 +16,8 @@ The rows are sorted by role, and within a role by
 [the groups of steps](./typography.mdx#groups-of-steps) on the overview. Use the page-layout groups
 on dashboards, overview pages and front pages. If your case is not here, ask whether the text wraps
 to find the role, and the nearest row in that role is usually right. Headers are always `medium`,
-and a `label` or `body` row without a weight uses `normal`.
+and a `label` or `body` row without a weight uses `normal`. A row that names Commit Mono sets the
+label step in `font-family.mono`, as [figures and codes](#figures-and-codes) shows.
 
 | You are setting                                                                                                   | Use                                   | Why                                                                    |
 | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------- |
@@ -44,6 +45,8 @@ and a `label` or `body` row without a weight uses `normal`.
 | an avatar's metadata                                                                                              | `label.xs`                            | one step below the name beside the avatar                              |
 | a dialog title                                                                                                    | `label.lg`, `medium`                  | the largest step inside components, for the one title a dialog has     |
 | a table cell                                                                                                      | `label.md`                            | and Compact density for a dense table, rather than a smaller step      |
+| figures that line up in a column, such as the values in a numeric table cell                                      | `label.md`, Commit Mono               | every character has the same width, so the digits of each row align    |
+| a code or an ID, such as a tag number                                                                             | `label.md`, Commit Mono               | readers compare it one character at a time                             |
 | a chart label, or a caption of one line                                                                           | `label.sm`                            | short and functional, even when it sits under running text             |
 | metadata, such as a date or a count                                                                               | `label.sm`                            | with `text.secondary` for colour, rather than a smaller step           |
 | **Labels in the page layout**                                                                                     |                                       |                                                                        |
@@ -66,7 +69,9 @@ and a `label` or `body` row without a weight uses `normal`.
 | running text on a display read from a distance                                                                    | `body.2xl` or `body.3xl`              | it wraps, and it is read from further away than a desk screen          |
 
 Key figures can use Inter's tabular figures, where every digit has the same width, so a value that
-updates does not shift sideways.
+updates does not shift sideways. Tabular figures give the digits one width and leave letters at
+their own widths. When a column of values has to line up, or a code is read one character at a time,
+use Commit Mono, which gives every character one width.
 
 Here is an overview page set with rows from the table: the app name in `label.xl`, the page title
 in `header.4xl`, the ingress in `body.xl`, key figures in `label.3xl` with tabular figures and
@@ -96,6 +101,23 @@ height from `label.sm`. The second sets only the font size, so it inherits the l
 running text. The dashed outline shows the line box of each caption:
 
 <StoryCanvas of="Typography/AlwaysSetThePair" showLink />
+
+## Figures and codes
+
+Commit Mono has no size tokens of its own. Set `--eds-font-family-mono` together with the size and
+line height of the label step the text sits among:
+
+```css
+.production-value {
+  font-family: var(--eds-font-family-mono);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  font-weight: var(--eds-font-weight-normal);
+}
+```
+
+A table cell in `label.md` sets its figures in `label.md` as well, so the row keeps one line height.
+The Figma text styles are `mono/md` and `mono/lg`, in `default` and `bold`.
 
 ## Building hierarchy
 
@@ -197,8 +219,8 @@ the eye jump back too often, and longer lines make it hard to find the start of 
 
 These look right on screen, which is why they get through.
 
-- **Binding the family one layer too low.** In Figma, bind `font-family.ui` or
-  `font-family.header`, not `family/ui` from the hidden font collection. The value is the same
+- **Binding the family one layer too low.** In Figma, bind `font-family.ui`, `font-family.header`
+  or `font-family.mono`, not `family/ui` from the hidden font collection. The value is the same
   today, but the hidden layer is internal and can change without notice.
 - **Binding line height to a spacing token.** Line heights resolve to the same values as spacing, so
   a spacing token in the line-height field looks correct, but it gives the wrong line height as
@@ -246,7 +268,8 @@ These look right on screen, which is why they get through.
   eyebrow (the small category text above a title). There is no overline style
 - Pick a smaller step to fit a dense view. That reimplements Compact and drifts from every other
   dense view in the product
-- Mix typefaces within one piece of UI. Equinor is for headers, Inter for everything else
+- Mix typefaces within one piece of text. Equinor is for headers, Commit Mono for figures and codes
+  that have to line up, and Inter for everything else
 - Set font weights by number. Use the three weight tokens
 
 :::

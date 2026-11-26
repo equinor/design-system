@@ -12,6 +12,11 @@ export type TypeScaleProps = {
    * token source, so the specimen cannot show a step that does not exist or miss one that does.
    */
   steps: string[]
+  /**
+   * Sets the steps in another family than the role's own. `mono` is the `mono/*` text styles: label
+   * steps in Commit Mono, which has no role or scale of its own.
+   */
+  family?: 'mono'
 }
 
 /** Family and default weight per role, as ADR-0027 composes the text styles. */
@@ -33,6 +38,9 @@ const SAMPLE: Record<TypeRole, string> = {
   label: 'Pipeline pressure',
   body: 'The north manifold is due for inspection. Two valves showed wear at the last visit, so they are first on the list.',
 }
+
+/** Figures and a code, the text Commit Mono is for. */
+const MONO_SAMPLE = 'PT-4021 182.0282 Sm3'
 
 /** Attributes that change what a token resolves to. */
 const WATCHED = ['data-theme', 'data-color-scheme', 'data-density']
@@ -84,7 +92,13 @@ function useApplied(ref: React.RefObject<HTMLElement | null>) {
   return applied
 }
 
-function Step({ role, step }: { role: TypeRole; step: string }) {
+type StepProps = {
+  role: TypeRole
+  step: string
+  family?: TypeScaleProps['family']
+}
+
+function Step({ role, step, family }: StepProps) {
   const sample = useRef<HTMLSpanElement>(null)
   const applied = useApplied(sample)
   const name = `typography.${role}.${step}`
@@ -101,13 +115,13 @@ function Step({ role, step }: { role: TypeRole; step: string }) {
         ref={sample}
         className="docs-type-scale__sample"
         style={{
-          fontFamily: cssVar(FAMILY[role]),
+          fontFamily: cssVar(family ? `font-family.${family}` : FAMILY[role]),
           fontWeight: cssVar(WEIGHT[role]),
           fontSize: cssVar(`${name}.font-size`),
           lineHeight: cssVar(`${name}.line-height`),
         }}
       >
-        {SAMPLE[role]}
+        {family === 'mono' ? MONO_SAMPLE : SAMPLE[role]}
       </span>
     </div>
   )
@@ -120,11 +134,11 @@ function Step({ role, step }: { role: TypeRole; step: string }) {
  * The 2.0.0-beta `TypeSpecimen` stays as it is, because the frozen 2.0.0-beta typography page
  * imports it and its token names no longer exist in the current set.
  */
-export function TypeScale({ role, steps }: TypeScaleProps) {
+export function TypeScale({ role, steps, family }: TypeScaleProps) {
   return (
     <div className="docs-type-scale" data-role={role}>
       {steps.map((step) => (
-        <Step key={step} role={role} step={step} />
+        <Step key={step} role={role} step={step} family={family} />
       ))}
     </div>
   )
