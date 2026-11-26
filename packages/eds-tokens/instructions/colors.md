@@ -93,6 +93,8 @@ Measured that way, every text and icon token meets the minimum in both schemes a
 
 WCAG 1.4.11 asks for 3:1 only on what identifies a control or its state. `background.interactive.neutral.muted.default` resolves to the same colour as `background.canvas` in both schemes, because it is the resting state of a ghost control, which its label identifies. It does not need 3:1, so do not swap `muted` for `emphasis` to raise it.
 
+The border of a text field, `border.interactive.neutral.muted.*` and `border.interactive.danger.muted.*` in the error state, stays below 3:1 against `background.input` as well. The label, description, placeholder or an icon inside the field identifies it, and an error icon marks the error state, so the border does not need 3:1. Do not swap it for `emphasis`. A field that shows none of these has nothing that identifies it, so do not build one.
+
 On any other pairing, check the two colours yourself, in both schemes and every state, and report both the ratio and the Lc. A token name alone does not guarantee contrast. See [Accessibility § Colour](https://eds.equinor.com/docs/Next/foundation/accessibility/#colour) and [Usage § Foreground pairing](https://eds.equinor.com/docs/Next/foundation/colour/usage/#foreground-pairing).
 
 ## Colour schemes

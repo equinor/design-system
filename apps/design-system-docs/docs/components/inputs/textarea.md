@@ -85,6 +85,8 @@ Text area adapts to density modes via `data-density` attribute. Spacious mode is
 
 Text area handles accessibility automatically by connecting labels, descriptions, and helper messages via proper ARIA attributes.
 
+The field's border is light and stays below the 3:1 contrast that WCAG 2.1 asks for on a control's boundary. The label is what shows people that there is a field to fill in, and in the error state the error icon inside the field marks the error. See [Accessibility § Colour](../../foundation/accessibility.md#colour).
+
 **Keyboard support:**
 
 - **Tab**: Move focus to and from the field
