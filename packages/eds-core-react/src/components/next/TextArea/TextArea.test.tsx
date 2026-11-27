@@ -91,6 +91,13 @@ describe('TextArea (next)', () => {
       expect(screen.getByText('3')).toBeInTheDocument()
     })
 
+    it('sets no legacy typography attributes on the count', () => {
+      render(<TextArea showCharacterCount defaultValue="hello" />)
+      const count = screen.getByText('5')
+      expect(count).not.toHaveAttribute('data-font-family')
+      expect(count).not.toHaveAttribute('data-font-size')
+    })
+
     it('does not show char count when showCharacterCount is not set', () => {
       render(<TextArea label="Label" defaultValue="hello" />)
       expect(screen.queryByText('5')).not.toBeInTheDocument()

@@ -1,6 +1,6 @@
 @layer eds-components {
   .eds-text-area {
-    /* No gap, as in Figma: the label grows to fill the row (Field) */
+    /* No gap, as in Figma: the label grows to fill the row (see field.css) */
     & .label-row {
       display: flex;
       align-items: center;
@@ -9,8 +9,8 @@
 
       /* The small icon Button (4px + 16px + 4px) is taller than the label
          line. A negative margin of half the difference keeps the row at the
-         label line height, as the 20px icon frame in Figma does. */
-      & > button,
+         label line height, as the 20px icon frame in Figma does. The height
+         repeats the small icon-only Button in button.css. */
       & > .eds-tooltip-anchor {
         /* Flex, so the tooltip anchor is no taller than the button. As a block
            its line box adds height in compact, where the button is small. */
@@ -59,7 +59,7 @@
       inline-size: 100%;
     }
 
-    /* Follows the helper message colour, including when disabled (Field) */
+    /* Follows the helper message colour, including when disabled (see field.css) */
     & .char-count {
       flex-shrink: 0;
 
