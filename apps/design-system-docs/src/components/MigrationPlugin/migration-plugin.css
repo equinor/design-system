@@ -1,0 +1,41 @@
+/* The guide to the EDS Variable Migration plugin: steps with an image of the
+   plugin window beside the text, and the live demo of the window. Only the
+   Beta docs use these classes, so the 1.1.0 archive is not affected. */
+
+.docs-plugin-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(100%, 20rem);
+  gap: var(--eds-spacing-xl);
+  align-items: start;
+
+  margin-block: var(--eds-spacing-md) var(--eds-spacing-2xl);
+}
+
+.docs-plugin-step__text > :first-child {
+  margin-block-start: 0;
+}
+
+.docs-plugin-step__image {
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+  height: auto;
+}
+
+.docs-plugin-demo {
+  display: block;
+
+  width: 100%;
+  margin-block: var(--eds-spacing-md) var(--eds-spacing-xl);
+  border: 0;
+
+  background: transparent;
+}
+
+/* Below this width the text column gets too narrow, so the image goes under
+   the text. */
+@media (width < 62rem) {
+  .docs-plugin-step {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

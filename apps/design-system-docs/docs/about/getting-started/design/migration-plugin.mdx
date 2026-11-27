@@ -1,0 +1,189 @@
+---
+title: Migrating a Figma file to the EDS Beta tokens
+sidebar_label: Migrating a Figma file
+description: How to move a Figma file from the legacy EDS variables to the EDS Beta tokens with the EDS Variable Migration plugin.
+---
+
+import {
+  PluginStep,
+  PluginWindowDemo,
+} from '@site/src/components/MigrationPlugin/MigrationPlugin'
+
+EDS Variable Migration is a Figma plugin that moves a file from the legacy EDS variables to the EDS
+Beta tokens. The legacy variables come from the deprecated EDS Colours, Spacing and Typography
+libraries, and the EDS Beta tokens from the library **EDS Foundation [EDS Beta]**. The plugin finds
+every property in the file that is bound to a legacy variable and proposes an EDS Beta token for
+each one. When you press Apply, it changes the ones it is sure of. Where the right token depends on
+what a layer does, it asks you first. It notes every change on the layer it changed, so a frame can
+be reverted later.
+
+The plugin changes variables, text styles and modes. It does not swap components, so an instance of
+a legacy library component keeps its legacy values until you swap it to an EDS Beta component. The
+one exception is the legacy Typography component, which the plugin can convert to a text layer with
+an EDS Beta text style. The plugin runs in your file and sends no data anywhere.
+
+This page takes you through a first run. [Statuses and special cases](./migration-plugin-statuses.mdx)
+explains what each status means, and what to do with the values the plugin cannot change by itself.
+
+## Try it on a sample file
+
+The window below is the plugin's own window, running in your browser on a sample file with three
+frames, a main component and a few instances of the legacy Typography component. It works as it does
+in Figma, except that no Figma file changes: Apply marks the values as migrated in the sample, and
+the buttons that act on the canvas, such as Go to, say what they do in Figma. Reload the page to
+start again.
+
+<PluginWindowDemo />
+
+## Find the plugin in Figma
+
+The plugin is published for Equinor, so everyone signed in to Equinor's Figma organisation can run
+it. In a design file, open **Actions** in the toolbar and search for **EDS Variable Migration**. The
+plugin is marked BETA, as the EDS Beta tokens it moves your file to are.
+
+The first time you open it, a short introduction explains what the plugin does and does not do.
+**Settings**, the sliders button in the window's header, opens the introduction again, and has the
+display settings and a dark mode for the window.
+
+## Before you start
+
+- Enable **EDS Foundation [EDS Beta]** in the file under **Assets → Libraries**. The plugin imports
+  the EDS Beta variables and text styles from there.
+- Keep the legacy libraries enabled until you are done, because Revert frame needs them to put the
+  legacy variables back.
+- Try the plugin on a branch of the file or on a copy of a frame first. Every change can be reverted,
+  and a branch also lets you compare the result with the original before anyone else sees it.
+
+## 1. Scan
+
+<PluginStep
+  step="scan"
+  alt="The plugin window before a scan, with the scopes Selection, Page and File and the Scan button."
+>
+
+Choose what to scan and press **Scan**. **Selection** scans the frames you have selected, **Page**
+every frame on the current page, and **File** every page, one at a time. A large file takes a while,
+and you can stop the scan. **Select pages**, beside File, lets you leave out pages such as an
+archive. That choice is kept in the file for everyone who scans it.
+
+While it scans, the plugin marks on the canvas which frame it is reading, and where it finds legacy
+and migrated values.
+
+</PluginStep>
+
+## 2. Read the health
+
+<PluginStep
+  step="health"
+  alt="The window after a scan: the health in per cent, a bar with a count for each status, and the Frames tab below."
+>
+
+The health bar counts every property bound to a variable, the typography of every text and every
+mode set on a layer, and shows how much of it is migrated. Health reaches 100% only when no legacy
+variable is left in the scope. Each colour in the bar is a status:
+
+- **Migrated** already uses the EDS Beta tokens.
+- **Ready** has one clear EDS Beta token, and Apply changes it.
+- **Needs check** depends on what the layer does, for example whether it is interactive, so the
+  plugin asks you.
+- **Manual fix** is a value Figma does not let a plugin change where it is, such as an icon size
+  inside an instance.
+- **No equivalent** has no EDS Beta token. The plugin proposes a stand-in for you to accept or
+  replace.
+- **Inside instances** comes from an instance's main component and changes with it.
+
+The **i** button by the counts explains them in the window, and
+[Statuses and special cases](./migration-plugin-statuses.mdx) explains each one with what to do.
+Below the health, **Frames** lists the frames with the most work left first.
+
+</PluginStep>
+
+## 3. Look through Changes
+
+<PluginStep
+  step="changes"
+  alt="The Changes tab: tabs for Colour, Type, Spacing, Size, Radius, Modes and Typography, status filters, and rows with a legacy variable, an arrow and the EDS Beta token it becomes."
+>
+
+**Changes** lists every legacy variable in the scope with the EDS Beta token it becomes, in tabs by
+kind of value: colour, type, spacing, size, corner radius, modes and the legacy Typography component.
+Each row starts with the number of values that use the legacy variable, and the status filters above
+the rows narrow the list, for example to the values that need a check.
+
+A click on the legacy variable selects its layers in Figma. A click on the target opens a picker
+that works like Figma's variable picker, where you choose another token for every value in the row.
+The arrow at the end of a row opens its values, so you can change one at a time, and the checkboxes
+let you change several at once with the bar at the bottom of the window. An eye on a row means that
+the new colour looks clearly different from the legacy one. The token is right for what the layer
+does, but check how it looks.
+
+The picker never offers to keep a legacy variable, because the aim is a file with none left. To put a
+value off, choose **Decide later**. Apply then leaves it, and it counts as not migrated until you
+choose a token.
+
+</PluginStep>
+
+## 4. Review and apply
+
+<PluginStep
+  step="review"
+  alt="Review with a value that needs a check: the layer, the legacy variable and its proposed EDS Beta token, why it needs a check, and a picker with the proposal at the top."
+>
+
+**Review**, in the footer, goes through the values that need a check one at a time, together with
+the No equivalent values and the values you set to Decide later. For each one, the plugin selects the
+layer, says why it was unsure or what the EDS Beta lacks, and shows its proposal at the top of the
+picker. Confirm the proposal, choose another token, or choose Decide later. A token you choose makes
+the value Ready.
+
+</PluginStep>
+
+<PluginStep
+  step="apply"
+  alt="The window after Apply: a message that says how many values and legacy modes the run changed, the health after the run, and nothing left to apply in the footer."
+>
+
+**Apply** makes every Ready change in the scope, or in one frame when you have it open. A
+confirmation counts what the run will change before anything changes. Apply binds the EDS Beta
+variables, sets the EDS Beta text styles, and sets the new modes on the layers that had the legacy
+ones:
+
+- The legacy density Spacious becomes **comfortable**, and Comfortable becomes **compact**, because
+  the legacy Comfortable was the dense mode.
+- Light and Dark become **light** and **dark**.
+
+A legacy mode is removed once nothing below it uses a legacy variable. While a value below still
+does, the mode stays, and the plugin says what it waits for.
+
+Applying in a main component changes every instance of it in the file, and the confirmation says how
+many there are.
+
+</PluginStep>
+
+## 5. Check the result, and revert if needed
+
+<PluginStep
+  step="revert"
+  alt="An opened frame after Apply, with the confirmation Revert the changes in this frame, which says how many layers get their legacy values back."
+>
+
+Look through the frames after Apply. Small differences in colour and spacing come from the new token
+values, because the EDS Beta tokens do not have the values of the legacy ones.
+[Colour migration](../../../foundation/colour/migration.mdx) explains how the colours changed.
+
+To undo a run straight away, press Ctrl+Z (Cmd+Z on a Mac), and Figma undoes the whole Apply. To go
+back later, open the frame and press **Revert frame**. The plugin puts the legacy variables,
+typography and modes back from the note it left on each layer it changed, and leaves a value someone
+has changed since as it is.
+
+**Export report**, beside the scope, gives a Markdown report and a CSV with the health, what needs a
+check and the gaps in the tokens. The plugin also keeps the latest scan and your choices in the file,
+so the next person who opens it sees where you left off.
+
+</PluginStep>
+
+## Where to get help
+
+Tell the EDS team what does not work, or what the plugin proposes that does not fit your design,
+through the [support channels](../../../support/support.mdx). The report from Export report shows
+the team what the plugin found in your file.
