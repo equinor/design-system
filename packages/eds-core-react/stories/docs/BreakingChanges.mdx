@@ -303,7 +303,7 @@ New composition primitive. Replaces `InputWrapper`, `Label`, the internal `Helpe
 - Removed: `leftAdornmentsProps`, `rightAdornmentsProps`, `leftAdornmentsWidth`, `rightAdornmentsWidth`.
 - `as` is limited to `input` | `textarea` and is internal.
 
-**Markup**: the class names are flat. `.eds-input` is the outer container and the native `<input>` / `<textarea>` carries `.control`. The adornment classes are `adornment`, `item` and `text`, and the error icon is `error-icon`. `className` and `style` land on the container and are merged with `eds-input`. Use `.your-class input` to reach the native element. An error icon renders when `invalid` and the field is neither disabled nor read-only (opt out with `hideErrorIcon`), and `aria-invalid` is set automatically.
+**Markup**: the class names are flat. `.eds-input` is the outer container and the native `<input>` / `<textarea>` carries `.control`. The adornment classes are `adornment`, `item` and `text`, and the error icon is `error-icon`. `className` and `style` land on the container and are merged with `eds-input`. Use `.your-class input` to reach the native element. An error icon renders when `invalid` and the field is neither disabled nor read-only (opt out with `hideErrorIcon`), and `aria-invalid` is set automatically. `Icon` elements passed directly as `startAdornment` or `endAdornment` are sized by the input at `md`, so an `Icon`'s own `size` prop has no effect there.
 
 ## Link
 
