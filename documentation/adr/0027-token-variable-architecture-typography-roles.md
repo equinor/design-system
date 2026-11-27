@@ -216,7 +216,7 @@ Three layers with one reference direction, and a Figma text-style layer on top. 
 
 ## Amendments
 
-- 2026-11-26: Commit Mono is added as a third font family, for figures that line up in columns and for codes and IDs ([#5786](https://github.com/equinor/design-system/issues/5786)). Point 4 adds `family/mono` to the Font collection, point 5 the `commitmono` primitive, point 7 the weights of the `mono/*` text styles and point 8 the four `mono/{md,lg}/{default,bold}` styles, which take the total from 47 to 51. The styles use the `label` size and line-height tokens, so the three roles and their scales are unchanged ([#5799](https://github.com/equinor/design-system/issues/5799)).
+- 2026-11-26: Commit Mono is added as a third font family, for figures that line up in columns and for codes and IDs ([#5786](https://github.com/equinor/design-system/issues/5786)). Point 4 adds `family/mono` to the Font collection, point 5 the `commitmono` primitive, point 7 the weights of the `mono/*` text styles and point 8 the four `mono/{md,lg}/{default,bold}` styles, which take the total from 47 to 51. The styles use the `label` size and line-height tokens, so the three roles and their scales are unchanged ([#5964](https://github.com/equinor/design-system/pull/5964)).
 
 ## Related
 
