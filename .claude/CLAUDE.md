@@ -48,10 +48,11 @@ Skills in `.claude/skills/<name>/SKILL.md` are applied automatically when the ta
 
 Configured in `.claude/settings.json`. Scripts live in `.claude/hooks/`.
 
-| Hook             | Event         | Matcher                                             | Purpose                                                                                                                          |
-| ---------------- | ------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `read_hook.js`   | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files                                                                                   |
-| `format_hook.js` | `PostToolUse` | `Edit\|Write`                                       | Runs `eslint --fix` on edited `.ts`/`.tsx`, `stylelint --fix` on `/components/next/` CSS, and `prettier --write` on `.css`/`.md` |
+| Hook              | Event         | Matcher                                             | Purpose                                                                                                                          |
+| ----------------- | ------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `read_hook.js`    | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files                                                                                   |
+| `format_hook.js`  | `PostToolUse` | `Edit\|Write`                                       | Runs `eslint --fix` on edited `.ts`/`.tsx`, `stylelint --fix` on `/components/next/` CSS, and `prettier --write` on `.css`/`.md` |
+| `pr_flow_hook.js` | `PreToolUse`  | `Bash`                                              | Hands the agent the matching part of `PR_REVIEWS.md` when it runs `git push`, `gh pr create`, `gh pr ready` or a review command  |
 
 See [`.claude/README.md`](./README.md) for hook authoring details.
 

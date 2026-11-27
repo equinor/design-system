@@ -16,10 +16,11 @@ Hooks are shell commands that run in response to Claude Code events. They can bl
 
 ## Current Hooks (in this repo)
 
-| Hook             | Event         | Matcher                                             | Purpose                                        |
-| ---------------- | ------------- | --------------------------------------------------- | ---------------------------------------------- |
-| `read_hook.js`   | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files |
-| `format_hook.js` | `PostToolUse` | `Edit\|Write`                                       | Runs ESLint+Prettier auto-fix on edited files  |
+| Hook              | Event         | Matcher                                             | Purpose                                                             |
+| ----------------- | ------------- | --------------------------------------------------- | ------------------------------------------------------------------- |
+| `read_hook.js`    | `PreToolUse`  | `Read\|Grep\|Glob\|Bash\|Edit\|Write\|NotebookEdit` | Blocks access to `.env` and other secret files                      |
+| `format_hook.js`  | `PostToolUse` | `Edit\|Write`                                       | Runs ESLint+Prettier auto-fix on edited files                       |
+| `pr_flow_hook.js` | `PreToolUse`  | `Bash`                                              | Hands the agent the matching part of `PR_REVIEWS.md` on PR commands |
 
 ## Configuration
 
