@@ -214,6 +214,14 @@
     }
   }
 
+  /* Forced colours strip box-shadow, so the focus ring is drawn with the
+   * outline there, outside the field as in Figma */
+  @media (forced-colors: active) {
+    .eds-input:focus-within {
+      outline-offset: var(--_stroke-width);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .eds-input {
       --_transition-duration: 0ms;
