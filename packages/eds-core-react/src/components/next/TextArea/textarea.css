@@ -1,17 +1,29 @@
 @layer eds-components {
   .eds-text-area {
+    /* No gap, as in Figma: the label grows to fill the row (see field.css) */
     & .label-row {
       display: flex;
-      gap: var(--eds-typography-gap-horizontal);
       align-items: center;
       justify-content: space-between;
-
       inline-size: 100%;
 
-      & > button,
+      /* The small icon Button (4px + 16px + 4px) is taller than the label
+         line. A negative margin of half the difference keeps the row at the
+         label line height, as the 20px icon frame in Figma does. The height
+         repeats the small icon-only Button in button.css. */
       & > .eds-tooltip-anchor {
+        /* Flex, so the tooltip anchor is no taller than the button. As a block
+           its line box adds height in compact, where the button is small. */
+        display: flex;
         flex-shrink: 0;
-        margin-block: calc(var(--eds-sizing-icon-xs) / -2);
+        margin-block: calc(
+          (
+              var(--eds-typography-label-md-line-height) -
+                var(--eds-typography-label-sm-line-height) - 2 *
+                var(--eds-spacing-3xs)
+            ) /
+            2
+        );
       }
     }
 
@@ -25,6 +37,11 @@
         overflow: auto;
 
         box-sizing: border-box;
+
+        /* Extend the textarea to the bottom-right corner so the resize
+           handle sits flush */
+        margin-block-end: calc(-1 * var(--eds-spacing-xs));
+        margin-inline-end: calc(-1 * var(--eds-spacing-xs));
         padding-block-end: var(--eds-spacing-xs);
         padding-inline-end: var(--eds-spacing-xs);
 
@@ -33,30 +50,24 @@
       }
     }
 
+    /* The character count is not in Figma. The gap only shows when the
+       helper message runs up to the count. */
     & .helper-row {
       display: flex;
-      gap: var(--eds-typography-gap-horizontal);
+      gap: var(--eds-spacing-xs);
       align-items: baseline;
       inline-size: 100%;
     }
 
+    /* Follows the helper message colour, including when disabled (see field.css) */
     & .char-count {
       flex-shrink: 0;
-      color: var(--eds-color-text-subtle);
+
+      margin-inline-start: auto;
+
+      font-size: var(--eds-typography-label-xs-font-size);
+      line-height: var(--eds-typography-label-xs-line-height);
+      color: var(--_eds-field-helper-color);
     }
-  }
-}
-
-/* Must be outside @layer: [data-font-family] { margin: 0 } in variables.css
-   is unlayered and overrides any margin inside @layer eds-components. */
-.eds-text-area {
-  & .char-count {
-    margin-inline-start: auto;
-  }
-
-  /* Extend textarea to bottom-right corner so the resize handle sits flush. */
-  & textarea.control {
-    margin-block-end: calc(-1 * var(--eds-spacing-xs));
-    margin-inline-end: calc(-1 * var(--eds-spacing-xs));
   }
 }

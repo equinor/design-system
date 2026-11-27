@@ -164,8 +164,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             {showCharacterCount && (
               <span
                 className="char-count"
-                data-font-family="ui"
-                data-font-size="xs"
                 aria-live={
                   maxLength !== undefined && charCount >= maxLength * 0.8
                     ? 'polite'
