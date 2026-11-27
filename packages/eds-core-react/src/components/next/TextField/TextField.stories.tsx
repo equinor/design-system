@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import { StoryFn, Meta } from '@storybook/react-vite'
 import { money } from '@equinor/eds-icons'
 import { TextField } from './TextField'
 import type { TextFieldProps } from './TextField.types'
-import { ExampleLabel, Stack } from './../../../../.storybook/components'
+import { Stack } from './../../../../.storybook/components'
 import { Icon } from '../Icon'
 import page from './TextField.docs.mdx'
 
@@ -415,73 +414,25 @@ WithLabelInfo.parameters = {
   },
 }
 
-export const DensityModes: StoryFn<TextFieldProps> = () => {
-  const [spaciousPassword, setSpaciousPassword] = useState('')
-  const [comfortablePassword, setComfortablePassword] = useState('')
-  const minLength = 8
-
-  const getSpaciousError = () => {
-    if (spaciousPassword.length === 0) return false
-    return spaciousPassword.length < minLength
-  }
-
-  const getComfortableError = () => {
-    if (comfortablePassword.length === 0) return false
-    return comfortablePassword.length < minLength
-  }
-
-  return (
-    <div style={{ display: 'flex', gap: '2rem' }}>
-      <div data-density="spacious" style={{ width: '320px' }}>
-        <ExampleLabel>Spacious</ExampleLabel>
-        <Stack>
-          <TextField
-            label="Email"
-            placeholder="user@example.com"
-            labelInfo="Additional context about this field"
-          />
-          <TextField
-            label="Password"
-            type="password"
-            indicator="(Required)"
-            required
-            placeholder="Enter password"
-            value={spaciousPassword}
-            onChange={(e) => setSpaciousPassword(e.target.value)}
-            invalid={getSpaciousError()}
-            helperMessage="Must be at least 8 characters"
-          />
-        </Stack>
+export const DensityModes: StoryFn<TextFieldProps> = () => (
+  <div style={{ display: 'flex', gap: '2rem' }}>
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
+      <div key={density} data-density={density} style={{ width: '320px' }}>
+        <TextField
+          label={density.charAt(0).toUpperCase() + density.slice(1)}
+          labelInfo="Additional context about this field"
+          placeholder="user@example.com"
+          helperMessage="Helper message"
+        />
       </div>
-      <div data-density="comfortable" style={{ width: '320px' }}>
-        <ExampleLabel>Comfortable</ExampleLabel>
-        <Stack>
-          <TextField
-            label="Email"
-            placeholder="user@example.com"
-            labelInfo="Additional context about this field"
-          />
-          <TextField
-            label="Password"
-            type="password"
-            indicator="(Required)"
-            required
-            placeholder="Enter password"
-            value={comfortablePassword}
-            onChange={(e) => setComfortablePassword(e.target.value)}
-            invalid={getComfortableError()}
-            helperMessage="Must be at least 8 characters"
-          />
-        </Stack>
-      </div>
-    </div>
-  )
-}
+    ))}
+  </div>
+)
 DensityModes.parameters = {
   docs: {
     description: {
       story:
-        'TextField adapts to density modes via `data-density` attribute. Spacious mode is the default with larger sizing, while comfortable mode provides a more compact layout. Try typing in the password fields to see live validation.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }
@@ -496,7 +447,7 @@ export const FullExample: StoryFn<TextFieldProps> = () => (
     helperMessage="Helper Message"
     labelInfo="This field accepts decimal values for currency amounts."
     startText="NOK"
-    endAdornment={<Icon data={money} size="md" />}
+    endAdornment={<Icon data={money} />}
   />
 )
 FullExample.parameters = {

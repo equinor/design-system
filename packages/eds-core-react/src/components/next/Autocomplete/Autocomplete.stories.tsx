@@ -726,24 +726,15 @@ WithReactHookForm.parameters = {
 
 export const DensityModes: StoryFn = () => (
   <div style={{ display: 'flex', gap: '2rem' }}>
-    <div data-density="spacious" style={{ width: '320px' }}>
-      <h3 style={{ marginBottom: '1rem' }}>Spacious</h3>
-      <Autocomplete
-        label="Element"
-        options={elements}
-        placeholder="Search elements"
-        helperMessage="Default density"
-      />
-    </div>
-    <div data-density="comfortable" style={{ width: '320px' }}>
-      <h3 style={{ marginBottom: '1rem' }}>Comfortable</h3>
-      <Autocomplete
-        label="Element"
-        options={elements}
-        placeholder="Search elements"
-        helperMessage="Compact density"
-      />
-    </div>
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
+      <div key={density} data-density={density} style={{ width: '320px' }}>
+        <Autocomplete
+          label={density.charAt(0).toUpperCase() + density.slice(1)}
+          options={elements}
+          placeholder="Search elements"
+        />
+      </div>
+    ))}
   </div>
 )
 
@@ -751,7 +742,7 @@ DensityModes.parameters = {
   docs: {
     description: {
       story:
-        'Autocomplete adapts to density modes via the `data-density` attribute on a parent element. Spacious is the default; comfortable provides a more compact layout for dense UIs. The dropdown items respond to density as well.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable. The dropdown items follow the density as well.',
     },
   },
 }

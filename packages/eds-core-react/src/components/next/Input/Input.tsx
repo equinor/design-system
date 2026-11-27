@@ -33,41 +33,20 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
       <div
         className={['eds-input', className].filter(Boolean).join(' ')}
         style={style}
-        data-color-appearance={tone}
-        data-font-size="md"
-        data-selectable-space="sm"
-        data-space-proportions="squished"
+        data-tone={tone}
         data-disabled={disabled || undefined}
         data-readonly={readOnly || undefined}
         data-invalid={invalid || undefined}
       >
         {displayErrorIcon && (
-          <span
-            className="error-icon"
-            data-font-size="xs"
-            data-font-family="ui"
-            data-baseline="center"
-          >
+          <span className="error-icon">
             <Icon data={error_filled} size="md" />
           </span>
         )}
         {hasStartAdornment && (
-          <div className="adornment" data-color-appearance="neutral">
-            {startText && (
-              <span
-                className="text"
-                data-font-family="ui"
-                data-font-size="xs"
-                data-baseline="center"
-              >
-                {startText}
-              </span>
-            )}
-            {startAdornment && (
-              <span className="item" data-font-size="xs">
-                {startAdornment}
-              </span>
-            )}
+          <div className="adornment">
+            {startText && <span className="text">{startText}</span>}
+            {startAdornment && <span className="item">{startAdornment}</span>}
           </div>
         )}
         <Component
@@ -76,32 +55,15 @@ export const Input: OverridableComponent<InputProps, HTMLInputElement> =
           disabled={disabled}
           readOnly={readOnly}
           className="control"
-          data-color-appearance="neutral"
-          data-font-family="ui"
-          data-font-size="md"
-          data-line-height="default"
           {...(inputProps as InputHTMLAttributes<
             HTMLInputElement | HTMLTextAreaElement
           >)}
           aria-invalid={invalid || undefined}
         />
         {hasEndAdornment && (
-          <div className="adornment" data-color-appearance="neutral">
-            {endText && (
-              <span
-                className="text"
-                data-font-family="ui"
-                data-font-size="xs"
-                data-baseline="center"
-              >
-                {endText}
-              </span>
-            )}
-            {endAdornment && (
-              <span className="item" data-font-size="xs">
-                {endAdornment}
-              </span>
-            )}
+          <div className="adornment">
+            {endText && <span className="text">{endText}</span>}
+            {endAdornment && <span className="item">{endAdornment}</span>}
           </div>
         )}
       </div>

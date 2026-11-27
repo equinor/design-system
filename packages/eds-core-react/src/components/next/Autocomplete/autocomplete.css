@@ -26,12 +26,15 @@
       color: var(--eds-color-text-disabled);
     }
 
-    /* Square connecting corners, suppress focus ring, and use medium border when dropdown is open */
+    /* Square connecting corners, suppress focus ring, and use the pressed
+     * border of the field's tone when the dropdown is open, as Figma's
+     * State=Active */
     &:has(input[aria-expanded='true']) .eds-input {
+      --_border-color: var(--_border-muted-pressed);
+      --_focus-ring: none;
+
       border-end-start-radius: 0;
       border-end-end-radius: 0;
-      outline-color: var(--eds-color-border-medium);
-      box-shadow: none;
     }
 
     & .eds-menu:popover-open {
