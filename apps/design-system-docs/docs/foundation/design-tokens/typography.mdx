@@ -2,7 +2,7 @@
 title: Typography
 hide_title: true
 sidebar_label: Overview
-description: Typography in EDS has three roles on two typefaces. You pick a role by what the text does and a step by how large it should be, and density adjusts the size for you.
+description: Typography in EDS has three roles on two typefaces, and a monospace typeface for figures and codes. You pick a role by what the text does and a step by how large it should be, and density adjusts the size for you.
 ---
 
 import { TokenAnatomy } from '@site/src/components/tokens/TokenAnatomy'
@@ -47,7 +47,8 @@ the font size, because text without its own line height inherits one from its pa
 ## Three roles
 
 Every piece of text takes one of three roles. Two typefaces cover them: Equinor for headers, and
-Inter for everything else.
+Inter for labels and body text. A third typeface, Commit Mono, sets label text whose characters have
+to line up, as [monospace](#monospace) describes.
 
 {/* GEN:typography-roles BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
 
@@ -128,11 +129,11 @@ Weight is set separately from size. A text style combines a step with one of thr
 
 {/* GEN:typography-weights BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
 
-| Token                | CSS custom property        | Value | Use it for                                                                  |
-| -------------------- | -------------------------- | ----- | --------------------------------------------------------------------------- |
-| `font-weight.normal` | `--eds-font-weight-normal` | 400   | the default for label and body text                                         |
-| `font-weight.medium` | `--eds-font-weight-medium` | 500   | every header, and label text that needs emphasis                            |
-| `font-weight.bold`   | `--eds-font-weight-bold`   | 700   | strong emphasis in label and body text, and `<strong>` and `<b>` on the web |
+| Token                | CSS custom property        | Value | Use it for                                                                        |
+| -------------------- | -------------------------- | ----- | --------------------------------------------------------------------------------- |
+| `font-weight.normal` | `--eds-font-weight-normal` | 400   | the default for label, body and mono text                                         |
+| `font-weight.medium` | `--eds-font-weight-medium` | 500   | every header, and label text that needs emphasis                                  |
+| `font-weight.bold`   | `--eds-font-weight-bold`   | 700   | strong emphasis in label, body and mono text, and `<strong>` and `<b>` on the web |
 
 {/* GEN:typography-weights END */}
 
@@ -149,16 +150,45 @@ Inter weight as Regular.
 
 {/* GEN:typography-families BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
 
-| Token                | CSS custom property        | Typeface | Used by            |
-| -------------------- | -------------------------- | -------- | ------------------ |
-| `font-family.header` | `--eds-font-family-header` | Equinor  | `header`           |
-| `font-family.ui`     | `--eds-font-family-ui`     | Inter    | `label` and `body` |
+| Token                | CSS custom property        | Typeface   | Used by                                                   |
+| -------------------- | -------------------------- | ---------- | --------------------------------------------------------- |
+| `font-family.header` | `--eds-font-family-header` | Equinor    | `header`                                                  |
+| `font-family.ui`     | `--eds-font-family-ui`     | Inter      | `label` and `body`                                        |
+| `font-family.mono`   | `--eds-font-family-mono`   | CommitMono | the `mono/md` and `mono/lg` text styles, on `label` steps |
 
 {/* GEN:typography-families END */}
 
+### Monospace
+
+Commit Mono is a monospaced typeface: every character, whether a letter, a digit or a punctuation
+mark, has the same width. Use it for text that has to line up character by character:
+
+- **Figures in a column**, such as the values in a table of production data, so the digits of every
+  row sit under each other.
+- **Codes and IDs**, such as a tag number, which readers compare one character at a time.
+
+Monospace has no role of its own. Its four text styles set `label` steps in Commit Mono:
+
+{/* GEN:typography-mono BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+| Text style        | Size and line height | Weight   | Comfortable |
+| ----------------- | -------------------- | -------- | ----------- |
+| `mono/md/default` | `label.md`           | `normal` | 14 / 20     |
+| `mono/md/bold`    | `label.md`           | `bold`   | 14 / 20     |
+| `mono/lg/default` | `label.lg`           | `normal` | 16 / 24     |
+| `mono/lg/bold`    | `label.lg`           | `bold`   | 16 / 24     |
+
+{/* GEN:typography-mono END */}
+
+It has no scale of its own because it always sits among label text, such as a figure in a table row
+or a tag number beside its description. It takes the label step of the text around it, so the two
+share a line height and the row keeps one height. It also follows density through the label tokens,
+with no tokens of its own to keep in step. [Figures and codes](./typography-usage.mdx#figures-and-codes)
+on the usage page shows how to set it in CSS.
+
 ### Loading the fonts
 
-The EDS variable font stylesheet loads both Equinor and Inter:
+The EDS variable font stylesheet loads Equinor, Inter and Commit Mono:
 
 ```html
 <link
@@ -167,9 +197,10 @@ The EDS variable font stylesheet loads both Equinor and Inter:
 />
 ```
 
-:::warning `equinor-font.css` does not include Inter
+:::warning `equinor-font.css` does not include Inter or Commit Mono
 The older `equinor-font.css` stylesheet only includes Equinor. With it alone, every `label` and
-`body` style, which is most of an interface, falls back to a generic sans-serif without any error.
+`body` style, which is most of an interface, falls back to a generic sans-serif, and the `mono`
+styles to a generic monospace, without any error.
 :::
 
 ## Density

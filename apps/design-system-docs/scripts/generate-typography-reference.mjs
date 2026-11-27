@@ -100,12 +100,27 @@ const ROLES = {
 }
 
 const WEIGHTS = {
-  normal: 'the default for label and body text',
+  normal: 'the default for label, body and mono text',
   medium: 'every header, and label text that needs emphasis',
-  bold: 'strong emphasis in label and body text, and `<strong>` and `<b>` on the web',
+  bold: 'strong emphasis in label, body and mono text, and `<strong>` and `<b>` on the web',
 }
 
-const FAMILIES = ['font-family.header', 'font-family.ui']
+const FAMILIES = ['font-family.header', 'font-family.ui', 'font-family.mono']
+
+/**
+ * Monospace is a family, not a role: the `mono/*` text styles set label steps in Commit Mono, so
+ * the token source has no `typography.mono` group to read the steps from. The steps and weights are
+ * the Figma text styles `mono/{md,lg}/{default,bold}`, recorded in ADR-0027 points 7 and 8.
+ */
+const MONO = {
+  family: 'font-family.mono',
+  role: 'label',
+  steps: ['md', 'lg'],
+  weights: ['normal', 'bold'],
+}
+
+/** The generic families a CSS font stack may end with. */
+const GENERIC_FAMILIES = ['serif', 'sans-serif', 'monospace']
 
 // --- what the package carries -------------------------------------------------------------------
 
@@ -285,6 +300,13 @@ const fontValue = (name) => {
   return value
 }
 
+/**
+ * A family token resolves to a font stack in CSS, such as `CommitMono, monospace`: the typeface,
+ * then a generic family for when the font does not load. TypeScript carries only the typeface.
+ */
+const typeface = (name) => fontValue(name)?.split(',')[0].trim() ?? null
+const fallback = (name) => fontValue(name)?.split(',').slice(1).join(',').trim()
+
 // --- checks on the model -------------------------------------------------------------------------
 
 for (const role of Object.keys(ROLES)) {
@@ -323,6 +345,35 @@ for (const weight of Object.keys(WEIGHTS)) {
       `font-weight.${weight} has wording in WEIGHTS but is not in the token source`,
     )
   }
+}
+for (const name of FAMILIES) {
+  if (!fontTokens.get(name)) {
+    problems.push(
+      `${name} is listed in FAMILIES but is not in the token source`,
+    )
+    continue
+  }
+  if (!GENERIC_FAMILIES.includes(fallback(name))) {
+    problems.push(
+      `${name} is ${fontValue(name)} in the CSS bundle, which does not end with one generic family`,
+    )
+  }
+}
+if (!fontTokens.get(MONO.family)) {
+  problems.push(
+    `${MONO.family}, the family for mono, is not in the token source`,
+  )
+}
+for (const step of MONO.steps) {
+  if (!typography.has(`${MONO.role}.${step}.font-size`)) {
+    problems.push(
+      `the mono/${step} text styles use typography.${MONO.role}.${step}, which is not in the token source`,
+    )
+  }
+}
+for (const weight of MONO.weights) {
+  if (!WEIGHTS[weight])
+    problems.push(`font-weight.${weight} has no wording in WEIGHTS`)
 }
 
 for (const role of Object.keys(ROLES)) {
@@ -627,7 +678,10 @@ for (const role of Object.keys(ROLES)) {
 }
 for (const name of fontTokens.keys()) {
   const path = tsPath(name)
-  const expected = fontValue(name)
+  // TypeScript has no font stack, so a family is compared with the typeface alone.
+  const expected = name.startsWith('font-family.')
+    ? typeface(name)
+    : fontValue(name)
   const found = tsSemantic.get(path)
   if (String(found) !== String(expected)) {
     problems.push(
@@ -644,7 +698,7 @@ const cell = (role, step, density) => {
   const [size, line] = pair(role, step, density)
   return `${size} / ${line}`
 }
-const familyName = (role) => fontValue(ROLES[role].family)
+const familyName = (role) => typeface(ROLES[role].family)
 const range = (role) => {
   const steps = stepsOf(role)
   return `${code(steps[0])} to ${code(steps.at(-1))}`
@@ -700,8 +754,26 @@ tables['typography-families'] = [
     const roles = Object.keys(ROLES).filter(
       (role) => ROLES[role].family === name,
     )
-    return `| ${code(name)} | ${code(fontTokens.get(name))} | ${fontValue(name)} | ${roles.map(code).join(' and ')} |`
+    const usedBy =
+      name === MONO.family
+        ? `the ${list(MONO.steps.map((step) => code(`mono/${step}`)))} text styles, on ${code(MONO.role)} steps`
+        : roles.map(code).join(' and ')
+    return `| ${code(name)} | ${code(fontTokens.get(name))} | ${typeface(name)} | ${usedBy} |`
   }),
+]
+
+/** Figma calls weight 400 `default` in a text style name, as the overview's note explains. */
+const styleWeight = (weight) => (weight === 'normal' ? 'default' : weight)
+
+tables['typography-mono'] = [
+  '| Text style | Size and line height | Weight | Comfortable |',
+  '| --- | --- | --- | --- |',
+  ...MONO.steps.flatMap((step) =>
+    MONO.weights.map(
+      (weight) =>
+        `| ${code(`mono/${step}/${styleWeight(weight)}`)} | ${code(`${MONO.role}.${step}`)} | ${code(weight)} | ${cell(MONO.role, step, 'comfortable')} |`,
+    ),
+  ),
 ]
 
 const scaleIndices = [
@@ -815,13 +887,16 @@ tables['line-height-ratios'] = [
   ),
 ]
 
+const stepList = (steps) => `[${steps.map((s) => `'${s}'`).join(', ')}]`
+
 for (const role of Object.keys(ROLES)) {
   tables[`specimen-${role}`] = [
-    `<TypeScale role="${role}" steps={[${stepsOf(role)
-      .map((s) => `'${s}'`)
-      .join(', ')}]} />`,
+    `<TypeScale role="${role}" steps={${stepList(stepsOf(role))}} />`,
   ]
 }
+tables['specimen-mono'] = [
+  `<TypeScale role="${MONO.role}" family="mono" steps={${stepList(MONO.steps)}} />`,
+]
 
 const tokenCount = typography.size + fontTokens.size
 const example = {
@@ -855,13 +930,14 @@ tables['token-reference'] = [
   ]),
   '## Family and weight',
   '',
-  'These do not change with density.',
+  'These do not change with density. A family resolves to its typeface followed by a generic family,',
+  'which the browser uses when the font has not loaded.',
   '',
-  '| Token | CSS custom property | Value |',
-  '| --- | --- | --- |',
+  '| Token | CSS custom property | TypeScript | Value |',
+  '| --- | --- | --- | --- |',
   ...[...FAMILIES, ...Object.keys(WEIGHTS).map((w) => `font-weight.${w}`)].map(
     (name) =>
-      `| ${code(name)} | ${code(fontTokens.get(name))} | ${fontValue(name)} |`,
+      `| ${code(name)} | ${code(fontTokens.get(name))} | ${code(tsPath(name))} | ${fontValue(name)} |`,
   ),
   '',
   '## In TypeScript',
@@ -878,10 +954,12 @@ tables['token-reference'] = [
   `theme.${example.weight} // ${fontValue('font-weight.medium')}`,
   '```',
   '',
-  'The `next/` paths are temporary for the beta line. Two differences from the CSS form, both easy',
+  'The `next/` paths are temporary for the beta line. Three differences from the CSS form, all easy',
   'to miss:',
   '',
   '- **The values are unitless numbers, not lengths.** `14`, not `14px`. Add the unit yourself.',
+  `- **A family is the typeface alone.** ${code(`theme.${tsPath(MONO.family)}`)} is ${code(`'${typeface(MONO.family)}'`)}, where`,
+  `  the CSS custom property is ${code(fontValue(MONO.family))}. Add the generic family yourself.`,
   '- **The density is part of the file name.** There is no attribute for an object to read, so each',
   '  density has its own file, and you pick one:',
   '',
@@ -949,10 +1027,12 @@ const TARGETS = {
     'typography-steps',
     'typography-weights',
     'typography-families',
+    'typography-mono',
   ],
   'typography-scale.mdx': [
     'specimen-header',
     'specimen-label',
+    'specimen-mono',
     'specimen-body',
     'type-scale',
     'type-scale-offset',

@@ -54,6 +54,22 @@
 @import '@fontsource/inter/latin-600.css';
 @import '@fontsource/inter/latin-700.css';
 
+/* Commit Mono, for the mono specimens on the typography pages. The CDN serves
+   it in eds-uprights-vf.css, but that stylesheet also declares Inter and
+   Equinor, which the site loads above, so only its Commit Mono rule is copied
+   here. size-adjust scales Commit Mono to Inter's x-height, as it does for
+   product teams, so the specimens match what they see. */
+@font-face {
+  font-family: CommitMono;
+  font-weight: 1 999;
+  font-style: normal;
+
+  font-display: fallback;
+  size-adjust: 95.2%;
+  src: url('https://cdn.eds.equinor.com/font/CommitMonoV143-VF.woff2')
+    format('woff2-variations');
+}
+
 /* ======================================
  * COLOR SCHEME
  * ====================================== */

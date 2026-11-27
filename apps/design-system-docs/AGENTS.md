@@ -182,7 +182,11 @@ Both token bundles load (see imports in `theme-variables.css`):
 ## Fonts
 
 Equinor comes from the CDN (`cdn.eds.equinor.com`); Inter is self-hosted via
-`@fontsource/inter`, imported in `theme-variables.css`.
+`@fontsource/inter`, imported in `theme-variables.css`. Commit Mono, which only
+the mono specimens on the typography pages use, is one `@font-face` in
+`theme-variables.css` that points at the CDN file. It is copied from the CDN's
+`eds-uprights-vf.css`, including `size-adjust: 95.2%`, because importing that
+stylesheet would declare Inter and Equinor a second time.
 
 **Import the `latin-NNN.css` entrypoints, never the unsuffixed `NNN.css`.**
 The unsuffixed ones pull seven subsets each (latin, latin-ext, cyrillic,

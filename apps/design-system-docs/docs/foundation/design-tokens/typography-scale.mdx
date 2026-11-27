@@ -35,6 +35,15 @@ from the browser. Switch the density to see every step move while the names stay
 
 {/* GEN:specimen-label END */}
 
+**Mono**: the `mono/md` and `mono/lg` text styles, which set the `label.md` and `label.lg` tokens
+in Commit Mono
+
+{/* GEN:specimen-mono BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
+
+<TypeScale role="label" family="mono" steps={['md', 'lg']} />
+
+{/* GEN:specimen-mono END */}
+
 **Body**
 
 {/* GEN:specimen-body BEGIN - regenerate with pnpm generate:typography-reference. Do not edit by hand. */}
@@ -44,6 +53,14 @@ from the browser. Switch the density to see every step move while the names stay
 {/* GEN:specimen-body END */}
 
 </DensitySwitch>
+
+:::note Commit Mono looks larger in Figma than in the browser
+The EDS font stylesheet scales Commit Mono to 95.2% with `size-adjust`, so that its x-height matches
+Inter's and a figure looks the same size as the label text beside it. Figma cannot scale a font this
+way, so at the same font size token, Commit Mono looks about 5% larger in Figma than in the browser.
+The readout beside the specimens shows the token value, because `size-adjust` scales the glyphs and
+leaves the font size as it is.
+:::
 
 ## The Equinor and Inter scales
 

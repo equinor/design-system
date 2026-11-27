@@ -37,6 +37,17 @@ The token shape is `--eds-typography-{role}-{size}-{font-size,line-height}`, wit
 
 Family and weight have no role or size segment. The family is `--eds-font-family-ui` for `label` and `body`, and `--eds-font-family-header` for `header`. The weight is `--eds-font-weight-{normal,medium,bold}` and never changes with the size ([ADR-0029](../../../documentation/adr/0029-typography-approach-for-eds-2-web.md)): `header` is `medium` at every size, `label` uses `normal`, `medium` or `bold`, and `body` uses `normal` or `bold`.
 
+A third family, `--eds-font-family-mono` (Commit Mono), is for figures that have to line up in a column and for codes and IDs. It has no role or size tokens of its own: set it with the `label` font size and line height of the text around it, in `normal` or `bold`. The Figma text styles are `mono/{md,lg}/{default,bold}`, which use `label.md` and `label.lg` ([ADR-0027](../../../documentation/adr/0027-token-variable-architecture-typography-roles.md) point 7).
+
+```css
+.numeric-value {
+  font-family: var(--eds-font-family-mono);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+```
+
 Reach for these tokens whenever the component's typography is fixed by design, which is the common case. Do not add `data-font-*` attributes to the component's own elements for this; the tokens above already encode the size + role combination.
 
 ADR-0029 supersedes [ADR-0018](../../../documentation/adr/0018-typography-approach-for-eds-2.md), so the size-matched weights and the inherited `--_font-weight-bolder` from ADR-0018 no longer apply.
