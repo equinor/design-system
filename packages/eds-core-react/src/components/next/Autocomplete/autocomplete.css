@@ -31,10 +31,10 @@
      * State=Active */
     &:has(input[aria-expanded='true']) .eds-input {
       --_border-color: var(--_border-muted-pressed);
+      --_focus-ring: none;
 
       border-end-start-radius: 0;
       border-end-end-radius: 0;
-      box-shadow: none;
     }
 
     & .eds-menu:popover-open {
