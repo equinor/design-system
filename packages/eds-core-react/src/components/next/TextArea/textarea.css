@@ -50,10 +50,6 @@
 /* Must be outside @layer: [data-font-family] { margin: 0 } in variables.css
    is unlayered and overrides any margin inside @layer eds-components. */
 .eds-text-area {
-  & .error-icon {
-    margin-block-start: var(--eds-spacing-vertical-2xs);
-  }
-
   & .char-count {
     margin-inline-start: auto;
   }

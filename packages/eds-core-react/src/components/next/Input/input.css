@@ -21,6 +21,7 @@
     --_cursor: auto;
     --_control-cursor: text;
     --_error-icon-display: flex;
+    --_icon-size: var(--eds-spacing-md);
 
     /* No width token: the design uses 1px for every stroke (#5692) */
     --_stroke-width: 1px;
@@ -175,6 +176,14 @@
         display: flex;
         align-items: center;
 
+        /* Icons take the size Figma binds, whatever Icon's size prop says.
+         * This selector outranks Icon's own [data-size] rule. */
+        & > svg,
+        & > .eds-icon {
+          width: var(--_icon-size);
+          height: var(--_icon-size);
+        }
+
         /* Keep a small Button from making the Input taller than its line
          * height */
         &:has(button) {
@@ -190,17 +199,17 @@
     }
 
     /* A button is as wide as the line height, an icon as wide as
-     * --eds-spacing-md. The negative margin lines up a button's icon with
+     * --_icon-size. The negative margin lines up a button's icon with
      * icon adornments. */
     & > .control ~ .adornment > .item:has(button) {
       margin-inline-end: calc(
-        (var(--eds-spacing-md) - var(--eds-typography-label-md-line-height)) / 2
+        (var(--_icon-size) - var(--eds-typography-label-md-line-height)) / 2
       );
     }
 
     & > .adornment:has(~ .control) > .item:has(button) {
       margin-inline-start: calc(
-        (var(--eds-spacing-md) - var(--eds-typography-label-md-line-height)) / 2
+        (var(--_icon-size) - var(--eds-typography-label-md-line-height)) / 2
       );
     }
   }
