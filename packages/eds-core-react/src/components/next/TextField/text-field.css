@@ -1,21 +1,30 @@
 @layer eds-components {
   .eds-text-field {
+    /* No gap, as in Figma: the label grows to fill the row (Field) */
     & > .header {
       display: flex;
-      gap: var(--eds-typography-gap-horizontal);
       align-items: center;
       justify-content: space-between;
-
       inline-size: 100%;
     }
 
+    /* The small icon Button (4px + 16px + 4px) is taller than the label
+       line. A negative margin of half the difference keeps the row at the
+       label line height, as the 20px icon frame in Figma does. */
     & > .header > .info,
     & > .header > .eds-tooltip-anchor {
+      /* Flex, so the tooltip anchor is no taller than the button. As a block
+         its line box adds height in compact, where the button is small. */
+      display: flex;
       flex-shrink: 0;
-
-      /* Negative margin collapses the button's 24px layout contribution to ~8px,
-         matching Figma's 8px icon container. Label text-box height determines row height. */
-      margin-block: calc(var(--eds-sizing-icon-xs) / -2);
+      margin-block: calc(
+        (
+            var(--eds-typography-label-md-line-height) -
+              var(--eds-typography-label-sm-line-height) - 2 *
+              var(--eds-spacing-3xs)
+          ) /
+          2
+      );
     }
   }
 }
