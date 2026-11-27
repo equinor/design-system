@@ -409,7 +409,7 @@ New component, no 2.x counterpart. Use it where you used `Typography` with `link
 
 **Composition**: built on [Field](#field). For layouts TextField does not cover, compose `Field` yourself.
 
-**Markup**: the root is `div.eds-field.eds-text-field`, with a new `div.header` around the label and info button and `.info` on the info button. `className` and `style` land on the root and are merged with `eds-text-field`; use `.your-class input` for the native element. The helper message is a single `<p class="helper-message">` with `role="alert"` when invalid.
+**Markup**: the root is `div.eds-field.eds-text-field`, with a new `div.header` around the label and info button and `.info` on the info button. `className` and `style` land on the root and are merged with `eds-text-field`; use `.your-class input` for the native element. The helper message is a single `<p class="helper-message">` with `role="alert"` when invalid. Adornments are passed to [Input](#input), which sizes an `Icon` passed as `startAdornment` or `endAdornment` at `md`, so an `Icon`'s own `size` prop has no effect there.
 
 ## Tooltip
 
