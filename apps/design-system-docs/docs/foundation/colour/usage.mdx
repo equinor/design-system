@@ -181,6 +181,11 @@ as well as the level: `text.on-muted.accent` is a different colour.
 On ordinary surfaces such as `background.surface` and `background.canvas`, use `text.primary`,
 `.secondary` or `.tertiary` instead. See [Check for a dedicated role](#check-for-a-dedicated-role).
 
+A foreground that carries a tone but has no fill behind it takes the `default` level, as the
+secondary and ghost buttons, the current tab and an outlined badge without a fill do. Use
+`text.on-default.<tone>` and `icon.on-default.<tone>`. They reach at least 6:1 on
+`background.canvas` and `background.surface` in both colour schemes.
+
 ### When to use something else
 
 - **A component specifies another foreground.** Follow the component. The
