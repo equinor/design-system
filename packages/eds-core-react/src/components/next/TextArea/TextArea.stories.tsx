@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react-vite'
 import { TextArea } from '.'
 import type { TextAreaProps } from '.'
-import { ExampleLabel, Stack } from './../../../../.storybook/components'
+import { Stack } from './../../../../.storybook/components'
 import page from './TextArea.docs.mdx'
 
 const meta: Meta<typeof TextArea> = {
@@ -349,35 +349,23 @@ WithCharacterCount.parameters = {
 
 export const DensityModes: StoryFn<TextAreaProps> = () => (
   <div style={{ display: 'flex', gap: '2rem' }}>
-    <div data-density="spacious" style={{ width: '320px' }}>
-      <ExampleLabel>Spacious</ExampleLabel>
-      <Stack>
+    {(['compact', 'comfortable', 'relaxed'] as const).map((density) => (
+      <div key={density} data-density={density} style={{ width: '320px' }}>
         <TextArea
-          label="Notes"
+          label={density.charAt(0).toUpperCase() + density.slice(1)}
           placeholder="Enter your notes"
           rows={3}
           helperMessage="Helper Message"
         />
-      </Stack>
-    </div>
-    <div data-density="comfortable" style={{ width: '320px' }}>
-      <ExampleLabel>Comfortable</ExampleLabel>
-      <Stack>
-        <TextArea
-          label="Notes"
-          placeholder="Enter your notes"
-          rows={3}
-          helperMessage="Helper Message"
-        />
-      </Stack>
-    </div>
+      </div>
+    ))}
   </div>
 )
 DensityModes.parameters = {
   docs: {
     description: {
       story:
-        'TextArea adapts to density modes via `data-density` attribute on a parent element.',
+        'Set `data-density` on a parent element to change the size. The default is comfortable.',
     },
   },
 }
