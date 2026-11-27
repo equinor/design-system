@@ -4,6 +4,17 @@ All notable changes to EDS 2.0 beta components (`@equinor/eds-core-react/next`) 
 
 These are experimental components available under the `/next` entry point. They follow semantic versioning with a `beta` prerelease tag.
 
+## [3.0.0-beta.8](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.7...eds-core-react-next@v3.0.0-beta.8) (2026-11-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* Input (next) sets `data-tone` (`neutral` or `danger`) instead of `data-color-appearance`, and no longer sets `data-selectable-space`, `data-space-proportions`, `data-font-*` or `data-baseline`. Icons in `startAdornment` and `endAdornment` are sized by Input (`--eds-spacing-md`), so Icon's `size` prop has no effect there. Input needs the beta token bundle.
+
+### ♻️ Refactoring
+
+* migrate Input (next) to beta tokens ([#5898](https://github.com/equinor/design-system/issues/5898)) ([2891edc](https://github.com/equinor/design-system/commit/2891edc7e89608ff0508a813dabed3ba11b16941))
+
 ## [3.0.0-beta.7](https://github.com/equinor/design-system/compare/eds-core-react-next@v3.0.0-beta.6...eds-core-react-next@v3.0.0-beta.7) (2026-11-20)
 
 
