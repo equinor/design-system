@@ -372,6 +372,64 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/eds-figma-migration-plugin:
+    dependencies:
+      '@equinor/eds-core-react':
+        specifier: workspace:^
+        version: link:../../packages/eds-core-react
+      '@equinor/eds-icons':
+        specifier: workspace:^
+        version: link:../../packages/eds-icons
+      '@equinor/eds-tokens':
+        specifier: workspace:^
+        version: link:../../packages/eds-tokens
+      react:
+        specifier: ^19.3.1
+        version: 19.3.1
+      react-dom:
+        specifier: ^19.3.1
+        version: 19.3.1(react@19.3.1)
+    devDependencies:
+      '@figma/plugin-typings':
+        specifier: ^1.142.0
+        version: 1.143.0
+      '@playwright/test':
+        specifier: ^1.65.0
+        version: 1.65.1
+      '@testing-library/dom':
+        specifier: ^10.4.2
+        version: 10.4.2
+      '@types/node':
+        specifier: ^25.5.2
+        version: 25.9.5
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: ^19.3.0
+        version: 19.3.0(@types/react@19.2.18)
+      '@vitejs/plugin-react':
+        specifier: ^6.2.1
+        version: 6.3.0(babel-plugin-react-compiler@1.0.0)(vite@8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0))
+      eslint:
+        specifier: ^9.38.0
+        version: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
+      sharp:
+        specifier: '>=0.35.0'
+        version: 0.35.5(@types/node@25.9.5)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^8.3.5
+        version: 8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0)
+      vite-plugin-singlefile:
+        specifier: ^2.3.4
+        version: 2.3.4(rollup@4.68.6)(vite@8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0))
+      vitest:
+        specifier: ^4.1.11
+        version: 4.1.12(@types/node@25.9.5)(jsdom@26.1.0(supports-color@10.2.2))(vite@8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0))
+
   apps/mobile-storybook:
     dependencies:
       '@equinor/eds-mobile-components':
@@ -3777,6 +3835,9 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  '@figma/plugin-typings@1.143.0':
+    resolution: {integrity: sha512-7oP0XwTiuAuQPRNmuPX4PeRP5fjLMnRZ6Ed7Ybr61JoW9Os04Eml/XqYE3kyvohcFQfYXsRK5sqCLaKzc8qnZg==}
+
   '@figma/rest-api-spec@0.47.0':
     resolution: {integrity: sha512-gU1Z8kF+cXyMREA+0mHVkKF4d6641zsDR7rLxJXIxa4r60SJzrK+etSrumiSWmyoYe/xkkCgTmm7lk0R/KzKDg==}
 
@@ -6099,9 +6160,6 @@ packages:
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
-
-  '@types/estree@1.0.9':
-    resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
   '@types/express-serve-static-core@4.19.9':
     resolution: {integrity: sha512-QP2ESEe/ImWY0HDwNAnK9PvEffUyhLTnWkk7KXzHfyeWAnlrDe1fN77bXl6ia8KT3wPlmA7t9/VPRpnf4Ex9sg==}
@@ -13826,6 +13884,16 @@ packages:
       vite:
         optional: true
 
+  vite-plugin-singlefile@2.3.4:
+    resolution: {integrity: sha512-1FAhlTCL6KJDpSUudrVU+gspapvS+tmKCg70vwNaAU6tyXn3E/C6+NnwQIze06byhBRv7VggZ78K0h+J/Rsdrg==}
+    engines: {node: '>18.0.0'}
+    peerDependencies:
+      rollup: ^4.59.0
+      vite: ^5.4.21 || ^6.0.0 || ^7.0.0 || ^8.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
   vite@8.3.8:
     resolution: {integrity: sha512-LzOn3h9rG/0vhLdXrV4yJ4QFA9eEoqCl+Yx+kGJd7aB9w6nfNgVHKSYwLPZUHrz4ZGa+t+kXjV9itvcHDLQouA==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -17685,11 +17753,6 @@ snapshots:
       eslint: 9.39.4(jiti@2.7.0)(supports-color@10.2.2)
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/eslint-utils@4.9.1(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))':
-    dependencies:
-      eslint: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
-      eslint-visitor-keys: 3.4.3
-
   '@eslint-community/regexpp@4.12.2': {}
 
   '@eslint/config-array@0.21.2(supports-color@10.2.2)':
@@ -18166,6 +18229,8 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@figma/plugin-typings@1.143.0': {}
+
   '@figma/rest-api-spec@0.47.0': {}
 
   '@floating-ui/core@1.8.0':
@@ -18233,8 +18298,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@img/colour@1.1.0':
-    optional: true
+  '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.35.5':
     optionalDependencies:
@@ -18958,7 +19022,7 @@ snapshots:
 
   '@mdx-js/mdx@3.1.1(supports-color@10.2.2)':
     dependencies:
-      '@types/estree': 1.0.9
+      '@types/estree': 1.0.10
       '@types/estree-jsx': 1.0.5
       '@types/hast': 3.0.5
       '@types/mdx': 2.0.14
@@ -20656,8 +20720,6 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
-  '@types/estree@1.0.9': {}
-
   '@types/express-serve-static-core@4.19.9':
     dependencies:
       '@types/node': 25.9.5
@@ -21101,7 +21163,7 @@ snapshots:
 
   '@typescript-eslint/utils@5.62.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))
+      '@eslint-community/eslint-utils': 4.10.1(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))
       '@types/json-schema': 7.0.15
       '@types/semver': 7.7.1
       '@typescript-eslint/scope-manager': 5.62.0
@@ -21116,7 +21178,7 @@ snapshots:
 
   '@typescript-eslint/utils@8.58.2(eslint@9.39.4(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4(jiti@2.7.0)(supports-color@10.2.2))
+      '@eslint-community/eslint-utils': 4.10.1(eslint@9.39.4(jiti@2.7.0)(supports-color@10.2.2))
       '@typescript-eslint/scope-manager': 8.58.2
       '@typescript-eslint/types': 8.58.2
       '@typescript-eslint/typescript-estree': 8.58.2(supports-color@10.2.2)(typescript@5.9.3)
@@ -21262,6 +21324,13 @@ snapshots:
 
   '@unrs/resolver-binding-win32-x64-msvc@1.12.2':
     optional: true
+
+  '@vitejs/plugin-react@6.3.0(babel-plugin-react-compiler@1.0.0)(vite@8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.1
+      vite: 8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0)
+    optionalDependencies:
+      babel-plugin-react-compiler: 1.0.0
 
   '@vitejs/plugin-react@6.3.0(babel-plugin-react-compiler@1.0.0)(vite@8.3.8(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0))':
     dependencies:
@@ -29336,6 +29405,39 @@ snapshots:
       '@types/node': 25.6.0
     optional: true
 
+  sharp@0.35.5(@types/node@25.9.5):
+    dependencies:
+      '@img/colour': 1.1.0
+      detect-libc: 2.1.2
+      semver: 7.8.5
+    optionalDependencies:
+      '@img/sharp-darwin-arm64': 0.35.5
+      '@img/sharp-darwin-x64': 0.35.5
+      '@img/sharp-freebsd-wasm32': 0.35.5
+      '@img/sharp-libvips-darwin-arm64': 1.3.4
+      '@img/sharp-libvips-darwin-x64': 1.3.4
+      '@img/sharp-libvips-linux-arm': 1.3.4
+      '@img/sharp-libvips-linux-arm64': 1.3.4
+      '@img/sharp-libvips-linux-ppc64': 1.3.4
+      '@img/sharp-libvips-linux-riscv64': 1.3.4
+      '@img/sharp-libvips-linux-s390x': 1.3.4
+      '@img/sharp-libvips-linux-x64': 1.3.4
+      '@img/sharp-libvips-linuxmusl-arm64': 1.3.4
+      '@img/sharp-libvips-linuxmusl-x64': 1.3.4
+      '@img/sharp-linux-arm': 0.35.5
+      '@img/sharp-linux-arm64': 0.35.5
+      '@img/sharp-linux-ppc64': 0.35.5
+      '@img/sharp-linux-riscv64': 0.35.5
+      '@img/sharp-linux-s390x': 0.35.5
+      '@img/sharp-linux-x64': 0.35.5
+      '@img/sharp-linuxmusl-arm64': 0.35.5
+      '@img/sharp-linuxmusl-x64': 0.35.5
+      '@img/sharp-webcontainers-wasm32': 0.35.5
+      '@img/sharp-win32-arm64': 0.35.5
+      '@img/sharp-win32-ia32': 0.35.5
+      '@img/sharp-win32-x64': 0.35.5
+      '@types/node': 25.9.5
+
   shebang-command@2.0.0:
     dependencies:
       shebang-regex: 3.0.0
@@ -30635,6 +30737,13 @@ snapshots:
       - supports-color
       - typescript
       - webpack
+
+  vite-plugin-singlefile@2.3.4(rollup@4.68.6)(vite@8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0)):
+    dependencies:
+      picomatch: 4.0.7
+      vite: 8.3.8(@types/node@25.9.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0)
+    optionalDependencies:
+      rollup: 4.68.6
 
   vite@8.3.8(@types/node@25.6.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.15)(yaml@2.9.0):
     dependencies:

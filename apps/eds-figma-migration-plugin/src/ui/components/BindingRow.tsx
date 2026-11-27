@@ -1,0 +1,125 @@
+import type { ReactNode } from 'react'
+import { Badge, Button, Checkbox } from '@equinor/eds-core-react/next'
+import {
+  CATEGORY_LABELS,
+  HELD_LABEL,
+  HIDDEN_LABEL,
+  ORIGIN_LABELS,
+} from '../labels'
+import type { ValueOrigin } from '../labels'
+import type { Category } from '../../scan/types'
+import { BADGES, HELD_BADGE } from '../badges'
+
+type BindingRowProps = {
+  /** The main line: a property in the Layers view, a layer in the Variables view */
+  title: string
+  /** A second line, such as the layer's path */
+  subtitle?: string
+  old?: string
+  target: string
+  /** Says when the target is a change someone made */
+  note?: string
+  reason?: string
+  /**
+   * What else the change does, shown whatever the status: text carried
+   * across to instances, or the changes a Manual fix's reset removes and
+   * sets again
+   */
+  effects?: string[]
+  category: Category
+  /** A legacy mode kept until the layers below it are migrated, badged Waiting */
+  held?: boolean
+  /** Inside an instance: whether the instance overrides the value or takes it from its main component */
+  origin?: ValueOrigin
+  /** The layer or a layer above it is hidden, so Go to only selects it in the Layers panel */
+  hidden?: boolean
+  /** Shows a checkbox and a Change button */
+  changeable: boolean
+  /** Shows the checkbox; false for a Manual fix, which is decided one at a time */
+  selectable?: boolean
+  selected: boolean
+  onToggle: (selected: boolean) => void
+  onSelectLayer: () => void
+  onChange: () => void
+  /** More buttons after Change, such as Convert on the Typography tab */
+  actions?: ReactNode
+}
+
+/** One binding: what it is on, what it changes from and to, its status, and the actions on it. */
+export function BindingRow({
+  title,
+  subtitle,
+  old,
+  target,
+  note,
+  reason,
+  effects = [],
+  category,
+  held = false,
+  origin,
+  hidden = false,
+  changeable,
+  selectable = changeable,
+  selected,
+  onToggle,
+  onSelectLayer,
+  onChange,
+  actions,
+}: BindingRowProps) {
+  const badge = held ? HELD_BADGE : BADGES[category]
+  return (
+    <li className="binding-row">
+      {selectable ? (
+        <Checkbox
+          className="binding-check"
+          aria-label={`Select ${title}`}
+          checked={selected}
+          onChange={(event) => onToggle(event.target.checked)}
+        />
+      ) : (
+        <span className="binding-check" aria-hidden="true" />
+      )}
+      <button type="button" className="binding-select" onClick={onSelectLayer}>
+        <span className="binding-name">{title}</span>
+        {subtitle && <span className="binding-path">{subtitle}</span>}
+        {hidden && <span className="hidden-label">{HIDDEN_LABEL}</span>}
+        {origin && (
+          <span className="origin-label" data-origin={origin}>
+            {ORIGIN_LABELS[origin]}
+          </span>
+        )}
+        <span className="binding-swap">
+          {old && <span className="binding-old">{old}</span>}
+          {old && <span aria-hidden="true"> → </span>}
+          <span className="binding-new">{target}</span>
+        </span>
+        {note && <span className="override-note">{note}</span>}
+        {reason && category !== 'sure' && (
+          <span className="binding-reason">{reason}</span>
+        )}
+        {effects.map((effect) => (
+          <span key={effect} className="binding-effect">
+            {effect}
+          </span>
+        ))}
+      </button>
+      <div className="binding-actions">
+        <Badge tone={badge.tone} emphasis={badge.emphasis}>
+          {category === 'check' ? '⚠ ' : ''}
+          {held ? HELD_LABEL : CATEGORY_LABELS[category]}
+        </Badge>
+        {changeable && (
+          <Button
+            size="small"
+            variant="secondary"
+            aria-label={`Change the target of ${title}`}
+            onClick={onChange}
+          >
+            Change
+          </Button>
+        )}
+        {actions}
+      </div>
+    </li>
+  )
+}

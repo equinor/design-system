@@ -1,0 +1,28 @@
+{
+  // The plugin main thread (code.js) runs in Figma's sandbox, which has no DOM.
+  // The Figma typings declare their own `console`, `fetch` and timers, which
+  // clash with lib.dom, so this project leaves the DOM out. ES2020 is the
+  // newest library the sandbox is known to support; the bundle itself is
+  // compiled down to ES2017 syntax (vite.plugin.config.ts).
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["@figma/plugin-typings"]
+  },
+  // test/plugin has the tests of the main thread, with a stand-in for
+  // `figma`, so they are typed against the same Figma typings.
+  "include": [
+    "src/plugin/**/*.ts",
+    "src/shared/**/*.ts",
+    "src/mapping/**/*.ts",
+    "src/scan/**/*.ts",
+    "test/plugin/**/*.ts"
+  ]
+}

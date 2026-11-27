@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-11-11",
+  "libraries": [
+    {
+      "id": "colours-dynamic",
+      "name": "🎨 EDS Colours (dynamic) (Deprecated)",
+      "libraryKey": "lk-f029f99b22116007d64a68fc73ed1360a7ace71965b18606991d548442e39a834c13053ebceed1e3eeb5c61b63a6d4953b898682fe95bcaa295630a5a00f4a5a",
+      "collections": [
+        {
+          "name": "🎨 Appearance",
+          "key": "83d908cb8374dc7ba7545157bc413a954cc48e3f"
+        },
+        { "name": "Concept", "key": "f3af6d5a8911fc63d3c6c3332d27bf944ffc19c8" }
+      ]
+    },
+    {
+      "id": "colours-static",
+      "name": "🎨 EDS Colours (static) (Deprecated)",
+      "libraryKey": "lk-f0a5d55d2dfc092fa1de2e085488c39179bbbb4ad9eb2139d6f81d72bbe5df0c0a53d3a5233293ca3f18cc90c6ca5e8beca939036376f87e0ac80d80284e84d7",
+      "collections": [
+        {
+          "name": "Semantic",
+          "key": "0fec0fd2c9ae6d608b2efc134cf84ba490428ce7"
+        },
+        { "name": "Concept", "key": "92275ad0227f50a0c6b43a1825a63e9b93f2b7bc" }
+      ]
+    },
+    {
+      "id": "colours-shared",
+      "name": "🎨 EDS Colours (Deprecated), collections behind the published ones",
+      "libraryKey": null,
+      "collections": [
+        {
+          "name": "🌗 Color scheme",
+          "key": "d323d76c6333d5655c51cee7d829139a07f4cc3a",
+          "published": false
+        },
+        {
+          "name": "Color Light",
+          "key": "9de3044565afd7dd623bfcff1eead980bb479c08",
+          "published": false
+        },
+        {
+          "name": "Color Dark",
+          "key": "d2fe6c2b7d952c2cd73029c375a713b2a1225635",
+          "published": false
+        }
+      ]
+    },
+    {
+      "id": "spacing-typography",
+      "name": "🅰️ EDS Spacing & Typography tokens (Deprecated)",
+      "libraryKey": "lk-cef05fea4271fffa0b85476bbc80dd72eb90d9e8f4823d2bccf51bd40dfcce15f01869f025c310468c726337b3dab9548544f0e665b108404b570dadad6babc4",
+      "collections": [
+        {
+          "name": "💎 Density",
+          "key": "a0090fc9e5f10901592819d77214a0b6b62fba64"
+        },
+        {
+          "name": "🗣️ Semantic",
+          "key": "d81ca23cb1cce2daf508b6525a2672f0f1863573"
+        },
+        {
+          "name": "🪐 Space proportions",
+          "key": "d662b2d3fdc90cccda3e4f5ee84f0799646d2e29"
+        },
+        {
+          "name": "🪐 Container space",
+          "key": "b312a7902ac82bc36bf701e29cc24b90e78a902a"
+        },
+        {
+          "name": "🪐 Selectable space",
+          "key": "5e01d647e5d248607b79bc6e21b29e4615dd8058"
+        },
+        {
+          "name": "🪐 Page space",
+          "key": "d3e6c26ffb8d79e6a4bc72b70fc18accfc3e605a"
+        },
+        {
+          "name": "🪐 Horizontal space",
+          "key": "4a2803666fac8e47468f44f488efdc5f1f9ee4b8"
+        },
+        {
+          "name": "🪐 Vertical space",
+          "key": "58c06a977f14015c5de11cb23074c191810c1874"
+        },
+        {
+          "name": "🪐 Horizontal gap",
+          "key": "375485cd081837449fd5526af0539cd33f6428b6"
+        },
+        {
+          "name": "🪐 Vertical gap",
+          "key": "53cc9e8b732de16743bb63c08b54dca3df19af31"
+        },
+        {
+          "name": "🅰️ Font and icon size",
+          "key": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e"
+        },
+        {
+          "name": "🅰️ Font family",
+          "key": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a"
+        },
+        {
+          "name": "🅰️ Font baseline",
+          "key": "11dacee70902caff981b08e06c846a5834fe7a41"
+        },
+        {
+          "name": "🅰️ Line height",
+          "key": "d53851cec89ec6a8a213f80e0e2cad832b6b15cf"
+        },
+        {
+          "name": "🅰️ Font weight",
+          "key": "0db85558f13bb5dfed43ad8215dba813271f644f"
+        },
+        {
+          "name": "🅰️ Tracking",
+          "key": "ecedd11e5bb0cd60e81866c6a95a83120bf918a2"
+        },
+        {
+          "name": "⭕️ Border radius",
+          "key": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c"
+        },
+        { "name": "📦 Box", "key": "529af4ca5efdcb9a9e75110494fd9d377b16f515" },
+        {
+          "name": "📐 Size",
+          "key": "1274d3d7f539f5aa0f56a8fe9ce50bd4b610c955"
+        },
+        {
+          "name": "🖼️ Icon size",
+          "key": "d11e1c9e1fad954c672c23561032a6e57b0d46ee"
+        },
+        {
+          "name": "〰️ Stroke",
+          "key": "12c980aa799f8c7e8888ac6eee5ddaa802f67a43"
+        },
+        {
+          "name": "👾 Primitives",
+          "key": "e890b8a0e956fc9c647987c28152cbe50744348e",
+          "published": false
+        }
+      ]
+    }
+  ]
+}

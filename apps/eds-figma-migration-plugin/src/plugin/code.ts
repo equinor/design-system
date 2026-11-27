@@ -1,0 +1,829 @@
+/**
+ * The plugin main thread. Runs in Figma's sandbox, reads and changes the
+ * document, and talks to the plugin window (src/ui) through messages.
+ */
+import { MAPPING_VERSION } from '../mapping/version'
+import {
+  modeWaits,
+  planConversions,
+  previewConversions,
+  previewRun,
+} from '../scan/apply-plan'
+import {
+  buildMappingGroups,
+  effectiveCategory,
+  isMappable,
+  NO_KEPT_MODES,
+  withChanges,
+  withRowChoice,
+} from '../scan/mapping'
+import { recount } from '../scan/summary'
+import type { KeptModes, Overrides } from '../scan/mapping'
+import type {
+  Command,
+  OverrideChange,
+  PluginToUi,
+  SelectionComponent,
+  UiToPlugin,
+} from '../shared/messages'
+import { applyChanges } from './apply/apply'
+import { convertTypography } from './apply/convert'
+import { revertRoots } from './apply/revert'
+import { collectFixture } from './dev/export-fixture'
+import { exportInventory } from './dev/export-inventory'
+import { ScanCancelled } from './scan/collect'
+import {
+  componentInstances,
+  currentTarget,
+  filePages,
+  pagesOfFile,
+  runScan,
+  typographyComponentCounts,
+} from './scan/scan'
+import {
+  loadChoices,
+  loadHealth,
+  loadLeftOutPages,
+  saveChoices,
+  saveHealth,
+  saveLeftOutPages,
+} from './store'
+import { buildReport } from '../scan/report'
+import type { ScanState, ScanTarget } from './scan/scan'
+import { componentSource, LegacyCounter } from './scan/sources'
+import { remoteMainComponents } from '../scan/sources'
+import type { ComponentSource } from '../scan/types'
+import { scanKey } from '../shared/pages'
+import {
+  clampSize,
+  fitHeight,
+  INTRO_KEY,
+  INTRO_VERSION,
+  readSettings,
+  SETTINGS_KEY,
+  WINDOW,
+  WINDOW_SIZE_KEY,
+} from '../shared/window'
+
+const COMMANDS: Command[] = [
+  'open',
+  'dev-export-inventory',
+  'dev-export-fixture',
+]
+const command: Command = COMMANDS.includes(figma.command as Command)
+  ? (figma.command as Command)
+  : 'open'
+
+figma.showUI(__html__, {
+  themeColors: true,
+  width: WINDOW.width,
+  height: WINDOW.height,
+  title: 'EDS Variable Migration [BETA]',
+})
+
+// The window opens at the size the person last gave it.
+figma.clientStorage
+  .getAsync(WINDOW_SIZE_KEY)
+  .then((saved: unknown) => {
+    const size = saved as { width?: unknown; height?: unknown } | undefined
+    if (typeof size?.width === 'number' && typeof size.height === 'number') {
+      const { width, height } = clampSize(size.width, size.height)
+      figma.ui.resize(width, height)
+    }
+  })
+  .catch(() => {
+    // No saved size; the default stays.
+  })
+
+function post(message: PluginToUi) {
+  figma.ui.postMessage(message)
+}
+
+let lastScan: ScanState | undefined
+/** A source check is running (src/plugin/scan/sources.ts) */
+let checkingSources = false
+/** Stops the source check under way, at once */
+let onStopSources: (() => void) | undefined
+let lastTarget: ScanTarget | undefined
+/** The instances of the main components with a Typography instance in them, counted once per scan when the Typography tab asks */
+let componentCounts: Record<string, number> | undefined
+let overrides: Overrides = loadChoices()
+/**
+ * The legacy modes the next Apply keeps in the last scan, with the current
+ * choices (scan/apply-plan.ts, keptModesByRecord). Worked out again with
+ * every count, and sent to the window before it.
+ */
+let kept: KeptModes = NO_KEPT_MODES
+/** Every legacy mode that values below read and the next Apply leaves, with what clearing it waits for */
+let blocked: Record<string, string> = {}
+/**
+ * The pages a scan of the file leaves out. Kept here as well as in the file,
+ * so a file that cannot store the choice still uses it until the plugin
+ * closes.
+ */
+let leftOutPages: string[] = loadLeftOutPages()
+/** True while a scan, an apply or a revert runs; only one at a time */
+let busy = false
+let cancelRequested = false
+
+/**
+ * The scan counted with the designer's choices: a chosen target is Ready,
+ * and Decide later makes a Ready value Needs check. A legacy mode that is
+ * only cleared and that the next Apply keeps, because values below it are
+ * not changed in that run, counts as No equivalent (Waiting), so Ready is
+ * what Apply changes. Sets `kept` and `blocked` for the window.
+ */
+function withChoices(state: ScanState): ScanState {
+  const current = overrides
+  const waits = modeWaits(
+    state.records,
+    current,
+    new Set(state.records.map((record) => record.entryId)),
+    state.oldInstances,
+  )
+  const keptNow = waits.kept
+  kept = keptNow
+  blocked = waits.blocked
+  return {
+    ...state,
+    summary: recount(
+      state.summary,
+      state.records,
+      state.oldInstances,
+      (record) => effectiveCategory(record, current, keptNow),
+    ),
+  }
+}
+
+function isMainComponent(node: BaseNode): boolean {
+  return node.type === 'COMPONENT' || node.type === 'COMPONENT_SET'
+}
+
+/**
+ * Whether the selection is main components, or one layer inside a main
+ * component. A change there changes every instance of the component.
+ */
+function selectionComponent(
+  selection: readonly SceneNode[],
+): SelectionComponent | undefined {
+  if (selection.length === 0) return undefined
+  if (selection.every(isMainComponent)) return { kind: 'main' }
+  if (selection.length > 1) return undefined
+  for (
+    let parent = selection[0].parent;
+    parent && parent.type !== 'PAGE';
+    parent = parent.parent
+  ) {
+    if (isMainComponent(parent)) {
+      const set =
+        parent.type === 'COMPONENT' && parent.parent?.type === 'COMPONENT_SET'
+          ? parent.parent
+          : parent
+      return { kind: 'inside', name: set.name }
+    }
+  }
+  return undefined
+}
+
+function postSelection() {
+  const selection = figma.currentPage.selection
+  const component = selectionComponent(selection)
+  post({
+    type: 'selection',
+    count: selection.length,
+    firstName: selection[0]?.name,
+    ...(component ? { component } : {}),
+  })
+}
+
+figma.on('selectionchange', postSelection)
+figma.on('currentpagechange', postSelection)
+
+function postPages() {
+  post({ type: 'pages', pages: filePages(), leftOut: leftOutPages })
+}
+
+// A page added in Figma is usually opened at once, so the page count
+// beside Select pages follows it. The page picker asks again as it opens.
+figma.on('currentpagechange', postPages)
+
+/**
+ * Test session finding 17: after an undo or an edit, the window kept
+ * offering the changes of the earlier scan. A change on the current page
+ * that the plugin did not make marks the scan as out of date, once per scan.
+ * The plugin's own changes are ignored while it works and for a moment
+ * after, since Figma reports changes a little later.
+ */
+let quietUntil = 0
+let staleSent = false
+let watchedPage: PageNode | undefined
+
+function onNodeChange() {
+  if (!lastScan || staleSent || busy || Date.now() < quietUntil) return
+  staleSent = true
+  post({ type: 'stale' })
+}
+
+function watchPage() {
+  watchedPage?.off('nodechange', onNodeChange)
+  watchedPage = figma.currentPage
+  watchedPage.on('nodechange', onNodeChange)
+}
+
+/** Ignores the changes Figma reports for what the plugin just did. */
+function quietAfterOwnChanges() {
+  quietUntil = Date.now() + 1500
+}
+
+watchPage()
+figma.on('currentpagechange', watchPage)
+
+/**
+ * Scans the target. The designer's choices are kept from one scan to the
+ * next: they are stored by layer and property, and by legacy variable and
+ * proposal, so they still apply to what is left after an apply.
+ */
+async function scan(target: ScanTarget) {
+  if (busy) return
+  busy = true
+  cancelRequested = false
+  try {
+    post({
+      type: 'scan-start',
+      scope: target.scope,
+      pageCount:
+        target.scope === 'file' ? pagesOfFile(target.pageIds).length : 1,
+      target: scanKey(target),
+    })
+    const state = await runScan(
+      target,
+      (progress) => post({ type: 'scan-progress', progress }),
+      () => cancelRequested,
+      (pageIndex, map) => post({ type: 'scan-map', pageIndex, map }),
+    )
+    lastTarget = target
+    lastScan = withChoices(state)
+    componentCounts = undefined
+    staleSent = false
+    saveHealth(lastScan.summary)
+    post({ type: 'kept-modes', kept, blocked })
+    post({ type: 'scan-done', summary: lastScan.summary })
+    post({ type: 'mapping', groups: buildMappingGroups(lastScan.records) })
+    post({
+      type: 'conversions',
+      groups: buildMappingGroups(lastScan.conversions, { ownReasons: true }),
+    })
+    post({ type: 'instances', instances: lastScan.oldInstances })
+    post({ type: 'overrides', overrides })
+  } catch (error) {
+    if (error instanceof ScanCancelled) post({ type: 'scan-cancelled' })
+    else throw error
+  } finally {
+    busy = false
+    quietUntil = Math.max(quietUntil, Date.now() + 500)
+  }
+}
+
+/**
+ * Applies the Ready changes in the entries, then scans the same layers
+ * again. With `recordIds`, only the Ready changes among those bindings.
+ *
+ * A run that stops on an error, such as LIBRARY_MISSING when EDS Foundation
+ * [EDS Beta] is not enabled, may have changed layers before it stopped, and
+ * the change events of those changes are ignored as the plugin's own. So the
+ * same layers are scanned again before the error goes to the window, which
+ * then shows the file as it is, not the scan from before the run.
+ */
+async function apply(entryIds: string[], recordIds?: Set<string>) {
+  if (!lastScan || !lastTarget || busy) return
+  busy = true
+  let stopped: { error: unknown } | undefined
+  try {
+    const result = await applyChanges(
+      lastScan.records,
+      overrides,
+      new Set(entryIds),
+      (done, total) => post({ type: 'apply-progress', done, total }),
+      recordIds,
+    )
+    // A Manual fix that failed goes back to being one, so the designer sees
+    // it again instead of an accepted fix that will fail the same way.
+    if (result.failedFixes.length > 0) {
+      setOverrides(
+        result.failedFixes.map((id) => ({
+          target: { type: 'record' as const, id },
+          value: undefined,
+        })),
+      )
+    }
+    post({ type: 'apply-done', result })
+  } catch (error) {
+    stopped = { error }
+  } finally {
+    busy = false
+    quietAfterOwnChanges()
+  }
+  if (stopped) {
+    // The error the window shows is the run's, not one from this scan.
+    await scan(lastTarget).catch(() => undefined)
+    throw stopped.error
+  }
+  await scan(lastTarget)
+}
+
+/**
+ * Replaces Typography component instances with text layers, with the text
+ * style and colour their rows on the Typography tab show, then scans again.
+ * An instance whose text style is not Ready is left, and the result says
+ * why.
+ */
+async function convert(instanceIds: string[]) {
+  if (!lastScan || !lastTarget || busy) return
+  busy = true
+  try {
+    const plan = planConversions(lastScan.conversions, overrides, instanceIds)
+    const result = await convertTypography(plan)
+    post({ type: 'convert-done', result })
+  } finally {
+    busy = false
+    quietAfterOwnChanges()
+  }
+  await scan(lastTarget)
+}
+
+/** Puts back what the plugin changed in an entry, then scans again. */
+async function revert(entryId: string) {
+  const entry = lastScan?.summary.entries.find(
+    (candidate) => candidate.id === entryId,
+  )
+  if (!entry || !lastTarget || busy) return
+  busy = true
+  try {
+    const roots: SceneNode[] = []
+    for (const id of entry.nodeIds) {
+      const node = await figma.getNodeByIdAsync(id)
+      if (
+        node &&
+        !node.removed &&
+        node.type !== 'PAGE' &&
+        node.type !== 'DOCUMENT'
+      ) {
+        roots.push(node as SceneNode)
+      }
+    }
+    const result = await revertRoots(roots)
+    post({ type: 'revert-done', result })
+  } finally {
+    busy = false
+    quietAfterOwnChanges()
+  }
+  await scan(lastTarget)
+}
+
+function pageOf(node: BaseNode): PageNode | null {
+  let current: BaseNode | null = node
+  while (current && current.type !== 'PAGE') current = current.parent
+  return current
+}
+
+async function select(nodeIds: string[]) {
+  const nodes: SceneNode[] = []
+  for (const id of nodeIds) {
+    const node = await figma.getNodeByIdAsync(id)
+    if (node && node.type !== 'DOCUMENT' && node.type !== 'PAGE') {
+      nodes.push(node as SceneNode)
+    }
+  }
+  if (nodes.length === 0) {
+    post({
+      type: 'error',
+      message: 'The layer is no longer in the file. Scan again.',
+    })
+    return
+  }
+  const page = pageOf(nodes[0])
+  if (page && page !== figma.currentPage) await figma.setCurrentPageAsync(page)
+  const onPage = nodes.filter((node) => pageOf(node) === figma.currentPage)
+  figma.currentPage.selection = onPage
+  // A hidden layer can be selected, but the canvas draws no box around it
+  // and the view does not move to it. The view goes to the layers the canvas
+  // shows, or, when every layer is hidden, to the layers they are in.
+  const shown = onPage.filter((node) => !isHidden(node))
+  const around =
+    shown.length > 0
+      ? shown
+      : [
+          ...new Set(
+            onPage
+              .map(shownAncestor)
+              .filter((node): node is SceneNode => node !== null),
+          ),
+        ]
+  if (around.length > 0) figma.viewport.scrollAndZoomIntoView(around)
+  const notes: string[] = []
+  const hidden = onPage.length - shown.length
+  if (hidden > 0) notes.push(hiddenNote(onPage, hidden, around, shown.length))
+  const elsewhere = nodes.length - onPage.length
+  if (elsewhere > 0) {
+    notes.push(
+      `Selected ${onPage.length} on this page. ${elsewhere} more ${elsewhere === 1 ? 'is' : 'are'} on other pages.`,
+    )
+  }
+  if (notes.length > 0) figma.notify(notes.join(' '), { timeout: 6000 })
+}
+
+/** Whether the node or a layer above it is hidden, so the canvas does not show it. */
+function isHidden(node: SceneNode): boolean {
+  for (
+    let current: BaseNode | null = node;
+    current && current.type !== 'PAGE' && current.type !== 'DOCUMENT';
+    current = current.parent
+  ) {
+    if ('visible' in current && !current.visible) return true
+  }
+  return false
+}
+
+/**
+ * The nearest layer above a hidden node that the canvas shows: the parent of
+ * the outermost hidden layer. Null when that parent is the page.
+ */
+function shownAncestor(node: SceneNode): SceneNode | null {
+  let outermost: BaseNode = node
+  for (
+    let current = node.parent;
+    current && current.type !== 'PAGE' && current.type !== 'DOCUMENT';
+    current = current.parent
+  ) {
+    if ('visible' in current && !current.visible) outermost = current
+  }
+  const parent = outermost.parent
+  return parent && parent.type !== 'PAGE' && parent.type !== 'DOCUMENT'
+    ? (parent as SceneNode)
+    : null
+}
+
+/** Says that Go to selected hidden layers, which only the Layers panel shows. */
+function hiddenNote(
+  selected: SceneNode[],
+  hidden: number,
+  around: SceneNode[],
+  shown: number,
+): string {
+  if (shown > 0) {
+    return `${hidden} of the ${selected.length} selected layers ${hidden === 1 ? 'is' : 'are'} hidden, so only the Layers panel shows ${hidden === 1 ? 'it' : 'them'}.`
+  }
+  const view =
+    around.length === 0
+      ? ''
+      : around.length === 1
+        ? ` The view shows ${around[0].name}, the layer ${hidden === 1 ? 'it is' : 'they are'} in.`
+        : ' The view shows the layers they are in.'
+  return hidden === 1
+    ? `${selected[0].name} is hidden, so it is only selected in the Layers panel.${view}`
+    : `The ${hidden} layers are hidden, so they are only selected in the Layers panel.${view}`
+}
+
+/** The entries the bindings are in, for Apply on the selected values. */
+function entriesOf(recordIds: ReadonlySet<string>): Set<string> {
+  return new Set(
+    (lastScan?.records ?? [])
+      .filter((record) => recordIds.has(record.id))
+      .map((record) => record.entryId),
+  )
+}
+
+async function selectOld(oldKey: string) {
+  if (!lastScan) return
+  const nodeIds = [
+    ...new Set(
+      lastScan.records
+        .filter((record) => record.oldKey === oldKey && isMappable(record))
+        .map((record) => record.nodeId),
+    ),
+  ]
+  await select(nodeIds)
+}
+
+/**
+ * Keeps the designer's choices, saves them in the file, and counts the scan
+ * again with them.
+ */
+function keepChoices(next: Overrides) {
+  overrides = next
+  post({ type: 'overrides', overrides })
+  if (!saveChoices(overrides)) post({ type: 'choices-not-saved' })
+  if (lastScan) {
+    // The health bars, the legend and the filters follow every change.
+    lastScan = withChoices(lastScan)
+    post({ type: 'kept-modes', kept, blocked })
+    post({ type: 'summary', summary: lastScan.summary })
+  }
+}
+
+function setOverrides(changes: OverrideChange[]) {
+  keepChoices(withChanges(overrides, changes))
+}
+
+async function entryDetail(entryId: string) {
+  if (!lastScan) return
+  const scan = lastScan
+  const entry = scan.summary.entries.find((item) => item.id === entryId)
+  const records = scan.records.filter((record) => record.entryId === entryId)
+  // A main component lists every instance in it, to show which of them
+  // still use legacy values and where those change.
+  const inComponent =
+    entry?.kind === 'component' || entry?.insideComponent !== undefined
+  post({
+    type: 'entry-detail',
+    entryId,
+    records,
+    oldInstances: scan.oldInstances.filter(
+      (instance) => instance.entryId === entryId,
+    ),
+    ...(inComponent
+      ? {
+          instances: await componentInstances(scan.instances, records, entryId),
+        }
+      : {}),
+  })
+}
+
+async function runDevExportInventory() {
+  const { files, notes } = await exportInventory()
+  post({ type: 'dev-export', files, notes })
+}
+
+async function runDevExportFixture() {
+  const node = figma.currentPage.selection[0]
+  if (!node) {
+    post({
+      type: 'dev-export',
+      files: [],
+      notes: ['Select the frame to export, then run the command again.'],
+    })
+    return
+  }
+  const fixture = await collectFixture(node)
+  post({
+    type: 'dev-export',
+    files: [
+      {
+        fileName: 'test-frame.json',
+        path: 'test/fixtures/test-frame.json',
+        json: `${JSON.stringify(fixture, null, 2)}\n`,
+      },
+    ],
+    notes: [],
+  })
+}
+
+figma.ui.onmessage = async (message: UiToPlugin) => {
+  try {
+    switch (message.type) {
+      case 'ready':
+        post({
+          type: 'init',
+          command,
+          mappingVersion: MAPPING_VERSION,
+          fileName: figma.root.name,
+          currentPageName: figma.currentPage.name,
+        })
+        postSelection()
+        postPages()
+        {
+          // The person's own preferences, kept in clientStorage, not the file.
+          const seen = (await figma.clientStorage
+            .getAsync(INTRO_KEY)
+            .catch(() => undefined)) as unknown
+          const settings = (await figma.clientStorage
+            .getAsync(SETTINGS_KEY)
+            .catch(() => undefined)) as unknown
+          post({
+            type: 'prefs',
+            introSeen: typeof seen === 'number' && seen >= INTRO_VERSION,
+            settings: readSettings(settings),
+          })
+        }
+        {
+          const saved = loadHealth()
+          if (saved) post({ type: 'saved-health', saved })
+        }
+        if (command === 'dev-export-inventory') await runDevExportInventory()
+        if (command === 'dev-export-fixture') await runDevExportFixture()
+        break
+      case 'scan':
+        await scan(currentTarget(message.scope, leftOutPages))
+        break
+      case 'cancel-scan':
+        cancelRequested = true
+        break
+      case 'get-pages':
+        postPages()
+        break
+      case 'set-left-out-pages':
+        leftOutPages = message.pageIds
+        saveLeftOutPages(leftOutPages)
+        postPages()
+        break
+      case 'get-entry':
+        await entryDetail(message.entryId)
+        break
+      case 'select':
+        await select(message.nodeIds)
+        break
+      case 'intro-seen':
+        await figma.clientStorage
+          .setAsync(INTRO_KEY, INTRO_VERSION)
+          .catch(() => undefined)
+        break
+      case 'save-settings':
+        await figma.clientStorage
+          .setAsync(SETTINGS_KEY, message.settings)
+          .catch(() => undefined)
+        break
+      case 'reset-window-size':
+        figma.ui.resize(WINDOW.width, WINDOW.height)
+        await figma.clientStorage
+          .deleteAsync(WINDOW_SIZE_KEY)
+          .catch(() => undefined)
+        break
+      case 'scan-page-of': {
+        const node = await figma.getNodeByIdAsync(message.nodeId)
+        const page = node ? pageOf(node) : null
+        if (node && page) {
+          await figma.setCurrentPageAsync(page)
+          if (node.type !== 'PAGE' && node.type !== 'DOCUMENT') {
+            figma.currentPage.selection = [node as SceneNode]
+            figma.viewport.scrollAndZoomIntoView([node as SceneNode])
+          }
+        }
+        await scan(currentTarget('page', leftOutPages))
+        break
+      }
+      case 'go-to-page': {
+        const page = await figma.getNodeByIdAsync(message.pageId)
+        if (page?.type === 'PAGE') await figma.setCurrentPageAsync(page)
+        break
+      }
+      case 'select-old':
+        await selectOld(message.oldKey)
+        break
+      case 'set-overrides':
+        setOverrides(message.changes)
+        break
+      case 'row-choice':
+        keepChoices(withRowChoice(overrides, message.row, message.value))
+        break
+      case 'apply':
+        await apply(message.entryIds)
+        break
+      case 'apply-selected': {
+        const ids = new Set(message.recordIds)
+        await apply([...entriesOf(ids)], ids)
+        break
+      }
+      case 'preview':
+        if (lastScan) {
+          const recordIds = message.recordIds && new Set(message.recordIds)
+          post({
+            type: 'preview',
+            id: message.id,
+            preview: previewRun(
+              lastScan.records,
+              overrides,
+              recordIds
+                ? entriesOf(recordIds)
+                : new Set(message.entryIds ?? []),
+              recordIds,
+              lastScan.oldInstances,
+            ),
+          })
+        }
+        break
+      case 'revert':
+        await revert(message.entryId)
+        break
+      case 'convert-typography':
+        await convert(message.instanceIds)
+        break
+      case 'preview-convert':
+        // From the same plan as convert(), with the instances of the main
+        // components when the Typography tab has had them counted.
+        if (lastScan) {
+          post({
+            type: 'convert-preview',
+            id: message.id,
+            preview: previewConversions(
+              planConversions(
+                lastScan.conversions,
+                overrides,
+                message.instanceIds,
+              ),
+              lastScan.oldInstances,
+              componentCounts,
+            ),
+          })
+        }
+        break
+      case 'get-typography-components':
+        if (lastScan) {
+          const { conversions, oldInstances } = lastScan
+          const counts =
+            componentCounts ?? (await typographyComponentCounts(oldInstances))
+          // A scan that ended meanwhile counts its own when asked. A choice
+          // made meanwhile replaces lastScan, but keeps its lists.
+          if (conversions === lastScan?.conversions) {
+            componentCounts = counts
+            post({ type: 'typography-components', counts })
+          }
+        }
+        break
+      case 'check-sources':
+        // One check at a time; the button is off while one runs.
+        if (lastScan && !checkingSources) {
+          checkingSources = true
+          let stopped = false
+          try {
+            figma.skipInvisibleInstanceChildren = false
+            const mains = remoteMainComponents(lastScan.oldInstances)
+            post({ type: 'sources-start', total: mains.length })
+            const counter = new LegacyCounter()
+            // Stop ends the check at once: the import under way goes on in
+            // Figma, but its answer is dropped.
+            const stop = new Promise<'stopped'>((resolve) => {
+              onStopSources = () => resolve('stopped')
+            })
+            for (const { key, instanceId } of mains) {
+              post({ type: 'source-checking', key })
+              const source = await Promise.race([
+                componentSource(instanceId, counter).catch(
+                  (error: unknown): ComponentSource => ({
+                    kind: 'failed',
+                    message:
+                      error instanceof Error ? error.message : String(error),
+                  }),
+                ),
+                stop,
+              ])
+              if (source === 'stopped') {
+                stopped = true
+                break
+              }
+              post({ type: 'source', key, source })
+            }
+          } finally {
+            checkingSources = false
+            onStopSources = undefined
+            post({ type: 'sources-done', ...(stopped ? { stopped } : {}) })
+          }
+        }
+        break
+      case 'cancel-sources':
+        onStopSources?.()
+        break
+      case 'resize': {
+        const clamped = clampSize(message.width, message.height)
+        const { width, height } = message.fit
+          ? { width: clamped.width, height: fitHeight(message.height) }
+          : clamped
+        figma.ui.resize(width, height)
+        if (message.done) {
+          await figma.clientStorage
+            .setAsync(WINDOW_SIZE_KEY, { width, height })
+            .catch(() => undefined)
+        }
+        break
+      }
+      case 'get-report':
+        if (lastScan) {
+          post({
+            type: 'report',
+            report: buildReport({
+              fileName: figma.root.name,
+              summary: lastScan.summary,
+              records: lastScan.records,
+              oldInstances: lastScan.oldInstances,
+              overrides,
+              kept,
+            }),
+          })
+        }
+        break
+      case 'run-dev-export-inventory':
+        await runDevExportInventory()
+        break
+      case 'run-dev-export-fixture':
+        await runDevExportFixture()
+        break
+      case 'notify':
+        figma.notify(message.message)
+        break
+    }
+  } catch (error) {
+    post({
+      type: 'error',
+      message: error instanceof Error ? error.message : String(error),
+    })
+  }
+}

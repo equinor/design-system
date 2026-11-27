@@ -1,0 +1,2462 @@
+/* The plugin window. Every value comes from the semantic tokens in
+   @equinor/eds-tokens, so the window follows the colour scheme and density
+   set on <html>. Layout pieces that the Beta has no component for are built
+   here; see BETA-GAPS.md. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+/*
+ * The Apply footer is fixed to the bottom of the window. ApplyActions sets
+ * --apply-footer-height to its height, so the content ends above it and
+ * scrolling to or focusing an element keeps it clear of the footer.
+ */
+html {
+  scroll-padding-block-end: calc(
+    var(--apply-footer-height, 0px) + var(--eds-spacing-sm)
+  );
+}
+
+/*
+ * The purple Figma uses for main components. The window uses it wherever it
+ * shows a main component, or a layer inside one, since a change there
+ * changes every instance. EDS has no token for it, so the value is local to
+ * the plugin. White text on it measures 5.3:1, so the label stays readable
+ * in both colour schemes. The purple is not used as a text colour, because
+ * on the dark canvas it measures 3.3:1, below the 4.5:1 text needs.
+ */
+:root {
+  --main-component-colour: #8a38f5;
+  --main-component-on-colour: #fff;
+}
+
+body {
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-body-md-font-size);
+  line-height: var(--eds-typography-body-md-line-height);
+  color: var(--eds-text-primary);
+  background-color: var(--eds-background-canvas);
+}
+
+[data-color-scheme='light'] {
+  color-scheme: light;
+}
+
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.app-header {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--eds-spacing-md);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  background-color: var(--eds-background-surface);
+}
+
+.app-title {
+  margin: 0;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-md-line-height);
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--eds-spacing-md);
+  padding-block-end: calc(
+    var(--eds-spacing-md) + var(--apply-footer-height, 0px)
+  );
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-md);
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.muted {
+  margin: 0;
+  font-size: var(--eds-typography-body-sm-font-size);
+  line-height: var(--eds-typography-body-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.scope {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.scope legend {
+  margin-block-end: var(--eds-spacing-xs);
+  padding: 0;
+}
+
+.scope-options {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-md);
+}
+
+.selection-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scan-action {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+}
+
+/* Select pages and the page count, beside File */
+.pages-line {
+  display: inline-flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.pages-count {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The page picker: one checkbox per page, dividers as lines as in Figma */
+.pages-dialog {
+  & p {
+    margin: 0;
+  }
+
+  & .pages-all {
+    padding-block-end: var(--eds-spacing-xs);
+    border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  }
+}
+
+.pages-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pages-divider {
+  margin-block: var(--eds-spacing-2xs);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.export-file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+.export-file-header {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.export-file-actions {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+}
+
+.export-json {
+  width: 100%;
+  padding: var(--eds-spacing-xs);
+  font-family: var(--eds-font-family-mono);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-primary);
+  resize: vertical;
+  background-color: var(--eds-background-input);
+  border: 1px solid var(--eds-border-interactive-neutral-muted-default);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+code {
+  font-family: var(--eds-font-family-mono);
+}
+
+.stack-tight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+/*
+ * Scan loader (ScanLoader.tsx): a map of the page being scanned, with the
+ * frames and layers as outlines that fill in when they are read, a box on
+ * the layer being read, and dots where EDS values are found. The first scan
+ * gets the whole window, a later one a card.
+ *
+ * Colours: the accent for what the scan is doing, and the dots in the same
+ * colours as the health bar's Migrated (success) and neutral for legacy
+ * values, which are not sorted into Ready, Needs check or No equivalent
+ * until the scan ends. EDS has no motion tokens, so the durations are local
+ * (BETA-GAPS.md). Every animation is inside the no-preference query at the
+ * end, so reduced motion keeps the map and the numbers but nothing moves.
+ */
+.scan-loader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-md);
+
+  &[data-variant='rescan'] {
+    gap: var(--eds-spacing-sm);
+    padding: var(--eds-spacing-sm);
+    background-color: var(--eds-background-surface);
+    border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+    border-radius: var(--eds-corner-radius-rounded);
+  }
+}
+
+.scan-loader-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  min-inline-size: 0;
+}
+
+.scan-loader-eyebrow {
+  margin: 0;
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.scan-loader-title {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-xl-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-xl-line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The map: a canvas with Figma's dot grid, and the page drawn to fit it. */
+.scan-map {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  block-size: clamp(160px, 36vh, 320px);
+  /* The canvas inside sizes itself from this box (cqw, cqh). */
+  container-type: size;
+  background-color: var(--eds-background-surface);
+  background-image: radial-gradient(
+    circle,
+    var(--eds-border-non-interactive-neutral-muted) 1px,
+    transparent 1.5px
+  );
+  background-size: var(--eds-spacing-md) var(--eds-spacing-md);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  /* The card's thumbnail; the size is the plugin's own, not a token. */
+  &[data-size='small'] {
+    flex-shrink: 0;
+    inline-size: 96px;
+    block-size: 60px;
+    background-image: none;
+  }
+
+  /* Before the page is loaded: a sheen across the empty canvas. */
+  &[data-loading]::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      var(--eds-background-non-interactive-neutral-muted),
+      transparent
+    );
+    transform: translateX(-100%);
+  }
+}
+
+.scan-map-canvas {
+  position: relative;
+  aspect-ratio: var(--_aspect);
+  inline-size: min(100cqw, 100cqh * var(--_aspect));
+
+  & svg {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    overflow: visible;
+  }
+
+  & rect {
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+.scan-map-sections rect {
+  fill: var(--eds-background-non-interactive-neutral-muted);
+  stroke: var(--eds-border-non-interactive-neutral-muted);
+}
+
+.scan-map-tiles rect {
+  fill: var(--eds-background-surface);
+  stroke: var(--eds-border-non-interactive-neutral-default);
+}
+
+.scan-map-read rect {
+  fill: var(--eds-background-non-interactive-accent-muted);
+  stroke: var(--eds-border-non-interactive-accent-default);
+}
+
+.scan-map-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* One pixel per value found, so the dots fill the layers in as a texture
+   instead of standing out one by one. */
+.scan-dot {
+  --_size: 1px;
+
+  position: absolute;
+  inline-size: var(--_size);
+  block-size: var(--_size);
+  margin: calc(var(--_size) / -2) 0 0 calc(var(--_size) / -2);
+  background-color: var(--eds-background-non-interactive-success-emphasis);
+
+  &[data-legacy] {
+    background-color: var(--eds-background-non-interactive-neutral-emphasis);
+  }
+}
+
+/* The layer being read: an accent box with a scan line running down it. */
+.scan-focus {
+  position: absolute;
+  overflow: hidden;
+  min-inline-size: 6px;
+  min-block-size: 6px;
+  background-color: color-mix(
+    in srgb,
+    var(--eds-background-non-interactive-accent-emphasis) 12%,
+    transparent
+  );
+  border: 2px solid var(--eds-border-non-interactive-accent-emphasis);
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px
+    color-mix(
+      in srgb,
+      var(--eds-border-non-interactive-accent-emphasis) 25%,
+      transparent
+    );
+
+  &::after {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    block-size: 40%;
+    content: '';
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      color-mix(
+        in srgb,
+        var(--eds-background-non-interactive-accent-emphasis) 45%,
+        transparent
+      ),
+      transparent
+    );
+    transform: translateY(-100%);
+  }
+}
+
+/* The progress bar. The Beta has no progress bar (BETA-GAPS.md). */
+.scan-bar {
+  position: relative;
+  overflow: hidden;
+  block-size: var(--eds-spacing-xs);
+  background-color: var(--eds-background-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-pill);
+
+  &[data-size='small'] {
+    block-size: var(--eds-spacing-3xs);
+  }
+}
+
+.scan-bar-fill {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+  background-color: var(--eds-background-non-interactive-accent-emphasis);
+  border-radius: inherit;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--eds-text-on-emphasis-accent) 45%, transparent),
+      transparent
+    );
+    transform: translateX(-100%);
+  }
+}
+
+/* Where each page of a file scan starts on the bar. */
+.scan-bar-page {
+  position: absolute;
+  inset-block: 0;
+  inline-size: 2px;
+  margin-inline-start: -1px;
+  background-color: var(--eds-background-canvas);
+}
+
+/* The numbers: the lead one large, the others as labels beside it. */
+.scan-loader-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-sm) var(--eds-spacing-xl);
+  align-items: flex-end;
+  margin: 0;
+
+  & > div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--eds-spacing-3xs);
+  }
+
+  & dt {
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+    color: var(--eds-text-secondary);
+  }
+
+  & dd {
+    margin: 0;
+    font-size: var(--eds-typography-label-lg-font-size);
+    font-weight: var(--eds-font-weight-medium);
+    font-variant-numeric: tabular-nums;
+    line-height: var(--eds-typography-label-lg-line-height);
+  }
+
+  & [data-lead] dd {
+    font-family: var(--eds-font-family-header);
+    font-size: var(--eds-typography-header-3xl-font-size);
+    line-height: var(--eds-typography-header-3xl-line-height);
+  }
+}
+
+.scan-loader-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scan-loader-legend {
+  display: flex;
+  gap: var(--eds-spacing-md);
+  margin: 0;
+  padding: 0;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-2xs);
+    align-items: center;
+  }
+
+  /* The legend's swatch is larger than the map's dots, so it can be seen. */
+  & .scan-dot {
+    --_size: 6px;
+
+    position: static;
+    margin: 0;
+    border-radius: var(--eds-corner-radius-pill);
+  }
+}
+
+.scan-loader-row {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+}
+
+.scan-loader-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+
+  /* The page name stays on one line; the counts under it may wrap. */
+  & > .scan-loader-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.scan-loader-line {
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+/* The results under the scan card while a later scan runs. */
+.results[data-updating] {
+  opacity: 0.4;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .results {
+    transition: opacity 200ms ease-out;
+  }
+
+  .scan-loader[data-variant='initial'] {
+    animation: scan-rise 450ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .scan-loader[data-variant='rescan'] {
+    animation: scan-rise 250ms ease-out both;
+  }
+
+  .scan-map[data-loading]::after {
+    animation: scan-sheen 1.4s ease-in-out infinite;
+  }
+
+  .scan-map-canvas {
+    animation: scan-map-in 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* A layer flashes in the accent as it is read. */
+  .scan-map-read rect {
+    animation: scan-tile-read 700ms ease-out both;
+  }
+
+  .scan-dot {
+    animation: scan-dot-in 400ms ease-out both;
+  }
+
+  .scan-loader-legend .scan-dot {
+    animation: none;
+  }
+
+  /* The box glides from one layer to the next. */
+  .scan-focus {
+    transition:
+      left 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      top 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      width 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      height 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &::after {
+      animation: scan-beam 1.1s linear infinite;
+    }
+  }
+
+  .scan-bar-fill {
+    transition: inline-size 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &::after {
+      animation: scan-sheen 1.6s ease-in-out infinite;
+    }
+  }
+
+  /* The end of the first scan: the map settles and the health bar grows. */
+  .scan-loader[data-done] {
+    & .scan-map-canvas {
+      animation: scan-done 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    & .health-bar {
+      transform-origin: left;
+      animation: scan-grow 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+  }
+}
+
+@keyframes scan-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes scan-map-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes scan-tile-read {
+  from {
+    fill: var(--eds-background-non-interactive-accent-emphasis);
+  }
+}
+
+@keyframes scan-dot-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes scan-beam {
+  to {
+    transform: translateY(250%);
+  }
+}
+
+@keyframes scan-sheen {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes scan-done {
+  40% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes scan-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Health bar. One segment per category, in the non-interactive fills of the
+   status tones, so they follow the colour scheme. */
+.health-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.health-value {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-xl-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-xl-line-height);
+}
+
+.health-bar {
+  --_height: var(--eds-spacing-sm);
+
+  display: flex;
+  overflow: hidden;
+  gap: 1px;
+  block-size: var(--_height);
+  border-radius: var(--eds-corner-radius-pill);
+  background-color: var(--eds-background-non-interactive-neutral-muted);
+
+  &[data-size='small'] {
+    --_height: var(--eds-spacing-2xs);
+
+    inline-size: var(--eds-spacing-4xl);
+    flex-shrink: 0;
+  }
+}
+
+.health-segment,
+.health-swatch {
+  --_color: var(--eds-background-non-interactive-neutral-emphasis);
+
+  background-color: var(--_color);
+
+  &[data-category='migrated'] {
+    --_color: var(--eds-background-non-interactive-success-emphasis);
+  }
+
+  /* Ready is information, not done yet, so it is blue rather than green. */
+  &[data-category='sure'] {
+    --_color: var(--eds-background-non-interactive-info-emphasis);
+  }
+
+  &[data-category='check'] {
+    --_color: var(--eds-background-non-interactive-warning-emphasis);
+  }
+
+  &[data-category='none'] {
+    --_color: var(--eds-background-non-interactive-danger-emphasis);
+  }
+
+  &[data-category='inInstance'] {
+    --_color: var(--eds-background-non-interactive-neutral-emphasis);
+  }
+
+  /* Manual fix: work left for the designer in Figma, warning like Needs
+     check, drawn as an outline because the plugin will not apply it. */
+  &[data-category='byHand'] {
+    --_color: transparent;
+
+    box-shadow: inset 0 0 0 1.5px
+      var(--eds-border-non-interactive-warning-emphasis);
+  }
+
+  /* A legacy mode waiting for the layers below it. It counts as No
+     equivalent, but nothing is wrong, so it is not red. */
+  &[data-category='held'] {
+    --_color: var(--eds-background-non-interactive-neutral-emphasis);
+  }
+}
+
+.health-segment {
+  flex-basis: 0;
+  min-inline-size: 2px;
+}
+
+.health-legend-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.legend-help {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+  margin: 0;
+
+  & dt {
+    display: flex;
+    gap: var(--eds-spacing-2xs);
+    align-items: center;
+    font-weight: var(--eds-font-weight-medium);
+  }
+
+  & dd {
+    margin: 0;
+    color: var(--eds-text-secondary);
+  }
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+}
+
+.filter-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.health-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs) var(--eds-spacing-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-3xs);
+    align-items: center;
+  }
+
+  & strong {
+    font-weight: var(--eds-font-weight-medium);
+  }
+}
+
+.health-swatch {
+  inline-size: var(--eds-spacing-xs);
+  block-size: var(--eds-spacing-xs);
+  border-radius: var(--eds-corner-radius-pill);
+}
+
+/* Frame list */
+.entry-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+}
+
+.group-title {
+  margin: 0 0 var(--eds-spacing-3xs);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.entry-list,
+.binding-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.entry-row,
+.binding-row {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  padding-block: var(--eds-spacing-3xs);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.binding-select {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  margin: 0;
+  padding: var(--eds-spacing-3xs) var(--eds-spacing-2xs);
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  background-color: var(--eds-background-interactive-neutral-muted-default);
+  border: 0;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:hover {
+    background-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:active {
+    background-color: var(--eds-background-interactive-neutral-muted-pressed);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.entry-name,
+.binding-name {
+  overflow: hidden;
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entry-meta,
+.binding-path,
+.binding-property,
+.binding-reason {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.entry-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  padding-block: var(--eds-spacing-3xs);
+}
+
+.entry-health-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.entry-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-2xs);
+}
+
+/* The kind of a row or group: Page, Section, Frame, Layers or Component. */
+.kind-label {
+  font-size: var(--eds-typography-label-xs-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--eds-text-secondary);
+}
+
+/* A main component, or a place inside one, in Figma's component purple
+   (--main-component-colour at the top of this file). */
+.main-component-label {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-3xs);
+  align-items: center;
+  max-inline-size: 100%;
+  padding-inline: var(--eds-spacing-2xs);
+  overflow: hidden;
+  font-size: var(--eds-typography-label-xs-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--main-component-on-colour);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: var(--main-component-colour);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.inside-main-component {
+  display: inline-flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  vertical-align: middle;
+}
+
+.main-component-glyph {
+  flex-shrink: 0;
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  fill: currentcolor;
+}
+
+/* The heading of an opened main component, or of a layer inside one, and
+   the Apply footer when it applies to main components only, carry the
+   purple at their edge, as Figma marks a selection in a component. */
+.main-component-context {
+  padding-inline-start: var(--eds-spacing-sm);
+  border-inline-start: 3px solid var(--main-component-colour);
+}
+
+.apply-footer[data-main-component] {
+  border-block-start: 2px solid var(--main-component-colour);
+}
+
+.selection-line {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  min-inline-size: 0;
+}
+
+.entry-health {
+  min-inline-size: var(--eds-spacing-2xl);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Inspector */
+.inspector-header {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inspector-title {
+  flex: 1;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-header-md-line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+}
+
+.binding-layer {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: baseline;
+  min-inline-size: 0;
+}
+
+.binding-swap {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  overflow-wrap: anywhere;
+}
+
+.binding-old {
+  color: var(--eds-text-secondary);
+}
+
+.binding-new {
+  font-weight: var(--eds-font-weight-medium);
+}
+
+.binding-reason {
+  font-style: italic;
+}
+
+/* What else a change does, such as text carried across to instances. */
+.binding-effect {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-primary);
+}
+
+/* Tabs. The Beta has no tabs component (BETA-GAPS.md). */
+.tab-list {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.tab {
+  --_border: transparent;
+
+  flex-shrink: 0;
+  margin: 0;
+  white-space: nowrap;
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+  color: var(--eds-text-secondary);
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-block-end: 2px solid var(--_border);
+
+  &:hover {
+    color: var(--eds-text-primary);
+  }
+
+  &[aria-selected='true'] {
+    --_border: var(--eds-border-non-interactive-accent-emphasis);
+
+    color: var(--eds-text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+.tab-panel {
+  padding-block-start: var(--eds-spacing-md);
+}
+
+/* Mapping view */
+.mapping-list,
+.mapping-rows {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mapping-list {
+  gap: var(--eds-spacing-sm);
+}
+
+.mapping-group {
+  padding: var(--eds-spacing-sm);
+  background-color: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.mapping-header,
+.mapping-row {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+}
+
+.mapping-header {
+  padding-block-end: var(--eds-spacing-xs);
+}
+
+.mapping-old,
+.mapping-target {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+}
+
+.mapping-row {
+  padding-block: var(--eds-spacing-xs);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.binding-actions {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-2xs);
+  align-items: flex-end;
+}
+
+.override-note {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-on-default-info);
+}
+
+/* Inside an instance: overridden there, or taken from the main component.
+   An override is the one the plugin can change, so it reads stronger. */
+.origin-label {
+  --_weight: var(--eds-font-weight-medium);
+  --_color: var(--eds-text-primary);
+
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--_weight);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--_color);
+
+  &[data-origin='main'] {
+    --_weight: var(--eds-font-weight-normal);
+    --_color: var(--eds-text-secondary);
+  }
+}
+
+/* A hidden layer, or one in a hidden layer: Go to only selects it in the
+   Layers panel, since the canvas draws no box around it. */
+.hidden-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+/* The Instances tab's tree, drawn as Figma's Layers panel draws layers so
+   designers know it at once: 32px rows at 11px, 24px indent per level, a caret
+   and a 16px layer icon, instances in Figma's component purple, slot content
+   under a row in Figma's slot pink, hidden instances dimmed with the hidden
+   icon. The colours are Figma's own, read from its stylesheet on 2026-11-19
+   (component text #8638e5 light, #d9b8ff dark; dimmed #c5b2dc, #7f699b; slot
+   #ea10ac, #ff99e0; row hover #f5f5f5, #383838), so they follow the window's
+   colour scheme with light-dark(). The slot icon is Figma's square with a plus
+   (checked against Figma 2026-11-19). */
+.tree-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.instance-tree {
+  --_component: light-dark(#8638e5, #d9b8ff);
+  --_component-dimmed: light-dark(#c5b2dc, #7f699b);
+  --_slot: light-dark(#ea10ac, #ff99e0);
+  /* Figma draws layer icons a step softer than the name, and at full
+     colour on hover: #a38cc0 and #7f699b for instances, #ab5998 for slots */
+  --_component-icon: light-dark(#a38cc0, #7f699b);
+  --_slot-icon: #ab5998;
+  --_hover: light-dark(#f5f5f5, #383838);
+  --_secondary: light-dark(#00000080, #ffffffb2);
+
+  font-family: Inter, var(--eds-font-family-ui);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.tree-row {
+  --_color: var(--eds-text-primary);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  block-size: 32px;
+  padding-inline: calc(var(--_depth, 0) * 24px) 1px;
+  color: var(--_color);
+  border-radius: 5px;
+
+  &:hover,
+  &:focus-within {
+    background-color: var(--_hover);
+  }
+
+  &[data-kind='instance'] {
+    --_color: var(--_component);
+    --_icon: var(--_component-icon);
+  }
+
+  &[data-kind='slot'] {
+    --_color: var(--_slot);
+    --_icon: var(--_slot-icon);
+  }
+
+  /* Frames and loose layers in Figma's text colour, a main component in
+     the component colour */
+  &[data-kind='frame'],
+  &[data-kind='loose'] {
+    --_icon: var(--_secondary);
+  }
+
+  &[data-kind='component'] {
+    --_color: var(--_component);
+    --_icon: var(--_component-icon);
+  }
+
+  &[data-hidden] {
+    --_color: var(--_component-dimmed);
+    --_icon: var(--_component-dimmed);
+  }
+
+  &:hover .tree-icon,
+  &:focus-within .tree-icon {
+    --_icon: var(--_color);
+  }
+}
+
+/* A row without layers below keeps the caret's place, without its hover. */
+.tree-spacer {
+  flex: none;
+  inline-size: 30px;
+}
+
+/* The caret fills the row's height but for 1px above and below, 30 by 30.
+   Its click area is stretched over the whole row, so a click anywhere on the
+   row opens it; the row's hover shows that, so the caret has none of its
+   own. */
+.tree-caret {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 30px;
+  block-size: 30px;
+  padding: 0;
+  color: var(--_secondary);
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: 5px;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    border-radius: 5px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+/* The values row has no layer icon; its name lines up with the others. */
+.tree-icon-space {
+  flex: none;
+  inline-size: 16px;
+}
+
+/* The small header over the inner instances of an instance in a frame's
+   Layers view, in the tree's type */
+.tree-heading {
+  padding-block: 12px 4px;
+  padding-inline-start: 8px;
+  font-family: Inter, var(--eds-font-family-ui);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--eds-text-secondary);
+}
+
+.tree-icon {
+  flex: none;
+  color: var(--_icon, currentColor);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+
+  &[data-filled],
+  & [data-fill] {
+    fill: currentColor;
+    stroke: none;
+  }
+}
+
+.tree-label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-inline-size: 0;
+  padding-inline-start: 4px;
+}
+
+.tree-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-hidden {
+  flex: none;
+  margin-inline-end: 8px;
+  color: var(--_secondary);
+}
+
+.tree-count {
+  flex: none;
+  margin-inline-start: 8px;
+  color: var(--_secondary);
+}
+
+/* Go to at the right end of the row: 30px high, in the row's 11px, styled as
+   the EDS ghost button (Button variant ghost, tone accent): no border, the
+   muted accent fill on hover and focus, the pressed fill when pressed. */
+.tree-goto {
+  --_bg: transparent;
+
+  /* Above the caret's click area */
+  position: relative;
+  z-index: 1;
+  flex: none;
+  block-size: 30px;
+  margin-inline-start: 4px;
+  padding-inline: 8px;
+  font: inherit;
+  color: var(--eds-text-on-default-accent);
+  cursor: pointer;
+  background-color: var(--_bg);
+  border: 0;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:hover,
+  &:focus-visible {
+    --_bg: var(--eds-background-interactive-accent-muted-hover);
+  }
+
+  &:active {
+    --_bg: var(--eds-background-interactive-accent-muted-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+/* Where an instance's legacy values can be fixed (phase 3): a short label on
+   its row and on its group in Where to fix them, in the row's type. A library
+   update is information, in info blue, as Ready is; the others are neutral. */
+.tree-source {
+  --_bg: var(--eds-background-non-interactive-neutral-muted);
+  --_color: var(--eds-text-on-muted-neutral);
+
+  flex: none;
+  margin-inline-start: 6px;
+  padding-inline: 4px;
+  font-family: Inter, var(--eds-font-family-ui);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--_color);
+  white-space: nowrap;
+  background-color: var(--_bg);
+  border-radius: 3px;
+
+  &[data-source='update'] {
+    --_bg: var(--eds-background-non-interactive-info-muted);
+    --_color: var(--eds-text-on-muted-info);
+  }
+}
+
+.source-check {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.source-title {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+
+  & .tree-source {
+    margin-inline-start: 0;
+  }
+}
+
+/* In a frame's Layers view: the values on an instance's own layers, under its
+   row at the level of the instances in it, in the window's type rather than
+   the tree's 11px. A margin, so the list's top line starts at the indent too. */
+.tree-leaves {
+  margin-inline-start: calc(var(--_depth, 0) * 24px);
+  font-family: var(--eds-font-family-ui);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+/* Target picker */
+.picker-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* The Beta Autocomplete keeps its input at its own width inside a wider
+   root, so the wrapper is stretched here (BETA-GAPS.md). */
+.picker-autocomplete {
+  inline-size: 100%;
+
+  & .anchor {
+    inline-size: 100%;
+  }
+}
+
+/* Accordion contents */
+.group-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  min-inline-size: 0;
+  text-align: start;
+}
+
+.binding-row {
+  align-items: flex-start;
+}
+
+.binding-check {
+  flex-shrink: 0;
+  inline-size: var(--eds-spacing-xl);
+}
+
+/* The values of an open row, with the Convert actions on the Typography tab. */
+.binding-list.nested,
+.stack-tight.nested {
+  margin-inline-start: var(--eds-spacing-xl);
+}
+
+.mapping-row-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+}
+
+.mapping-row-block .mapping-row {
+  align-items: flex-start;
+}
+
+/* Bulk bar: stays at the bottom of the window while there is a selection. */
+.app {
+  position: relative;
+}
+
+.bulk-bar {
+  position: sticky;
+  inset-block-end: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  background-color: var(--eds-background-floating);
+  border-block-start: 1px solid
+    var(--eds-border-non-interactive-neutral-default);
+  box-shadow: var(--eds-elevation-high);
+}
+
+.bulk-count {
+  font-size: var(--eds-typography-label-md-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.bulk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+}
+
+/* Target picker, built like Figma's variable picker. */
+.target-picker {
+  inline-size: min(100%, 440px);
+}
+
+.variable-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+}
+
+.variable-options {
+  overflow-y: auto;
+  max-block-size: 320px;
+  padding-block: var(--eds-spacing-3xs);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.variable-group-title {
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm) var(--eds-spacing-3xs);
+  font-size: var(--eds-typography-label-sm-font-size);
+  font-weight: var(--eds-font-weight-medium);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.variable-option {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding: var(--eds-spacing-3xs) var(--eds-spacing-sm);
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--eds-background-interactive-accent-selected-default);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+.swatch,
+.option-preview {
+  flex-shrink: 0;
+  inline-size: var(--eds-spacing-lg);
+  block-size: var(--eds-spacing-lg);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.swatch {
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.option-label {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.option-value {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The actions at the top of an accordion panel: Select all and Go to. The
+   accordion header is a summary, which cannot hold buttons. */
+.panel-actions {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--eds-spacing-xs);
+}
+
+/* Frames and layers without EDS variables, hidden behind a button. */
+.empty-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  align-items: flex-start;
+  padding-block-start: var(--eds-spacing-xs);
+}
+
+/* Apply, Review and Revert under a health bar. */
+.apply-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+}
+
+.apply-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+}
+
+.run-failures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-xs);
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* The ⚠ review, one binding at a time. */
+.review-progress {
+  block-size: var(--eds-spacing-3xs);
+  overflow: hidden;
+  background: var(--eds-background-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-pill);
+
+  & span {
+    display: block;
+    block-size: 100%;
+    background: var(--eds-background-non-interactive-accent-emphasis);
+  }
+}
+
+.review-reason {
+  margin: 0;
+  padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  font-size: var(--eds-typography-body-sm-font-size);
+  line-height: var(--eds-typography-body-sm-line-height);
+  background: var(--eds-background-non-interactive-warning-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+}
+
+.review-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding-inline-start: var(--eds-spacing-md);
+}
+
+/* What a Manual fix's reset also removes and sets again. */
+.reset-effects {
+  margin-block-start: var(--eds-spacing-2xs);
+
+  & p {
+    margin: 0;
+  }
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--eds-spacing-4xs);
+    margin: var(--eds-spacing-3xs) 0 0;
+    padding-inline-start: var(--eds-spacing-md);
+  }
+}
+
+/* The scope line under the health bar, with Export report beside it. */
+.scope-line {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.report-preview {
+  max-block-size: 12rem;
+  margin: var(--eds-spacing-xs) 0 0;
+  padding: var(--eds-spacing-xs);
+  overflow: auto;
+  font-family: ui-monospace, monospace;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  white-space: pre-wrap;
+  background: var(--eds-background-canvas);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+}
+
+.saved-frames {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-sm);
+    justify-content: space-between;
+  }
+}
+
+/* UX review F2: what each proposed target is for, under its name. */
+.option-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.option-meaning {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.review-details {
+  margin-block-start: var(--eds-spacing-2xs);
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+
+  & summary {
+    cursor: pointer;
+  }
+}
+
+/* UX review F1: one line that says what is shown, with the filters behind it. */
+.filter-summary {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* UX review F6 and F7: the Mapping tab laid out like Figma's Check designs.
+   Sections by what the values are on, one row per legacy variable and
+   target. */
+.tab-count {
+  color: var(--eds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.check-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-3xs);
+  padding-block-start: var(--eds-spacing-xs);
+}
+
+.check-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--eds-spacing-3xs);
+  border-block-end: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.check-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check-row-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-4xs);
+}
+
+.check-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr) auto auto;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.check-legacy,
+.check-target {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  min-inline-size: 0;
+  min-block-size: var(--eds-spacing-xl);
+  padding: var(--eds-spacing-4xs) var(--eds-spacing-2xs);
+  font: inherit;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-primary);
+  text-align: start;
+  cursor: pointer;
+  background: var(--eds-background-surface);
+  border: 1px solid var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:hover {
+    background: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+
+  & .swatch,
+  & .option-preview {
+    inline-size: var(--eds-spacing-md);
+    block-size: var(--eds-spacing-md);
+  }
+}
+
+.check-count {
+  min-inline-size: var(--eds-spacing-md);
+  color: var(--eds-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.check-legacy-name,
+.check-target-name {
+  /* Compact rows stay on one line; the full name is in the tooltip and the
+     picker. Typography keeps its size and font on a second line (FR2). */
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.check-arrow {
+  color: var(--eds-text-secondary);
+}
+
+.check-status {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--eds-spacing-4xs);
+  align-items: center;
+  font-size: var(--eds-typography-label-sm-font-size);
+  color: var(--eds-text-on-default-warning);
+}
+
+.check-choice {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--eds-icon-secondary);
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.check-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  padding-inline-start: calc(var(--eds-spacing-lg) + var(--eds-spacing-2xs));
+}
+
+/* UX review F8: Apply in a footer fixed to the bottom of the window. */
+.apply-footer {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 4;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  /* Room for the resize grip in the corner */
+  padding-inline-end: calc(var(--eds-spacing-md) + 32px);
+  background: var(--eds-background-surface);
+  border-block-start: 1px solid var(--eds-border-non-interactive-neutral-muted);
+}
+
+.apply-summary {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--eds-typography-label-md-font-size);
+  line-height: var(--eds-typography-label-md-line-height);
+}
+
+.most-work {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  padding-block-end: var(--eds-spacing-sm);
+}
+
+/* Check designs: actions and settings at the right of the header. */
+.header-actions {
+  display: flex;
+  gap: var(--eds-spacing-3xs);
+  align-items: center;
+  margin-inline-start: auto;
+}
+
+/* After a scan the scope and Scan share one line. */
+.scan-controls.compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs) var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+
+  & .section-title {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
+/* Final review FR2: the target on two lines, its name and then its value. */
+.check-target-text {
+  /* The value sits on the same line as the name, as in Check designs, and
+     moves under it only when both do not fit, such as a text style's size
+     and font. */
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 0 var(--eds-spacing-2xs);
+  align-items: baseline;
+  justify-content: space-between;
+  min-inline-size: 0;
+
+  /* The name starts at its own width, so the value wraps under it when both
+     do not fit. With the basis of 0 from flex: 1, the name gave way to the
+     value instead, and a text style read "bo…" beside "14px, Inter Regular"
+     at the default width (test session 2, 2026-11-25). */
+  & .check-target-name {
+    flex: 1 1 auto;
+  }
+
+  & .option-value {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+/* The legacy number, in px, at the end of the legacy side. */
+.check-legacy .option-value {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+/* Final review FR8: tighter tabs for the kinds of value. */
+.tabs.compact > .tab-list {
+  gap: 0;
+
+  & .tab {
+    padding-inline: var(--eds-spacing-2xs);
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+  }
+}
+
+/* Final review FR5: a line about local components when they are hidden. */
+.components-note {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding-block-start: var(--eds-spacing-sm);
+}
+
+.scan-action {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+/* The layer src/ui/fit.ts watches to see how much of the window is in view:
+   the whole window, under everything, drawing nothing. */
+.fit-probe {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* One line of a longer explanation, and a section title, with the rest of
+   the explanation behind an info button at the end (src/ui/components/
+   InfoButton.tsx). */
+.info-note,
+.section-heading {
+  display: flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+
+  & p {
+    margin: 0;
+  }
+}
+
+/* The grip that resizes the window, in the bottom right corner. */
+.resize-handle {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  z-index: 5;
+  /* A target large enough to find and drag; the grip is drawn inside it */
+  inline-size: 32px;
+  block-size: 32px;
+  padding: 6px;
+  color: var(--eds-icon-secondary);
+  cursor: nwse-resize;
+  touch-action: none;
+  background: none;
+  border: 0;
+
+  & svg {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: -2px;
+  }
+}
+
+/* A number has no swatch; its empty square would only take room from the name. */
+.check-target .option-preview {
+  display: none;
+}
+
+/* The legacy colour as it resolves on the layers, beside its name. */
+.check-swatches {
+  display: inline-flex;
+  flex-shrink: 0;
+
+  & .swatch {
+    inline-size: var(--eds-spacing-md);
+    block-size: var(--eds-spacing-md);
+  }
+
+  & .swatch + .swatch {
+    margin-inline-start: calc(var(--eds-spacing-2xs) * -1);
+  }
+}
+
+/* Why a row needs a check, under the row, in one line; the full text is in the tooltip and the review. */
+.check-reason {
+  margin: 0;
+  padding-inline-start: calc(var(--eds-spacing-lg) + var(--eds-spacing-2xs));
+  overflow: hidden;
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* The status at the end of a row. With a reason, it is a button: a tooltip
+   says why, and a click opens the whole reason. */
+.check-why {
+  padding: var(--eds-spacing-4xs);
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: var(--eds-corner-radius-rounded);
+
+  &:hover {
+    background: var(--eds-background-interactive-neutral-muted-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--eds-border-interactive-focus);
+    outline-offset: 1px;
+  }
+}
+
+.check-why[data-kind='none'] {
+  color: var(--eds-icon-secondary);
+}
+
+/*
+ * The tooltips that give a reason hold a sentence or two. The Beta Tooltip
+ * sets width: max-content, so the text stays on one line, and when no side
+ * of the trigger has room for that line, the tooltip keeps its preferred side
+ * and runs out of the window. Here the text wraps to the room on the side the
+ * tooltip is placed on, up to a width that stays readable in a wide window.
+ * The minimum width stops it from wrapping into a narrow column above or
+ * below a trigger at the edge of the window: that side does not fit, so the
+ * tooltip moves on to a side with more room.
+ */
+.reason-tooltip {
+  inline-size: fit-content;
+  min-inline-size: 240px;
+  max-inline-size: 360px;
+}
+
+/*
+ * The introduction. Equinor's own look: the Equinor typeface for the
+ * heading, a moss green band with a picture made of the window's own parts,
+ * and plenty of space. Only EDS Beta tokens, so it follows light and dark.
+ */
+.intro {
+  inline-size: min(calc(100vw - 2 * var(--eds-spacing-md)), 520px);
+  /* One height for every step, so the dialog does not jump */
+  block-size: min(calc(100vh - 2 * var(--eds-spacing-md)), 640px);
+  overflow: hidden;
+  background: var(--eds-background-surface);
+
+  /* Only when open: a closed dialog keeps the browser's display: none */
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.intro-hero {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 168px;
+  padding: var(--eds-spacing-xl) var(--eds-spacing-lg);
+  color: var(--eds-text-on-emphasis-accent);
+  background: var(--eds-background-non-interactive-accent-emphasis);
+}
+
+.intro-hero-tokens {
+  /* Both cards as wide as the longer name, the arrow centred between them */
+  display: grid;
+  gap: var(--eds-spacing-xs);
+  justify-items: stretch;
+  inline-size: max-content;
+  max-inline-size: 100%;
+
+  & .intro-hero-arrow {
+    justify-self: center;
+  }
+}
+
+.intro-token {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-2xs);
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  color: var(--eds-text-primary);
+  background: var(--eds-background-surface);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-high);
+
+  & code {
+    font-family: var(--eds-font-family-mono);
+    font-size: var(--eds-typography-label-sm-font-size);
+    line-height: var(--eds-typography-label-sm-line-height);
+  }
+}
+
+.intro-token-library {
+  font-size: var(--eds-typography-label-xs-font-size);
+  line-height: var(--eds-typography-label-xs-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.intro-token-row {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.intro-hero-arrow {
+  color: var(--eds-icon-on-emphasis-accent);
+}
+
+.intro-hero-health {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+  inline-size: min(100%, 320px);
+  padding: var(--eds-spacing-md);
+  color: var(--eds-text-primary);
+  background: var(--eds-background-surface);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-high);
+}
+
+.intro-hero-figure {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-lg-font-size);
+  line-height: var(--eds-typography-header-lg-line-height);
+}
+
+.intro-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-2xs);
+}
+
+.intro-hero-instance {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+.intro-instance-card {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-md);
+  color: var(--eds-text-primary);
+  background: var(--eds-background-surface);
+  border-radius: var(--eds-corner-radius-rounded);
+  box-shadow: var(--eds-elevation-high);
+
+  & svg {
+    color: var(--eds-icon-secondary);
+  }
+}
+
+.intro-hero-caption {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+}
+
+.intro-hero-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--eds-spacing-xs);
+  inline-size: min(100%, 320px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & li {
+    display: flex;
+    gap: var(--eds-spacing-xs);
+    align-items: center;
+    padding: var(--eds-spacing-xs) var(--eds-spacing-sm);
+    font-weight: var(--eds-font-weight-medium);
+    color: var(--eds-text-primary);
+    background: var(--eds-background-surface);
+    border-radius: var(--eds-corner-radius-rounded);
+    box-shadow: var(--eds-elevation-high);
+  }
+}
+
+.intro-step-number {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--eds-spacing-xl);
+  block-size: var(--eds-spacing-xl);
+  font-size: var(--eds-typography-label-sm-font-size);
+  color: var(--eds-text-on-emphasis-accent);
+  background: var(--eds-background-non-interactive-accent-emphasis);
+  border-radius: var(--eds-corner-radius-pill);
+}
+
+.intro-hero-ready svg {
+  inline-size: 72px;
+  block-size: 72px;
+  color: var(--eds-icon-on-emphasis-accent);
+}
+
+.intro-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+  min-block-size: 0;
+  overflow-y: auto;
+  padding: var(--eds-spacing-lg) var(--eds-spacing-lg) var(--eds-spacing-sm);
+}
+
+.intro-progress {
+  display: flex;
+  gap: var(--eds-spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intro-step-label {
+  font-size: var(--eds-typography-label-sm-font-size);
+  line-height: var(--eds-typography-label-sm-line-height);
+  color: var(--eds-text-secondary);
+}
+
+.intro-segments {
+  display: flex;
+  gap: var(--eds-spacing-3xs, 2px);
+}
+
+.intro-segment {
+  inline-size: 24px;
+  block-size: 4px;
+  background: var(--eds-border-non-interactive-neutral-muted);
+  border-radius: var(--eds-corner-radius-pill);
+
+  &[data-done] {
+    background: var(--eds-background-non-interactive-accent-emphasis);
+  }
+}
+
+/* The Equinor typeface, larger than the Dialog's own title */
+.eds-dialog .intro-title {
+  font-family: var(--eds-font-family-header);
+  font-size: var(--eds-typography-header-xl-font-size);
+  font-weight: var(--eds-font-weight-normal);
+  line-height: var(--eds-typography-header-xl-line-height);
+  color: var(--eds-text-primary);
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-sm);
+
+  & p {
+    margin: 0;
+  }
+}
+
+.intro-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+  margin: 0;
+  padding-inline-start: var(--eds-spacing-lg);
+}
+
+.intro-actions {
+  display: flex;
+  flex: none;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+  padding: var(--eds-spacing-sm) var(--eds-spacing-lg) var(--eds-spacing-lg);
+}
+
+.intro-actions-end {
+  display: flex;
+  gap: var(--eds-spacing-xs);
+  margin-inline-start: auto;
+}
+
+/* Settings: sections of switches and buttons. The page picker scrolls the
+   same way, for a file with many pages. */
+.settings-dialog,
+.pages-dialog {
+  inline-size: min(calc(100vw - 2 * var(--eds-spacing-md)), 420px);
+  max-block-size: calc(100vh - 2 * var(--eds-spacing-md));
+
+  /* In a short window the sections scroll, and Done stays in view */
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & > .content {
+    min-block-size: 0;
+    overflow-y: auto;
+  }
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eds-spacing-xs);
+
+  & + & {
+    padding-block-start: var(--eds-spacing-md);
+    border-block-start: 1px solid
+      var(--eds-border-non-interactive-neutral-muted);
+  }
+
+  & p {
+    margin: 0;
+  }
+}
+
+.settings-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eds-spacing-xs);
+  align-items: center;
+}
+
+/* Rule review 2026-11-12: a row whose new colour looks clearly different,
+   in the status column so the row keeps its grid */
+.check-status-group {
+  display: inline-flex;
+  gap: var(--eds-spacing-2xs);
+  align-items: center;
+}
+
+.check-visible-change {
+  display: inline-flex;
+  align-items: center;
+  color: var(--eds-icon-secondary);
+}

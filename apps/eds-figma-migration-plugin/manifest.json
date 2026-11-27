@@ -1,0 +1,31 @@
+{
+  "name": "EDS Variable Migration [BETA]",
+  "id": "1702357333472971124",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "permissions": ["teamlibrary"],
+  "networkAccess": {
+    "allowedDomains": ["https://cdn.eds.equinor.com"],
+    "reasoning": "Loads the Equinor and Inter fonts that the EDS components in the plugin window are set in. The plugin sends no data anywhere."
+  },
+  "menu": [
+    { "name": "Open", "command": "open" },
+    { "separator": true },
+    {
+      "name": "Developer",
+      "menu": [
+        {
+          "name": "Export EDS inventories",
+          "command": "dev-export-inventory"
+        },
+        {
+          "name": "Export scan of selected frame as fixture",
+          "command": "dev-export-fixture"
+        }
+      ]
+    }
+  ]
+}

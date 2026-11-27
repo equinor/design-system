@@ -1,0 +1,31 @@
+# Gaps in the Beta
+
+The plugin window is a small app built on the Beta components (`/next`) and
+the Beta tokens. This file records each component or token that was missing
+or awkward while building it, with what the plugin does instead. Add to it as
+the plugin grows.
+
+| What                                                            | Where it came up                                       | What the plugin does                                                                                                                                              |
+| --------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No typography component                                         | Window title, section titles, help text                | Plain `h1`, `h2` and `p` elements with the typography tokens in `ui.css`                                                                                          |
+| No radio group                                                  | The Page or File scope                                 | A `fieldset` with a `legend` around two `Radio` components, laid out in `ui.css`                                                                                  |
+| No border width token                                           | Header divider, the JSON field in the developer export | `1px` in `ui.css`                                                                                                                                                 |
+| No code or monospace text style                                 | The JSON field in the developer export                 | `--eds-font-family-mono` with the label size tokens; the Figma file has `mono/*` text styles, but the CSS bundle has no mono size tokens                          |
+| No list or table                                                | The frame list and the bindings in the inspector       | `ul` rows with a full-width `button` for the row action and a separate icon `Button`, styled in `ui.css`                                                          |
+| No progress bar or meter                                        | The health bar, each frame's bar, the scan's progress  | Flex segments in the non-interactive emphasis fills of the status tones, with `role="img"` and the counts as its label; the scan uses `role="progressbar"`        |
+| No segmented control or filter group                            | Filtering the bindings in the inspector by category    | A row of `Chip`s with `selected`, in a `role="group"`                                                                                                             |
+| `Switch` with a long label wraps the label under the knob       | Showing the local components                           | A shorter label                                                                                                                                                   |
+| `/next` is not in the exports map                               | Building an app in the monorepo against main           | Aliases in `vite.config.ts` and `paths` in `tsconfig.json` to the build, as the docs site does. Deliberate (#4395), but every internal app repeats it             |
+| Fonts are not part of a package                                 | Loading Equinor and Inter                              | The stylesheet from `cdn.eds.equinor.com`, declared under `networkAccess` in the manifest                                                                         |
+| No tabs                                                         | Frames and Mapping in the overview                     | Buttons with the ARIA tabs pattern and arrow-key navigation in `Tabs.tsx`                                                                                         |
+| `Autocomplete` does not fill its container                      | The search in the target picker                        | The root takes the width, but the input wrapper (`.anchor`) keeps about 200px, so `ui.css` stretches it from outside; this reaches into the component's internals |
+| `Accordion.Header` is a `summary`, so it cannot hold a checkbox | Ticking every binding of a layer or variable at once   | A “Select all” checkbox at the top of the panel                                                                                                                   |
+| No sticky action bar or toolbar                                 | The actions on the ticked bindings                     | `BulkBar.tsx`, a sticky region at the bottom of the window                                                                                                        |
+| No motion tokens (durations, easing)                            | The scan loader                                        | Durations and curves in `ui.css`, all inside a `prefers-reduced-motion: no-preference` query                                                                      |
+
+## Menu
+
+`Menu` and `MenuItem` style a list, but do not open, close, position or
+handle the keyboard. The settings used to be such a menu, with all of that
+added by hand; they are now a Beta `Dialog` with `Switch`es and buttons
+(`src/ui/components/SettingsDialog.tsx`), which needs none of it.

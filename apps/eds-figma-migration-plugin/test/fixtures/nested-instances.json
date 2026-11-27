@@ -1,0 +1,1542 @@
+{
+  "generatedAt": "2026-11-19",
+  "fileName": "Sample file",
+  "frame": {
+    "id": "2100:1825",
+    "name": "Well details"
+  },
+  "variables": {
+    "VariableID:9458bde037474d1ffdf45e49031dbc06252c21bf/4014:1103": {
+      "id": "VariableID:9458bde037474d1ffdf45e49031dbc06252c21bf/4014:1103",
+      "key": "9458bde037474d1ffdf45e49031dbc06252c21bf",
+      "name": "Generic/Space horizontal",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:4d3d9f65bd72b51c809e29e47a426c3690f991dd/4014:1104": {
+      "id": "VariableID:4d3d9f65bd72b51c809e29e47a426c3690f991dd/4014:1104",
+      "key": "4d3d9f65bd72b51c809e29e47a426c3690f991dd",
+      "name": "Generic/Space vertical",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756": {
+      "id": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+      "key": "d6a5fcea9820325069761585ffde20e1d35f614e",
+      "name": "Generic/Corner radius",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12": {
+      "id": "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12",
+      "key": "8b40d66aadc04e567e647289d3cf55c1fa51715c",
+      "name": "Bg/Surface",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1": {
+      "id": "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1",
+      "key": "a910f606b5064699233e8df89d266c6c3ef921a5",
+      "name": "Border/Subtle",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:09b34ad488982377ef0b3dcfcbcffd3beb1f8031/4040:1": {
+      "id": "VariableID:09b34ad488982377ef0b3dcfcbcffd3beb1f8031/4040:1",
+      "key": "09b34ad488982377ef0b3dcfcbcffd3beb1f8031",
+      "name": "Generic/Gap horizontal",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:4855eb51596e3f2f51b0d58717fd6f8b5c0d9c4b/4375:19": {
+      "id": "VariableID:4855eb51596e3f2f51b0d58717fd6f8b5c0d9c4b/4375:19",
+      "key": "4855eb51596e3f2f51b0d58717fd6f8b5c0d9c4b",
+      "name": "Typography/Baseline adjust top",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:0bea9c99113c48731fe7e95a88369051e1968cf1/4375:20": {
+      "id": "VariableID:0bea9c99113c48731fe7e95a88369051e1968cf1/4375:20",
+      "key": "0bea9c99113c48731fe7e95a88369051e1968cf1",
+      "name": "Typography/Baseline adjust bottom",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:98cfb79c38049c1c20062c792840369d5f106d8d/4498:3": {
+      "id": "VariableID:98cfb79c38049c1c20062c792840369d5f106d8d/4498:3",
+      "key": "98cfb79c38049c1c20062c792840369d5f106d8d",
+      "name": "Typography/Tracking",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8": {
+      "id": "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8",
+      "key": "7e185b83cf30d6f965f9fcc63d6dce0b836b07eb",
+      "name": "Typography/Font size",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902": {
+      "id": "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902",
+      "key": "d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea",
+      "name": "Typography/Font family",
+      "type": "STRING",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23": {
+      "id": "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23",
+      "key": "35fc8f53acb295f6bd0101028ded4d7e3ba38470",
+      "name": "Typography/Line height",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:417727d6f9182a60692665c2f807b6a3edcdffc5/4375:35": {
+      "id": "VariableID:417727d6f9182a60692665c2f807b6a3edcdffc5/4375:35",
+      "key": "417727d6f9182a60692665c2f807b6a3edcdffc5",
+      "name": "Typography/Font weight",
+      "type": "FLOAT",
+      "collectionKey": "d81ca23cb1cce2daf508b6525a2672f0f1863573",
+      "collectionName": "🗣️ Semantic"
+    },
+    "VariableID:9a7951590438e5e2ba22bbd0fe7378a9bd8d5a12/9162:1": {
+      "id": "VariableID:9a7951590438e5e2ba22bbd0fe7378a9bd8d5a12/9162:1",
+      "key": "9a7951590438e5e2ba22bbd0fe7378a9bd8d5a12",
+      "name": "Text/Subtle",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    },
+    "VariableID:3ddf7b2d7199abc4d49b5d8133636dd738d4f94e/9152:0": {
+      "id": "VariableID:3ddf7b2d7199abc4d49b5d8133636dd738d4f94e/9152:0",
+      "key": "3ddf7b2d7199abc4d49b5d8133636dd738d4f94e",
+      "name": "Border/Medium",
+      "type": "COLOR",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance"
+    }
+  },
+  "nodes": {
+    "2100:1826": {
+      "name": "Details panel",
+      "type": "INSTANCE",
+      "path": [
+        "Well details"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "strokeSides": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826"
+      ]
+    },
+    "I2100:1826;2100:1774": {
+      "name": "Header",
+      "type": "FRAME",
+      "path": [
+        "Well details",
+        "Details panel"
+      ],
+      "context": {
+        "nodeType": "FRAME",
+        "names": [
+          "Header",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        }
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826"
+      ]
+    },
+    "I2100:1826;2100:1775": {
+      "name": "Typography",
+      "type": "INSTANCE",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Header"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Typography",
+          "Header",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        }
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1775"
+      ]
+    },
+    "I2100:1826;2100:1775;2526:534": {
+      "name": "Typography",
+      "type": "TEXT",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Header",
+        "Typography"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Typography",
+          "Typography",
+          "Header",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "singleLine": true
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1775"
+      ],
+      "fillUnder": {
+        "owner": "2100:1826",
+        "variable": "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12"
+      }
+    },
+    "I2100:1826;2100:1777;5823:9340;67:16": {
+      "name": "icon",
+      "type": "BOOLEAN_OPERATION",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Header",
+        "Close",
+        "Leading Icon"
+      ],
+      "context": {
+        "nodeType": "BOOLEAN_OPERATION",
+        "names": [
+          "icon",
+          "Leading Icon",
+          "Close",
+          "Header",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "hasReactions": true,
+        "size": [
+          12,
+          12
+        ]
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1777",
+        "I2100:1826;2100:1777;5823:9340"
+      ],
+      "fillUnder": {
+        "owner": "2100:1826",
+        "variable": "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12"
+      }
+    },
+    "I2100:1826;2100:1813;2100:1952": {
+      "name": "Tab",
+      "type": "INSTANCE",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content",
+        "Tabs"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Tab",
+          "Tabs",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "hasReactions": true,
+        "strokeSides": [
+          0,
+          0,
+          2,
+          0
+        ]
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:1952"
+      ]
+    },
+    "I2100:1826;2100:1813;2100:1953": {
+      "name": "Tab",
+      "type": "INSTANCE",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content",
+        "Tabs"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Tab",
+          "Tabs",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "hasReactions": true,
+        "strokeSides": [
+          0,
+          0,
+          2,
+          0
+        ]
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:1953"
+      ]
+    },
+    "I2100:1826;2100:1813;2100:1954": {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Badge",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Accent"
+        },
+        "strokeSides": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "modeHolders": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:1954"
+      ],
+      "hidden": true,
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:1954"
+      ]
+    },
+    "I2100:1826;2100:1813;2100:1955": {
+      "name": "Typography",
+      "type": "INSTANCE",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Typography",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        }
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:1955"
+      ]
+    },
+    "I2100:1826;2100:1813;2100:1955;2526:534": {
+      "name": "Typography",
+      "type": "TEXT",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content",
+        "Typography"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Typography",
+          "Typography",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "singleLine": true
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:1955"
+      ],
+      "fillUnder": {
+        "owner": "2100:1826",
+        "variable": "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12"
+      }
+    },
+    "I2100:1826;2100:1813;2100:2033": {
+      "name": "Badge",
+      "type": "INSTANCE",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Badge",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Info"
+        },
+        "strokeSides": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "modeHolders": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:2033"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:2033"
+      ]
+    },
+    "I2100:1826;2100:1813;2100:2108;5823:7987;67:16": {
+      "name": "icon",
+      "type": "BOOLEAN_OPERATION",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content",
+        "Button",
+        "Trailing Icon"
+      ],
+      "context": {
+        "nodeType": "BOOLEAN_OPERATION",
+        "names": [
+          "icon",
+          "Trailing Icon",
+          "Button",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "hasReactions": true,
+        "size": [
+          15,
+          15
+        ]
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:2108",
+        "I2100:1826;2100:1813;2100:2108;5823:7987"
+      ],
+      "fillUnder": {
+        "owner": "2100:1826",
+        "variable": "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12"
+      }
+    },
+    "I2100:1826;2100:1813;2100:2150": {
+      "name": "Typography",
+      "type": "INSTANCE",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Typography",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        }
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "hidden": true,
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:2150"
+      ]
+    },
+    "I2100:1826;2100:1813;2100:2150;2526:534": {
+      "name": "Typography",
+      "type": "TEXT",
+      "path": [
+        "Well details",
+        "Details panel",
+        "Content",
+        "Typography"
+      ],
+      "context": {
+        "nodeType": "TEXT",
+        "names": [
+          "Typography",
+          "Typography",
+          "Content",
+          "Details panel",
+          "Well details"
+        ],
+        "modes": {
+          "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral"
+        },
+        "singleLine": true
+      },
+      "modeHolders": [
+        "2100:1826"
+      ],
+      "hidden": true,
+      "instances": [
+        "2100:1826",
+        "I2100:1826;2100:1813;2100:2150"
+      ],
+      "fillUnder": {
+        "owner": "2100:1826",
+        "variable": "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12"
+      }
+    }
+  },
+  "steps": {
+    "2100:1826": {
+      "id": "2100:1826",
+      "name": "Details panel",
+      "component": "Details panel"
+    },
+    "I2100:1826;2100:1775": {
+      "id": "I2100:1826;2100:1775",
+      "name": "Typography",
+      "component": "Typography"
+    },
+    "I2100:1826;2100:1777": {
+      "id": "I2100:1826;2100:1777",
+      "name": "Close",
+      "component": "Button"
+    },
+    "I2100:1826;2100:1777;5823:9340": {
+      "id": "I2100:1826;2100:1777;5823:9340",
+      "name": "Leading Icon",
+      "component": "Placeholder Icon"
+    },
+    "I2100:1826;2100:1813;2100:1952": {
+      "id": "I2100:1826;2100:1813;2100:1952",
+      "name": "Tab",
+      "component": "Tab",
+      "slot": true
+    },
+    "I2100:1826;2100:1813;2100:1953": {
+      "id": "I2100:1826;2100:1813;2100:1953",
+      "name": "Tab",
+      "component": "Tab",
+      "slot": true
+    },
+    "I2100:1826;2100:1813;2100:1954": {
+      "id": "I2100:1826;2100:1813;2100:1954",
+      "name": "Badge",
+      "component": "Badge",
+      "hidden": true,
+      "slot": true
+    },
+    "I2100:1826;2100:1813;2100:1955": {
+      "id": "I2100:1826;2100:1813;2100:1955",
+      "name": "Typography",
+      "component": "Typography",
+      "slot": true
+    },
+    "I2100:1826;2100:1813;2100:2033": {
+      "id": "I2100:1826;2100:1813;2100:2033",
+      "name": "Badge",
+      "component": "Badge",
+      "slot": true
+    },
+    "I2100:1826;2100:1813;2100:2108": {
+      "id": "I2100:1826;2100:1813;2100:2108",
+      "name": "Button",
+      "component": "Button",
+      "slot": true
+    },
+    "I2100:1826;2100:1813;2100:2108;5823:7987": {
+      "id": "I2100:1826;2100:1813;2100:2108;5823:7987",
+      "name": "Trailing Icon",
+      "component": "Placeholder Icon"
+    },
+    "I2100:1826;2100:1813;2100:2150": {
+      "id": "I2100:1826;2100:1813;2100:2150",
+      "name": "Typography",
+      "component": "Typography",
+      "hidden": true,
+      "slot": true
+    }
+  },
+  "units": [
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353"
+      },
+      "instance": "2100:1826",
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance",
+      "modeId": "3:3",
+      "modeName": "Neutral"
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingLeft"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:9458bde037474d1ffdf45e49031dbc06252c21bf/4014:1103",
+        "chain": [
+          {
+            "collectionKey": "4a2803666fac8e47468f44f488efdc5f1f9ee4b8",
+            "name": "generic-space-horizontal"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:4d3d9f65bd72b51c809e29e47a426c3690f991dd/4014:1104",
+        "chain": [
+          {
+            "collectionKey": "58c06a977f14015c5de11cb23074c191810c1874",
+            "name": "generic-space-vertical"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingRight"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:9458bde037474d1ffdf45e49031dbc06252c21bf/4014:1103",
+        "chain": [
+          {
+            "collectionKey": "4a2803666fac8e47468f44f488efdc5f1f9ee4b8",
+            "name": "generic-space-horizontal"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:4d3d9f65bd72b51c809e29e47a426c3690f991dd/4014:1104",
+        "chain": [
+          {
+            "collectionKey": "58c06a977f14015c5de11cb23074c191810c1874",
+            "name": "generic-space-vertical"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "topLeftRadius"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "topRightRadius"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "bottomLeftRadius"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "bottomRightRadius"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "radius",
+      "ref": {
+        "variable": "VariableID:d6a5fcea9820325069761585ffde20e1d35f614e/4038:756",
+        "chain": [
+          {
+            "collectionKey": "0f3b54ad261ab0d26dd254ff10a28573d0f7dc5c",
+            "name": "Border/radius"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:8b40d66aadc04e567e647289d3cf55c1fa51715c/9152:12",
+        "colour": "#ffffff"
+      }
+    },
+    {
+      "node": "2100:1826",
+      "entry": "2100:1825",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1",
+        "colour": "#d4d4d4"
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1774",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "itemSpacing"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:09b34ad488982377ef0b3dcfcbcffd3beb1f8031/4040:1",
+        "chain": [
+          {
+            "collectionKey": "375485cd081837449fd5526af0539cd33f6428b6",
+            "name": "generic-gap-horizontal"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1775",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:4855eb51596e3f2f51b0d58717fd6f8b5c0d9c4b/4375:19",
+        "chain": [
+          {
+            "collectionKey": "11dacee70902caff981b08e06c846a5834fe7a41",
+            "name": "baseline/top"
+          },
+          {
+            "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+            "name": "typography/padding-baselined"
+          },
+          {
+            "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+            "name": "font-family-size/xs/padding-baselined"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "typography/ui-body/xs/padding-baselined"
+          }
+        ],
+        "value": 0
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1775",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0bea9c99113c48731fe7e95a88369051e1968cf1/4375:20",
+        "chain": [
+          {
+            "collectionKey": "11dacee70902caff981b08e06c846a5834fe7a41",
+            "name": "baseline/bottom"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1775;2526:534",
+      "entry": "2100:1825",
+      "property": {
+        "type": "typography"
+      },
+      "instance": "2100:1826",
+      "unit": "typography",
+      "fields": {
+        "letterSpacing": {
+          "variable": "VariableID:98cfb79c38049c1c20062c792840369d5f106d8d/4498:3",
+          "chain": [
+            {
+              "collectionKey": "ecedd11e5bb0cd60e81866c6a95a83120bf918a2",
+              "name": "typography/tracking"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/tracking-normal"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/tracking-normal"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/tracking-normal"
+            }
+          ],
+          "value": 0
+        },
+        "fontSize": {
+          "variable": "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8",
+          "chain": [
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/font-size"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/font-size"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/font-size"
+            }
+          ],
+          "value": 10.5
+        },
+        "fontFamily": {
+          "variable": "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902",
+          "chain": [
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "typography/font-family"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/font-family"
+            }
+          ]
+        },
+        "lineHeight": {
+          "variable": "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23",
+          "chain": [
+            {
+              "collectionKey": "d53851cec89ec6a8a213f80e0e2cad832b6b15cf",
+              "name": "typography/line-height"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/line-height-default"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/line-height-default"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/line-height-default"
+            }
+          ],
+          "value": 16
+        },
+        "fontWeight": {
+          "variable": "VariableID:417727d6f9182a60692665c2f807b6a3edcdffc5/4375:35",
+          "chain": [
+            {
+              "collectionKey": "0db85558f13bb5dfed43ad8215dba813271f644f",
+              "name": "typography/font-weight"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/font-weight-normal"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/font-weight-normal"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/font-weight-normal"
+            }
+          ],
+          "value": 400
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5,
+      "textStyle": {
+        "id": "S:37bf6165d753292273ad01199844a95bebcb70ad,4498:5",
+        "key": "37bf6165d753292273ad01199844a95bebcb70ad",
+        "name": "EDS Typography"
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1777;5823:9340;67:16",
+      "entry": "2100:1825",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "instance": "2100:1826",
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:9a7951590438e5e2ba22bbd0fe7378a9bd8d5a12/9162:1",
+        "colour": "#585858"
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:1952",
+      "entry": "2100:1825",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "instance": "I2100:1826;2100:1813;2100:1952",
+      "override": true,
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:3ddf7b2d7199abc4d49b5d8133636dd738d4f94e/9152:0",
+        "colour": "#aeaeae"
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:1953",
+      "entry": "2100:1825",
+      "property": {
+        "type": "paint",
+        "field": "strokes",
+        "index": 0
+      },
+      "instance": "I2100:1826;2100:1813;2100:1953",
+      "override": true,
+      "unit": "variable",
+      "kind": "stroke",
+      "ref": {
+        "variable": "VariableID:a910f606b5064699233e8df89d266c6c3ef921a5/9152:1",
+        "colour": "#d4d4d4"
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:1954",
+      "entry": "2100:1825",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353"
+      },
+      "instance": "I2100:1826;2100:1813;2100:1954",
+      "override": true,
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance",
+      "modeId": "7002:0",
+      "modeName": "Accent"
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:1955",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "instance": "I2100:1826;2100:1813;2100:1955",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:4855eb51596e3f2f51b0d58717fd6f8b5c0d9c4b/4375:19",
+        "chain": [
+          {
+            "collectionKey": "11dacee70902caff981b08e06c846a5834fe7a41",
+            "name": "baseline/top"
+          },
+          {
+            "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+            "name": "typography/padding-baselined"
+          },
+          {
+            "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+            "name": "font-family-size/xs/padding-baselined"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "typography/ui-body/xs/padding-baselined"
+          }
+        ],
+        "value": 0
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:1955",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "instance": "I2100:1826;2100:1813;2100:1955",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0bea9c99113c48731fe7e95a88369051e1968cf1/4375:20",
+        "chain": [
+          {
+            "collectionKey": "11dacee70902caff981b08e06c846a5834fe7a41",
+            "name": "baseline/bottom"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:1955;2526:534",
+      "entry": "2100:1825",
+      "property": {
+        "type": "typography"
+      },
+      "instance": "I2100:1826;2100:1813;2100:1955",
+      "unit": "typography",
+      "fields": {
+        "letterSpacing": {
+          "variable": "VariableID:98cfb79c38049c1c20062c792840369d5f106d8d/4498:3",
+          "chain": [
+            {
+              "collectionKey": "ecedd11e5bb0cd60e81866c6a95a83120bf918a2",
+              "name": "typography/tracking"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/tracking-normal"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/tracking-normal"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/tracking-normal"
+            }
+          ],
+          "value": 0
+        },
+        "fontSize": {
+          "variable": "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8",
+          "chain": [
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/font-size"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/font-size"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/font-size"
+            }
+          ],
+          "value": 10.5
+        },
+        "fontFamily": {
+          "variable": "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902",
+          "chain": [
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "typography/font-family"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/font-family"
+            }
+          ]
+        },
+        "lineHeight": {
+          "variable": "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23",
+          "chain": [
+            {
+              "collectionKey": "d53851cec89ec6a8a213f80e0e2cad832b6b15cf",
+              "name": "typography/line-height"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/line-height-default"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/line-height-default"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/line-height-default"
+            }
+          ],
+          "value": 16
+        },
+        "fontWeight": {
+          "variable": "VariableID:417727d6f9182a60692665c2f807b6a3edcdffc5/4375:35",
+          "chain": [
+            {
+              "collectionKey": "0db85558f13bb5dfed43ad8215dba813271f644f",
+              "name": "typography/font-weight"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/font-weight-normal"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/font-weight-normal"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/font-weight-normal"
+            }
+          ],
+          "value": 400
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5,
+      "textStyle": {
+        "id": "S:37bf6165d753292273ad01199844a95bebcb70ad,4498:5",
+        "key": "37bf6165d753292273ad01199844a95bebcb70ad",
+        "name": "EDS Typography"
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:2033",
+      "entry": "2100:1825",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353"
+      },
+      "instance": "I2100:1826;2100:1813;2100:2033",
+      "override": true,
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance",
+      "modeId": "7002:2",
+      "modeName": "Info"
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:2108;5823:7987;67:16",
+      "entry": "2100:1825",
+      "property": {
+        "type": "paint",
+        "field": "fills",
+        "index": 0
+      },
+      "instance": "I2100:1826;2100:1813;2100:2108",
+      "override": true,
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:9a7951590438e5e2ba22bbd0fe7378a9bd8d5a12/9162:1",
+        "colour": "#585858"
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:2150",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingTop"
+      },
+      "instance": "I2100:1826;2100:1813;2100:2150",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:4855eb51596e3f2f51b0d58717fd6f8b5c0d9c4b/4375:19",
+        "chain": [
+          {
+            "collectionKey": "11dacee70902caff981b08e06c846a5834fe7a41",
+            "name": "baseline/top"
+          },
+          {
+            "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+            "name": "typography/padding-baselined"
+          },
+          {
+            "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+            "name": "font-family-size/xs/padding-baselined"
+          },
+          {
+            "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+            "name": "typography/ui-body/xs/padding-baselined"
+          }
+        ],
+        "value": 0
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:2150",
+      "entry": "2100:1825",
+      "property": {
+        "type": "field",
+        "field": "paddingBottom"
+      },
+      "instance": "I2100:1826;2100:1813;2100:2150",
+      "unit": "variable",
+      "kind": "spacing",
+      "ref": {
+        "variable": "VariableID:0bea9c99113c48731fe7e95a88369051e1968cf1/4375:20",
+        "chain": [
+          {
+            "collectionKey": "11dacee70902caff981b08e06c846a5834fe7a41",
+            "name": "baseline/bottom"
+          }
+        ],
+        "resolvedValue": 0,
+        "value": 0
+      }
+    },
+    {
+      "node": "I2100:1826;2100:1813;2100:2150;2526:534",
+      "entry": "2100:1825",
+      "property": {
+        "type": "typography"
+      },
+      "instance": "I2100:1826;2100:1813;2100:2150",
+      "unit": "typography",
+      "fields": {
+        "letterSpacing": {
+          "variable": "VariableID:98cfb79c38049c1c20062c792840369d5f106d8d/4498:3",
+          "chain": [
+            {
+              "collectionKey": "ecedd11e5bb0cd60e81866c6a95a83120bf918a2",
+              "name": "typography/tracking"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/tracking-normal"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/tracking-normal"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/tracking-normal"
+            }
+          ],
+          "value": 0
+        },
+        "fontSize": {
+          "variable": "VariableID:7e185b83cf30d6f965f9fcc63d6dce0b836b07eb/4496:8",
+          "chain": [
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/font-size"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/font-size"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/font-size"
+            }
+          ],
+          "value": 10.5
+        },
+        "fontFamily": {
+          "variable": "VariableID:d0b37bbc7d92baa406a8daa33b0ef3c84a1e80ea/4038:902",
+          "chain": [
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "typography/font-family"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/font-family"
+            }
+          ]
+        },
+        "lineHeight": {
+          "variable": "VariableID:35fc8f53acb295f6bd0101028ded4d7e3ba38470/4375:23",
+          "chain": [
+            {
+              "collectionKey": "d53851cec89ec6a8a213f80e0e2cad832b6b15cf",
+              "name": "typography/line-height"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/line-height-default"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/line-height-default"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/line-height-default"
+            }
+          ],
+          "value": 16
+        },
+        "fontWeight": {
+          "variable": "VariableID:417727d6f9182a60692665c2f807b6a3edcdffc5/4375:35",
+          "chain": [
+            {
+              "collectionKey": "0db85558f13bb5dfed43ad8215dba813271f644f",
+              "name": "typography/font-weight"
+            },
+            {
+              "collectionKey": "ad2d2a041fb4a36ed3a5279efd43ba853b88992e",
+              "name": "typography/font-weight-normal"
+            },
+            {
+              "collectionKey": "e8e1ae2db0a4ba725a87ab8ba4b82e379934d99a",
+              "name": "font-family-size/xs/font-weight-normal"
+            },
+            {
+              "collectionKey": "a0090fc9e5f10901592819d77214a0b6b62fba64",
+              "name": "typography/ui-body/xs/font-weight-normal"
+            }
+          ],
+          "value": 400
+        }
+      },
+      "font": {
+        "family": "Inter",
+        "style": "Regular"
+      },
+      "fontSize": 10.5,
+      "textStyle": {
+        "id": "S:37bf6165d753292273ad01199844a95bebcb70ad,4498:5",
+        "key": "37bf6165d753292273ad01199844a95bebcb70ad",
+        "name": "EDS Typography"
+      }
+    }
+  ]
+}

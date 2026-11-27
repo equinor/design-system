@@ -1,0 +1,463 @@
+/**
+ * Types for a scan. The plugin main thread reads the document into raw units
+ * (src/plugin/scan/collect.ts), and the pure code in src/scan classifies and
+ * counts them. The raw units are plain data, so the scan of a frame can be
+ * saved as a fixture and run through the same pipeline in the tests.
+ */
+import type {
+  BindingKind,
+  ChainStep,
+  Outcome,
+  RoleContext,
+  TextCase,
+  TypographyField,
+  VariableType,
+} from '../mapping/types'
+
+/** A bound variable as read from the document, before it is classified. */
+export type RawVariable = {
+  id: string
+  key: string
+  name: string
+  type: VariableType
+  /** Key of the variable's collection; empty for local variables in files that are not libraries */
+  collectionKey: string
+  collectionName: string
+  /** The alias chain under the modes in force, down to the first `💎 Density` variable */
+  chain?: ChainStep[]
+  /** For the rules: the value of a variable whose chain does not reach `💎 Density` */
+  resolvedValue?: number | string | boolean | null
+  /** For the window and the rules: the number a legacy variable resolves to on this layer, in px */
+  value?: number
+  /** For the window: the colour a legacy variable resolves to on this layer, as #rrggbb or #rrggbbaa */
+  colour?: string
+}
+
+import type { Density } from '../mapping/density'
+import type { ColorScheme } from '../mapping/scheme'
+
+export type { Density }
+
+export type RawFillUnder = {
+  /** The variable on the fill, when it uses one */
+  variable?: RawVariable
+  context: Omit<RoleContext, 'fillUnder'>
+}
+
+export type RawContext = Omit<RoleContext, 'fillUnder'> & {
+  fillUnder?: RawFillUnder
+}
+
+/** Where on a node a binding sits. */
+export type PropertyRef =
+  | {
+      type: 'paint'
+      field: 'fills' | 'strokes'
+      index: number
+      /** For a fill on a range of text */
+      range?: [number, number]
+    }
+  | { type: 'effect'; index: number; field: string }
+  | { type: 'field'; field: string }
+  | { type: 'typography'; range?: [number, number] }
+  | { type: 'mode'; collectionId: string }
+
+export type RawTextStyle = {
+  id: string
+  key: string
+  name: string
+}
+
+/** An instance a layer is in, for the tree of the instances inside an instance. */
+export type InstanceStep = {
+  id: string
+  name: string
+  /** The name of its main component, or of the component set for a variant */
+  component?: string
+  /** The instance or a layer above it is hidden */
+  hidden?: true
+  /**
+   * The instance sits in slot content that the instance above it owns. Once
+   * a slot is edited in an instance, its content gets ids of its own, no
+   * longer follows the main component and is not in the instance's
+   * `overrides`; an instance in it reads its own overrides instead.
+   */
+  slot?: true
+  /** For an instance in slot content: the name of the slot, such as Content */
+  slotName?: string
+}
+
+/** One counted unit: a paint binding, a bound field, the typography of a text or range, or an explicit mode. */
+export type RawUnit = {
+  nodeId: string
+  nodeName: string
+  nodeType: string
+  /** The frame, loose-layer group or local component the unit is listed under */
+  entryId: string
+  /** Names from the entry's root down to the node's parent */
+  path: string[]
+  property: PropertyRef
+  /**
+   * Id of the outermost instance the node is in, or the node itself when it
+   * is an instance: the instance whose `overrides` say whether a value is its
+   * own. Slot content an instance owns starts over: an instance in it is the
+   * outermost one for its layers, and a layer in it outside any instance has
+   * none, as in a frame.
+   */
+  instanceId?: string
+  /**
+   * Every instance the layer is in, outermost first, and the layer itself
+   * last when it is an instance. Unlike `instanceId`, it runs on through
+   * slot content an instance owns, so it gives the full tree.
+   */
+  instances?: InstanceStep[]
+  /**
+   * For a layer in slot content an instance owns, and not inside an instance
+   * there: the name of the slot, such as Content. The instance is the last in
+   * `instances`. The frame's Layers view puts the layer's values under that
+   * slot of the instance, as Figma's Layers panel does (the Container, Type
+   * and Actions frames in the Content slot of a pasted panel component,
+   * 2026-11-19).
+   */
+  slotName?: string
+  /**
+   * Inside an instance: the instance sets this value itself, as an override,
+   * instead of taking it from its main component, so it can change here.
+   */
+  override?: true
+  /** Ids of the node and its ancestors in the entry that set explicit modes, outermost first */
+  modeHolders?: string[]
+  /**
+   * The layer or a layer above it is hidden, so the canvas does not show it.
+   * Go to then selects it in the Layers panel and shows the layer it is in.
+   */
+  hidden?: true
+  context: RawContext
+} & (
+  | {
+      unit: 'variable'
+      kind: BindingKind
+      variable: RawVariable
+      /**
+       * For a legacy number variable whose value could not be read: the
+       * value the layer has now for the field, or for the field of the
+       * effect, in px (a fraction for an opacity). The stand-in for a
+       * number takes it as its px (OldVariable.layerValue).
+       */
+      layerValue?: number
+      /**
+       * For a size an instance overrides on a layer inside it: the variable
+       * the layer at the same place in the main component binds, if any
+       */
+      mainVariable?: RawVariable
+      /**
+       * For such a layer that is a swapped instance: the component the main
+       * component has there, which a reset goes back to, and the one it was
+       * swapped to
+       */
+      swap?: {
+        from: string
+        to: string
+        /** The instance-swap property it was swapped with, and the instance that has it */
+        property?: { name: string; on: string }
+      }
+    }
+  | {
+      unit: 'typography'
+      fields: Partial<Record<TypographyField, RawVariable>>
+      font: { family: string; style: string }
+      fontSize: number
+      textStyle?: RawTextStyle
+      /**
+       * The text case of the text or range, when it is not ORIGINAL; MIXED
+       * when the range has more than one. Converting a Typography instance
+       * drops it, since setting a case detaches the text style.
+       */
+      textCase?: TextCase | 'MIXED'
+    }
+  /**
+   * A number the plugin set in place of a legacy variable, such as a border
+   * width, read from the change log while the layer still has that number
+   */
+  | { unit: 'value'; value: number | null }
+  | {
+      unit: 'mode'
+      collectionId: string
+      collectionKey: string
+      collectionName: string
+      modeId: string
+      modeName: string
+    }
+)
+
+export type Category =
+  /** Bound to EDS Foundation [EDS Beta] */
+  | 'migrated'
+  | 'sure'
+  | 'check'
+  /**
+   * Manual fix: a legacy variable the instance overrides where Figma lets
+   * nobody change it, such as the size of a layer inside an instance. The
+   * plugin flags it and says how to reset it in Figma; Apply leaves it.
+   */
+  | 'byHand'
+  | 'none'
+  /** A legacy variable an instance takes from its main component */
+  | 'inInstance'
+  /** Bound to another library or to a local variable; left out of the score */
+  | 'other'
+
+export const SCORED_CATEGORIES = [
+  'migrated',
+  'sure',
+  'check',
+  'byHand',
+  'none',
+  'inInstance',
+] as const
+
+export type ScoredCategory = (typeof SCORED_CATEGORIES)[number]
+
+export type Counts = Record<ScoredCategory, number> & {
+  other: number
+  /** Of `migrated`: values inside instances that follow their main component, without overrides */
+  migratedInInstances?: number
+}
+
+/** What kind of property a binding is on, for filtering. */
+export type PropertyGroup =
+  'colour' | 'typography' | 'spacing' | 'size' | 'radius' | 'modes' | 'other'
+
+export const PROPERTY_GROUPS: PropertyGroup[] = [
+  'colour',
+  'typography',
+  'spacing',
+  'size',
+  'radius',
+  'modes',
+  'other',
+]
+
+/** A unit after classification, as the inspector and the report show it. */
+export type BindingRecord = {
+  id: string
+  nodeId: string
+  nodeName: string
+  nodeType: string
+  entryId: string
+  path: string[]
+  property: PropertyRef
+  group: PropertyGroup
+  /** For variables: the kind of property, which decides the variables a picker offers */
+  kind?: BindingKind
+  category: Category
+  /**
+   * Identifies the legacy variable, the set of legacy typography variables,
+   * or the legacy mode, so the Mapping view can group every use of it.
+   */
+  oldKey?: string
+  /** The old variable, a summary of old typography variables, or the old mode */
+  old?: string
+  /** The collection of the old variable or mode */
+  oldCollection?: string
+  /** For migrated and other units: what the property is bound to now */
+  current?: string
+  outcome?: Outcome
+  /** The proposal first */
+  candidates?: string[]
+  /** Why the rules decided as they did; for a Manual fix, the steps to make it by hand */
+  reason?: string
+  /**
+   * For every Manual fix: what resetting the layer does besides the fix, as
+   * items for a list. The swap back and again, or the instance-swap
+   * property set to its default and back; each change with a variable on
+   * the layer and the layers below it, with its EDS Beta value; and the
+   * changes without a variable. The window shows them whatever the status,
+   * so they stay in view once the fix is accepted.
+   */
+  resetEffects?: string[]
+  rule?: string
+  instanceId?: string
+  /** Every instance the layer is in, outermost first (RawUnit.instances) */
+  instances?: InstanceStep[]
+  /** The slot of the last instance in `instances` the layer is in, as owned slot content (RawUnit.slotName) */
+  slotName?: string
+  /** Inside an instance: a value the instance overrides, which the plugin can change there */
+  override?: true
+  /** Ids of the node and its ancestors in the entry that set explicit modes */
+  modeHolders?: string[]
+  /** The layer or a layer above it is hidden (RawUnit.hidden) */
+  hidden?: true
+  /**
+   * Keys of the legacy collections the binding reads, so a legacy mode on one
+   * of them above it has to stay while the binding does: its own collection
+   * and every collection in its alias chain.
+   */
+  reads?: string[]
+  /** The legacy variable, for a binding on a variable; the change log and revert need its key */
+  oldVariable?: { id: string; key: string; name: string }
+  /** The legacy typography variables by field, for a text or range */
+  oldFields?: Partial<Record<TypographyField, { key: string; name: string }>>
+  /** The font of a text or range before the change */
+  oldFont?: { family: string; style: string }
+  /**
+   * For legacy typography: what the rules read from it in a few words, such
+   * as “UI body, md, Medium, squished” (legacyTypographyText), which tells
+   * apart typography that binds the same variables in other modes
+   */
+  oldTypography?: string
+  /**
+   * For the text style of a conversion: the text case of the legacy text,
+   * when it has one. Converting drops it when the text style has another
+   * (scan/conversions.ts), which the Convert confirmation counts.
+   */
+  textCase?: TextCase | 'MIXED'
+  /** The number the legacy variable resolves to on the layer, in px */
+  oldValue?: number
+  /** The colour the legacy variable resolves to on the layer */
+  oldColour?: string
+  /** The density the layer has after the migration, which decides the new numbers */
+  density?: Density
+  /** The colour scheme the layer has after the migration, which decides the new colours shown */
+  scheme?: ColorScheme
+  /** The legacy mode, for an explicit mode */
+  oldMode?: {
+    collectionId: string
+    collectionKey: string
+    modeId: string
+    modeName: string
+  }
+}
+
+export type EntryKind = 'frame' | 'loose' | 'component'
+
+/** A top-level frame, the loose layers of a page or section, or a local component. */
+export type EntrySummary = {
+  id: string
+  kind: EntryKind
+  name: string
+  pageId: string
+  pageName: string
+  /** Section names, outermost first; empty for a frame directly on the page */
+  sections: string[]
+  /** Nodes to select for go-to: the frame itself, or the loose layers */
+  nodeIds: string[]
+  counts: Counts
+  /** migrated ÷ (migrated + sure + check + none + in instance), or null when there is nothing to score */
+  health: number | null
+  /** Instances in the entry that still contain old variables */
+  oldInstances: number
+  /** Layers the plugin has changed, with a change log Revert can use */
+  changed?: number
+  /** For a local component with legacy variables: its instances in the file */
+  instanceCount?: number
+  /**
+   * For a selected layer inside a main component: that component, or its
+   * component set. A change here changes every instance of it.
+   */
+  insideComponent?: { id: string; name: string }
+}
+
+export type OldInstance = {
+  id: string
+  name: string
+  entryId: string
+  /** An instance of the legacy Typography component, which can become a text layer */
+  typography?: boolean
+  /** The text in a Typography instance, to tell them apart */
+  text?: string
+  /** The text layer in a Typography instance, whose units give the conversion's text style and colour */
+  textId?: string
+  /**
+   * For a Typography instance directly in a main component: that component,
+   * named with its component set. Converting the instance carries the text
+   * each instance of the component shows across to the new text layer.
+   */
+  inComponent?: { id: string; name: string }
+  /** Old variables inside the instance or on it */
+  count: number
+  /** The instance or a layer above it is hidden */
+  hidden?: true
+  /**
+   * For an instance in slot content that another instance owns: that
+   * instance, the nearest one above it
+   */
+  within?: { id: string; name: string }
+  /** Where in the instance the legacy values are: the instances in it, as a tree */
+  tree?: InstanceTree
+  mainComponent?: {
+    name: string
+    key: string
+    remote: boolean
+    /** For a main component in this file, to go to it */
+    id?: string
+  }
+}
+
+/**
+ * Where the legacy values an instance takes from its main component can be
+ * fixed (phase 3 of the nested-instances plan, 2026-11-20), found by
+ * importing the main component by its key, which tells the sources apart
+ * (spikes S2 and S3, 2026-11-19): a main component in this file needs no
+ * import; an import that fails means no library this file reaches has the
+ * main component: it is in another file that is not a library, such as a
+ * panel component pasted from another file, or its library no longer
+ * publishes it, such as the old Badge and Divider of Core Components (tested
+ * in Figma, 2026-11-20); an import that returns the file's
+ * own copy means the copy is the library's current version; a new node means
+ * the library has a newer version. `legacy` counts the legacy bindings and
+ * modes in the file's copy of the main component, `latestLegacy` those in
+ * the library's newer version.
+ */
+export type ComponentSource =
+  | { kind: 'this-file' }
+  | { kind: 'library'; legacy: number }
+  | { kind: 'update'; legacy: number; latestLegacy: number }
+  | { kind: 'no-library' }
+  | { kind: 'failed'; message: string }
+
+/**
+ * An instance and the instances in it, with the legacy values each takes
+ * from its main component (category Inside instances). The root is an
+ * instance from the Instances tab; the counts of a node include the
+ * instances below it.
+ */
+export type InstanceTree = {
+  id: string
+  name: string
+  component?: string
+  hidden?: true
+  slot?: true
+  slotName?: string
+  /** Legacy values in the instance and the instances in it */
+  count: number
+  /** Of `count`: values on hidden layers */
+  hiddenCount: number
+  /** Of `count`: values on the instance's own layers, outside the instances in it */
+  own: number
+  children: InstanceTree[]
+}
+
+/** An instance inside a main component, for the list in the component's inspector. */
+export type ComponentInstance = {
+  id: string
+  name: string
+  /** Layer names from the main component down to the instance's parent */
+  path: string[]
+  mainComponent?: OldInstance['mainComponent']
+  /** Legacy values the instance overrides: they change in this component */
+  overridden: number
+  /** Legacy values it takes from its main component: they change there */
+  fromMain: number
+}
+
+export type ScanSummary = {
+  scope: 'selection' | 'page' | 'file'
+  scannedAt: string
+  mappingVersion: string
+  pages: { id: string; name: string }[]
+  nodesScanned: number
+  totals: Counts
+  health: number | null
+  entries: EntrySummary[]
+}

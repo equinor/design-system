@@ -1,0 +1,155 @@
+{
+  "generatedAt": "2026-11-16",
+  "fileName": "🔹 EDS Core Components (EDS Beta)",
+  "frame": {
+    "id": "113:420",
+    "name": "Text Field [EDS Beta] (Not in storybook)"
+  },
+  "variables": {
+    "VariableID:2f3d11bbfd7ecc535b2c3e2b890f3f9a293ec789/2301:808": {
+      "id": "VariableID:2f3d11bbfd7ecc535b2c3e2b890f3f9a293ec789/2301:808",
+      "key": "2f3d11bbfd7ecc535b2c3e2b890f3f9a293ec789",
+      "name": "spacing/md",
+      "type": "FLOAT",
+      "collectionKey": "4d6ff509ffd397f98191dfee9da2b3cc783908c8",
+      "collectionName": "semantic"
+    },
+    "VariableID:bd283ba01d346775bc225f78c5efd2ff918fa5dc/2718:1140": {
+      "id": "VariableID:bd283ba01d346775bc225f78c5efd2ff918fa5dc/2718:1140",
+      "key": "bd283ba01d346775bc225f78c5efd2ff918fa5dc",
+      "name": "icon/secondary",
+      "type": "COLOR",
+      "collectionKey": "4d6ff509ffd397f98191dfee9da2b3cc783908c8",
+      "collectionName": "semantic"
+    }
+  },
+  "nodes": {
+    "I113:436;113:542": {
+      "name": "↳ ↳ Leading Icon Item",
+      "type": "INSTANCE",
+      "path": [
+        "Text Field [EDS Beta] (Not in storybook)",
+        "State=Default, Validation=Error",
+        "Field + Helper",
+        "↳ Right Adornment"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "↳ ↳ Leading Icon Item",
+          "↳ Right Adornment",
+          "Field + Helper",
+          "State=Default, Validation=Error",
+          "Text Field [EDS Beta] (Not in storybook)"
+        ],
+        "modes": { "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral" },
+        "hasReactions": true
+      },
+      "modeHolders": ["I113:436;113:542"]
+    },
+    "I113:436;113:542;66:4158": {
+      "name": "Placeholder Icon",
+      "type": "INSTANCE",
+      "path": [
+        "Text Field [EDS Beta] (Not in storybook)",
+        "State=Default, Validation=Error",
+        "Field + Helper",
+        "↳ Right Adornment",
+        "↳ ↳ Leading Icon Item"
+      ],
+      "context": {
+        "nodeType": "INSTANCE",
+        "names": [
+          "Placeholder Icon",
+          "↳ ↳ Leading Icon Item",
+          "↳ Right Adornment",
+          "Field + Helper",
+          "State=Default, Validation=Error",
+          "Text Field [EDS Beta] (Not in storybook)"
+        ],
+        "modes": { "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral" },
+        "hasReactions": true
+      },
+      "modeHolders": ["I113:436;113:542"]
+    },
+    "I113:436;113:542;66:4158;67:16": {
+      "name": "icon",
+      "type": "BOOLEAN_OPERATION",
+      "path": [
+        "Text Field [EDS Beta] (Not in storybook)",
+        "State=Default, Validation=Error",
+        "Field + Helper",
+        "↳ Right Adornment",
+        "↳ ↳ Leading Icon Item",
+        "Placeholder Icon"
+      ],
+      "context": {
+        "nodeType": "BOOLEAN_OPERATION",
+        "names": [
+          "icon",
+          "Placeholder Icon",
+          "↳ ↳ Leading Icon Item",
+          "↳ Right Adornment",
+          "Field + Helper",
+          "State=Default, Validation=Error",
+          "Text Field [EDS Beta] (Not in storybook)"
+        ],
+        "modes": { "83d908cb8374dc7ba7545157bc413a954cc48e3f": "Neutral" },
+        "hasReactions": true,
+        "size": [12, 12]
+      },
+      "modeHolders": ["I113:436;113:542"]
+    }
+  },
+  "units": [
+    {
+      "node": "I113:436;113:542",
+      "entry": "113:420",
+      "property": {
+        "type": "mode",
+        "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353"
+      },
+      "instance": "113:436",
+      "override": true,
+      "unit": "mode",
+      "collectionId": "VariableCollectionId:83d908cb8374dc7ba7545157bc413a954cc48e3f/7002:1353",
+      "collectionKey": "83d908cb8374dc7ba7545157bc413a954cc48e3f",
+      "collectionName": "🎨 Appearance",
+      "modeId": "3:3",
+      "modeName": "Neutral"
+    },
+    {
+      "node": "I113:436;113:542;66:4158",
+      "entry": "113:420",
+      "property": { "type": "field", "field": "width" },
+      "instance": "113:436",
+      "unit": "variable",
+      "kind": "size",
+      "ref": {
+        "variable": "VariableID:2f3d11bbfd7ecc535b2c3e2b890f3f9a293ec789/2301:808"
+      }
+    },
+    {
+      "node": "I113:436;113:542;66:4158",
+      "entry": "113:420",
+      "property": { "type": "field", "field": "height" },
+      "instance": "113:436",
+      "unit": "variable",
+      "kind": "size",
+      "ref": {
+        "variable": "VariableID:2f3d11bbfd7ecc535b2c3e2b890f3f9a293ec789/2301:808"
+      }
+    },
+    {
+      "node": "I113:436;113:542;66:4158;67:16",
+      "entry": "113:420",
+      "property": { "type": "paint", "field": "fills", "index": 0 },
+      "instance": "113:436",
+      "unit": "variable",
+      "kind": "fill",
+      "ref": {
+        "variable": "VariableID:bd283ba01d346775bc225f78c5efd2ff918fa5dc/2718:1140"
+      }
+    }
+  ]
+}
